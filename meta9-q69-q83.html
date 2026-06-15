@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 9 · Civil — Q69 a Q83</title>
+<style>
+  :root{
+    --bg:#050b18; --bg2:#081222;
+    --qcard:#0b1828; --qborder:#16365a; --qglow:rgba(46,120,200,.30);
+    --text:#e9f0f8; --muted:#90a6c0; --soft:#b9c8dc;
+    --opt:#0d1c30; --optb:#1b3a5c; --optbh:#2b5a8a;
+    --cy:#37a8e0; --selbg:#123e6e; --selb:#2f7fd0;
+    --green:#27c06a; --greenbg:#0a2016; --greenb:#1c5e3a; --greenglow:rgba(34,197,105,.30);
+    --amber:#f5a623; --amberbg:#241a08; --amberb:#6a4a14; --amberglow:rgba(245,166,35,.28);
+    --purple:#b06bf2; --purplebg:#190f2c; --purpleb:#432a6e; --purpleglow:rgba(168,85,247,.28);
+    --teal:#22d3b8; --tealbg:#062420; --tealb:#155245; --tealglow:rgba(34,211,184,.26);
+    --cyan:#38bdf8; --cyanbg:#06212e; --cyanb:#155a72; --cyanglow:rgba(56,189,248,.26);
+    --red:#f25555; --redbg:#240c0c; --redb:#6a1f1f;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:28px 16px 80px;
+    background:radial-gradient(1200px 700px at 50% -120px,#0c1d33 0%,var(--bg) 60%);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+  .head{text-align:center;margin-bottom:18px}
+  .head h1{font-size:22px;font-weight:800;letter-spacing:.3px;margin:0 0 4px}
+  .head p{margin:0;color:var(--muted);font-size:13px}
+  .placar{display:flex;gap:10px;justify-content:center;margin:16px 0 26px;flex-wrap:wrap}
+  .chip{background:var(--qcard);border:1px solid var(--qborder);border-radius:12px;padding:9px 16px;min-width:96px;text-align:center}
+  .chip .n{font-size:22px;font-weight:800;display:block;line-height:1.1}
+  .chip .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+  .chip.ac .n{color:var(--green)} .chip.er .n{color:var(--red)} .chip.pe .n{color:var(--cy)}
+  .reset{display:block;margin:0 auto 30px;background:transparent;color:var(--muted);border:1px solid var(--qborder);border-radius:10px;padding:8px 18px;font-size:12px;cursor:pointer;transition:.15s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .reset:hover{color:var(--text);border-color:var(--optbh)}
+  .q{margin-bottom:34px}
+  .meta{font-size:12px;color:var(--muted);margin:0 0 8px;padding-left:2px}
+  .meta b{color:var(--soft);font-weight:600}
+  .card{background:var(--qcard);border:1px solid var(--qborder);border-radius:18px;padding:20px 22px;box-shadow:0 0 0 1px rgba(255,255,255,.02),0 18px 40px -28px var(--qglow)}
+  .label{font-size:13px;font-weight:800;letter-spacing:1.6px;color:#cfe0f2;margin:0 0 12px}
+  .enun{font-size:15px;color:var(--text);margin:0 0 6px}
+  .items{margin:10px 0 6px;display:flex;flex-direction:column;gap:8px}
+  .item{font-size:14px;color:var(--soft);padding-left:2px}
+  .item b{color:#dce8f6}
+  .prompt{font-size:14.5px;color:var(--text);margin:14px 0 4px;font-weight:500}
+  .opts{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+  .opt{display:flex;align-items:flex-start;gap:13px;background:var(--opt);border:1px solid var(--optb);border-radius:13px;padding:13px 15px;cursor:pointer;transition:.14s;text-align:left;color:var(--soft);font-size:14px;line-height:1.5;width:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .opt:hover{border-color:var(--optbh);background:#102237}
+  .badge{flex:0 0 auto;width:28px;height:28px;border-radius:50%;border:1.8px solid var(--cy);color:var(--cy);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:-1px;transition:.14s}
+  .opt .txt{padding-top:3px}
+  .opt.correct{background:var(--greenbg);border-color:var(--greenb)}
+  .opt.correct .badge{background:var(--green);border-color:var(--green);color:#04130a}
+  .opt.correct .txt{color:#dffaeb}
+  .opt.wrong{background:var(--redbg);border-color:var(--redb)}
+  .opt.wrong .badge{background:var(--red);border-color:var(--red);color:#1a0606}
+  .opt.wrong .txt{color:#ffdede}
+  .opt.neutral{background:var(--amberbg);border-color:var(--amberb)}
+  .opt.neutral .badge{background:var(--amber);border-color:var(--amber);color:#180f02}
+  .opt.neutral .txt{color:#fbe9c8}
+  .opts.answered .opt{cursor:default}
+  .opts.answered .opt:not(.correct):not(.wrong):not(.neutral){opacity:.5}
+  .verdict{margin-top:14px;border-radius:12px;padding:11px 15px;font-weight:700;font-size:14px;display:none}
+  .verdict.show{display:block}
+  .verdict.ok{background:var(--greenbg);border:1px solid var(--greenb);color:var(--green)}
+  .verdict.no{background:var(--redbg);border:1px solid var(--redb);color:var(--red)}
+  .verdict.anul{background:var(--amberbg);border:1px solid var(--amberb);color:var(--amber)}
+  .togg{margin-top:14px;width:100%;background:#0c1d33;border:1px solid var(--cyanb);color:var(--cyan);font-weight:700;font-size:13.5px;letter-spacing:.4px;border-radius:13px;padding:13px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:9px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .togg:hover{background:#0f2540}
+  .togg .ar{transition:.2s}
+  .togg.open .ar{transform:rotate(180deg)}
+  .com{display:none;margin-top:14px}
+  .com.open{display:block}
+  .gcard{background:linear-gradient(180deg,#0a2016 0%,#081a12 100%);border:1px solid var(--greenb);border-radius:18px;padding:20px 22px;box-shadow:0 0 0 1px rgba(34,197,105,.06),0 18px 44px -30px var(--greenglow)}
+  .gcard.anul{background:linear-gradient(180deg,#241a08 0%,#1a1305 100%);border-color:var(--amberb);box-shadow:0 0 0 1px rgba(245,166,35,.06),0 18px 44px -30px var(--amberglow)}
+  .ghead{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .gcheck{flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:26px;color:#04130a;font-weight:900}
+  .gcheck.anul{background:var(--amber);color:#180f02}
+  .gtitle{font-size:21px;font-weight:900;color:#fff;letter-spacing:.3px}
+  .gtitle .ans{color:var(--green)}
+  .gtitle .ans.anul{color:var(--amber)}
+  .gpill{display:inline-flex;align-items:center;gap:5px;background:rgba(34,197,105,.16);border:1px solid var(--greenb);color:var(--green);font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+  .gpill.anul{background:rgba(245,166,35,.16);border-color:var(--amberb);color:var(--amber)}
+  .gsrc{font-size:13px;color:var(--muted);margin:2px 0 0 60px}
+  .gsrc b{color:var(--green);font-weight:800}
+  .gsrc b.anul{color:var(--amber)}
+  .gcmd{font-size:12px;color:var(--muted);margin:6px 0 0 60px}
+  .sec{display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.07)}
+  .sec:first-of-type{border-top:none}
+  .tile{flex:0 0 auto;width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:25px}
+  .sbody{flex:1;min-width:0}
+  .sttl{font-size:13.5px;font-weight:900;letter-spacing:.8px;margin:4px 0 9px}
+  .slist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .slist li{position:relative;padding-left:18px;font-size:13.5px;color:var(--soft);line-height:1.55}
+  .slist li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%}
+  .slist li b{color:#eaf2fb;font-weight:700}
+  .slist li i{font-style:italic;color:#cdd9e8}
+  .green .tile{background:var(--greenbg);border:1px solid var(--greenb);box-shadow:0 0 22px -8px var(--greenglow)}
+  .green .sttl{color:var(--green)} .green .slist li::before{background:var(--green)}
+  .amber .tile{background:var(--amberbg);border:1px solid var(--amberb);box-shadow:0 0 22px -8px var(--amberglow)}
+  .amber .sttl{color:var(--amber)} .amber .slist li::before{background:var(--amber)}
+  .purple .tile{background:var(--purplebg);border:1px solid var(--purpleb);box-shadow:0 0 22px -8px var(--purpleglow)}
+  .purple .sttl{color:var(--purple)} .purple .slist li::before{background:var(--purple)}
+  .teal .tile{background:var(--tealbg);border:1px solid var(--tealb);box-shadow:0 0 22px -8px var(--tealglow)}
+  .teal .sttl{color:var(--teal)} .teal .slist li::before{background:var(--teal)}
+  .cyan .tile{background:var(--cyanbg);border:1px solid var(--cyanb);box-shadow:0 0 22px -8px var(--cyanglow)}
+  .cyan .sttl{color:var(--cyan)} .cyan .slist li::before{background:var(--cyan)}
+  .verif{display:flex;flex-direction:column;gap:9px;margin-top:3px}
+  .vrow{display:flex;align-items:center;gap:8px;font-size:13px}
+  .vrow .vk{color:var(--cyan);font-weight:700;white-space:nowrap}
+  .vrow .vlead{flex:1;border-bottom:1px dashed rgba(255,255,255,.18);min-width:14px;height:1px}
+  .vrow .vv{color:var(--muted);white-space:nowrap}
+  .vrow .vv.ok{color:var(--green);font-weight:700}
+  .vbox{display:inline-flex;width:18px;height:18px;border-radius:5px;background:var(--green);color:#04130a;font-weight:900;font-size:12px;align-items:center;justify-content:center;margin-left:4px}
+  .end{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>Meta 9 · Direito Civil — Q69 a Q83</h1>
+    <p>Método ICOL · gabarito oficial confirmado no QConcursos · 15 questões (1 anulada)</p>
+  </div>
+  <div class="placar">
+    <div class="chip ac"><span class="n" id="pAc">0</span><span class="l">Acertos</span></div>
+    <div class="chip er"><span class="n" id="pEr">0</span><span class="l">Erros</span></div>
+    <div class="chip pe"><span class="n" id="pPe">15</span><span class="l">Pendentes</span></div>
+  </div>
+  <button class="reset" onclick="resetAll()">↺ Reiniciar</button>
+  <div id="app"></div>
+  <div class="end">Cartório · 1ª Fase Objetiva · Civil (p. 107–115)</div>
+</div>
+<script>
+const QS = [
+{
+ n:69, id:"Q3775629", meta:"Cespe · TJ-RO · 2025 · Remoção", tema:"Prescrição do inadimplemento contratual (STJ)",
+ comando:"assinalar a correta", answer:"D",
+ enun:"Segundo o entendimento do STJ, a responsabilidade civil decorrente de descumprimento de contrato de compromisso de compra e venda:",
+ items:[], prompt:"",
+ opts:[["A","decai em 4 anos"],["B","prescreve em 5 anos"],["C","prescreve em 3 anos"],["D","prescreve em 10 anos"],["E","decai em 3 anos"]],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
+   "A pretensão de reparo por <b>inadimplemento contratual</b> prescreve em <b>10 anos</b> (<b>art. 205 CC</b> — regra geral). O prazo trienal do art. 206, §3º, V só alcança a responsabilidade <b>EXTRAcontratual</b> (aquiliana)."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "(c) 3 anos = responsabilidade <b>extracontratual</b>; (a)/(e) falam em <b>decadência</b> (é prescrição); (b) 5 anos sem base."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "A confusão <b>3 anos (extracontratual) × 10 anos (contratual)</b>. Descumprimento de <b>contrato</b> = decenal (art. 205)."
+  ]},
+  {c:"purple",i:"⚖️",t:"JURISPRUDÊNCIA (STJ)",li:[
+   "Corte Especial, <b>EREsp 1.280.825/RJ</b>: a pretensão indenizatória por inadimplemento contratual (inclusive vícios construtivos) submete-se ao prazo <b>decenal</b> do art. 205; o trienal é só para a aquiliana."
+  ]}
+ ],
+ verif:{qc:"Q3775629",dd:"inadimplemento contratual → prescrição decenal — EREsp 1.280.825",norma:"art. 205 CC"}
+},
+{
+ n:70, id:"Q3775024", meta:"Cespe · TJ-RO · 2025 · Remoção", tema:"Vencimento antecipado e termo inicial (STJ)",
+ comando:"assinalar a correta", answer:"B",
+ enun:"De acordo com o entendimento do STJ, o vencimento antecipado da dívida:",
+ items:[], prompt:"",
+ opts:[
+  ["A","altera o termo inicial do prazo decadencial, da parcela subsequente"],
+  ["B","não altera o termo inicial do prazo prescricional, que continua contado da data do vencimento da última parcela originalmente pactuada"],
+  ["C","não altera o prazo decadencial, contado da parcela subsequente"],
+  ["D","altera o decadencial, do vencimento antecipado"],
+  ["E","altera o prescricional, do vencimento antecipado"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (B)",li:[
+   "Cobrança é pretensão <b>prescricional</b> (afasta A, C, D, que falam em decadência). E, pelo STJ, o <b>vencimento antecipado NÃO altera</b> o termo inicial: a prescrição continua contada do vencimento da <b>última parcela originalmente pactuada</b>."
+  ]},
+  {c:"teal",i:"⚖️",t:"B × E (o nó)",li:[
+   "Ambas dizem \"prescricional\". A diferença é \"<b>não altera</b> / última parcela original\" (B — correta) × \"altera / data do vencimento antecipado\" (E — errada)."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "Intuitivamente parece que a antecipação adianta o <i>dies a quo</i> — mas o STJ mantém o termo inicial no <b>vencimento original</b>."
+  ]},
+  {c:"purple",i:"⚖️",t:"JURISPRUDÊNCIA (STJ)",li:[
+   "O vencimento antecipado da dívida <b>não altera o termo inicial</b> da prescrição da pretensão de cobrança; conta-se do vencimento <b>originalmente pactuado</b>."
+  ]}
+ ],
+ verif:{qc:"Q3775024",dd:"vencimento antecipado não desloca o termo inicial da prescrição",norma:"— entendimento jurisprudencial"}
+},
+{
+ n:71, id:"Q2513926", meta:"Consulplan · TJ-AC · 2023 · Ingresso", tema:"Interrupção da prescrição (arts. 202–203)",
+ comando:"assinalar a correta", answer:"C",
+ enun:"No que tange às causas de interrupção da prescrição, assinale a afirmativa correta.",
+ items:[], prompt:"",
+ opts:[
+  ["A","somente o titular pode promover atos de interrupção"],
+  ["B","após o fim da causa, retoma descontando-se o período já transcorrido"],
+  ["C","a interrupção ocorre uma única vez, sendo o protesto cambial uma das hipóteses"],
+  ["D","por despacho que determinar a citação, somente se o juízo for competente"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
+   "<b>Art. 202, <i>caput</i></b> — a interrupção só pode ocorrer <b>uma vez</b>; e <b>art. 202, III</b> — o <b>protesto cambial</b> é hipótese de interrupção."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "<b>(a)</b> art. 203 — pode ser interrompida por <b>qualquer interessado</b>.",
+   "<b>(b)</b> na interrupção o prazo <b>recomeça do zero</b> (art. 202, p.ún.) — \"descontar\" é efeito da <b>suspensão</b>.",
+   "<b>(d)</b> art. 202, I — o despacho interrompe <b>ainda que o juiz seja incompetente</b>."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHAS",li:[
+   "\"somente o titular\" (× qualquer interessado); \"descontando\" (suspensão × interrupção, que <b>zera</b>); \"somente se competente\" (× mesmo incompetente)."
+  ]}
+ ],
+ verif:{qc:"Q2513926",dd:"N/A — letra de norma",norma:"arts. 202 (caput, I, III, p.ún.), 203 CC"}
+},
+{
+ n:72, id:"Q2211452", meta:"Cespe · TJ-SC · 2023 · Remoção", tema:"Aluguéis entre cônjuges (arts. 206 §3 I + 197 I)",
+ comando:"assinalar a correta", answer:"E",
+ enun:"Eduardo alugava prédio urbano da esposa Cláudia e parou de pagar aluguéis; depois divorciaram-se e Cláudia ajuizou ação de cobrança. O prazo prescricional para Cláudia cobrar é de:",
+ items:[], prompt:"",
+ opts:[
+  ["A","2 anos, do inadimplemento"],["B","3 anos, do inadimplemento"],
+  ["C","2 anos, do divórcio"],["D","1 ano, do inadimplemento"],
+  ["E","3 anos, contados da data do divórcio"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (E) — dois artigos",li:[
+   "<b>Prazo:</b> aluguéis de prédios urbanos/rústicos prescrevem em <b>3 anos</b> (art. 206, §3º, I).",
+   "<b>Termo inicial:</b> não corre prescrição entre cônjuges na constância da sociedade conjugal (<b>art. 197, I</b>) ⇒ o prazo só começa a partir do <b>divórcio</b>."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "(b) acerta os 3 anos mas erra o termo inicial (\"do inadimplemento\" — ignora o art. 197, I); (a)/(c)/(d) erram o prazo."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA (combinação)",li:[
+   "A resposta \"óbvia\" é B (3 anos do inadimplemento). O <b>art. 197, I</b> desloca o <i>dies a quo</i> para o <b>fim do casamento</b>."
+  ]}
+ ],
+ verif:{qc:"Q2211452",dd:"N/A — letra de norma",norma:"arts. 206 §3 I, 197 I CC"}
+},
+{
+ n:73, id:"Q2211312", meta:"Cespe · TJ-SC · 2023 · Ingresso", tema:"Emolumentos do tabelião (art. 206 §1 III)",
+ comando:"assinalar a correta", answer:"D",
+ enun:"Luiz e Carla lavraram escritura de divórcio e se recusaram a pagar os emolumentos. O prazo prescricional para o tabelião ajuizar cobrança é de:",
+ items:[], prompt:"",
+ opts:[["A","cinco anos"],["B","dez anos"],["C","dois anos"],["D","um ano"],["E","três anos"]],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
+   "<b>Art. 206, §1º, III, CC</b> — prescreve em <b>um ano</b> a pretensão dos tabeliães, auxiliares da justiça e serventuários pela percepção de <b>emolumentos, custas e honorários</b>. Regra específica que afasta as gerais."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "(a) 5 anos seria dívida líquida em instrumento (§5 I) ou profissional liberal (§5 II) — mas há regra específica de 1 ano; (b) 10 anos é residual; (c)/(e) sem base."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "A intuição leva a 5 anos (dívida líquida/profissional liberal), mas o <b>art. 206, §1º, III</b> dá prazo curtíssimo de <b>1 ano</b> — tema caro a concurso de cartório."
+  ]}
+ ],
+ verif:{qc:"Q2211312",dd:"N/A — letra de norma",norma:"art. 206, §1º, III CC"}
+},
+{
+ n:74, id:"Q1852548", meta:"FGV · TJ-SC · 2021 · Remoção", tema:"Reconhecimento da dívida = interrupção (art. 202, VI)",
+ comando:"assinalar a correta", answer:"C",
+ enun:"Com receio de despejo (3 meses de aluguel atrasado), José escreveu carta ao locador reconhecendo as dívidas e pedindo parcelamento. Ocorreu:",
+ items:[], prompt:"",
+ opts:[["A","renúncia à prescrição"],["B","suspensão"],["C","interrupção da prescrição"],["D","impedimento"],["E","purgação da prescrição"]],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
+   "<b>Art. 202, VI, CC</b> — a prescrição interrompe-se por <b>qualquer ato inequívoco, ainda que extrajudicial, que importe reconhecimento do direito pelo devedor</b>. A carta reconhecendo a dívida é exatamente isso."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "<b>(a)</b> renúncia só cabe <b>após consumada</b> a prescrição (art. 191) — aqui são 3 meses; <b>(b)/(d)</b> decorrem de causas legais (arts. 197–201); <b>(e)</b> purgação da prescrição <b>não existe</b> (purgação é da mora)."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "Confundir com <b>renúncia</b> — mas esta pressupõe prescrição <b>já consumada</b>; reconhecer dívida durante o prazo = <b>interrupção</b> (art. 202, VI)."
+  ]}
+ ],
+ verif:{qc:"Q1852548",dd:"N/A — letra de norma",norma:"art. 202, VI; art. 191 CC"}
+},
+{
+ n:75, id:"Q1852354", meta:"Consulplan · TJ-MS · 2021 · Ingresso", tema:"Prescrição de aluguéis (art. 206 §3 I)",
+ comando:"assinalar a correta", answer:"B",
+ enun:"Nayara locou imóvel residencial urbano a Paulo (R$ 2.570/mês, venc. dia 5); a partir de novembro Paulo deixou de pagar. Prazo prescricional para Nayara cobrar os aluguéis:",
+ items:[], prompt:"",
+ opts:[["A","1 ano"],["B","3 anos"],["C","4 anos"],["D","5 anos"]],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (B)",li:[
+   "<b>Art. 206, §3º, I, CC</b> — prescreve em <b>3 anos</b> a pretensão relativa a <b>aluguéis de prédios urbanos ou rústicos</b>."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "1, 4 e 5 anos não se aplicam; valores, datas e venc. dia 5 são <b>distratores</b> — a resposta é só a natureza da pretensão (aluguéis = 3 anos)."
+  ]},
+  {c:"purple",i:"📖",t:"DIFERENÇA P/ Q72",li:[
+   "Lá havia cônjuges (art. 197, I deslocava o termo inicial). Aqui <b>não há</b> relação conjugal → prazo de 3 anos corre normalmente do inadimplemento."
+  ]}
+ ],
+ verif:{qc:"Q1852354",dd:"N/A — letra de norma",norma:"art. 206, §3º, I CC"}
+},
+{
+ n:76, id:"Q1852371", meta:"Consulplan · TJ-MS · 2021 · Remoção", tema:"Interrupção contra herdeiro de solidário (art. 204 §2)",
+ comando:"assinalar a correta", answer:"C",
+ enun:"João e Manoel devem solidariamente R$ 500 a Pedro. João (2 filhos maiores) falece; um dos herdeiros assina confissão de dívida. Efeito da interrupção:",
+ items:[], prompt:"",
+ opts:[
+  ["A","interrompe para o herdeiro-assinante, o outro filho e Manoel"],
+  ["B","interrompe para o assinante e o outro filho; mas não para Manoel"],
+  ["C","interrompe só para o herdeiro que assinou; para o outro herdeiro e para Manoel, continua correndo"],
+  ["D","não interrompe para ninguém"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
+   "O reconhecimento da dívida interrompe (art. 202, VI), operado <b>contra um dos herdeiros</b> do devedor solidário. Pelo <b>art. 204, §2º, CC</b>, essa interrupção <b>não prejudica os outros herdeiros ou devedores, salvo obrigações/direitos indivisíveis</b>. R$ 500 é <b>divisível</b> ⇒ atinge só o herdeiro-assinante."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "(a) estende a todos (só caberia se indivisível); (b) inclui indevidamente o outro filho; (d) nega até ao assinante (que reconheceu)."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "Não confundir com o <b>§1º</b> (interrupção <b>contra o devedor solidário</b> envolve os demais e seus herdeiros). Aqui foi <b>contra um herdeiro</b> → incide o <b>§2º</b> (restrito, salvo indivisibilidade). Dinheiro = divisível."
+  ]}
+ ],
+ verif:{qc:"Q1852371",dd:"N/A — letra de norma",norma:"art. 204, §2º; art. 202, VI CC"}
+},
+{
+ n:77, id:"Q1852457", meta:"Consulplan · TJ-MS · 2021 · Remoção", tema:"Decadência (arts. 207–211)",
+ comando:"assinalar a CONTRÁRIA à lei", answer:"D",
+ enun:"Acerca da decadência, tem-se por oposta à previsão legal (= a contrária à lei):",
+ items:[], prompt:"",
+ opts:[
+  ["A","após consumada, não se admite renúncia à decadência"],
+  ["B","a decadência convencional pode ser alegada em qualquer grau de jurisdição"],
+  ["C","decadência legal → o juiz conhece de ofício"],
+  ["D","à decadência aplicam-se, a rigor, as regras que impedem, suspendem ou interrompem a prescrição"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (D é a errada)",li:[
+   "<b>Art. 207 CC</b> — \"<b>salvo disposição legal em contrário, NÃO se aplicam</b> à decadência as normas que impedem, suspendem ou interrompem a prescrição\". A alternativa afirma o oposto."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS DE ACORDO COM A LEI",li:[
+   "(a) art. 209 (renúncia à decadência <b>legal</b> é nula); (b) art. 211 (decadência <b>convencional</b> — alegação em qualquer grau, mas o juiz não supre); (c) art. 210 (decadência <b>legal</b> — conhecimento de ofício)."
+  ]},
+  {c:"purple",i:"📖",t:"MAPA DA DECADÊNCIA",li:[
+   "<b>Legal</b> → renúncia nula (209) + ofício (210). <b>Convencional</b> → pode renunciar + alegação em qualquer grau, sem ofício (211).",
+   "Regra geral: prazos de decadência <b>não</b> se impedem/suspendem/interrompem (207), salvo lei."
+  ]}
+ ],
+ verif:{qc:"Q1852457",dd:"N/A — letra de norma",norma:"arts. 207, 209, 210, 211 CC"}
+},
+{
+ n:78, id:"Q1854243", meta:"Vunesp · TJ-GO · 2021 · Remoção", tema:"Vítima por equiparação — bystander (CDC 17 + 27)",
+ comando:"assinalar a correta", answer:"B",
+ enun:"Prazo prescricional da pretensão de ressarcimento de danos sofridos pelos moradores de casas atingidas pela queda, em 1996, de aeronave de empresa de transporte aéreo:",
+ items:[], prompt:"",
+ opts:[["A","15 anos"],["B","5 anos"],["C","10 anos"],["D","20 anos"]],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (B)",li:[
+   "Os moradores atingidos são <b>vítimas do evento</b> (bystanders) → <b>consumidores por equiparação</b> (<b>art. 17 CDC</b>). Acidente em 1996 (CDC já vigente) ⇒ prazo <b>prescricional de 5 anos do art. 27 do CDC</b> (STJ)."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "(c) 10 anos (art. 205 CC) e (d) 20 anos (CC/16) seriam cogitáveis se não incidisse o CDC — mas a relação é de consumo por equiparação; (a) 15 anos sem base."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "As vítimas <b>não eram passageiras</b> (terceiros no solo), mas ainda assim são <b>consumidoras por equiparação</b> (art. 17) — daí o prazo do <b>CDC (5 anos)</b>, não o do CC."
+  ]},
+  {c:"purple",i:"⚖️",t:"JURISPRUDÊNCIA (STJ)",li:[
+   "<b>Bystander</b> (vítima do evento, art. 17 CDC) tem a pretensão reparatória sujeita ao prazo <b>quinquenal do art. 27 do CDC</b>, e não aos prazos do CC."
+  ]}
+ ],
+ verif:{qc:"Q1854243",dd:"bystander = consumidor por equiparação; prazo do art. 27 CDC",norma:"arts. 17 e 27 CDC"}
+},
+{
+ n:79, id:"Q2553336", meta:"Vunesp · TJ-SP · 2024 · Remoção", tema:"Requisitos da escritura pública (art. 215)",
+ comando:"assinalar a correta", answer:"C",
+ enun:"A escritura pública, salvo quando exigido por lei outros requisitos, deve conter sempre:",
+ items:[], prompt:"",
+ opts:[
+  ["A","escrituração em português ou, não sabendo o comparecente, o idioma deste, com o notário fluente"],
+  ["B","assinatura a rogo de quem não puder comparecer"],
+  ["C","declaração de ter sido lida na presença das partes/comparecentes, ou de que todos a leram"],
+  ["D","qualificação e assinatura dos cônjuges das partes"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
+   "Reproduz o <b>art. 215, §1º, VI, CC</b> — a escritura deve conter \"declaração de ter sido <b>lida</b> na presença das partes e demais comparecentes, ou de que todos a leram\"."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "<b>(a)</b> redigida na língua nacional (§3º); se o comparecente não a souber, exige-se <b>tradutor/intérprete</b> (§2º) — não \"notário fluente\".",
+   "<b>(b)</b> a assinatura <b>a rogo</b> é de quem está <b>presente</b> mas não pode/sabe assinar.",
+   "<b>(d)</b> não é requisito <b>sempre</b> a assinatura dos cônjuges; só a qualificação quando necessária."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "Trocar <b>tradutor/intérprete</b> por \"notário fluente\" (a) e \"a rogo p/ quem não comparece\" (b — na verdade é p/ presente que não assina)."
+  ]}
+ ],
+ verif:{qc:"Q2553336",dd:"N/A — letra de norma",norma:"art. 215, §1º VI, §2º, §3º CC"}
+},
+{
+ n:80, id:"Q2272719", meta:"Ieses · TJ-AM · 2023 · Ingresso", tema:"Meios de prova (arts. 223, 228, 232)",
+ comando:"assinalar a correta", answer:"A",
+ enun:"Sobre os meios de prova, avalie as assertivas.",
+ items:[
+  "<b>I.</b> A recusa à perícia médica ordenada pelo juiz não poderá suprir a prova que se pretendia obter.",
+  "<b>II.</b> A cópia fotográfica conferida por tabelião supre a ausência do título de crédito/original, inclusive nos casos em que a lei/circunstâncias condicionarem o direito à exibição.",
+  "<b>III.</b> A pessoa com deficiência poderá testemunhar em igualdade de condições, com todos os recursos de tecnologia assistiva."
+ ],
+ prompt:"Está correto o que se afirma em:",
+ opts:[["A","Apenas III"],["B","I, II e III"],["C","I e II"],["D","II e III"]],
+ secs:[
+  {c:"green",i:"⚖️",t:"III (correta)",li:[
+   "<b>Art. 228, §2º, CC</b> (Estatuto da Pessoa com Deficiência) — reprodução literal."
+  ]},
+  {c:"amber",i:"⚠️",t:"I e II (erradas — inversões)",li:[
+   "<b>I</b> — <b>art. 232 CC</b>: a recusa à perícia médica <b>PODERÁ suprir</b> a prova (presunção contra quem recusa). A assertiva trocou por \"não poderá\".",
+   "<b>II</b> — <b>art. 223, parágrafo único</b>: a prova <b>NÃO supre</b> a ausência do título/original quando a lei/circunstâncias condicionarem o direito à exibição. A assertiva afirmou o contrário."
+  ]},
+  {c:"purple",i:"📖",t:"MEMÓRIA",li:[
+   "Recusa à perícia <b>prejudica</b> quem recusa (art. 232); cópia não substitui o original quando a exibição for condição (art. 223, ún.)."
+  ]}
+ ],
+ verif:{qc:"Q2272719",dd:"N/A — letra de norma",norma:"arts. 223 ún., 228 §2º, 232 CC"}
+},
+{
+ n:81, id:"Q3811853", meta:"Ieses · TJ-PA · 2026 · Remoção", tema:"Obrigação de dar coisa certa (arts. 233–237)",
+ comando:"marcar a INCORRETA", answer:"B",
+ enun:"Sobre o art. 233 e seguintes do CC (obrigação de dar coisa certa), marque a incorreta:",
+ items:[], prompt:"",
+ opts:[
+  ["A","coisa perdida sem culpa antes da tradição → resolve p/ ambas; com culpa → equivalente + perdas e danos"],
+  ["B","deteriorada a coisa, sendo o devedor culpado, poderá o credor resolver a obrigação, ou aceitar coisa diversa"],
+  ["C","a obrigação abrange os acessórios, salvo contrário do título"],
+  ["D","até a tradição a coisa pertence ao devedor (melhoramentos → aumento de preço)"],
+  ["E","sendo culpado o devedor, o credor exige o equivalente ou aceita a coisa no estado em que se acha + indenização"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (B é a errada)",li:[
+   "Na <b>deterioração COM culpa</b> (<b>art. 236</b>), o credor pode <b>exigir o equivalente</b> ou <b>aceitar a coisa no estado em que se acha</b> (+ perdas e danos) — não \"resolver a obrigação ou aceitar coisa diversa\". A alternativa mistura o art. 235 (sem culpa) e inventa \"coisa diversa\"."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS CORRETAS",li:[
+   "(a) art. 234; (c) art. 233; (d) art. 237; <b>(e) art. 236</b> (versão literal da deterioração com culpa)."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA (B × E)",li:[
+   "Ambas falam de \"culpa do devedor\". <b>E</b> é a cópia fiel do art. 236; <b>B</b> distorce. Mapa: deterioração <b>sem culpa</b> = art. 235 (resolver ou aceitar com abatimento); <b>com culpa</b> = art. 236 (equivalente ou aceitar no estado + perdas e danos)."
+  ]}
+ ],
+ verif:{qc:"Q3811853",dd:"N/A — letra de norma",norma:"arts. 233, 234, 235, 236, 237 CC"}
+},
+{
+ n:82, id:"Q3775474", meta:"Cespe · TJ-RR · 2025 · Remoção", tema:"Obrigações alternativas (art. 256)",
+ comando:"assinalar a correta", anulada:true, resol:"B",
+ enun:"Obrigações alternativas com escolha do credor; o devedor não pode cumprir nenhuma das prestações por motivos alheios à sua vontade (sem culpa). O credor:",
+ items:[], prompt:"",
+ opts:[
+  ["A","optar por obrigação diversa equivalente, sem indenização"],
+  ["B","não poderá reclamar o valor da obrigação"],
+  ["C","reclamar qualquer das duas + perdas e danos"],
+  ["D","exigir obrigação diversa de maior valor + perdas e danos"],
+  ["E","reclamar a maior, sem indenização"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"RESOLUÇÃO (seria B)",li:[
+   "Quando <b>todas</b> as prestações se tornam impossíveis <b>sem culpa</b> do devedor, <b>extingue-se a obrigação</b> (<b>art. 256 CC</b>) ⇒ o credor <b>nada pode reclamar</b> (letra B)."
+  ]},
+  {c:"teal",i:"⚖️",t:"CONTRASTE (com culpa)",li:[
+   "<b>Art. 255</b> — se a escolha é do credor e ambas se tornam inexequíveis <b>por culpa</b> do devedor, o credor reclama o valor de qualquer das duas + perdas e danos (seria a letra C). A questão trazia \"sem culpa\", daí B."
+  ]},
+  {c:"purple",i:"🔁",t:"REVISAR (a regra cai)",li:[
+   "<b>Sem culpa → extingue</b> (art. 256). <b>Com culpa → valor de qualquer + perdas e danos</b> (art. 255)."
+  ]}
+ ],
+ verif:{qc:"Q3775474 — ANULADA",dd:"N/A — letra de norma",norma:"arts. 255, 256 CC"}
+},
+{
+ n:83, id:"Q2553387", meta:"Vunesp · TJ-SP · 2024 · Remoção", tema:"Res perit domino (obrigação de dar coisa certa)",
+ comando:"assinalar a correta", answer:"D",
+ enun:"Marcos comprou carro novo dando o usado como parte do preço, a ser entregue na retirada do novo. Antes da tradição, o usado (sem seguro) foi furtado. Nesse caso:",
+ items:[], prompt:"",
+ opts:[
+  ["A","concessionária responde (caso fortuito)"],
+  ["B","concessionária responde (compra e venda aperfeiçoada pelo consenso)"],
+  ["C","contrato não se resolve, concessionária aceita outro bem"],
+  ["D","Marcos responde, por res perit domino, devendo pagar à concessionária, em pecúnia, o valor avaliado do usado"]
+ ],
+ secs:[
+  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
+   "<i>Res perit domino</i> — a coisa perece para o <b>dono</b>. Até a tradição, o usado pertencia a Marcos (<b>art. 237 CC</b>). Pereceu (furto) antes da tradição; como Marcos era o dono, o risco é dele → sua prestação falha, mas ele continua devendo à concessionária o <b>equivalente em dinheiro</b>."
+  ]},
+  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
+   "(a)/(b) põem o risco na <b>concessionária</b> — mas a perfeição consensual <b>não</b> transfere o risco da coisa ainda não tradicionada; (c) inventa obrigação de aceitar outro bem."
+  ]},
+  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
+   "O trecho \"furto previsível/não é fortuito\" é acessório — o que decide é <b>res perit domino + art. 237</b> (a coisa ainda era de Marcos)."
+  ]}
+ ],
+ verif:{qc:"Q2553387",dd:"N/A — princípio/letra de norma",norma:"art. 237 CC + res perit domino"}
+}
+];
+
+const app = document.getElementById('app');
+function render(){
+  app.innerHTML = QS.map(q=>{
+    const items = q.items && q.items.length
+      ? `<div class="items">${q.items.map(it=>`<div class="item">${it}</div>`).join('')}</div>` : '';
+    const prompt = q.prompt ? `<div class="prompt">${q.prompt}</div>` : '';
+    const opts = q.opts.map(([L,txt])=>`
+      <button class="opt" data-q="${q.n}" data-l="${L}">
+        <span class="badge">${L}</span><span class="txt">${txt}</span>
+      </button>`).join('');
+    const secs = q.secs.map(s=>`
+      <div class="sec ${s.c}">
+        <div class="tile">${s.i}</div>
+        <div class="sbody">
+          <div class="sttl">${s.t}</div>
+          <ul class="slist">${s.li.map(x=>`<li>${x}</li>`).join('')}</ul>
+        </div>
+      </div>`).join('');
+    const verif = `
+      <div class="sec cyan">
+        <div class="tile">🔍</div>
+        <div class="sbody">
+          <div class="sttl">VERIFICAÇÃO</div>
+          <div class="verif">
+            <div class="vrow"><span class="vk">QConcursos</span><span class="vlead"></span><span class="vv ${q.anulada?'':'ok'}">${q.verif.qc}${q.anulada?'':'<span class="vbox">✓</span>'}</span></div>
+            <div class="vrow"><span class="vk">Dizer o Direito</span><span class="vlead"></span><span class="vv">${q.verif.dd}</span></div>
+            <div class="vrow"><span class="vk">Norma</span><span class="vlead"></span><span class="vv ok">${q.verif.norma}${q.verif.norma!=='—'&&q.verif.norma.indexOf('—')!==0?'<span class="vbox">✓</span>':''}</span></div>
+          </div>
+        </div>
+      </div>`;
+    let ghead;
+    if(q.anulada){
+      ghead = `
+        <div class="ghead">
+          <div class="gcheck anul">!</div>
+          <div><div class="gtitle">QUESTÃO <span class="ans anul">ANULADA</span> &nbsp;<span class="gpill anul">⚠ anulada pela banca</span></div></div>
+        </div>
+        <div class="gsrc">QConcursos <b class="anul">${q.id}</b></div>
+        <div class="gcmd">resolução: ${q.resol} (art. 256) · comando original: ${q.comando}</div>`;
+    } else {
+      ghead = `
+        <div class="ghead">
+          <div class="gcheck">✓</div>
+          <div><div class="gtitle">GABARITO: <span class="ans">${q.answer}</span> &nbsp;<span class="gpill">✓ oficial confirmado</span></div></div>
+        </div>
+        <div class="gsrc">QConcursos <b>${q.id}</b></div>
+        <div class="gcmd">(comando: ${q.comando})</div>`;
+    }
+    return `
+    <div class="q" id="q${q.n}">
+      <div class="meta">Q${q.n} · <b>${q.meta}</b> — ${q.tema}</div>
+      <div class="card">
+        <div class="label">QUESTÃO</div>
+        <div class="enun">${q.enun}</div>
+        ${items}${prompt}
+        <div class="opts" id="opts${q.n}">${opts}</div>
+        <div class="verdict" id="vd${q.n}"></div>
+        <button class="togg" data-tg="${q.n}"><span>📋 Gabarito comentado</span><span class="ar">▾</span></button>
+        <div class="com" id="com${q.n}">
+          <div class="gcard${q.anulada?' anul':''}">
+            ${ghead}
+            <div style="margin-top:8px">${secs}${verif}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',onAnswer));
+  document.querySelectorAll('.togg').forEach(b=>b.addEventListener('click',onToggle));
+}
+const state = {};
+function onAnswer(e){
+  const b = e.currentTarget;
+  const n = b.dataset.q, L = b.dataset.l;
+  if(state[n]) return;
+  const q = QS.find(x=>x.n==n);
+  state[n] = L;
+  const box = document.getElementById('opts'+n);
+  box.classList.add('answered');
+  const vd = document.getElementById('vd'+n);
+  if(q.anulada){
+    box.querySelectorAll('.opt').forEach(o=>{ if(o.dataset.l===q.resol) o.classList.add('neutral'); });
+    vd.className='verdict anul show';
+    vd.innerHTML='⚠️ Questão ANULADA pela banca — resolução: <b>'+q.resol+'</b> (não conta no placar)';
+  } else {
+    box.querySelectorAll('.opt').forEach(o=>{
+      if(o.dataset.l===q.answer) o.classList.add('correct');
+      if(o.dataset.l===L && L!==q.answer) o.classList.add('wrong');
+    });
+    if(L===q.answer){ vd.className='verdict ok show'; vd.textContent='✓ Você acertou!'; }
+    else { vd.className='verdict no show'; vd.innerHTML='✗ Você errou — gabarito oficial: <b>'+q.answer+'</b>'; }
+  }
+  updatePlacar();
+}
+function onToggle(e){
+  const n = e.currentTarget.dataset.tg;
+  document.getElementById('com'+n).classList.toggle('open');
+  e.currentTarget.classList.toggle('open');
+}
+function updatePlacar(){
+  let ac=0,er=0;
+  QS.forEach(q=>{ if(state[q.n] && !q.anulada){ state[q.n]===q.answer?ac++:er++; }});
+  document.getElementById('pAc').textContent=ac;
+  document.getElementById('pEr').textContent=er;
+  document.getElementById('pPe').textContent=QS.length-Object.keys(state).length;
+}
+function resetAll(){
+  for(const k in state) delete state[k];
+  render(); updatePlacar();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+render();
+</script>
+</body>
+</html>
