@@ -149,7 +149,8 @@ const METAS = [
   {dia:9, titulo:"Meta 9 · Civil",    sub:"Defeitos do NJ · Prescrição · Obrigações",
     ferramentas:[
       {nome:"Q54 a Q68", icon:"📝", url:"meta9-q54-q68.html", store:"concurso_q54_q68_v2", total:15},
-      {nome:"Q69 a Q83", icon:"📝", url:"meta9-q69-q83.html", store:"concurso_q69_q83_v2", total:15}
+      {nome:"Q69 a Q83", icon:"📝", url:"meta9-q69-q83.html", store:"concurso_q69_q83_v2", total:15},
+      {nome:"Q84 a Q98", icon:"📝", url:"meta9-q84-q98.html", store:"concurso_q84_q98_v2", revStore:"concurso_q84_q98_v2_rev", total:15}
     ]
   }
 ];
@@ -159,26 +160,33 @@ function hojeISO(){
   const d=new Date(); d.setHours(0,0,0,0); return d.toISOString().slice(0,10);
 }
 
-function lerProgresso(store, total){
+function lerProgresso(store, total, revStore){
   try{
     const s = JSON.parse(localStorage.getItem(store)||'{}');
-    const respostas = s.respostas || {};
-    const revisao   = s.revisao   || {};
     const hoje = hojeISO();
-    const respondidas = Object.keys(respostas).length;
-    const acertos = Object.keys(respostas).filter(id=>{
-      // verifica se acertou comparando com correta — não temos acesso direto,
-      // mas o estado salva isso via caderno (erro entra no caderno)
-      return !s.caderno || !s.caderno[id];
-    }).length;
-    const erros = respondidas - acertos;
-    const revisarHoje = Object.values(revisao).filter(r=>r.nextDate && r.nextDate<=hoje).length;
+    let respondidas=0, acertos=0, erros=0, revisarHoje=0;
+    if(s.respostas){
+      const respostas = s.respostas;
+      const revisao = s.revisao || {};
+      respondidas = Object.keys(respostas).length;
+      const errantes = new Set(Object.keys(s.caderno||{}));
+      acertos = Object.keys(respostas).filter(id=>!errantes.has(id)).length;
+      erros = respondidas - acertos;
+      revisarHoje = Object.values(revisao).filter(r=>r.nextDate && r.nextDate<=hoje).length;
+    } else if(s.resp){
+      respondidas = Object.keys(s.resp).length;
+      acertos = respondidas; erros = 0;
+      if(revStore){
+        const rev = JSON.parse(localStorage.getItem(revStore)||'{}');
+        revisarHoje = Object.values(rev).filter(v=>typeof v==='string'&&v<=hoje).length;
+      }
+    }
     return {respondidas, acertos, erros, revisarHoje, total};
   }catch(e){ return {respondidas:0, acertos:0, erros:0, revisarHoje:0, total}; }
 }
 
 function renderTool(f){
-  const p = lerProgresso(f.store, f.total);
+  const p = lerProgresso(f.store, f.total, f.revStore);
   const pct = Math.round((p.respondidas/f.total)*100);
   let progTxt = p.respondidas===0 ? 'Não iniciado'
     : p.respondidas===f.total ? `✓ Concluído · ${p.acertos} acertos`
@@ -209,7 +217,7 @@ function render(){
     if(temFerramenta){
       let algumIniciado=false, todoConcluido=true, algumDue=false;
       m.ferramentas.forEach(f=>{
-        const p=lerProgresso(f.store,f.total);
+        const p=lerProgresso(f.store,f.total,f.revStore);
         if(p.respondidas>0) algumIniciado=true;
         if(p.respondidas<f.total) todoConcluido=false;
         if(p.revisarHoje>0) algumDue=true;
