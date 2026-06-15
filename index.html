@@ -3,338 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Concurso — Ferramentas de Estudo</title>
+<title>1ª Fase — Cronograma de Metas</title>
 <style>
-  :root {
-    --bg: #050b18;
-    --bg2: #081222;
-    --card: #0b1828;
-    --border: #16365a;
-    --text: #e9f0f8;
-    --muted: #90a6c0;
-    --soft: #b9c8dc;
-    --green: #27c06a;
-    --amber: #f5a623;
-    --amberbg: #241a08;
-    --amberb: #6a4a14;
-    --cyan: #38bdf8;
-    --cyanbg: #06212e;
-    --cyanb: #155a72;
-    --purple: #b06bf2;
-    --glow: rgba(46,120,200,.28);
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 40px 16px 80px;
-    background: radial-gradient(1200px 700px at 50% -120px, #0c1d33 0%, var(--bg) 60%);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-  }
+:root{
+  --bg:#050b18;--card:#0b1828;--border:#16365a;--glow:rgba(46,120,200,.28);
+  --text:#e9f0f8;--muted:#90a6c0;--soft:#b9c8dc;
+  --green:#27c06a;--greenbg:#0a2016;--greenb:#1c5e3a;--greenglow:rgba(34,197,105,.28);
+  --amber:#f5a623;--amberbg:#241a08;--amberb:#6a4a14;--amberglow:rgba(245,166,35,.28);
+  --cyan:#38bdf8;--cyanbg:#06212e;--cyanb:#155a72;
+  --purple:#b06bf2;--purplebg:#190f2c;--purpleb:#432a6e;
+  --red:#f25555;--redbg:#240c0c;--redb:#6a1f1f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:radial-gradient(1200px 700px at 50% -120px,#0c1d33 0%,var(--bg) 60%);
+  color:var(--text);min-height:100vh;padding:28px 16px 80px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:680px;margin:0 auto}
 
-  /* iframe warning banner */
-  #iframeBanner {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-    background: var(--amberbg);
-    border-bottom: 1px solid var(--amberb);
-    color: var(--amber);
-    font-size: 12px;
-    padding: 8px 44px 8px 16px;
-    line-height: 1.4;
-    display: flex; align-items: center; gap: 8px;
-  }
-  #iframeBanner button {
-    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: var(--amber); font-size: 16px;
-    cursor: pointer; padding: 4px 8px; line-height: 1;
-    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-  }
+/* Header */
+.head{text-align:center;margin-bottom:32px}
+.head h1{font-size:22px;font-weight:800;letter-spacing:.3px;margin-bottom:4px}
+.head p{color:var(--muted);font-size:13px}
 
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-  }
+/* Aviso */
+.aviso{
+  background:var(--amberbg);border:1px solid var(--amberb);border-radius:13px;
+  padding:12px 16px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;font-size:13px;
+}
+.aviso span{color:var(--amber);flex:1;line-height:1.5}
 
-  .head {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-top: 20px;
-  }
-  .head h1 {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: .3px;
-    margin: 0 0 8px;
-    background: linear-gradient(135deg, #e9f0f8 0%, #38bdf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .head p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-  }
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:0}
+.titem{display:flex;gap:0;position:relative}
 
-  /* warning box */
-  .warning-box {
-    background: var(--amberbg);
-    border: 1px solid var(--amberb);
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-bottom: 32px;
-    font-size: 13px;
-    color: var(--amber);
-    line-height: 1.5;
-  }
-  .warning-box strong { color: #fbbf24; }
+/* Linha vertical */
+.titem::before{
+  content:"";position:absolute;left:19px;top:40px;bottom:-1px;
+  width:2px;background:var(--border);z-index:0;
+}
+.titem:last-child::before{display:none}
 
-  /* cards grid */
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin-bottom: 40px;
-  }
-  @media (min-width: 560px) {
-    .grid { grid-template-columns: 1fr 1fr; }
-  }
+/* Bolinha do dia */
+.tday{
+  flex:0 0 40px;display:flex;flex-direction:column;align-items:center;
+  padding-top:12px;z-index:1;
+}
+.tball{
+  width:38px;height:38px;border-radius:50%;border:2px solid var(--border);
+  background:var(--card);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;
+}
+.tball.active{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 14px -4px var(--cyan)}
+.tball.done{border-color:var(--green);color:var(--green);box-shadow:0 0 14px -4px var(--greenglow)}
+.tball.due{border-color:var(--amber);color:var(--amber);box-shadow:0 0 14px -4px var(--amberglow)}
 
-  .tool-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 22px 20px;
-    box-shadow: 0 4px 24px rgba(0,0,0,.35), 0 0 0 0 var(--glow);
-    transition: border-color .2s, box-shadow .2s, transform .15s;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .tool-card:hover {
-    border-color: #2b5a8a;
-    box-shadow: 0 6px 32px rgba(0,0,0,.5), 0 0 24px var(--glow);
-    transform: translateY(-2px);
-  }
+/* Card da meta */
+.tcard{
+  flex:1;margin:8px 0 20px 14px;
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px 18px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.02),0 12px 32px -20px var(--glow);
+}
+.tcard.active{border-color:var(--cyanb)}
+.tcard.done{border-color:var(--greenb);box-shadow:0 0 0 1px rgba(34,197,105,.06),0 12px 32px -20px var(--greenglow)}
+.tcard.due{border-color:var(--amberb);box-shadow:0 0 0 1px rgba(245,166,35,.10),0 12px 32px -20px var(--amberglow)}
 
-  .tool-card .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    color: var(--cyan);
-    background: var(--cyanbg);
-    border: 1px solid var(--cyanb);
-    border-radius: 20px;
-    padding: 3px 10px;
-    width: fit-content;
-  }
+.tmeta{font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.ttitle{font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px}
+.tsub{font-size:12px;color:var(--muted);margin-bottom:12px}
 
-  .tool-card h2 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
-  }
+/* Ferramentas da meta */
+.tools{display:flex;flex-direction:column;gap:8px}
+.tool{
+  display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 13px;
+  text-decoration:none;color:var(--soft);font-size:13px;cursor:pointer;
+  transition:.14s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+.tool:hover{border-color:var(--cyanb);background:rgba(56,189,248,.07);color:var(--text)}
+.tool .ticon{font-size:16px;flex-shrink:0}
+.tool .tname{flex:1;font-weight:600}
+.tool .tprog{font-size:11px;color:var(--muted);white-space:nowrap}
+.tool .tprog.ok{color:var(--green);font-weight:700}
+.tool .tprog.due{color:var(--amber);font-weight:700}
 
-  .tool-card .desc {
-    margin: 0;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+/* Barra de progresso */
+.progbar{height:4px;background:rgba(255,255,255,.07);border-radius:4px;margin-top:8px;overflow:hidden}
+.progfill{height:4px;background:var(--green);border-radius:4px;transition:.3s}
 
-  .tool-card .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 2px;
-  }
-  .tool-card .tag {
-    font-size: 11px;
-    color: var(--soft);
-    background: #0d1c30;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2px 9px;
-  }
+/* Badge "em breve" */
+.soon{
+  display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:7px 12px;
+  color:var(--muted);font-size:12px;font-weight:600;
+}
 
-  .btn-open {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #1d5fa8 0%, #1a4f8e 100%);
-    color: #fff;
-    border: 1px solid #2b6bbf;
-    border-radius: 10px;
-    padding: 11px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background .15s, box-shadow .15s, transform .1s;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    margin-top: auto;
-  }
-  .btn-open:hover {
-    background: linear-gradient(135deg, #2470c4 0%, #1d5fa8 100%);
-    box-shadow: 0 0 16px rgba(38,112,196,.45);
-    transform: translateY(-1px);
-  }
-  .btn-open:active { transform: translateY(0); }
+/* Stats globais */
+.stats{
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;
+}
+.stt{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:9px 16px;text-align:center;min-width:80px;
+}
+.stt .n{font-size:20px;font-weight:800;display:block;line-height:1.1}
+.stt .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.stt.ac .n{color:var(--green)}.stt.er .n{color:var(--red)}.stt.rev .n{color:var(--amber)}
 
-  /* footer info */
-  .info-section {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 22px;
-    margin-bottom: 28px;
-  }
-  .info-section h3 {
-    margin: 0 0 14px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--soft);
-    text-transform: uppercase;
-    letter-spacing: .6px;
-  }
-  .info-section ul {
-    margin: 0;
-    padding: 0 0 0 18px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .info-section ul li { margin-bottom: 4px; }
-  .info-section ul li b { color: var(--text); }
-  .info-section ul li .hl { color: var(--cyan); }
-  .info-section ul li .ok { color: var(--green); }
-  .info-section ul li .warn { color: var(--amber); }
-
-  .footer {
-    text-align: center;
-    font-size: 12px;
-    color: #3a526a;
-    margin-top: 40px;
-  }
+.end{text-align:center;color:var(--muted);font-size:11px;margin-top:28px}
 </style>
 </head>
 <body>
-
-<!-- iframe warning -->
-<div id="iframeBanner">
-  <span>⚠️ <strong>Importante:</strong> Abra as ferramentas por esta página — não as embutia em iframes (como Notion). O localStorage não funciona em iframes e o progresso se perde.</span>
-  <button onclick="dismissBanner()" title="Fechar">✕</button>
-</div>
-
-<div class="wrap" id="mainWrap" style="margin-top:0">
+<div class="wrap">
 
   <div class="head">
-    <h1>Ferramentas de Estudo</h1>
-    <p>Meta 9 · Direito Civil · Questões comentadas com revisão espaçada</p>
+    <h1>1ª Fase — Cronograma de Metas</h1>
+    <p>Cartório · Prova Objetiva · Seu progresso é salvo neste aparelho</p>
   </div>
 
-  <div class="warning-box">
-    ⚠️ <strong>Sobre o progresso:</strong> Cada ferramenta salva seu progresso automaticamente no <b>localStorage</b> deste navegador/dispositivo. Cada pessoa tem seu próprio progresso. Não embutia as ferramentas em iframe (Notion, Google Sites, etc.) — o localStorage não funciona em iframes.
+  <div class="stats" id="statsGlobal"></div>
+
+  <div class="aviso">
+    <span>⚠️ Abra as ferramentas por esta página — elas funcionam como página normal no navegador. Não as acesse por dentro do Notion ou iframe: o progresso não é salvo.</span>
   </div>
 
-  <div class="grid" id="toolsGrid">
-    <!-- cards rendered by JS -->
-  </div>
+  <div class="timeline" id="timeline"></div>
 
-  <div class="info-section">
-    <h3>Funcionalidades de cada ferramenta</h3>
-    <ul>
-      <li><b class="ok">Revisão espaçada (Ebbinghaus)</b> — agenda automaticamente acertos/erros em 1, 7 ou 30 dias</li>
-      <li><b class="hl">Caderno de erros</b> — questões erradas entram automaticamente; marque manualmente com ⭐</li>
-      <li><b>5 modos de estudo</b> — Todas, Revisar hoje, Caderno de erros, Por matéria, Aleatório</li>
-      <li><b>Cronômetro</b> — por questão e por sessão, com Pausar/Retomar</li>
-      <li><b>Estatísticas</b> — Acertos, Erros, Pendentes, Revisadas hoje + barra de progresso</li>
-      <li><b class="hl">Export/Import JSON</b> — faça backup do seu progresso e restaure em outro dispositivo</li>
-      <li><b class="warn">Q82 anulada</b> — questão anulada pela banca é sinalizada em âmbar e não conta no placar</li>
-    </ul>
-  </div>
-
-  <div class="footer">
-    Meta 9 · Direito Civil · Q54 – Q83
-  </div>
+  <div class="end">Abra este link no navegador e salve nos favoritos · Cada pessoa tem seu próprio progresso</div>
 </div>
 
 <script>
-const FERRAMENTAS = [
-  {
-    nome: 'Meta 9 · Civil — Q54 a Q68',
-    badge: 'Q54 – Q68',
-    desc: '15 questões · Fraude contra credores, Defeitos do NJ, Nulidade/anulabilidade, Prescrição e decadência',
-    tags: ['Fraude contra credores', 'Defeitos do NJ', 'Prescrição', '15 questões'],
-    url: 'meta9-q54-q68.html'
-  },
-  {
-    nome: 'Meta 9 · Civil — Q69 a Q83',
-    badge: 'Q69 – Q83',
-    desc: '15 questões (1 anulada) · Prescrição e decadência, Obrigações, Escritura pública e prova',
-    tags: ['Prescrição', 'Obrigações', 'Escritura pública', '15 questões'],
-    url: 'meta9-q69-q83.html'
+// ─── EDITE AQUI: todas as metas do cronograma ───────────────────────────────
+const METAS = [
+  {dia:1, titulo:"Meta 1 · Notarial", sub:"Atos notariais fundamentais", ferramentas:[]},
+  {dia:2, titulo:"Meta 2 · Civil",    sub:"Parte geral e obrigações",    ferramentas:[]},
+  {dia:3, titulo:"Meta 3 · Notarial", sub:"Registros e escrituras",      ferramentas:[]},
+  {dia:4, titulo:"Meta 4 · Empresarial", sub:"Direito empresarial",      ferramentas:[]},
+  {dia:5, titulo:"Meta 5 · Constitucional", sub:"Direito constitucional",ferramentas:[]},
+  {dia:6, titulo:"Meta 6 · Notarial", sub:"Normas cartoriais",           ferramentas:[]},
+  {dia:7, titulo:"Meta 7 · Tributário", sub:"Direito tributário",        ferramentas:[]},
+  {dia:8, titulo:"Meta 8 · Administrativo", sub:"Direito administrativo",ferramentas:[]},
+  {dia:9, titulo:"Meta 9 · Civil",    sub:"Defeitos do NJ · Prescrição · Obrigações",
+    ferramentas:[
+      {nome:"Q54 a Q68", icon:"📝", url:"meta9-q54-q68.html", store:"concurso_q54_q68_v2", total:15},
+      {nome:"Q69 a Q83", icon:"📝", url:"meta9-q69-q83.html", store:"concurso_q69_q83_v2", total:15}
+    ]
   }
 ];
+// ─────────────────────────────────────────────────────────────────────────────
 
-function dismissBanner() {
-  const b = document.getElementById('iframeBanner');
-  if (b) { b.style.display = 'none'; sessionStorage.setItem('idx_banner_dismissed', '1'); }
+function hojeISO(){
+  const d=new Date(); d.setHours(0,0,0,0); return d.toISOString().slice(0,10);
 }
 
-function adjustTopPadding() {
-  const banner = document.getElementById('iframeBanner');
-  const wrap = document.getElementById('mainWrap');
-  if (banner && banner.style.display !== 'none') {
-    wrap.style.marginTop = banner.offsetHeight + 'px';
-  } else {
-    wrap.style.marginTop = '0';
-  }
+function lerProgresso(store, total){
+  try{
+    const s = JSON.parse(localStorage.getItem(store)||'{}');
+    const respostas = s.respostas || {};
+    const revisao   = s.revisao   || {};
+    const hoje = hojeISO();
+    const respondidas = Object.keys(respostas).length;
+    const acertos = Object.keys(respostas).filter(id=>{
+      // verifica se acertou comparando com correta — não temos acesso direto,
+      // mas o estado salva isso via caderno (erro entra no caderno)
+      return !s.caderno || !s.caderno[id];
+    }).length;
+    const erros = respondidas - acertos;
+    const revisarHoje = Object.values(revisao).filter(r=>r.nextDate && r.nextDate<=hoje).length;
+    return {respondidas, acertos, erros, revisarHoje, total};
+  }catch(e){ return {respondidas:0, acertos:0, erros:0, revisarHoje:0, total}; }
 }
 
-function openTool(url) {
-  window.open(url, '_blank', 'noopener');
+function renderTool(f){
+  const p = lerProgresso(f.store, f.total);
+  const pct = Math.round((p.respondidas/f.total)*100);
+  let progTxt = p.respondidas===0 ? 'Não iniciado'
+    : p.respondidas===f.total ? `✓ Concluído · ${p.acertos} acertos`
+    : `${p.respondidas}/${f.total} questões`;
+  let progClass = p.respondidas===f.total ? 'ok' : p.revisarHoje>0 ? 'due' : '';
+  if(p.revisarHoje>0) progTxt += ` · ⏰ ${p.revisarHoje} p/ revisar`;
+
+  return `
+    <a class="tool" href="${f.url}" target="_blank" rel="noopener">
+      <span class="ticon">${f.icon}</span>
+      <span class="tname">${f.nome}</span>
+      <span class="tprog ${progClass}">${progTxt}</span>
+    </a>
+    ${p.respondidas>0?`<div class="progbar"><div class="progfill" style="width:${pct}%"></div></div>`:''}
+  `;
 }
 
-function renderCards() {
-  const grid = document.getElementById('toolsGrid');
-  grid.innerHTML = FERRAMENTAS.map(f => `
-    <div class="tool-card">
-      <div class="badge">&#128214; ${f.badge}</div>
-      <h2>${f.nome}</h2>
-      <p class="desc">${f.desc}</p>
-      <div class="meta">
-        ${f.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+function render(){
+  const hoje = hojeISO();
+  let totalAc=0, totalEr=0, totalRev=0;
+
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = METAS.map(m=>{
+    const temFerramenta = m.ferramentas.length > 0;
+    let status = 'pending';
+    let toolsHTML = '';
+
+    if(temFerramenta){
+      let algumIniciado=false, todoConcluido=true, algumDue=false;
+      m.ferramentas.forEach(f=>{
+        const p=lerProgresso(f.store,f.total);
+        if(p.respondidas>0) algumIniciado=true;
+        if(p.respondidas<f.total) todoConcluido=false;
+        if(p.revisarHoje>0) algumDue=true;
+        totalAc+=p.acertos; totalEr+=p.erros; totalRev+=p.revisarHoje;
+      });
+      if(algumDue) status='due';
+      else if(todoConcluido) status='done';
+      else if(algumIniciado) status='active';
+
+      toolsHTML = `<div class="tools">${m.ferramentas.map(renderTool).join('')}</div>`;
+    } else {
+      toolsHTML = `<span class="soon">🔒 Em breve</span>`;
+    }
+
+    const ballClass = status==='done'?'done':status==='due'?'due':temFerramenta?'active':'';
+    const cardClass = status==='done'?'done':status==='due'?'due':temFerramenta?'active':'';
+
+    return `
+    <div class="titem">
+      <div class="tday"><div class="tball ${ballClass}">${m.dia}</div></div>
+      <div class="tcard ${cardClass}">
+        <div class="tmeta">Dia ${m.dia}</div>
+        <div class="ttitle">${m.titulo}</div>
+        <div class="tsub">${m.sub}</div>
+        ${toolsHTML}
       </div>
-      <a class="btn-open" href="${f.url}" target="_blank" rel="noopener"
-         onclick="event.preventDefault(); openTool('${f.url}')">
-        Abrir ferramenta &#8594;
-      </a>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
+
+  // Stats globais
+  const sg = document.getElementById('statsGlobal');
+  sg.innerHTML = `
+    <div class="stt ac"><span class="n">${totalAc}</span><span class="l">Acertos</span></div>
+    <div class="stt er"><span class="n">${totalEr}</span><span class="l">Erros</span></div>
+    <div class="stt rev"><span class="n">${totalRev}</span><span class="l">Revisar hoje</span></div>
+  `;
 }
 
-// Init
-(function() {
-  if (sessionStorage.getItem('idx_banner_dismissed')) {
-    const b = document.getElementById('iframeBanner');
-    if (b) b.style.display = 'none';
-  }
-  renderCards();
-  adjustTopPadding();
-  window.addEventListener('resize', adjustTopPadding);
-})();
+render();
 </script>
 </body>
 </html>
