@@ -2,363 +2,766 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estudo Premium · Civil — Q84 a Q98</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meta 9 · Q84–Q98 | Direito Civil</title>
 <style>
-:root{
-  --b1a:#071A3D;--b1b:#0A234F;--b1c:#0C1C3A;
-  --g2a:#062b22;--g2b:#0a3a2c;--g2c:#073229;
-  --cy:#38BDF8;--cyd:#0EA5E9;--tx:#eaf2fb;--mut:#9fb4cf;--soft:#c4d4e8;
-  --glass:rgba(16,38,74,.55);--glassbd:rgba(56,189,248,.28);
-  --emerald:#10b981;--emd:#059669;
-  --gold1:#F59E0B;--gold2:#FBBF24;
-  --blue1:#2563EB;--blue2:#38BDF8;
-  --org1:#EA580C;--org2:#FB923C;
-  --pur1:#7C3AED;--pur2:#C084FC;
-  --teal1:#0F766E;--teal2:#14B8A6;
-  --red:#e0596a;--redbg:rgba(140,30,40,.32);--redbd:rgba(224,89,106,.45);
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;color:var(--tx);background:#04101f;-webkit-font-smoothing:antialiased;line-height:1.55}
-.app{display:flex;min-height:100vh}
-.hl-art{color:var(--gold2);font-weight:700}
-.hl-con{color:#67e8f9;font-style:italic}
-.hl-key{color:#bef264;font-weight:700;letter-spacing:.2px}
-
-/* ===== BLOCO 1 — QUESTÃO (60%) ===== */
-.bloco1{flex:0 0 60%;max-width:60%;padding:30px 34px 40px;
-  background:linear-gradient(155deg,var(--b1a) 0%,var(--b1b) 48%,var(--b1c) 100%);position:relative;overflow:hidden}
-.bloco1::before{content:"";position:absolute;top:-160px;left:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.16),transparent 65%);pointer-events:none}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;z-index:2;margin-bottom:18px}
-.brand{font-size:13px;font-weight:800;letter-spacing:1px;color:#cfe6ff;text-transform:uppercase}
-.timers{display:flex;gap:14px;align-items:center;font-size:12.5px;color:var(--mut)}
-.timers b{color:var(--cy);font-variant-numeric:tabular-nums;font-weight:800}
-.timers button{background:rgba(255,255,255,.06);border:1px solid rgba(56,189,248,.25);color:var(--soft);border-radius:8px;padding:4px 10px;font-size:11.5px;cursor:pointer}
-.progwrap{position:relative;z-index:2;margin-bottom:18px}
-.progmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:6px}
-.progbar{height:7px;border-radius:7px;background:rgba(255,255,255,.07);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(56,189,248,.12)}
-.progbar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2563EB,#38BDF8);box-shadow:0 0 14px rgba(56,189,248,.6);transition:width .35s}
-.qmeta{position:relative;z-index:2;font-size:12px;color:#7fa6cf;margin-bottom:10px}
-.qmeta b{color:#bcd6f2}
-.enuncard{position:relative;z-index:2;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid var(--glassbd);border-radius:20px;padding:22px 24px;
-  box-shadow:0 0 0 1px rgba(56,189,248,.06),0 24px 60px -30px rgba(8,30,70,.9),0 0 40px -18px rgba(56,189,248,.4)}
-.qlabel{font-size:11.5px;font-weight:800;letter-spacing:2px;color:#8fc7f5;margin-bottom:10px}
-.enun{font-size:16px;color:#f1f7ff;margin:0}
-.items{margin:12px 0 2px;display:flex;flex-direction:column;gap:9px}
-.item{font-size:14.5px;color:var(--soft)} .item b{color:#e6f0fc}
-.prompt{font-size:14.5px;color:#eaf3ff;margin-top:14px;font-weight:600}
-.alts{position:relative;z-index:2;margin-top:18px;display:flex;flex-direction:column;gap:11px}
-.alt{display:flex;align-items:flex-start;gap:14px;border:1px solid rgba(120,170,225,.18);border-radius:15px;padding:14px 16px;cursor:pointer;transition:.16s;text-align:left;color:#dce8f7;font-size:14.5px;width:100%;backdrop-filter:blur(4px)}
-.alt[data-l="A"]{background:linear-gradient(135deg,#1b4a86,#225aa0)}
-.alt[data-l="B"]{background:linear-gradient(135deg,#236aa8,#2b7ec0)}
-.alt[data-l="C"]{background:linear-gradient(135deg,#177e8f,#1f97a6)}
-.alt[data-l="D"]{background:linear-gradient(135deg,#2a72be,#3486d8)}
-.alt[data-l="E"]{background:linear-gradient(135deg,#1a3f73,#23579a)}
-.alt:hover{border-color:rgba(56,189,248,.5);transform:translateY(-1px);box-shadow:0 0 22px -8px rgba(56,189,248,.5)}
-.alt.sel{border-color:var(--cy);box-shadow:0 0 0 2px rgba(56,189,248,.35),0 0 26px -6px rgba(56,189,248,.7)}
-.alt .lt{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:1.8px solid rgba(56,189,248,.6);color:var(--cy);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;background:rgba(56,189,248,.08)}
-.alt .at{padding-top:4px}
-.alts.done .alt{cursor:default}
-.alt.correct{background:linear-gradient(135deg,rgba(16,185,129,.28),rgba(5,150,105,.22));border-color:rgba(16,185,129,.7);box-shadow:0 0 30px -6px rgba(16,185,129,.7)}
-.alt.correct .lt{background:var(--emerald);border-color:var(--emerald);color:#04130a}
-.alt.correct .at{color:#d6ffe9}
-.alt.wrong{background:var(--redbg);border-color:var(--redbd)}
-.alt.wrong .lt{background:var(--red);border-color:var(--red);color:#1a0606}
-.alts.done .alt:not(.correct):not(.wrong){opacity:.45}
-.nav{position:relative;z-index:2;display:flex;justify-content:space-between;gap:12px;margin-top:22px}
-.nav button{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(56,189,248,.25);color:#cfe2f5;border-radius:13px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
-.nav button:hover:not(:disabled){background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.5)}
-.nav button:disabled{opacity:.35;cursor:default}
-
-/* ===== BLOCO 2 — GABARITO COMENTADO (40%) ===== */
-.bloco2{flex:0 0 40%;max-width:40%;padding:30px 26px 50px;overflow-y:auto;max-height:100vh;
-  background:linear-gradient(160deg,var(--g2a) 0%,var(--g2b) 50%,var(--g2c) 100%)}
-.b2head{font-size:12px;font-weight:800;letter-spacing:2px;color:#7fe9c4;text-transform:uppercase;margin-bottom:16px;opacity:.85}
-.locked{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:60vh;color:#7fb8a4;gap:12px}
-.locked .ic{font-size:42px;opacity:.6}
-.sec{border-radius:18px;padding:16px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
-.sec .sh{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px}
-.sec .ic{font-size:18px;width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-.sec p{margin:0;font-size:13.7px;color:#e4f1ea;line-height:1.62}
-.sec p+p{margin-top:8px}
-/* gabarito */
-.s-gab{background:linear-gradient(135deg,rgba(16,185,129,.16),rgba(5,150,105,.08));border-color:rgba(16,185,129,.4)}
-.s-gab .sh{color:#34e3a8} .s-gab .ic{background:rgba(16,185,129,.18);box-shadow:0 0 22px -6px rgba(16,185,129,.7)}
-.gline{display:flex;align-items:center;gap:14px}
-.gbig{font-size:34px;font-weight:900;color:#34e3a8;text-shadow:0 0 24px rgba(16,185,129,.6);line-height:1}
-.gsub{font-size:12px;color:#9fe9cf} .gsub b{color:#d6ffe9}
-/* fundamento */
-.s-fun{background:linear-gradient(135deg,rgba(245,158,11,.14),rgba(251,191,36,.06));border-color:rgba(245,158,11,.4)}
-.s-fun .sh{color:var(--gold2)} .s-fun .ic{background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#3a2606;box-shadow:0 0 22px -6px rgba(245,158,11,.7)}
-/* explicacao */
-.s-exp{background:linear-gradient(135deg,rgba(37,99,235,.14),rgba(56,189,248,.06));border-color:rgba(56,189,248,.4)}
-.s-exp .sh{color:var(--blue2)} .s-exp .ic{background:linear-gradient(135deg,var(--blue1),var(--blue2));color:#06223f;box-shadow:0 0 22px -6px rgba(56,189,248,.7)}
-/* pegadinha */
-.s-peg{background:linear-gradient(135deg,rgba(234,88,12,.16),rgba(251,146,60,.07));border-color:rgba(234,88,12,.45)}
-.s-peg .sh{color:var(--org2)} .s-peg .ic{background:linear-gradient(135deg,var(--org1),var(--org2));color:#3a1605;box-shadow:0 0 22px -6px rgba(234,88,12,.7)}
-/* mnemonico */
-.s-mne{background:linear-gradient(135deg,rgba(124,58,237,.16),rgba(192,132,252,.07));border-color:rgba(124,58,237,.45)}
-.s-mne .sh{color:var(--pur2)} .s-mne .ic{background:linear-gradient(135deg,var(--pur1),var(--pur2));color:#1f0a3a;box-shadow:0 0 22px -6px rgba(124,58,237,.7)}
-.s-mne p{font-style:italic;color:#ecdcff}
-/* revisao */
-.s-rev{background:linear-gradient(135deg,rgba(15,118,110,.16),rgba(20,184,166,.07));border-color:rgba(20,184,166,.45)}
-.s-rev .sh{color:var(--teal2)} .s-rev .ic{background:linear-gradient(135deg,var(--teal1),var(--teal2));color:#04201b;box-shadow:0 0 22px -6px rgba(20,184,166,.7)}
-.revbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.rb{background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.4);color:#5eead4;border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.14s}
-.rb:hover{background:rgba(20,184,166,.22)}
-.rb.on{background:linear-gradient(135deg,var(--teal1),var(--teal2));color:#04201b;border-color:transparent}
-.revstat{display:block;margin-top:9px;font-size:12px;color:#fbbf24;font-weight:700}
-/* verificacao */
-.s-ver{background:linear-gradient(135deg,rgba(14,165,233,.14),rgba(56,189,248,.06));border-color:rgba(14,165,233,.4)}
-.s-ver .sh{color:var(--blue2)} .s-ver .ic{background:linear-gradient(135deg,var(--cyd),var(--blue2));color:#06223f;box-shadow:0 0 22px -6px rgba(14,165,233,.7)}
-.vrow{display:flex;align-items:center;gap:9px;font-size:12.7px;margin-top:7px}
-.vrow .vk{color:#7dd3fc;font-weight:700;min-width:108px}
-.vrow .vv{color:#d6e9f7;flex:1}
-.vchk{flex:0 0 auto;width:19px;height:19px;border-radius:6px;background:var(--emerald);color:#04130a;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center}
-@media(max-width:980px){
-  .app{flex-direction:column}
-  .bloco1,.bloco2{flex:0 0 100%;max-width:100%}
-  .bloco2{max-height:none}
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d8ee;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.6}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer;border:none;border-radius:6px;font-size:14px;font-weight:600;transition:opacity .15s,transform .1s}
+button:active{transform:scale(.97)}
+a{color:#38bdf8}
+#iframeBanner{background:#1a0d00;border-bottom:2px solid #f5a623;padding:10px 16px;font-size:13px;color:#f5c77e;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
+#iframeBanner span{flex:1}
+#iframeBanner button{background:transparent;color:#f5a623;font-size:18px;padding:0 4px;line-height:1;border:none}
+#saveBanner{background:#0b1828;border-bottom:1px solid #16365a;padding:8px 16px;font-size:12px;color:#38bdf8;text-align:center;position:sticky;top:0;z-index:99}
+.wrap{max-width:780px;margin:0 auto;padding:16px}
+.head{text-align:center;margin-bottom:18px}
+.head h1{font-size:20px;color:#38bdf8;font-weight:700}
+.head p{font-size:13px;color:#6a8aaa;margin-top:4px}
+.placar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600}
+.chip span{display:block;font-size:10px;color:#6a8aaa;font-weight:400}
+.chip.verde{border-color:#27c06a;color:#27c06a}
+.chip.vermelho{border-color:#f25555;color:#f25555}
+.chip.cinza{border-color:#4a6a8a;color:#8aaabb}
+.chip.roxo{border-color:#b06bf2;color:#b06bf2}
+.progbar{height:5px;background:#0b1828;border-radius:4px;overflow:hidden;margin-bottom:16px}
+#progFill{height:100%;background:linear-gradient(90deg,#38bdf8,#27c06a);width:0%;transition:width .4s}
+.modos{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.modoBtn{background:#0b1828;border:1px solid #16365a;color:#8aaabb;padding:6px 12px;border-radius:20px;font-size:13px}
+.modoBtn.ativo{background:#16365a;border-color:#38bdf8;color:#38bdf8}
+#materiaSelect{background:#0b1828;border:1px solid #16365a;color:#c9d8ee;padding:6px 10px;border-radius:20px;font-size:13px;outline:none;display:none}
+.timer{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:8px 14px;font-size:13px;color:#8aaabb;display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.timer span{flex:1}
+.timer button{background:#16365a;color:#8aaabb;padding:4px 10px;font-size:12px}
+.q{background:#0b1828;border:1px solid #16365a;border-radius:12px;padding:18px;margin-bottom:14px}
+.qnum{font-size:12px;color:#6a8aaa;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.materia-tag{background:#16365a;color:#38bdf8;border-radius:12px;padding:2px 8px;font-size:11px}
+.qenunc{font-size:15px;line-height:1.7;margin-bottom:16px;color:#d0e0f0}
+.opts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid #16365a;border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#38bdf8;background:#0d1e30}
+.opt input[type=radio]{accent-color:#38bdf8;flex-shrink:0;margin-top:3px}
+.opt.selecionada{border-color:#38bdf8;background:#0d2030}
+.opt.correta{border-color:#27c06a!important;background:#071a0f!important}
+.opt.errada{border-color:#f25555!important;background:#1a0707!important}
+#btnConfirmar{background:#38bdf8;color:#050b18;padding:10px 24px;font-size:15px;width:100%;margin-top:4px}
+#btnConfirmar:disabled{opacity:.4;cursor:not-allowed}
+.resultado{font-size:16px;font-weight:700;margin-top:14px;padding:10px 14px;border-radius:8px;display:none}
+.resultado.certo{background:#071a0f;border:1px solid #27c06a;color:#27c06a}
+.resultado.errado{background:#1a0707;border:1px solid #f25555;color:#f25555}
+.gabarito{font-size:13px;color:#8aaabb;margin-top:8px;display:none}
+details.coment{margin-top:10px;border:1px solid #16365a;border-radius:8px;overflow:hidden;display:none}
+details.coment summary{padding:10px 14px;cursor:pointer;font-size:13px;color:#38bdf8;font-weight:600;background:#0d1e30;list-style:none}
+details.coment summary::-webkit-details-marker{display:none}
+details.coment summary::before{content:'▶ '}
+details.coment[open] summary::before{content:'▼ '}
+details.coment .comentBody{padding:14px;font-size:14px;line-height:1.7;color:#c9d8ee}
+.agendamento{margin-top:12px;display:none}
+.agendInfo{font-size:13px;color:#8aaabb;margin-bottom:8px}
+.agendInfo.hoje{color:#f5a623}
+.agendInfo.futuro{color:#6a8aaa}
+.agendBtns{display:flex;flex-wrap:wrap;gap:6px}
+.agendBtns button{background:#1a2a3a;border:1px solid #f5a623;color:#f5a623;padding:5px 12px;font-size:12px}
+.agendBtns button.remover{border-color:#f25555;color:#f25555}
+.starBtn{margin-top:10px;background:transparent;border:1px solid #b06bf2;color:#b06bf2;padding:6px 14px;font-size:13px;width:100%;display:none}
+.starBtn.ativo{background:#1a0a2e;border-color:#b06bf2}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.nav button{background:#16365a;color:#c9d8ee;padding:9px 18px;font-size:14px}
+.nav button:disabled{opacity:.3;cursor:not-allowed}
+.nav span{font-size:14px;color:#6a8aaa}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.actions button{background:#0b1828;border:1px solid #16365a;color:#8aaabb;padding:8px 14px;font-size:13px}
+.actions button:hover{border-color:#38bdf8;color:#38bdf8}
+.actions button.danger{border-color:#f25555;color:#f25555}
+.vazio{text-align:center;padding:40px 20px;color:#6a8aaa;font-size:15px}
+#importInput{display:none}
+@media(max-width:480px){.modos{gap:4px}.modoBtn{font-size:12px;padding:5px 9px}.nav button{padding:8px 12px;font-size:13px}.wrap{padding:10px}}
 </style>
 </head>
 <body>
-<div class="app">
-  <section class="bloco1">
-    <div class="topbar">
-      <div class="brand">⚖️ Civil · Q84–Q98</div>
-      <div class="timers">
-        <span>Questão <b id="tQ">00:00</b></span>
-        <span>Sessão <b id="tS">00:00</b></span>
-        <button id="btP" onclick="togglePause()">⏸</button>
-        <button onclick="resetAll()">↺</button>
-      </div>
-    </div>
-    <div class="progwrap">
-      <div class="progmeta"><span id="pPos">1 / 15</span><span id="pScore">✓ 0 · ✗ 0</span></div>
-      <div class="progbar"><i id="pBar"></i></div>
-    </div>
-    <div id="qarea"></div>
-    <div class="nav">
-      <button id="btPrev" onclick="nav(-1)">← Anterior</button>
-      <button id="btNext" onclick="nav(1)">Próxima →</button>
-    </div>
-  </section>
-  <aside class="bloco2">
-    <div class="b2head">📗 Gabarito comentado</div>
-    <div id="garea"></div>
-  </aside>
+
+<div id="iframeBanner">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframe()">✕</button>
 </div>
+
+<div id="saveBanner">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+
+<div class="wrap">
+  <div class="head">
+    <h1>Meta 9 · Q84–Q98</h1>
+    <p>Direito Civil · Contratos · Evicção · Obrigações</p>
+  </div>
+
+  <div class="placar" id="placar"></div>
+  <div class="progbar"><div id="progFill"></div></div>
+
+  <div class="modos" id="modos">
+    <button class="modoBtn ativo" data-modo="todas">Todas</button>
+    <button class="modoBtn" data-modo="revisar">Revisar hoje</button>
+    <button class="modoBtn" data-modo="caderno">Caderno de erros</button>
+    <button class="modoBtn" data-modo="materia">Por matéria</button>
+    <button class="modoBtn" data-modo="aleatorio">Aleatório</button>
+    <select id="materiaSelect"></select>
+  </div>
+
+  <div class="timer" id="timerBar">
+    <span id="timerDisplay">⏱ 00:00  |  Sessão: 00:00</span>
+    <button id="btnPausar" onclick="togglePause()">Pausar</button>
+  </div>
+
+  <div id="qcard" class="q">
+    <div class="vazio">Carregando...</div>
+  </div>
+
+  <div class="nav">
+    <button id="btnAnterior" onclick="navegar(-1)">← Anterior</button>
+    <span id="navCount">— / —</span>
+    <button id="btnProxima" onclick="navegar(1)">Próxima →</button>
+  </div>
+
+  <div class="actions">
+    <button class="danger" onclick="recomecar()">Recomeçar</button>
+    <button onclick="exportarProgresso()">Exportar progresso</button>
+    <button onclick="document.getElementById('importInput').click()">Importar progresso</button>
+    <input type="file" id="importInput" accept=".json" onchange="importarProgresso(event)">
+  </div>
+</div>
+
 <script>
-const QS=[
-{n:84,id:"Q2272720",meta:"Ieses · TJ-AM · 2023 · Ingresso",tema:"Obrigações alternativas (art. 252)",comando:"assinalar a correta",answer:"D",
- enun:"Sobre as obrigações alternativas, analise as assertivas.",
- items:["I. A escolha cabe ao credor como regra, salvo estipulação contrária.","II. Nas obrigações divisíveis, o devedor pode obrigar o credor a receber parte em uma prestação e parte em outra, como regra.","III. Quando a obrigação for de prestações periódicas, a faculdade de opção poderá ser exercida em cada período."],
- prompt:"Assinale a correta:",
- opts:[["A","I e II"],["B","I, II e III"],["C","II e III"],["D","Apenas a assertiva III está correta"]],
- fundamento:"art. 252, caput, § 1º e § 2º do CC.",
- explicacao:"Só a III está correta (art. 252, § 2º): nas prestações periódicas, a opção é exercida em cada período. A I está errada — a escolha cabe ao DEVEDOR (art. 252, caput), não ao credor. A II está errada — art. 252, § 1º: o devedor não pode obrigar o credor a receber parte em uma prestação e parte em outra.",
- pegadinha:"I e II invertem o caput e o § 1º do art. 252 — trocam o titular da escolha e 'permitem' o pagamento fracionado, que é vedado.",
- mnemonico:"A escolha é do DEVEDOR; obrigação periódica → opção a cada período.",
- verif:{qc:"Q2272720",dd:"N/A — letra de norma",norma:"art. 252 CC"}},
-{n:85,id:"Q3811857",meta:"Ieses · TJ-PA · 2026 · Remoção",tema:"Contratos em geral (arts. 422–426)",comando:"marcar a incorreta",answer:"D",
- enun:"Considerando o art. 422 e seguintes do CC, marque a alternativa incorreta:",items:[],prompt:"",
- opts:[["A","Não pode ser objeto de contrato a herança de pessoa viva."],["B","É lícito estipular contratos atípicos, observadas as normas gerais."],["C","Nos contratos de adesão, são nulas as cláusulas de renúncia antecipada do aderente a direito resultante da natureza do negócio."],["D","Os contratantes são obrigados a respeitar, na conclusão do contrato, todas as cláusulas do contrato."],["E","Havendo cláusulas ambíguas ou contraditórias no contrato de adesão, adota-se a interpretação mais favorável ao aderente."]],
- fundamento:"arts. 422, 423, 424, 425 e 426 do CC.",
- explicacao:"A alternativa D é a incorreta: distorce o art. 422 — os contratantes devem guardar os princípios de probidade e boa-fé, não 'respeitar todas as cláusulas'. As demais são letra da lei: art. 426 (herança de pessoa viva), art. 425 (contratos atípicos), art. 424 (renúncia antecipada nula no adesão) e art. 423 (interpretação pró-aderente).",
- pegadinha:"D soa razoável, mas o art. 422 trata de boa-fé objetiva, não de 'respeitar as cláusulas'.",
- mnemonico:"Art. 422 = boa-fé e probidade — não 'respeitar cláusulas'.",
- verif:{qc:"Q3811857",dd:"N/A — letra de norma",norma:"arts. 422–426 CC"}},
-{n:86,id:"Q3775475",meta:"Cespe · TJ-RR · 2025 · Remoção",tema:"Vícios redibitórios (arts. 441–445)",comando:"assinalar a correta",answer:"E",
- enun:"Carlos, ciente de que o imóvel deveria ser demolido por graves problemas estruturais, vendeu-o a João (R$ 500 mil), que desconhecia a situação. Seis meses após a tradição, João é notificado pela defesa civil. Nesse caso, João:",items:[],prompt:"",
- opts:[["A","só abatimento, sem rescisão/perdas e danos"],["B","nem rescisão nem perdas e danos (prazo decadencial)"],["C","sem rescisão (prazo decadencial), mas com reparação de danos"],["D","rescisão + restituição, mas sem indenização (prazo decadencial)"],["E","poderá exigir a rescisão e a restituição dos valores pagos, com perdas e danos, ou optar por permanecer com o imóvel e reclamar o abatimento no preço."]],
- fundamento:"arts. 441, 442, 443 e 445 do CC.",
- explicacao:"Defeito oculto que torna o imóvel impróprio é vício redibitório (art. 441). João pode redibir (rescindir e restituir, art. 442) ou pedir abatimento. Como Carlos conhecia o vício e ocultou (má-fé), responde por restituição mais perdas e danos (art. 443). O prazo para imóvel é de 1 ano (art. 445) e só passaram 6 meses — não decaiu.",
- pegadinha:"O 'transcurso do prazo decadencial' nas opções B, C e D é a isca: imóvel decai em 1 ano, não em 6 meses; e, sabendo o vendedor do vício, cabem perdas e danos.",
- mnemonico:"Imóvel = 1 ano (art. 445); vendedor sabia → também perdas e danos (art. 443).",
- verif:{qc:"Q3775475",dd:"N/A — letra de norma",norma:"arts. 441–445 CC"}},
-{n:87,id:"Q3775828",meta:"Cespe · TJ-RR · 2025 · Ingresso",tema:"Teoria da imprevisão (arts. 478–480)",comando:"assinalar a correta",answer:"E",
- enun:"Empresa recreativa obteve empréstimo bancário (carência de 12 meses e 60 prestações) para ampliar seu parque. Uma crise mundial de saúde pública inviabilizou seus serviços. Constitui direito da empresa devedora:",items:[],prompt:"",
- opts:[["A","exigir a suspensão do pagamento das prestações"],["B","exigir a prorrogação da carência"],["C","exigir resolução e suspensão das obrigações"],["D","restituir 50% e pagar a diferença sem juros"],["E","pedir a resolução do contrato ou a revisão de cláusulas contratuais, dada a sua nova realidade econômica."]],
- fundamento:"arts. 478, 479 e 480 do CC (e art. 317).",
- explicacao:"Contrato de execução continuada mais pandemia (fato extraordinário e imprevisível) que gera onerosidade excessiva é teoria da imprevisão. O devedor pode pedir a resolução (art. 478) ou a revisão das cláusulas (arts. 479 e 317). As demais inventam soluções sem amparo legal.",
- pegadinha:"A banca oferece 'saídas' criativas (suspender prestações, prorrogar carência, restituir 50%); só vale resolução ou revisão.",
- mnemonico:"Imprevisão = resolução OU revisão (arts. 478–480).",
- verif:{qc:"Q3775828",dd:"N/A — letra de norma",norma:"arts. 478–480 CC"}},
-{n:88,id:"Q3775825",meta:"Cespe · TJ-RR · 2025 · Ingresso",tema:"Regras de interpretação (art. 113, § 2º)",comando:"assinalar a correta",answer:"A",
- enun:"No que diz respeito às cláusulas contratuais em negócio jurídico, as partes:",items:[],prompt:"",
- opts:[["A","podem pactuar regras de interpretação diversas das previstas em lei, nos contratos por instrumento público ou particular"],["B","podem pactuar somente quando se tratar de bens móveis ou semoventes"],["C","podem pactuar somente quando o negócio não envolver incapazes"],["D","não podem pactuar regras de interpretação diversas das previstas em lei"],["E","podem pactuar somente quando firmado por instrumento público"]],
- fundamento:"art. 113, § 2º do CC (Lei 13.874/2019 — Lei da Liberdade Econômica).",
- explicacao:"O art. 113, § 2º permite às partes pactuar livremente regras de interpretação diversas das previstas em lei, sem distinção de forma. As demais enxertam restrições inexistentes (somente móveis, somente sem incapazes, somente público, ou 'não podem').",
- pegadinha:"A lei não condiciona a pactuação ao tipo de bem, à ausência de incapazes ou à forma pública.",
- mnemonico:"Liberdade Econômica = pactuar interpretação é LIVRE (art. 113, § 2º).",
- verif:{qc:"Q3775825",dd:"N/A — letra de norma",norma:"art. 113 § 2º CC"}},
-{n:89,id:"Q3775035",meta:"Cespe · TJ-RO · 2025 · Ingresso",tema:"Imprevisão segundo o STJ",comando:"assinalar a correta",answer:"B",
- enun:"De acordo com o STJ, aplica-se a teoria da imprevisão quando a onerosidade excessiva decorrer de:",items:[],prompt:"",
- opts:[["A","estiagem em contratos agrícolas"],["B","pandemia, em relação à empresa de coworking, com drástica redução comprovada do faturamento"],["C","contratos derivativos quando presentes os riscos e o desequilíbrio econômico-financeiro"],["D","aumento salarial por dissídio coletivo (contrato administrativo)"],["E","pragas em contratos agrícolas"]],
- fundamento:"art. 478 do CC + jurisprudência do STJ (álea ordinária x extraordinária).",
- explicacao:"O STJ só aplica a imprevisão quando o fato é extraordinário e imprevisível. A pandemia, para empresa de coworking com queda comprovada de faturamento, entra. Estiagem e pragas no agronegócio, variação cambial em derivativos e dissídio coletivo são áleas ordinárias (previsíveis) — o STJ recusa.",
- pegadinha:"Estiagem e pragas 'parecem' imprevisíveis, mas no agronegócio são riscos previsíveis (álea ordinária).",
- mnemonico:"Agronegócio e câmbio = álea ordinária; pandemia = extraordinária (STJ).",
- verif:{qc:"Q3775035",dd:"STJ — áleas agrícolas/cambiais ordinárias; pandemia extraordinária",norma:"art. 478 CC"}},
-{n:90,id:"Q3775033",meta:"Cespe · TJ-RO · 2025 · Ingresso",tema:"Evicção — momento do cálculo (art. 450, § ún)",comando:"assinalar a correta",answer:"B",
- enun:"Segundo o STJ, o evicto tem direito à restituição integral do valor do bem, calculado ao tempo em que:",items:[],prompt:"",
- opts:[["A","realizado o negócio, valor de mercado à celebração"],["B","dele foi desapossado, considerado o valor do bem apurado no momento da perda sofrida"],["C","desapossado, mas valor do negócio celebrado"],["D","desapossado, mas valor de mercado à celebração"],["E","realizado o negócio, preço à época corrigido"]],
- fundamento:"art. 450, parágrafo único do CC + STJ.",
- explicacao:"O valor a restituir ao evicto é o da coisa na época em que se evenceu (momento do desapossamento), não o do contrato (art. 450, parágrafo único). O STJ confirma. As alternativas C e D usam 'valor do negócio' ou 'tempo da celebração'; A e E ancoram no tempo do negócio.",
- pegadinha:"Usar o 'valor do contrato' ou 'tempo da celebração' — o correto é o valor atual da coisa, ao tempo da evicção.",
- mnemonico:"Evicção: vale o preço da coisa NA HORA da perda (art. 450, § ún).",
- verif:{qc:"Q3775033",dd:"STJ — valor da coisa ao tempo da evicção",norma:"art. 450 § ún CC"}},
-{n:91,id:"Q3673867",meta:"FGV · ENAC · 2025",tema:"Emancipação legal (art. 5º, § ún, V)",comando:"assinalar a correta",answer:"B",
- enun:"Pedro, 15 anos, jogador profissional de futebol (salário R$ 100 mil). O contrato é assinado no dia seguinte ao seu 16º aniversário, sem assistência dos genitores. O negócio jurídico é:",items:[],prompt:"",
- opts:[["A","válido — a participação do pai nas tratativas supre a assistência"],["B","existente, válido e eficaz, porque emancipado ao completar 16 anos por possuir economias próprias"],["C","inválido — só emanciparia com autorização judicial e registro"],["D","inválido — só com registro público"],["E","inválido — só com autorização judicial"]],
- fundamento:"art. 5º, parágrafo único, V do CC.",
- explicacao:"Pedro, atleta profissional com economia própria, foi emancipado de pleno direito ao completar 16 anos (art. 5º, parágrafo único, V). A emancipação legal é automática — não depende de autorização judicial nem de registro como condição de validade. As demais exigem requisitos da emancipação voluntária (pais por instrumento público mais registro).",
- pegadinha:"Confundir emancipação legal (automática) com a voluntária (instrumento público mais registro) ou judicial (sentença).",
- mnemonico:"Emprego com economia própria aos 16 = emancipação LEGAL automática.",
- verif:{qc:"Q3673867",dd:"N/A — letra de norma",norma:"art. 5º § ún V CC"}},
-{n:92,id:"Q3151530",meta:"Cespe · TJ-PE · 2024 · Remoção",tema:"Herança de pessoa viva (art. 426)",comando:"assinalar a correta",answer:"D",
- enun:"Após reconhecer a paternidade, o pai propôs ao filho indenização se ele aceitasse ser excluído da herança (renúncia antecipada ao quinhão na sucessão futura). Houve homologação judicial. Segundo o STJ, a transação é:",items:[],prompt:"",
- opts:[["A","válida — a homologação impede o reconhecimento do vício"],["B","ineficaz"],["C","válida — direito disponível"],["D","nula, pois herança de pessoa viva não pode ser objeto de contrato"],["E","anulável"]],
- fundamento:"arts. 426 e 166 do CC + STJ.",
- explicacao:"Renúncia antecipada a quinhão de sucessão ainda não aberta é pacto sobre herança de pessoa viva (pacta corvina), vedado pelo art. 426, gerando nulidade absoluta (art. 166). O STJ confirma que a homologação judicial não convalida a nulidade. 'Ineficaz' (B) e 'anulável' (E) erram a categoria; A e C dizem 'válida'.",
- pegadinha:"A homologação judicial não sana a nulidade; e a categoria é NULIDADE, não ineficácia nem anulabilidade.",
- mnemonico:"Herança de pessoa viva = NULO (art. 426); homologação não salva.",
- verif:{qc:"Q3151530",dd:"STJ — pacta corvina é nulo; homologação não convalida",norma:"arts. 426, 166 CC"}},
-{n:93,id:"Q2553219",meta:"Vunesp · TJ-SP · 2024 · Ingresso",tema:"Boa-fé objetiva — supressio",comando:"assinalar a correta",answer:"C",
- enun:"Alfa presta serviços a Beta (2015) com reajuste anual; prazo de 48 meses, depois prosseguiram sem aditamento. Reajustes aplicados até 2020, depois não cobrados. Em 2024 Beta sai; Alfa cobra multa rescisória e reajuste retroativo a 2021. É correto afirmar que a cobrança:",items:[],prompt:"",
- opts:[["A","da multa é lícita (expectativa de manutenção)"],["B","do reajuste retroativo é lícita (mera liberalidade)"],["C","do reajuste retroativo é ilícita, pois viola a vedação de comportamento contraditório (boa-fé objetiva)"],["D","da multa é lícita, embora excessivo o montante"]],
- fundamento:"art. 422 do CC (boa-fé objetiva — supressio / venire contra factum proprium).",
- explicacao:"Alfa tolerou o reajuste a menor por anos, criando expectativa na contraparte. Cobrar a diferença retroativa agora é comportamento contraditório (venire contra factum proprium) e configura supressio — perda do direito pelo não-exercício prolongado, derivada da boa-fé objetiva (art. 422). A multa também não incide, pois o termo expirou e o contrato passou a vigorar por prazo indeterminado.",
- pegadinha:"A multa 'parece' devida pela continuidade, mas o termo já expirara; e o reajuste retroativo esbarra na supressio.",
- mnemonico:"Não exercer por muito tempo + criar expectativa = supressio (perde o direito).",
- verif:{qc:"Q2553219",dd:"supressio / venire contra factum proprium",norma:"art. 422 CC"}},
-{n:94,id:"Q2307542",meta:"FGV · TJ-SE · 2023 · Remoção",tema:"Contrato preliminar — falta de registro (art. 463, § ún)",comando:"assinalar a correta",answer:"D",
- enun:"Adriana e Bernardo celebraram contrato preliminar para venda de participação societária, sem levar ao registro competente (art. 463, § ún). Ante a falta de registro, o negócio deve ser reputado:",items:[],prompt:"",
- opts:[["A","inexistente"],["B","nulo (requisito de validade)"],["C","anulável"],["D","relativamente ineficaz, pois o registro destina-se à oponibilidade perante terceiros"],["E","absolutamente ineficaz"]],
- fundamento:"art. 463, parágrafo único do CC + Enunciado 30 do CJF.",
- explicacao:"O registro do contrato preliminar (art. 463, parágrafo único) é fator de eficácia perante terceiros, não requisito de validade nem de existência. Sem registro, o contrato vale e obriga entre as partes, mas é relativamente ineficaz quanto a terceiros (Enunciado 30 do CJF). As demais o tratam como inexistente, nulo, anulável ou absolutamente ineficaz.",
- pegadinha:"Tratar o registro como requisito de validade ou existência — é apenas fator de eficácia e oponibilidade a terceiros.",
- mnemonico:"Registro do preliminar = oponibilidade a terceiros, não validade.",
- verif:{qc:"Q2307542",dd:"Enunciado 30 CJF — eficácia perante terceiros",norma:"art. 463 § ún CC"}},
-{n:95,id:"Q2306770",meta:"FGV · TJ-SE · 2023 · Ingresso",tema:"Distrato e forma (arts. 472 + 108)",comando:"assinalar a correta",answer:"E",
- enun:"André vendeu imóvel a Bianca por instrumento público, embora o valor fosse inferior a 30 vezes o salário mínimo. Desistiram em comum acordo e celebraram o distrato por instrumento particular. O distrato é:",items:[],prompt:"",
- opts:[["A","inexistente"],["B","nulo"],["C","anulável"],["D","ineficaz"],["E","válido"]],
- fundamento:"arts. 472 e 108 do CC.",
- explicacao:"O art. 472 manda o distrato seguir a forma exigida por lei. Para imóvel de valor inferior a 30 vezes o salário mínimo, a escritura pública não é exigida (art. 108) — foi adotada por opção. Logo, o distrato por instrumento particular é válido. As demais supõem forma pública obrigatória, que não havia.",
- pegadinha:"A forma do distrato segue a EXIGIDA por lei, não a efetivamente ADOTADA.",
- mnemonico:"Distrato = forma exigida (art. 472); escritura só p/ imóvel > 30x SM (art. 108).",
- verif:{qc:"Q2306770",dd:"N/A — letra de norma",norma:"arts. 472, 108 CC"}},
-{n:96,id:"Q2512277",meta:"Consulplan · TJ-MA · 2023 · Remoção",tema:"Evicção (art. 449)",comando:"assinalar a correta",answer:"C",
- enun:"Pedro comprou de João, na forma da lei, uma casa em São Luís/MA por R$ 600 mil. É acionado por Felipe, que diz ser o real proprietário do imóvel, usurpado por João. É correto afirmar que:",items:[],prompt:"",
- opts:[["A","para exercer os direitos da evicção, é necessário o trânsito em julgado"],["B","evicção é perda por decisão judicial, inviável em apreensão administrativa"],["C","com cláusula de irresponsabilidade pela evicção, se ela ocorrer e o evicto não sabia do risco, o alienante responde pelo preço"],["D","é lícito reforçar a responsabilidade, mas a parte só responderá até o valor da coisa"]],
- fundamento:"arts. 448 e 449 do CC + STJ.",
- explicacao:"Pelo art. 449, mesmo com cláusula que exclui a garantia da evicção, se o evicto não sabia do risco, ele recebe o preço que pagou. As alternativas A e B prendem a evicção a sentença transitada em julgado ou negam a apreensão administrativa (o STJ admite ambos); a D 'limita ao valor da coisa', mas reforçar (art. 448) agrava a responsabilidade.",
- pegadinha:"Cláusula de exclusão não retira o direito ao preço de quem ignorava o risco; e a evicção independe de sentença transitada.",
- mnemonico:"Excluiu a garantia? Quem não sabia do risco ainda recebe o PREÇO (art. 449).",
- verif:{qc:"Q2512277",dd:"STJ — evicção independe de sentença / cabe em apreensão administrativa",norma:"arts. 448, 449 CC"}},
-{n:97,id:"Q2512274",meta:"Consulplan · TJ-MA · 2023 · Remoção",tema:"Inadimplemento antecipado + safra futura",comando:"assinalar a correta",answer:"D",
- enun:"Pedro Paulo (comerciante de cereais) tem contratos de safra futura; procurou Marcolino para adquirir sua safra futura (milho). À luz da Teoria Geral dos Contratos:",items:[],prompt:"",
- opts:[["A","é válida a cláusula que deixa exclusivamente a Pedro Paulo fixar o preço da safra"],["B","por ser obrigação personalíssima, a morte de Pedro Paulo extingue o contrato"],["C","chuvas, pragas e oscilações de preço são fato extraordinário e imprevisível que autoriza a resolução"],["D","evidenciado antes do prazo que Marcolino não cumprirá, Pedro Paulo pode pedir a extinção do pacto com devolução do antecipado — inadimplemento antecipado"]],
- fundamento:"art. 489 do CC + teoria do inadimplemento antecipado (STJ).",
- explicacao:"Inadimplemento antecipado (quebra antecipada): evidenciado antes do termo que o devedor não cumprirá, o credor pode pedir a extinção desde logo, com devolução do antecipado. A 'a' é nula (preço ao arbítrio exclusivo de uma parte, art. 489); 'b' erra (safra futura não é personalíssima); 'c' erra (riscos do agronegócio são álea ordinária, STJ).",
- pegadinha:"A alternativa C 'parece' imprevisão, mas chuva, praga e preço no agronegócio são previsíveis (álea ordinária).",
- mnemonico:"Vai descumprir antes do prazo? Pode resolver já = inadimplemento antecipado.",
- verif:{qc:"Q2512274",dd:"inadimplemento antecipado; agronegócio = álea ordinária (STJ)",norma:"art. 489 CC"}},
-{n:98,id:"Q2513647",meta:"Consulplan · TJ-AC · 2023 · Remoção",tema:"Evicção — extensão da indenização (art. 450)",comando:"assinalar a correta",answer:"D",
- enun:"Em relação à evicção, assinale a afirmativa correta.",items:[],prompt:"",
- opts:[["A","todos os contratos podem ter cláusula que diminui/exclui a responsabilidade do alienante por evicção"],["B","ainda que soubesse que o bem era litigioso, terá sempre o direito de demandar o alienante"],["C","com cláusula genérica de exclusão, o adquirente não terá meios de reclamar qualquer indenização"],["D","o adquirente que perdeu em leilão a casa que alugava terá direito ao valor atual do imóvel mais lucros cessantes (aluguel) e multas/indenizações pagas ao inquilino"]],
- fundamento:"arts. 447, 449, 450 e 457 do CC.",
- explicacao:"Pelo art. 450, além do valor da coisa (ao tempo da evicção), o evicto recobra perdas e danos — inclusive lucros cessantes (aluguel que deixou de receber) e indenizações pagas ao inquilino. A 'a' erra ('todos os contratos' — a garantia é dos onerosos, art. 447); 'b' erra (art. 457 — não cabe a quem sabia ser litigioso); 'c' erra (cláusula genérica não exonera; art. 449).",
- pegadinha:"'Todos os contratos' (x onerosos); 'sempre' (x art. 457); 'qualquer indenização' (x art. 449).",
- mnemonico:"Evicto recebe valor da coisa + perdas e danos (lucros cessantes incluídos).",
- verif:{qc:"Q2513647",dd:"N/A — letra de norma",norma:"arts. 447, 449, 450, 457 CC"}}
+const STORE_KEY = 'concurso_q84_q98_v2';
+
+const QUESTOES = [
+  {id:'q84', materia:'Obrigações alternativas', tipo:'multipla',
+   enunciado:`Sobre as obrigações alternativas, analise as assertivas.<br><br>
+   <b>I.</b> A escolha cabe ao credor como regra, salvo estipulação contrária.<br>
+   <b>II.</b> Nas obrigações divisíveis, o devedor pode obrigar o credor a receber parte em uma prestação e parte em outra, como regra.<br>
+   <b>III.</b> Quando a obrigação for de prestações periódicas, a faculdade de opção poderá ser exercida em cada período.<br><br>
+   <b>Assinale a correta:</b>`,
+   alternativas:[{letra:'A',texto:'I e II'},{letra:'B',texto:'I, II e III'},{letra:'C',texto:'II e III'},{letra:'D',texto:'Apenas a assertiva III está correta'}],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Só a III está correta (art. 252, §2º): nas prestações periódicas, a opção é exercida em cada período. A I está errada — a escolha cabe ao <b>DEVEDOR</b> (art. 252, caput), não ao credor. A II está errada — art. 252, §1º: o devedor não pode obrigar o credor a receber parte em uma prestação e parte em outra.<br><br>
+   <b>⚠️ Pegadinha:</b> I e II invertem o caput e o §1º do art. 252 — trocam o titular da escolha e "permitem" o pagamento fracionado, que é vedado.<br><br>
+   <b>🧠 Mnemônico:</b> A escolha é do DEVEDOR; obrigação periódica → opção a cada período.<br><br>
+   <b>📌 Norma:</b> art. 252 CC | QConcursos Q2272720`},
+
+  {id:'q85', materia:'Contratos em geral', tipo:'multipla',
+   enunciado:`Considerando o art. 422 e seguintes do CC, marque a alternativa <b>incorreta</b>:`,
+   alternativas:[
+    {letra:'A',texto:'Não pode ser objeto de contrato a herança de pessoa viva.'},
+    {letra:'B',texto:'É lícito estipular contratos atípicos, observadas as normas gerais.'},
+    {letra:'C',texto:'Nos contratos de adesão, são nulas as cláusulas de renúncia antecipada do aderente a direito resultante da natureza do negócio.'},
+    {letra:'D',texto:'Os contratantes são obrigados a respeitar, na conclusão do contrato, todas as cláusulas do contrato.'},
+    {letra:'E',texto:'Havendo cláusulas ambíguas ou contraditórias no contrato de adesão, adota-se a interpretação mais favorável ao aderente.'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D é a incorreta):</b> Distorce o art. 422 — os contratantes devem guardar os princípios de probidade e boa-fé, não "respeitar todas as cláusulas". As demais são letra da lei: art. 426 (herança de pessoa viva), art. 425 (contratos atípicos), art. 424 (renúncia antecipada nula no adesão) e art. 423 (interpretação pró-aderente).<br><br>
+   <b>⚠️ Pegadinha:</b> D soa razoável, mas o art. 422 trata de boa-fé objetiva, não de "respeitar as cláusulas".<br><br>
+   <b>🧠 Mnemônico:</b> Art. 422 = boa-fé e probidade — não "respeitar cláusulas".<br><br>
+   <b>📌 Norma:</b> arts. 422–426 CC | QConcursos Q3811857`},
+
+  {id:'q86', materia:'Vícios redibitórios', tipo:'multipla',
+   enunciado:`Carlos, ciente de que o imóvel deveria ser demolido por graves problemas estruturais, vendeu-o a João (R$ 500 mil), que desconhecia a situação. Seis meses após a tradição, João é notificado pela defesa civil. Nesse caso, João:`,
+   alternativas:[
+    {letra:'A',texto:'só abatimento, sem rescisão/perdas e danos'},
+    {letra:'B',texto:'nem rescisão nem perdas e danos (prazo decadencial)'},
+    {letra:'C',texto:'sem rescisão (prazo decadencial), mas com reparação de danos'},
+    {letra:'D',texto:'rescisão + restituição, mas sem indenização (prazo decadencial)'},
+    {letra:'E',texto:'poderá exigir a rescisão e a restituição dos valores pagos, com perdas e danos, ou optar por permanecer com o imóvel e reclamar o abatimento no preço.'}
+   ],
+   correta:'E',
+   comentario:`<b>⚖️ Por quê (E):</b> Defeito oculto que torna o imóvel impróprio é vício redibitório (art. 441). João pode redibir (rescindir e restituir, art. 442) ou pedir abatimento. Como Carlos conhecia o vício e ocultou (má-fé), responde por restituição mais perdas e danos (art. 443). O prazo para imóvel é de 1 ano (art. 445) e só passaram 6 meses — não decaiu.<br><br>
+   <b>⚠️ Pegadinha:</b> O "transcurso do prazo decadencial" nas opções B, C e D é a isca: imóvel decai em 1 ano, não em 6 meses; e, sabendo o vendedor do vício, cabem perdas e danos.<br><br>
+   <b>🧠 Mnemônico:</b> Imóvel = 1 ano (art. 445); vendedor sabia → também perdas e danos (art. 443).<br><br>
+   <b>📌 Norma:</b> arts. 441–445 CC | QConcursos Q3775475`},
+
+  {id:'q87', materia:'Teoria da imprevisão', tipo:'multipla',
+   enunciado:`Empresa recreativa obteve empréstimo bancário (carência de 12 meses e 60 prestações) para ampliar seu parque. Uma crise mundial de saúde pública inviabilizou seus serviços. Constitui direito da empresa devedora:`,
+   alternativas:[
+    {letra:'A',texto:'exigir a suspensão do pagamento das prestações'},
+    {letra:'B',texto:'exigir a prorrogação da carência'},
+    {letra:'C',texto:'exigir resolução e suspensão das obrigações'},
+    {letra:'D',texto:'restituir 50% e pagar a diferença sem juros'},
+    {letra:'E',texto:'pedir a resolução do contrato ou a revisão de cláusulas contratuais, dada a sua nova realidade econômica.'}
+   ],
+   correta:'E',
+   comentario:`<b>⚖️ Por quê (E):</b> Contrato de execução continuada mais pandemia (fato extraordinário e imprevisível) que gera onerosidade excessiva é teoria da imprevisão. O devedor pode pedir a resolução (art. 478) ou a revisão das cláusulas (arts. 479 e 317). As demais inventam soluções sem amparo legal.<br><br>
+   <b>⚠️ Pegadinha:</b> A banca oferece "saídas" criativas (suspender prestações, prorrogar carência, restituir 50%); só vale resolução ou revisão.<br><br>
+   <b>🧠 Mnemônico:</b> Imprevisão = resolução OU revisão (arts. 478–480).<br><br>
+   <b>📌 Norma:</b> arts. 478–480 CC | QConcursos Q3775828`},
+
+  {id:'q88', materia:'Interpretação contratual', tipo:'multipla',
+   enunciado:`No que diz respeito às cláusulas contratuais em negócio jurídico, as partes:`,
+   alternativas:[
+    {letra:'A',texto:'podem pactuar regras de interpretação diversas das previstas em lei, nos contratos por instrumento público ou particular'},
+    {letra:'B',texto:'podem pactuar somente quando se tratar de bens móveis ou semoventes'},
+    {letra:'C',texto:'podem pactuar somente quando o negócio não envolver incapazes'},
+    {letra:'D',texto:'não podem pactuar regras de interpretação diversas das previstas em lei'},
+    {letra:'E',texto:'podem pactuar somente quando firmado por instrumento público'}
+   ],
+   correta:'A',
+   comentario:`<b>⚖️ Por quê (A):</b> O art. 113, §2º (Lei da Liberdade Econômica — 13.874/2019) permite às partes pactuar livremente regras de interpretação diversas das previstas em lei, sem distinção de forma. As demais enxertam restrições inexistentes (somente móveis, somente sem incapazes, somente público, ou "não podem").<br><br>
+   <b>⚠️ Pegadinha:</b> A lei não condiciona a pactuação ao tipo de bem, à ausência de incapazes ou à forma pública.<br><br>
+   <b>🧠 Mnemônico:</b> Liberdade Econômica = pactuar interpretação é LIVRE (art. 113, §2º).<br><br>
+   <b>📌 Norma:</b> art. 113 §2º CC | QConcursos Q3775825`},
+
+  {id:'q89', materia:'Teoria da imprevisão', tipo:'multipla',
+   enunciado:`De acordo com o STJ, aplica-se a teoria da imprevisão quando a onerosidade excessiva decorrer de:`,
+   alternativas:[
+    {letra:'A',texto:'estiagem em contratos agrícolas'},
+    {letra:'B',texto:'pandemia, em relação à empresa de coworking, com drástica redução comprovada do faturamento'},
+    {letra:'C',texto:'contratos derivativos quando presentes os riscos e o desequilíbrio econômico-financeiro'},
+    {letra:'D',texto:'aumento salarial por dissídio coletivo (contrato administrativo)'},
+    {letra:'E',texto:'pragas em contratos agrícolas'}
+   ],
+   correta:'B',
+   comentario:`<b>⚖️ Por quê (B):</b> O STJ só aplica a imprevisão quando o fato é extraordinário e imprevisível. A pandemia, para empresa de coworking com queda comprovada de faturamento, se encaixa. Estiagem e pragas no agronegócio, variação cambial em derivativos e dissídio coletivo são áleas ordinárias — o STJ recusa.<br><br>
+   <b>⚠️ Pegadinha:</b> Estiagem e pragas "parecem" imprevisíveis, mas no agronegócio são riscos previsíveis (álea ordinária).<br><br>
+   <b>🧠 Mnemônico:</b> Agronegócio e câmbio = álea ordinária; pandemia = extraordinária (STJ).<br><br>
+   <b>📌 Norma:</b> art. 478 CC + STJ | QConcursos Q3775035`},
+
+  {id:'q90', materia:'Evicção', tipo:'multipla',
+   enunciado:`Segundo o STJ, o evicto tem direito à restituição integral do valor do bem, calculado ao tempo em que:`,
+   alternativas:[
+    {letra:'A',texto:'realizado o negócio, valor de mercado à celebração'},
+    {letra:'B',texto:'dele foi desapossado, considerado o valor do bem apurado no momento da perda sofrida'},
+    {letra:'C',texto:'desapossado, mas valor do negócio celebrado'},
+    {letra:'D',texto:'desapossado, mas valor de mercado à celebração'},
+    {letra:'E',texto:'realizado o negócio, preço à época corrigido'}
+   ],
+   correta:'B',
+   comentario:`<b>⚖️ Por quê (B):</b> O valor a restituir ao evicto é o da coisa na época em que se evenceu (momento do desapossamento), não o do contrato (art. 450, parágrafo único). O STJ confirma. As alternativas C e D usam "valor do negócio" ou "tempo da celebração"; A e E ancoram no tempo do negócio.<br><br>
+   <b>⚠️ Pegadinha:</b> Usar o "valor do contrato" ou "tempo da celebração" — o correto é o valor atual da coisa, ao tempo da evicção.<br><br>
+   <b>🧠 Mnemônico:</b> Evicção: vale o preço da coisa NA HORA da perda (art. 450, §ún).<br><br>
+   <b>📌 Norma:</b> art. 450 §ún CC + STJ | QConcursos Q3775033`},
+
+  {id:'q91', materia:'Emancipação', tipo:'multipla',
+   enunciado:`De acordo com o CC, o menor terá sua emancipação legal reconhecida, ficando com ele o ônus de provar essa condição, quando:`,
+   alternativas:[
+    {letra:'A',texto:'tiver dezesseis anos completos e seus pais concordarem'},
+    {letra:'B',texto:'tiver estabelecimento civil ou comercial, ou existência de relação de emprego, desde que, em função deles, o menor com dezesseis anos completos tenha economia própria'},
+    {letra:'C',texto:'tiver obtido sentença judicial de emancipação, em virtude de seus méritos morais e intelectuais'},
+    {letra:'D',texto:'tiver concluído curso de nível médio técnico em escola reconhecida pelo MEC'},
+    {letra:'E',texto:'estiver empregado em empresa familiar de seus ascendentes, a qualquer tempo'}
+   ],
+   correta:'B',
+   comentario:`<b>⚖️ Por quê (B):</b> Transcrição do art. 5º, parágrafo único, V, CC: emancipação pela existência de relação de emprego ou estabelecimento civil/comercial desde que o menor com 16 anos completos tenha economia própria — emancipação LEGAL (independe de autorização dos pais ou juiz).<br><br>
+   <b>⚠️ As outras:</b> A confunde com emancipação voluntária (pais + 16 anos); C inventa "méritos morais"; D trata de colação de grau superior; E inventa emprego familiar a qualquer tempo.<br><br>
+   <b>🧠 Mnemônico:</b> Emprego com economia própria aos 16 = emancipação LEGAL automática.<br><br>
+   <b>📌 Norma:</b> art. 5º §ún V CC | QConcursos Q3673867`},
+
+  {id:'q92', materia:'Herança de pessoa viva', tipo:'multipla',
+   enunciado:`Após reconhecer a paternidade, o pai propôs ao filho indenização se ele aceitasse ser excluído da herança (renúncia antecipada ao quinhão na sucessão futura). Houve homologação judicial. Segundo o STJ, a transação é:`,
+   alternativas:[
+    {letra:'A',texto:'válida — a homologação impede o reconhecimento do vício'},
+    {letra:'B',texto:'ineficaz'},
+    {letra:'C',texto:'válida — direito disponível'},
+    {letra:'D',texto:'nula, pois herança de pessoa viva não pode ser objeto de contrato'},
+    {letra:'E',texto:'anulável'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Renúncia antecipada a quinhão de sucessão ainda não aberta é pacto sobre herança de pessoa viva (pacta corvina), vedado pelo art. 426, gerando nulidade absoluta (art. 166). O STJ confirma que a homologação judicial não convalida a nulidade. "Ineficaz" (B) e "anulável" (E) erram a categoria; A e C dizem "válida".<br><br>
+   <b>⚠️ Pegadinha:</b> A homologação judicial não sana a nulidade; e a categoria é NULIDADE, não ineficácia nem anulabilidade.<br><br>
+   <b>🧠 Mnemônico:</b> Herança de pessoa viva = NULO (art. 426); homologação não salva.<br><br>
+   <b>📌 Norma:</b> arts. 426, 166 CC + STJ | QConcursos Q3151530`},
+
+  {id:'q93', materia:'Boa-fé objetiva', tipo:'multipla',
+   enunciado:`Alfa presta serviços a Beta (2015) com reajuste anual; prazo de 48 meses, depois prosseguiram sem aditamento. Reajustes aplicados até 2020, depois não cobrados. Em 2024 Beta sai; Alfa cobra multa rescisória e reajuste retroativo a 2021. É correto afirmar que a cobrança:`,
+   alternativas:[
+    {letra:'A',texto:'da multa é lícita (expectativa de manutenção)'},
+    {letra:'B',texto:'do reajuste retroativo é lícita (mera liberalidade)'},
+    {letra:'C',texto:'do reajuste retroativo é ilícita, pois viola a vedação de comportamento contraditório (boa-fé objetiva)'},
+    {letra:'D',texto:'da multa é lícita, embora excessivo o montante'}
+   ],
+   correta:'C',
+   comentario:`<b>⚖️ Por quê (C):</b> Alfa tolerou o reajuste a menor por anos, criando expectativa na contraparte. Cobrar a diferença retroativa agora é comportamento contraditório (venire contra factum proprium) e configura supressio — perda do direito pelo não-exercício prolongado, derivada da boa-fé objetiva (art. 422). A multa também não incide, pois o termo expirou e o contrato passou a vigorar por prazo indeterminado.<br><br>
+   <b>⚠️ Pegadinha:</b> A multa "parece" devida pela continuidade, mas o termo já expirara; e o reajuste retroativo esbarra na supressio.<br><br>
+   <b>🧠 Mnemônico:</b> Não exercer por muito tempo + criar expectativa = supressio (perde o direito).<br><br>
+   <b>📌 Norma:</b> art. 422 CC | QConcursos Q2553219`},
+
+  {id:'q94', materia:'Contrato preliminar', tipo:'multipla',
+   enunciado:`Adriana e Bernardo celebraram contrato preliminar para venda de participação societária, sem levar ao registro competente (art. 463, §ún). Ante a falta de registro, o negócio deve ser reputado:`,
+   alternativas:[
+    {letra:'A',texto:'inexistente'},
+    {letra:'B',texto:'nulo (requisito de validade)'},
+    {letra:'C',texto:'anulável'},
+    {letra:'D',texto:'relativamente ineficaz, pois o registro destina-se à oponibilidade perante terceiros'},
+    {letra:'E',texto:'absolutamente ineficaz'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> O registro do contrato preliminar (art. 463, parágrafo único) é fator de eficácia perante terceiros, não requisito de validade nem de existência. Sem registro, o contrato vale e obriga entre as partes, mas é relativamente ineficaz quanto a terceiros (Enunciado 30 do CJF). As demais o tratam como inexistente, nulo, anulável ou absolutamente ineficaz.<br><br>
+   <b>⚠️ Pegadinha:</b> Tratar o registro como requisito de validade ou existência — é apenas fator de eficácia e oponibilidade a terceiros.<br><br>
+   <b>🧠 Mnemônico:</b> Registro do preliminar = oponibilidade a terceiros, não validade.<br><br>
+   <b>📌 Norma:</b> art. 463 §ún CC + Enunciado 30 CJF | QConcursos Q2307542`},
+
+  {id:'q95', materia:'Distrato', tipo:'multipla',
+   enunciado:`André vendeu imóvel a Bianca por instrumento público, embora o valor fosse inferior a 30 vezes o salário mínimo. Desistiram em comum acordo e celebraram o distrato por instrumento particular. O distrato é:`,
+   alternativas:[
+    {letra:'A',texto:'inexistente'},
+    {letra:'B',texto:'nulo'},
+    {letra:'C',texto:'anulável'},
+    {letra:'D',texto:'ineficaz'},
+    {letra:'E',texto:'válido'}
+   ],
+   correta:'E',
+   comentario:`<b>⚖️ Por quê (E):</b> O art. 472 manda o distrato seguir a forma exigida por lei. Para imóvel de valor inferior a 30 vezes o salário mínimo, a escritura pública não é exigida (art. 108) — foi adotada por opção. Logo, o distrato por instrumento particular é válido. As demais supõem forma pública obrigatória, que não havia.<br><br>
+   <b>⚠️ Pegadinha:</b> A forma do distrato segue a EXIGIDA por lei, não a efetivamente ADOTADA.<br><br>
+   <b>🧠 Mnemônico:</b> Distrato = forma exigida (art. 472); escritura só p/ imóvel >30x SM (art. 108).<br><br>
+   <b>📌 Norma:</b> arts. 472, 108 CC | QConcursos Q2306770`},
+
+  {id:'q96', materia:'Evicção', tipo:'multipla',
+   enunciado:`Pedro comprou de João, na forma da lei, uma casa em São Luís/MA por R$ 600 mil. É acionado por Felipe, que diz ser o real proprietário do imóvel, usurpado por João. É correto afirmar que:`,
+   alternativas:[
+    {letra:'A',texto:'para exercer os direitos da evicção, é necessário o trânsito em julgado'},
+    {letra:'B',texto:'evicção é perda por decisão judicial, inviável em apreensão administrativa'},
+    {letra:'C',texto:'com cláusula de irresponsabilidade pela evicção, se ela ocorrer e o evicto não sabia do risco, o alienante responde pelo preço'},
+    {letra:'D',texto:'é lícito reforçar a responsabilidade, mas a parte só responderá até o valor da coisa'}
+   ],
+   correta:'C',
+   comentario:`<b>⚖️ Por quê (C):</b> Pelo art. 449, mesmo com cláusula que exclui a garantia da evicção, se o evicto não sabia do risco, ele recebe o preço que pagou. As alternativas A e B prendem a evicção a sentença transitada em julgado ou negam a apreensão administrativa (o STJ admite ambos); a D "limita ao valor da coisa", mas reforçar (art. 448) agrava a responsabilidade.<br><br>
+   <b>⚠️ Pegadinha:</b> Cláusula de exclusão não retira o direito ao preço de quem ignorava o risco; e a evicção independe de sentença transitada.<br><br>
+   <b>🧠 Mnemônico:</b> Excluiu a garantia? Quem não sabia do risco ainda recebe o PREÇO (art. 449).<br><br>
+   <b>📌 Norma:</b> arts. 448, 449 CC + STJ | QConcursos Q2512277`},
+
+  {id:'q97', materia:'Inadimplemento antecipado', tipo:'multipla',
+   enunciado:`Pedro Paulo (comerciante de cereais) tem contratos de safra futura; procurou Marcolino para adquirir sua safra futura (milho). À luz da Teoria Geral dos Contratos:`,
+   alternativas:[
+    {letra:'A',texto:'é válida a cláusula que deixa exclusivamente a Pedro Paulo fixar o preço da safra'},
+    {letra:'B',texto:'por ser obrigação personalíssima, a morte de Pedro Paulo extingue o contrato'},
+    {letra:'C',texto:'chuvas, pragas e oscilações de preço são fato extraordinário e imprevisível que autoriza a resolução'},
+    {letra:'D',texto:'evidenciado antes do prazo que Marcolino não cumprirá, Pedro Paulo pode pedir a extinção do pacto com devolução do antecipado — inadimplemento antecipado'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Inadimplemento antecipado (quebra antecipada): evidenciado antes do termo que o devedor não cumprirá, o credor pode pedir a extinção desde logo, com devolução do antecipado. A "a" é nula (preço ao arbítrio exclusivo de uma parte, art. 489); "b" erra (safra futura não é personalíssima); "c" erra (riscos do agronegócio são álea ordinária, STJ).<br><br>
+   <b>⚠️ Pegadinha:</b> A alternativa C "parece" imprevisão, mas chuva, praga e preço no agronegócio são previsíveis (álea ordinária).<br><br>
+   <b>🧠 Mnemônico:</b> Vai descumprir antes do prazo? Pode resolver já = inadimplemento antecipado.<br><br>
+   <b>📌 Norma:</b> art. 489 CC + STJ | QConcursos Q2512274`},
+
+  {id:'q98', materia:'Evicção', tipo:'multipla',
+   enunciado:`Em relação à evicção, assinale a afirmativa correta.`,
+   alternativas:[
+    {letra:'A',texto:'todos os contratos podem ter cláusula que diminui/exclui a responsabilidade do alienante por evicção'},
+    {letra:'B',texto:'ainda que soubesse que o bem era litigioso, terá sempre o direito de demandar o alienante'},
+    {letra:'C',texto:'com cláusula genérica de exclusão, o adquirente não terá meios de reclamar qualquer indenização'},
+    {letra:'D',texto:'o adquirente que perdeu em leilão a casa que alugava terá direito ao valor atual do imóvel mais lucros cessantes (aluguel) e multas/indenizações pagas ao inquilino'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Pelo art. 450, além do valor da coisa (ao tempo da evicção), o evicto recobra perdas e danos — inclusive lucros cessantes (aluguel que deixou de receber) e indenizações pagas ao inquilino. A "a" erra ("todos os contratos" — a garantia é dos onerosos, art. 447); "b" erra (art. 457 — não cabe a quem sabia ser litigioso); "c" erra (cláusula genérica não exonera; art. 449).<br><br>
+   <b>⚠️ Pegadinha:</b> "Todos os contratos" (× onerosos); "sempre" (× art. 457); "qualquer indenização" (× art. 449).<br><br>
+   <b>🧠 Mnemônico:</b> Evicto recebe valor da coisa + perdas e danos (lucros cessantes incluídos).<br><br>
+   <b>📌 Norma:</b> arts. 447, 449, 450, 457 CC | QConcursos Q2513647`}
 ];
 
-function hl(s){
-  if(!s) return '';
-  s=s.replace(/(arts?\.\s?\d+[ºo]?(?:\s?a\s?\d+[ºo]?)?(?:\s?,?\s?§\s?\d+[ºo]?)?(?:\s?,?\s?[IVX]+\b)?)/gi,'<span class="hl-art">$1</span>');
-  s=s.replace(/\b(supressio|surrectio|venire contra factum proprium|pacta corvina|eventus damni|consilium fraudis|res perit domino|actio nata|bystander)\b/gi,'<span class="hl-con">$1</span>');
-  s=s.replace(/\b(sempre|somente|nunca|exceto|apenas|jamais|todos|incorreta|correta)\b/gi,'<span class="hl-key">$1</span>');
-  return s;
+// ── State ──────────────────────────────────────────────────────────────────
+const defaultState = () => ({
+  respostas: {},
+  revisao: {},
+  caderno: {},
+  revisarDepois: {},
+  posicao: 0,
+  modo: 'todas',
+  materiaFiltro: ''
+});
+
+let state = defaultState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) state = Object.assign(defaultState(), JSON.parse(raw));
+  } catch(e) {}
 }
 
-const STORE='concurso_q84_q98_v2', REV='concurso_q84_q98_v2_rev';
-let state=JSON.parse(localStorage.getItem(STORE)||'{}');
-let reviews=JSON.parse(localStorage.getItem(REV)||'{}');
-if(!state.resp) state.resp={}; if(typeof state.pos!=='number') state.pos=0;
-let pos=state.pos||0, secQ=0, secS=state.tempo||0, pausado=false, tick=null;
-function save(){state.pos=pos;state.tempo=secS;try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
-function saveRev(){try{localStorage.setItem(REV,JSON.stringify(reviews));}catch(e){}}
-function hojeISO(){const d=new Date();d.setHours(0,0,0,0);return d.toISOString().slice(0,10);}
-function maisDias(n){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
-function fmt(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0');}
+function saveState() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e) {}
+}
 
-function render(){
-  if(pos<0)pos=0; if(pos>=QS.length)pos=QS.length-1;
-  const q=QS[pos]; secQ=0; document.getElementById('tQ').textContent='00:00';
-  const resp=state.resp[q.n], done=!!resp;
-  const items=q.items&&q.items.length?`<div class="items">${q.items.map(it=>`<div class="item">${hl(it)}</div>`).join('')}</div>`:'';
-  const prompt=q.prompt?`<div class="prompt">${hl(q.prompt)}</div>`:'';
-  const alts=q.opts.map(([L,txt])=>{
-    let cls='alt';
-    if(done){ if(L===q.answer)cls+=' correct'; if(resp===L&&L!==q.answer)cls+=' wrong'; if(resp===L)cls+=' sel'; }
-    return `<button class="${cls}" data-l="${L}" onclick="responder('${L}')"><span class="lt">${L}</span><span class="at">${hl(txt)}</span></button>`;
-  }).join('');
-  document.getElementById('qarea').innerHTML=`
-    <div class="qmeta">Q${q.n} · <b>${q.meta}</b> — ${q.tema}</div>
-    <div class="enuncard"><div class="qlabel">QUESTÃO</div><div class="enun">${hl(q.enun)}</div>${items}${prompt}</div>
-    <div class="alts${done?' done':''}">${alts}</div>`;
-  document.getElementById('btPrev').disabled=pos===0;
-  document.getElementById('btNext').disabled=pos===QS.length-1;
-  document.getElementById('pBar').style.width=((pos+1)/QS.length*100)+'%';
-  document.getElementById('pPos').textContent=(pos+1)+' / '+QS.length;
-  updateScore();
-  renderGab(done);
-  save();
+// ── Queue ──────────────────────────────────────────────────────────────────
+let queue = [];
+
+function today() { return new Date().toISOString().split('T')[0]; }
+
+function buildQueue() {
+  const t = today();
+  if (state.modo === 'todas') {
+    return [...QUESTOES];
+  } else if (state.modo === 'revisar') {
+    return QUESTOES.filter(x => {
+      const r = state.revisao[x.id];
+      return r && r.nextDate <= t;
+    });
+  } else if (state.modo === 'caderno') {
+    return QUESTOES.filter(x => state.caderno[x.id] || state.revisarDepois[x.id]);
+  } else if (state.modo === 'materia') {
+    const m = state.materiaFiltro;
+    return m ? QUESTOES.filter(x => x.materia === m) : [...QUESTOES];
+  } else if (state.modo === 'aleatorio') {
+    return fisherYates([...QUESTOES]);
+  }
+  return [...QUESTOES];
 }
-function renderGab(done){
-  const q=QS[pos], g=document.getElementById('garea');
-  if(!done){ g.innerHTML=`<div class="locked"><div class="ic">🔒</div><div>Selecione uma alternativa para revelar o gabarito comentado.</div></div>`; return; }
-  const rev=reviews[q.n], hoje=hojeISO();
-  const dias=[1,3,7,15,30];
-  const revbtns=dias.map(d=>{
-    const iso=maisDias(d); const on=rev===iso?' on':'';
-    return `<button class="rb${on}" onclick="agendar('${q.n}',${d})">${d} dia${d>1?'s':''}</button>`;
-  }).join('');
-  const revstat = rev ? (rev<=hoje?'⏰ revisar hoje':('agendada para '+rev.split('-').reverse().join('/'))) : '';
-  g.innerHTML=`
-    <div class="sec s-gab"><div class="sh"><span class="ic">✅</span>Gabarito oficial</div>
-      <div class="gline"><div class="gbig">${q.answer}</div><div class="gsub">oficial confirmado<br><b>QConcursos ${q.id}</b> · ${q.comando}</div></div></div>
-    <div class="sec s-fun"><div class="sh"><span class="ic">⚖️</span>Fundamento legal</div><p>${hl(q.fundamento)}</p></div>
-    <div class="sec s-exp"><div class="sh"><span class="ic">📘</span>Explicação</div><p>${hl(q.explicacao)}</p></div>
-    ${q.pegadinha?`<div class="sec s-peg"><div class="sh"><span class="ic">⚠️</span>Pegadinha da banca</div><p>${hl(q.pegadinha)}</p></div>`:''}
-    ${q.mnemonico?`<div class="sec s-mne"><div class="sh"><span class="ic">🧠</span>Mnemônico</div><p>${hl(q.mnemonico)}</p></div>`:''}
-    <div class="sec s-rev"><div class="sh"><span class="ic">🔁</span>Revisão espaçada</div>
-      <div class="revbtns">${revbtns}</div><span class="revstat">${revstat}</span></div>
-    <div class="sec s-ver"><div class="sh"><span class="ic">🔍</span>Verificação</div>
-      <div class="vrow"><span class="vk">QConcursos</span><span class="vv">${q.verif.qc}</span><span class="vchk">✓</span></div>
-      <div class="vrow"><span class="vk">Dizer o Direito</span><span class="vv">${q.verif.dd}</span></div>
-      <div class="vrow"><span class="vk">Norma</span><span class="vv">${hl(q.verif.norma)}</span><span class="vchk">✓</span></div></div>`;
+
+function fisherYates(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
-function responder(L){
-  const q=QS[pos];
-  if(state.resp[q.n]) return;
-  state.resp[q.n]=L; save(); render();
+
+function currentQ() { return queue[state.posicao] || null; }
+
+// ── Spaced repetition ─────────────────────────────────────────────────────
+function addDays(dateStr, days) {
+  const d = new Date(dateStr + 'T12:00:00');
+  d.setDate(d.getDate() + days);
+  return d.toISOString().split('T')[0];
 }
-function agendar(n,d){ reviews[n]=maisDias(d); saveRev(); renderGab(true); }
-function nav(d){ const np=pos+d; if(np<0||np>=QS.length)return; pos=np; render(); window.scrollTo({top:0,behavior:'smooth'}); }
-function updateScore(){
-  let ac=0,er=0; QS.forEach(q=>{const r=state.resp[q.n]; if(r){r===q.answer?ac++:er++;}});
-  document.getElementById('pScore').textContent='✓ '+ac+' · ✗ '+er;
+
+function scheduleQ(id, days) {
+  if (!state.revisao[id]) state.revisao[id] = { nextDate: today(), interval: 1, acertos: 0 };
+  state.revisao[id].nextDate = addDays(today(), days);
+  state.revisao[id].interval = days;
+  saveState();
+  renderCard();
 }
-function startTimer(){ if(tick)clearInterval(tick); tick=setInterval(()=>{ if(pausado)return; secQ++;secS++; document.getElementById('tQ').textContent=fmt(secQ); document.getElementById('tS').textContent=fmt(secS); if(secS%10===0)save(); },1000); }
-function togglePause(){ pausado=!pausado; document.getElementById('btP').textContent=pausado?'▶':'⏸'; }
-function resetAll(){ if(!confirm('Apagar todo o progresso (respostas e revisões) deste aparelho?'))return; state={resp:{},pos:0,tempo:0}; reviews={}; pos=0; secS=0; save(); saveRev(); document.getElementById('tS').textContent='00:00'; render(); }
-document.getElementById('tS').textContent=fmt(secS);
-render(); startTimer();
+
+function removeSchedule(id) {
+  delete state.revisao[id];
+  saveState();
+  renderCard();
+}
+
+function autoSchedule(id, correct) {
+  if (!state.revisao[id]) state.revisao[id] = { nextDate: today(), interval: 1, acertos: 0 };
+  const r = state.revisao[id];
+  if (correct) {
+    r.acertos = (r.acertos || 0) + 1;
+    const days = r.acertos === 1 ? 1 : r.acertos === 2 ? 7 : 30;
+    r.nextDate = addDays(today(), days);
+    r.interval = days;
+  } else {
+    r.acertos = 0;
+    r.nextDate = addDays(today(), 1);
+    r.interval = 1;
+  }
+}
+
+function formatDate(d) {
+  const [y, m, day] = d.split('-');
+  return day + '/' + m + '/' + y;
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+function calcStats() {
+  const total = QUESTOES.length;
+  let acertos = 0, erros = 0, revisadasHoje = 0;
+  const t = today();
+  for (const q of QUESTOES) {
+    const r = state.respostas[q.id];
+    if (r) {
+      if (r.letra === q.correta) acertos++;
+      else erros++;
+    }
+    const rev = state.revisao[q.id];
+    if (rev && rev.nextDate <= t) revisadasHoje++;
+  }
+  const pendentes = total - acertos - erros;
+  const pct = Math.round(((acertos + erros) / total) * 100);
+  return { total, acertos, erros, pendentes, revisadasHoje, pct };
+}
+
+// ── Timers ─────────────────────────────────────────────────────────────────
+let sessionSecs = 0;
+let questionSecs = 0;
+let paused = false;
+let timerInterval = null;
+
+function startTimers() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(function() {
+    if (!paused) {
+      sessionSecs++;
+      questionSecs++;
+      updateTimerDisplay();
+    }
+  }, 1000);
+}
+
+function resetQuestionTimer() { questionSecs = 0; }
+
+function fmt(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('timerDisplay');
+  if (el) el.textContent = '⏱ ' + fmt(questionSecs) + '  |  Sessão: ' + fmt(sessionSecs);
+}
+
+function togglePause() {
+  paused = !paused;
+  const btn = document.getElementById('btnPausar');
+  if (btn) btn.textContent = paused ? 'Retomar' : 'Pausar';
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function renderPlacar() {
+  const s = calcStats();
+  document.getElementById('placar').innerHTML =
+    '<div class="chip verde">' + s.acertos + '<span>Acertos</span></div>' +
+    '<div class="chip vermelho">' + s.erros + '<span>Erros</span></div>' +
+    '<div class="chip cinza">' + s.pendentes + '<span>Pendentes</span></div>' +
+    '<div class="chip roxo">' + s.revisadasHoje + '<span>Revisadas hoje</span></div>';
+  document.getElementById('progFill').style.width = s.pct + '%';
+}
+
+function renderModos() {
+  document.querySelectorAll('.modoBtn').forEach(function(btn) {
+    btn.classList.toggle('ativo', btn.dataset.modo === state.modo);
+  });
+  const sel = document.getElementById('materiaSelect');
+  sel.style.display = state.modo === 'materia' ? '' : 'none';
+}
+
+function renderCard() {
+  const card = document.getElementById('qcard');
+  const q = currentQ();
+  if (!q) {
+    card.innerHTML = '<div class="vazio">Nenhuma questão neste modo. Tente outro filtro.</div>';
+    document.getElementById('navCount').textContent = '0 / 0';
+    document.getElementById('btnAnterior').disabled = true;
+    document.getElementById('btnProxima').disabled = true;
+    return;
+  }
+
+  const idx = state.posicao;
+  const total = queue.length;
+  document.getElementById('navCount').textContent = (idx + 1) + ' / ' + total;
+  document.getElementById('btnAnterior').disabled = idx === 0;
+  document.getElementById('btnProxima').disabled = idx === total - 1;
+
+  const resp = state.respostas[q.id];
+  const answered = !!resp;
+  const correct = answered && resp.letra === q.correta;
+  const rev = state.revisao[q.id];
+  const t = today();
+  const starred = !!state.revisarDepois[q.id];
+
+  let schedHtml = '';
+  if (rev) {
+    const overdue = rev.nextDate <= t;
+    const cls = overdue ? 'hoje' : 'futuro';
+    const label = overdue ? 'revisar hoje ⏰' : 'próx. revisão: ' + formatDate(rev.nextDate);
+    schedHtml = '<p class="agendInfo ' + cls + '">📅 ' + label + '</p>';
+  } else {
+    schedHtml = '<p class="agendInfo">Sem agendamento.</p>';
+  }
+
+  let optsHtml = '';
+  q.alternativas.forEach(function(alt) {
+    let cls = '';
+    if (answered) {
+      if (alt.letra === q.correta) cls = ' correta';
+      else if (resp.letra === alt.letra && alt.letra !== q.correta) cls = ' errada';
+    }
+    const checked = (answered && resp.letra === alt.letra) ? ' checked' : '';
+    const disabled = answered ? ' disabled' : '';
+    optsHtml += '<label class="opt' + cls + '" id="opt_' + alt.letra + '">' +
+      '<input type="radio" name="resp_' + q.id + '" value="' + alt.letra + '"' + checked + disabled + '>' +
+      '<span><b>' + alt.letra + ')</b> ' + alt.texto + '</span>' +
+      '</label>';
+  });
+
+  let resultadoHtml = '';
+  if (answered) {
+    const cls2 = correct ? 'certo' : 'errado';
+    const msg = correct ? '✓ Correto!' : '✗ Errado! Você marcou: ' + resp.letra;
+    resultadoHtml = '<div class="resultado ' + cls2 + '" style="display:block">' + msg + '</div>' +
+      '<div class="gabarito" style="display:block">Gabarito: <b>' + q.correta + '</b></div>' +
+      '<details class="coment" style="display:block"><summary>Ver explicação</summary>' +
+      '<div class="comentBody">' + q.comentario + '</div></details>' +
+      '<div class="agendamento" style="display:block">' + schedHtml +
+      '<div class="agendBtns">' +
+      '<button onclick="scheduleQ(\'' + q.id + '\',1)">1 dia</button>' +
+      '<button onclick="scheduleQ(\'' + q.id + '\',7)">7 dias</button>' +
+      '<button onclick="scheduleQ(\'' + q.id + '\',30)">30 dias</button>' +
+      '<button class="remover" onclick="removeSchedule(\'' + q.id + '\')">remover</button>' +
+      '</div></div>' +
+      '<button class="starBtn' + (starred ? ' ativo' : '') + '" style="display:block" onclick="toggleStar(\'' + q.id + '\')">' +
+      (starred ? '⭐ No caderno' : '☆ Revisar depois') + '</button>';
+  } else {
+    resultadoHtml = '<button id="btnConfirmar" onclick="confirmar()" disabled>Confirmar</button>' +
+      '<button class="starBtn' + (starred ? ' ativo' : '') + '" style="display:block;margin-top:10px" onclick="toggleStar(\'' + q.id + '\')">' +
+      (starred ? '⭐ No caderno' : '☆ Revisar depois') + '</button>';
+  }
+
+  card.innerHTML =
+    '<div class="qnum">' +
+    '<span>Q' + (idx + 1) + ' de ' + total + ' — ID: ' + q.id.toUpperCase() + '</span>' +
+    '<span class="materia-tag">' + q.materia + '</span>' +
+    '</div>' +
+    '<div class="qenunc">' + q.enunciado + '</div>' +
+    '<div class="opts" id="opts">' + optsHtml + '</div>' +
+    resultadoHtml;
+
+  if (!answered) {
+    card.querySelectorAll('input[type=radio]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        document.getElementById('btnConfirmar').disabled = false;
+        card.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selecionada'); });
+        r.closest('.opt').classList.add('selecionada');
+      });
+    });
+  }
+}
+
+function confirmar() {
+  const q = currentQ();
+  if (!q) return;
+  const sel = document.querySelector('input[name="resp_' + q.id + '"]:checked');
+  if (!sel) return;
+  const letra = sel.value;
+  const correct = letra === q.correta;
+
+  state.respostas[q.id] = { letra: letra, data: today() };
+  autoSchedule(q.id, correct);
+
+  if (!correct) {
+    state.caderno[q.id] = true;
+  }
+
+  saveState();
+  renderPlacar();
+  renderCard();
+}
+
+function navegar(dir) {
+  const newPos = state.posicao + dir;
+  if (newPos < 0 || newPos >= queue.length) return;
+  state.posicao = newPos;
+  saveState();
+  resetQuestionTimer();
+  renderCard();
+}
+
+function toggleStar(id) {
+  if (state.revisarDepois[id]) {
+    delete state.revisarDepois[id];
+  } else {
+    state.revisarDepois[id] = true;
+  }
+  saveState();
+  renderCard();
+}
+
+function setModo(modo) {
+  state.modo = modo;
+  state.posicao = 0;
+  saveState();
+  rebuild();
+}
+
+function rebuild() {
+  queue = buildQueue();
+  if (state.posicao >= queue.length) state.posicao = 0;
+  renderModos();
+  renderPlacar();
+  renderCard();
+}
+
+// ── Init materia select ────────────────────────────────────────────────────
+function initMateriaSelect() {
+  const sel = document.getElementById('materiaSelect');
+  const materias = [];
+  QUESTOES.forEach(function(q) {
+    if (materias.indexOf(q.materia) === -1) materias.push(q.materia);
+  });
+  let opts = '<option value="">— todas as matérias —</option>';
+  materias.forEach(function(m) {
+    opts += '<option value="' + m + '"' + (state.materiaFiltro === m ? ' selected' : '') + '>' + m + '</option>';
+  });
+  sel.innerHTML = opts;
+  sel.addEventListener('change', function() {
+    state.materiaFiltro = sel.value;
+    state.posicao = 0;
+    saveState();
+    rebuild();
+  });
+}
+
+// ── Mode buttons ────────────────────────────────────────────────────────────
+document.getElementById('modos').addEventListener('click', function(e) {
+  const btn = e.target.closest('.modoBtn');
+  if (!btn) return;
+  setModo(btn.dataset.modo);
+});
+
+// ── Recomeçar ───────────────────────────────────────────────────────────────
+function recomecar() {
+  if (!confirm('Tem certeza? Todo o progresso, agendamentos e caderno de erros serão apagados.')) return;
+  localStorage.removeItem(STORE_KEY);
+  location.reload();
+}
+
+// ── Export ──────────────────────────────────────────────────────────────────
+function exportarProgresso() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'progresso_q84_q98_' + today() + '.json';
+  a.click();
+  setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+}
+
+// ── Import ──────────────────────────────────────────────────────────────────
+function importarProgresso(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      state = Object.assign(defaultState(), imported);
+      saveState();
+      rebuild();
+      alert('Progresso importado com sucesso!');
+    } catch(err) {
+      alert('Arquivo inválido. Verifique se é um JSON de progresso exportado daqui.');
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+// ── iFrame banner ────────────────────────────────────────────────────────────
+function dismissIframe() {
+  const el = document.getElementById('iframeBanner');
+  if (el) el.style.display = 'none';
+  sessionStorage.setItem('iframeDismissed', '1');
+}
+
+function checkIframeBanner() {
+  if (sessionStorage.getItem('iframeDismissed') === '1') {
+    const el = document.getElementById('iframeBanner');
+    if (el) el.style.display = 'none';
+  }
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+loadState();
+checkIframeBanner();
+initMateriaSelect();
+queue = buildQueue();
+if (state.posicao >= queue.length) state.posicao = 0;
+renderModos();
+renderPlacar();
+renderCard();
+startTimers();
 </script>
 </body>
 </html>
