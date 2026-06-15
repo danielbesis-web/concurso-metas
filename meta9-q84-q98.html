@@ -2,766 +2,837 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Meta 9 · Q84–Q98 | Direito Civil</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 9 · Civil — Q84 a Q98</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#050b18;color:#c9d8ee;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.6}
-button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer;border:none;border-radius:6px;font-size:14px;font-weight:600;transition:opacity .15s,transform .1s}
-button:active{transform:scale(.97)}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
 a{color:#38bdf8}
-#iframeBanner{background:#1a0d00;border-bottom:2px solid #f5a623;padding:10px 16px;font-size:13px;color:#f5c77e;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
-#iframeBanner span{flex:1}
-#iframeBanner button{background:transparent;color:#f5a623;font-size:18px;padding:0 4px;line-height:1;border:none}
-#saveBanner{background:#0b1828;border-bottom:1px solid #16365a;padding:8px 16px;font-size:12px;color:#38bdf8;text-align:center;position:sticky;top:0;z-index:99}
-.wrap{max-width:780px;margin:0 auto;padding:16px}
-.head{text-align:center;margin-bottom:18px}
-.head h1{font-size:20px;color:#38bdf8;font-weight:700}
-.head p{font-size:13px;color:#6a8aaa;margin-top:4px}
-.placar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-.chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600}
-.chip span{display:block;font-size:10px;color:#6a8aaa;font-weight:400}
-.chip.verde{border-color:#27c06a;color:#27c06a}
-.chip.vermelho{border-color:#f25555;color:#f25555}
-.chip.cinza{border-color:#4a6a8a;color:#8aaabb}
-.chip.roxo{border-color:#b06bf2;color:#b06bf2}
-.progbar{height:5px;background:#0b1828;border-radius:4px;overflow:hidden;margin-bottom:16px}
-#progFill{height:100%;background:linear-gradient(90deg,#38bdf8,#27c06a);width:0%;transition:width .4s}
-.modos{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.modoBtn{background:#0b1828;border:1px solid #16365a;color:#8aaabb;padding:6px 12px;border-radius:20px;font-size:13px}
-.modoBtn.ativo{background:#16365a;border-color:#38bdf8;color:#38bdf8}
-#materiaSelect{background:#0b1828;border:1px solid #16365a;color:#c9d8ee;padding:6px 10px;border-radius:20px;font-size:13px;outline:none;display:none}
-.timer{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:8px 14px;font-size:13px;color:#8aaabb;display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.timer span{flex:1}
-.timer button{background:#16365a;color:#8aaabb;padding:4px 10px;font-size:12px}
-.q{background:#0b1828;border:1px solid #16365a;border-radius:12px;padding:18px;margin-bottom:14px}
-.qnum{font-size:12px;color:#6a8aaa;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
-.materia-tag{background:#16365a;color:#38bdf8;border-radius:12px;padding:2px 8px;font-size:11px}
-.qenunc{font-size:15px;line-height:1.7;margin-bottom:16px;color:#d0e0f0}
-.opts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid #16365a;border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s}
-.opt:hover{border-color:#38bdf8;background:#0d1e30}
-.opt input[type=radio]{accent-color:#38bdf8;flex-shrink:0;margin-top:3px}
-.opt.selecionada{border-color:#38bdf8;background:#0d2030}
-.opt.correta{border-color:#27c06a!important;background:#071a0f!important}
-.opt.errada{border-color:#f25555!important;background:#1a0707!important}
-#btnConfirmar{background:#38bdf8;color:#050b18;padding:10px 24px;font-size:15px;width:100%;margin-top:4px}
-#btnConfirmar:disabled{opacity:.4;cursor:not-allowed}
-.resultado{font-size:16px;font-weight:700;margin-top:14px;padding:10px 14px;border-radius:8px;display:none}
-.resultado.certo{background:#071a0f;border:1px solid #27c06a;color:#27c06a}
-.resultado.errado{background:#1a0707;border:1px solid #f25555;color:#f25555}
-.gabarito{font-size:13px;color:#8aaabb;margin-top:8px;display:none}
-details.coment{margin-top:10px;border:1px solid #16365a;border-radius:8px;overflow:hidden;display:none}
-details.coment summary{padding:10px 14px;cursor:pointer;font-size:13px;color:#38bdf8;font-weight:600;background:#0d1e30;list-style:none}
-details.coment summary::-webkit-details-marker{display:none}
-details.coment summary::before{content:'▶ '}
-details.coment[open] summary::before{content:'▼ '}
-details.coment .comentBody{padding:14px;font-size:14px;line-height:1.7;color:#c9d8ee}
-.agendamento{margin-top:12px;display:none}
-.agendInfo{font-size:13px;color:#8aaabb;margin-bottom:8px}
-.agendInfo.hoje{color:#f5a623}
-.agendInfo.futuro{color:#6a8aaa}
-.agendBtns{display:flex;flex-wrap:wrap;gap:6px}
-.agendBtns button{background:#1a2a3a;border:1px solid #f5a623;color:#f5a623;padding:5px 12px;font-size:12px}
-.agendBtns button.remover{border-color:#f25555;color:#f25555}
-.starBtn{margin-top:10px;background:transparent;border:1px solid #b06bf2;color:#b06bf2;padding:6px 14px;font-size:13px;width:100%;display:none}
-.starBtn.ativo{background:#1a0a2e;border-color:#b06bf2}
-.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.nav button{background:#16365a;color:#c9d8ee;padding:9px 18px;font-size:14px}
-.nav button:disabled{opacity:.3;cursor:not-allowed}
-.nav span{font-size:14px;color:#6a8aaa}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.actions button{background:#0b1828;border:1px solid #16365a;color:#8aaabb;padding:8px 14px;font-size:13px}
-.actions button:hover{border-color:#38bdf8;color:#38bdf8}
-.actions button.danger{border-color:#f25555;color:#f25555}
-.vazio{text-align:center;padding:40px 20px;color:#6a8aaa;font-size:15px}
-#importInput{display:none}
-@media(max-width:480px){.modos{gap:4px}.modoBtn{font-size:12px;padding:5px 9px}.nav button{padding:8px 12px;font-size:13px}.wrap{padding:10px}}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+
+/* Banners */
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+
+/* Header */
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+
+/* Timer */
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+
+/* Stats */
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+
+/* Mode selector */
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+
+/* Action row */
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+
+/* Card */
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-id{background:#16365a;color:#38bdf8}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-anulada{background:#2a1e00;color:#f5a623;border:1px solid #4a3200}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+
+/* Alternativas */
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+
+/* Confirm button */
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+
+/* Result banner */
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.result-banner.anulada{background:#2a1e00;border:1.5px solid #f5a623;color:#f5a623}
+
+/* Comment */
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+
+/* Scheduling */
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+
+/* Notebook / star */
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+
+/* Navigation */
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+
+/* Empty state */
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+
+/* Export/import */
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+
+@media(max-width:480px){
+  .stats-bar{gap:6px}
+  .stat-chip{padding:4px 8px}
+  .stat-chip .sv{font-size:16px}
+}
+  .notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+  .notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+  .notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+  .notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+  .notas-area::placeholder{color:#3a5474}
 </style>
 </head>
 <body>
 
-<div id="iframeBanner">
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
   <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
-  <button onclick="dismissIframe()">✕</button>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
 </div>
 
-<div id="saveBanner">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="header">
+  <h1>Meta 9 · Direito Civil — Q84 a Q98</h1>
 
-<div class="wrap">
-  <div class="head">
-    <h1>Meta 9 · Q84–Q98</h1>
-    <p>Direito Civil · Contratos · Evicção · Obrigações</p>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span>
+    <span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
   </div>
 
-  <div class="placar" id="placar"></div>
-  <div class="progbar"><div id="progFill"></div></div>
-
-  <div class="modos" id="modos">
-    <button class="modoBtn ativo" data-modo="todas">Todas</button>
-    <button class="modoBtn" data-modo="revisar">Revisar hoje</button>
-    <button class="modoBtn" data-modo="caderno">Caderno de erros</button>
-    <button class="modoBtn" data-modo="materia">Por matéria</button>
-    <button class="modoBtn" data-modo="aleatorio">Aleatório</button>
-    <select id="materiaSelect"></select>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
   </div>
 
-  <div class="timer" id="timerBar">
-    <span id="timerDisplay">⏱ 00:00  |  Sessão: 00:00</span>
-    <button id="btnPausar" onclick="togglePause()">Pausar</button>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por matéria</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
   </div>
 
-  <div id="qcard" class="q">
-    <div class="vazio">Carregando...</div>
-  </div>
-
-  <div class="nav">
-    <button id="btnAnterior" onclick="navegar(-1)">← Anterior</button>
-    <span id="navCount">— / —</span>
-    <button id="btnProxima" onclick="navegar(1)">Próxima →</button>
-  </div>
-
-  <div class="actions">
-    <button class="danger" onclick="recomecar()">Recomeçar</button>
-    <button onclick="exportarProgresso()">Exportar progresso</button>
-    <button onclick="document.getElementById('importInput').click()">Importar progresso</button>
-    <input type="file" id="importInput" accept=".json" onchange="importarProgresso(event)">
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
   </div>
 </div>
+
+<div style="padding:0 14px" id="mainContent"></div>
+
+<footer>Meta 9 · Q84–Q98 · Direito Civil</footer>
 
 <script>
 const STORE_KEY = 'concurso_q84_q98_v2';
 
 const QUESTOES = [
-  {id:'q84', materia:'Obrigações alternativas', tipo:'multipla',
-   enunciado:`Sobre as obrigações alternativas, analise as assertivas.<br><br>
-   <b>I.</b> A escolha cabe ao credor como regra, salvo estipulação contrária.<br>
-   <b>II.</b> Nas obrigações divisíveis, o devedor pode obrigar o credor a receber parte em uma prestação e parte em outra, como regra.<br>
-   <b>III.</b> Quando a obrigação for de prestações periódicas, a faculdade de opção poderá ser exercida em cada período.<br><br>
-   <b>Assinale a correta:</b>`,
+  {id:'q84', materia:'Obrigações', tipo:'multipla',
+   enunciado:`Sobre as obrigações alternativas, analise as assertivas:<br><br>I. A escolha cabe ao credor como regra, salvo estipulação contrária.<br>II. Nas obrigações divisíveis, o devedor pode obrigar o credor a receber parte em uma prestação e parte em outra, como regra.<br>III. Quando a obrigação for de prestações periódicas, a faculdade de opção poderá ser exercida em cada período.<br><br>Assinale a correta:`,
    alternativas:[{letra:'A',texto:'I e II'},{letra:'B',texto:'I, II e III'},{letra:'C',texto:'II e III'},{letra:'D',texto:'Apenas a assertiva III está correta'}],
    correta:'D',
-   comentario:`<b>⚖️ Por quê (D):</b> Só a III está correta (art. 252, §2º): nas prestações periódicas, a opção é exercida em cada período. A I está errada — a escolha cabe ao <b>DEVEDOR</b> (art. 252, caput), não ao credor. A II está errada — art. 252, §1º: o devedor não pode obrigar o credor a receber parte em uma prestação e parte em outra.<br><br>
-   <b>⚠️ Pegadinha:</b> I e II invertem o caput e o §1º do art. 252 — trocam o titular da escolha e "permitem" o pagamento fracionado, que é vedado.<br><br>
-   <b>🧠 Mnemônico:</b> A escolha é do DEVEDOR; obrigação periódica → opção a cada período.<br><br>
-   <b>📌 Norma:</b> art. 252 CC | QConcursos Q2272720`},
+   comentario:`<b>⚖️ Por quê (D — só III):</b> art. 252, §2º — nas prestações periódicas a opção é exercida em cada período. III é a letra da lei.<br><br><b>⚠️ As erradas:</b> I — a escolha cabe ao DEVEDOR (art. 252, caput); II — art. 252, §1º: o devedor não pode obrigar o credor a receber parte em uma prestação e parte em outra.<br><br><b>📌 Norma:</b> art. 252 (caput, §§1º e 2º) CC | QConcursos Q2272720`},
 
   {id:'q85', materia:'Contratos em geral', tipo:'multipla',
-   enunciado:`Considerando o art. 422 e seguintes do CC, marque a alternativa <b>incorreta</b>:`,
-   alternativas:[
-    {letra:'A',texto:'Não pode ser objeto de contrato a herança de pessoa viva.'},
-    {letra:'B',texto:'É lícito estipular contratos atípicos, observadas as normas gerais.'},
-    {letra:'C',texto:'Nos contratos de adesão, são nulas as cláusulas de renúncia antecipada do aderente a direito resultante da natureza do negócio.'},
-    {letra:'D',texto:'Os contratantes são obrigados a respeitar, na conclusão do contrato, todas as cláusulas do contrato.'},
-    {letra:'E',texto:'Havendo cláusulas ambíguas ou contraditórias no contrato de adesão, adota-se a interpretação mais favorável ao aderente.'}
-   ],
+   enunciado:`Considerando o art. 422 e seguintes do CC, marque a alternativa INCORRETA:`,
+   alternativas:[{letra:'A',texto:'Não pode ser objeto de contrato a herança de pessoa viva'},{letra:'B',texto:'É lícito estipular contratos atípicos, observadas as normas gerais'},{letra:'C',texto:'Nos contratos de adesão, são nulas as cláusulas de renúncia antecipada do aderente a direito resultante da natureza do negócio'},{letra:'D',texto:'Os contratantes são obrigados a respeitar, na conclusão do contrato, todas as cláusulas do contrato'},{letra:'E',texto:'Havendo cláusulas ambíguas ou contraditórias no contrato de adesão, adota-se a interpretação mais favorável ao aderente'}],
    correta:'D',
-   comentario:`<b>⚖️ Por quê (D é a incorreta):</b> Distorce o art. 422 — os contratantes devem guardar os princípios de probidade e boa-fé, não "respeitar todas as cláusulas". As demais são letra da lei: art. 426 (herança de pessoa viva), art. 425 (contratos atípicos), art. 424 (renúncia antecipada nula no adesão) e art. 423 (interpretação pró-aderente).<br><br>
-   <b>⚠️ Pegadinha:</b> D soa razoável, mas o art. 422 trata de boa-fé objetiva, não de "respeitar as cláusulas".<br><br>
-   <b>🧠 Mnemônico:</b> Art. 422 = boa-fé e probidade — não "respeitar cláusulas".<br><br>
-   <b>📌 Norma:</b> arts. 422–426 CC | QConcursos Q3811857`},
+   comentario:`<b>⚖️ Por quê (D é a incorreta):</b> distorce o art. 422 — os contratantes devem GUARDAR os princípios de probidade e boa-fé, não "respeitar todas as cláusulas".<br><br><b>✅ As corretas:</b> (A) art. 426; (B) art. 425; (C) art. 424; (E) art. 423.<br><br><b>⚠️ Pegadinha:</b> D soa razoável, mas o art. 422 trata de boa-fé objetiva.<br><br><b>📌 Norma:</b> arts. 422–426 CC | QConcursos Q3811857`},
 
   {id:'q86', materia:'Vícios redibitórios', tipo:'multipla',
    enunciado:`Carlos, ciente de que o imóvel deveria ser demolido por graves problemas estruturais, vendeu-o a João (R$ 500 mil), que desconhecia a situação. Seis meses após a tradição, João é notificado pela defesa civil. Nesse caso, João:`,
-   alternativas:[
-    {letra:'A',texto:'só abatimento, sem rescisão/perdas e danos'},
-    {letra:'B',texto:'nem rescisão nem perdas e danos (prazo decadencial)'},
-    {letra:'C',texto:'sem rescisão (prazo decadencial), mas com reparação de danos'},
-    {letra:'D',texto:'rescisão + restituição, mas sem indenização (prazo decadencial)'},
-    {letra:'E',texto:'poderá exigir a rescisão e a restituição dos valores pagos, com perdas e danos, ou optar por permanecer com o imóvel e reclamar o abatimento no preço.'}
-   ],
+   alternativas:[{letra:'A',texto:'Só abatimento, sem rescisão/perdas e danos'},{letra:'B',texto:'Nem rescisão nem perdas e danos (prazo decadencial)'},{letra:'C',texto:'Sem rescisão (prazo decadencial), mas com reparação de danos'},{letra:'D',texto:'Rescisão + restituição, mas sem indenização (prazo decadencial)'},{letra:'E',texto:'Poderá exigir a rescisão e a restituição dos valores pagos, com perdas e danos, ou optar por permanecer com o imóvel e reclamar o abatimento'}],
    correta:'E',
-   comentario:`<b>⚖️ Por quê (E):</b> Defeito oculto que torna o imóvel impróprio é vício redibitório (art. 441). João pode redibir (rescindir e restituir, art. 442) ou pedir abatimento. Como Carlos conhecia o vício e ocultou (má-fé), responde por restituição mais perdas e danos (art. 443). O prazo para imóvel é de 1 ano (art. 445) e só passaram 6 meses — não decaiu.<br><br>
-   <b>⚠️ Pegadinha:</b> O "transcurso do prazo decadencial" nas opções B, C e D é a isca: imóvel decai em 1 ano, não em 6 meses; e, sabendo o vendedor do vício, cabem perdas e danos.<br><br>
-   <b>🧠 Mnemônico:</b> Imóvel = 1 ano (art. 445); vendedor sabia → também perdas e danos (art. 443).<br><br>
-   <b>📌 Norma:</b> arts. 441–445 CC | QConcursos Q3775475`},
+   comentario:`<b>⚖️ Por quê (E):</b> vício oculto = vício redibitório (art. 441). João pode redibir (art. 442) ou pedir abatimento. Como Carlos CONHECIA o vício (má-fé), responde por restituição + perdas e danos (art. 443).<br><br><b>⏱ Prazo:</b> imóvel = 1 ano (art. 445); só 6 meses → não decaiu.<br><br><b>⚠️ Pegadinha:</b> o "prazo decadencial" (B/C/D) é a isca — imóvel decai em 1 ano; e o vendedor sabia, então cabem perdas e danos.<br><br><b>📌 Norma:</b> arts. 441–445 CC | QConcursos Q3775475`},
 
   {id:'q87', materia:'Teoria da imprevisão', tipo:'multipla',
-   enunciado:`Empresa recreativa obteve empréstimo bancário (carência de 12 meses e 60 prestações) para ampliar seu parque. Uma crise mundial de saúde pública inviabilizou seus serviços. Constitui direito da empresa devedora:`,
-   alternativas:[
-    {letra:'A',texto:'exigir a suspensão do pagamento das prestações'},
-    {letra:'B',texto:'exigir a prorrogação da carência'},
-    {letra:'C',texto:'exigir resolução e suspensão das obrigações'},
-    {letra:'D',texto:'restituir 50% e pagar a diferença sem juros'},
-    {letra:'E',texto:'pedir a resolução do contrato ou a revisão de cláusulas contratuais, dada a sua nova realidade econômica.'}
-   ],
+   enunciado:`Empresa recreativa obteve empréstimo bancário (carência de 12 meses + 60 prestações) para ampliar seu parque. Uma crise mundial de saúde pública inviabilizou seus serviços. Constitui direito da empresa devedora:`,
+   alternativas:[{letra:'A',texto:'Exigir a suspensão do pagamento das prestações'},{letra:'B',texto:'Exigir a prorrogação da carência'},{letra:'C',texto:'Exigir resolução + suspensão das obrigações'},{letra:'D',texto:'Restituir 50% e pagar a diferença sem juros'},{letra:'E',texto:'Pedir a resolução do contrato ou a revisão de cláusulas, dada a nova realidade econômica'}],
    correta:'E',
-   comentario:`<b>⚖️ Por quê (E):</b> Contrato de execução continuada mais pandemia (fato extraordinário e imprevisível) que gera onerosidade excessiva é teoria da imprevisão. O devedor pode pedir a resolução (art. 478) ou a revisão das cláusulas (arts. 479 e 317). As demais inventam soluções sem amparo legal.<br><br>
-   <b>⚠️ Pegadinha:</b> A banca oferece "saídas" criativas (suspender prestações, prorrogar carência, restituir 50%); só vale resolução ou revisão.<br><br>
-   <b>🧠 Mnemônico:</b> Imprevisão = resolução OU revisão (arts. 478–480).<br><br>
-   <b>📌 Norma:</b> arts. 478–480 CC | QConcursos Q3775828`},
+   comentario:`<b>⚖️ Por quê (E):</b> contrato de execução continuada + pandemia (fato extraordinário e imprevisível) → onerosidade excessiva → teoria da imprevisão. O devedor pede RESOLUÇÃO (art. 478) ou REVISÃO (arts. 479/317).<br><br><b>⚠️ As outras:</b> inventam soluções sem amparo legal.<br><br><b>📌 Norma:</b> arts. 478–480 CC | QConcursos Q3775828`},
 
-  {id:'q88', materia:'Interpretação contratual', tipo:'multipla',
+  {id:'q88', materia:'Interpretação do NJ', tipo:'multipla',
    enunciado:`No que diz respeito às cláusulas contratuais em negócio jurídico, as partes:`,
-   alternativas:[
-    {letra:'A',texto:'podem pactuar regras de interpretação diversas das previstas em lei, nos contratos por instrumento público ou particular'},
-    {letra:'B',texto:'podem pactuar somente quando se tratar de bens móveis ou semoventes'},
-    {letra:'C',texto:'podem pactuar somente quando o negócio não envolver incapazes'},
-    {letra:'D',texto:'não podem pactuar regras de interpretação diversas das previstas em lei'},
-    {letra:'E',texto:'podem pactuar somente quando firmado por instrumento público'}
-   ],
+   alternativas:[{letra:'A',texto:'Podem pactuar regras de interpretação diversas das previstas em lei, nos contratos por instrumento público ou particular'},{letra:'B',texto:'Podem pactuar somente quando se tratar de bens móveis ou semoventes'},{letra:'C',texto:'Podem pactuar somente quando o negócio não envolver incapazes'},{letra:'D',texto:'Não podem pactuar regras de interpretação diversas das previstas em lei'},{letra:'E',texto:'Podem pactuar somente quando firmado por instrumento público'}],
    correta:'A',
-   comentario:`<b>⚖️ Por quê (A):</b> O art. 113, §2º (Lei da Liberdade Econômica — 13.874/2019) permite às partes pactuar livremente regras de interpretação diversas das previstas em lei, sem distinção de forma. As demais enxertam restrições inexistentes (somente móveis, somente sem incapazes, somente público, ou "não podem").<br><br>
-   <b>⚠️ Pegadinha:</b> A lei não condiciona a pactuação ao tipo de bem, à ausência de incapazes ou à forma pública.<br><br>
-   <b>🧠 Mnemônico:</b> Liberdade Econômica = pactuar interpretação é LIVRE (art. 113, §2º).<br><br>
-   <b>📌 Norma:</b> art. 113 §2º CC | QConcursos Q3775825`},
+   comentario:`<b>⚖️ Por quê (A):</b> art. 113, §2º (Lei da Liberdade Econômica) — as partes podem LIVREMENTE pactuar regras de interpretação diversas das legais, sem distinção de forma.<br><br><b>⚠️ As outras:</b> enxertam restrições inexistentes (só móveis, só sem incapazes, só público, ou "não podem").<br><br><b>📌 Norma:</b> art. 113, §2º CC | QConcursos Q3775825`},
 
-  {id:'q89', materia:'Teoria da imprevisão', tipo:'multipla',
+  {id:'q89', materia:'Teoria da imprevisão (STJ)', tipo:'multipla',
    enunciado:`De acordo com o STJ, aplica-se a teoria da imprevisão quando a onerosidade excessiva decorrer de:`,
-   alternativas:[
-    {letra:'A',texto:'estiagem em contratos agrícolas'},
-    {letra:'B',texto:'pandemia, em relação à empresa de coworking, com drástica redução comprovada do faturamento'},
-    {letra:'C',texto:'contratos derivativos quando presentes os riscos e o desequilíbrio econômico-financeiro'},
-    {letra:'D',texto:'aumento salarial por dissídio coletivo (contrato administrativo)'},
-    {letra:'E',texto:'pragas em contratos agrícolas'}
-   ],
+   alternativas:[{letra:'A',texto:'Estiagem em contratos agrícolas'},{letra:'B',texto:'Pandemia, em relação à empresa de coworking, com drástica redução comprovada do faturamento'},{letra:'C',texto:'Contratos derivativos quando presentes os riscos e o desequilíbrio econômico-financeiro'},{letra:'D',texto:'Aumento salarial por dissídio coletivo (contrato administrativo)'},{letra:'E',texto:'Pragas em contratos agrícolas'}],
    correta:'B',
-   comentario:`<b>⚖️ Por quê (B):</b> O STJ só aplica a imprevisão quando o fato é extraordinário e imprevisível. A pandemia, para empresa de coworking com queda comprovada de faturamento, se encaixa. Estiagem e pragas no agronegócio, variação cambial em derivativos e dissídio coletivo são áleas ordinárias — o STJ recusa.<br><br>
-   <b>⚠️ Pegadinha:</b> Estiagem e pragas "parecem" imprevisíveis, mas no agronegócio são riscos previsíveis (álea ordinária).<br><br>
-   <b>🧠 Mnemônico:</b> Agronegócio e câmbio = álea ordinária; pandemia = extraordinária (STJ).<br><br>
-   <b>📌 Norma:</b> art. 478 CC + STJ | QConcursos Q3775035`},
+   comentario:`<b>⚖️ Por quê (B):</b> o STJ só aplica quando o fato é EXTRAORDINÁRIO e IMPREVISÍVEL. A pandemia, para coworking com queda comprovada, entra.<br><br><b>⚠️ As outras (áleas ordinárias):</b> estiagem/pragas no agronegócio, derivativos (câmbio) e dissídio coletivo são previsíveis.<br><br><b>⚖️ STJ:</b> agronegócio e câmbio = álea ordinária; pandemia = extraordinária.<br><br><b>📌 Norma:</b> art. 478 CC | QConcursos Q3775035`},
 
   {id:'q90', materia:'Evicção', tipo:'multipla',
    enunciado:`Segundo o STJ, o evicto tem direito à restituição integral do valor do bem, calculado ao tempo em que:`,
-   alternativas:[
-    {letra:'A',texto:'realizado o negócio, valor de mercado à celebração'},
-    {letra:'B',texto:'dele foi desapossado, considerado o valor do bem apurado no momento da perda sofrida'},
-    {letra:'C',texto:'desapossado, mas valor do negócio celebrado'},
-    {letra:'D',texto:'desapossado, mas valor de mercado à celebração'},
-    {letra:'E',texto:'realizado o negócio, preço à época corrigido'}
-   ],
+   alternativas:[{letra:'A',texto:'Realizado o negócio, valor de mercado à celebração'},{letra:'B',texto:'Dele foi desapossado, considerado o valor do bem apurado no momento da perda sofrida'},{letra:'C',texto:'Desapossado, mas valor do negócio celebrado'},{letra:'D',texto:'Desapossado, mas valor de mercado à celebração'},{letra:'E',texto:'Realizado o negócio, preço à época corrigido'}],
    correta:'B',
-   comentario:`<b>⚖️ Por quê (B):</b> O valor a restituir ao evicto é o da coisa na época em que se evenceu (momento do desapossamento), não o do contrato (art. 450, parágrafo único). O STJ confirma. As alternativas C e D usam "valor do negócio" ou "tempo da celebração"; A e E ancoram no tempo do negócio.<br><br>
-   <b>⚠️ Pegadinha:</b> Usar o "valor do contrato" ou "tempo da celebração" — o correto é o valor atual da coisa, ao tempo da evicção.<br><br>
-   <b>🧠 Mnemônico:</b> Evicção: vale o preço da coisa NA HORA da perda (art. 450, §ún).<br><br>
-   <b>📌 Norma:</b> art. 450 §ún CC + STJ | QConcursos Q3775033`},
+   comentario:`<b>⚖️ Por quê (B):</b> valor da coisa NA ÉPOCA EM QUE SE EVENCEU (desapossamento) — art. 450, §ún; o STJ confirma.<br><br><b>⚠️ B × C × D:</b> B = valor no momento da perda (correta); C/D usam valor do negócio/celebração.<br><br><b>📌 Norma:</b> art. 450, §ún CC | QConcursos Q3775033`},
 
-  {id:'q91', materia:'Emancipação', tipo:'multipla',
-   enunciado:`De acordo com o CC, o menor terá sua emancipação legal reconhecida, ficando com ele o ônus de provar essa condição, quando:`,
-   alternativas:[
-    {letra:'A',texto:'tiver dezesseis anos completos e seus pais concordarem'},
-    {letra:'B',texto:'tiver estabelecimento civil ou comercial, ou existência de relação de emprego, desde que, em função deles, o menor com dezesseis anos completos tenha economia própria'},
-    {letra:'C',texto:'tiver obtido sentença judicial de emancipação, em virtude de seus méritos morais e intelectuais'},
-    {letra:'D',texto:'tiver concluído curso de nível médio técnico em escola reconhecida pelo MEC'},
-    {letra:'E',texto:'estiver empregado em empresa familiar de seus ascendentes, a qualquer tempo'}
-   ],
+  {id:'q91', materia:'Capacidade e emancipação', tipo:'multipla',
+   enunciado:`Pedro, 15 anos, jogador profissional de futebol (salário R$ 100 mil). O contrato é assinado no dia seguinte ao seu 16º aniversário, sem assistência dos genitores. O negócio jurídico é:`,
+   alternativas:[{letra:'A',texto:'Válido — a participação do pai nas tratativas supre a assistência'},{letra:'B',texto:'Existente, válido e eficaz, porque emancipado ao completar 16 anos por possuir economias próprias'},{letra:'C',texto:'Inválido — só emanciparia com autorização judicial e registro'},{letra:'D',texto:'Inválido — só com registro público'},{letra:'E',texto:'Inválido — só com autorização judicial'}],
    correta:'B',
-   comentario:`<b>⚖️ Por quê (B):</b> Transcrição do art. 5º, parágrafo único, V, CC: emancipação pela existência de relação de emprego ou estabelecimento civil/comercial desde que o menor com 16 anos completos tenha economia própria — emancipação LEGAL (independe de autorização dos pais ou juiz).<br><br>
-   <b>⚠️ As outras:</b> A confunde com emancipação voluntária (pais + 16 anos); C inventa "méritos morais"; D trata de colação de grau superior; E inventa emprego familiar a qualquer tempo.<br><br>
-   <b>🧠 Mnemônico:</b> Emprego com economia própria aos 16 = emancipação LEGAL automática.<br><br>
-   <b>📌 Norma:</b> art. 5º §ún V CC | QConcursos Q3673867`},
+   comentario:`<b>⚖️ Por quê (B):</b> atleta profissional com economia própria → emancipado de pleno direito aos 16 (art. 5º, §ún, V). A emancipação LEGAL é automática, sem autorização judicial nem registro como condição de validade.<br><br><b>⚠️ As outras:</b> (A) participar das tratativas não supre; (C/D/E) exigem requisitos da emancipação voluntária (pais → instrumento público + registro).<br><br><b>📌 Norma:</b> art. 5º, §ún, V CC | QConcursos Q3673867`},
 
   {id:'q92', materia:'Herança de pessoa viva', tipo:'multipla',
    enunciado:`Após reconhecer a paternidade, o pai propôs ao filho indenização se ele aceitasse ser excluído da herança (renúncia antecipada ao quinhão na sucessão futura). Houve homologação judicial. Segundo o STJ, a transação é:`,
-   alternativas:[
-    {letra:'A',texto:'válida — a homologação impede o reconhecimento do vício'},
-    {letra:'B',texto:'ineficaz'},
-    {letra:'C',texto:'válida — direito disponível'},
-    {letra:'D',texto:'nula, pois herança de pessoa viva não pode ser objeto de contrato'},
-    {letra:'E',texto:'anulável'}
-   ],
+   alternativas:[{letra:'A',texto:'Válida — a homologação impede o reconhecimento do vício'},{letra:'B',texto:'Ineficaz'},{letra:'C',texto:'Válida — direito disponível'},{letra:'D',texto:'Nula, pois herança de pessoa viva não pode ser objeto de contrato'},{letra:'E',texto:'Anulável'}],
    correta:'D',
-   comentario:`<b>⚖️ Por quê (D):</b> Renúncia antecipada a quinhão de sucessão ainda não aberta é pacto sobre herança de pessoa viva (pacta corvina), vedado pelo art. 426, gerando nulidade absoluta (art. 166). O STJ confirma que a homologação judicial não convalida a nulidade. "Ineficaz" (B) e "anulável" (E) erram a categoria; A e C dizem "válida".<br><br>
-   <b>⚠️ Pegadinha:</b> A homologação judicial não sana a nulidade; e a categoria é NULIDADE, não ineficácia nem anulabilidade.<br><br>
-   <b>🧠 Mnemônico:</b> Herança de pessoa viva = NULO (art. 426); homologação não salva.<br><br>
-   <b>📌 Norma:</b> arts. 426, 166 CC + STJ | QConcursos Q3151530`},
+   comentario:`<b>⚖️ Por quê (D):</b> renúncia antecipada a quinhão de sucessão não aberta = pacta corvina (art. 426) → NULIDADE (art. 166). A homologação judicial NÃO convalida.<br><br><b>⚠️ As outras:</b> (B) ineficaz e (E) anulável erram a categoria (é nulo); (A)/(C) dizem "válida".<br><br><b>📌 Norma:</b> arts. 426, 166 CC | QConcursos Q3151530`},
 
-  {id:'q93', materia:'Boa-fé objetiva', tipo:'multipla',
-   enunciado:`Alfa presta serviços a Beta (2015) com reajuste anual; prazo de 48 meses, depois prosseguiram sem aditamento. Reajustes aplicados até 2020, depois não cobrados. Em 2024 Beta sai; Alfa cobra multa rescisória e reajuste retroativo a 2021. É correto afirmar que a cobrança:`,
-   alternativas:[
-    {letra:'A',texto:'da multa é lícita (expectativa de manutenção)'},
-    {letra:'B',texto:'do reajuste retroativo é lícita (mera liberalidade)'},
-    {letra:'C',texto:'do reajuste retroativo é ilícita, pois viola a vedação de comportamento contraditório (boa-fé objetiva)'},
-    {letra:'D',texto:'da multa é lícita, embora excessivo o montante'}
-   ],
+  {id:'q93', materia:'Boa-fé objetiva (supressio)', tipo:'multipla',
+   enunciado:`Alfa presta serviços a Beta (2015) com reajuste anual; prazo de 48 meses, depois prosseguiram sem aditamento. Reajustes aplicados até 2020, depois não cobrados. Em 2024 Beta sai; Alfa cobra multa rescisória + reajuste retroativo a 2021. É correto afirmar que a cobrança:`,
+   alternativas:[{letra:'A',texto:'Da multa é lícita (expectativa de manutenção)'},{letra:'B',texto:'Do reajuste retroativo é lícita (mera liberalidade)'},{letra:'C',texto:'Do reajuste retroativo é ilícita, pois viola a vedação de comportamento contraditório (boa-fé objetiva)'},{letra:'D',texto:'Da multa é lícita, embora excessivo o montante'}],
    correta:'C',
-   comentario:`<b>⚖️ Por quê (C):</b> Alfa tolerou o reajuste a menor por anos, criando expectativa na contraparte. Cobrar a diferença retroativa agora é comportamento contraditório (venire contra factum proprium) e configura supressio — perda do direito pelo não-exercício prolongado, derivada da boa-fé objetiva (art. 422). A multa também não incide, pois o termo expirou e o contrato passou a vigorar por prazo indeterminado.<br><br>
-   <b>⚠️ Pegadinha:</b> A multa "parece" devida pela continuidade, mas o termo já expirara; e o reajuste retroativo esbarra na supressio.<br><br>
-   <b>🧠 Mnemônico:</b> Não exercer por muito tempo + criar expectativa = supressio (perde o direito).<br><br>
-   <b>📌 Norma:</b> art. 422 CC | QConcursos Q2553219`},
+   comentario:`<b>⚖️ Por quê (C):</b> tolerar o reajuste a menor por anos cria expectativa → SUPRESSIO / venire contra factum proprium: perde o direito à diferença (boa-fé objetiva, art. 422).<br><br><b>⚠️ As outras:</b> (A/D) a multa não incide (o termo expirou → prazo indeterminado); (B) há supressio.<br><br><b>📌 Norma:</b> art. 422 CC | QConcursos Q2553219`},
 
   {id:'q94', materia:'Contrato preliminar', tipo:'multipla',
    enunciado:`Adriana e Bernardo celebraram contrato preliminar para venda de participação societária, sem levar ao registro competente (art. 463, §ún). Ante a falta de registro, o negócio deve ser reputado:`,
-   alternativas:[
-    {letra:'A',texto:'inexistente'},
-    {letra:'B',texto:'nulo (requisito de validade)'},
-    {letra:'C',texto:'anulável'},
-    {letra:'D',texto:'relativamente ineficaz, pois o registro destina-se à oponibilidade perante terceiros'},
-    {letra:'E',texto:'absolutamente ineficaz'}
-   ],
+   alternativas:[{letra:'A',texto:'Inexistente'},{letra:'B',texto:'Nulo (requisito de validade)'},{letra:'C',texto:'Anulável'},{letra:'D',texto:'Relativamente ineficaz, pois o registro destina-se à oponibilidade perante terceiros'},{letra:'E',texto:'Absolutamente ineficaz'}],
    correta:'D',
-   comentario:`<b>⚖️ Por quê (D):</b> O registro do contrato preliminar (art. 463, parágrafo único) é fator de eficácia perante terceiros, não requisito de validade nem de existência. Sem registro, o contrato vale e obriga entre as partes, mas é relativamente ineficaz quanto a terceiros (Enunciado 30 do CJF). As demais o tratam como inexistente, nulo, anulável ou absolutamente ineficaz.<br><br>
-   <b>⚠️ Pegadinha:</b> Tratar o registro como requisito de validade ou existência — é apenas fator de eficácia e oponibilidade a terceiros.<br><br>
-   <b>🧠 Mnemônico:</b> Registro do preliminar = oponibilidade a terceiros, não validade.<br><br>
-   <b>📌 Norma:</b> art. 463 §ún CC + Enunciado 30 CJF | QConcursos Q2307542`},
+   comentario:`<b>⚖️ Por quê (D):</b> o registro do contrato preliminar (art. 463, §ún) é fator de EFICÁCIA perante terceiros, não requisito de validade/existência. Sem registro, vale entre as partes, mas é relativamente ineficaz a terceiros (Enunciado 30 CJF).<br><br><b>⚠️ As outras:</b> tratam como inexistente/nulo/anulável/absolutamente ineficaz.<br><br><b>📌 Norma:</b> art. 463, §ún CC | QConcursos Q2307542`},
 
-  {id:'q95', materia:'Distrato', tipo:'multipla',
-   enunciado:`André vendeu imóvel a Bianca por instrumento público, embora o valor fosse inferior a 30 vezes o salário mínimo. Desistiram em comum acordo e celebraram o distrato por instrumento particular. O distrato é:`,
-   alternativas:[
-    {letra:'A',texto:'inexistente'},
-    {letra:'B',texto:'nulo'},
-    {letra:'C',texto:'anulável'},
-    {letra:'D',texto:'ineficaz'},
-    {letra:'E',texto:'válido'}
-   ],
+  {id:'q95', materia:'Distrato e forma', tipo:'multipla',
+   enunciado:`André vendeu imóvel a Bianca por instrumento público, embora o valor fosse inferior a 30x o salário mínimo. Desistiram em comum acordo e celebraram o distrato por instrumento particular. O distrato é:`,
+   alternativas:[{letra:'A',texto:'Inexistente'},{letra:'B',texto:'Nulo'},{letra:'C',texto:'Anulável'},{letra:'D',texto:'Ineficaz'},{letra:'E',texto:'Válido'}],
    correta:'E',
-   comentario:`<b>⚖️ Por quê (E):</b> O art. 472 manda o distrato seguir a forma exigida por lei. Para imóvel de valor inferior a 30 vezes o salário mínimo, a escritura pública não é exigida (art. 108) — foi adotada por opção. Logo, o distrato por instrumento particular é válido. As demais supõem forma pública obrigatória, que não havia.<br><br>
-   <b>⚠️ Pegadinha:</b> A forma do distrato segue a EXIGIDA por lei, não a efetivamente ADOTADA.<br><br>
-   <b>🧠 Mnemônico:</b> Distrato = forma exigida (art. 472); escritura só p/ imóvel >30x SM (art. 108).<br><br>
-   <b>📌 Norma:</b> arts. 472, 108 CC | QConcursos Q2306770`},
+   comentario:`<b>⚖️ Por quê (E):</b> art. 472 — o distrato segue a forma EXIGIDA por lei. Para imóvel < 30x SM, a escritura pública não é exigida (art. 108) — foi adotada por opção. Logo, o distrato por instrumento particular é válido.<br><br><b>⚠️ As outras:</b> supõem forma pública obrigatória, que não havia.<br><br><b>📌 Norma:</b> arts. 472, 108 CC | QConcursos Q2306770`},
 
   {id:'q96', materia:'Evicção', tipo:'multipla',
-   enunciado:`Pedro comprou de João, na forma da lei, uma casa em São Luís/MA por R$ 600 mil. É acionado por Felipe, que diz ser o real proprietário do imóvel, usurpado por João. É correto afirmar que:`,
-   alternativas:[
-    {letra:'A',texto:'para exercer os direitos da evicção, é necessário o trânsito em julgado'},
-    {letra:'B',texto:'evicção é perda por decisão judicial, inviável em apreensão administrativa'},
-    {letra:'C',texto:'com cláusula de irresponsabilidade pela evicção, se ela ocorrer e o evicto não sabia do risco, o alienante responde pelo preço'},
-    {letra:'D',texto:'é lícito reforçar a responsabilidade, mas a parte só responderá até o valor da coisa'}
-   ],
+   enunciado:`Pedro comprou de João, na forma da lei, uma casa em São Luís/MA por R$ 600 mil. É acionado por Felipe, que diz ser o real proprietário, usurpado por João. É correto afirmar que:`,
+   alternativas:[{letra:'A',texto:'Para exercer os direitos da evicção, é necessário o trânsito em julgado'},{letra:'B',texto:'Evicção é perda por decisão judicial, inviável em apreensão administrativa'},{letra:'C',texto:'Com cláusula de irresponsabilidade pela evicção, se ela ocorrer e o evicto não sabia do risco, o alienante responde pelo preço'},{letra:'D',texto:'É lícito reforçar a responsabilidade, mas a parte só responderá até o valor da coisa'}],
    correta:'C',
-   comentario:`<b>⚖️ Por quê (C):</b> Pelo art. 449, mesmo com cláusula que exclui a garantia da evicção, se o evicto não sabia do risco, ele recebe o preço que pagou. As alternativas A e B prendem a evicção a sentença transitada em julgado ou negam a apreensão administrativa (o STJ admite ambos); a D "limita ao valor da coisa", mas reforçar (art. 448) agrava a responsabilidade.<br><br>
-   <b>⚠️ Pegadinha:</b> Cláusula de exclusão não retira o direito ao preço de quem ignorava o risco; e a evicção independe de sentença transitada.<br><br>
-   <b>🧠 Mnemônico:</b> Excluiu a garantia? Quem não sabia do risco ainda recebe o PREÇO (art. 449).<br><br>
-   <b>📌 Norma:</b> arts. 448, 449 CC + STJ | QConcursos Q2512277`},
+   comentario:`<b>⚖️ Por quê (C):</b> art. 449 — mesmo com cláusula de exclusão, se o evicto NÃO sabia do risco, recebe o preço pago.<br><br><b>⚠️ As outras:</b> (A)/(B) a evicção independe de sentença transitada e cabe em apreensão administrativa (STJ); (D) reforçar (art. 448) agrava, não limita.<br><br><b>📌 Norma:</b> arts. 448, 449 CC | QConcursos Q2512277`},
 
   {id:'q97', materia:'Inadimplemento antecipado', tipo:'multipla',
    enunciado:`Pedro Paulo (comerciante de cereais) tem contratos de safra futura; procurou Marcolino para adquirir sua safra futura (milho). À luz da Teoria Geral dos Contratos:`,
-   alternativas:[
-    {letra:'A',texto:'é válida a cláusula que deixa exclusivamente a Pedro Paulo fixar o preço da safra'},
-    {letra:'B',texto:'por ser obrigação personalíssima, a morte de Pedro Paulo extingue o contrato'},
-    {letra:'C',texto:'chuvas, pragas e oscilações de preço são fato extraordinário e imprevisível que autoriza a resolução'},
-    {letra:'D',texto:'evidenciado antes do prazo que Marcolino não cumprirá, Pedro Paulo pode pedir a extinção do pacto com devolução do antecipado — inadimplemento antecipado'}
-   ],
+   alternativas:[{letra:'A',texto:'É válida a cláusula que deixa exclusivamente a Pedro Paulo fixar o preço da safra'},{letra:'B',texto:'Por ser obrigação personalíssima, a morte de Pedro Paulo extingue o contrato'},{letra:'C',texto:'Chuvas, pragas e oscilações de preço são fato extraordinário e imprevisível que autoriza a resolução'},{letra:'D',texto:'Evidenciado antes do prazo que Marcolino não cumprirá, Pedro Paulo pode pedir a extinção do pacto com devolução do antecipado — inadimplemento antecipado'}],
    correta:'D',
-   comentario:`<b>⚖️ Por quê (D):</b> Inadimplemento antecipado (quebra antecipada): evidenciado antes do termo que o devedor não cumprirá, o credor pode pedir a extinção desde logo, com devolução do antecipado. A "a" é nula (preço ao arbítrio exclusivo de uma parte, art. 489); "b" erra (safra futura não é personalíssima); "c" erra (riscos do agronegócio são álea ordinária, STJ).<br><br>
-   <b>⚠️ Pegadinha:</b> A alternativa C "parece" imprevisão, mas chuva, praga e preço no agronegócio são previsíveis (álea ordinária).<br><br>
-   <b>🧠 Mnemônico:</b> Vai descumprir antes do prazo? Pode resolver já = inadimplemento antecipado.<br><br>
-   <b>📌 Norma:</b> art. 489 CC + STJ | QConcursos Q2512274`},
+   comentario:`<b>⚖️ Por quê (D):</b> inadimplemento antecipado (quebra antecipada) — evidente que o devedor não cumprirá antes do termo → o credor pode resolver desde logo, com devolução do antecipado.<br><br><b>⚠️ As outras:</b> (A) preço ao arbítrio exclusivo é NULO (art. 489); (B) safra futura não é personalíssima; (C) riscos do agronegócio = álea ordinária (STJ).<br><br><b>📌 Norma:</b> art. 489 CC + inadimplemento antecipado | QConcursos Q2512274`},
 
   {id:'q98', materia:'Evicção', tipo:'multipla',
    enunciado:`Em relação à evicção, assinale a afirmativa correta.`,
-   alternativas:[
-    {letra:'A',texto:'todos os contratos podem ter cláusula que diminui/exclui a responsabilidade do alienante por evicção'},
-    {letra:'B',texto:'ainda que soubesse que o bem era litigioso, terá sempre o direito de demandar o alienante'},
-    {letra:'C',texto:'com cláusula genérica de exclusão, o adquirente não terá meios de reclamar qualquer indenização'},
-    {letra:'D',texto:'o adquirente que perdeu em leilão a casa que alugava terá direito ao valor atual do imóvel mais lucros cessantes (aluguel) e multas/indenizações pagas ao inquilino'}
-   ],
+   alternativas:[{letra:'A',texto:'Todos os contratos podem ter cláusula que diminui/exclui a responsabilidade do alienante por evicção'},{letra:'B',texto:'Ainda que soubesse que o bem era litigioso, terá sempre o direito de demandar o alienante'},{letra:'C',texto:'Com cláusula genérica de exclusão, o adquirente não terá meios de reclamar qualquer indenização'},{letra:'D',texto:'O adquirente que perdeu em leilão a casa que alugava terá direito ao valor atual do imóvel + lucros cessantes (aluguel) + multas/indenizações pagas ao inquilino'}],
    correta:'D',
-   comentario:`<b>⚖️ Por quê (D):</b> Pelo art. 450, além do valor da coisa (ao tempo da evicção), o evicto recobra perdas e danos — inclusive lucros cessantes (aluguel que deixou de receber) e indenizações pagas ao inquilino. A "a" erra ("todos os contratos" — a garantia é dos onerosos, art. 447); "b" erra (art. 457 — não cabe a quem sabia ser litigioso); "c" erra (cláusula genérica não exonera; art. 449).<br><br>
-   <b>⚠️ Pegadinha:</b> "Todos os contratos" (× onerosos); "sempre" (× art. 457); "qualquer indenização" (× art. 449).<br><br>
-   <b>🧠 Mnemônico:</b> Evicto recebe valor da coisa + perdas e danos (lucros cessantes incluídos).<br><br>
-   <b>📌 Norma:</b> arts. 447, 449, 450, 457 CC | QConcursos Q2513647`}
+   comentario:`<b>⚖️ Por quê (D):</b> art. 450 — além do valor da coisa (ao tempo da evicção), o evicto recobra PERDAS E DANOS (lucros cessantes + prejuízos consequentes).<br><br><b>⚠️ As outras:</b> (A) garantia só nos onerosos (art. 447); (B) art. 457 — não cabe a quem sabia litigioso; (C) cláusula genérica não exonera + art. 449.<br><br><b>📌 Norma:</b> arts. 447, 449, 450, 457 CC | QConcursos Q2513647`}
 ];
 
 // ── State ──────────────────────────────────────────────────────────────────
-const defaultState = () => ({
-  respostas: {},
-  revisao: {},
-  caderno: {},
-  revisarDepois: {},
-  posicao: 0,
-  modo: 'todas',
-  materiaFiltro: ''
-});
-
-let state = defaultState();
-
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if (raw) state = Object.assign(defaultState(), JSON.parse(raw));
-  } catch(e) {}
+function defaultState() {
+  return {
+    respostas: {},
+    revisao: {},
+    caderno: {},
+    revisarDepois: {},
+    posicao: 0,
+    modo: 'todas',
+    materiaFiltro: '',
+    notas: {}
+  };
 }
 
+let state = defaultState();
+let lista = [];
+let paused = false;
+let qSecs = 0, sSecs = 0;
+let timerInterval = null;
+let commentOpen = {};
+
+// ── Persistence ────────────────────────────────────────────────────────────
 function saveState() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e) {}
 }
 
-// ── Queue ──────────────────────────────────────────────────────────────────
-let queue = [];
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      state = Object.assign(defaultState(), parsed);
+    }
+  } catch(e) { state = defaultState(); }
+}
 
+// ── Date helpers ───────────────────────────────────────────────────────────
 function today() { return new Date().toISOString().split('T')[0]; }
 
-function buildQueue() {
+function addDays(d, n) {
+  const dt = new Date(d + 'T12:00:00');
+  dt.setDate(dt.getDate() + n);
+  return dt.toISOString().split('T')[0];
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-');
+  return d + '/' + m + '/' + y;
+}
+
+// ── Fisher-Yates shuffle ───────────────────────────────────────────────────
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+// ── Build list based on mode ───────────────────────────────────────────────
+function buildLista() {
   const t = today();
+  let ids;
   if (state.modo === 'todas') {
-    return [...QUESTOES];
-  } else if (state.modo === 'revisar') {
-    return QUESTOES.filter(x => {
-      const r = state.revisao[x.id];
-      return r && r.nextDate <= t;
-    });
+    ids = QUESTOES.map(function(q){ return q.id; });
+  } else if (state.modo === 'hoje') {
+    ids = QUESTOES.filter(function(q){
+      const r = state.revisao[q.id];
+      return r && r.nextDate && r.nextDate <= t;
+    }).map(function(q){ return q.id; });
   } else if (state.modo === 'caderno') {
-    return QUESTOES.filter(x => state.caderno[x.id] || state.revisarDepois[x.id]);
+    ids = QUESTOES.filter(function(q){
+      return state.caderno[q.id] || state.revisarDepois[q.id];
+    }).map(function(q){ return q.id; });
   } else if (state.modo === 'materia') {
     const m = state.materiaFiltro;
-    return m ? QUESTOES.filter(x => x.materia === m) : [...QUESTOES];
+    ids = QUESTOES.filter(function(q){ return !m || q.materia === m; }).map(function(q){ return q.id; });
   } else if (state.modo === 'aleatorio') {
-    return fisherYates([...QUESTOES]);
-  }
-  return [...QUESTOES];
-}
-
-function fisherYates(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function currentQ() { return queue[state.posicao] || null; }
-
-// ── Spaced repetition ─────────────────────────────────────────────────────
-function addDays(dateStr, days) {
-  const d = new Date(dateStr + 'T12:00:00');
-  d.setDate(d.getDate() + days);
-  return d.toISOString().split('T')[0];
-}
-
-function scheduleQ(id, days) {
-  if (!state.revisao[id]) state.revisao[id] = { nextDate: today(), interval: 1, acertos: 0 };
-  state.revisao[id].nextDate = addDays(today(), days);
-  state.revisao[id].interval = days;
-  saveState();
-  renderCard();
-}
-
-function removeSchedule(id) {
-  delete state.revisao[id];
-  saveState();
-  renderCard();
-}
-
-function autoSchedule(id, correct) {
-  if (!state.revisao[id]) state.revisao[id] = { nextDate: today(), interval: 1, acertos: 0 };
-  const r = state.revisao[id];
-  if (correct) {
-    r.acertos = (r.acertos || 0) + 1;
-    const days = r.acertos === 1 ? 1 : r.acertos === 2 ? 7 : 30;
-    r.nextDate = addDays(today(), days);
-    r.interval = days;
+    ids = shuffle(QUESTOES.map(function(q){ return q.id; }));
   } else {
-    r.acertos = 0;
-    r.nextDate = addDays(today(), 1);
-    r.interval = 1;
+    ids = QUESTOES.map(function(q){ return q.id; });
   }
-}
-
-function formatDate(d) {
-  const [y, m, day] = d.split('-');
-  return day + '/' + m + '/' + y;
+  return ids;
 }
 
 // ── Stats ──────────────────────────────────────────────────────────────────
-function calcStats() {
-  const total = QUESTOES.length;
-  let acertos = 0, erros = 0, revisadasHoje = 0;
+function computeStats() {
+  const contaveis = QUESTOES.filter(function(q){ return !q.anulada; });
+  const total = contaveis.length;
+  let acertos = 0, erros = 0;
   const t = today();
-  for (const q of QUESTOES) {
+  let revisadasHoje = 0;
+
+  contaveis.forEach(function(q) {
     const r = state.respostas[q.id];
     if (r) {
-      if (r.letra === q.correta) acertos++;
+      if (r === q.correta) acertos++;
       else erros++;
     }
     const rev = state.revisao[q.id];
-    if (rev && rev.nextDate <= t) revisadasHoje++;
-  }
-  const pendentes = total - acertos - erros;
-  const pct = Math.round(((acertos + erros) / total) * 100);
-  return { total, acertos, erros, pendentes, revisadasHoje, pct };
+    if (rev && rev.lastAnswered === t) revisadasHoje++;
+  });
+
+  const respondidas = acertos + erros;
+  const pendentes = total - respondidas;
+  const pct = total > 0 ? Math.round((respondidas / total) * 100) : 0;
+  return { total: total, acertos: acertos, erros: erros, pendentes: pendentes,
+           revisadasHoje: revisadasHoje, respondidas: respondidas, pct: pct };
+}
+
+function renderStats() {
+  const s = computeStats();
+  const bar = document.getElementById('statsBar');
+  bar.innerHTML =
+    '<div class="stat-chip"><span class="sv green">' + s.acertos + '</span><span class="sl">Acertos</span></div>' +
+    '<div class="stat-chip"><span class="sv red">' + s.erros + '</span><span class="sl">Erros</span></div>' +
+    '<div class="stat-chip"><span class="sv amber">' + s.pendentes + '</span><span class="sl">Pendentes</span></div>' +
+    '<div class="stat-chip"><span class="sv cyan">' + s.revisadasHoje + '</span><span class="sl">Revisadas hoje</span></div>';
+
+  const fill = document.getElementById('progressFill');
+  const lbl = document.getElementById('progressLabel');
+  if (fill) fill.style.width = s.pct + '%';
+  if (lbl) lbl.textContent = s.respondidas + '/' + s.total + ' respondidas (' + s.pct + '%) — anulada Q82 não contada';
 }
 
 // ── Timers ─────────────────────────────────────────────────────────────────
-let sessionSecs = 0;
-let questionSecs = 0;
-let paused = false;
-let timerInterval = null;
+function fmtTime(secs) {
+  const m = String(Math.floor(secs / 60)).padStart(2, '0');
+  const s = String(secs % 60).padStart(2, '0');
+  return m + ':' + s;
+}
 
 function startTimers() {
   if (timerInterval) clearInterval(timerInterval);
   timerInterval = setInterval(function() {
     if (!paused) {
-      sessionSecs++;
-      questionSecs++;
-      updateTimerDisplay();
+      qSecs++;
+      sSecs++;
     }
+    const qEl = document.getElementById('timerQ');
+    const sEl = document.getElementById('timerS');
+    if (qEl) qEl.textContent = fmtTime(qSecs);
+    if (sEl) sEl.textContent = fmtTime(sSecs);
   }, 1000);
 }
 
-function resetQuestionTimer() { questionSecs = 0; }
-
-function fmt(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
-}
-
-function updateTimerDisplay() {
-  const el = document.getElementById('timerDisplay');
-  if (el) el.textContent = '⏱ ' + fmt(questionSecs) + '  |  Sessão: ' + fmt(sessionSecs);
+function resetQTimer() {
+  qSecs = 0;
+  const qEl = document.getElementById('timerQ');
+  if (qEl) qEl.textContent = '00:00';
 }
 
 function togglePause() {
   paused = !paused;
-  const btn = document.getElementById('btnPausar');
+  const btn = document.getElementById('btnPause');
   if (btn) btn.textContent = paused ? 'Retomar' : 'Pausar';
 }
 
-// ── Render ─────────────────────────────────────────────────────────────────
-function renderPlacar() {
-  const s = calcStats();
-  document.getElementById('placar').innerHTML =
-    '<div class="chip verde">' + s.acertos + '<span>Acertos</span></div>' +
-    '<div class="chip vermelho">' + s.erros + '<span>Erros</span></div>' +
-    '<div class="chip cinza">' + s.pendentes + '<span>Pendentes</span></div>' +
-    '<div class="chip roxo">' + s.revisadasHoje + '<span>Revisadas hoje</span></div>';
-  document.getElementById('progFill').style.width = s.pct + '%';
+// ── Spaced repetition ──────────────────────────────────────────────────────
+function scheduleNext(id, acertou) {
+  const t = today();
+  const rv = state.revisao[id] || { nextDate: null, interval: 1, acertos: 0, lastAnswered: null };
+  rv.lastAnswered = t;
+  if (acertou) {
+    rv.acertos = (rv.acertos || 0) + 1;
+    if (rv.acertos === 1) rv.interval = 1;
+    else if (rv.acertos === 2) rv.interval = 7;
+    else rv.interval = 30;
+  } else {
+    rv.acertos = 0;
+    rv.interval = 1;
+  }
+  rv.nextDate = addDays(t, rv.interval);
+  state.revisao[id] = rv;
 }
 
-function renderModos() {
-  document.querySelectorAll('.modoBtn').forEach(function(btn) {
-    btn.classList.toggle('ativo', btn.dataset.modo === state.modo);
+function scheduleManual(id, days) {
+  const t = today();
+  const rv = state.revisao[id] || { nextDate: null, interval: days, acertos: 0, lastAnswered: t };
+  rv.nextDate = (days === 0) ? null : addDays(t, days);
+  rv.interval = days;
+  state.revisao[id] = rv;
+  saveState();
+  renderCard();
+}
+
+// ── Render helpers ─────────────────────────────────────────────────────────
+function reviewBadgeHTML(id) {
+  const rv = state.revisao[id];
+  if (!rv || !rv.nextDate) return '';
+  const t = today();
+  if (rv.nextDate <= t) {
+    return '<span class="review-badge review-today">revisar hoje ⏰</span>';
+  }
+  return '<span class="review-badge review-future">📅 ' + fmtDate(rv.nextDate) + '</span>';
+}
+
+function schedRowHTML(id) {
+  return '<div class="sched-row">' +
+    '<span class="sched-label">Agendar:</span>' +
+    '<button class="sched-btn" onclick="scheduleManual(\'' + id + '\',1)">1 dia</button>' +
+    '<button class="sched-btn" onclick="scheduleManual(\'' + id + '\',7)">7 dias</button>' +
+    '<button class="sched-btn" onclick="scheduleManual(\'' + id + '\',30)">30 dias</button>' +
+    '<button class="sched-btn remove" onclick="scheduleManual(\'' + id + '\',0)">remover</button>' +
+    '</div>';
+}
+
+function starBtnHTML(id) {
+  const active = state.revisarDepois[id] ? ' active' : '';
+  const label = state.revisarDepois[id] ? '⭐ No caderno' : '☆ Revisar depois';
+  return '<button class="star-btn' + active + '" onclick="toggleStar(\'' + id + '\')">' + label + '</button>';
+}
+
+// ── Toggle star ────────────────────────────────────────────────────────────
+function toggleStar(id) {
+  if (state.revisarDepois[id]) delete state.revisarDepois[id];
+  else state.revisarDepois[id] = true;
+  saveState();
+  renderCard();
+  renderStats();
+}
+
+// ── Answer selection ───────────────────────────────────────────────────────
+function selecionarAlternativa(id, letra) {
+  if (state.respostas[id]) return;
+  document.querySelectorAll('.alt-btn[data-id="' + id + '"]').forEach(function(btn) {
+    btn.classList.remove('selected');
   });
-  const sel = document.getElementById('materiaSelect');
-  sel.style.display = state.modo === 'materia' ? '' : 'none';
+  const btn = document.querySelector('.alt-btn[data-id="' + id + '"][data-letra="' + letra + '"]');
+  if (btn) btn.classList.add('selected');
+  const confirmBtn = document.getElementById('confirm-' + id);
+  if (confirmBtn) confirmBtn.disabled = false;
+}
+
+// ── Confirm ────────────────────────────────────────────────────────────────
+function confirmar(id) {
+  const q = QUESTOES.find(function(x){ return x.id === id; });
+  if (!q) return;
+
+  if (q.anulada) {
+    state.respostas[id] = 'ANULADA';
+  } else {
+    const selected = document.querySelector('.alt-btn[data-id="' + id + '"].selected');
+    if (!selected) return;
+    const letraEscolhida = selected.dataset.letra;
+    state.respostas[id] = letraEscolhida;
+    const acertou = letraEscolhida === q.correta;
+    scheduleNext(id, acertou);
+    if (!acertou) state.caderno[id] = true;
+  }
+
+  saveState();
+  renderCard();
+  renderStats();
+}
+
+// ── Comment toggle ─────────────────────────────────────────────────────────
+function toggleComment(id) {
+  commentOpen[id] = !commentOpen[id];
+  const body = document.getElementById('comment-body-' + id);
+  const tog = document.getElementById('comment-toggle-' + id);
+  if (body) body.classList.toggle('open', !!commentOpen[id]);
+  if (tog) tog.textContent = commentOpen[id] ? '▲ Ocultar comentário' : '▼ Ver comentário / gabarito';
+}
+
+// ── Main render ────────────────────────────────────────────────────────────
+function salvarNota(id, txt){
+  if(!state.notas) state.notas = {};
+  state.notas[id] = txt;
+  saveState();
 }
 
 function renderCard() {
-  const card = document.getElementById('qcard');
-  const q = currentQ();
-  if (!q) {
-    card.innerHTML = '<div class="vazio">Nenhuma questão neste modo. Tente outro filtro.</div>';
-    document.getElementById('navCount').textContent = '0 / 0';
-    document.getElementById('btnAnterior').disabled = true;
-    document.getElementById('btnProxima').disabled = true;
+  const cont = document.getElementById('mainContent');
+  if (!lista.length) {
+    cont.innerHTML = '<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';
     return;
   }
 
-  const idx = state.posicao;
-  const total = queue.length;
-  document.getElementById('navCount').textContent = (idx + 1) + ' / ' + total;
-  document.getElementById('btnAnterior').disabled = idx === 0;
-  document.getElementById('btnProxima').disabled = idx === total - 1;
+  const pos = Math.min(Math.max(state.posicao, 0), lista.length - 1);
+  state.posicao = pos;
+  const id = lista[pos];
+  const q = QUESTOES.find(function(x){ return x.id === id; });
+  if (!q) { cont.innerHTML = ''; return; }
 
-  const resp = state.respostas[q.id];
-  const answered = !!resp;
-  const correct = answered && resp.letra === q.correta;
-  const rev = state.revisao[q.id];
-  const t = today();
-  const starred = !!state.revisarDepois[q.id];
+  const resposta = state.respostas[id];
+  const respondida = !!resposta;
+  const isAnulada = !!q.anulada;
+  const acertou = respondida && !isAnulada && resposta === q.correta;
+  const errou = respondida && !isAnulada && resposta !== q.correta;
 
-  let schedHtml = '';
-  if (rev) {
-    const overdue = rev.nextDate <= t;
-    const cls = overdue ? 'hoje' : 'futuro';
-    const label = overdue ? 'revisar hoje ⏰' : 'próx. revisão: ' + formatDate(rev.nextDate);
-    schedHtml = '<p class="agendInfo ' + cls + '">📅 ' + label + '</p>';
-  } else {
-    schedHtml = '<p class="agendInfo">Sem agendamento.</p>';
-  }
-
-  let optsHtml = '';
-  q.alternativas.forEach(function(alt) {
-    let cls = '';
-    if (answered) {
-      if (alt.letra === q.correta) cls = ' correta';
-      else if (resp.letra === alt.letra && alt.letra !== q.correta) cls = ' errada';
+  // Result banner
+  let resultHTML = '';
+  if (respondida) {
+    if (isAnulada) {
+      resultHTML = '<div class="result-banner anulada">⚠️ Esta questão foi ANULADA pela banca. Nenhuma resposta é considerada errada.</div>';
+    } else if (acertou) {
+      resultHTML = '<div class="result-banner correct">✅ Correto! Resposta: ' + resposta + '</div>';
+    } else {
+      resultHTML = '<div class="result-banner wrong">❌ Incorreto. Sua resposta: ' + resposta + ' | Gabarito: ' + q.correta + '</div>';
     }
-    const checked = (answered && resp.letra === alt.letra) ? ' checked' : '';
-    const disabled = answered ? ' disabled' : '';
-    optsHtml += '<label class="opt' + cls + '" id="opt_' + alt.letra + '">' +
-      '<input type="radio" name="resp_' + q.id + '" value="' + alt.letra + '"' + checked + disabled + '>' +
-      '<span><b>' + alt.letra + ')</b> ' + alt.texto + '</span>' +
-      '</label>';
+  }
+
+  // Alternativas
+  let altsHTML = '<div class="alts">';
+  q.alternativas.forEach(function(alt) {
+    let btnCls = 'alt-btn';
+    let letraCls = 'alt-letra';
+    const disabled = respondida ? 'disabled' : '';
+
+    if (respondida && !isAnulada) {
+      if (alt.letra === q.correta && alt.letra === resposta) {
+        btnCls = 'alt-btn correct';
+        letraCls = 'alt-letra correct';
+      } else if (alt.letra === q.correta) {
+        btnCls = 'alt-btn reveal-correct';
+        letraCls = 'alt-letra reveal-correct';
+      } else if (alt.letra === resposta) {
+        btnCls = 'alt-btn wrong';
+        letraCls = 'alt-letra wrong';
+      }
+    }
+
+    altsHTML += '<button class="' + btnCls + '" data-id="' + id + '" data-letra="' + alt.letra + '" ' + disabled +
+      ' onclick="selecionarAlternativa(\'' + id + '\',\'' + alt.letra + '\')">' +
+      '<span class="' + letraCls + '">' + alt.letra + '</span>' +
+      '<span>' + alt.texto + '</span>' +
+      '</button>';
   });
+  altsHTML += '</div>';
 
-  let resultadoHtml = '';
-  if (answered) {
-    const cls2 = correct ? 'certo' : 'errado';
-    const msg = correct ? '✓ Correto!' : '✗ Errado! Você marcou: ' + resp.letra;
-    resultadoHtml = '<div class="resultado ' + cls2 + '" style="display:block">' + msg + '</div>' +
-      '<div class="gabarito" style="display:block">Gabarito: <b>' + q.correta + '</b></div>' +
-      '<details class="coment" style="display:block"><summary>Ver explicação</summary>' +
-      '<div class="comentBody">' + q.comentario + '</div></details>' +
-      '<div class="agendamento" style="display:block">' + schedHtml +
-      '<div class="agendBtns">' +
-      '<button onclick="scheduleQ(\'' + q.id + '\',1)">1 dia</button>' +
-      '<button onclick="scheduleQ(\'' + q.id + '\',7)">7 dias</button>' +
-      '<button onclick="scheduleQ(\'' + q.id + '\',30)">30 dias</button>' +
-      '<button class="remover" onclick="removeSchedule(\'' + q.id + '\')">remover</button>' +
-      '</div></div>' +
-      '<button class="starBtn' + (starred ? ' ativo' : '') + '" style="display:block" onclick="toggleStar(\'' + q.id + '\')">' +
-      (starred ? '⭐ No caderno' : '☆ Revisar depois') + '</button>';
-  } else {
-    resultadoHtml = '<button id="btnConfirmar" onclick="confirmar()" disabled>Confirmar</button>' +
-      '<button class="starBtn' + (starred ? ' ativo' : '') + '" style="display:block;margin-top:10px" onclick="toggleStar(\'' + q.id + '\')">' +
-      (starred ? '⭐ No caderno' : '☆ Revisar depois') + '</button>';
+  // Confirm button
+  let confirmHTML = '';
+  if (!respondida) {
+    if (isAnulada) {
+      confirmHTML = '<button class="btn-confirm" id="confirm-' + id + '" onclick="confirmar(\'' + id + '\')">Marcar como vista (questão anulada)</button>';
+    } else {
+      confirmHTML = '<button class="btn-confirm" id="confirm-' + id + '" onclick="confirmar(\'' + id + '\')" disabled>Confirmar</button>';
+    }
   }
 
-  card.innerHTML =
-    '<div class="qnum">' +
-    '<span>Q' + (idx + 1) + ' de ' + total + ' — ID: ' + q.id.toUpperCase() + '</span>' +
-    '<span class="materia-tag">' + q.materia + '</span>' +
+  // Comment
+  const cOpen = commentOpen[id] ? ' open' : '';
+  const cLabel = commentOpen[id] ? '▲ Ocultar comentário' : '▼ Ver comentário / gabarito';
+  const commentHTML = respondida ?
+    '<div class="comment-wrap">' +
+    '<button class="comment-toggle" id="comment-toggle-' + id + '" onclick="toggleComment(\'' + id + '\')">' + cLabel + '</button>' +
+    '<div class="comment-body' + cOpen + '" id="comment-body-' + id + '">' + q.comentario + '</div>' +
+    '</div>' : '';
+
+  // Scheduling
+  const schedHTML = respondida ? schedRowHTML(id) : '';
+
+  // Review badge + anulada badge
+  const rvBadge = reviewBadgeHTML(id);
+  const anuladaBadge = isAnulada ? '<span class="badge badge-anulada">ANULADA</span>' : '';
+
+  var notaVal = (state.notas && state.notas[id]) ? state.notas[id] : '';
+  var notasHTML = '<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\'' + id + '\', this.value)">' + notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</textarea></div>';
+  cont.innerHTML =
+    '<div class="nav-counter">Questão ' + (pos + 1) + ' de ' + lista.length + '</div>' +
+    '<div class="card">' +
+    '<div class="card-meta">' +
+    '<span class="badge badge-id">' + q.id.toUpperCase() + '</span>' +
+    '<span class="badge badge-materia">' + q.materia + '</span>' +
+    anuladaBadge + rvBadge + starBtnHTML(id) +
     '</div>' +
-    '<div class="qenunc">' + q.enunciado + '</div>' +
-    '<div class="opts" id="opts">' + optsHtml + '</div>' +
-    resultadoHtml;
+    '<div class="enunciado">' + q.enunciado + '</div>' +
+    altsHTML +
+    confirmHTML +
+    resultHTML +
+    commentHTML +
+    schedHTML +
+    notasHTML +
+    '</div>' +
+    '<div class="nav-row">' +
+    '<button class="nav-btn" onclick="navPrev()" ' + (pos === 0 ? 'disabled' : '') + '>← Anterior</button>' +
+    '<button class="nav-btn" onclick="navNext()" ' + (pos >= lista.length - 1 ? 'disabled' : '') + '>Próxima →</button>' +
+    '</div>';
+}
 
-  if (!answered) {
-    card.querySelectorAll('input[type=radio]').forEach(function(r) {
-      r.addEventListener('change', function() {
-        document.getElementById('btnConfirmar').disabled = false;
-        card.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selecionada'); });
-        r.closest('.opt').classList.add('selecionada');
-      });
-    });
+// ── Navigation ─────────────────────────────────────────────────────────────
+function navPrev() {
+  if (state.posicao > 0) {
+    state.posicao--;
+    saveState();
+    resetQTimer();
+    renderCard();
   }
 }
 
-function confirmar() {
-  const q = currentQ();
-  if (!q) return;
-  const sel = document.querySelector('input[name="resp_' + q.id + '"]:checked');
-  if (!sel) return;
-  const letra = sel.value;
-  const correct = letra === q.correta;
-
-  state.respostas[q.id] = { letra: letra, data: today() };
-  autoSchedule(q.id, correct);
-
-  if (!correct) {
-    state.caderno[q.id] = true;
+function navNext() {
+  if (state.posicao < lista.length - 1) {
+    state.posicao++;
+    saveState();
+    resetQTimer();
+    renderCard();
   }
-
-  saveState();
-  renderPlacar();
-  renderCard();
 }
 
-function navegar(dir) {
-  const newPos = state.posicao + dir;
-  if (newPos < 0 || newPos >= queue.length) return;
-  state.posicao = newPos;
-  saveState();
-  resetQuestionTimer();
-  renderCard();
-}
-
-function toggleStar(id) {
-  if (state.revisarDepois[id]) {
-    delete state.revisarDepois[id];
-  } else {
-    state.revisarDepois[id] = true;
-  }
-  saveState();
-  renderCard();
-}
-
+// ── Mode / filter ──────────────────────────────────────────────────────────
 function setModo(modo) {
   state.modo = modo;
   state.posicao = 0;
+  const sel = document.getElementById('materiaSelect');
+  if (sel) sel.style.display = (modo === 'materia') ? '' : 'none';
+  document.querySelectorAll('.mode-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.modo === modo);
+  });
+  lista = buildLista();
   saveState();
-  rebuild();
+  resetQTimer();
+  renderCard();
+  renderStats();
 }
 
-function rebuild() {
-  queue = buildQueue();
-  if (state.posicao >= queue.length) state.posicao = 0;
-  renderModos();
-  renderPlacar();
+function setMateriaFiltro(val) {
+  state.materiaFiltro = val;
+  state.posicao = 0;
+  lista = buildLista();
+  saveState();
+  resetQTimer();
   renderCard();
 }
 
-// ── Init materia select ────────────────────────────────────────────────────
-function initMateriaSelect() {
-  const sel = document.getElementById('materiaSelect');
+function populateMateriaSelect() {
   const materias = [];
   QUESTOES.forEach(function(q) {
     if (materias.indexOf(q.materia) === -1) materias.push(q.materia);
   });
-  let opts = '<option value="">— todas as matérias —</option>';
+  materias.sort();
+  const sel = document.getElementById('materiaSelect');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— Escolha —</option>';
   materias.forEach(function(m) {
-    opts += '<option value="' + m + '"' + (state.materiaFiltro === m ? ' selected' : '') + '>' + m + '</option>';
-  });
-  sel.innerHTML = opts;
-  sel.addEventListener('change', function() {
-    state.materiaFiltro = sel.value;
-    state.posicao = 0;
-    saveState();
-    rebuild();
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m;
+    if (m === state.materiaFiltro) opt.selected = true;
+    sel.appendChild(opt);
   });
 }
 
-// ── Mode buttons ────────────────────────────────────────────────────────────
-document.getElementById('modos').addEventListener('click', function(e) {
-  const btn = e.target.closest('.modoBtn');
-  if (!btn) return;
-  setModo(btn.dataset.modo);
-});
-
-// ── Recomeçar ───────────────────────────────────────────────────────────────
+// ── Recomeçar ──────────────────────────────────────────────────────────────
 function recomecar() {
-  if (!confirm('Tem certeza? Todo o progresso, agendamentos e caderno de erros serão apagados.')) return;
-  localStorage.removeItem(STORE_KEY);
-  location.reload();
+  if (confirm('Tem certeza? Todo o progresso (respostas, agendamentos, caderno) será apagado permanentemente.')) {
+    localStorage.removeItem(STORE_KEY);
+    location.reload();
+  }
 }
 
-// ── Export ──────────────────────────────────────────────────────────────────
+// ── Export / Import ────────────────────────────────────────────────────────
 function exportarProgresso() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const json = JSON.stringify(state, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = 'progresso_q84_q98_' + today() + '.json';
+  document.body.appendChild(a);
   a.click();
-  setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
-// ── Import ──────────────────────────────────────────────────────────────────
+function exportarNotas(){
+  var txt = 'ANOTAÇÕES — Civil Q84–Q98\n' + today() + '\n\n';
+  var n = 0;
+  QUESTOES.forEach(function(q){
+    var nota = state.notas && state.notas[q.id];
+    if(nota && nota.trim()){
+      n++;
+      txt += '【' + q.id.toUpperCase() + ' · ' + q.materia + '】\n' + nota.trim() + '\n\n';
+    }
+  });
+  if(!n){ alert('Você ainda não tem anotações registradas.'); return; }
+  var blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'anotacoes_q84_q98_' + today() + '.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function importarProgresso(evt) {
   const file = evt.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
-      const imported = JSON.parse(e.target.result);
-      state = Object.assign(defaultState(), imported);
+      const parsed = JSON.parse(e.target.result);
+      state = Object.assign(defaultState(), parsed);
       saveState();
-      rebuild();
+      lista = buildLista();
+      populateMateriaSelect();
+      document.querySelectorAll('.mode-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.modo === state.modo);
+      });
+      const sel = document.getElementById('materiaSelect');
+      if (sel) sel.style.display = (state.modo === 'materia') ? '' : 'none';
+      renderStats();
+      renderCard();
       alert('Progresso importado com sucesso!');
     } catch(err) {
-      alert('Arquivo inválido. Verifique se é um JSON de progresso exportado daqui.');
+      alert('Arquivo inválido ou corrompido.');
     }
   };
   reader.readAsText(file);
   evt.target.value = '';
 }
 
-// ── iFrame banner ────────────────────────────────────────────────────────────
-function dismissIframe() {
-  const el = document.getElementById('iframeBanner');
-  if (el) el.style.display = 'none';
-  sessionStorage.setItem('iframeDismissed', '1');
+// ── Iframe banner ──────────────────────────────────────────────────────────
+function dismissIframeBanner() {
+  const b = document.getElementById('bannerIframe');
+  if (b) b.style.display = 'none';
+  try { sessionStorage.setItem('iframe_banner_dismissed', '1'); } catch(e) {}
 }
 
 function checkIframeBanner() {
-  if (sessionStorage.getItem('iframeDismissed') === '1') {
-    const el = document.getElementById('iframeBanner');
-    if (el) el.style.display = 'none';
-  }
+  try {
+    if (sessionStorage.getItem('iframe_banner_dismissed') === '1') {
+      const b = document.getElementById('bannerIframe');
+      if (b) b.style.display = 'none';
+    }
+  } catch(e) {}
 }
 
-// ── Boot ─────────────────────────────────────────────────────────────────────
-loadState();
-checkIframeBanner();
-initMateriaSelect();
-queue = buildQueue();
-if (state.posicao >= queue.length) state.posicao = 0;
-renderModos();
-renderPlacar();
-renderCard();
-startTimers();
+// ── Init ───────────────────────────────────────────────────────────────────
+function init() {
+  loadState();
+  checkIframeBanner();
+  populateMateriaSelect();
+
+  document.querySelectorAll('.mode-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.modo === state.modo);
+  });
+
+  const sel = document.getElementById('materiaSelect');
+  if (sel && state.modo === 'materia') sel.style.display = '';
+
+  lista = buildLista();
+  renderStats();
+  renderCard();
+  startTimers();
+}
+
+init();
 </script>
 </body>
 </html>
