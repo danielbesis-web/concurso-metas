@@ -2,655 +2,730 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meta 9 · Civil — Q54 a Q68</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meta 9 · Q54–Q68 | Direito Civil</title>
 <style>
-  :root{
-    --bg:#050b18; --bg2:#081222;
-    --qcard:#0b1828; --qborder:#16365a; --qglow:rgba(46,120,200,.30);
-    --text:#e9f0f8; --muted:#90a6c0; --soft:#b9c8dc;
-    --opt:#0d1c30; --optb:#1b3a5c; --optbh:#2b5a8a;
-    --cy:#37a8e0; --selbg:#123e6e; --selb:#2f7fd0;
-    --green:#27c06a; --greenbg:#0a2016; --greenb:#1c5e3a; --greenglow:rgba(34,197,105,.30);
-    --amber:#f5a623; --amberbg:#241a08; --amberb:#6a4a14; --amberglow:rgba(245,166,35,.28);
-    --purple:#b06bf2; --purplebg:#190f2c; --purpleb:#432a6e; --purpleglow:rgba(168,85,247,.28);
-    --teal:#22d3b8; --tealbg:#062420; --tealb:#155245; --tealglow:rgba(34,211,184,.26);
-    --cyan:#38bdf8; --cyanbg:#06212e; --cyanb:#155a72; --cyanglow:rgba(56,189,248,.26);
-    --red:#f25555; --redbg:#240c0c; --redb:#6a1f1f;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; padding:28px 16px 80px;
-    background:radial-gradient(1200px 700px at 50% -120px,#0c1d33 0%,var(--bg) 60%);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.55; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:760px;margin:0 auto}
-  .head{text-align:center;margin-bottom:18px}
-  .head h1{font-size:22px;font-weight:800;letter-spacing:.3px;margin:0 0 4px}
-  .head p{margin:0;color:var(--muted);font-size:13px}
-  .placar{
-    display:flex;gap:10px;justify-content:center;margin:16px 0 26px;flex-wrap:wrap
-  }
-  .chip{
-    background:var(--qcard);border:1px solid var(--qborder);border-radius:12px;
-    padding:9px 16px;min-width:96px;text-align:center
-  }
-  .chip .n{font-size:22px;font-weight:800;display:block;line-height:1.1}
-  .chip .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
-  .chip.ac .n{color:var(--green)} .chip.er .n{color:var(--red)} .chip.pe .n{color:var(--cy)}
-  .reset{
-    display:block;margin:0 auto 30px;background:transparent;color:var(--muted);
-    border:1px solid var(--qborder);border-radius:10px;padding:8px 18px;font-size:12px;
-    cursor:pointer;transition:.15s;touch-action:manipulation;-webkit-tap-highlight-color:transparent
-  }
-  .reset:hover{color:var(--text);border-color:var(--optbh)}
-
-  .q{margin-bottom:34px}
-  .meta{font-size:12px;color:var(--muted);margin:0 0 8px;padding-left:2px}
-  .meta b{color:var(--soft);font-weight:600}
-
-  .card{
-    background:var(--qcard);border:1px solid var(--qborder);border-radius:18px;
-    padding:20px 22px;box-shadow:0 0 0 1px rgba(255,255,255,.02),0 18px 40px -28px var(--qglow)
-  }
-  .label{font-size:13px;font-weight:800;letter-spacing:1.6px;color:#cfe0f2;margin:0 0 12px}
-  .enun{font-size:15px;color:var(--text);margin:0 0 6px}
-  .items{margin:10px 0 6px;display:flex;flex-direction:column;gap:8px}
-  .item{font-size:14px;color:var(--soft);padding-left:2px}
-  .item b{color:#dce8f6}
-  .prompt{font-size:14.5px;color:var(--text);margin:14px 0 4px;font-weight:500}
-
-  .opts{margin-top:14px;display:flex;flex-direction:column;gap:9px}
-  .opt{
-    display:flex;align-items:flex-start;gap:13px;background:var(--opt);
-    border:1px solid var(--optb);border-radius:13px;padding:13px 15px;cursor:pointer;
-    transition:.14s;text-align:left;color:var(--soft);font-size:14px;line-height:1.5;width:100%;
-    touch-action:manipulation;-webkit-tap-highlight-color:transparent
-  }
-  .opt:hover{border-color:var(--optbh);background:#102237}
-  .badge{
-    flex:0 0 auto;width:28px;height:28px;border-radius:50%;border:1.8px solid var(--cy);
-    color:var(--cy);font-weight:800;font-size:13px;display:flex;align-items:center;
-    justify-content:center;margin-top:-1px;transition:.14s
-  }
-  .opt .txt{padding-top:3px}
-  .opt.correct{background:var(--greenbg);border-color:var(--greenb)}
-  .opt.correct .badge{background:var(--green);border-color:var(--green);color:#04130a}
-  .opt.correct .txt{color:#dffaeb}
-  .opt.wrong{background:var(--redbg);border-color:var(--redb)}
-  .opt.wrong .badge{background:var(--red);border-color:var(--red);color:#1a0606}
-  .opt.wrong .txt{color:#ffdede}
-  .opts.answered .opt{cursor:default}
-  .opts.answered .opt:not(.correct):not(.wrong){opacity:.5}
-
-  .verdict{margin-top:14px;border-radius:12px;padding:11px 15px;font-weight:700;font-size:14px;display:none}
-  .verdict.show{display:block}
-  .verdict.ok{background:var(--greenbg);border:1px solid var(--greenb);color:var(--green)}
-  .verdict.no{background:var(--redbg);border:1px solid var(--redb);color:var(--red)}
-
-  .togg{
-    margin-top:14px;width:100%;background:#0c1d33;border:1px solid var(--cyanb);
-    color:var(--cyan);font-weight:700;font-size:13.5px;letter-spacing:.4px;
-    border-radius:13px;padding:13px;cursor:pointer;transition:.15s;
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    touch-action:manipulation;-webkit-tap-highlight-color:transparent
-  }
-  .togg:hover{background:#0f2540}
-  .togg .ar{transition:.2s}
-  .togg.open .ar{transform:rotate(180deg)}
-
-  .com{display:none;margin-top:14px}
-  .com.open{display:block}
-
-  .gcard{
-    background:linear-gradient(180deg,#0a2016 0%,#081a12 100%);
-    border:1px solid var(--greenb);border-radius:18px;padding:20px 22px;
-    box-shadow:0 0 0 1px rgba(34,197,105,.06),0 18px 44px -30px var(--greenglow)
-  }
-  .ghead{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-  .gcheck{
-    flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--green);
-    display:flex;align-items:center;justify-content:center;font-size:26px;color:#04130a;font-weight:900
-  }
-  .gtitle{font-size:22px;font-weight:900;color:#fff;letter-spacing:.3px}
-  .gtitle .ans{color:var(--green)}
-  .gpill{
-    display:inline-flex;align-items:center;gap:5px;background:rgba(34,197,105,.16);
-    border:1px solid var(--greenb);color:var(--green);font-size:11px;font-weight:800;
-    padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px
-  }
-  .gsrc{font-size:13px;color:var(--muted);margin:2px 0 0 60px}
-  .gsrc b{color:var(--green);font-weight:800}
-  .gcmd{font-size:12px;color:var(--muted);margin:6px 0 0 60px}
-
-  .sec{display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.07)}
-  .sec:first-of-type{border-top:none}
-  .tile{
-    flex:0 0 auto;width:50px;height:50px;border-radius:14px;display:flex;align-items:center;
-    justify-content:center;font-size:25px
-  }
-  .sbody{flex:1;min-width:0}
-  .sttl{font-size:13.5px;font-weight:900;letter-spacing:.8px;margin:4px 0 9px}
-  .slist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-  .slist li{position:relative;padding-left:18px;font-size:13.5px;color:var(--soft);line-height:1.55}
-  .slist li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%}
-  .slist li b{color:#eaf2fb;font-weight:700}
-  .slist li i{font-style:italic;color:#cdd9e8}
-
-  .green .tile{background:var(--greenbg);border:1px solid var(--greenb);box-shadow:0 0 22px -8px var(--greenglow)}
-  .green .sttl{color:var(--green)} .green .slist li::before{background:var(--green)}
-  .amber .tile{background:var(--amberbg);border:1px solid var(--amberb);box-shadow:0 0 22px -8px var(--amberglow)}
-  .amber .sttl{color:var(--amber)} .amber .slist li::before{background:var(--amber)}
-  .purple .tile{background:var(--purplebg);border:1px solid var(--purpleb);box-shadow:0 0 22px -8px var(--purpleglow)}
-  .purple .sttl{color:var(--purple)} .purple .slist li::before{background:var(--purple)}
-  .teal .tile{background:var(--tealbg);border:1px solid var(--tealb);box-shadow:0 0 22px -8px var(--tealglow)}
-  .teal .sttl{color:var(--teal)} .teal .slist li::before{background:var(--teal)}
-  .cyan .tile{background:var(--cyanbg);border:1px solid var(--cyanb);box-shadow:0 0 22px -8px var(--cyanglow)}
-  .cyan .sttl{color:var(--cyan)} .cyan .slist li::before{background:var(--cyan)}
-
-  .verif{display:flex;flex-direction:column;gap:9px;margin-top:3px}
-  .vrow{display:flex;align-items:center;gap:8px;font-size:13px}
-  .vrow .vk{color:var(--cyan);font-weight:700;white-space:nowrap}
-  .vrow .vlead{flex:1;border-bottom:1px dashed rgba(255,255,255,.18);min-width:14px;height:1px}
-  .vrow .vv{color:var(--muted);white-space:nowrap}
-  .vrow .vv.ok{color:var(--green);font-weight:700}
-  .vbox{display:inline-flex;width:18px;height:18px;border-radius:5px;background:var(--green);
-    color:#04130a;font-weight:900;font-size:12px;align-items:center;justify-content:center;margin-left:4px}
-  .end{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d8ee;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.6}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer;border:none;border-radius:6px;font-size:14px;font-weight:600;transition:opacity .15s,transform .1s}
+button:active{transform:scale(.97)}
+a{color:#38bdf8}
+#iframeBanner{background:#1a0d00;border-bottom:2px solid #f5a623;padding:10px 16px;font-size:13px;color:#f5c77e;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
+#iframeBanner span{flex:1}
+#iframeBanner button{background:transparent;color:#f5a623;font-size:18px;padding:0 4px;line-height:1;border:none}
+#saveBanner{background:#0b1828;border-bottom:1px solid #16365a;padding:8px 16px;font-size:12px;color:#38bdf8;text-align:center;position:sticky;top:0;z-index:99}
+.wrap{max-width:780px;margin:0 auto;padding:16px}
+.head{text-align:center;margin-bottom:18px}
+.head h1{font-size:20px;color:#38bdf8;font-weight:700}
+.head p{font-size:13px;color:#6a8aaa;margin-top:4px}
+.placar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600}
+.chip span{display:block;font-size:10px;color:#6a8aaa;font-weight:400}
+.chip.verde{border-color:#27c06a;color:#27c06a}
+.chip.vermelho{border-color:#f25555;color:#f25555}
+.chip.cinza{border-color:#4a6a8a;color:#8aaabb}
+.chip.roxo{border-color:#b06bf2;color:#b06bf2}
+.progbar{height:5px;background:#0b1828;border-radius:4px;overflow:hidden;margin-bottom:16px}
+#progFill{height:100%;background:linear-gradient(90deg,#38bdf8,#27c06a);width:0%;transition:width .4s}
+.modos{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.modoBtn{background:#0b1828;border:1px solid #16365a;color:#8aaabb;padding:6px 12px;border-radius:20px;font-size:13px}
+.modoBtn.ativo{background:#16365a;border-color:#38bdf8;color:#38bdf8}
+#materiaSelect{background:#0b1828;border:1px solid #16365a;color:#c9d8ee;padding:6px 10px;border-radius:20px;font-size:13px;outline:none;display:none}
+.timer{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:8px 14px;font-size:13px;color:#8aaabb;display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.timer span{flex:1}
+.timer button{background:#16365a;color:#8aaabb;padding:4px 10px;font-size:12px}
+.q{background:#0b1828;border:1px solid #16365a;border-radius:12px;padding:18px;margin-bottom:14px}
+.qnum{font-size:12px;color:#6a8aaa;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.materia-tag{background:#16365a;color:#38bdf8;border-radius:12px;padding:2px 8px;font-size:11px}
+.qenunc{font-size:15px;line-height:1.7;margin-bottom:16px;color:#d0e0f0}
+.opts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid #16365a;border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#38bdf8;background:#0d1e30}
+.opt input[type=radio]{accent-color:#38bdf8;flex-shrink:0;margin-top:3px}
+.opt.selecionada{border-color:#38bdf8;background:#0d2030}
+.opt.correta{border-color:#27c06a!important;background:#071a0f!important}
+.opt.errada{border-color:#f25555!important;background:#1a0707!important}
+#btnConfirmar{background:#38bdf8;color:#050b18;padding:10px 24px;font-size:15px;width:100%;margin-top:4px}
+#btnConfirmar:disabled{opacity:.4;cursor:not-allowed}
+.resultado{font-size:16px;font-weight:700;margin-top:14px;padding:10px 14px;border-radius:8px;display:none}
+.resultado.certo{background:#071a0f;border:1px solid #27c06a;color:#27c06a}
+.resultado.errado{background:#1a0707;border:1px solid #f25555;color:#f25555}
+.gabarito{font-size:13px;color:#8aaabb;margin-top:8px;display:none}
+details.coment{margin-top:10px;border:1px solid #16365a;border-radius:8px;overflow:hidden;display:none}
+details.coment summary{padding:10px 14px;cursor:pointer;font-size:13px;color:#38bdf8;font-weight:600;background:#0d1e30;list-style:none}
+details.coment summary::-webkit-details-marker{display:none}
+details.coment summary::before{content:'▶ '}
+details.coment[open] summary::before{content:'▼ '}
+details.coment .comentBody{padding:14px;font-size:14px;line-height:1.7;color:#c9d8ee}
+.agendamento{margin-top:12px;display:none}
+.agendInfo{font-size:13px;color:#8aaabb;margin-bottom:8px}
+.agendInfo.hoje{color:#f5a623}
+.agendInfo.futuro{color:#6a8aaa}
+.agendBtns{display:flex;flex-wrap:wrap;gap:6px}
+.agendBtns button{background:#1a2a3a;border:1px solid #f5a623;color:#f5a623;padding:5px 12px;font-size:12px}
+.agendBtns button.remover{border-color:#f25555;color:#f25555}
+.starBtn{margin-top:10px;background:transparent;border:1px solid #b06bf2;color:#b06bf2;padding:6px 14px;font-size:13px;width:100%;display:none}
+.starBtn.ativo{background:#1a0a2e;border-color:#b06bf2}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.nav button{background:#16365a;color:#c9d8ee;padding:9px 18px;font-size:14px}
+.nav button:disabled{opacity:.3;cursor:not-allowed}
+.nav span{font-size:14px;color:#6a8aaa}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.actions button{background:#0b1828;border:1px solid #16365a;color:#8aaabb;padding:8px 14px;font-size:13px}
+.actions button:hover{border-color:#38bdf8;color:#38bdf8}
+.actions button.danger{border-color:#f25555;color:#f25555}
+.vazio{text-align:center;padding:40px 20px;color:#6a8aaa;font-size:15px}
+#importInput{display:none}
+@media(max-width:480px){.modos{gap:4px}.modoBtn{font-size:12px;padding:5px 9px}.nav button{padding:8px 12px;font-size:13px}.wrap{padding:10px}}
 </style>
 </head>
 <body>
+
+<div id="iframeBanner">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframe()">✕</button>
+</div>
+
+<div id="saveBanner">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+
 <div class="wrap">
   <div class="head">
-    <h1>Meta 9 · Direito Civil — Q54 a Q68</h1>
-    <p>Método ICOL · gabarito oficial confirmado no QConcursos · 15 questões</p>
+    <h1>Meta 9 · Q54–Q68</h1>
+    <p>Direito Civil · Negócio Jurídico · Prescrição e Decadência</p>
   </div>
-  <div class="placar">
-    <div class="chip ac"><span class="n" id="pAc">0</span><span class="l">Acertos</span></div>
-    <div class="chip er"><span class="n" id="pEr">0</span><span class="l">Erros</span></div>
-    <div class="chip pe"><span class="n" id="pPe">15</span><span class="l">Pendentes</span></div>
+
+  <div class="placar" id="placar"></div>
+  <div class="progbar"><div id="progFill"></div></div>
+
+  <div class="modos" id="modos">
+    <button class="modoBtn ativo" data-modo="todas">Todas</button>
+    <button class="modoBtn" data-modo="revisar">Revisar hoje</button>
+    <button class="modoBtn" data-modo="caderno">Caderno de erros</button>
+    <button class="modoBtn" data-modo="materia">Por matéria</button>
+    <button class="modoBtn" data-modo="aleatorio">Aleatório</button>
+    <select id="materiaSelect"></select>
   </div>
-  <button class="reset" onclick="resetAll()">↺ Reiniciar</button>
-  <div id="app"></div>
-  <div class="end">Cartório · 1ª Fase Objetiva · Civil (p. 107–115)</div>
+
+  <div class="timer" id="timerBar">
+    <span id="timerDisplay">⏱ 00:00  |  Sessão: 00:00</span>
+    <button id="btnPausar" onclick="togglePause()">Pausar</button>
+  </div>
+
+  <div id="qcard" class="q">
+    <div class="vazio">Carregando...</div>
+  </div>
+
+  <div class="nav">
+    <button id="btnAnterior" onclick="navegar(-1)">← Anterior</button>
+    <span id="navCount">— / —</span>
+    <button id="btnProxima" onclick="navegar(1)">Próxima →</button>
+  </div>
+
+  <div class="actions">
+    <button class="danger" onclick="recomecar()">Recomeçar</button>
+    <button onclick="exportarProgresso()">Exportar progresso</button>
+    <button onclick="document.getElementById('importInput').click()">Importar progresso</button>
+    <input type="file" id="importInput" accept=".json" onchange="importarProgresso(event)">
+  </div>
 </div>
+
 <script>
-const QS = [
-{
- n:54, id:"Q2513923", meta:"Consulplan · TJ-AC · 2023 · Ingresso", tema:"Fraude contra credores (arts. 158–165)",
- comando:"assinalar a correta", answer:"A",
- enun:"Sobre a fraude contra credores, prevista nos artigos 158 a 165 do Código Civil, analise as afirmativas a seguir.",
- items:[
-  "<b>I.</b> Para que se alegue fraude contra credores, o credor precisa demonstrar que, quando da transmissão dos bens em fraude, a dívida junto ao devedor alienante já existia.",
-  "<b>II.</b> A transferência de patrimônio, de forma gratuita, para terceiros, sabendo o devedor da existência da dívida, possibilita ao credor alegar a ocorrência de fraude contra credores.",
-  "<b>III.</b> Por meio da chamada \"Ação Pauliana\" é possível anular a transferência de bens onerosa, quando a insolvência do devedor for notória ou houver meios de se demonstrar que ela era de conhecimento do adquirente do bem.",
-  "<b>IV.</b> O chamado \"eventus damni\" consiste na diminuição patrimonial do devedor, provocada pela celebração de um negócio jurídico de transferência de bens do devedor."
- ],
- prompt:"Está correto o que se afirma em:",
- opts:[["A","I, II, III e IV"],["B","II, apenas"],["C","I e III, apenas"],["D","I, III e IV, apenas"]],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (A)",li:[
-    "Os quatro itens estão certos.",
-    "<b>I</b> — anterioridade do crédito: a fraude só se configura se o crédito for <b>anterior</b> ao ato (art. 158, <i>caput</i>, e art. 159).",
-    "<b>II</b> — ato <b>gratuito</b> prejudicial pode ser anulado independentemente de prova de má-fé do terceiro (art. 158): basta o <i>eventus damni</i>.",
-    "<b>III</b> — ação pauliana (revocatória) anula ato <b>oneroso</b> quando há insolvência notória ou o adquirente conhecia/devia conhecer (<i>consilium fraudis</i> — art. 159).",
-    "<b>IV</b> — <i>eventus damni</i> é exatamente o <b>prejuízo objetivo</b> (redução do patrimônio ao ponto de insolvência)."
-  ]},
-  {c:"purple",i:"📖",t:"OS DOIS ELEMENTOS",li:[
-    "<i>Eventus damni</i> (objetivo — prejuízo/insolvência) + <i>consilium fraudis</i> (subjetivo — má-fé).",
-    "Má-fé <b>dispensada</b> no ato gratuito (art. 158); <b>exigida</b> no oneroso (art. 159)."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Nenhuma falsa — a banca tentou induzir a marcar \"apenas\".",
-    "O detalhe que distingue arts. 158 e 159 é a (dis)pensa do <i>consilium fraudis</i> conforme o ato seja gratuito ou oneroso."
-  ]},
-  {c:"teal",i:"⚖️",t:"JURISPRUDÊNCIA",li:[
-    "<b>Súmula 195/STJ</b> — \"Em embargos de terceiro <b>não</b> se anula ato jurídico, por fraude contra credores\". A fraude se discute por <b>ação pauliana</b>."
-  ]}
- ],
- verif:{qc:"Q2513923",dd:"N/A — letra de norma; reforço Súmula 195/STJ",norma:"arts. 158–159 CC"}
-},
-{
- n:55, id:"Q2211453", meta:"Cespe · TJ-SC · 2023 · Remoção", tema:"Defeitos do NJ (classificação)",
- comando:"assinalar a correta", answer:"B",
- enun:"O defeito do negócio jurídico no qual a pessoa desfalca seu patrimônio, a ponto de se tornar insolvente e, assim, não honrar com suas obrigações de cunho material, é denominado:",
- items:[], prompt:"",
- opts:[["A","estado de perigo, vício social"],["B","fraude contra credores, vício social"],["C","fraude contra credores, vício de consentimento"],["D","lesão, vício social"],["E","lesão, vício de consentimento"]],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (B)",li:[
-    "A descrição (desfalque patrimonial → insolvência → prejuízo aos credores) é a <b>fraude contra credores</b> (arts. 158–165 CC), classificada como vício/defeito <b>SOCIAL</b> do negócio jurídico."
-  ]},
-  {c:"purple",i:"📖",t:"MAPA DOS DEFEITOS",li:[
-    "<b>Vícios de consentimento</b> = erro, dolo, coação, estado de perigo e lesão (atingem a vontade).",
-    "<b>Vícios sociais</b> = fraude contra credores e simulação (atingem terceiros/a ordem social)."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(a) estado de perigo e (d)(e) lesão são vícios de <b>consentimento</b>, não sociais.",
-    "(c) acerta o instituto mas erra a classificação (chama de consentimento)."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "O par \"instituto correto + classificação errada\" (alternativa C) — fraude contra credores é vício <b>social</b>, jamais de consentimento."
-  ]}
- ],
- verif:{qc:"Q2211453",dd:"N/A — letra de norma/doutrina",norma:"arts. 158–165 CC"}
-},
-{
- n:56, id:"Q1914740", meta:"Vunesp · TJ-SP · 2022 · Ingresso", tema:"Nulidade e anulabilidade",
- comando:"assinalar a correta", answer:"D",
- enun:"Sobre os negócios nulos e anuláveis, assinale a alternativa correta.",
- items:[], prompt:"",
- opts:[
-  ["A","o menor de dezesseis anos não pode, para eximir-se de uma obrigação, invocar a sua idade, se dolosamente a ocultou ou se declarou-se maior."],
-  ["B","sendo nulo o negócio jurídico simulado, não há direitos a ressalvar, mesmo quanto aos terceiros de boa-fé em face dos contraentes originários."],
-  ["C","o negócio jurídico de consumo também é nulo quando celebrado por agente absolutamente incapaz."],
-  ["D","quando a lei dispuser que determinado ato é anulável, sem estabelecer prazo para pleitear-se a anulação, será esse de dois anos, a contar da data da conclusão do ato."]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
-    "Reproduz <i>ipsis litteris</i> o <b>art. 179 CC</b> — anulabilidade sem prazo legal específico ⇒ prazo <b>decadencial de 2 anos</b>, contado da conclusão do ato."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "<b>(a)</b> o art. 180 fala do <b>menor entre 16 e 18 anos</b> (relativamente incapaz). A alternativa trocou por \"menor de dezesseis\" — inversão.",
-    "<b>(b)</b> contraria o art. 167, <i>caput</i>: o negócio simulado é nulo, <b>ressalvados os direitos de terceiros de boa-fé</b> — a alternativa nega a ressalva.",
-    "<b>(c)</b> afirmação sem amparo; a inequívoca é a D (letra do art. 179)."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "A banca troca o <b>número/faixa</b> (16–18 → \"menor de 16\") e <b>nega a ressalva</b> ao terceiro de boa-fé.",
-    "Decore: <b>2 anos</b> = anulabilidade sem prazo próprio (art. 179); <b>4 anos</b> = regra geral (art. 178)."
-  ]}
- ],
- verif:{qc:"Q1914740",dd:"N/A — letra de norma",norma:"arts. 167, 179, 180 CC"}
-},
-{
- n:57, id:"Q1914739", meta:"Vunesp · TJ-SP · 2022 · Ingresso", tema:"Princípio da torpeza (dolo bilateral)",
- comando:"assinalar a correta", answer:"C",
- enun:"O CC/16 (art. 104) dizia que, havendo intuito de prejudicar terceiros ou infringir a lei, os contraentes nada poderiam alegar quanto à simulação. Regra não reproduzida no CC/02. Assinale o dispositivo do novo sistema que mais se aproxima do princípio geral contido no artigo revogado.",
- items:[], prompt:"",
- opts:[
-  ["A","coação por terceiro — art. 154"],
-  ["B","erro que não prejudica se executado conforme a vontade real — art. 144"],
-  ["C","se ambas as partes procederem com dolo, nenhuma pode alegá-lo — art. 150"],
-  ["D","lesão: suplemento/redução afasta anulação — art. 157, § 2º"]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
-    "O <b>art. 150 CC</b> (dolo <b>recíproco/bilateral</b>) traduz o princípio <i>nemo auditur propriam turpitudinem allegans</i> — ninguém pode valer-se da própria torpeza.",
-    "Como o antigo art. 104 vedava aos simuladores de má-fé invocar a própria simulação, o art. 150 impede a parte que agiu com dolo de alegá-lo."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(a) art. 154 = coação por terceiro; (b) art. 144 e (d) art. 157, §2º exprimem a <b>conservação do negócio</b>, não a torpeza."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Todas as alternativas são transcrições corretas de artigos — o desafio é achar o que <b>encarna o mesmo princípio</b> (torpeza bilateral)."
-  ]}
- ],
- verif:{qc:"Q1914739",dd:"N/A — princípio geral",norma:"art. 150 CC"}
-},
-{
- n:58, id:"Q1852460", meta:"Consulplan · TJ-MS · 2021 · Remoção", tema:"Erro, dolo e falso motivo",
- comando:"assinalar a CONTRÁRIA à lei", answer:"A",
- enun:"O Código Civil prevê hipóteses em que se reputará defeituoso o negócio jurídico. Assinale a alternativa contrária à previsão legal quanto aos efeitos do NJ.",
- items:[], prompt:"",
- opts:[
-  ["A","A declaração de vontade é viciada sempre que decorrente de falso motivo."],
-  ["B","O dolo praticado por ambas as partes impede sua invocação para anulação ou indenização."],
-  ["C","A anulação do ato não requer que o erro emane da vontade de ambas as partes, bastando decorrer de um envolvido."],
-  ["D","O ato é anulável quando praticado por erro de caráter essencial (objeto principal/qualidades substanciais/pessoa)."]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (A é a errada)",li:[
-    "O <b>art. 140 CC</b> diz que o falso motivo <b>só</b> vicia a declaração <b>quando expresso como razão determinante</b> — não \"sempre\". A alternativa generaliza e contraria a lei."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS DE ACORDO COM A LEI",li:[
-    "(b) art. 150 (dolo recíproco); (c) art. 138 (basta o <b>erro unilateral</b>); (d) art. 139, I (erro essencial sobre objeto/qualidade/pessoa)."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "O advérbio <b>\"sempre\"</b> — palavra absoluta que troca o \"só… quando expresso\" do art. 140. Clássico marcador de alternativa falsa."
-  ]}
- ],
- verif:{qc:"Q1852460",dd:"N/A — letra de norma",norma:"arts. 138, 139, 140, 150 CC"}
-},
-{
- n:59, id:"Q1852658", meta:"FGV · TJ-SC · 2021 · Ingresso", tema:"Simulação por interposta pessoa",
- comando:"assinalar a correta", answer:"D",
- enun:"Ademir queria doar um terreno ao sobrinho João, mas sabia que a esposa Delma não concordaria. Doou o imóvel ao amigo Cleber que, meses depois, repassou a João, conforme previamente acertado entre Ademir e Cleber. Ocorreu:",
- items:[], prompt:"",
- opts:[["A","dolo"],["B","fraude contra credores"],["C","lesão"],["D","simulação"],["E","erro"]],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
-    "Cleber é <b>interposta pessoa</b> (\"testa de ferro/laranja\"). Transmitir a quem realmente se quer beneficiar (João) por pessoa interposta é <b>simulação relativa subjetiva</b> — <b>art. 167, § 1º, I, CC</b> (negócio simulado é nulo; subsiste o dissimulado se válido)."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(a) dolo e (e) erro exigem vontade viciada — aqui tudo foi <b>combinado</b>; (b) fraude exige credor e insolvência, inexistentes; (c) lesão exige desproporção por necessidade/inexperiência."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Confundir com <b>fraude contra credores</b> — mas o alvo é a oposição da cônjuge, e o mecanismo (pessoa interposta combinada) é <b>simulação</b>. Sinal-chave: \"conforme previamente acertado\"."
-  ]}
- ],
- verif:{qc:"Q1852658",dd:"N/A — letra de norma",norma:"art. 167, § 1º, I, CC"}
-},
-{
- n:60, id:"Q1852661", meta:"FGV · TJ-SC · 2021 · Ingresso", tema:"Incapacidade × emancipação",
- comando:"assinalar a correta", answer:"A",
- enun:"Cláudia, de 15 anos, e José, de 17 anos, casado, celebram contrato de compra e venda de um aparelho celular avaliado em R$ 2.000,00. À luz dos arts. 3º, 4º, 5º e 166 do Código Civil, é correto afirmar que o negócio jurídico firmado entre eles é:",
- items:[], prompt:"",
- opts:[
-  ["A","nulo em relação a Cláudia e válido em relação a José."],
-  ["B","nulo em relação a Cláudia e anulável em relação a José."],
-  ["C","anulável tanto em relação a Cláudia quanto em relação a José."],
-  ["D","válido tanto em relação a Cláudia quanto em relação a José."],
-  ["E","anulável em relação a Cláudia e válido em relação a José."]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (A)",li:[
-    "<b>Cláudia (15)</b> é <b>absolutamente incapaz</b> (menor de 16 — art. 3º) ⇒ ato <b>NULO</b> (art. 166, I).",
-    "<b>José (17), casado</b>, foi <b>emancipado</b> pelo casamento (art. 5º, parágrafo único, II) ⇒ plenamente capaz ⇒ ato <b>VÁLIDO</b>."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Querer marcar <b>B (nulo e anulável)</b> tratando José como relativamente incapaz (16–18). O <b>casamento emancipa</b> — some a incapacidade, o ato é válido, não anulável."
-  ]},
-  {c:"purple",i:"📖",t:"EMANCIPAÇÃO (art. 5º, ún.)",li:[
-    "Casamento; emprego público efetivo; colação de grau em curso superior; estabelecimento civil/comercial ou relação de emprego com economia própria (16+); ou por concessão dos pais/sentença (16+)."
-  ]}
- ],
- verif:{qc:"Q1852661",dd:"N/A — letra de norma",norma:"arts. 3º, 5º ún. II, 166 I CC"}
-},
-{
- n:61, id:"Q1852558", meta:"FGV · TJ-SC · 2021 · Remoção", tema:"Dolo omissivo (art. 147)",
- comando:"assinalar a correta", answer:"D",
- enun:"Célio quer vender sala comercial. Com receio de perder a venda, omitiu que o imóvel não tinha instalação elétrica adequada para a atividade que sabia que Clara exerceria ali. Celebrada a compra e venda, Clara descobre a verdade. É possível invalidar com base em:",
- items:[], prompt:"",
- opts:[["A","erro"],["B","lesão"],["C","simulação"],["D","dolo"],["E","estado de perigo"]],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
-    "O silêncio intencional sobre fato que a outra parte ignorava é <b>omissão dolosa</b> — <b>art. 147 CC</b> (dolo negativo). Provado que sem a omissão o negócio não se faria, há <b>dolo essencial</b>, e o ato é <b>anulável</b> (art. 145)."
-  ]},
-  {c:"purple",i:"📖",t:"ERRO × DOLO",li:[
-    "No <b>erro</b> a falsa noção é <b>espontânea</b>; no <b>dolo</b>, é <b>provocada</b> pela outra parte. Aqui Célio induziu Clara ⇒ dolo, não erro."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(b) lesão exige desproporção por necessidade/inexperiência; (c) simulação exige conluio; (e) estado de perigo exige obrigação excessiva sob perigo — nenhum se aplica."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Marcar <b>erro (A)</b>. O divisor é quem causou a falsa percepção — houve <b>indução por omissão</b> (art. 147) ⇒ dolo."
-  ]}
- ],
- verif:{qc:"Q1852558",dd:"N/A — letra de norma",norma:"arts. 145, 147 CC"}
-},
-{
- n:62, id:"Q1852374", meta:"Consulplan · TJ-MS · 2021 · Ingresso", tema:"Dolo do representante (art. 149)",
- comando:"assinalar a correta", answer:"B",
- enun:"Pedro, curador de João (joalheiro interditado), agindo dolosamente, vende a Maria um anel de rubilita (pedra sem valor) como se fosse rubi. Sobre a responsabilidade de cada um, assinale a correta.",
- items:[], prompt:"",
- opts:[
-  ["A","Pedro e João respondem solidariamente por todos os prejuízos."],
-  ["B","João responderá até o proveito que teve, ainda que não tenha conhecimento do dolo do representante legal."],
-  ["C","Apenas João responderá, pois o negócio lhe trouxe benefícios."],
-  ["D","Apenas Pedro responderá, por ter atuado dolosamente."]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (B)",li:[
-    "<b>Art. 149 CC</b> — o dolo do representante <b>LEGAL</b> (curador) só obriga o representado a responder <b>até a importância do proveito que teve</b>. João responde até o proveito; Pedro (autor do dolo) responde pelo restante."
-  ]},
-  {c:"purple",i:"📖",t:"A DISTINÇÃO DO ART. 149",li:[
-    "Representante <b>legal</b> ⇒ representado responde <b>até o proveito</b>.",
-    "Representante <b>convencional</b> ⇒ representado responde <b>solidariamente</b> por perdas e danos."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Trocar <b>legal × convencional</b> (a palavra \"solidária\" na A) ou cravar \"apenas X\" — ambos respondem, em medidas diferentes."
-  ]}
- ],
- verif:{qc:"Q1852374",dd:"N/A — letra de norma",norma:"art. 149 CC"}
-},
-{
- n:63, id:"Q1854239", meta:"Vunesp · TJ-GO · 2021 · Remoção", tema:"Venda ascendente-descendente (art. 496)",
- comando:"assinalar a correta", answer:"B",
- enun:"A venda de bem entre ascendente e descendente, por meio de interposta pessoa, é:",
- items:[], prompt:"",
- opts:[
-  ["A","nulo, decadencial 2 anos"],["B","anulável, decadencial 2 anos"],
-  ["C","anulável, prescricional 4 anos"],["D","nulo, decadencial 4 anos"]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (B)",li:[
-    "A venda de ascendente a descendente sem consentimento dos demais descendentes e do cônjuge é <b>anulável</b> (<b>art. 496 CC</b>) — inclusive por <b>interposta pessoa</b>. Sem prazo próprio, aplica-se o <b>decadencial de 2 anos</b> (art. 179 CC)."
-  ]},
-  {c:"teal",i:"⚖️",t:"POR QUE NÃO NULO/4 ANOS",li:[
-    "O art. 496 fala em <b>anulável</b> (afasta A e D); o prazo é <b>decadencial de 2 anos</b> (art. 179), não prescricional de 4 (art. 178) → afasta C."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "\"Interposta pessoa\" sugere simulação/nulidade, mas a regra <b>especial</b> do art. 496 prevalece. E confundir <b>2 anos</b> (art. 179) com <b>4 anos</b> (art. 178)."
-  ]},
-  {c:"purple",i:"📖",t:"HISTÓRICO",li:[
-    "A <b>Súmula 494/STF</b> (CC/16) falava em prescrição de 20 anos — <b>superada</b> no CC/02: hoje é decadência de 2 anos (art. 179)."
-  ]}
- ],
- verif:{qc:"Q1854239",dd:"N/A — letra de norma; Súmula 494/STF superada",norma:"arts. 496, 179 CC"}
-},
-{
- n:64, id:"Q3775473", meta:"Cespe · TJ-RR · 2025 · Remoção", tema:"Prazo prescricional geral (art. 205)",
- comando:"assinalar a correta", answer:"D",
- enun:"Dois indivíduos envolveram-se em uma situação jurídica, não havendo previsão legal acerca do prazo prescricional. Nessa situação, os fatos decorrentes são:",
- items:[], prompt:"",
- opts:[["A","imprescritíveis"],["B","3 anos"],["C","5 anos"],["D","10 anos"],["E","20 anos"]],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
-    "<b>Art. 205 CC</b> — \"A prescrição ocorre em <b>dez anos</b>, quando a lei não lhe haja fixado prazo menor\". É a regra geral/residual."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(b)(c) 3 e 5 anos são prazos <b>específicos</b> do art. 206; (e) 20 anos era o <b>CC/16</b>; (a) imprescritibilidade só em hipóteses excepcionais."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Marcar <b>20 anos</b> (regra de 1916). No CC/02 a regra geral caiu para <b>10 anos</b> (art. 205)."
-  ]}
- ],
- verif:{qc:"Q3775473",dd:"N/A — letra de norma",norma:"art. 205 CC"}
-},
-{
- n:65, id:"Q3775824", meta:"Cespe · TJ-RR · 2025 · Ingresso", tema:"Alegação da prescrição (art. 193)",
- comando:"assinalar a correta", answer:"C",
- enun:"Nas demandas judiciais, a prescrição:",
- items:[], prompt:"",
- opts:[
-  ["A","deve ser alegada até a sentença, sob pena de preclusão"],
-  ["B","até a interposição de recurso à 2ª instância"],
-  ["C","pode ser alegada em qualquer grau de jurisdição, pela parte a quem aproveita"],
-  ["D","na primeira oportunidade, sob pena de preclusão"],
-  ["E","antes da instrução, sob pena de preclusão"]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
-    "Reproduz o <b>art. 193 CC</b> — \"a prescrição pode ser alegada <b>em qualquer grau de jurisdição</b>, pela parte a quem aproveita\". Não há preclusão por não alegá-la na 1ª oportunidade."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "Todas inventam <b>limites temporais/preclusão</b> que o art. 193 não estabelece."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Confundir com art. 278 CPC — mas a prescrição tem regra própria (art. 193 CC + conhecível <b>de ofício</b>, art. 487, II, CPC). Em REsp/RE exige prequestionamento."
-  ]}
- ],
- verif:{qc:"Q3775824",dd:"N/A — letra de norma",norma:"art. 193 CC"}
-},
-{
- n:66, id:"Q3775810", meta:"Cespe · TJ-RR · 2025 · Ingresso", tema:"Fundamento da prescrição/decadência",
- comando:"assinalar a correta", answer:"D",
- enun:"Prescrição e decadência são fatos jurídicos por meio dos quais a ordem jurídica confere destaque ao princípio da:",
- items:[], prompt:"",
- opts:[["A","prevenção"],["B","proporcionalidade"],["C","precaução"],["D","segurança jurídica"],["E","razoabilidade"]],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
-    "Prescrição e decadência existem para <b>estabilizar as relações jurídicas</b> e evitar a eternização da incerteza pela inércia do titular — expressão do princípio da <b>segurança jurídica</b>."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "Prevenção e precaução são do <b>Direito Ambiental</b>; proporcionalidade e razoabilidade são critérios gerais de controle de atos."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Alternativas \"de princípio\" genérico (proporcionalidade/razoabilidade) são tentadoras; o fundamento dos prazos é a <b>segurança/estabilidade</b>."
-  ]}
- ],
- verif:{qc:"Q3775810",dd:"N/A — conceitual/doutrina",norma:"—"}
-},
-{
- n:67, id:"Q3775639", meta:"Cespe · TJ-RO · 2025 · Remoção", tema:"Enriquecimento sem causa (art. 206 §3 IV + STJ)",
- comando:"assinalar a correta", answer:"C",
- enun:"Consoante o Código Civil e o entendimento do STJ, o prazo aplicável à ação de ressarcimento fundada em enriquecimento ilícito é:",
- items:[], prompt:"",
- opts:[
-  ["A","prescricional de 3 anos, da prática do ato"],
-  ["B","10 anos, do conhecimento inequívoco"],
-  ["C","prescricional de 3 anos, do conhecimento inequívoco do ato"],
-  ["D","decadencial de 3 anos, do conhecimento"],
-  ["E","10 anos, da prática"]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (C)",li:[
-    "Prazo <b>prescricional de 3 anos</b> (<b>art. 206, § 3º, IV, CC</b> — ressarcimento de enriquecimento sem causa) + termo inicial no <b>conhecimento inequívoco</b> do ato (<i>actio nata</i> subjetiva)."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(a)/(e) erram o <b>termo inicial</b> (\"da prática\"); (b)/(e) erram o <b>prazo</b> (10 anos); (d) erra a <b>natureza</b> (é prescrição, não decadência)."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "É <b>3 anos</b> (fácil), mas o termo inicial é o <b>conhecimento inequívoco</b> (<i>actio nata</i> subjetiva), não \"a prática do ato\"."
-  ]},
-  {c:"purple",i:"⚖️",t:"JURISPRUDÊNCIA (STJ)",li:[
-    "Teoria da <i>actio nata</i> (vertente <b>subjetiva</b>): o prazo flui da <b>ciência inequívoca</b> da lesão, não da mera ocorrência do fato."
-  ]}
- ],
- verif:{qc:"Q3775639",dd:"actio nata subjetiva — termo inicial = ciência inequívoca",norma:"art. 206 § 3º IV CC"}
-},
-{
- n:68, id:"Q3775635", meta:"Cespe · TJ-RO · 2025 · Remoção", tema:"Anulação por dolo — prazo (art. 178)",
- comando:"assinalar a correta", answer:"D",
- enun:"De acordo com a jurisprudência do STJ, as ações que visem à anulação de negócio jurídico celebrado com dolo:",
- items:[], prompt:"",
- opts:[
-  ["A","não convalescem pelo decurso do tempo, por ser nulo"],
-  ["B","decadencial de 3 anos, da celebração"],
-  ["C","prescricional de 3 anos, da celebração"],
-  ["D","decadencial de 4 anos, da celebração"],
-  ["E","prescricional de 4 anos, da celebração"]
- ],
- secs:[
-  {c:"green",i:"⚖️",t:"POR QUÊ (D)",li:[
-    "Dolo é vício de consentimento ⇒ negócio <b>anulável</b> (art. 171, II). Prazo <b>decadencial de 4 anos</b> (<b>art. 178, II, CC</b>), contado do dia em que se realizou o negócio. STJ confirma a natureza <b>decadencial</b>."
-  ]},
-  {c:"teal",i:"⚖️",t:"AS OUTRAS",li:[
-    "(a) trata como <b>nulo</b> (é anulável); (b) prazo errado (3, não 4); (c)/(e) chamam de <b>prescricional</b> (anulabilidade → decadência)."
-  ]},
-  {c:"amber",i:"⚠️",t:"PEGADINHA",li:[
-    "Dupla: <b>prescricional × decadencial</b> (anulabilidade = decadência) e <b>3 × 4 anos</b>. Art. 178 = 4 anos decadenciais; termo inicial = realização do negócio."
-  ]},
-  {c:"purple",i:"⚖️",t:"JURISPRUDÊNCIA (STJ)",li:[
-    "A ação <b>anulatória</b> de NJ por vício de vontade submete-se ao prazo <b>decadencial</b> do art. 178 (não prescricional)."
-  ]}
- ],
- verif:{qc:"Q3775635",dd:"anulatória por vício → decadência art. 178",norma:"arts. 171 II, 178 II CC"}
-}
+const STORE_KEY = 'concurso_q54_q68_v2';
+
+const QUESTOES = [
+  {id:'q54', materia:'Fraude contra credores', tipo:'multipla',
+   enunciado:`Sobre a fraude contra credores (arts. 158–165 CC), analise as afirmativas.<br><br>
+   <b>I.</b> Para que se alegue fraude contra credores, o credor precisa demonstrar que, quando da transmissão dos bens em fraude, a dívida junto ao devedor alienante já existia.<br>
+   <b>II.</b> A transferência de patrimônio, de forma gratuita, para terceiros, sabendo o devedor da existência da dívida, possibilita ao credor alegar a ocorrência de fraude contra credores.<br>
+   <b>III.</b> Por meio da chamada "Ação Pauliana" é possível anular a transferência de bens onerosa, quando a insolvência do devedor for notória ou houver meios de se demonstrar que ela era de conhecimento do adquirente do bem.<br>
+   <b>IV.</b> O chamado "eventus damni" consiste na diminuição patrimonial do devedor, provocada pela celebração de um negócio jurídico de transferência de bens do devedor.<br><br>
+   <b>Está correto o que se afirma em:</b>`,
+   alternativas:[{letra:'A',texto:'I, II, III e IV'},{letra:'B',texto:'II, apenas'},{letra:'C',texto:'I e III, apenas'},{letra:'D',texto:'I, III e IV, apenas'}],
+   correta:'A',
+   comentario:`<b>⚖️ Por quê (A):</b> Os quatro itens estão certos. <b>I</b> — anterioridade do crédito: a fraude só se configura se o crédito for anterior ao ato (art. 158 e 159). <b>II</b> — ato gratuito prejudicial pode ser anulado independentemente de prova de má-fé do terceiro (art. 158): basta o <i>eventus damni</i>. <b>III</b> — ação pauliana anula ato oneroso quando há insolvência notória ou o adquirente conhecia (<i>consilium fraudis</i> — art. 159). <b>IV</b> — <i>eventus damni</i> é o prejuízo objetivo (redução do patrimônio ao ponto de insolvência).<br><br>
+   <b>📖 Os dois elementos:</b> <i>Eventus damni</i> (objetivo) + <i>consilium fraudis</i> (subjetivo). Má-fé dispensada no ato gratuito (art. 158); exigida no oneroso (art. 159).<br><br>
+   <b>⚠️ Pegadinha:</b> Nenhuma afirmativa é falsa. <b>Súmula 195/STJ:</b> em embargos de terceiro não se anula ato por fraude contra credores — usa-se ação pauliana.<br><br>
+   <b>📌 Norma:</b> arts. 158–159 CC | QConcursos Q2513923`},
+
+  {id:'q55', materia:'Defeitos do negócio jurídico', tipo:'multipla',
+   enunciado:`O defeito do negócio jurídico no qual a pessoa desfalca seu patrimônio, a ponto de se tornar insolvente e, assim, não honrar com suas obrigações de cunho material, é denominado:`,
+   alternativas:[{letra:'A',texto:'estado de perigo, vício social'},{letra:'B',texto:'fraude contra credores, vício social'},{letra:'C',texto:'fraude contra credores, vício de consentimento'},{letra:'D',texto:'lesão, vício social'},{letra:'E',texto:'lesão, vício de consentimento'}],
+   correta:'B',
+   comentario:`<b>⚖️ Por quê (B):</b> A descrição (desfalque patrimonial → insolvência → prejuízo aos credores) é a <b>fraude contra credores</b> (arts. 158–165 CC), classificada como vício <b>SOCIAL</b>.<br><br>
+   <b>📖 Mapa dos defeitos:</b> <b>Vícios de consentimento</b> = erro, dolo, coação, estado de perigo, lesão. <b>Vícios sociais</b> = fraude contra credores e simulação.<br><br>
+   <b>⚠️ Pegadinha:</b> A alternativa C acerta o instituto mas erra a classificação — fraude contra credores é vício social, jamais de consentimento.<br><br>
+   <b>📌 Norma:</b> arts. 158–165 CC | QConcursos Q2211453`},
+
+  {id:'q56', materia:'Nulidade e anulabilidade', tipo:'multipla',
+   enunciado:`Sobre os negócios nulos e anuláveis, assinale a alternativa correta.`,
+   alternativas:[
+    {letra:'A',texto:'O menor de dezesseis anos não pode, para eximir-se de uma obrigação, invocar a sua idade, se dolosamente a ocultou ou se declarou-se maior.'},
+    {letra:'B',texto:'Sendo nulo o negócio jurídico simulado, não há direitos a ressalvar, mesmo quanto aos terceiros de boa-fé em face dos contraentes originários.'},
+    {letra:'C',texto:'O negócio jurídico de consumo também é nulo quando celebrado por agente absolutamente incapaz.'},
+    {letra:'D',texto:'Quando a lei dispuser que determinado ato é anulável, sem estabelecer prazo para pleitear-se a anulação, será esse de dois anos, a contar da data da conclusão do ato.'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Reproduz ipsis litteris o <b>art. 179 CC</b> — anulabilidade sem prazo legal específico ⇒ prazo decadencial de <b>2 anos</b>, contado da conclusão do ato.<br><br>
+   <b>⚠️ As outras:</b> (A) o art. 180 fala do menor entre 16 e 18 anos (relativamente incapaz) — a alternativa trocou por "menor de dezesseis". (B) contraria o art. 167: o negócio simulado é nulo, ressalvados os direitos de terceiros de boa-fé.<br><br>
+   <b>⚠️ Pegadinha:</b> Decore: <b>2 anos</b> = anulabilidade sem prazo próprio (art. 179); <b>4 anos</b> = regra geral (art. 178).<br><br>
+   <b>📌 Norma:</b> arts. 167, 179, 180 CC | QConcursos Q1914740`},
+
+  {id:'q57', materia:'Defeitos do negócio jurídico', tipo:'multipla',
+   enunciado:`O CC/16 (art. 104) dizia que, havendo intuito de prejudicar terceiros ou infringir a lei, os contraentes nada poderiam alegar quanto à simulação. Regra não reproduzida no CC/02. Assinale o dispositivo do novo sistema que mais se aproxima do princípio geral contido no artigo revogado.`,
+   alternativas:[
+    {letra:'A',texto:'Coação por terceiro — art. 154'},
+    {letra:'B',texto:'Erro que não prejudica se executado conforme a vontade real — art. 144'},
+    {letra:'C',texto:'Se ambas as partes procederem com dolo, nenhuma pode alegá-lo — art. 150'},
+    {letra:'D',texto:'Lesão: suplemento/redução afasta anulação — art. 157, §2º'}
+   ],
+   correta:'C',
+   comentario:`<b>⚖️ Por quê (C):</b> O <b>art. 150 CC</b> (dolo recíproco/bilateral) traduz o princípio <i>nemo auditur propriam turpitudinem allegans</i> — ninguém pode valer-se da própria torpeza. Como o antigo art. 104 vedava aos simuladores de má-fé invocar a própria simulação, o art. 150 impede a parte que agiu com dolo de alegá-lo.<br><br>
+   <b>⚠️ Pegadinha:</b> Todas as alternativas são transcrições corretas de artigos — o desafio é achar o que encarna o mesmo <b>princípio da torpeza bilateral</b>.<br><br>
+   <b>📌 Norma:</b> art. 150 CC | QConcursos Q1914739`},
+
+  {id:'q58', materia:'Defeitos do negócio jurídico', tipo:'multipla',
+   enunciado:`O Código Civil prevê hipóteses em que se reputará defeituoso o negócio jurídico. Assinale a alternativa <b>contrária</b> à previsão legal quanto aos efeitos do NJ.`,
+   alternativas:[
+    {letra:'A',texto:'A declaração de vontade é viciada sempre que decorrente de falso motivo.'},
+    {letra:'B',texto:'O dolo praticado por ambas as partes impede sua invocação para anulação ou indenização.'},
+    {letra:'C',texto:'A anulação do ato não requer que o erro emane da vontade de ambas as partes, bastando decorrer de um envolvido.'},
+    {letra:'D',texto:'O ato é anulável quando praticado por erro de caráter essencial.'}
+   ],
+   correta:'A',
+   comentario:`<b>⚖️ Por quê (A é a errada):</b> O <b>art. 140 CC</b> diz que o falso motivo <b>só</b> vicia a declaração quando expresso como razão determinante — não "sempre". A alternativa generaliza e contraria a lei.<br><br>
+   <b>✅ As de acordo com a lei:</b> (B) art. 150 (dolo recíproco); (C) art. 138 (basta o erro unilateral); (D) art. 139, I (erro essencial sobre objeto/qualidade/pessoa).<br><br>
+   <b>⚠️ Pegadinha:</b> O advérbio <b>"sempre"</b> — palavra absoluta que troca o "só… quando expresso" do art. 140. Clássico marcador de alternativa falsa.<br><br>
+   <b>📌 Norma:</b> arts. 138, 139, 140, 150 CC | QConcursos Q1852460`},
+
+  {id:'q59', materia:'Simulação', tipo:'multipla',
+   enunciado:`Ademir queria doar um terreno ao sobrinho João, mas sabia que a esposa Delma não concordaria. Doou o imóvel ao amigo Cleber que, meses depois, repassou a João, conforme previamente acertado entre Ademir e Cleber. Ocorreu:`,
+   alternativas:[{letra:'A',texto:'Dolo'},{letra:'B',texto:'Fraude contra credores'},{letra:'C',texto:'Lesão'},{letra:'D',texto:'Simulação'},{letra:'E',texto:'Erro'}],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Cleber é interposta pessoa ("testa de ferro/laranja"). Transmitir a quem realmente se quer beneficiar (João) por pessoa interposta é <b>simulação relativa subjetiva</b> — <b>art. 167, §1º, I, CC</b>.<br><br>
+   <b>⚠️ Pegadinha:</b> Confundir com fraude contra credores — mas o alvo é a oposição da cônjuge, e o mecanismo (pessoa interposta combinada) é simulação. Sinal-chave: "conforme previamente acertado".<br><br>
+   <b>📌 Norma:</b> art. 167, §1º, I CC | QConcursos Q1852658`},
+
+  {id:'q60', materia:'Capacidade e incapacidade', tipo:'multipla',
+   enunciado:`Cláudia, de 15 anos, e José, de 17 anos, casado, celebram contrato de compra e venda de um aparelho celular avaliado em R$ 2.000,00. À luz dos arts. 3º, 4º, 5º e 166 do CC, é correto afirmar que o negócio jurídico firmado entre eles é:`,
+   alternativas:[
+    {letra:'A',texto:'Nulo em relação a Cláudia e válido em relação a José.'},
+    {letra:'B',texto:'Nulo em relação a Cláudia e anulável em relação a José.'},
+    {letra:'C',texto:'Anulável tanto em relação a Cláudia quanto em relação a José.'},
+    {letra:'D',texto:'Válido tanto em relação a Cláudia quanto em relação a José.'},
+    {letra:'E',texto:'Anulável em relação a Cláudia e válido em relação a José.'}
+   ],
+   correta:'A',
+   comentario:`<b>⚖️ Por quê (A):</b> <b>Cláudia (15)</b> é absolutamente incapaz (menor de 16 — art. 3º) ⇒ ato <b>NULO</b> (art. 166, I). <b>José (17), casado</b>, foi emancipado pelo casamento (art. 5º, parágrafo único, II) ⇒ plenamente capaz ⇒ ato <b>VÁLIDO</b>.<br><br>
+   <b>⚠️ Pegadinha:</b> Querer marcar B (nulo e anulável) tratando José como relativamente incapaz (16–18). O <b>casamento emancipa</b> — o ato é válido, não anulável.<br><br>
+   <b>📖 Emancipação (art. 5º, ún.):</b> Casamento; emprego público efetivo; colação de grau em curso superior; estabelecimento civil/comercial com economia própria (16+); concessão dos pais/sentença (16+).<br><br>
+   <b>📌 Norma:</b> arts. 3º, 5º ún. II, 166 I CC | QConcursos Q1852661`},
+
+  {id:'q61', materia:'Dolo', tipo:'multipla',
+   enunciado:`Célio quer vender sala comercial. Com receio de perder a venda, omitiu que o imóvel não tinha instalação elétrica adequada para a atividade que sabia que Clara exerceria ali. Celebrada a compra e venda, Clara descobre a verdade. É possível invalidar com base em:`,
+   alternativas:[{letra:'A',texto:'Erro'},{letra:'B',texto:'Lesão'},{letra:'C',texto:'Simulação'},{letra:'D',texto:'Dolo'},{letra:'E',texto:'Estado de perigo'}],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> O silêncio intencional sobre fato que a outra parte ignorava é <b>omissão dolosa</b> — <b>art. 147 CC</b> (dolo negativo). Provado que sem a omissão o negócio não se faria, há dolo essencial e o ato é anulável (art. 145).<br><br>
+   <b>📖 Erro × Dolo:</b> No erro a falsa noção é espontânea; no dolo, é provocada pela outra parte. Aqui Célio induziu Clara ⇒ dolo, não erro.<br><br>
+   <b>⚠️ Pegadinha:</b> Marcar erro (A). O divisor é quem causou a falsa percepção — houve indução por omissão (art. 147) ⇒ dolo.<br><br>
+   <b>📌 Norma:</b> arts. 145, 147 CC | QConcursos Q1852558`},
+
+  {id:'q62', materia:'Dolo', tipo:'multipla',
+   enunciado:`Pedro, curador de João (joalheiro interditado), agindo dolosamente, vende a Maria um anel de rubilita (pedra sem valor) como se fosse rubi. Sobre a responsabilidade de cada um, assinale a correta.`,
+   alternativas:[
+    {letra:'A',texto:'Pedro e João respondem solidariamente por todos os prejuízos.'},
+    {letra:'B',texto:'João responderá até o proveito que teve, ainda que não tenha conhecimento do dolo do representante legal.'},
+    {letra:'C',texto:'Apenas João responderá, pois o negócio lhe trouxe benefícios.'},
+    {letra:'D',texto:'Apenas Pedro responderá, por ter atuado dolosamente.'}
+   ],
+   correta:'B',
+   comentario:`<b>⚖️ Por quê (B):</b> <b>Art. 149 CC</b> — o dolo do representante <b>LEGAL</b> (curador) só obriga o representado a responder <b>até a importância do proveito que teve</b>. João responde até o proveito; Pedro (autor do dolo) responde pelo restante.<br><br>
+   <b>📖 A distinção do art. 149:</b> Representante <b>legal</b> ⇒ representado responde até o proveito. Representante <b>convencional</b> ⇒ representado responde solidariamente por perdas e danos.<br><br>
+   <b>⚠️ Pegadinha:</b> Trocar legal × convencional (a palavra "solidária" na A) ou cravar "apenas X" — ambos respondem, em medidas diferentes.<br><br>
+   <b>📌 Norma:</b> art. 149 CC | QConcursos Q1852374`},
+
+  {id:'q63', materia:'Invalidade do negócio jurídico', tipo:'multipla',
+   enunciado:`A venda de bem entre ascendente e descendente, por meio de interposta pessoa, é:`,
+   alternativas:[
+    {letra:'A',texto:'Nulo, decadencial 2 anos'},
+    {letra:'B',texto:'Anulável, decadencial 2 anos'},
+    {letra:'C',texto:'Anulável, prescricional 4 anos'},
+    {letra:'D',texto:'Nulo, decadencial 4 anos'}
+   ],
+   correta:'B',
+   comentario:`<b>⚖️ Por quê (B):</b> A venda de ascendente a descendente sem consentimento dos demais descendentes e do cônjuge é <b>anulável</b> (<b>art. 496 CC</b>) — inclusive por interposta pessoa. Sem prazo próprio, aplica-se o <b>decadencial de 2 anos</b> (art. 179 CC).<br><br>
+   <b>⚠️ Por que não nulo/4 anos:</b> O art. 496 fala em anulável (afasta A e D); o prazo é decadencial de 2 anos (art. 179), não prescricional de 4 (art. 178).<br><br>
+   <b>⚠️ Pegadinha:</b> "Interposta pessoa" sugere simulação/nulidade, mas a regra especial do art. 496 prevalece. Confundir 2 anos (art. 179) com 4 anos (art. 178). <b>Súmula 494/STF</b> (CC/16, 20 anos) — superada no CC/02.<br><br>
+   <b>📌 Norma:</b> arts. 496, 179 CC | QConcursos Q1854239`},
+
+  {id:'q64', materia:'Prescrição e decadência', tipo:'multipla',
+   enunciado:`Dois indivíduos envolveram-se em uma situação jurídica, não havendo previsão legal acerca do prazo prescricional. Nessa situação, os fatos decorrentes são:`,
+   alternativas:[{letra:'A',texto:'Imprescritíveis'},{letra:'B',texto:'3 anos'},{letra:'C',texto:'5 anos'},{letra:'D',texto:'10 anos'},{letra:'E',texto:'20 anos'}],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> <b>Art. 205 CC</b> — "A prescrição ocorre em <b>dez anos</b>, quando a lei não lhe haja fixado prazo menor". É a regra geral/residual.<br><br>
+   <b>⚠️ Pegadinha:</b> Marcar 20 anos (regra do CC/16). No CC/02 a regra geral caiu para <b>10 anos</b> (art. 205).<br><br>
+   <b>📌 Norma:</b> art. 205 CC | QConcursos Q3775473`},
+
+  {id:'q65', materia:'Prescrição e decadência', tipo:'multipla',
+   enunciado:`Nas demandas judiciais, a prescrição:`,
+   alternativas:[
+    {letra:'A',texto:'Deve ser alegada até a sentença, sob pena de preclusão'},
+    {letra:'B',texto:'Até a interposição de recurso à 2ª instância'},
+    {letra:'C',texto:'Pode ser alegada em qualquer grau de jurisdição, pela parte a quem aproveita'},
+    {letra:'D',texto:'Na primeira oportunidade, sob pena de preclusão'},
+    {letra:'E',texto:'Antes da instrução, sob pena de preclusão'}
+   ],
+   correta:'C',
+   comentario:`<b>⚖️ Por quê (C):</b> Reproduz o <b>art. 193 CC</b> — "a prescrição pode ser alegada <b>em qualquer grau de jurisdição</b>, pela parte a quem aproveita". Não há preclusão por não alegá-la na 1ª oportunidade.<br><br>
+   <b>⚠️ Pegadinha:</b> Todas as outras inventam limites temporais/preclusão que o art. 193 não estabelece. A prescrição também é conhecível de ofício (art. 487, II, CPC).<br><br>
+   <b>📌 Norma:</b> art. 193 CC | QConcursos Q3775824`},
+
+  {id:'q66', materia:'Prescrição e decadência', tipo:'multipla',
+   enunciado:`Prescrição e decadência são fatos jurídicos por meio dos quais a ordem jurídica confere destaque ao princípio da:`,
+   alternativas:[{letra:'A',texto:'Prevenção'},{letra:'B',texto:'Proporcionalidade'},{letra:'C',texto:'Precaução'},{letra:'D',texto:'Segurança jurídica'},{letra:'E',texto:'Razoabilidade'}],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Prescrição e decadência existem para <b>estabilizar as relações jurídicas</b> e evitar a eternização da incerteza pela inércia do titular — expressão do princípio da <b>segurança jurídica</b>.<br><br>
+   <b>⚠️ Pegadinha:</b> Alternativas "de princípio" genérico (proporcionalidade/razoabilidade) são tentadoras; o fundamento dos prazos é a segurança/estabilidade. Prevenção e precaução são do Direito Ambiental.<br><br>
+   <b>📌 QConcursos Q3775810`},
+
+  {id:'q67', materia:'Prescrição e decadência', tipo:'multipla',
+   enunciado:`Consoante o Código Civil e o entendimento do STJ, o prazo aplicável à ação de ressarcimento fundada em enriquecimento ilícito é:`,
+   alternativas:[
+    {letra:'A',texto:'Prescricional de 3 anos, da prática do ato'},
+    {letra:'B',texto:'10 anos, do conhecimento inequívoco'},
+    {letra:'C',texto:'Prescricional de 3 anos, do conhecimento inequívoco do ato'},
+    {letra:'D',texto:'Decadencial de 3 anos, do conhecimento'},
+    {letra:'E',texto:'10 anos, da prática'}
+   ],
+   correta:'C',
+   comentario:`<b>⚖️ Por quê (C):</b> Prazo <b>prescricional de 3 anos</b> (<b>art. 206, §3º, IV, CC</b> — ressarcimento de enriquecimento sem causa) + termo inicial no <b>conhecimento inequívoco</b> do ato (<i>actio nata</i> subjetiva).<br><br>
+   <b>⚠️ Pegadinha:</b> É 3 anos (fácil), mas o termo inicial é o <b>conhecimento inequívoco</b> (<i>actio nata</i> subjetiva), não "a prática do ato".<br><br>
+   <b>⚖️ STJ:</b> Teoria da <i>actio nata</i> (vertente subjetiva): o prazo flui da ciência inequívoca da lesão.<br><br>
+   <b>📌 Norma:</b> art. 206 §3º IV CC | QConcursos Q3775639`},
+
+  {id:'q68', materia:'Prescrição e decadência', tipo:'multipla',
+   enunciado:`De acordo com a jurisprudência do STJ, as ações que visem à anulação de negócio jurídico celebrado com dolo:`,
+   alternativas:[
+    {letra:'A',texto:'Não convalescem pelo decurso do tempo, por ser nulo'},
+    {letra:'B',texto:'Decadencial de 3 anos, da celebração'},
+    {letra:'C',texto:'Prescricional de 3 anos, da celebração'},
+    {letra:'D',texto:'Decadencial de 4 anos, da celebração'},
+    {letra:'E',texto:'Prescricional de 4 anos, da celebração'}
+   ],
+   correta:'D',
+   comentario:`<b>⚖️ Por quê (D):</b> Dolo é vício de consentimento ⇒ negócio <b>anulável</b> (art. 171, II). Prazo <b>decadencial de 4 anos</b> (<b>art. 178, II, CC</b>), contado do dia em que se realizou o negócio. STJ confirma a natureza decadencial.<br><br>
+   <b>⚠️ Pegadinha dupla:</b> prescricional × decadencial (anulabilidade = decadência) e 3 × 4 anos. Art. 178 = <b>4 anos decadenciais</b>; termo inicial = realização do negócio.<br><br>
+   <b>📌 Norma:</b> arts. 171 II, 178 II CC | QConcursos Q3775635`}
 ];
 
-const app = document.getElementById('app');
-const esc = s => s;
+// ── State ──────────────────────────────────────────────────────────────────
+const defaultState = () => ({
+  respostas: {},
+  revisao: {},
+  caderno: {},
+  revisarDepois: {},
+  posicao: 0,
+  modo: 'todas',
+  materiaFiltro: ''
+});
 
-function render(){
-  app.innerHTML = QS.map(q=>{
-    const items = q.items && q.items.length
-      ? `<div class="items">${q.items.map(it=>`<div class="item">${it}</div>`).join('')}</div>` : '';
-    const prompt = q.prompt ? `<div class="prompt">${q.prompt}</div>` : '';
-    const opts = q.opts.map(([L,txt])=>`
-      <button class="opt" data-q="${q.n}" data-l="${L}">
-        <span class="badge">${L}</span><span class="txt">${txt}</span>
-      </button>`).join('');
-    const secs = q.secs.map(s=>`
-      <div class="sec ${s.c}">
-        <div class="tile">${s.i}</div>
-        <div class="sbody">
-          <div class="sttl">${s.t}</div>
-          <ul class="slist">${s.li.map(x=>`<li>${x}</li>`).join('')}</ul>
-        </div>
-      </div>`).join('');
-    const verif = `
-      <div class="sec cyan">
-        <div class="tile">🔍</div>
-        <div class="sbody">
-          <div class="sttl">VERIFICAÇÃO</div>
-          <div class="verif">
-            <div class="vrow"><span class="vk">QConcursos</span><span class="vlead"></span><span class="vv ok">${q.verif.qc}<span class="vbox">✓</span></span></div>
-            <div class="vrow"><span class="vk">Dizer o Direito</span><span class="vlead"></span><span class="vv">${q.verif.dd}</span></div>
-            <div class="vrow"><span class="vk">Norma</span><span class="vlead"></span><span class="vv ok">${q.verif.norma}${q.verif.norma!=='—'?'<span class="vbox">✓</span>':''}</span></div>
-          </div>
-        </div>
-      </div>`;
-    return `
-    <div class="q" id="q${q.n}">
-      <div class="meta">Q${q.n} · <b>${q.meta}</b> — ${q.tema}</div>
-      <div class="card">
-        <div class="label">QUESTÃO</div>
-        <div class="enun">${q.enun}</div>
-        ${items}${prompt}
-        <div class="opts" id="opts${q.n}">${opts}</div>
-        <div class="verdict" id="vd${q.n}"></div>
-        <button class="togg" data-tg="${q.n}">
-          <span>📋 Gabarito comentado</span><span class="ar">▾</span>
-        </button>
-        <div class="com" id="com${q.n}">
-          <div class="gcard">
-            <div class="ghead">
-              <div class="gcheck">✓</div>
-              <div>
-                <div class="gtitle">GABARITO: <span class="ans">${q.answer}</span> &nbsp;<span class="gpill">✓ oficial confirmado</span></div>
-              </div>
-            </div>
-            <div class="gsrc">QConcursos <b>${q.id}</b></div>
-            <div class="gcmd">(comando: ${q.comando})</div>
-            <div style="margin-top:8px">${secs}${verif}</div>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+let state = defaultState();
 
-  document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',onAnswer));
-  document.querySelectorAll('.togg').forEach(b=>b.addEventListener('click',onToggle));
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) state = Object.assign(defaultState(), JSON.parse(raw));
+  } catch(e) {}
 }
 
-const state = {};
-function onAnswer(e){
-  const b = e.currentTarget;
-  const n = b.dataset.q, L = b.dataset.l;
-  if(state[n]) return;
-  const q = QS.find(x=>x.n==n);
-  state[n] = L;
-  const box = document.getElementById('opts'+n);
-  box.classList.add('answered');
-  box.querySelectorAll('.opt').forEach(o=>{
-    if(o.dataset.l===q.answer) o.classList.add('correct');
-    if(o.dataset.l===L && L!==q.answer) o.classList.add('wrong');
+function saveState() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+// ── Queue ──────────────────────────────────────────────────────────────────
+let queue = [];
+
+function today() { return new Date().toISOString().split('T')[0]; }
+
+function buildQueue() {
+  const t = today();
+  if (state.modo === 'todas') {
+    return [...QUESTOES];
+  } else if (state.modo === 'revisar') {
+    return QUESTOES.filter(x => {
+      const r = state.revisao[x.id];
+      return r && r.nextDate <= t;
+    });
+  } else if (state.modo === 'caderno') {
+    return QUESTOES.filter(x => state.caderno[x.id] || state.revisarDepois[x.id]);
+  } else if (state.modo === 'materia') {
+    const m = state.materiaFiltro;
+    return m ? QUESTOES.filter(x => x.materia === m) : [...QUESTOES];
+  } else if (state.modo === 'aleatorio') {
+    return fisherYates([...QUESTOES]);
+  }
+  return [...QUESTOES];
+}
+
+function fisherYates(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function currentQ() { return queue[state.posicao] || null; }
+
+// ── Spaced repetition ─────────────────────────────────────────────────────
+function addDays(dateStr, days) {
+  const d = new Date(dateStr + 'T12:00:00');
+  d.setDate(d.getDate() + days);
+  return d.toISOString().split('T')[0];
+}
+
+function scheduleQ(id, days) {
+  if (!state.revisao[id]) state.revisao[id] = { nextDate: today(), interval: 1, acertos: 0 };
+  state.revisao[id].nextDate = addDays(today(), days);
+  state.revisao[id].interval = days;
+  saveState();
+  renderCard();
+}
+
+function removeSchedule(id) {
+  delete state.revisao[id];
+  saveState();
+  renderCard();
+}
+
+function autoSchedule(id, correct) {
+  if (!state.revisao[id]) state.revisao[id] = { nextDate: today(), interval: 1, acertos: 0 };
+  const r = state.revisao[id];
+  if (correct) {
+    r.acertos = (r.acertos || 0) + 1;
+    const days = r.acertos === 1 ? 1 : r.acertos === 2 ? 7 : 30;
+    r.nextDate = addDays(today(), days);
+    r.interval = days;
+  } else {
+    r.acertos = 0;
+    r.nextDate = addDays(today(), 1);
+    r.interval = 1;
+  }
+}
+
+function formatDate(d) {
+  const [y, m, day] = d.split('-');
+  return day + '/' + m + '/' + y;
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+function calcStats() {
+  const total = QUESTOES.length;
+  let acertos = 0, erros = 0, revisadasHoje = 0;
+  const t = today();
+  for (const q of QUESTOES) {
+    const r = state.respostas[q.id];
+    if (r) {
+      if (r.letra === q.correta) acertos++;
+      else erros++;
+    }
+    const rev = state.revisao[q.id];
+    if (rev && rev.nextDate <= t) revisadasHoje++;
+  }
+  const pendentes = total - acertos - erros;
+  const pct = Math.round(((acertos + erros) / total) * 100);
+  return { total, acertos, erros, pendentes, revisadasHoje, pct };
+}
+
+// ── Timers ─────────────────────────────────────────────────────────────────
+let sessionSecs = 0;
+let questionSecs = 0;
+let paused = false;
+let timerInterval = null;
+
+function startTimers() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(function() {
+    if (!paused) {
+      sessionSecs++;
+      questionSecs++;
+      updateTimerDisplay();
+    }
+  }, 1000);
+}
+
+function resetQuestionTimer() { questionSecs = 0; }
+
+function fmt(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('timerDisplay');
+  if (el) el.textContent = '⏱ ' + fmt(questionSecs) + '  |  Sessão: ' + fmt(sessionSecs);
+}
+
+function togglePause() {
+  paused = !paused;
+  const btn = document.getElementById('btnPausar');
+  if (btn) btn.textContent = paused ? 'Retomar' : 'Pausar';
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function renderPlacar() {
+  const s = calcStats();
+  document.getElementById('placar').innerHTML =
+    '<div class="chip verde">' + s.acertos + '<span>Acertos</span></div>' +
+    '<div class="chip vermelho">' + s.erros + '<span>Erros</span></div>' +
+    '<div class="chip cinza">' + s.pendentes + '<span>Pendentes</span></div>' +
+    '<div class="chip roxo">' + s.revisadasHoje + '<span>Revisadas hoje</span></div>';
+  document.getElementById('progFill').style.width = s.pct + '%';
+}
+
+function renderModos() {
+  document.querySelectorAll('.modoBtn').forEach(function(btn) {
+    btn.classList.toggle('ativo', btn.dataset.modo === state.modo);
   });
-  const vd = document.getElementById('vd'+n);
-  if(L===q.answer){ vd.className='verdict ok show'; vd.textContent='✓ Você acertou!'; }
-  else { vd.className='verdict no show'; vd.innerHTML='✗ Você errou — gabarito oficial: <b>'+q.answer+'</b>'; }
-  updatePlacar();
+  const sel = document.getElementById('materiaSelect');
+  sel.style.display = state.modo === 'materia' ? '' : 'none';
 }
-function onToggle(e){
-  const n = e.currentTarget.dataset.tg;
-  document.getElementById('com'+n).classList.toggle('open');
-  e.currentTarget.classList.toggle('open');
+
+function renderCard() {
+  const card = document.getElementById('qcard');
+  const q = currentQ();
+  if (!q) {
+    card.innerHTML = '<div class="vazio">Nenhuma questão neste modo. Tente outro filtro.</div>';
+    document.getElementById('navCount').textContent = '0 / 0';
+    document.getElementById('btnAnterior').disabled = true;
+    document.getElementById('btnProxima').disabled = true;
+    return;
+  }
+
+  const idx = state.posicao;
+  const total = queue.length;
+  document.getElementById('navCount').textContent = (idx + 1) + ' / ' + total;
+  document.getElementById('btnAnterior').disabled = idx === 0;
+  document.getElementById('btnProxima').disabled = idx === total - 1;
+
+  const resp = state.respostas[q.id];
+  const answered = !!resp;
+  const correct = answered && resp.letra === q.correta;
+  const rev = state.revisao[q.id];
+  const t = today();
+  const starred = !!state.revisarDepois[q.id];
+
+  let schedHtml = '';
+  if (rev) {
+    const overdue = rev.nextDate <= t;
+    const cls = overdue ? 'hoje' : 'futuro';
+    const label = overdue ? 'revisar hoje ⏰' : 'próx. revisão: ' + formatDate(rev.nextDate);
+    schedHtml = '<p class="agendInfo ' + cls + '">📅 ' + label + '</p>';
+  } else {
+    schedHtml = '<p class="agendInfo">Sem agendamento.</p>';
+  }
+
+  let optsHtml = '';
+  q.alternativas.forEach(function(alt) {
+    let cls = '';
+    if (answered) {
+      if (alt.letra === q.correta) cls = ' correta';
+      else if (resp.letra === alt.letra && alt.letra !== q.correta) cls = ' errada';
+    }
+    const checked = (answered && resp.letra === alt.letra) ? ' checked' : '';
+    const disabled = answered ? ' disabled' : '';
+    optsHtml += '<label class="opt' + cls + '" id="opt_' + alt.letra + '">' +
+      '<input type="radio" name="resp_' + q.id + '" value="' + alt.letra + '"' + checked + disabled + '>' +
+      '<span><b>' + alt.letra + ')</b> ' + alt.texto + '</span>' +
+      '</label>';
+  });
+
+  let resultadoHtml = '';
+  if (answered) {
+    const cls2 = correct ? 'certo' : 'errado';
+    const msg = correct ? '✓ Correto!' : '✗ Errado! Você marcou: ' + resp.letra;
+    resultadoHtml = '<div class="resultado ' + cls2 + '" style="display:block">' + msg + '</div>' +
+      '<div class="gabarito" style="display:block">Gabarito: <b>' + q.correta + '</b></div>' +
+      '<details class="coment" style="display:block"><summary>Ver explicação</summary>' +
+      '<div class="comentBody">' + q.comentario + '</div></details>' +
+      '<div class="agendamento" style="display:block">' + schedHtml +
+      '<div class="agendBtns">' +
+      '<button onclick="scheduleQ(\'' + q.id + '\',1)">1 dia</button>' +
+      '<button onclick="scheduleQ(\'' + q.id + '\',7)">7 dias</button>' +
+      '<button onclick="scheduleQ(\'' + q.id + '\',30)">30 dias</button>' +
+      '<button class="remover" onclick="removeSchedule(\'' + q.id + '\')">remover</button>' +
+      '</div></div>' +
+      '<button class="starBtn' + (starred ? ' ativo' : '') + '" style="display:block" onclick="toggleStar(\'' + q.id + '\')">' +
+      (starred ? '⭐ No caderno' : '☆ Revisar depois') + '</button>';
+  } else {
+    resultadoHtml = '<button id="btnConfirmar" onclick="confirmar()" disabled>Confirmar</button>' +
+      '<button class="starBtn' + (starred ? ' ativo' : '') + '" style="display:block;margin-top:10px" onclick="toggleStar(\'' + q.id + '\')">' +
+      (starred ? '⭐ No caderno' : '☆ Revisar depois') + '</button>';
+  }
+
+  card.innerHTML =
+    '<div class="qnum">' +
+    '<span>Q' + (idx + 1) + ' de ' + total + ' — ID: ' + q.id.toUpperCase() + '</span>' +
+    '<span class="materia-tag">' + q.materia + '</span>' +
+    '</div>' +
+    '<div class="qenunc">' + q.enunciado + '</div>' +
+    '<div class="opts" id="opts">' + optsHtml + '</div>' +
+    resultadoHtml;
+
+  if (!answered) {
+    card.querySelectorAll('input[type=radio]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        document.getElementById('btnConfirmar').disabled = false;
+        card.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('selecionada'); });
+        r.closest('.opt').classList.add('selecionada');
+      });
+    });
+  }
 }
-function updatePlacar(){
-  let ac=0,er=0;
-  QS.forEach(q=>{ if(state[q.n]){ state[q.n]===q.answer?ac++:er++; }});
-  document.getElementById('pAc').textContent=ac;
-  document.getElementById('pEr').textContent=er;
-  document.getElementById('pPe').textContent=QS.length-ac-er;
+
+function confirmar() {
+  const q = currentQ();
+  if (!q) return;
+  const sel = document.querySelector('input[name="resp_' + q.id + '"]:checked');
+  if (!sel) return;
+  const letra = sel.value;
+  const correct = letra === q.correta;
+
+  state.respostas[q.id] = { letra: letra, data: today() };
+  autoSchedule(q.id, correct);
+
+  if (!correct) {
+    state.caderno[q.id] = true;
+  }
+
+  saveState();
+  renderPlacar();
+  renderCard();
 }
-function resetAll(){
-  for(const k in state) delete state[k];
-  render(); updatePlacar();
-  window.scrollTo({top:0,behavior:'smooth'});
+
+function navegar(dir) {
+  const newPos = state.posicao + dir;
+  if (newPos < 0 || newPos >= queue.length) return;
+  state.posicao = newPos;
+  saveState();
+  resetQuestionTimer();
+  renderCard();
 }
-render();
+
+function toggleStar(id) {
+  if (state.revisarDepois[id]) {
+    delete state.revisarDepois[id];
+  } else {
+    state.revisarDepois[id] = true;
+  }
+  saveState();
+  renderCard();
+}
+
+function setModo(modo) {
+  state.modo = modo;
+  state.posicao = 0;
+  saveState();
+  rebuild();
+}
+
+function rebuild() {
+  queue = buildQueue();
+  if (state.posicao >= queue.length) state.posicao = 0;
+  renderModos();
+  renderPlacar();
+  renderCard();
+}
+
+// ── Init materia select ────────────────────────────────────────────────────
+function initMateriaSelect() {
+  const sel = document.getElementById('materiaSelect');
+  const materias = [];
+  QUESTOES.forEach(function(q) {
+    if (materias.indexOf(q.materia) === -1) materias.push(q.materia);
+  });
+  let opts = '<option value="">— todas as matérias —</option>';
+  materias.forEach(function(m) {
+    opts += '<option value="' + m + '"' + (state.materiaFiltro === m ? ' selected' : '') + '>' + m + '</option>';
+  });
+  sel.innerHTML = opts;
+  sel.addEventListener('change', function() {
+    state.materiaFiltro = sel.value;
+    state.posicao = 0;
+    saveState();
+    rebuild();
+  });
+}
+
+// ── Mode buttons ────────────────────────────────────────────────────────────
+document.getElementById('modos').addEventListener('click', function(e) {
+  const btn = e.target.closest('.modoBtn');
+  if (!btn) return;
+  setModo(btn.dataset.modo);
+});
+
+// ── Recomeçar ───────────────────────────────────────────────────────────────
+function recomecar() {
+  if (!confirm('Tem certeza? Todo o progresso, agendamentos e caderno de erros serão apagados.')) return;
+  localStorage.removeItem(STORE_KEY);
+  location.reload();
+}
+
+// ── Export ──────────────────────────────────────────────────────────────────
+function exportarProgresso() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'progresso_q54_q68_' + today() + '.json';
+  a.click();
+  setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+}
+
+// ── Import ──────────────────────────────────────────────────────────────────
+function importarProgresso(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      state = Object.assign(defaultState(), imported);
+      saveState();
+      rebuild();
+      alert('Progresso importado com sucesso!');
+    } catch(err) {
+      alert('Arquivo inválido. Verifique se é um JSON de progresso exportado daqui.');
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+// ── iFrame banner ────────────────────────────────────────────────────────────
+function dismissIframe() {
+  const el = document.getElementById('iframeBanner');
+  if (el) el.style.display = 'none';
+  sessionStorage.setItem('iframeDismissed', '1');
+}
+
+function checkIframeBanner() {
+  if (sessionStorage.getItem('iframeDismissed') === '1') {
+    const el = document.getElementById('iframeBanner');
+    if (el) el.style.display = 'none';
+  }
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+loadState();
+checkIframeBanner();
+initMateriaSelect();
+queue = buildQueue();
+if (state.posicao >= queue.length) state.posicao = 0;
+renderModos();
+renderPlacar();
+renderCard();
+startTimers();
 </script>
 </body>
 </html>
