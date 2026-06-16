@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Civil — Pagamento Indireto (págs. 397–441)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s;margin-top:6px}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.lei-body.open{display:block}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+.recall-item.open .recall-q .chev{transform:rotate(90deg)}
+.recall-a{display:none;padding:0 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.recall-item.open .recall-a{display:block;padding-top:11px}
+.notas-wrap{margin-top:16px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:62px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.dom-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.dom-btn.active{border-color:#27c06a;color:#27c06a;background:#0a2018}
+.dom-btn:hover{border-color:#27c06a;color:#27c06a}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.tech-grid{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.tech{background:#0b0f1f;border:1px solid #261a3e;border-radius:10px;padding:12px 14px}
+.tech h4{font-size:14px;color:#c59bf2;margin-bottom:4px}
+.tech p{font-size:13px;line-height:1.55;color:#bcc8e0}
+.tech .how{color:#8fa6c4;font-size:12.5px;margin-top:4px;display:block}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso (anotações, revisões e temas dominados) é salvo automaticamente neste aparelho.</div>
+<div class="header">
+  <h1>📘 Caderno de Revisão · Direito Civil</h1>
+  <div class="sub">Modalidades de <b>Pagamento Indireto das Obrigações</b> · e-Book de Civil, <b>págs. 397–441</b> · arts. 334–388 do CC/02</div>
+  <div class="timer-bar">
+    <span>⏱ Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Tudo</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="conteudo" onclick="setModo('conteudo')">Só institutos</button>
+    <button class="mode-btn" data-modo="tema" onclick="setModo('tema')">Por tema</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setTemaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Caderno de Revisão · Civil — Pagamento Indireto · págs. 397–441 · CC/02, arts. 334–388</footer>
+<script>
+const STORE_KEY = 'caderno_civil_pgind_397_441_v1';
+const CARDS = [
+  {id:'tec', tipo:'tecnica', tema:'Como estudar', pag:'Método',
+   titulo:'🚀 Técnicas de Memorização e de Alta Performance',
+   html:`<p>Antes do conteúdo, fixe o <b>método</b>. Estes cards foram montados para serem usados com as 6 técnicas abaixo — elas valem mais que reler o e-Book dez vezes.</p>`,
+   tech:[
+     {h:'1 · Active Recall (recordação ativa)',p:'Tente RESPONDER antes de ver a resposta. Cada instituto traz um bloco 🎯 com perguntas ocultas — pense, fale em voz alta, só depois clique para conferir.',how:'Aqui: clique nas perguntas verdes do bloco Active Recall. Errou? Marque para revisar amanhã.'},
+     {h:'2 · Revisão Espaçada (curva de Ebbinghaus)',p:'Revise no momento em que está prestes a esquecer: 24h → 7 dias → 30 dias. Cada repetição no limite do esquecimento grava a memória de longo prazo.',how:'Aqui: use os botões 1 / 7 / 30 dias de cada card e o filtro "Revisar hoje".'},
+     {h:'3 · Mnemônicos e Acrônimos',p:'Listas (requisitos, hipóteses, ordem legal) viram siglas e frases. O cérebro guarda "RLVF" muito melhor que quatro adjetivos soltos.',how:'Aqui: cada instituto tem uma caixa amarela 🧠 com o mnemônico-chave pronto.'},
+     {h:'4 · Interleaving (intercalar temas)',p:'Não estude um instituto até a exaustão. Alterne consignação → novação → compensação. A confusão controlada força o cérebro a discriminar e fixa melhor.',how:'Aqui: use o modo "Por tema" para pular entre institutos parecidos (sub-rogação × cessão × novação).'},
+     {h:'5 · Técnica Feynman (explicar como a uma criança)',p:'Se você não consegue explicar "remissão" em uma frase simples, não entendeu. Reescreva com suas palavras no campo de anotações.',how:'Aqui: use o campo 📝 de cada card para explicar o instituto do seu jeito; depois baixe tudo em .txt.'},
+     {h:'6 · Questões > releitura',p:'Resolver e errar gera aprendizado; reler gera ilusão de saber. Priorize provas anteriores (FGV, CEBRASPE, VUNESP, IESES) sobre o grifo do PDF.',how:'Aqui: trate cada bloco Active Recall como uma microprova e cruze com o seu banco de questões.'}
+   ]},
+
+  {id:'mapa', tipo:'mapa', tema:'Mapa', pag:'397–441',
+   titulo:'🗺️ Faixa de Páginas × Assuntos',
+   html:`<p>Visão de helicóptero do bloco. A teoria do adimplemento divide o pagamento indireto em <b>satisfativo</b> (entrega de coisa) e <b>não satisfativo</b> (sem entrega).</p>`,
+   mem:`<b>Os 8 institutos em 2 grupos:</b><br>• <span class="mnemo">SATISFATIVO = C S I D</span> Consignação · Sub-rogação · Imputação · Dação <i>(entregam algo)</i><br>• <span class="mnemo">NÃO SATISFATIVO = N C C R</span> Novação · Compensação · Confusão · Remissão <i>(extinguem sem entrega)</i>`,
+   rows:[
+     ['397','Visão geral — pagamento direto × indireto; satisfativo × não satisfativo'],
+     ['397–406','Consignação em pagamento (arts. 334–345 CC + 539–549 CPC)'],
+     ['406–411','Pagamento com sub-rogação (arts. 346–351)'],
+     ['411–416','Imputação ao pagamento (arts. 352–355)'],
+     ['416–423','Dação em pagamento / datio in solutum (arts. 356–359)'],
+     ['423–432','Novação (arts. 360–367) + reflexos registrais (AFG)'],
+     ['432–436','Compensação (arts. 368–380)'],
+     ['436–437','Confusão (arts. 381–384)'],
+     ['437–441','Remissão (arts. 385–388)'],
+     ['441','Ponte: inadimplemento + Lei 14.905/2024 (juros de mora)']
+   ]},
+
+  {id:'consig', tipo:'conteudo', tema:'Consignação', pag:'397–406',
+   titulo:'1 · Consignação em Pagamento',
+   sintese:`<p><b>Conceito:</b> modalidade <b>indireta e satisfativa</b> de adimplemento. É o <b>depósito da coisa devida</b> (judicial ou em estabelecimento bancário) para liberar o devedor quando há obstáculo ao pagamento direto. CC/02 (arts. 334–345, direito material) + CPC/15 (arts. 539–549, processo).</p>
+   <p><b>Natureza jurídica:</b> <b>mista / híbrida</b> — instituto de direito material e processual ao mesmo tempo (Chaves/Rosenvald; Tepedino; Caio Mário). <span class="art">(pergunta TJSP/2018)</span></p>
+   <p><b>Objeto:</b> coisas em geral — bens <b>móveis e imóveis</b>, não só dinheiro (obrigação de dar). Obrigação de fazer só se materializável em coisa (ex.: pintar quadro); de <b>não fazer, nunca</b>.</p>
+   <p><b>Efeitos:</b> o depósito <b>não tem efeito liberatório imediato</b> — a liberação só ocorre quando o credor levanta o objeto OU a ação consignatória é julgada procedente. Depósito a menor (sem custas/juros/correção) é ineficaz.</p>
+   <p><b>Extrajudicial (art. 539 CPC):</b> só para <b>dinheiro</b> (corrente majoritária). Deposita em banco oficial, cientifica o credor por carta com AR, prazo de <b>10 dias</b> para recusa. Sem recusa → liberado. Com recusa → ação em <b>30 dias (1 mês)</b>.</p>`,
+   lei:`<p><span class="art-num">Art. 334.</span> Considera-se pagamento, e extingue a obrigação, o depósito judicial ou em estabelecimento bancário da coisa devida.</p>
+   <p><span class="art-num">Art. 335 (hipóteses):</span> I — credor não pode/recusa sem justa causa (mora accipiendi); II — credor não vai nem manda receber (obrigação quesível); III — credor incapaz, desconhecido, ausente, lugar incerto/perigoso; IV — dúvida sobre quem deve receber (dúvida subjetiva ativa); <b>V — litígio sobre o OBJETO</b> (única causa OBJETIVA).</p>
+   <p><span class="art-num">Art. 337.</span> Depósito no lugar do pagamento cessa juros e riscos. <span class="art-num">Art. 345:</span> única hipótese em que o <b>credor</b> pode tomar a iniciativa (litígio entre credores que se excluem).</p>`,
+   mem:`<b>Hipóteses do art. 335 (I a V):</b> os incisos <span class="mnemo">I a IV são SUBJETIVOS</span> (ligados ao credor). <span class="mnemo">Só o V é OBJETIVO</span> = <b>litígio sobre o Objeto</b> (V de "Verdadeiramente objetiva"). <br>Lembre: depósito <b>≠ pagamento imediato</b> → só libera quando levantado ou julgado procedente.`,
+   recall:[
+     {p:'Qual a natureza jurídica da consignação em pagamento?',r:'Mista / híbrida — direito material (CC/02) + processual (CPC/15). Resposta clássica TJSP.'},
+     {p:'Das hipóteses do art. 335, qual é a única causa objetiva?',r:'O inciso V — pendência de litígio sobre o OBJETO do pagamento. As demais (I–IV) são subjetivas, ligadas ao credor.'},
+     {p:'O depósito tem efeito liberatório imediato?',r:'Não. A obrigação só se extingue quando o credor levanta o objeto ou a ação consignatória é julgada procedente.'},
+     {p:'A consignação extrajudicial cabe para qualquer coisa?',r:'Não. Pela posição majoritária (art. 539 CPC), só para dinheiro: depósito em banco oficial, AR, 10 dias p/ recusa; se houver recusa, ação em 30 dias.'}
+   ]},
+
+  {id:'subrog', tipo:'conteudo', tema:'Sub-rogação', pag:'406–411',
+   titulo:'2 · Pagamento com Sub-rogação',
+   sintese:`<p><b>Conceito:</b> pagamento indireto <b>satisfativo</b> (arts. 346–351). O CC trata só da <b>sub-rogação pessoal ativa</b>: o terceiro que paga é promovido a credor. A obrigação extingue-se para o credor primitivo; o devedor primitivo passa a dever ao terceiro adimplente.</p>
+   <p><b>Distinções:</b> ≠ <b>novação</b> (na sub-rogação o vínculo subsiste; na novação extingue-se e nasce novo); ≠ <b>cessão de crédito</b> (cessão = transmissão; sub-rogação = extinção/pagamento — por isso fica no capítulo da extinção).</p>
+   <p><b>Espécies:</b> <b>legal</b> (art. 346 — opera de pleno direito, independe de vontade) e <b>convencional</b> (art. 347 — negócio jurídico). A convencional do art. 347, I segue as regras da cessão de crédito (art. 348).</p>
+   <p><b>Efeito (art. 349):</b> translativo amplo — transfere ao novo credor <b>todos os direitos, ações, privilégios e garantias</b> contra devedor e fiadores. Na legal, o sub-rogado só cobra <b>até o que desembolsou</b> (art. 350).</p>
+   <p><b>Parcial (art. 351):</b> se o pagamento não foi integral, o <b>credor originário tem preferência</b> sobre o sub-rogado se os bens do devedor não bastarem para os dois.</p>`,
+   lei:`<p><span class="art-num">Art. 346 (legal, de pleno direito):</span> I — credor que paga dívida do devedor comum; II — adquirente de imóvel hipotecado que paga o credor hipotecário (e terceiro que paga p/ não perder direito sobre imóvel); III — terceiro interessado que paga dívida pela qual era/podia ser obrigado.</p>
+   <p><span class="art-num">Art. 347 (convencional):</span> I — credor recebe de terceiro e lhe transfere expressamente os direitos (rege-se pela cessão — art. 348); II — terceiro empresta ao devedor a quantia sob condição de sub-rogar-se.</p>
+   <p><span class="art-num">Art. 349:</span> transfere direitos, ações, privilégios e garantias. <span class="art-num">Art. 351:</span> preferência do credor originário na sub-rogação parcial.</p>`,
+   mem:`<span class="mnemo">LEGAL = de pleno direito</span> (3 incisos do art. 346, lembre "CAT": <b>C</b>redor paga dívida do devedor comum · <b>A</b>dquirente do imóvel hipotecado · <b>T</b>erceiro interessado).<br><span class="mnemo">Sub-rogação ≠ Novação ≠ Cessão</span>: sub-rogação <b>mantém</b> o vínculo (paga e vira credor); novação <b>extingue e cria novo</b>; cessão <b>transmite</b> o crédito.`,
+   recall:[
+     {p:'O CC trata de qual sub-rogação: real ou pessoal?',r:'Pessoal ativa. A sub-rogação real (substituição de coisa por coisa) não integra o direito das obrigações.'},
+     {p:'Cite as 3 hipóteses de sub-rogação legal (art. 346).',r:'I) credor que paga dívida do devedor comum; II) adquirente do imóvel hipotecado que paga o credor hipotecário; III) terceiro interessado que paga.'},
+     {p:'O que distingue sub-rogação de novação?',r:'Na sub-rogação o vínculo subsiste (muda só o credor, terceiro adimplente). Na novação o vínculo se extingue e nasce uma obrigação nova.'},
+     {p:'Na sub-rogação PARCIAL, quem tem preferência?',r:'O credor originário (art. 351), se os bens do devedor não bastarem para pagar ele e o sub-rogado.'}
+   ]},
+
+  {id:'imput', tipo:'conteudo', tema:'Imputação', pag:'411–416',
+   titulo:'3 · Imputação ao Pagamento',
+   sintese:`<p><b>Conceito:</b> imputar = indicar/apontar (arts. 352–355). Quem tem <b>dois ou mais débitos da mesma natureza</b> ao mesmo credor, todos <b>líquidos e vencidos</b>, indica qual está pagando quando o valor não cobre tudo.</p>
+   <p><b>Natureza:</b> direito <b>potestativo</b> (favor debitoris) — o credor fica em estado de sujeição. <b>Não há imputação parcial</b> (princípio da identidade física da prestação): pagar R$500 de uma dívida de R$1.000 é só pagamento direto da menor, não imputação.</p>
+   <p><b>Escolha:</b> 1º o <b>devedor</b>; se calar, o <b>credor</b> (na quitação); se ambos omissos → <b>imputação legal</b> (subsidiária).</p>
+   <p><b>Imputação legal:</b> art. 354 — primeiro nos <b>juros</b>, depois no capital. Art. 355 — na dívida mais <b>antiga</b>; se vencidas juntas, na mais <b>onerosa</b> (princípio da maior onerosidade). Em tributos, regra própria do art. 163 do CTN.</p>`,
+   lei:`<p><span class="art-num">Art. 352.</span> Quem deve dois ou mais débitos da mesma natureza, líquidos e vencidos, indica a qual oferece pagamento.</p>
+   <p><span class="art-num">Art. 354.</span> Havendo capital e juros, imputa-se primeiro nos <b>juros vencidos</b>, depois no capital — salvo estipulação ou quitação por conta do capital. <span class="art">(STJ Tema 426 — aplica-se ao SFH)</span></p>
+   <p><span class="art-num">Art. 355.</span> Omissos devedor e quitação → imputa-se na <b>mais antiga</b>; se vencidas ao mesmo tempo → na <b>mais onerosa</b>.</p>`,
+   mem:`<b>Ordem da imputação LEGAL:</b> <span class="mnemo">JU-CA / AN-ON</span> → <b>JU</b>ros antes do <b>CA</b>pital (art. 354); mais <b>AN</b>tiga, senão mais <b>ON</b>erosa (art. 355).<br>Requisitos para imputar: <span class="mnemo">P-LV</span> = <b>P</b>luralidade de débitos · mesma natureza · <b>L</b>íquidos · <b>V</b>encidos. E lembre: <b>não existe imputação parcial</b>.`,
+   recall:[
+     {p:'Quem escolhe a dívida na imputação? E qual a ordem subsidiária?',r:'1º o devedor (direito potestativo); se calar, o credor; se ambos omissos, imputação legal. O devedor NÃO é obrigado a quitar a mais antiga, salvo previsão contratual.'},
+     {p:'Havendo capital e juros, em que se imputa primeiro?',r:'Nos juros vencidos, depois no capital (art. 354), salvo estipulação ou quitação dada por conta do capital.'},
+     {p:'É possível imputação parcial?',r:'Não — princípio da identidade física da prestação. Pagar valor inferior a uma dívida é apenas pagamento direto da dívida menor.'},
+     {p:'Na imputação legal, se as dívidas venceram juntas?',r:'Imputa-se na mais onerosa (art. 355) — princípio da maior onerosidade.'}
+   ]},
+
+  {id:'dacao', tipo:'conteudo', tema:'Dação', pag:'416–423',
+   titulo:'4 · Dação em Pagamento (datio in solutum)',
+   sintese:`<p><b>Conceito:</b> o credor consente em receber <b>prestação diversa</b> da devida (arts. 356–359). Negócio jurídico <b>bilateral, real e translativo</b> de propriedade; extingue a obrigação originária.</p>
+   <p><b>Requisitos:</b> (1) dívida/vínculo preexistente; (2) <b>consentimento do credor</b>; (3) <b>diversidade</b> entre a prestação pactuada e a oferecida. O devedor <b>não tem direito potestativo</b> de impor a substituição.</p>
+   <p><b>Regimes:</b> art. 357 — fixado o preço, aplicam-se as regras da <b>compra e venda</b> (imóvel > 30 SM exige escritura pública). Art. 358 — se a coisa dada for <b>título de crédito</b>, a transferência importa <b>cessão</b>.</p>
+   <p><b>Pro soluto × pro solvendo:</b> <b>pro soluto</b> = extingue na entrega (devedor responde só pela existência do crédito) → é dação. <b>Pro solvendo</b> (datio pro solvendo) = só garante; extinção condicionada ao êxito da cobrança → <b>não</b> é dação, é dação em cumprimento.</p>
+   <p><b>Evicção (art. 359):</b> credor evicto → <b>restabelece a obrigação primitiva</b> (efeito repristinatório de Marciano), ficando sem efeito a quitação, ressalvados direitos de terceiros. A <b>fiança não ressurge</b> (art. 837, III). Promessa de dação <b>não extingue</b> a dívida (falta transferência).</p>`,
+   lei:`<p><span class="art-num">Art. 356.</span> O credor pode consentir em receber prestação diversa da que lhe é devida.</p>
+   <p><span class="art-num">Art. 357.</span> Determinado o preço, regem as normas da compra e venda. <span class="art-num">Art. 358.</span> Se for título de crédito, a transferência importa cessão.</p>
+   <p><span class="art-num">Art. 359.</span> Evicto o credor da coisa recebida, restabelece-se a obrigação primitiva, sem efeito a quitação, ressalvados direitos de terceiros. <span class="art">(CTN art. 156, XI — dação de imóvel extingue crédito tributário)</span></p>`,
+   mem:`<b>Requisitos:</b> <span class="mnemo">D-C-D</span> = <b>D</b>ívida prévia · <b>C</b>onsentimento do credor · <b>D</b>iversidade da prestação.<br><b>Evicção:</b> "perdeu a coisa dada → <b>volta a dívida velha</b>" (art. 359, repristinação de Marciano), <b>mas o fiador NÃO volta</b> (art. 837, III).<br>Macete: <span class="mnemo">pro soLUTO = quiTOU</span> (extingue) · <span class="mnemo">pro solVENDO = ainda VAI vender/cobrar</span> (só garante).`,
+   recall:[
+     {p:'Quais os 3 requisitos da dação em pagamento?',r:'Dívida preexistente, consentimento do credor e diversidade entre a prestação devida e a oferecida.'},
+     {p:'Qual o efeito da evicção da coisa dada em pagamento?',r:'Restabelece-se a obrigação primitiva (art. 359), sem efeito a quitação — exceto a fiança, que não ressurge (art. 837, III).'},
+     {p:'Diferencie dação pro soluto de pro solvendo.',r:'Pro soluto: extingue a dívida na entrega (é dação). Pro solvendo: só garante; a extinção depende do êxito da cobrança — não é dação, é "dação em cumprimento".'},
+     {p:'A promessa de dação em pagamento extingue a dívida?',r:'Não (STJ). Falta a transferência efetiva do bem; é apenas ato de vontade de entregar depois — aproxima-se de novação, não ingressa no registro.'}
+   ]},
+
+  {id:'novacao', tipo:'conteudo', tema:'Novação', pag:'423–432',
+   titulo:'5 · Novação',
+   sintese:`<p><b>Conceito:</b> pagamento indireto <b>não satisfativo</b> (arts. 360–367). Substitui-se a obrigação primitiva por uma <b>nova, substancialmente diversa</b> (aliquid novi). Tem efeito <b>extintivo</b> (da antiga) e <b>constitutivo</b> (da nova). "Nova-ação".</p>
+   <p><b>Natureza:</b> negócio jurídico bilateral; exige <b>animus novandi</b> expresso ou tácito <b>inequívoco</b> (art. 361). Não há novação legal no CC. Mera alteração acessória (prazo, valor, juros) ou emissão de cheque <b>não</b> nova.</p>
+   <p><b>Espécies (art. 360):</b> I — <b>objetiva</b> (nova dívida substitui a antiga); II — <b>subjetiva passiva</b> (novo devedor): por <b>delegação</b> (com o devedor) ou <b>expromissão</b> (sem ele, art. 362); III — <b>subjetiva ativa</b> (novo credor).</p>
+   <p><b>Efeitos:</b> art. 364 — extingue acessórios e garantias, salvo estipulação. Art. 365 — entre solidários, só responde quem novou; os demais ficam exonerados. Art. 366 — novação <b>exonera o fiador</b> sem seu consenso. Art. 367 — obrigações nulas/extintas não se novam (anuláveis sim).</p>`,
+   lei:`<p><span class="art-num">Art. 360.</span> Dá-se a novação: I — nova dívida do devedor com o credor (objetiva); II — novo devedor sucede o antigo (subjetiva passiva); III — novo credor substitui o antigo (subjetiva ativa).</p>
+   <p><span class="art-num">Art. 361.</span> Sem ânimo de novar (expresso ou tácito inequívoco), a 2ª obrigação só confirma a 1ª. <span class="art-num">Art. 364.</span> Extingue acessórios e garantias, salvo estipulação. <span class="art-num">Art. 366.</span> Exonera o fiador.</p>
+   <p><span class="art">Súmula 581/STJ:</span> a novação da Lei de Falência (art. 59, Lei 11.101/05), por ser condicionada e não afetar garantias, não se equipara à novação civil (sui generis).</p>`,
+   mem:`<b>Espécies (art. 360):</b> <span class="mnemo">O-P-A</span> = <b>O</b>bjetiva (muda o objeto) · subjetiva <b>P</b>assiva (muda o devedor) · subjetiva <b>A</b>tiva (muda o credor).<br>Passiva: <span class="mnemo">delegaÇÃO = com o devedOR</span> · <span class="mnemo">eXpromissão = seX, sem o devedor</span> (terceiro entra sozinho).<br>Ouro de prova: <b>renegociar prazo/juros e emitir cheque NÃO é novação</b> — falta o aliquid novi e o animus novandi.`,
+   recall:[
+     {p:'O que é o "aliquid novi" e o "animus novandi"?',r:'Aliquid novi = elemento novo essencial (a nova obrigação deve ser substancialmente diversa). Animus novandi = intenção de novar, expressa ou tácita inequívoca (art. 361).'},
+     {p:'Quais as 3 espécies de novação?',r:'Objetiva (muda o objeto/dívida), subjetiva passiva (novo devedor — delegação ou expromissão) e subjetiva ativa (novo credor).'},
+     {p:'Renegociação de dívida (prazo, juros, garantia) gera novação?',r:'Em regra, não (STJ). Alteração de elementos acessórios apenas confirma a obrigação. Sem aporte de novos valores e sem animus novandi, não há novação — relevante no registro de AFG.'},
+     {p:'O que diz a Súmula 581 do STJ?',r:'A novação da Lei de Falência (recuperação judicial), por ser condicionada e não afetar garantias, não se equipara à novação civil — é sui generis.'}
+   ]},
+
+  {id:'compens', tipo:'conteudo', tema:'Compensação', pag:'432–436',
+   titulo:'6 · Compensação',
+   sintese:`<p><b>Conceito:</b> pagamento indireto <b>não satisfativo</b> (arts. 368–380). Duas pessoas são, ao mesmo tempo, <b>credor e devedor uma da outra</b>; as obrigações extinguem-se até onde se compensarem.</p>
+   <p><b>Requisitos (compensação legal):</b> dívidas <b>recíprocas, líquidas, vencidas e fungíveis</b> entre si. Se condicionais ou a termo, não há compensação legal. Prazos de favor não obstam (art. 372).</p>
+   <p><b>Espécies:</b> <b>legal</b> (de pleno direito, juiz só reconhece), <b>convencional</b> (vontade das partes, dispensa requisitos legais) e <b>judicial</b>.</p>
+   <p><b>Exceções (art. 373):</b> não cabe se a dívida provém de <b>esbulho, furto ou roubo</b>; de <b>comodato, depósito ou alimentos</b>; ou de <b>coisa impenhorável</b>. Art. 380: vedada em prejuízo de terceiro. <b>Jurisprudência:</b> a prescrição só obsta a compensação se for anterior à coexistência das dívidas (Info 726).</p>`,
+   lei:`<p><span class="art-num">Art. 368.</span> Sendo duas pessoas ao mesmo tempo credor e devedor uma da outra, as obrigações extinguem-se até onde se compensarem.</p>
+   <p><span class="art-num">Art. 369.</span> Compensam-se dívidas líquidas, vencidas e de coisas fungíveis. <span class="art-num">Art. 373:</span> diferença de causa não impede, salvo I esbulho/furto/roubo; II comodato/depósito/alimentos; III coisa impenhorável.</p>
+   <p><span class="art-num">Art. 380.</span> Não se admite compensação em prejuízo de direito de terceiro.</p>`,
+   mem:`<b>Requisitos da compensação LEGAL:</b> <span class="mnemo">R-L-V-F</span> = <b>R</b>ecíprocas · <b>L</b>íquidas · <b>V</b>encidas · <b>F</b>ungíveis entre si.<br><b>Exceções do art. 373</b> (não compensa): <span class="mnemo">"o ladrão, o guardião e o filho"</span> → coisa de <b>esbulho/furto/roubo</b>; de <b>comodato/depósito/alimentos</b>; coisa <b>impenhorável</b>.`,
+   recall:[
+     {p:'Quais os 4 requisitos da compensação legal?',r:'Reciprocidade, liquidez, exigibilidade (vencidas) e fungibilidade entre si das prestações.'},
+     {p:'Cite as hipóteses do art. 373 que impedem a compensação.',r:'Dívida oriunda de esbulho/furto/roubo; de comodato, depósito ou alimentos; e coisa não suscetível de penhora.'},
+     {p:'A prescrição impede a compensação?',r:'Só se a prescrição for anterior ao momento da coexistência das dívidas (STJ, Info 726). Se completou depois da coexistência, não impede.'},
+     {p:'Diferencie compensação legal, convencional e judicial.',r:'Legal: de pleno direito, satisfeitos os requisitos do CC. Convencional: pela vontade das partes, dispensa requisitos legais. Judicial: declarada pelo juiz por autorização normativa.'}
+   ]},
+
+  {id:'confusao', tipo:'conteudo', tema:'Confusão', pag:'436–437',
+   titulo:'7 · Confusão',
+   sintese:`<p><b>Conceito:</b> extingue-se a obrigação quando se reúnem na <b>mesma pessoa</b> as qualidades de <b>credor e devedor</b> (art. 381) — ninguém é credor de si mesmo. Causa mais comum: <b>sucessão hereditária</b> (devedor herda do credor). Também por incorporação de PJ.</p>
+   <p><b>Pessoal × real:</b> a confusão do direito das obrigações é a <b>pessoal</b> (reunião dos polos). A "confusão real" (mistura de coisas) é outro instituto (arts. 1.272–1.274).</p>
+   <p><b>Extensão (art. 382):</b> pode ser <b>total ou parcial</b>. Solidariedade (art. 383): só extingue até a <b>cota</b> do credor/devedor solidário, subsistindo a solidariedade quanto ao resto.</p>
+   <p><b>Cessação (art. 384):</b> cessando a confusão, <b>restabelece-se</b> a obrigação anterior com todos os acessórios. PJ distinta dos sócios não gera confusão.</p>`,
+   lei:`<p><span class="art-num">Art. 381.</span> Extingue-se a obrigação desde que na mesma pessoa se confundam as qualidades de credor e devedor.</p>
+   <p><span class="art-num">Art. 382.</span> Pode verificar-se sobre toda a dívida ou parte dela. <span class="art-num">Art. 383.</span> Na solidariedade, só extingue até a respectiva cota. <span class="art-num">Art. 384.</span> Cessando a confusão, restabelece-se a obrigação anterior com seus acessórios.</p>`,
+   mem:`<span class="mnemo">Confusão = 1 pessoa, 2 chapéus</span> (credor + devedor na mesma cabeça). Pense no <b>sobrinho que deve ao tio e o herda</b>.<br>Solidária? <b>extingue só a cota</b> (art. 383). Cessou? <b>a dívida volta inteira</b> (art. 384). <b>PJ ≠ sócio</b> → sem confusão.`,
+   recall:[
+     {p:'Quando ocorre a confusão (pessoal)?',r:'Quando credor e devedor passam a ser a mesma pessoa (art. 381). Ex.: sucessão hereditária, incorporação de PJ.'},
+     {p:'Na solidariedade, a confusão extingue toda a obrigação?',r:'Não. Só extingue até a cota do credor/devedor solidário, subsistindo a solidariedade quanto ao restante (art. 383).'},
+     {p:'O que ocorre se a confusão cessar?',r:'Restabelece-se a obrigação anterior, com todos os seus acessórios (art. 384).'}
+   ]},
+
+  {id:'remissao', tipo:'conteudo', tema:'Remissão', pag:'437–441',
+   titulo:'8 · Remissão',
+   sintese:`<p><b>Conceito:</b> remitir = <b>perdoar</b> a dívida (arts. 385–388). Pagamento indireto <b>não satisfativo</b>. É <b>negócio jurídico bilateral</b> — depende da <b>aceitação do devedor</b> (art. 385) — e <b>não pode prejudicar terceiro</b> (ineficácia relativa).</p>
+   <p><b>Remissão × renúncia:</b> remissão é <b>bilateral</b> (precisa de aceite); <b>renúncia</b> é ato <b>unilateral</b> (basta a vontade do renunciante).</p>
+   <p><b>Espécies (art. 386):</b> expressa ou <b>tácita</b> — a <b>devolução voluntária do título</b> por escrito particular prova a desoneração (ex.: credor devolve o cheque em vez de depositar). Exige entrega espontânea pelo próprio credor.</p>
+   <p><b>Solidariedade (art. 388):</b> remissão a um co-devedor extingue só a <b>parte dele</b>; o credor mantém a solidariedade contra os demais, mas já não pode cobrar sem deduzir a parte remitida.</p>
+   <p><b>Limitada à garantia (art. 387):</b> a restituição voluntária do <b>objeto empenhado</b> prova a <b>renúncia à garantia real</b>, não a extinção da dívida — o crédito deixa de ser pignoratício e vira <b>quirografário</b>.</p>`,
+   lei:`<p><span class="art-num">Art. 385.</span> A remissão da dívida, aceita pelo devedor, extingue a obrigação, mas sem prejuízo de terceiro.</p>
+   <p><span class="art-num">Art. 386.</span> A devolução voluntária do título (escrito particular) prova desoneração do devedor e co-obrigados. <span class="art-num">Art. 387.</span> Restituição do objeto empenhado prova renúncia à garantia, não a extinção da dívida.</p>
+   <p><span class="art-num">Art. 388.</span> Remissão a um co-devedor extingue a dívida na parte correspondente; reservada a solidariedade, já não se cobra o débito sem dedução da parte remitida.</p>`,
+   mem:`<span class="mnemo">re-Missão = Mútuo</span> (bilateral, precisa de aceite) · <span class="mnemo">re-Núncia = só Um</span> (unilateral). Não confunda!<br><b>Art. 387 (pegadinha clássica):</b> devolveu o <b>objeto do penhor</b> → renunciou só à <b>GARANTIA</b>; a dívida continua, agora <b>quirografária</b>. Devolveu o <b>TÍTULO</b> (art. 386) → perdoou a <b>DÍVIDA</b>.`,
+   recall:[
+     {p:'Remissão é ato unilateral ou bilateral?',r:'Bilateral — depende da aceitação do devedor (art. 385). Difere da renúncia, que é unilateral.'},
+     {p:'Diferencie o art. 386 do art. 387.',r:'Art. 386: devolver o TÍTULO da dívida prova remissão da própria dívida. Art. 387: devolver o OBJETO EMPENHADO prova só renúncia à garantia real (crédito vira quirografário), não extinção da dívida.'},
+     {p:'Na solidariedade passiva, qual o efeito da remissão a um co-devedor?',r:'Extingue só a parte dele (art. 388). O credor mantém a solidariedade contra os demais, mas não pode cobrar sem deduzir a parte remitida.'},
+     {p:'A remissão pode prejudicar terceiro?',r:'Não. É ineficaz relativamente ao terceiro prejudicado (ex.: credor do credor), que pode penhorar o crédito diretamente do devedor.'}
+   ]}
+];
+
+function defaultState(){return{dominado:{},revisao:{},notas:{},recall:{},leiOpen:{},posicao:0,modo:'todas',temaFiltro:''};}
+let state=defaultState(),lista=[],paused=false,sSecs=0,timerInterval=null;
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function buildLista(){var t=today(),ids;
+  if(state.modo==='todas'){ids=CARDS.map(function(c){return c.id;});}
+  else if(state.modo==='hoje'){ids=CARDS.filter(function(c){var r=state.revisao[c.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(c){return c.id;});}
+  else if(state.modo==='conteudo'){ids=CARDS.filter(function(c){return c.tipo==='conteudo';}).map(function(c){return c.id;});}
+  else if(state.modo==='tema'){var m=state.temaFiltro;ids=CARDS.filter(function(c){return !m||c.tema===m;}).map(function(c){return c.id;});}
+  else{ids=CARDS.map(function(c){return c.id;});}
+  return ids;}
+function computeStats(){var conteudo=CARDS.filter(function(c){return c.tipo==='conteudo';}),total=conteudo.length,dom=0,t=today(),hoje=0;
+  conteudo.forEach(function(c){if(state.dominado[c.id])dom++;var r=state.revisao[c.id];if(r&&r.nextDate&&r.nextDate<=t)hoje++;});
+  var pct=total>0?Math.round(dom/total*100):0;return{total:total,dom:dom,pend:total-dom,hoje:hoje,pct:pct};}
+function renderStats(){var s=computeStats();
+  document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.dom+'</span><span class="sl">Dominados</span></div><div class="stat-chip"><span class="sv amber">'+s.pend+'</span><span class="sl">A revisar</span></div><div class="stat-chip"><span class="sv cyan">'+s.hoje+'</span><span class="sl">Revisar hoje</span></div><div class="stat-chip"><span class="sv">'+s.total+'</span><span class="sl">Institutos</span></div>';
+  var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.dom+'/'+s.total+' institutos dominados ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){sSecs++;}var s=document.getElementById('timerS');if(s)s.textContent=fmtTime(sSecs);},1000);}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();renderStats();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar revisão:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">24h</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function domBtnHTML(id){var a=state.dominado[id]?' active':'',l=state.dominado[id]?'✓ Dominado':'☐ Marcar dominado';return'<button class="dom-btn'+a+'" onclick="toggleDom(\''+id+'\')">'+l+'</button>';}
+function toggleDom(id){if(state.dominado[id])delete state.dominado[id];else state.dominado[id]=true;saveState();renderCard();renderStats();}
+function toggleLei(id){state.leiOpen[id]=!state.leiOpen[id];saveState();var b=document.getElementById('lei-body-'+id),t=document.getElementById('lei-tog-'+id);if(b)b.classList.toggle('open',!!state.leiOpen[id]);if(t)t.textContent=state.leiOpen[id]?'▲ Ocultar letra da lei / artigos-chave':'📜 Ver letra da lei / artigos-chave';}
+function toggleRecall(id,i){var k=id+'_'+i;state.recall[k]=!state.recall[k];saveState();var el=document.getElementById('rec-'+k);if(el)el.classList.toggle('open',!!state.recall[k]);}
+function salvarNota(id,txt){state.notas[id]=txt;saveState();}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();renderCard();window.scrollTo(0,0);}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();renderCard();window.scrollTo(0,0);}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='tema'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();renderCard();renderStats();window.scrollTo(0,0);}
+function setTemaFiltro(val){state.temaFiltro=val;state.posicao=0;lista=buildLista();saveState();renderCard();}
+function populateTemaSelect(){var temas=[];CARDS.forEach(function(c){if(c.tipo==='conteudo'&&temas.indexOf(c.tema)===-1)temas.push(c.tema);});var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha o tema —</option>';temas.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.temaFiltro)o.selected=true;sel.appendChild(o);});}
+function recallHTML(card){if(!card.recall)return'';var h='<div class="sec-label recall">🎯 Active Recall — responda antes de abrir</div>';
+  card.recall.forEach(function(rc,i){var k=card.id+'_'+i,open=state.recall[k]?' open':'';
+    h+='<div class="recall-item'+open+'" id="rec-'+k+'"><div class="recall-q" onclick="toggleRecall(\''+card.id+'\','+i+')"><span class="qmark">?</span><span>'+rc.p+'</span><span class="chev">▸</span></div><div class="recall-a">'+rc.r+'</div></div>';});
+  return h;}
+function notasHTML(id){var v=state.notas[id]||'';return'<div class="notas-wrap"><div class="notas-label">📝 Explique com suas palavras (técnica Feynman)</div><textarea class="notas-area" placeholder="Resuma este instituto do seu jeito, anote pegadinhas, jurisprudência…" oninput="salvarNota(\''+id+'\', this.value)">'+esc(v)+'</textarea></div>';}
+function renderCard(){var cont=document.getElementById('mainContent');
+  if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhum card neste filtro.</div></div>';return;}
+  var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],c=CARDS.find(function(x){return x.id===id;});if(!c){cont.innerHTML='';return;}
+  var html='<div class="nav-counter">Card '+(pos+1)+' de '+lista.length+'</div>';
+  if(c.tipo==='tecnica'){
+    html+='<div class="card intro"><div class="card-meta"><span class="badge badge-tema">'+c.tema+'</span><span class="badge badge-pag">'+c.pag+'</span></div><div class="card-title">'+c.titulo+'</div><div class="prose">'+c.html+'</div><div class="tech-grid">';
+    c.tech.forEach(function(t){html+='<div class="tech"><h4>'+t.h+'</h4><p>'+t.p+'</p><span class="how">▶ '+t.how+'</span></div>';});
+    html+='</div></div>';
+  } else if(c.tipo==='mapa'){
+    html+='<div class="card mapa"><div class="card-meta"><span class="badge badge-tema">'+c.tema+'</span><span class="badge badge-pag">págs. '+c.pag+'</span></div><div class="card-title">'+c.titulo+'</div><div class="prose">'+c.html+'</div>';
+    if(c.mem)html+='<div class="sec-label mem">🧠 Mapa mnemônico</div><div class="mem-box">'+c.mem+'</div>';
+    html+='<div class="sec-label sintese">📑 Roteiro do bloco</div><table class="map-table"><tr><th>Págs.</th><th>Assunto</th></tr>';
+    c.rows.forEach(function(r){html+='<tr><td class="pg">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
+    html+='</table></div>';
+  } else {
+    var leiOpen=state.leiOpen[id]?' open':'',leiLbl=state.leiOpen[id]?'▲ Ocultar letra da lei / artigos-chave':'📜 Ver letra da lei / artigos-chave';
+    html+='<div class="card"><div class="card-meta"><span class="badge badge-tema">'+c.tema+'</span><span class="badge badge-pag">págs. '+c.pag+'</span>'+reviewBadgeHTML(id)+domBtnHTML(id)+'</div><div class="card-title">'+c.titulo+'</div>';
+    html+='<div class="sec-label sintese">📑 Síntese para revisão</div><div class="prose">'+c.sintese+'</div>';
+    html+='<button class="lei-toggle" id="lei-tog-'+id+'" onclick="toggleLei(\''+id+'\')">'+leiLbl+'</button><div class="lei-body'+leiOpen+'" id="lei-body-'+id+'">'+c.lei+'</div>';
+    html+='<div class="sec-label mem">🧠 Técnica de memorização</div><div class="mem-box">'+c.mem+'</div>';
+    html+=recallHTML(c);
+    html+=notasHTML(id);
+    html+=schedRowHTML(id);
+    html+='</div>';
+  }
+  html+='<div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próximo →</button></div>';
+  cont.innerHTML=html;}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso (anotações, revisões, dominados) será apagado.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='caderno_civil_pgind_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — Caderno Civil · Pagamento Indireto (págs. 397–441)\n'+today()+'\n\n',n=0;CARDS.forEach(function(c){var nota=state.notas&&state.notas[c.id];if(nota&&nota.trim()){n++;txt+='【'+c.tema+' · '+c.titulo+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_civil_pgind_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateTemaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='tema'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function init(){loadState();populateTemaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='tema')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+init();
+</script>
+</body>
+</html>
