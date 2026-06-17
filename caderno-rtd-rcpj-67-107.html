@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · RTD/RCPJ (págs. 67–107)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"\25B8";position:absolute;left:0;color:#38bdf8}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s;margin-top:6px}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.lei-body.open{display:block}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+.recall-item.open .recall-q .chev{transform:rotate(90deg)}
+.recall-a{display:none;padding:0 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.recall-item.open .recall-a{display:block;padding-top:11px}
+.notas-wrap{margin-top:16px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:62px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.dom-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.dom-btn.active{border-color:#27c06a;color:#27c06a;background:#0a2018}
+.dom-btn:hover{border-color:#27c06a;color:#27c06a}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.tech-grid{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.tech{background:#0b0f1f;border:1px solid #261a3e;border-radius:10px;padding:12px 14px}
+.tech h4{font-size:14px;color:#c59bf2;margin-bottom:4px}
+.tech p{font-size:13px;line-height:1.55;color:#bcc8e0}
+.tech .how{color:#8fa6c4;font-size:12.5px;margin-top:4px;display:block}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso (anotações, revisões e temas dominados) é salvo automaticamente neste aparelho.</div>
+<div class="header">
+  <h1>📘 Caderno de Revisão · RTD &amp; RCPJ</h1>
+  <div class="sub">Registro de Títulos e Documentos + Registro Civil de Pessoas Jurídicas · e-Book de RTD/RCPJ, <b>págs. 67–107</b> · Lei nº 6.015/1973 · Lei nº 14.382/2022</div>
+  <div class="timer-bar">
+    <span>⏱ Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Tudo</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="conteudo" onclick="setModo('conteudo')">Só temas</button>
+    <button class="mode-btn" data-modo="tema" onclick="setModo('tema')">Por tema</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setTemaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Caderno de Revisão · RTD &amp; RCPJ · págs. 67–107 · Lei 6.015/1973, Lei 14.382/2022, CC/02 e Lei 8.935/1994</footer>
+<script>
+const STORE_KEY = 'caderno_rtd_rcpj_67_107_v1';
+const CARDS = [
+  {id:'tec', tipo:'tecnica', tema:'Como estudar', pag:'Método',
+   titulo:'🚀 Técnicas de Memorização e de Alta Performance',
+   html:`<p>Antes do conteúdo, fixe o <b>método</b>. Estes cards foram montados para serem usados com as 6 técnicas abaixo — elas valem mais que reler o e-Book dez vezes.</p>`,
+   tech:[
+     {h:'1 · Active Recall (recordação ativa)',p:'Tente RESPONDER antes de ver a resposta. Cada tema traz um bloco 🎯 com perguntas ocultas — pense, fale em voz alta, só depois clique para conferir.',how:'Aqui: clique nas perguntas verdes do bloco Active Recall. Errou? Agende revisão para amanhã.'},
+     {h:'2 · Revisão Espaçada (curva de Ebbinghaus)',p:'Revise no momento em que está prestes a esquecer: 24h → 7 dias → 30 dias. Cada repetição no limite do esquecimento grava a memória de longo prazo.',how:'Aqui: use os botões 1 / 7 / 30 dias de cada card e o filtro "Revisar hoje".'},
+     {h:'3 · Mnemônicos e Acrônimos',p:'Listas (livros, requisitos, hipóteses) viram siglas e frases. O cérebro guarda "A-B-C-D-E-F-G" muito melhor que sete descrições soltas.',how:'Aqui: cada tema tem uma caixa amarela 🧠 com o mnemônico-chave pronto.'},
+     {h:'4 · Interleaving (intercalar temas)',p:'Não estude um tema até a exaustão. Alterne RTD → RCPJ, competência → notificações → continuidade. A confusão controlada força o cérebro a discriminar.',how:'Aqui: use o modo "Por tema" para pular entre temas parecidos (territorialidade no RTD × no RCPJ).'},
+     {h:'5 · Técnica Feynman (explicar como a uma criança)',p:'Se você não consegue explicar "princípio da continuidade" em uma frase simples, não entendeu. Reescreva com suas palavras no campo de anotações.',how:'Aqui: use o campo 📝 de cada card para explicar o tema do seu jeito; depois baixe tudo em .txt.'},
+     {h:'6 · Questões > releitura',p:'Resolver e errar gera aprendizado; reler gera ilusão de saber. Priorize provas anteriores (CEBRASPE, FGV, VUNESP, IESES) sobre o grifo do PDF.',how:'Aqui: trate cada bloco Active Recall como uma microprova e cruze com o seu banco de questões.'}
+   ]},
+
+  {id:'mapa', tipo:'mapa', tema:'Mapa', pag:'67–107',
+   titulo:'🗺️ Faixa de Páginas × Assuntos',
+   html:`<p>Visão de helicóptero do bloco. O e-Book divide o estudo em dois ofícios historicamente <b>cumulados</b> (Lei 973/1903): o <b>RTD</b> (Registro de Títulos e Documentos) e o <b>RCPJ</b> (Registro Civil de Pessoas Jurídicas).</p>`,
+   mem:`<b>Os 2 ofícios e seus livros:</b><br>• <span class="mnemo">RTD = 7 livros: A B C D E F G</span> <i>(E, F e G incluídos pela Lei 14.382/2022)</i><br>• <span class="mnemo">RCPJ = 2 livros: A (atos) + B (imprensa)</span><br><b>Prazos-chave:</b> <span class="mnemo">RTD = 20 dias</span> da assinatura · <span class="mnemo">RCPJ = 30 dias</span> da lavratura.`,
+   rows:[
+     ['67–68','Competência territorial do RTD (art. 130) — redação antiga × Lei 14.382/2022'],
+     ['69–71','RTD — Livros e escrituração (arts. 132–141): Livros A a G'],
+     ['71–72','RTD — Qualificação (registro imediato, exame sumário)'],
+     ['72–73','RTD — Prazo para registro: 20 dias (art. 130 e parágrafo único)'],
+     ['74–75','RTD — Notificações (art. 160) e territorialidade: CNJ × STJ'],
+     ['75–77','RTD — Cancelamento (arts. 164–166 e art. 252)'],
+     ['78–82','RCPJ — Origem, conceito e natureza jurídica'],
+     ['83–89','RCPJ — Princípios (institucionais + específicos) e continuidade'],
+     ['94–97','RCPJ — Atribuições (arts. 114–115) e certidões'],
+     ['96–102','RCPJ — Qualificação e requisitos (art. 46 CC / art. 120 LRP)'],
+     ['101–102','RCPJ — Prazos: 30 dias (art. 1.151 CC) e arts. 188/205'],
+     ['103–105','RCPJ — Livros A e B (art. 116) e exame do objeto (art. 115)'],
+     ['105–107','RCPJ — Gestão documental, índices (arts. 117–118) e publicidade constitutiva (art. 119)']
+   ]},
+
+  {id:'comp', tipo:'conteudo', tema:'Competência', pag:'67–68',
+   titulo:'1 · RTD — Competência Territorial (art. 130)',
+   sintese:`<p><b>Base legal:</b> art. 130 da Lei nº 6.015/1973 (LRP).</p>
+   <p><b>Redação clássica (até 31/12/2023):</b> os títulos e documentos são registrados no <b>domicílio das partes contratantes</b>; residindo elas em circunscrições territoriais diversas, faz-se o registro <b>em todas elas</b> (duplo/múltiplo registro).</p>
+   <p><b>Nova redação (Lei nº 14.382/2022, em vigor desde 1º/01/2024):</b> registra-se no domicílio: <b>I</b> — das partes, quando na mesma circunscrição; <b>II</b> — de <b>um dos devedores ou garantidores</b>, quando em circunscrições diversas; <b>III</b> — de <b>uma das partes</b>, quando não houver devedor ou garantidor.</p>
+   <p><b>Fim do duplo registro:</b> a dispensa decorre da unificação de dados promovida pelo <b>SERP</b> (Sistema Eletrônico dos Registros Públicos).</p>
+   <p><b>Regras novas do art. 130:</b> §1º os atos produzem efeitos <b>a partir do registro</b>; §2º <b>dispensa-se reconhecimento de firma</b> (a responsabilidade pela autenticidade das assinaturas é exclusiva do apresentante); §3º o documento de quitação/exoneração, <b>em meio físico</b>, exige reconhecimento de firma do credor.</p>
+   <p><b>Crítica doutrinária:</b> os arts. 127 e 129 abrangem não só contratos, mas atos jurídicos em sentido estrito e declarações de ciência — em que não há "partes", mas declarantes, sujeitos ou interessados.</p>`,
+   lei:`<p><span class="art-num">Art. 130 (redação original).</span> Dentro do prazo de vinte dias da assinatura pelas partes, os atos dos arts. 127 e 129 serão registrados no domicílio das partes contratantes e, quando residam em circunscrições diversas, far-se-á o registro em todas elas. Parágrafo único: documentos apresentados após o prazo produzem efeitos a partir da apresentação.</p>
+   <p><span class="art-num">Art. 130 (Lei 14.382/2022, desde 01/01/2024).</span> Os atos dos arts. 127 e 129 serão registrados no domicílio: I — das partes (mesma circunscrição); II — de um dos devedores ou garantidores (circunscrições diversas); III — de uma das partes (sem devedor ou garantidor). §1º efeitos a partir do registro; §2º dispensa de reconhecimento de firma; §3º quitação/exoneração física exige firma do credor.</p>
+   <p><span class="art-num">Lei 14.382/2022, art. 21.</span> A nova redação do art. 130 da LRP entrou em vigor em <b>1º de janeiro de 2024</b>.</p>`,
+   mem:`<b>Onde registrar (regra atual):</b> <span class="mnemo">MESMA circunscrição → PARTES</span> · <span class="mnemo">circunscrições DIVERSAS → DEVEDOR/garantidor</span> · <span class="mnemo">SEM devedor → uma das PARTES</span>.<br>Antes da 14.382 registrava-se em <b>TODAS</b> as circunscrições; o <b>SERP</b> acabou com o duplo registro. E grave: RTD <b>não exige reconhecimento de firma</b> (§2º).`,
+   recall:[
+     {p:'Pela redação atual do art. 130 (pós-14.382), onde se registra quando as partes residem em circunscrições diversas?',r:'No domicílio de um dos devedores ou garantidores (inciso II). Não há mais duplo registro — a unificação de dados é feita pelo SERP.'},
+     {p:'E quando não há devedor nem garantidor?',r:'Registra-se no domicílio de uma das partes (inciso III).'},
+     {p:'O RTD exige reconhecimento de firma?',r:'Não (art. 130, §2º). A responsabilidade pela autenticidade das assinaturas é exclusiva do apresentante. Exceção: quitação/exoneração apresentada em meio físico exige firma reconhecida do credor (§3º).'},
+     {p:'Qual a crítica doutrinária ao uso do termo "partes" no art. 130?',r:'Os arts. 127 e 129 incluem atos que não têm partes (atos jurídicos em sentido estrito e declarações de ciência), mas declarantes, sujeitos ou interessados.'}
+   ]},
+
+  {id:'livrtd', tipo:'conteudo', tema:'Livros RTD', pag:'69–71',
+   titulo:'2 · RTD — Livros e Escrituração (arts. 132–141)',
+   sintese:`<p><b>Base legal:</b> escrituração do RTD nos arts. 132 a 141 da LRP.</p>
+   <p><b>Os 7 livros (art. 132, redação da Lei 14.382/2022):</b></p>
+   <ul>
+   <li><b>Livro A</b> — protocolo (apontamento diário de todos os títulos, documentos e papéis).</li>
+   <li><b>Livro B</b> — trasladação integral (conservação e validade contra terceiros).</li>
+   <li><b>Livro C</b> — inscrição por extrato (efeitos perante terceiros e autenticação de data).</li>
+   <li><b>Livro D</b> — indicador pessoal (substituível por sistema de fichas).</li>
+   <li><b>Livro E</b> — indicador real (matrícula dos bens móveis) — <b>incluído pela 14.382</b>.</li>
+   <li><b>Livro F</b> — registro facultativo de documentos para conservação (art. 127, VII e art. 127-A) — <b>incluído pela 14.382</b>.</li>
+   <li><b>Livro G</b> — indicador pessoal específico dos apresentantes do Livro F — <b>incluído pela 14.382</b>.</li>
+   </ul>
+   <p><b>Novidade:</b> a Lei nº 14.382/2022 acrescentou <b>três livros</b> ao RTD: <b>E, F e G</b>.</p>
+   <p><b>Escrituração:</b> art. 133 (título no alto de cada página); art. 134 (o juiz pode autorizar desdobramento dos livros); art. 135 (colunas do protocolo: nº de ordem, dia/mês, natureza/qualidade do lançamento, apresentante, anotações). O art. 141 foi <b>revogado</b> pela 14.382.</p>`,
+   lei:`<p><span class="art-num">Art. 132.</span> Livros do RTD: A (protocolo), B (trasladação integral), C (inscrição por extrato), D (indicador pessoal — substituível por fichas), E (indicador real — bens móveis), F (registro facultativo p/ conservação) e G (indicador pessoal dos apresentantes do Livro F).</p>
+   <p><span class="art-num">Art. 135.</span> Colunas do protocolo: 1º número de ordem; 2º dia e mês; 3º natureza do título e qualidade do lançamento; 4º nome do apresentante; 5º anotações e averbações.</p>
+   <p><span class="art-num">Art. 141.</span> Revogado pela Lei nº 14.382/2022.</p>`,
+   mem:`<b>7 livros do RTD = A B C D E F G.</b> Os <span class="mnemo">3 últimos (E F G) são da Lei 14.382/2022</span>.<br>Não confunda os indicadores: <span class="mnemo">D = indicador PESSOAL</span> (nomes) · <span class="mnemo">E = indicador REAL</span> (bens móveis). "rEal = coisa".`,
+   recall:[
+     {p:'Quantos e quais são os livros do RTD?',r:'Sete: A (protocolo), B (trasladação integral), C (extrato), D (indicador pessoal), E (indicador real), F (conservação facultativa) e G (indicador pessoal do Livro F).'},
+     {p:'Quais livros foram incluídos pela Lei 14.382/2022?',r:'Os Livros E, F e G.'},
+     {p:'Diferencie o Livro D do Livro E.',r:'D é o indicador pessoal (nomes das partes), substituível por fichas; E é o indicador real, para matrícula dos bens móveis que figurarem nos demais livros.'}
+   ]},
+
+  {id:'qualrtd', tipo:'conteudo', tema:'Qualif. RTD', pag:'71–72',
+   titulo:'3 · RTD — Qualificação Registral',
+   sintese:`<p><b>Registro imediato:</b> diferentemente do Registro de Imóveis (até 30 dias do protocolo), no RTD o registro é <b>realizado imediatamente</b> (LOUREIRO).</p>
+   <p><b>Exame sucinto:</b> inscreve-se o <b>título</b>, não o negócio jurídico nele consubstanciado — por isso a qualificação é mais sumária. Há quem diga que até documento falso pode ser registrado, havendo insistência do apresentante.</p>
+   <p><b>Mas há qualificação:</b> em atenção aos princípios da legalidade, validade, eficácia e segurança jurídica, o oficial faz exame <b>ainda que sumário</b> — verificando requisitos extrínsecos (assinaturas, certidões legalmente exigidas).</p>
+   <p><b>Limites:</b> <b>não</b> se registram no RTD contratos sociais, atas societárias ou estatutos (salvo para mera <b>conservação</b> e desde que já registrados no RCPJ), nem memoriais de incorporação/loteamentos clandestinos — para evitar confusão e fraude à lei.</p>
+   <p><b>Recusa:</b> a não aptidão é justificada em <b>nota de devolução</b>; persistindo a inconformidade, usa-se o <b>procedimento de dúvida</b> (GENTIL).</p>`,
+   lei:`<p><span class="art-num">Art. 147.</span> Protocolado o título, far-se-á em seguida o lançamento (registro integral ou resumido, ou averbação) e, concluído, declarar-se-á no corpo do documento o número de ordem e a data, com rubrica do oficial ou prepostos.</p>
+   <p><span class="art">Doutrina (Loureiro):</span> no RTD inscreve-se o título e não o negócio jurídico — daí a qualificação ser mais sucinta que no RI, sem dispensar o exame dos requisitos extrínsecos.</p>`,
+   mem:`<span class="mnemo">RI = qualifica o NEGÓCIO</span> (exame profundo, 30 dias) · <span class="mnemo">RTD = qualifica o TÍTULO</span> (sumário, imediato).<br>Pegadinha: contrato social/ata/estatuto <b>não</b> entra no RTD para gerar personalidade — só para <b>conservação</b> e se já houver registro no <b>RCPJ</b>. Recusa → nota de devolução → dúvida.`,
+   recall:[
+     {p:'Por que a qualificação no RTD é mais sumária que no Registro de Imóveis?',r:'Porque no RTD se inscreve o título (documento), não o negócio jurídico nele contido. O registro, ademais, é imediato.'},
+     {p:'É possível registrar um estatuto ou contrato social no RTD?',r:'Apenas para fins de conservação e desde que já exista registro no RCPJ. O RTD não confere personalidade jurídica — registrá-lo para esse fim geraria insegurança.'},
+     {p:'O que o oficial faz quando o título não está apto a ingressar?',r:'Emite nota de devolução (única, justificada); persistindo a inconformidade, instaura o procedimento de dúvida.'}
+   ]},
+
+  {id:'prazortd', tipo:'conteudo', tema:'Prazo RTD', pag:'72–73',
+   titulo:'4 · RTD — Prazo para Registro (20 dias)',
+   sintese:`<p><b>Prazo:</b> <b>20 dias</b> contados da <b>assinatura pelas partes</b> (art. 130), para os atos dos arts. 127 e 129 — exceto o art. 127, VII (natureza facultativa).</p>
+   <p><b>Sanção pelo descumprimento:</b> ultrapassado o prazo, o registro <b>produz efeitos apenas a partir da data da apresentação</b>, e não da assinatura (art. 130, parágrafo único). É sanção indireta: retarda a eficácia plena.</p>
+   <p><b>Em relação a terceiros:</b> os efeitos são obtidos <b>a partir do registro</b>, e não da mera apresentação (RODRIGUES). A data da assinatura no escrito particular registrado tempestivamente prevalece sobre a do protocolo, salvo prova em contrário.</p>
+   <p><b>Documento sem data:</b> havendo reconhecimento de firma, a data do reconhecimento pode ser tida como a data do documento; não sendo possível identificar, os efeitos correm <b>a partir do registro</b> (GENTIL).</p>`,
+   lei:`<p><span class="art-num">Art. 130, caput.</span> Dentro do prazo de vinte dias da assinatura pelas partes, os atos dos arts. 127 e 129 serão registrados...</p>
+   <p><span class="art-num">Art. 130, parágrafo único.</span> Os registros de documentos apresentados depois de findo o prazo produzirão efeitos a partir da data da apresentação.</p>`,
+   mem:`<span class="mnemo">RTD = 20 dias da ASSINATURA</span>. Dentro do prazo, o registro retroage à <b>assinatura</b>; <span class="mnemo">FORA do prazo → vale da APRESENTAÇÃO</span>.<br>Não confunda com o RCPJ (30 dias da lavratura). E lembre: perante <b>terceiros</b>, a eficácia é sempre <b>a partir do registro</b>.`,
+   recall:[
+     {p:'Qual o prazo para registro no RTD e de quando se conta?',r:'20 dias, contados da assinatura pelas partes (art. 130), salvo o art. 127, VII (facultativo).'},
+     {p:'Qual a consequência de registrar fora do prazo de 20 dias?',r:'O registro só produz efeitos a partir da data da apresentação, não da assinatura (art. 130, parágrafo único) — sanção indireta que retarda a eficácia.'},
+     {p:'Como se fixa a data de um documento sem data e sem firma reconhecida?',r:'Os efeitos passam a correr a partir da data do registro.'}
+   ]},
+
+  {id:'notif', tipo:'conteudo', tema:'Notificações', pag:'74–75',
+   titulo:'5 · RTD — Notificações e Territorialidade',
+   sintese:`<p><b>Base legal:</b> art. 160 da LRP. A requerimento do apresentante, o oficial notifica do registro/averbação os demais interessados que figurarem no documento e quaisquer terceiros indicados, podendo <b>requisitar oficiais de outros municípios</b>. Servem também para avisos, denúncias e notificações sem intervenção judicial.</p>
+   <p><b>Quem cumpre:</b> o próprio oficial ou escrevente designado e <b>autorizado pelo juiz</b> competente (§2º). Os certificados são lavrados nas anotações, à margem do registro (§1º).</p>
+   <p><b>O grande debate — territorialidade:</b></p>
+   <ul>
+   <li><b>CNJ</b> (P.P. 642 / 0001261-78.2010): aplica o princípio da territorialidade — só o oficial do <b>domicílio do notificado</b> seria competente.</li>
+   <li><b>STJ</b> (2ª Seção, recursos repetitivos): é <b>válida</b> a notificação por <b>via postal com AR</b> no endereço do devedor, ainda que o título tenha sido apresentado em cartório de <b>comarca diversa</b> — relevante para comprovar a <b>mora</b> na alienação fiduciária.</li>
+   </ul>`,
+   lei:`<p><span class="art-num">Art. 160.</span> O oficial será obrigado, quando o apresentante requerer, a notificar do registro/averbação os demais interessados e terceiros indicados, podendo requisitar oficiais de outros Municípios. §1º certificados nas anotações. §2º serviço realizado por escreventes designados e autorizados pelo juiz.</p>
+   <p><span class="art">STJ — 2ª Seção (repetitivo):</span> válida a notificação extrajudicial entregue por via postal, com AR, no endereço do devedor, ainda que o cartório esteja em comarca diversa do domicílio. <b>REsp 1.283.834-BA</b> (2012) e <b>REsp 1.184.570-MG</b> (2012), Rel. Min. Maria Isabel Gallotti.</p>`,
+   mem:`<b>CNJ × STJ na notificação extrajudicial:</b><br><span class="mnemo">CNJ = territorialidade</span> (só oficial do domicílio do notificado).<br><span class="mnemo">STJ = vale a notificação POSTAL com AR</span> mesmo de comarca diversa (foco: <b>mora na alienação fiduciária</b>). Decisão em <b>recurso repetitivo</b> → tende a prevalecer em prova de jurisprudência.`,
+   recall:[
+     {p:'Quem pode cumprir a notificação extrajudicial do RTD?',r:'O próprio oficial ou escrevente especialmente designado e autorizado pelo juiz competente (art. 160, §2º).'},
+     {p:'Qual a posição do CNJ sobre a territorialidade da notificação?',r:'Aplica o princípio da territorialidade: só o oficial da comarca de domicílio do notificado seria competente (P.P. 642).'},
+     {p:'E a posição do STJ (recurso repetitivo)?',r:'É válida a notificação por via postal, com AR, no endereço do devedor, ainda que o título tenha sido apresentado em cartório de comarca diversa — sobretudo para comprovar a mora na alienação fiduciária (REsp 1.283.834-BA e REsp 1.184.570-MG).'}
+   ]},
+
+  {id:'cancel', tipo:'conteudo', tema:'Cancelamento', pag:'75–77',
+   titulo:'6 · RTD — Cancelamento (arts. 164–166)',
+   sintese:`<p><b>Eficácia até o cancelamento:</b> o registro, enquanto não cancelado, produz <b>todos os efeitos legais</b>, ainda que se prove, por outra via, que o título está desfeito, anulado, extinto ou rescindido (art. 252).</p>
+   <p><b>Natureza:</b> o cancelamento é um <b>ato de averbação</b>, após o qual o ato deixa de ter eficácia. Exige <b>provocação das partes legitimadas</b> ou <b>ordem judicial</b> (princípio da instância), com prévia fundamentação. Cancelado no todo, cessam os efeitos; em parte, apenas na extensão obliterada.</p>
+   <p><b>Hipóteses (art. 164):</b> o cancelamento pode ser feito em virtude de <b>(i) sentença</b>; <b>(ii) documento autêntico de quitação</b>; ou <b>(iii) exoneração do título registrado</b>.</p>
+   <p><b>Formalização (art. 165):</b> o oficial certifica, na coluna das averbações, o cancelamento e sua razão, mencionando o documento que o autorizou, datando e assinando. Não havendo espaço, faz-se novo registro com referências recíprocas. Os requerimentos são arquivados com os documentos (art. 166).</p>`,
+   lei:`<p><span class="art-num">Art. 252.</span> O registro, enquanto não cancelado, produz todos os efeitos legais, ainda que por outra maneira se prove que o título está desfeito, anulado, extinto ou rescindido.</p>
+   <p><span class="art-num">Art. 164.</span> O cancelamento poderá ser feito em virtude de sentença ou de documento autêntico de quitação ou de exoneração do título registrado.</p>
+   <p><span class="art-num">Art. 165.</span> Apresentado o documento, o oficial certificará na coluna das averbações o cancelamento e a razão, mencionando o documento que o autorizou. <span class="art-num">Art. 166.</span> Os requerimentos de cancelamento serão arquivados com os documentos que os instruírem.</p>`,
+   mem:`<b>Cancelar = averbar.</b> 3 caminhos do art. 164: <span class="mnemo">S-Q-E</span> = <b>S</b>entença · <b>Q</b>uitação (documento autêntico) · <b>E</b>xoneração do título.<br>Pegadinha do art. 252: <b>registro não cancelado VALE</b>, mesmo que o título já esteja desfeito/anulado/extinto. Só some quando há a averbação de cancelamento.`,
+   recall:[
+     {p:'O que dispõe o art. 252 da LRP sobre os efeitos do registro?',r:'Enquanto não cancelado, o registro produz todos os efeitos legais, ainda que por outra via se prove que o título está desfeito, anulado, extinto ou rescindido.'},
+     {p:'Quais as três hipóteses de cancelamento do art. 164?',r:'Sentença; documento autêntico de quitação; ou exoneração do título registrado.'},
+     {p:'O cancelamento pode ser feito de ofício pelo oficial?',r:'Não. Exige provocação das partes legitimadas/interessadas ou ordem judicial (princípio da instância), com prévia fundamentação. É um ato de averbação.'}
+   ]},
+
+  {id:'concrcpj', tipo:'conteudo', tema:'Conceito', pag:'78–82',
+   titulo:'7 · RCPJ — Origem, Conceito e Natureza',
+   sintese:`<p><b>Origem:</b> RTD e RCPJ nasceram juntos no período republicano com a <b>Lei nº 973/1903</b> (Ofício privativo na Capital Federal); o <b>Decreto nº 4.775/1903</b> criou o "Ofício do Registro Especial" (cumulação histórica RTD+RCPJ). O Decreto nº 4.743/1923 (Lei de Imprensa) deu ao RCPJ a matrícula de jornais. A CF/1934 deu à União competência para legislar sobre registros públicos; a <b>Lei nº 6.015/1973</b> segue vigente; a CF/88, art. 236, "privatizou" os serviços.</p>
+   <p><b>Conceito:</b> serviço extrajudicial que assegura autenticidade, segurança, publicidade e eficácia dos <b>atos constitutivos de pessoas jurídicas de direito privado que NÃO exercem atividade empresarial</b>, conferindo-lhes existência legal e personalidade jurídica.</p>
+   <p><b>Exclusões:</b> empresários individuais e sociedades de advocacia (registradas na OAB, Lei 8.906/94).</p>
+   <p><b>Recepciona</b> (art. 44 CC): associações, sociedades (simples), fundações, organizações religiosas e <b>partidos políticos</b> — estes de natureza <b>mista</b> (personalidade de direito eleitoral, lei específica).</p>
+   <p><b>Natureza da atividade:</b> serviço <b>público</b> exercido em caráter <b>privado por delegação</b> (CF, art. 236; Lei 8.935/94) — "serviço público com gestão particular". Ingresso por concurso público de provas e títulos.</p>`,
+   lei:`<p><span class="art-num">CF/88, art. 236.</span> Os serviços notariais e de registro são exercidos em caráter privado, por delegação do Poder Público.</p>
+   <p><span class="art-num">Lei 6.015/73, art. 1º, §1º, II.</span> Inclui o registro civil de pessoas jurídicas entre os Registros Públicos.</p>
+   <p><span class="art-num">Lei 8.935/94, art. 14.</span> A delegação depende de habilitação em concurso público de provas e títulos, nacionalidade brasileira, capacidade civil, quitação eleitoral/militar, diploma de bacharel em direito e conduta condigna.</p>`,
+   mem:`<span class="mnemo">RTD + RCPJ = irmãos siameses</span> desde a Lei 973/1903 (cumulação histórica).<br><b>O que vai ao RCPJ?</b> PJ de direito privado <b>NÃO empresária</b> (associação, fundação, sociedade simples, religiosa, partido). <span class="mnemo">Empresária → Junta Comercial</span>; advocacia → OAB. <b>Partido = natureza mista</b> (direito eleitoral).`,
+   recall:[
+     {p:'Qual a finalidade do RCPJ e o que está excluído dele?',r:'Conferir existência legal e personalidade às PJ de direito privado não empresárias. Excluem-se empresários individuais, sociedades empresárias (Junta Comercial) e sociedades de advocacia (OAB).'},
+     {p:'Por que o partido político tem natureza mista no RCPJ?',r:'Embora seja PJ de direito privado (art. 44 CC), tem personalidade de direito eleitoral; sua organização e funcionamento são disciplinados em lei específica (art. 44, §3º, CC).'},
+     {p:'Qual a natureza jurídica da atividade registral?',r:'Serviço público exercido em caráter privado por delegação (CF, art. 236) — "serviço público com gestão particular". Ingresso por concurso de provas e títulos (Lei 8.935/94).'}
+   ]},
+
+  {id:'princ', tipo:'conteudo', tema:'Princípios', pag:'83–89',
+   titulo:'8 · RCPJ — Princípios',
+   sintese:`<p><b>Princípios da Administração Pública</b> (art. 37 CF, aplicáveis aos delegatários): legalidade, impessoalidade, moralidade, publicidade e eficiência.</p>
+   <p><b>Princípios institucionais</b> (art. 1º da LRP e da Lei 8.935/94): <b>publicidade, autenticidade, segurança e eficácia</b>.</p>
+   <p><b>Princípios específicos:</b></p>
+   <ul>
+   <li><b>Legalidade</b> — não se registra ato ilícito; veda-se associação para fins ilícitos ou paramilitar (CF, art. 5º, XVII; LRP, art. 115).</li>
+   <li><b>Publicidade</b> — efeitos erga omnes, de forma <b>indireta</b> (certidão); aqui é <b>constitutiva</b> de direitos.</li>
+   <li><b>Autenticidade</b> — presunção de veracidade; o direito de anular a constituição da PJ <b>decai em 3 anos</b> (art. 45, p.ú., CC) → depois, presunção absoluta.</li>
+   <li><b>Prioridade</b> — quem apresenta primeiro tem preferência (ex.: direito ao nome da PJ).</li>
+   <li><b>Territorialidade</b> — a <b>sede</b> define a competência registral (art. 46, I, CC; arts. 120 e 123, LRP).</li>
+   <li><b>Rogação/Instância</b> — o oficial age por provocação, não de ofício (art. 13, LRP; registro com base em <b>uma via</b>, art. 121).</li>
+   <li><b>Continuidade/trato sucessivo</b> — a cadeia registral não admite lacunas (art. 45 CC).</li>
+   </ul>`,
+   lei:`<p><span class="art-num">CF/88, art. 5º, XVII.</span> É plena a liberdade de associação para fins lícitos, vedada a de caráter paramilitar.</p>
+   <p><span class="art-num">LRP, art. 13.</span> Salvo anotações/averbações obrigatórias, os atos do registro são praticados: I — por ordem judicial; II — a requerimento dos interessados; III — a requerimento do MP, quando a lei autorizar.</p>
+   <p><span class="art-num">LRP, art. 121.</span> O registro será feito com base em uma via do estatuto, compromisso ou contrato, a requerimento do representante legal (redação da Lei 14.382/2022).</p>
+   <p><span class="art-num">CC, art. 45.</span> Começa a existência legal das PJ de direito privado com a inscrição do ato constitutivo, averbando-se todas as alterações posteriores. Parágrafo único: decai em 3 anos o direito de anular a constituição.</p>`,
+   mem:`<b>Adm. Pública:</b> <span class="mnemo">LIMPE</span> (Legalidade · Impessoalidade · Moralidade · Publicidade · Eficiência).<br><b>Institucionais:</b> <span class="mnemo">P-A-S-E</span> (Publicidade · Autenticidade · Segurança · Eficácia).<br>Continuidade = <b>cadeia sem buracos</b>: associação inativa que pula diretorias → qualificação <b>negativa</b>. Decadência da anulação = <span class="mnemo">3 anos</span> (art. 45, p.ú.).`,
+   recall:[
+     {p:'Quais são os quatro princípios institucionais do registro (art. 1º da LRP e da Lei 8.935)?',r:'Publicidade, autenticidade, segurança e eficácia.'},
+     {p:'Em quanto tempo decai o direito de anular a constituição de uma PJ de direito privado?',r:'Três anos, contados da publicação da inscrição no registro (art. 45, parágrafo único, CC) — após o que há presunção absoluta de veracidade.'},
+     {p:'O que define a competência registral no RCPJ?',r:'A sede da pessoa jurídica (princípio da territorialidade; art. 46, I, CC e arts. 120/123 da LRP).'},
+     {p:'Uma associação inativa apresenta apenas a ata da nova diretoria, sem as anteriores. Qual a solução?',r:'Há violação ao princípio da continuidade/trato sucessivo → qualificação negativa. O interessado deve suprir a cadeia (registrar as atas faltantes) ou obter nomeação judicial de administrador provisório (art. 49 CC).'}
+   ]},
+
+  {id:'atrib', tipo:'conteudo', tema:'Atribuições', pag:'94–97',
+   titulo:'9 · RCPJ — Atribuições (arts. 114–115)',
+   sintese:`<p><b>Inscrições (art. 114):</b> <b>I</b> — contratos, atos constitutivos, estatutos ou compromissos das sociedades civis, religiosas, pias, morais, científicas ou literárias, fundações e associações de utilidade pública; <b>II</b> — sociedades civis com formas das leis comerciais, <b>salvo as anônimas</b>; <b>III</b> — atos constitutivos e estatutos dos <b>partidos políticos</b>. Parágrafo único: <b>matrícula</b> de jornais, periódicos, oficinas impressoras, empresas de radiodifusão e agências de notícias.</p>
+   <p><b>Averbações:</b> também se averbam as alterações posteriores dos atos constitutivos. Exclui-se a competência sobre PJ <b>empresárias</b>.</p>
+   <p><b>Certidões:</b> qualquer pessoa pode requerê-las <b>sem informar motivo</b> (art. 17); são expedidas em até <b>5 dias</b> (arts. 16 e 19), em inteiro teor, resumo ou relatório.</p>
+   <p><b>Objeto ilícito (art. 115):</b> não se registram atos cujo objeto indique destino/atividade ilícitos, nocivos ou perigosos ao bem público, à ordem pública, à moral e aos bons costumes. Ocorrendo isso, o oficial <b>sobresta e suscita dúvida ao juiz</b> (de ofício ou por provocação de qualquer autoridade).</p>
+   <p><b>Visto de advogado:</b> sua falta impede o registro (salvo ME e EPP).</p>`,
+   lei:`<p><span class="art-num">Art. 114.</span> No RCPJ inscrevem-se: I — atos constitutivos de sociedades civis/religiosas/pias/morais/científicas/literárias, fundações e associações de utilidade pública; II — sociedades civis com formas comerciais, salvo anônimas; III — atos constitutivos e estatutos dos partidos políticos. P. único: matrícula de jornais, oficinas impressoras, radiodifusão e agências de notícias.</p>
+   <p><span class="art-num">Art. 115.</span> Não se registram atos constitutivos com objeto ilícito ou nocivo; o oficial, de ofício ou por provocação de qualquer autoridade, sobrestará o registro e suscitará dúvida ao juiz.</p>
+   <p><span class="art-num">Arts. 16, 17 e 19.</span> Qualquer pessoa pode requerer certidão sem informar o motivo; prazo de até 5 dias.</p>`,
+   mem:`<b>Art. 114 — o que inscreve:</b> <span class="mnemo">I = atos constitutivos · II = soc. civis com forma comercial (salvo S/A) · III = partidos</span>; <b>P.ú. = imprensa</b> (matrícula).<br>Objeto ilícito (art. 115): oficial <span class="mnemo">SOBRESTA + suscita DÚVIDA</span> — única dúvida que pode ser <b>de ofício</b>. Falta de visto de advogado barra o registro (exceto ME/EPP).`,
+   recall:[
+     {p:'Cite os três incisos de inscrição do art. 114 e o que diz o parágrafo único.',r:'I — atos constitutivos de sociedades civis/religiosas/morais/científicas/literárias, fundações e associações de utilidade pública; II — sociedades civis com forma comercial, salvo anônimas; III — partidos políticos. P. único: matrícula de jornais, oficinas impressoras, radiodifusão e agências de notícias.'},
+     {p:'O que faz o oficial diante de ato constitutivo com objeto ilícito (art. 115)?',r:'Sobresta o registro e suscita dúvida ao juiz, de ofício ou por provocação de qualquer autoridade. É a dúvida que pode ser instaurada de ofício.'},
+     {p:'Qualquer pessoa pode pedir certidão no RCPJ? Em que prazo?',r:'Sim, sem informar motivo ou interesse (art. 17), no prazo de até 5 dias (arts. 16 e 19), em inteiro teor, resumo ou relatório.'}
+   ]},
+
+  {id:'qualrcpj', tipo:'conteudo', tema:'Qualif. RCPJ', pag:'96–102',
+   titulo:'10 · RCPJ — Qualificação e Requisitos (art. 46 CC / art. 120 LRP)',
+   sintese:`<p><b>Qualificação rigorosa:</b> o oficial examina forma e conteúdo. Positiva → registra; <b>negativa → sobresta e suscita dúvida</b>. O CC reforça: art. 1.152 (regularidade das publicações) e art. 1.153 (autenticidade/legitimidade do signatário + prescrições legais; notifica para sanar).</p>
+   <p><b>Requisitos do ato constitutivo (art. 46 CC e art. 120 LRP):</b></p>
+   <ul>
+   <li><b>Denominação, fins, sede, tempo de duração</b> e <b>fundo social</b> (quando houver);</li>
+   <li><b>Nome e individualização</b> dos fundadores/instituidores e dos diretores;</li>
+   <li><b>Modo de administração e representação</b> (ativa/passiva, judicial/extrajudicial);</li>
+   <li>Se o ato é <b>reformável</b> quanto à administração e de que modo;</li>
+   <li>Se os membros respondem ou não, <b>subsidiariamente</b>, pelas obrigações sociais;</li>
+   <li><b>Condições de extinção</b> e <b>destino do patrimônio</b>.</li>
+   </ul>
+   <p><b>Detalhes:</b> a denominação não pode coincidir com outra já existente (proteção do art. 1.155, p.ú., CC); a <b>sede</b> define o domicílio e a competência; ausente a administração, o juiz nomeia administrador provisório (art. 49 CC).</p>`,
+   lei:`<p><span class="art-num">CC, art. 46.</span> O registro declarará: I — denominação, fins, sede, tempo de duração e fundo social; II — nome e individualização de fundadores/instituidores e diretores; III — modo de administração e representação; IV — se o ato é reformável quanto à administração; V — responsabilidade subsidiária dos membros; VI — condições de extinção e destino do patrimônio.</p>
+   <p><span class="art-num">CC, art. 1.153.</span> Cumpre à autoridade verificar a autenticidade e a legitimidade do signatário e fiscalizar as prescrições legais; das irregularidades, notifica-se o requerente para saná-las.</p>
+   <p><span class="art-num">LRP, art. 120.</span> Lista, em paralelo ao art. 46 do CC, as indicações do registro das sociedades, fundações e partidos.</p>`,
+   mem:`<b>Requisitos do art. 46 (6 itens):</b> pense em <span class="mnemo">"Quem · O quê · Como · Pode mudar · Responde · Acaba"</span> → fundadores/diretores · denominação-fins-sede-duração-fundo · administração/representação · reformabilidade · responsabilidade subsidiária · extinção/destino do patrimônio.<br>Negativa → <b>sobresta + dúvida</b>. Denominação <b>não pode repetir</b> (prioridade + nome).`,
+   recall:[
+     {p:'Enumere os requisitos essenciais do ato constitutivo (art. 46 CC).',r:'Denominação, fins, sede, tempo de duração e fundo social; nome/individualização de fundadores-instituidores e diretores; modo de administração e representação; reformabilidade quanto à administração; responsabilidade subsidiária (ou não) dos membros; condições de extinção e destino do patrimônio.'},
+     {p:'O que o oficial verifica conforme o art. 1.153 do CC?',r:'A autenticidade e a legitimidade do signatário do requerimento e a observância das prescrições legais quanto ao ato e aos documentos; havendo irregularidade, notifica o requerente para saná-la.'},
+     {p:'A denominação da nova PJ pode coincidir com outra já registrada?',r:'Não — há proteção do nome (art. 1.155, p.ú., CC) e o princípio da prioridade impõe qualificação negativa à posterior.'}
+   ]},
+
+  {id:'prazorcpj', tipo:'conteudo', tema:'Prazos RCPJ', pag:'101–102',
+   titulo:'11 · RCPJ — Prazos (30 dias) e arts. 188/205',
+   sintese:`<p><b>Prazo para levar a registro (art. 1.151 CC):</b> <b>30 dias</b> contados da <b>lavratura</b> do ato. Cabe à pessoa obrigada em lei; em caso de omissão/demora, ao sócio ou qualquer interessado (que respondem por perdas e danos).</p>
+   <p><b>Registro fora do prazo:</b> ainda é possível, mas o registro só produz efeito <b>a partir da data da concessão</b> (não da assinatura/lavratura) — art. 1.151, §2º.</p>
+   <p><b>Prazos do oficial:</b> o registro é <b>imediato</b>; não sendo possível, lança-se no protocolo, sem superar:</p>
+   <ul>
+   <li><b>Art. 188</b> — registro ou nota devolutiva em <b>10 dias</b> do protocolo (antes 30; redação da Lei 14.382/2022);</li>
+   <li><b>Art. 205</b> — a prenotação cessa em <b>20 dias</b> (antes 30); na regularização fundiária de interesse social, <b>40 dias</b>.</li>
+   </ul>`,
+   lei:`<p><span class="art-num">CC, art. 1.151.</span> §1º documentos apresentados em 30 dias da lavratura; §2º requerido além do prazo, o registro só produz efeito a partir da concessão; §3º responsáveis respondem por perdas e danos.</p>
+   <p><span class="art-num">LRP, art. 188.</span> Protocolizado o título, registro ou nota devolutiva em 10 dias (Lei 14.382/2022).</p>
+   <p><span class="art-num">LRP, art. 205.</span> Cessam os efeitos da prenotação em 20 dias (40 dias na Reurb-S).</p>`,
+   mem:`<b>Não confunda os prazos:</b> <span class="mnemo">PARTE leva em 30 dias</span> (da lavratura, art. 1.151 CC) · <span class="mnemo">OFICIAL: 188 = 10 dias / 205 = 20 dias</span> (40 na Reurb-S).<br>Fora dos 30 dias → registro vale <b>da concessão</b>. Compare: RTD = 20 dias da assinatura.`,
+   recall:[
+     {p:'Qual o prazo para a parte levar o ato a registro no RCPJ e de quando se conta?',r:'30 dias contados da lavratura do ato (art. 1.151, §1º, CC).'},
+     {p:'O que ocorre se o registro for requerido após os 30 dias?',r:'Ainda é possível, mas o registro só produz efeito a partir da data da concessão, não da lavratura/assinatura (art. 1.151, §2º).'},
+     {p:'Quais os prazos do oficial nos arts. 188 e 205 após a Lei 14.382/2022?',r:'Art. 188: registro ou nota devolutiva em 10 dias do protocolo; art. 205: a prenotação cessa em 20 dias (40 dias na regularização fundiária de interesse social).'}
+   ]},
+
+  {id:'livrcpj', tipo:'conteudo', tema:'Livros RCPJ', pag:'103–105',
+   titulo:'12 · RCPJ — Livros A e B (art. 116)',
+   sintese:`<p><b>Dois livros obrigatórios</b> (art. 116, redação da Lei 14.382/2022):</p>
+   <ul>
+   <li><b>Livro A</b> — registro dos atos constitutivos (incisos I e II do art. 114): sociedades civis, religiosas, pias, morais, científicas, literárias, fundações, associações de utilidade pública, sociedades civis com forma comercial (salvo S/A) e partidos políticos.</li>
+   <li><b>Livro B</b> — <b>matrícula</b> das oficinas impressoras, jornais, periódicos, empresas de radiodifusão e agências de notícias.</li>
+   </ul>
+   <p><b>Meios:</b> os livros podem ser escriturados por sistemas de computação, microfilmagem, disco óptico e outros meios de reprodução.</p>
+   <p><b>Exame do objeto (art. 115):</b> só entidades de objeto lícito podem ser registradas; do contrário, o oficial sobresta e suscita dúvida ao juiz — exemplo de dúvida instaurada <b>de ofício</b> (segundo Martha El Debs, ligada à grave perturbação da ordem jurídica, e não à dúvida técnica dos arts. 198 e seguintes).</p>`,
+   lei:`<p><span class="art-num">Art. 116.</span> Haverá: I — Livro A, para os fins dos incisos I e II do art. 114; II — Livro B, para matrícula das oficinas impressoras, jornais, periódicos, empresas de radiodifusão e agências de notícias (redação da Lei 14.382/2022).</p>
+   <p><span class="art-num">Art. 115, p. único.</span> Ocorrendo objeto ilícito, o oficial, de ofício ou por provocação de qualquer autoridade, sobrestará o registro e suscitará dúvida ao juiz.</p>`,
+   mem:`<span class="mnemo">RCPJ = só 2 livros</span> (contra 7 do RTD).<br><span class="mnemo">Livro A = Atos constitutivos</span> · <span class="mnemo">Livro B = imprensa (Broadcast)</span> — jornais, oficinas, radiodifusão, agências de notícias (matrícula).`,
+   recall:[
+     {p:'Quantos livros obrigatórios tem o RCPJ e o que se registra em cada um?',r:'Dois: Livro A (atos constitutivos — incisos I e II do art. 114) e Livro B (matrícula de oficinas impressoras, jornais, periódicos, radiodifusão e agências de notícias).'},
+     {p:'A dúvida do art. 115 é a mesma dos arts. 198 e seguintes?',r:'Não. Segundo Martha El Debs, a do art. 115 pode ser instaurada de ofício (ligada à grave perturbação da ordem jurídica); a técnica dos arts. 198+ resolve dissenso entre usuário e registrador e é vedada de ofício.'}
+   ]},
+
+  {id:'public', tipo:'conteudo', tema:'Publicidade', pag:'105–107',
+   titulo:'13 · RCPJ — Gestão Documental, Índices e Publicidade',
+   sintese:`<p><b>Gestão documental (art. 117):</b> todos os exemplares de contratos, atos, estatutos e publicações registrados e arquivados são <b>encadernados por períodos certos</b>, acompanhados de <b>índice</b> que facilite a busca e o exame.</p>
+   <p><b>Índices (art. 118):</b> feitos pelos oficiais em <b>ordem cronológica e alfabética</b> de todos os registros e arquivamentos; pode-se adotar o <b>sistema de fichas</b>, mas o oficial permanece <b>sempre responsável por qualquer erro ou omissão</b>.</p>
+   <p><b>Publicidade constitutiva (art. 119):</b> aqui a publicidade <b>não é declaratória/informativa, mas constitutiva</b> — a existência legal da PJ <b>só começa com o registro</b> dos atos constitutivos, garantindo oponibilidade <b>erga omnes</b>.</p>
+   <p><b>Presunção absoluta (art. 45, p.ú., CC):</b> decai em <b>3 anos</b> o direito de anular a constituição; decorrido o prazo, o registro alcança presunção absoluta (<i>juris et de jure</i>).</p>`,
+   lei:`<p><span class="art-num">Art. 117.</span> Exemplares de contratos, atos, estatutos e publicações serão encadernados por períodos certos, com índice que facilite a busca.</p>
+   <p><span class="art-num">Art. 118.</span> Os oficiais farão índices, em ordem cronológica e alfabética, de todos os registros e arquivamentos, podendo adotar o sistema de fichas, mas ficando sempre responsáveis por qualquer erro ou omissão.</p>
+   <p><span class="art-num">Art. 119.</span> A existência legal das pessoas jurídicas só começa com o registro de seus atos constitutivos. <span class="art-num">CC, art. 45, p.ú.:</span> decai em 3 anos o direito de anular a constituição.</p>`,
+   mem:`<b>Índices (art. 118):</b> <span class="mnemo">ordem CRONOLÓGICA + ALFABÉTICA</span>; fichas são permitidas, mas o oficial <b>sempre responde</b> por erro/omissão.<br>No RCPJ a publicidade é <span class="mnemo">CONSTITUTIVA</span> (art. 119) — a PJ só "nasce" com o registro. Anulação decai em <span class="mnemo">3 anos</span> → depois, presunção absoluta (juris et de jure).`,
+   recall:[
+     {p:'Em que ordem são feitos os índices do RCPJ e quem responde por erros?',r:'Em ordem cronológica e alfabética (art. 118). Pode-se usar sistema de fichas, mas o oficial permanece sempre responsável por qualquer erro ou omissão.'},
+     {p:'A publicidade no RCPJ é declaratória ou constitutiva?',r:'Constitutiva: a existência legal da PJ só começa com o registro de seus atos constitutivos (art. 119), gerando oponibilidade erga omnes.'},
+     {p:'O que ocorre após 3 anos do registro da PJ?',r:'Decai o direito de anular a constituição (art. 45, p.ú., CC); o registro passa a gozar de presunção absoluta de veracidade (juris et de jure).'}
+   ]}
+];
+
+function defaultState(){return{dominado:{},revisao:{},notas:{},recall:{},leiOpen:{},posicao:0,modo:'todas',temaFiltro:''};}
+let state=defaultState(),lista=[],paused=false,sSecs=0,timerInterval=null;
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function buildLista(){var t=today(),ids;
+  if(state.modo==='todas'){ids=CARDS.map(function(c){return c.id;});}
+  else if(state.modo==='hoje'){ids=CARDS.filter(function(c){var r=state.revisao[c.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(c){return c.id;});}
+  else if(state.modo==='conteudo'){ids=CARDS.filter(function(c){return c.tipo==='conteudo';}).map(function(c){return c.id;});}
+  else if(state.modo==='tema'){var m=state.temaFiltro;ids=CARDS.filter(function(c){return !m||c.tema===m;}).map(function(c){return c.id;});}
+  else{ids=CARDS.map(function(c){return c.id;});}
+  return ids;}
+function computeStats(){var conteudo=CARDS.filter(function(c){return c.tipo==='conteudo';}),total=conteudo.length,dom=0,t=today(),hoje=0;
+  conteudo.forEach(function(c){if(state.dominado[c.id])dom++;var r=state.revisao[c.id];if(r&&r.nextDate&&r.nextDate<=t)hoje++;});
+  var pct=total>0?Math.round(dom/total*100):0;return{total:total,dom:dom,pend:total-dom,hoje:hoje,pct:pct};}
+function renderStats(){var s=computeStats();
+  document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.dom+'</span><span class="sl">Dominados</span></div><div class="stat-chip"><span class="sv amber">'+s.pend+'</span><span class="sl">A revisar</span></div><div class="stat-chip"><span class="sv cyan">'+s.hoje+'</span><span class="sl">Revisar hoje</span></div><div class="stat-chip"><span class="sv">'+s.total+'</span><span class="sl">Temas</span></div>';
+  var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.dom+'/'+s.total+' temas dominados ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){sSecs++;}var s=document.getElementById('timerS');if(s)s.textContent=fmtTime(sSecs);},1000);}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();renderStats();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar revisão:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">24h</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function domBtnHTML(id){var a=state.dominado[id]?' active':'',l=state.dominado[id]?'✓ Dominado':'☐ Marcar dominado';return'<button class="dom-btn'+a+'" onclick="toggleDom(\''+id+'\')">'+l+'</button>';}
+function toggleDom(id){if(state.dominado[id])delete state.dominado[id];else state.dominado[id]=true;saveState();renderCard();renderStats();}
+function toggleLei(id){state.leiOpen[id]=!state.leiOpen[id];saveState();var b=document.getElementById('lei-body-'+id),t=document.getElementById('lei-tog-'+id);if(b)b.classList.toggle('open',!!state.leiOpen[id]);if(t)t.textContent=state.leiOpen[id]?'▲ Ocultar letra da lei / artigos-chave':'📜 Ver letra da lei / artigos-chave';}
+function toggleRecall(id,i){var k=id+'_'+i;state.recall[k]=!state.recall[k];saveState();var el=document.getElementById('rec-'+k);if(el)el.classList.toggle('open',!!state.recall[k]);}
+function salvarNota(id,txt){state.notas[id]=txt;saveState();}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();renderCard();window.scrollTo(0,0);}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();renderCard();window.scrollTo(0,0);}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='tema'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();renderCard();renderStats();window.scrollTo(0,0);}
+function setTemaFiltro(val){state.temaFiltro=val;state.posicao=0;lista=buildLista();saveState();renderCard();}
+function populateTemaSelect(){var temas=[];CARDS.forEach(function(c){if(c.tipo==='conteudo'&&temas.indexOf(c.tema)===-1)temas.push(c.tema);});var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha o tema —</option>';temas.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.temaFiltro)o.selected=true;sel.appendChild(o);});}
+function recallHTML(card){if(!card.recall)return'';var h='<div class="sec-label recall">🎯 Active Recall — responda antes de abrir</div>';
+  card.recall.forEach(function(rc,i){var k=card.id+'_'+i,open=state.recall[k]?' open':'';
+    h+='<div class="recall-item'+open+'" id="rec-'+k+'"><div class="recall-q" onclick="toggleRecall(\''+card.id+'\','+i+')"><span class="qmark">?</span><span>'+rc.p+'</span><span class="chev">▸</span></div><div class="recall-a">'+rc.r+'</div></div>';});
+  return h;}
+function notasHTML(id){var v=state.notas[id]||'';return'<div class="notas-wrap"><div class="notas-label">📝 Explique com suas palavras (técnica Feynman)</div><textarea class="notas-area" placeholder="Resuma este tema do seu jeito, anote pegadinhas, jurisprudência…" oninput="salvarNota(\''+id+'\', this.value)">'+esc(v)+'</textarea></div>';}
+function renderCard(){var cont=document.getElementById('mainContent');
+  if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhum card neste filtro.</div></div>';return;}
+  var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],c=CARDS.find(function(x){return x.id===id;});if(!c){cont.innerHTML='';return;}
+  var html='<div class="nav-counter">Card '+(pos+1)+' de '+lista.length+'</div>';
+  if(c.tipo==='tecnica'){
+    html+='<div class="card intro"><div class="card-meta"><span class="badge badge-tema">'+c.tema+'</span><span class="badge badge-pag">'+c.pag+'</span></div><div class="card-title">'+c.titulo+'</div><div class="prose">'+c.html+'</div><div class="tech-grid">';
+    c.tech.forEach(function(t){html+='<div class="tech"><h4>'+t.h+'</h4><p>'+t.p+'</p><span class="how">▶ '+t.how+'</span></div>';});
+    html+='</div></div>';
+  } else if(c.tipo==='mapa'){
+    html+='<div class="card mapa"><div class="card-meta"><span class="badge badge-tema">'+c.tema+'</span><span class="badge badge-pag">págs. '+c.pag+'</span></div><div class="card-title">'+c.titulo+'</div><div class="prose">'+c.html+'</div>';
+    if(c.mem)html+='<div class="sec-label mem">🧠 Mapa mnemônico</div><div class="mem-box">'+c.mem+'</div>';
+    html+='<div class="sec-label sintese">📑 Roteiro do bloco</div><table class="map-table"><tr><th>Págs.</th><th>Assunto</th></tr>';
+    c.rows.forEach(function(r){html+='<tr><td class="pg">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
+    html+='</table></div>';
+  } else {
+    var leiOpen=state.leiOpen[id]?' open':'',leiLbl=state.leiOpen[id]?'▲ Ocultar letra da lei / artigos-chave':'📜 Ver letra da lei / artigos-chave';
+    html+='<div class="card"><div class="card-meta"><span class="badge badge-tema">'+c.tema+'</span><span class="badge badge-pag">págs. '+c.pag+'</span>'+reviewBadgeHTML(id)+domBtnHTML(id)+'</div><div class="card-title">'+c.titulo+'</div>';
+    html+='<div class="sec-label sintese">📑 Síntese para revisão</div><div class="prose">'+c.sintese+'</div>';
+    html+='<button class="lei-toggle" id="lei-tog-'+id+'" onclick="toggleLei(\''+id+'\')">'+leiLbl+'</button><div class="lei-body'+leiOpen+'" id="lei-body-'+id+'">'+c.lei+'</div>';
+    html+='<div class="sec-label mem">🧠 Técnica de memorização</div><div class="mem-box">'+c.mem+'</div>';
+    html+=recallHTML(c);
+    html+=notasHTML(id);
+    html+=schedRowHTML(id);
+    html+='</div>';
+  }
+  html+='<div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próximo →</button></div>';
+  cont.innerHTML=html;}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso (anotações, revisões, dominados) será apagado.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='caderno_rtd_rcpj_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — Caderno RTD/RCPJ (págs. 67–107)\n'+today()+'\n\n',n=0;CARDS.forEach(function(c){var nota=state.notas&&state.notas[c.id];if(nota&&nota.trim()){n++;txt+='【'+c.tema+' · '+c.titulo+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_rtd_rcpj_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateTemaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='tema'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function init(){loadState();populateTemaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='tema')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+init();
+</script>
+</body>
+</html>
