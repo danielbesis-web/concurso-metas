@@ -114,6 +114,28 @@ body{
 .stt.ac .n{color:var(--green)}.stt.er .n{color:var(--red)}.stt.rev .n{color:var(--amber)}
 
 .end{text-align:center;color:var(--muted);font-size:11px;margin-top:28px}
+
+/* Painel por disciplina */
+.disc-panel{margin-bottom:24px}
+.disc-section-title{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.disc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;margin-bottom:8px}
+.disc-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:10px}
+.disc-nome{font-size:13px;font-weight:800;color:var(--text)}
+.disc-num{font-size:13px;font-weight:800;white-space:nowrap}
+.disc-num.bom{color:var(--green)}.disc-num.med{color:var(--amber)}.disc-num.fraco{color:var(--red)}
+.disc-bar{height:5px;background:rgba(255,255,255,.06);border-radius:5px;margin-bottom:10px;overflow:hidden}
+.disc-fill{height:5px;border-radius:5px;transition:.3s}
+.disc-erros{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.disc-erros-label{font-size:11px;font-weight:800;color:var(--red);white-space:nowrap;padding-top:2px}
+.disc-tags{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.disc-tag{background:rgba(242,85,85,.1);border:1px solid rgba(242,85,85,.22);
+  border-radius:5px;padding:2px 7px;font-size:11px;font-weight:700;color:var(--red);
+  text-decoration:none;transition:.12s}
+.disc-tag:hover{background:rgba(242,85,85,.22)}
+.disc-zero{font-size:12px;color:var(--green);font-weight:700}
+.disc-pending{font-size:12px;color:var(--muted);font-style:italic}
 </style>
 </head>
 <body>
@@ -125,6 +147,8 @@ body{
   </div>
 
   <div class="stats" id="statsGlobal"></div>
+
+  <div id="disc-panel" class="disc-panel"></div>
 
   <div style="text-align:center;margin-bottom:20px">
     <a href="cadernos.html" style="display:inline-flex;align-items:center;gap:7px;background:#0b1828;border:1px solid #155a72;border-radius:10px;padding:9px 18px;color:#38bdf8;font-size:13px;font-weight:700;text-decoration:none;">📓 Cadernos de Revisão</a>
@@ -150,28 +174,28 @@ const METAS = [
   {dia:6, titulo:"Meta 6 · Notarial", sub:"Normas cartoriais",           ferramentas:[]},
   {dia:7, titulo:"Meta 7 · Tributário", sub:"Direito tributário",        ferramentas:[]},
   {dia:8, titulo:"Meta 8 · Administrativo", sub:"Direito administrativo",ferramentas:[]},
-  {dia:9, titulo:"Meta 9 · Civil",    sub:"Defeitos do NJ · Prescrição · Obrigações",
+  {dia:9, titulo:"Meta 9 · Civil", sub:"Defeitos do NJ · Prescrição · Obrigações", disc:"Civil",
     ferramentas:[
       {nome:"Q54 a Q68", icon:"📝", url:"meta9-q54-q68.html", store:"concurso_q54_q68_v2", total:15},
       {nome:"Q69 a Q83", icon:"📝", url:"meta9-q69-q83.html", store:"concurso_q69_q83_v2", total:15},
       {nome:"Q84 a Q98", icon:"📝", url:"meta9-q84-q98.html", store:"concurso_q84_q98_v2", total:15}
     ]
   },
-  {dia:10, titulo:"Meta 10 · Notarial", sub:"Lei do Protesto",
+  {dia:10, titulo:"Meta 10 · Notarial", sub:"Lei do Protesto", disc:"Lei do Protesto",
     ferramentas:[
       {nome:"Lei do Protesto — Parte 1", icon:"📝", url:"meta10-notarial.html", store:"concurso_q130_q144_v1", total:15},
       {nome:"Lei do Protesto — Parte 2", icon:"📝", url:"meta10-notarial-parte2.html", store:"concurso_meta10_parte2_v1", total:15},
       {nome:"Lei do Protesto — Parte 3", icon:"📝", url:"meta10-notarial-parte3.html", store:"concurso_meta10_parte3_v1", total:15}
     ]
   },
-  {dia:11, titulo:"Meta 11 · Processual Civil", sub:"Direito Processual Civil",
+  {dia:11, titulo:"Meta 11 · Processual Civil", sub:"Direito Processual Civil", disc:"Processual Civil",
     ferramentas:[
       {nome:"Processual Civil — Parte 1", icon:"📝", url:"meta11-procesocivil.html", store:"concurso_meta11_procivil_v1", total:14},
       {nome:"Processual Civil — Parte 2", icon:"📝", url:"meta11-procesocivil-parte2.html", store:"concurso_meta11_procivil_p2_v1", total:16},
       {nome:"Processual Civil — Parte 3", icon:"📝", url:"meta11-procesocivil-parte3.html", store:"concurso_meta11_procivil_p3_v1", total:15}
     ]
   },
-  {dia:12, titulo:"Meta 12 · Direito Penal", sub:"Direito Penal",
+  {dia:12, titulo:"Meta 12 · Direito Penal", sub:"Direito Penal", disc:"Direito Penal",
     ferramentas:[
       {nome:"Direito Penal — Q1 a Q15", icon:"📝", url:"meta12-direitopenal-q1-q15.html", store:"concurso_meta12_penal_q1q15_v1", total:15},
       {nome:"Direito Penal — Q16 a Q30", icon:"📝", url:"meta12-direitopenal-q16-q30.html", store:"concurso_meta12_penal_q16q30_v1", total:15}
@@ -280,7 +304,84 @@ function render(){
   `;
 }
 
+function lerQuestoesErradas(store, url){
+  try{
+    const s=JSON.parse(localStorage.getItem(store)||'{}');
+    if(s.caderno && Object.keys(s.caderno).length){
+      return Object.keys(s.caderno)
+        .sort((a,b)=>parseInt(a.replace(/\D/g,''))-parseInt(b.replace(/\D/g,'')))
+        .map(id=>({label:'Q'+id.replace(/\D/g,''), url}));
+    }
+    return [];
+  }catch(e){return[];}
+}
+
+function renderDiscPanel(){
+  const discs={};
+  METAS.forEach(m=>{
+    if(!m.disc||!m.ferramentas.length) return;
+    if(!discs[m.disc]) discs[m.disc]={acertos:0,erros:0,total:0,respondidas:0,erradas:[]};
+    m.ferramentas.forEach(f=>{
+      const p=lerProgresso(f.store,f.total,f.revStore);
+      discs[m.disc].acertos+=p.acertos;
+      discs[m.disc].erros+=p.erros;
+      discs[m.disc].total+=f.total;
+      discs[m.disc].respondidas+=p.respondidas;
+      lerQuestoesErradas(f.store, f.url).forEach(q=>discs[m.disc].erradas.push(q));
+    });
+  });
+
+  const entries=Object.entries(discs);
+  const comDados=entries.filter(([,d])=>d.respondidas>0);
+  if(!comDados.length) return;
+
+  const cards=entries.map(([nome,d])=>{
+    if(!d.respondidas){
+      return `<div class="disc-card">
+        <div class="disc-card-top">
+          <span class="disc-nome">${nome}</span>
+          <span class="disc-num" style="color:var(--muted)">${d.total} questões</span>
+        </div>
+        <span class="disc-pending">Não iniciado</span>
+      </div>`;
+    }
+    const pct=Math.round(d.acertos/d.respondidas*100);
+    const numClass=pct>=80?'bom':pct>=60?'med':'fraco';
+    const fillColor=pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--red)';
+    const resto=d.total-d.respondidas;
+
+    let erroHTML='';
+    if(d.erradas.length===0){
+      erroHTML=`<span class="disc-zero">✓ Nenhum erro registrado</span>`;
+    } else {
+      const tags=d.erradas.map(q=>`<a class="disc-tag" href="${q.url}" target="_blank">${q.label}</a>`).join('');
+      erroHTML=`<div class="disc-erros">
+        <span class="disc-erros-label">❌ ${d.erros}:</span>
+        <div class="disc-tags">${tags}</div>
+      </div>`;
+    }
+
+    const restoTxt=resto>0?` <span style="font-size:11px;color:var(--muted)">(+${resto} pendentes)</span>`:'';
+
+    return `<div class="disc-card">
+      <div class="disc-card-top">
+        <span class="disc-nome">${nome}${restoTxt}</span>
+        <span class="disc-num ${numClass}">${d.acertos}/${d.respondidas} · ${pct}%</span>
+      </div>
+      <div class="disc-bar"><div class="disc-fill" style="width:${pct}%;background:${fillColor}"></div></div>
+      ${erroHTML}
+    </div>`;
+  }).join('');
+
+  document.getElementById('disc-panel').innerHTML=
+    `<div class="disc-section-title">
+       <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>
+       Desempenho por Disciplina
+     </div>${cards}`;
+}
+
 render();
+renderDiscPanel();
 </script>
 </body>
 </html>
