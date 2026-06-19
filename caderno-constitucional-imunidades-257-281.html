@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Constitucional — Imunidades, Perda do Mandato e Processo Legislativo (págs. 257–281)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:760px;margin:0 auto}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.sec-label.jur{color:#f472b6}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.jur-box{background:#1a0a1c;border:1px solid #4a1f4a;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:13px;line-height:1.55;color:#f5cce8}
+.jur-box .info{display:inline-block;background:#3a1a3a;color:#f9b8e6;border:1px solid #6b2a6b;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:4px}
+.jur-box b{color:#fce4f5}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0;counter-increment:p}
+.list-pega li:before{content:counter(p);position:absolute;left:0;top:0;background:#1a1200;border:1px solid #4a3200;color:#fbbf24;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#f3dca8}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner-save">📘 Caderno interativo · clique nos blocos 📜 e 🎯 para revelar letra da lei e respostas</div>
+<div class="header">
+  <h1>📘 Caderno de Revisão · Direito Constitucional</h1>
+  <div class="sub"><b>Comissão Representativa</b> · <b>Imunidades Parlamentares</b> · <b>Perda do Mandato</b> · <b>Processo Legislativo</b> (iniciativa, sanção, veto) · e-Book de Constitucional, <b>págs. 257–281</b></div>
+  <div class="toc">
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#c1">1 Comissões</a>
+    <a href="#c2">2 Imun. teoria</a>
+    <a href="#c3">3 Material</a>
+    <a href="#c4">4 Formal</a>
+    <a href="#c5">5 Foro</a>
+    <a href="#c6">6 Outras Gar.</a>
+    <a href="#c7">7 Estadual/Mun.</a>
+    <a href="#c8">8 Perda Mand.</a>
+    <a href="#c9">9 P. Legisl.</a>
+    <a href="#c10">10 Iniciativa</a>
+    <a href="#c11">11 Sanção/Veto</a>
+    <a href="#tab">📊 Tabelas</a>
+    <a href="#sum">⚖️ Súmulas</a>
+    <a href="#peg">⚠️ Pegadinhas</a>
+    <a href="#flash">🔁 Flashcards</a>
+    <a href="#check">✅ Checklist</a>
+  </div>
+</div>
+<div class="content">
+
+<div class="card mapa" id="mapa">
+  <div class="card-meta"><span class="badge badge-tema">Mapa</span><span class="badge badge-pag">págs. 257–281</span></div>
+  <div class="card-title">🗺️ Faixa de Páginas × Assuntos</div>
+  <div class="prose"><p>Dois grandes eixos: <b>estatuto do parlamentar</b> (Comissão Representativa, imunidades, foro, perda do mandato) e <b>processo legislativo</b> (iniciativa, sanção e veto). Conteúdo super recorrente em prova oral e em prova objetiva de Cartório/Magistratura.</p></div>
+  <div class="mem-box"><b>Âncoras do bloco:</b><br>• <span class="mnemo">MATERIAL = CONTEÚDO · FORMAL = PROCESSO</span> (art. 53)<br>• <span class="mnemo">VEREADOR = SÓ MATERIAL + circunscrição</span> (art. 29, VIII)<br>• <span class="mnemo">VETO = expresso · motivado · supressivo · superável · irretratável · formal</span><br>• <span class="mnemo">1% · 5 Estados · 0,3%</span> (iniciativa popular)</div>
+  <table class="map-table">
+    <tr><th>Págs.</th><th>Assunto</th></tr>
+    <tr><td class="pg">257</td><td>Comissão Mista e <b>Comissão Representativa</b> (art. 58, §4º)</td></tr>
+    <tr><td class="pg">258–259</td><td>Imunidades parlamentares — conceito (Celso de Mello, Lenza); irrenunciabilidade; não se estendem a suplentes</td></tr>
+    <tr><td class="pg">259–262</td><td><b>Imunidade material</b> (art. 53, caput) + jurisprudência (Info 810, 969, 1051, 1053)</td></tr>
+    <tr><td class="pg">262–263</td><td><b>Imunidade formal</b> — prisão (§2º) e processo (§§3º a 5º + EC 35/2001)</td></tr>
+    <tr><td class="pg">263–264</td><td><b>Prerrogativa de foro</b> (§1º); cancelamento da Súm. 394/STF (Inq 687 QO)</td></tr>
+    <tr><td class="pg">264</td><td>Outras garantias: sigilo de fonte (§6º), Forças Armadas (§7º), estado de sítio (§8º)</td></tr>
+    <tr><td class="pg">264–265</td><td>Imunidade estadual (art. 27, §1º — Info 939) e municipal (art. 29, VIII — Info 775)</td></tr>
+    <tr><td class="pg">266</td><td>Incompatibilidades e impedimentos (art. 54)</td></tr>
+    <tr><td class="pg">266–269</td><td><b>Perda do mandato</b> (arts. 55-56); condenação criminal — Info 863/903/904</td></tr>
+    <tr><td class="pg">270</td><td>Processo legislativo — espécies normativas (art. 59)</td></tr>
+    <tr><td class="pg">271–275</td><td><b>Fase de iniciativa</b>: regra geral, concorrente, privativa (PR, Judiciário, TC), iniciativa popular</td></tr>
+    <tr><td class="pg">276–281</td><td><b>Fase constitutiva</b>: Casa iniciadora x revisora; emendas; sanção tácita/expressa; veto (Info 1059)</td></tr>
+  </table>
+</div>
+
+<div class="card" id="c1">
+  <div class="card-meta"><span class="badge badge-tema">Comissões</span><span class="badge badge-pag">pág. 257</span></div>
+  <div class="card-title">1 · Comissão Mista e Comissão Representativa</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Comissão mista:</b> formada por <b>Deputados e Senadores</b>; aprecia assuntos a serem examinados em <b>sessão conjunta</b> pelo Congresso Nacional (ex.: vetos, MPs).</p>
+    <p><b>Comissão representativa (art. 58, §4º):</b> instalada <b>somente durante o recesso parlamentar</b>; eleita por cada Casa na <b>última sessão ordinária</b> do período legislativo, reproduzindo, quanto possível, a <b>proporcionalidade partidária</b>.</p>
+    <p><b>Sessão legislativa × período legislativo</b> (EC 50/2006 — art. 57, caput): a sessão é anual (2/fev a 17/jul e 1º/ago a 22/dez), dividida em dois <b>períodos legislativos</b>. Cada período elege a Comissão para o recesso que se segue (18-31/jul e 23/dez-1º/fev).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 58, §4º.</span> Durante o recesso, haverá uma Comissão representativa do Congresso Nacional, eleita por suas Casas na última sessão ordinária do período legislativo, com atribuições definidas no regimento comum, cuja composição reproduzirá, quanto possível, a proporcionalidade da representação partidária.</p>
+    <p><span class="art-num">CF, art. 57, caput</span> (EC 50/2006): O Congresso Nacional reunir-se-á, anualmente, na Capital Federal, de 2/2 a 17/7 e de 1º/8 a 22/12.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">REPRESENTATIVA = RECESSO</span> — só existe nesse intervalo.<br><span class="mnemo">MISTA = MIX (Dep + Sen)</span> para sessão conjunta.<br>Sessão legislativa = 1 ano · 2 períodos · 2 recessos · 2 representativas.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quando se constitui a Comissão Representativa?</span><span class="chev">▸</span></summary><div class="recall-a">Somente durante o recesso parlamentar (art. 58, §4º). É eleita na última sessão ordinária do período legislativo anterior, com composição que reproduz a proporcionalidade partidária.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quantas Comissões Representativas há por sessão legislativa?</span><span class="chev">▸</span></summary><div class="recall-a">Duas — uma para cada recesso. Recesso de inverno: 18-31/jul; recesso de fim de ano: 23/dez-1º/fev.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Comissão mista é o quê?</span><span class="chev">▸</span></summary><div class="recall-a">Formada por Deputados e Senadores, aprecia assuntos de sessão conjunta do Congresso Nacional (ex.: votação de vetos, comissão mista de MPs do art. 62, §9º).</div></details>
+</div>
+
+<div class="card" id="c2">
+  <div class="card-meta"><span class="badge badge-tema">Imunidades — teoria</span><span class="badge badge-pag">págs. 258–259</span></div>
+  <div class="card-title">2 · Imunidades Parlamentares — Teoria Geral</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Conceito (Lenza):</b> são <b>prerrogativas inerentes à função</b> parlamentar, garantidoras do exercício do mandato com plena liberdade. <b>Não</b> são direito pessoal/subjetivo — não se confundem com <b>privilégio</b>.</p>
+    <p><b>Caráter institucional (Celso de Mello, Inq 510/DF):</b> "o instituto da imunidade atua como condição e garantia de independência do Poder Legislativo, seu real destinatário. Estende-se ao congressista <b>ratione muneris</b>, em função do cargo. Por isso o congressista, isoladamente, <b>não tem poder de disposição</b> sobre ela".</p>
+    <p><b>Consequências:</b></p>
+    <ul>
+      <li><b>Irrenunciáveis</b> — decorrem da função, não da pessoa.</li>
+      <li><b>Não se estendem aos suplentes</b>, salvo quando assumem ou estão em efetivo exercício.</li>
+    </ul>
+    <p><b>Classificação (Lenza):</b></p>
+    <ul>
+      <li><b>Material (real, substantiva, inviolabilidade)</b> — exclui o crime e a responsabilidade civil pelas opiniões, palavras e votos (art. 53, <i>caput</i>).</li>
+      <li><b>Formal (adjetiva, processual)</b> — regras sobre prisão e processo criminal (art. 53, §§2º a 5º).</li>
+    </ul>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 53, caput</span> (red. EC 35/2001): Os Deputados e Senadores são invioláveis, civil e penalmente, por quaisquer de suas opiniões, palavras e votos.</p>
+    <p><span class="art-num">Inq 510/DF</span>, Rel. Min. Celso de Mello, j. 1º.2.1991 — caráter institucional e irrenunciabilidade.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">PRERROGATIVA ≠ PRIVILÉGIO</span> — institucional, não pessoal.<br><span class="mnemo">IRRENUNCIÁVEL · NÃO ALCANÇA SUPLENTE</span> (salvo em exercício).<br>Material = CONTEÚDO · Formal = PROCESSO.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Por que as imunidades são irrenunciáveis?</span><span class="chev">▸</span></summary><div class="recall-a">Porque são prerrogativas institucionais ratione muneris — pertencem ao cargo, não à pessoa do parlamentar (Celso de Mello, Inq 510/DF).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O suplente goza de imunidade parlamentar?</span><span class="chev">▸</span></summary><div class="recall-a">Não — salvo quando assume o cargo ou está em efetivo exercício. A imunidade decorre da função.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferencie prerrogativa de privilégio.</span><span class="chev">▸</span></summary><div class="recall-a">Prerrogativa é institucional (decorre da função, é irrenunciável e garante a independência do Poder); privilégio é pessoal e contrário à isonomia.</div></details>
+</div>
+
+<div class="card" id="c3">
+  <div class="card-meta"><span class="badge badge-tema">Imunidade material</span><span class="badge badge-pag">págs. 259–262</span></div>
+  <div class="card-title">3 · Imunidade Material (Inviolabilidade)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>Garantida aos parlamentares federais (Deputados e Senadores), <b>civil e penalmente</b>, por quaisquer de suas <b>opiniões, palavras e votos</b> (art. 53, <i>caput</i>).</p>
+    <p><b>Requisito-chave:</b> <b>nexo de causalidade</b> com a atividade parlamentar — a manifestação deve ser proferida <b>no exercício</b> ou <b>em razão</b> das funções, <b>não se restringindo ao recinto</b> do Congresso.</p>
+    <p>O <b>local não é decisivo:</b> mesmo fora do Congresso há imunidade se houver pertinência funcional; mesmo dentro pode <b>não</b> haver, se o conteúdo for desvinculado.</p>
+    <p><b>Limites materiais</b> (STF, atualidades): a imunidade <b>NÃO cobre</b> discurso de ódio, manifestações racistas, ataques ao Estado de Direito, opiniões "criminosas" — fora do exercício legítimo (art. 5º, XLII).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 53, caput.</span> Os Deputados e Senadores são invioláveis, civil e penalmente, por quaisquer de suas opiniões, palavras e votos.</p>
+    <p><span class="art-num">CF, art. 5º, XLII.</span> A prática do racismo constitui crime inafiançável e imprescritível.</p>
+  </div></details>
+  <div class="sec-label jur">⚖️ Jurisprudência — Dizer o Direito</div>
+  <div class="jur-box"><span class="info">Info 810</span><b>STF, Inq 4088 e 4097/DF</b> (Rel. Min. Edson Fachin, 1.12.2015) — "mesmo quando desbordem e se enquadrem em tipos penais, as palavras dos congressistas, <b>desde que guardem alguma pertinência</b> com suas funções, estarão cobertas pela imunidade material do art. 53, caput".</div>
+  <div class="jur-box"><span class="info">Info 969</span><b>STF, PET 7174/DF</b> (Rel. p/ ac. Min. Marco Aurélio, 10.3.2020) — Wladimir Costa: o fato de o parlamentar estar na Casa <b>não afasta</b> a possibilidade de crime contra a honra, sobretudo quando as ofensas são divulgadas pelo próprio na <b>internet</b>; a imunidade só abarca <b>nexo direto e evidente</b> com o exercício do mandato.</div>
+  <div class="jur-box"><span class="info">Info 1053</span><b>STF, Pet 8242 e outras/DF</b> (Red. Min. Gilmar Mendes, 3.5.2022) — Sen. Kajuru: manifestações <b>injuriosas em redes sociais</b>, dolosas e genéricas, sem prova, <b>NÃO</b> protegidas pela imunidade material (teoria funcional + abuso da garantia).</div>
+  <div class="jur-box"><span class="info">Info 1051</span><b>STF, AP 1044/DF</b> (Rel. Min. Alexandre de Moraes, 20.4.2022) — Daniel Silveira: a imunidade <b>incide apenas</b> sobre manifestações no desempenho da função, <b>não como escudo</b> para discurso de ódio, ataques à democracia ou abolição do Estado de Direito; continuidade normativo-típica entre a LSN (Lei 7.170/83) e os arts. 359-L e 286, p.ú., do CP (Lei 14.197/2021).</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">NEXO + PERTINÊNCIA</span> = condição da imunidade material.<br>Não basta estar no plenário; não basta opinar — precisa <b>do mandato</b>.<br>Internet, redes sociais, ataques pessoais SEM pauta → <b>não há imunidade</b> (Info 969, 1051, 1053).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual o requisito-chave da imunidade material?</span><span class="chev">▸</span></summary><div class="recall-a">Nexo de causalidade com a atividade parlamentar — a manifestação deve ser proferida no exercício ou em razão das funções, não importa o local físico.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A imunidade material cobre discurso de ódio?</span><span class="chev">▸</span></summary><div class="recall-a">Não. O STF entende que discurso de ódio, racismo (art. 5º, XLII) e ataques ao Estado Democrático de Direito estão fora do exercício legítimo do mandato (AP 1044/DF — Daniel Silveira).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Parlamentar publica ofensa na internet — há imunidade?</span><span class="chev">▸</span></summary><div class="recall-a">Depende do conteúdo: se houver nexo com o mandato, sim; se forem ofensas genéricas, dolosas e sem prova, NÃO (Info 1053 — Kajuru; Info 969 — Wladimir Costa).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Cobre apenas o que é dito no plenário?</span><span class="chev">▸</span></summary><div class="recall-a">Não — protege mesmo manifestações feitas fora do Congresso, desde que mantenham pertinência com o mandato (Info 810).</div></details>
+</div>
+
+<div class="card" id="c4">
+  <div class="card-meta"><span class="badge badge-tema">Imunidade formal</span><span class="badge badge-pag">págs. 262–263</span></div>
+  <div class="card-title">4 · Imunidade Formal (Processual) — Prisão e Processo</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Para a prisão (art. 53, §2º):</b> desde a expedição do diploma, os parlamentares <b>não poderão ser presos</b>, salvo em <b>flagrante de crime inafiançável</b>. Os autos seguem em <b>24h</b> à Casa, que decide sobre a prisão pelo voto da <b>maioria</b> de seus membros.</p>
+    <p><b>Para o processo (art. 53, §§3º-5º + EC 35/2001):</b></p>
+    <ul>
+      <li>Antes da EC 35/2001 era necessária a <b>prévia licença</b> da Casa para o processo — gerava impunidade.</li>
+      <li>Hoje: recebida a denúncia por crime ocorrido <b>após a diplomação</b>, o STF dá ciência à Casa, que pode, por <b>iniciativa de partido</b> com representação e voto da <b>maioria absoluta</b>, <b>sustar</b> o andamento da ação penal até a decisão final.</li>
+      <li>O pedido de sustação é apreciado pela Casa em <b>45 dias</b> improrrogáveis do recebimento pela Mesa (§4º).</li>
+      <li>A sustação do processo <b>suspende a prescrição</b> enquanto durar o mandato (§5º).</li>
+    </ul>
+    <p><b>Conclusões da EC 35/2001:</b></p>
+    <ul>
+      <li><b>NÃO</b> há mais necessidade de prévia licença.</li>
+      <li><b>NÃO</b> há imunidade processual para crimes <b>antes</b> da diplomação.</li>
+    </ul>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 53, §2º.</span> Desde a expedição do diploma, os membros do Congresso Nacional não poderão ser presos, salvo em flagrante de crime inafiançável. Nesse caso, os autos serão remetidos em 24 horas à Casa respectiva, para que, pelo voto da maioria de seus membros, resolva sobre a prisão.</p>
+    <p><span class="art-num">CF, art. 53, §3º.</span> Recebida a denúncia contra Senador ou Deputado, por crime ocorrido após a diplomação, o STF dará ciência à Casa respectiva, que poderá, por iniciativa de partido político nela representado e pelo voto da maioria de seus membros, sustar o andamento da ação.</p>
+    <p><span class="art-num">CF, art. 53, §4º.</span> O pedido de sustação será apreciado pela Casa no prazo improrrogável de 45 dias do recebimento pela Mesa.</p>
+    <p><span class="art-num">CF, art. 53, §5º.</span> A sustação do processo suspende a prescrição, enquanto durar o mandato.</p>
+  </div></details>
+  <div class="sec-label jur">⚖️ Jurisprudência — Dizer o Direito</div>
+  <div class="jur-box"><span class="info">Info 939</span><b>STF, ADI 5823, 5824 e 5825 MC</b> (Red. Min. Marco Aurélio, 8.5.2019) — é <b>constitucional</b> resolução de Assembleia Legislativa que, com base em imunidade formal (art. 53, §2º c/c art. 27, §1º), <b>revoga a prisão preventiva e as cautelares</b> impostas a Deputado Estadual — o Legislativo pode sustar decisões judiciais que afastem ou limitem a função parlamentar.</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">PRISÃO = flagrante de inafiançável + 24h + voto da MAIORIA</span>.<br><span class="mnemo">PROCESSO = só DEPOIS da diplomação + iniciativa de PARTIDO + MAIORIA ABSOLUTA + 45 dias</span>.<br>EC 35/2001 acabou com a "prévia licença" e com a imunidade quanto a crimes anteriores ao diploma.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em que hipóteses um parlamentar federal pode ser preso?</span><span class="chev">▸</span></summary><div class="recall-a">Apenas em flagrante de crime inafiançável (art. 53, §2º). Os autos seguem à Casa em 24h, que decide pela maioria sobre a manutenção da prisão.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem pode sustar o processo penal contra parlamentar federal e como?</span><span class="chev">▸</span></summary><div class="recall-a">A Casa respectiva, por iniciativa de partido nela representado e pelo voto da maioria absoluta de seus membros, no prazo improrrogável de 45 dias. Aplica-se só a crimes pós-diplomação.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que muda na prescrição quando o processo é sustado?</span><span class="chev">▸</span></summary><div class="recall-a">A prescrição fica suspensa enquanto durar o mandato (art. 53, §5º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que a EC 35/2001 alterou?</span><span class="chev">▸</span></summary><div class="recall-a">Acabou com a necessidade de prévia licença da Casa para processar parlamentar; e eliminou a imunidade processual para crimes anteriores à diplomação.</div></details>
+</div>
+
+<div class="card" id="c5">
+  <div class="card-meta"><span class="badge badge-tema">Prerrogativa de foro</span><span class="badge badge-pag">págs. 263–264</span></div>
+  <div class="card-title">5 · Prerrogativa de Foro ("Foro Privilegiado")</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Art. 53, §1º + art. 102, I, "b"</b>: desde a expedição do diploma, Deputados e Senadores são julgados pelo <b>STF</b>.</p>
+    <p><b>Natureza:</b> não protege a pessoa, mas garante o <b>exercício do cargo/mandato</b>. Lenza prefere "<b>prerrogativa de foro</b>" a "foro privilegiado".</p>
+    <p><b>Súmula 394/STF — CANCELADA</b> (Inq 687 QO, Rel. Min. Sydney Sanches, 25.8.1999): dizia que a prerrogativa se mantinha para ex-membros do Congresso. O STF cancelou a tese — <b>ex-parlamentares</b> não têm foro especial; competência vai ao <b>juízo de 1º grau</b>.</p>
+    <p><b>Atualidade — restrição funcional (AP 937 QO, 2018):</b> a prerrogativa só se aplica a crimes <b>praticados no cargo e em razão dele</b> (critério funcional).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 53, §1º.</span> Os Deputados e Senadores, desde a expedição do diploma, serão submetidos a julgamento perante o STF.</p>
+    <p><span class="art-num">CF, art. 102, I, "b".</span> Compete ao STF processar e julgar, originariamente, nas infrações penais comuns, os membros do Congresso Nacional.</p>
+    <p><span class="art-num">Súmula 394/STF (CANCELADA).</span> Inq 687 QO, j. 25.8.1999 — tese não se refletiu na CF/88; ex-membros não têm foro.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">PRERROGATIVA ≠ PRIVILÉGIO</span> · protege a função, não a pessoa.<br><span class="mnemo">EX-PARLAMENTAR = SEM FORO</span> (Inq 687 QO cancelou a Súm. 394).<br><span class="mnemo">AP 937: crime no cargo + em razão dele</span> (filtro funcional do STF).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Por que se prefere "prerrogativa de foro" a "foro privilegiado"?</span><span class="chev">▸</span></summary><div class="recall-a">Porque não é um privilégio pessoal — é uma prerrogativa institucional que decorre do efetivo exercício do cargo, voltada a garantir a independência da função (Lenza).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Por que a Súmula 394 do STF foi cancelada?</span><span class="chev">▸</span></summary><div class="recall-a">Porque o art. 102, I, "b", da CF/88 confere foro originário no STF para "os membros do Congresso Nacional" — não contempla ex-membros. Inq 687 QO (1999).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que decidiu a AP 937 QO (2018)?</span><span class="chev">▸</span></summary><div class="recall-a">Restringiu o foro por prerrogativa a crimes praticados no exercício do cargo e em razão dele (critério funcional).</div></details>
+</div>
+
+<div class="card" id="c6">
+  <div class="card-meta"><span class="badge badge-tema">Outras garantias</span><span class="badge badge-pag">pág. 264</span></div>
+  <div class="card-title">6 · Outras Garantias do Parlamentar (art. 53, §§ 6º-8º)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <ul>
+      <li><b>Sigilo de fonte (§6º):</b> Deputados e Senadores <b>não</b> são obrigados a testemunhar sobre informações recebidas/prestadas em razão do mandato, nem sobre as pessoas que lhes confiaram informações.</li>
+      <li><b>Incorporação às Forças Armadas (§7º):</b> mesmo militares e ainda que em tempo de guerra, depende de <b>prévia licença</b> da Casa.</li>
+      <li><b>Estado de Defesa e Estado de Sítio (§8º):</b> em regra, as imunidades <b>subsistem</b>. <b>Exceção:</b> no <b>estado de sítio</b>, podem ser suspensas por voto de <b>2/3</b> da Casa, nos casos de atos praticados <b>fora do recinto</b> do Congresso, incompatíveis com a execução da medida.</li>
+    </ul>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 53, §6º.</span> Os Deputados e Senadores não serão obrigados a testemunhar sobre informações recebidas ou prestadas em razão do exercício do mandato, nem sobre as pessoas que lhes confiaram ou deles receberam informações.</p>
+    <p><span class="art-num">CF, art. 53, §7º.</span> A incorporação às Forças Armadas, embora militares e ainda que em tempo de guerra, dependerá de prévia licença da Casa respectiva.</p>
+    <p><span class="art-num">CF, art. 53, §8º.</span> As imunidades subsistirão durante o estado de sítio, só podendo ser suspensas mediante o voto de 2/3 dos membros da Casa respectiva, nos casos de atos praticados fora do recinto do Congresso, que sejam incompatíveis com a execução da medida.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">SIGILO · LICENÇA · 2/3 NO SÍTIO</span> = trilogia do §§ 6-7-8.<br>Estado de <b>DEFESA</b>: imunidades sempre intactas. Estado de <b>SÍTIO</b>: podem cair por 2/3, atos fora do recinto.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Parlamentar é obrigado a testemunhar sobre fontes?</span><span class="chev">▸</span></summary><div class="recall-a">Não — sigilo de fonte (art. 53, §6º). Não testemunha sobre informações recebidas/prestadas em razão do mandato nem sobre as pessoas envolvidas.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quando se suspendem as imunidades durante a anormalidade?</span><span class="chev">▸</span></summary><div class="recall-a">Apenas no estado de sítio, por voto de 2/3 da Casa, e somente para atos fora do recinto do Congresso incompatíveis com a execução da medida (art. 53, §8º). No estado de defesa, não há suspensão.</div></details>
+</div>
+
+<div class="card" id="c7">
+  <div class="card-meta"><span class="badge badge-tema">Estadual e Municipal</span><span class="badge badge-pag">págs. 264–266</span></div>
+  <div class="card-title">7 · Imunidade Estadual, Distrital e Municipal</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Deputados Estaduais (art. 27, §1º) e Distritais (art. 32, §3º):</b> aplicam-se as <b>mesmas</b> regras dos parlamentares federais — sistema eleitoral, inviolabilidade, imunidades, remuneração, perda do mandato, etc.</p>
+    <p><b>Vereadores (art. 29, VIII):</b> têm <b>apenas imunidade material</b> e somente <b>no exercício do mandato e na circunscrição do Município</b>. <b>Não</b> têm imunidade formal nem prerrogativa de foro pela CF.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 27, §1º.</span> Será de quatro anos o mandato dos Deputados Estaduais, aplicando-se-lhes as regras desta Constituição sobre sistema eleitoral, inviolabilidade, imunidades, remuneração, perda de mandato, licença, impedimentos e incorporação às Forças Armadas.</p>
+    <p><span class="art-num">CF, art. 29, VIII.</span> Inviolabilidade dos Vereadores por suas opiniões, palavras e votos no exercício do mandato e na circunscrição do Município.</p>
+    <p><span class="art-num">CF, art. 32, §3º.</span> Aos Deputados Distritais e à Câmara Legislativa aplica-se o disposto no art. 27.</p>
+  </div></details>
+  <div class="sec-label jur">⚖️ Jurisprudência — Dizer o Direito</div>
+  <div class="jur-box"><span class="info">Info 939</span><b>STF, ADI 5823, 5824, 5825 MC</b> (8.5.2019) — Deputados Estaduais gozam das <b>mesmas imunidades formais</b> previstas para parlamentares federais; é constitucional resolução da ALE que revoga prisão preventiva e cautelares impostas a Deputado Estadual.</div>
+  <div class="jur-box"><span class="info">Info 775</span><b>STF, RE 600063/SP</b> (Red. Min. Roberto Barroso, 25.2.2015 — repercussão geral) — tese: "Nos limites da circunscrição do Município e havendo pertinência com o exercício do mandato, garante-se a imunidade prevista no art. 29, VIII, da CF aos vereadores".</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">VEREADOR = SÓ MATERIAL + LIMITES MUNICIPAIS</span>.<br><span class="mnemo">DEP. ESTADUAL = TUDO igual ao federal</span> (Info 939).<br>Município → não há "sustação de processo" nem foro especial pela CF.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Vereador tem imunidade formal?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Apenas imunidade material e, ainda assim, restrita ao exercício do mandato e à circunscrição do Município (art. 29, VIII; RE 600063 — Info 775).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>ALE pode revogar prisão preventiva de Dep. Estadual?</span><span class="chev">▸</span></summary><div class="recall-a">Sim — STF reconheceu a constitucionalidade dessa resolução estadual com base no art. 53, §2º c/c art. 27, §1º (ADI 5823/5824/5825 MC — Info 939).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O Vereador goza de foro por prerrogativa?</span><span class="chev">▸</span></summary><div class="recall-a">Não — pela CF/88, não há foro. Eventual foro só pode ser previsto em Constituição Estadual para crimes de outra natureza (e ainda assim com limites do STF).</div></details>
+</div>
+
+<div class="card" id="c8">
+  <div class="card-meta"><span class="badge badge-tema">Perda do mandato</span><span class="badge badge-pag">págs. 266–269</span></div>
+  <div class="card-title">8 · Incompatibilidades, Impedimentos e Perda do Mandato</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Incompatibilidades (art. 54):</b></p>
+    <ul>
+      <li><b>Desde o diploma:</b> firmar contrato com PJ de direito público (salvo cláusulas uniformes); aceitar cargo/função/emprego remunerado nessas entidades.</li>
+      <li><b>Desde a posse:</b> ser proprietário/controlador/diretor de empresa que goze de favor; ocupar cargo demissível ad nutum; patrocinar causa; ser titular de <b>mais de um cargo ou mandato eletivo</b>.</li>
+    </ul>
+    <p><b>Hipóteses de perda do mandato (art. 55):</b></p>
+    <ul>
+      <li>I — infringir as proibições do art. 54;</li>
+      <li>II — procedimento <b>incompatível com o decoro parlamentar</b>;</li>
+      <li>III — faltar a <b>1/3</b> das sessões ordinárias por sessão legislativa (salvo licença);</li>
+      <li>IV — perder/suspender direitos políticos;</li>
+      <li>V — decretação pela Justiça Eleitoral;</li>
+      <li>VI — condenação criminal transitada em julgado.</li>
+    </ul>
+    <p><b>Procedimento:</b></p>
+    <ul>
+      <li><b>Incisos I, II e VI</b> — decisão da Casa, por <b>maioria absoluta</b>, mediante provocação da Mesa ou de partido com representação no CN, assegurada ampla defesa (§2º). Natureza <b>constitutiva</b>.</li>
+      <li><b>Incisos III, IV e V</b> — decisão <b>declarada</b> pela Mesa, de ofício ou por provocação (§3º). Natureza <b>declaratória</b>.</li>
+    </ul>
+    <p><b>Renúncia para frustrar o processo (§4º):</b> a renúncia de parlamentar submetido a processo que vise/possa levar à perda do mandato fica com <b>efeitos suspensos</b> até as deliberações finais.</p>
+    <p><b>Hipóteses de não-perda (art. 56):</b> investidura em cargos de Ministro, Governador de Território, Secretário (Estado/DF/Capital), chefe de missão diplomática temporária; ou licença por doença/interesse particular (este último até <b>120 dias</b> por sessão legislativa, sem remuneração).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 55, §2º.</span> Nos casos dos incisos I, II e VI, a perda do mandato será decidida pela Câmara dos Deputados ou pelo Senado Federal, por maioria absoluta, mediante provocação da respectiva Mesa ou de partido político representado no CN, assegurada ampla defesa.</p>
+    <p><span class="art-num">CF, art. 55, §3º.</span> Nos casos dos incisos III, IV e V, a perda será declarada pela Mesa, de ofício ou mediante provocação, assegurada ampla defesa.</p>
+    <p><span class="art-num">CF, art. 55, §4º.</span> A renúncia de parlamentar submetido a processo que vise ou possa levar à perda do mandato terá seus efeitos suspensos até as deliberações finais (EC de Revisão 6/1994).</p>
+    <p><span class="art-num">CF, art. 56, §2º.</span> Ocorrendo vaga e não havendo suplente, far-se-á eleição se faltarem mais de 15 meses para o término do mandato.</p>
+  </div></details>
+  <div class="sec-label jur">⚖️ Jurisprudência — Dizer o Direito</div>
+  <div class="jur-box"><span class="info">Info 863 e 903</span><b>STF, 1ª Turma — AP 694/MT</b> (Rel. Min. Rosa Weber, 2.5.2017) e <b>AP 968/SP</b> (Rel. Min. Luiz Fux, 22.5.2018) — <b>DEPENDE:</b> se condenação a <b>mais de 120 dias em regime fechado</b>, a perda é consequência lógica (Mesa apenas declara — art. 55, III + §3º); se em <b>regime aberto/semiaberto</b>, o Plenário da Casa delibera (§2º).</div>
+  <div class="jur-box"><span class="info">Info 904</span><b>STF, 2ª Turma — AP 996/DF</b> (Rel. Min. Edson Fachin, 29.5.2018) — <b>NÃO automática:</b> o STF apenas comunica; a Casa delibera como entender, nos termos do art. 55, VI + §2º.</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">PERDA: I-II-VI = Casa por MAIORIA ABSOLUTA</span> (constitutiva).<br><span class="mnemo">III-IV-V = Mesa apenas DECLARA</span>.<br>Renúncia que tenta frustrar processo → efeitos suspensos (§4º — caso Pizzolato/Donadon, lembrar).<br>Faltas: <b>1/3</b> das sessões.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais hipóteses de perda dependem de decisão da Casa por maioria absoluta?</span><span class="chev">▸</span></summary><div class="recall-a">I (infração das proibições do art. 54), II (decoro) e VI (condenação criminal transitada em julgado) — art. 55, §2º.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em que hipóteses a Mesa apenas declara a perda?</span><span class="chev">▸</span></summary><div class="recall-a">III (faltas — 1/3 das sessões), IV (perda/suspensão dos direitos políticos) e V (decretação pela Justiça Eleitoral) — art. 55, §3º.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Condenação criminal transitada em julgado → perda automática?</span><span class="chev">▸</span></summary><div class="recall-a">Divergência interna do STF: 1ª Turma — DEPENDE do regime (fechado > 120 dias = automática); 2ª Turma — NÃO é automática, a Casa delibera.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Parlamentar pode renunciar para evitar a perda?</span><span class="chev">▸</span></summary><div class="recall-a">Não. A renúncia tem efeitos suspensos até as deliberações finais (art. 55, §4º).</div></details>
+</div>
+
+<div class="card" id="c9">
+  <div class="card-meta"><span class="badge badge-tema">Processo Legislativo</span><span class="badge badge-pag">pág. 270</span></div>
+  <div class="card-title">9 · Processo Legislativo — Introdução e Espécies Normativas</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Conceito:</b> conjunto de regras procedimentais previstas na CF/88 para a elaboração das <b>espécies normativas</b> (art. 59):</p>
+    <ul>
+      <li>I — emendas à Constituição;</li>
+      <li>II — leis complementares;</li>
+      <li>III — leis ordinárias;</li>
+      <li>IV — leis delegadas;</li>
+      <li>V — medidas provisórias;</li>
+      <li>VI — decretos legislativos;</li>
+      <li>VII — resoluções.</li>
+    </ul>
+    <p><b>Parágrafo único:</b> a <b>LC 95/1998</b> (alterada pela LC 107/2001) dispõe sobre elaboração, redação, alteração e consolidação das leis.</p>
+    <p><b>Vícios (Lenza):</b></p>
+    <ul>
+      <li><b>Vício formal subjetivo</b> — defeito na <b>iniciativa</b> (quem propôs não tinha competência).</li>
+      <li><b>Vício formal objetivo</b> — defeito nas <b>demais fases</b> (quórum, sanção, votação).</li>
+      <li><b>Vício material</b> — defeito no <b>conteúdo</b> da norma (matéria).</li>
+    </ul>
+    <p><b>Fases do processo legislativo (LO):</b> (i) <b>introdutória/iniciativa</b>; (ii) <b>constitutiva</b> (deliberação parlamentar + executiva); (iii) <b>complementar</b> (promulgação + publicação).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 59.</span> O processo legislativo compreende a elaboração de: I — emendas à Constituição; II — leis complementares; III — leis ordinárias; IV — leis delegadas; V — medidas provisórias; VI — decretos legislativos; VII — resoluções.</p>
+    <p><span class="art-num">CF, art. 59, p.ú.</span> Lei complementar disporá sobre a elaboração, redação, alteração e consolidação das leis (LC 95/1998).</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">ELLDMDR</span> = espécies do art. 59 (EC, LC, LO, LD, MP, DL, Res).<br><span class="mnemo">SUBJETIVO = iniciativa · OBJETIVO = demais fases · MATERIAL = conteúdo</span>.<br>Arinos: 5 fases (introdutória, comissões, discussões, deliberações, revisão).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais as espécies normativas do art. 59?</span><span class="chev">▸</span></summary><div class="recall-a">EC, LC, LO, LD, MP, DL, Resolução — 7 espécies.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferencie vício formal subjetivo, objetivo e material.</span><span class="chev">▸</span></summary><div class="recall-a">Subjetivo = iniciativa (quem propôs não tinha competência); Objetivo = demais fases (quórum, votação); Material = conteúdo/matéria da norma.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a LC que regulamenta a elaboração das leis?</span><span class="chev">▸</span></summary><div class="recall-a">LC 95/1998 (alterada pela LC 107/2001).</div></details>
+</div>
+
+<div class="card" id="c10">
+  <div class="card-meta"><span class="badge badge-tema">Fase de Iniciativa</span><span class="badge badge-pag">págs. 271–275</span></div>
+  <div class="card-title">10 · Fase de Iniciativa — Regra Geral, Privativa e Popular</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Regra geral (art. 61):</b> a iniciativa de LC e LO cabe a <b>qualquer membro/Comissão</b> da Câmara, Senado ou CN; ao <b>Presidente da República</b>; ao <b>STF</b>; aos <b>Tribunais Superiores</b>; ao <b>PGR</b>; e aos <b>cidadãos</b>.</p>
+    <p><b>Iniciativa concorrente:</b> mais de um órgão pode deflagrar (ex.: LO comum).</p>
+    <p><b>Iniciativa privativa (reservada/exclusiva)</b> — Lenza prefere "exclusiva" pela indelegabilidade. Hipóteses do art. 61, §1º (PR): efetivos das FA; criação de cargos/aumento; organização administrativa/judiciária/orçamentária dos Territórios; servidores da União; MP/Defensoria da União e normas gerais aos demais; criação/extinção de Ministérios; militares.</p>
+    <p><b>Simetria</b> (Governador, Prefeito): as hipóteses do art. 61, §1º aplicam-se em âmbito estadual, distrital e municipal, sob pena de <b>inconstitucionalidade formal subjetiva</b>.</p>
+    <p><b>Judiciário (art. 96, II):</b> STF, Tribunais Superiores e TJs têm iniciativa privativa para matérias de interesse exclusivo. O <b>Estatuto da Magistratura</b> é LC <b>de iniciativa do STF</b> (art. 93).</p>
+    <p><b>Tribunais de Contas (art. 73 c/c art. 96):</b> propõem ao Legislativo projetos relativos a matérias do art. 96 (ex.: criação/extinção de cargos auxiliares, subsídio dos membros).</p>
+    <p><b>Câmara (art. 51, IV) e Senado (art. 52, XIII):</b> dispõem privativamente sobre sua organização, funcionamento, polícia, criação/transformação/extinção de cargos de seus serviços e fixação da respectiva remuneração.</p>
+    <p><b>Iniciativa popular (art. 61, §2º):</b> apresentação <b>à Câmara dos Deputados</b> de PL subscrito por, no mínimo, <b>1% do eleitorado nacional</b>, distribuído em ao menos <b>5 Estados</b>, com não menos de <b>0,3%</b> dos eleitores em cada um.</p>
+    <p><b>Estadual (art. 27, §4º):</b> remetido à lei. <b>Municipal (art. 29, XIII):</b> <b>5%</b> do eleitorado, em projetos de interesse específico do Município, cidade ou bairros.</p>
+    <p><b>Iniciativa parlamentar × extraparlamentar</b> (Alexandre de Moraes): parlamentar = membros do CN; extraparlamentar = PR, Tribunais Superiores, PGR, cidadãos.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 61.</span> A iniciativa das LC e LO cabe a qualquer membro/Comissão da Câmara, Senado ou CN, ao PR, ao STF, aos Tribunais Superiores, ao PGR e aos cidadãos, na forma e nos casos previstos nesta Constituição.</p>
+    <p><span class="art-num">CF, art. 61, §1º, II.</span> São de iniciativa privativa do PR as leis que disponham sobre: a) criação de cargos/aumento de remuneração; c) servidores da União e Territórios, regime jurídico, provimento, estabilidade, aposentadoria (red. EC 18/1998); d) organização do MP e Defensoria da União e normas gerais; e) criação/extinção de Ministérios (red. EC 32/2001).</p>
+    <p><span class="art-num">CF, art. 61, §2º.</span> A iniciativa popular pode ser exercida pela apresentação à Câmara dos Deputados de PL subscrito por, no mínimo, 1% do eleitorado nacional, distribuído por pelo menos 5 Estados, com não menos de 0,3% dos eleitores de cada um deles.</p>
+    <p><span class="art-num">CF, art. 29, XIII.</span> Iniciativa popular de projetos de lei de interesse específico do Município, da cidade ou de bairros, através de manifestação de, pelo menos, 5% do eleitorado.</p>
+    <p><span class="art-num">CF, art. 96, II.</span> Compete privativamente ao STF, aos Tribunais Superiores e aos Tribunais de Justiça propor ao Legislativo respectivo as matérias de seu interesse exclusivo.</p>
+  </div></details>
+  <div class="sec-label jur">⚖️ Jurisprudência — Dizer o Direito</div>
+  <div class="jur-box"><span class="info">Info 998</span><b>STF, ADI 4726/AP</b> (Rel. Min. Marco Aurélio, 10.11.2020) — é <b>inconstitucional</b>, na acepção formal, norma de iniciativa parlamentar que prevê <b>criação de órgão público e organização administrativa</b> — viola o art. 61, §1º, II, "b" e "e".</div>
+  <div class="jur-box"><span class="info">Info 776</span><b>STF, RE 590829/MG</b> (Rel. Min. Marco Aurélio, 5.3.2015) — a regra do art. 61, §1º, II, "c" (servidores) <b>aplica-se também</b> no âmbito municipal (princípio da simetria) — Lei Orgânica de Cambuí/MG inconstitucional.</div>
+  <div class="jur-box"><span class="info">Info 774</span><b>STF, ADI 3848/RJ</b> (Rel. Min. Marco Aurélio, 11.2.2015) — é <b>inconstitucional</b> EC estadual de iniciativa parlamentar que insere dispositivo determinando revisão automática de remuneração de servidores — matéria reservada ao chefe do Executivo (art. 61, §1º, II, "c").</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">POPULAR FEDERAL: 1% · 5 Estados · 0,3%</span> · entra pela <b>Câmara</b>.<br><span class="mnemo">POPULAR MUNICIPAL: 5%</span> (art. 29, XIII).<br><span class="mnemo">EC parlamentar NÃO BURLA reserva de iniciativa do PR</span> (Info 774).<br><span class="mnemo">SIMETRIA: arts. 61, §1º se aplica a Governador/Prefeito</span> (Info 776).<br>Vício de iniciativa = inconstitucionalidade formal SUBJETIVA, não convalida com sanção.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais matérias são de iniciativa privativa do PR?</span><span class="chev">▸</span></summary><div class="recall-a">Art. 61, §1º: efetivos das FA; criação de cargos/aumento de remuneração; organização administrativa, judiciária, tributária, orçamentária e pessoal dos Territórios; servidores da União; MP e Defensoria da União; criação/extinção de Ministérios; militares.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Pode EC de iniciativa parlamentar tratar de matéria reservada ao chefe do Executivo?</span><span class="chev">▸</span></summary><div class="recall-a">Não — STF, ADI 3848/RJ (Info 774): é inconstitucional EC parlamentar que insere matéria reservada ao Executivo.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Requisitos da iniciativa popular federal?</span><span class="chev">▸</span></summary><div class="recall-a">1% do eleitorado nacional, distribuído por pelo menos 5 Estados, com não menos de 0,3% em cada um. Apresentação à Câmara dos Deputados (art. 61, §2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Iniciativa popular municipal?</span><span class="chev">▸</span></summary><div class="recall-a">5% do eleitorado para projetos de interesse específico do Município, cidade ou bairros (art. 29, XIII).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Estatuto da Magistratura — espécie e iniciativa?</span><span class="chev">▸</span></summary><div class="recall-a">Lei complementar de iniciativa do STF (art. 93).</div></details>
+</div>
+
+<div class="card" id="c11">
+  <div class="card-meta"><span class="badge badge-tema">Fase Constitutiva</span><span class="badge badge-pag">págs. 275–281</span></div>
+  <div class="card-title">11 · Fase Constitutiva — Deliberação Parlamentar e Executiva (Sanção/Veto)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Casa iniciadora × Casa revisora (art. 64):</b> projetos do <b>PR, STF, Tribunais Superiores</b> — e, por extensão (Lenza), <b>iniciativa concorrente de Deputados/Comissões da Câmara</b>, do <b>PGR</b> e <b>popular</b> — começam na <b>Câmara dos Deputados</b>. Senado é casa <b>revisora</b>. Projetos dos <b>Senadores ou Comissões do Senado</b> começam no Senado.</p>
+    <p><b>Caminho do PL:</b> Comissão temática → (se houver questão orçamentária: Comissão de Finanças e Tributação) → CCJ → Plenário. <b>Art. 58, §2º, I</b>: comissões podem discutir e votar PL <b>dispensando o Plenário</b>, salvo recurso de <b>1/10</b> da Casa.</p>
+    <p><b>Destinos do PL na revisora (art. 65):</b></p>
+    <ul>
+      <li><b>Aprovado</b> → vai à sanção/promulgação.</li>
+      <li><b>Rejeitado</b> → arquivado. Reapresentação na <b>mesma sessão legislativa</b> só por proposta da <b>maioria absoluta</b> de qualquer das Casas (art. 67).</li>
+      <li><b>Emendado</b> → volta à iniciadora, que decide manter sua versão ou aceitar a emenda. <b>A iniciadora dá a última palavra</b>.</li>
+    </ul>
+    <p><b>Classificação das emendas (art. 118 RICD):</b> supressiva, aglutinativa, substitutiva, modificativa, aditiva e de redação.</p>
+    <p><b>Deliberação executiva — sanção (art. 66):</b></p>
+    <ul>
+      <li><b>Expressa</b> — PR concorda expressamente.</li>
+      <li><b>Tácita</b> — silêncio por <b>15 dias úteis</b> (§3º).</li>
+      <li>Não há sanção para os <b>arts. 49, 51 e 52</b> (art. 48).</li>
+    </ul>
+    <p><b>Veto (art. 66, §1º):</b></p>
+    <ul>
+      <li>Pode ser <b>jurídico</b> (inconstitucionalidade) ou <b>político</b> (contrário ao interesse público).</li>
+      <li><b>Total</b> ou <b>parcial</b> — o parcial <b>SÓ</b> abrange texto integral de <b>artigo, parágrafo, inciso ou alínea</b> (§2º) — <b>não vale veto de palavra solta</b>.</li>
+      <li><b>Prazo:</b> 15 dias úteis do recebimento; comunicação ao Pres. do Senado em <b>48h</b>.</li>
+      <li><b>Características:</b> <b>expresso, motivado, formal, supressivo, superável (relativo), irretratável</b>.</li>
+      <li><b>Apreciação:</b> sessão conjunta, em <b>30 dias</b>; rejeitado por <b>maioria absoluta</b> dos Dep. e Sen. (§4º). Esgotado o prazo sem deliberação, vai à ordem do dia da sessão imediata, sobrestando o que for (§6º).</li>
+      <li><b>Derrubada</b> (§5º) → projeto vai ao PR para promulgação.</li>
+    </ul>
+    <p><b>Cascata de promulgação (§7º):</b> em sanção tácita ou veto derrubado, se o PR não promulgar em <b>48h</b>, promulga o <b>Pres. do Senado</b>; em igual prazo, o <b>Vice-Pres. do Senado</b>.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 64.</span> A discussão e votação dos projetos de lei de iniciativa do PR, do STF e dos Tribunais Superiores terão início na Câmara dos Deputados.</p>
+    <p><span class="art-num">CF, art. 65.</span> O projeto aprovado por uma Casa será revisto pela outra, em um só turno de discussão e votação, e enviado à sanção ou promulgação, se a revisora o aprovar, ou arquivado, se o rejeitar. Sendo emendado, voltará à Casa iniciadora.</p>
+    <p><span class="art-num">CF, art. 66, §1º.</span> Se o PR considerar o projeto, no todo ou em parte, inconstitucional ou contrário ao interesse público, vetá-lo-á total ou parcialmente, no prazo de 15 dias úteis, contados do recebimento, e comunicará, dentro de 48 horas, ao Presidente do Senado os motivos do veto.</p>
+    <p><span class="art-num">CF, art. 66, §2º.</span> O veto parcial somente abrangerá texto integral de artigo, de parágrafo, de inciso ou de alínea.</p>
+    <p><span class="art-num">CF, art. 66, §3º.</span> Decorrido o prazo de 15 dias, o silêncio do PR importará sanção.</p>
+    <p><span class="art-num">CF, art. 66, §4º.</span> O veto será apreciado em sessão conjunta, dentro de 30 dias a contar de seu recebimento, só podendo ser rejeitado pelo voto da maioria absoluta dos Deputados e Senadores.</p>
+    <p><span class="art-num">CF, art. 66, §7º.</span> Se a lei não for promulgada em 48h pelo PR (nos casos de §§3º e 5º), o Presidente do Senado a promulgará; se este não o fizer em igual prazo, caberá ao Vice-Presidente do Senado fazê-lo.</p>
+    <p><span class="art-num">CF, art. 67.</span> A matéria constante de projeto rejeitado somente poderá constituir objeto de novo projeto, na mesma sessão legislativa, mediante proposta da maioria absoluta dos membros de qualquer das Casas do CN.</p>
+  </div></details>
+  <div class="sec-label jur">⚖️ Jurisprudência — Dizer o Direito</div>
+  <div class="jur-box"><span class="info">Info 1009</span><b>STF, ADI 6442, 6447, 6450, 6525/DF</b> (Rel. Min. Alexandre de Moraes, 13.3.2021) — não há inconstitucionalidade formal no fato de a lei ter sido aprovada por <b>votação virtual</b> em razão da pandemia de Covid-19; deliberação remota não viola normas do processo legislativo.</div>
+  <div class="jur-box"><span class="info">Info 1059</span><b>STF, ADPF 893/DF</b> (Red. Min. Roberto Barroso, 20.6.2022) — o poder de <b>veto extemporâneo</b> (após os 15 dias úteis) é <b>inconstitucional</b>; ultrapassado o prazo, o texto é sancionado tacitamente e o veto não pode mais ser exercido. Para retirar o dispositivo, o Legislativo deve revogá-lo.</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">VETO = EX-MO-FO-SU-SU-IR</span> → <b>Ex</b>presso · <b>Mo</b>tivado · <b>Fo</b>rmal · <b>Su</b>pressivo · <b>Su</b>perável · <b>Ir</b>retratável.<br><span class="mnemo">15 dias úteis · 48h ao Senado · 30 dias para apreciar · maioria ABSOLUTA derruba</span>.<br><span class="mnemo">CASCATA: PR → Pres. Senado → Vice-Pres. Senado (48h cada)</span>.<br>Veto parcial NUNCA atinge palavra/expressão isolada — só artigo, §, inciso ou alínea (§2º).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Que projetos começam na Câmara como casa iniciadora?</span><span class="chev">▸</span></summary><div class="recall-a">Os de iniciativa do PR, STF e Tribunais Superiores (art. 64). Por extensão (Lenza): também os do PGR e os de iniciativa popular. Os projetos dos Senadores começam no Senado.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que ocorre se o projeto for emendado pela revisora?</span><span class="chev">▸</span></summary><div class="recall-a">Volta à iniciadora. Esta dá a última palavra: pode aceitar a emenda e seguir à sanção, ou rejeitar e mandar o texto original para o PR (art. 65, p.ú.).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais são as 6 características do veto?</span><span class="chev">▸</span></summary><div class="recall-a">Expresso · Motivado · Formal (por escrito) · Supressivo · Superável (relativo) · Irretratável.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Como se derruba o veto?</span><span class="chev">▸</span></summary><div class="recall-a">Sessão conjunta, em 30 dias do recebimento; voto da maioria absoluta dos Deputados e Senadores (art. 66, §4º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O PR pode vetar uma palavra do projeto?</span><span class="chev">▸</span></summary><div class="recall-a">Não. O veto parcial só abrange texto integral de artigo, parágrafo, inciso ou alínea (art. 66, §2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Veto fora do prazo de 15 dias úteis é válido?</span><span class="chev">▸</span></summary><div class="recall-a">Não. ADPF 893 (Info 1059): veto extemporâneo é inconstitucional — esgotado o prazo, opera a sanção tácita (art. 66, §3º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem promulga se o PR ficar omisso após a sanção tácita ou derrubada do veto?</span><span class="chev">▸</span></summary><div class="recall-a">Cascata: o PR tem 48h; se omitir, o Presidente do Senado promulga; se este também ficar omisso por 48h, o Vice-Presidente do Senado (art. 66, §7º).</div></details>
+</div>
+
+<div class="card" id="tab">
+  <div class="card-meta"><span class="badge badge-tema">Tabelas</span><span class="badge badge-pag">Comparativos</span></div>
+  <div class="card-title">📊 Tabelas Comparativas</div>
+  <div class="sec-label sintese">Imunidade Material × Formal</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>Material (art. 53, caput)</th><th>Formal (art. 53, §§2º-5º)</th></tr>
+    <tr><td>Natureza</td><td>Causa de atipicidade / exclusão de responsabilidade</td><td>Obstáculo processual (prisão e processo)</td></tr>
+    <tr><td>Abrange</td><td>Opiniões, palavras e votos no exercício do mandato</td><td>Prisão (§2º) e processo criminal (§§3º-5º)</td></tr>
+    <tr><td>Requisito</td><td>Nexo de pertinência com o mandato</td><td>Crime após a diplomação</td></tr>
+    <tr><td>Limite</td><td>Não cobre discurso de ódio nem ataques ao Estado Democrático</td><td>EC 35/2001 → dispensa licença prévia</td></tr>
+  </table>
+  <div class="sec-label sintese">Imunidades — Federal × Estadual × Municipal</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>Federal (CN)</th><th>Estadual (ALE/DF)</th><th>Municipal (Vereador)</th></tr>
+    <tr><td>Material</td><td>Sim (art. 53)</td><td>Sim (art. 27, §1º)</td><td>Sim, mas só no Município (art. 29, VIII)</td></tr>
+    <tr><td>Formal</td><td>Sim (§§2º-5º)</td><td>Sim, simetria (Info 939)</td><td>NÃO</td></tr>
+    <tr><td>Foro CF</td><td>STF (art. 102, I, b)</td><td>TJ (art. 27, §1º)</td><td>NÃO há foro pela CF</td></tr>
+  </table>
+  <div class="sec-label sintese">Perda do Mandato — §2º × §3º do art. 55</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>§2º (I, II, VI)</th><th>§3º (III, IV, V)</th></tr>
+    <tr><td>Quem decide</td><td>Plenário da Casa</td><td>Mesa da Casa</td></tr>
+    <tr><td>Quórum</td><td>Maioria absoluta</td><td>(declaração)</td></tr>
+    <tr><td>Natureza</td><td>Constitutiva</td><td>Declaratória</td></tr>
+    <tr><td>Provocação</td><td>Mesa ou partido</td><td>De ofício / partido / qualquer membro</td></tr>
+  </table>
+  <div class="sec-label sintese">Iniciativa Popular — Federal × Municipal</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>Federal (art. 61, §2º)</th><th>Municipal (art. 29, XIII)</th></tr>
+    <tr><td>% mínimo</td><td>1% do eleitorado nacional</td><td>5% do eleitorado</td></tr>
+    <tr><td>Distribuição</td><td>≥ 5 Estados, com ≥ 0,3% em cada</td><td>—</td></tr>
+    <tr><td>Casa</td><td>Câmara dos Deputados</td><td>Câmara Municipal</td></tr>
+    <tr><td>Estadual</td><td colspan="2">A lei dispõe (art. 27, §4º)</td></tr>
+  </table>
+  <div class="sec-label sintese">Veto — Características e Prazos</div>
+  <table class="cmp-table">
+    <tr><th>Característica</th><th>Significado</th></tr>
+    <tr><td>Expresso</td><td>Não há veto tácito (o silêncio importa sanção)</td></tr>
+    <tr><td>Motivado / Formal</td><td>Por escrito, com fundamentação</td></tr>
+    <tr><td>Supressivo</td><td>Não pode adicionar matéria</td></tr>
+    <tr><td>Superável (relativo)</td><td>Pode ser derrubado por maioria absoluta</td></tr>
+    <tr><td>Irretratável</td><td>O PR não pode "voltar atrás" após enviar ao Senado</td></tr>
+    <tr><td>Prazo</td><td>15 dias úteis (§1º); comunica em 48h ao Sen.</td></tr>
+    <tr><td>Apreciação</td><td>30 dias em sessão conjunta (§4º)</td></tr>
+    <tr><td>Promulgação após</td><td>PR → Pres. Senado → Vice-Pres. Senado (48h cada)</td></tr>
+  </table>
+</div>
+
+<div class="card" id="sum">
+  <div class="card-meta"><span class="badge badge-tema">Súmulas / Jurisprudência</span></div>
+  <div class="card-title">⚖️ Súmulas e Teses Vinculantes</div>
+  <div class="prose">
+    <p><b>Súmula 394/STF (CANCELADA — Inq 687 QO, 25.8.1999):</b> dizia que a prerrogativa de foro se estendia a ex-membros. Cancelada porque a CF/88 só fala em "membros do Congresso Nacional" (art. 102, I, "b").</p>
+    <p><b>RE 600063/SP (Info 775, repercussão geral):</b> tese — <i>"Nos limites da circunscrição do Município e havendo pertinência com o exercício do mandato, garante-se a imunidade prevista no art. 29, VIII, da CF aos vereadores."</i></p>
+    <p><b>AP 937 QO (2018):</b> a prerrogativa de foro só alcança crimes praticados <b>no cargo e em razão dele</b> — restrição funcional.</p>
+    <p><b>Inq 687 QO (1999):</b> cancelamento da Súm. 394; ex-parlamentar vai ao juízo de 1º grau.</p>
+    <p><b>Inq 510/DF (Celso de Mello, 1991):</b> imunidade como prerrogativa institucional, irrenunciável.</p>
+  </div>
+</div>
+
+<div class="card" id="peg">
+  <div class="card-meta"><span class="badge badge-tema">Pegadinhas</span></div>
+  <div class="card-title">⚠️ Pegadinhas e Pontos de Prova</div>
+  <ol class="list-pega">
+    <li>Comissão <b>Representativa</b> só existe durante o <b>recesso</b> (art. 58, §4º) — não confundir com Comissão Mista (sessão conjunta).</li>
+    <li>Imunidade é <b>prerrogativa</b>, não <b>privilégio</b> — <b>irrenunciável</b>.</li>
+    <li>Imunidade <b>não alcança suplentes</b>, salvo se em efetivo exercício.</li>
+    <li>Imunidade material exige <b>nexo</b> com o mandato — o <b>local não é decisivo</b>.</li>
+    <li>Discurso de ódio, racismo e ataques ao Estado Democrático <b>não</b> são protegidos (AP 1044 — Daniel Silveira).</li>
+    <li>Manifestações na <b>internet</b> sem pertinência com o mandato → não há imunidade (Info 969, 1053).</li>
+    <li>Imunidade formal para prisão: só <b>flagrante de crime inafiançável</b>; autos em <b>24h</b> à Casa.</li>
+    <li>Para sustar processo: maioria absoluta + iniciativa de partido + <b>45 dias improrrogáveis</b>.</li>
+    <li>Sustação do processo <b>suspende a prescrição</b>.</li>
+    <li><b>EC 35/2001</b> acabou com a prévia licença e com a imunidade para crimes anteriores ao diploma.</li>
+    <li>Prerrogativa de foro <b>NÃO</b> alcança <b>ex-parlamentar</b> (Súm. 394 cancelada — Inq 687 QO).</li>
+    <li>AP 937 QO: foro só para crimes <b>no cargo e em razão dele</b> (filtro funcional).</li>
+    <li>Sigilo de fonte do §6º não é só sobre informações — também sobre as <b>pessoas</b>.</li>
+    <li>Estado de <b>defesa</b>: imunidades intactas. Estado de <b>sítio</b>: podem cair por <b>2/3</b> da Casa (§8º).</li>
+    <li>Vereador: <b>SÓ material</b> e <b>SÓ na circunscrição</b> do Município (art. 29, VIII).</li>
+    <li>Deputado Estadual: aplicam-se as mesmas regras federais (Info 939) — ALE pode revogar prisão preventiva.</li>
+    <li>Perda do mandato: §2º (I, II, VI) = Plenário decide por maioria absoluta; §3º (III, IV, V) = Mesa só declara.</li>
+    <li>STF divergente sobre condenação criminal: 1ª Turma DEPENDE do regime; 2ª Turma NÃO é automática.</li>
+    <li>Renúncia que tenta frustrar processo de perda → <b>efeitos suspensos</b> (§4º).</li>
+    <li>Faltas para perda do mandato: <b>1/3</b> das sessões ordinárias (não é metade, não é 2/3).</li>
+    <li>Espécies normativas: art. 59 — <b>7 espécies</b> (EC, LC, LO, LD, MP, DL, Resolução).</li>
+    <li>Vício formal SUBJETIVO = iniciativa; OBJETIVO = demais fases; MATERIAL = conteúdo. Não confunda.</li>
+    <li>Iniciativa privativa do PR (art. 61, §1º) <b>vincula</b> Estados, DF e Municípios por simetria.</li>
+    <li><b>EC parlamentar não burla</b> reserva de iniciativa do PR (ADI 3848 — Info 774).</li>
+    <li>Criação de órgão público por iniciativa parlamentar = inconst. formal subjetiva (ADI 4726 — Info 998).</li>
+    <li>Iniciativa popular FEDERAL: <b>1% · 5 Estados · 0,3%</b> + Câmara. MUNICIPAL: <b>5%</b>.</li>
+    <li>Casa iniciadora dá a <b>última palavra</b> sobre as emendas da revisora.</li>
+    <li>Sanção tácita: silêncio do PR por <b>15 dias úteis</b> (§3º).</li>
+    <li>Veto: 6 características — <b>Expresso, Motivado, Formal, Supressivo, Superável, Irretratável</b>.</li>
+    <li>Veto parcial só atinge <b>artigo, §, inciso ou alínea</b> (§2º) — nunca palavra solta.</li>
+    <li>Veto extemporâneo (após 15 dias úteis) é <b>inconstitucional</b> (ADPF 893 — Info 1059).</li>
+    <li>Apreciação do veto: 30 dias, sessão conjunta, maioria absoluta.</li>
+    <li>Cascata da promulgação: PR (48h) → Pres. Senado (48h) → Vice-Pres. Senado.</li>
+    <li>Reapresentação de projeto rejeitado na mesma sessão legislativa: <b>maioria absoluta</b> de qualquer Casa (art. 67).</li>
+    <li>Votação virtual na pandemia = <b>constitucional</b> (Info 1009).</li>
+  </ol>
+</div>
+
+<div class="card" id="flash">
+  <div class="card-meta"><span class="badge badge-tema">Flashcards</span></div>
+  <div class="card-title">🔁 Flashcards (clique para virar)</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quando existe a Comissão Representativa?</span><span class="chev">▸</span></summary><div class="recall-a">Somente no recesso parlamentar (art. 58, §4º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Imunidade é prerrogativa ou privilégio?</span><span class="chev">▸</span></summary><div class="recall-a">Prerrogativa institucional (ratione muneris) — irrenunciável.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Imunidade alcança o suplente?</span><span class="chev">▸</span></summary><div class="recall-a">Não, salvo em efetivo exercício.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Base legal da imunidade material?</span><span class="chev">▸</span></summary><div class="recall-a">Art. 53, caput, CF/88 (red. EC 35/2001).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Requisito-chave da material?</span><span class="chev">▸</span></summary><div class="recall-a">Nexo de pertinência com o exercício do mandato.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Material cobre discurso de ódio?</span><span class="chev">▸</span></summary><div class="recall-a">NÃO (AP 1044 — Info 1051; art. 5º, XLII).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Prisão de parlamentar federal?</span><span class="chev">▸</span></summary><div class="recall-a">Só em flagrante de crime inafiançável; autos à Casa em 24h (art. 53, §2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quórum para a Casa decidir sobre a prisão?</span><span class="chev">▸</span></summary><div class="recall-a">Maioria (não é absoluta — art. 53, §2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quórum para sustar o processo penal?</span><span class="chev">▸</span></summary><div class="recall-a">Maioria absoluta + iniciativa de partido (art. 53, §3º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Prazo para apreciar a sustação?</span><span class="chev">▸</span></summary><div class="recall-a">45 dias improrrogáveis (art. 53, §4º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Sustação do processo + prescrição?</span><span class="chev">▸</span></summary><div class="recall-a">Suspende a prescrição enquanto durar o mandato (§5º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>EC 35/2001 alterou o quê?</span><span class="chev">▸</span></summary><div class="recall-a">Acabou com a prévia licença e com a imunidade para crimes anteriores ao diploma.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Súmula 394/STF — situação atual?</span><span class="chev">▸</span></summary><div class="recall-a">Cancelada pelo Inq 687 QO — ex-parlamentar não tem foro.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>AP 937 QO — o que decidiu?</span><span class="chev">▸</span></summary><div class="recall-a">Foro restrito a crimes no cargo e em razão dele.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quórum para suspender imunidade no estado de sítio?</span><span class="chev">▸</span></summary><div class="recall-a">2/3 dos membros da Casa (art. 53, §8º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Imunidade no estado de defesa?</span><span class="chev">▸</span></summary><div class="recall-a">Intacta — não há suspensão.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Vereador: quais imunidades?</span><span class="chev">▸</span></summary><div class="recall-a">Apenas material, e só na circunscrição do Município (art. 29, VIII).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Deputado Estadual tem imunidade formal?</span><span class="chev">▸</span></summary><div class="recall-a">Sim — mesmas regras dos federais (art. 27, §1º; Info 939).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Faltas que geram perda do mandato?</span><span class="chev">▸</span></summary><div class="recall-a">1/3 das sessões ordinárias por sessão legislativa, salvo licença (art. 55, III).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quem decide os incisos I, II e VI do art. 55?</span><span class="chev">▸</span></summary><div class="recall-a">Plenário da Casa, por maioria absoluta — natureza constitutiva (§2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quem decide os incisos III, IV e V do art. 55?</span><span class="chev">▸</span></summary><div class="recall-a">Mesa da Casa — natureza declaratória (§3º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Renúncia para fugir do processo?</span><span class="chev">▸</span></summary><div class="recall-a">Efeitos suspensos até as deliberações finais (§4º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Espécies normativas (art. 59)?</span><span class="chev">▸</span></summary><div class="recall-a">EC · LC · LO · LD · MP · DL · Resolução (7 espécies).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Vício formal subjetivo é?</span><span class="chev">▸</span></summary><div class="recall-a">Defeito na iniciativa do projeto (quem propôs não tinha competência).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Requisitos da iniciativa popular federal?</span><span class="chev">▸</span></summary><div class="recall-a">1% do eleitorado nacional, ≥ 5 Estados, ≥ 0,3% em cada, na Câmara.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Iniciativa popular municipal?</span><span class="chev">▸</span></summary><div class="recall-a">5% do eleitorado (art. 29, XIII).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Estatuto da Magistratura — iniciativa?</span><span class="chev">▸</span></summary><div class="recall-a">LC de iniciativa do STF (art. 93).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Casa iniciadora dos projetos do PR/STF/Trib. Sup.?</span><span class="chev">▸</span></summary><div class="recall-a">Câmara dos Deputados (art. 64).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quem dá a última palavra sobre emendas da revisora?</span><span class="chev">▸</span></summary><div class="recall-a">A Casa iniciadora (art. 65, p.ú.).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Prazo da sanção tácita?</span><span class="chev">▸</span></summary><div class="recall-a">15 dias úteis (art. 66, §3º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Características do veto?</span><span class="chev">▸</span></summary><div class="recall-a">Expresso, motivado, formal, supressivo, superável, irretratável.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Limites do veto parcial?</span><span class="chev">▸</span></summary><div class="recall-a">Só texto integral de artigo, parágrafo, inciso ou alínea (§2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Veto extemporâneo é válido?</span><span class="chev">▸</span></summary><div class="recall-a">Não (ADPF 893 — Info 1059).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quórum para derrubar o veto?</span><span class="chev">▸</span></summary><div class="recall-a">Maioria absoluta dos Dep. e Sen., sessão conjunta, 30 dias.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Cascata de promulgação?</span><span class="chev">▸</span></summary><div class="recall-a">PR → Pres. Senado → Vice-Pres. Senado (48h cada — art. 66, §7º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Reapresentação de projeto rejeitado na mesma sessão legislativa?</span><span class="chev">▸</span></summary><div class="recall-a">Maioria absoluta de qualquer das Casas (art. 67).</div></details>
+</div>
+
+<div class="card" id="check">
+  <div class="card-meta"><span class="badge badge-tema">Checklist</span></div>
+  <div class="card-title">✅ Checklist de Domínio</div>
+  <div class="prose"><ul>
+    <li>Distinguir Comissão Mista da Comissão Representativa (art. 58, §4º) e situar nas sessões e períodos legislativos</li>
+    <li>Explicar a teoria das imunidades parlamentares como prerrogativa institucional (Celso de Mello — Inq 510)</li>
+    <li>Justificar a irrenunciabilidade e a inaplicação aos suplentes</li>
+    <li>Diferenciar imunidade material × formal (com base legal e natureza jurídica)</li>
+    <li>Citar a teoria do nexo de pertinência (Info 810) e a teoria funcional (Info 1053)</li>
+    <li>Aplicar a jurisprudência sobre discurso de ódio (Info 1051 — Daniel Silveira) e redes sociais (Info 969, 1053)</li>
+    <li>Memorizar o procedimento de prisão de parlamentar (flagrante + inafiançável + 24h + maioria)</li>
+    <li>Dominar a sustação do processo (iniciativa de partido + maioria absoluta + 45 dias + suspensão da prescrição)</li>
+    <li>Conhecer os efeitos da EC 35/2001 sobre a imunidade formal</li>
+    <li>Explicar a prerrogativa de foro e a evolução: Súm. 394 cancelada (Inq 687) + AP 937 QO</li>
+    <li>Distinguir estado de defesa (sem suspensão de imunidades) × estado de sítio (2/3 da Casa)</li>
+    <li>Identificar as imunidades dos Deputados Estaduais/Distritais (Info 939) e os limites das dos Vereadores (Info 775)</li>
+    <li>Memorizar incompatibilidades e impedimentos do art. 54 (desde o diploma × desde a posse)</li>
+    <li>Distinguir as hipóteses de perda do mandato (§2º × §3º do art. 55) e o efeito da renúncia (§4º)</li>
+    <li>Conhecer a divergência interna do STF sobre perda automática por condenação criminal (Info 863/903 × 904)</li>
+    <li>Citar as espécies normativas do art. 59 e a LC 95/1998</li>
+    <li>Diferenciar vícios formal subjetivo × formal objetivo × material</li>
+    <li>Listar as hipóteses do art. 61, §1º (iniciativa privativa do PR) e aplicar por simetria (Info 776)</li>
+    <li>Citar ADI 3848 (Info 774): EC parlamentar não burla iniciativa reservada</li>
+    <li>Citar ADI 4726 (Info 998): inconstitucionalidade da criação de órgão por iniciativa parlamentar</li>
+    <li>Dominar os requisitos da iniciativa popular federal e municipal</li>
+    <li>Identificar a Casa iniciadora em cada hipótese (art. 64)</li>
+    <li>Conhecer as 6 espécies de emenda do art. 118 RICD</li>
+    <li>Diferenciar sanção expressa × tácita e os casos sem sanção (arts. 48, 49, 51, 52)</li>
+    <li>Memorizar as 6 características do veto (E-M-F-S-S-I) e os prazos (15 úteis · 48h · 30 dias)</li>
+    <li>Citar ADPF 893 (Info 1059): veto extemporâneo é inconstitucional</li>
+    <li>Saber a cascata de promulgação do art. 66, §7º (PR → Pres. Sen. → Vice-Pres. Sen.)</li>
+    <li>Citar Info 1009 (votação virtual durante pandemia)</li>
+    <li>Aplicar o art. 67 (reapresentação de projeto rejeitado: maioria absoluta de qualquer Casa)</li>
+  </ul></div>
+</div>
+
+</div>
+<footer>Caderno de Revisão · Constitucional — Imunidades, Perda do Mandato e Processo Legislativo · págs. 257–281 · CF/88 · Fonte: Dizer o Direito, Pedro Lenza, Banco Prova Oral (Notion), QConcursos</footer>
+</div>
+</body>
+</html>
