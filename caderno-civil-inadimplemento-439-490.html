@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Civil — Inadimplemento (Lei 14.905/2024) e Contratos (págs. 439–490)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:760px;margin:0 auto}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0;counter-increment:p}
+.list-pega li:before{content:counter(p);position:absolute;left:0;top:0;background:#1a1200;border:1px solid #4a3200;color:#fbbf24;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#f3dca8}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner-save">📘 Caderno interativo · clique nos blocos 📜 e 🎯 para revelar letra da lei e respostas</div>
+<div class="header">
+  <h1>📘 Caderno de Revisão · Direito Civil</h1>
+  <div class="sub"><b>Inadimplemento das Obrigações</b> (nova <b>Lei 14.905/2024</b> — juros) · <b>Classificação dos Contratos</b> · e-Book de Civil, <b>págs. 439–490</b></div>
+  <div class="toc">
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#c1">1 Lei 14.905</a>
+    <a href="#c2">2 Inadimplemento</a>
+    <a href="#c3">3 Mora</a>
+    <a href="#c4">4 Espécies</a>
+    <a href="#c5">5 Purgação</a>
+    <a href="#c6">6 Fortuito</a>
+    <a href="#c7">7 Patrimonial</a>
+    <a href="#c8">8 Contratos</a>
+    <a href="#c9">9 Preliminar</a>
+    <a href="#tab">📊 Tabelas</a>
+    <a href="#sum">⚖️ Súmulas</a>
+    <a href="#peg">⚠️ Pegadinhas</a>
+    <a href="#flash">🔁 Flashcards</a>
+    <a href="#check">✅ Checklist</a>
+  </div>
+</div>
+<div class="content">
+
+<div class="card mapa" id="mapa">
+  <div class="card-meta"><span class="badge badge-tema">Mapa</span><span class="badge badge-pag">págs. 439–490</span></div>
+  <div class="card-title">🗺️ Faixa de Páginas × Assuntos</div>
+  <div class="prose"><p>Dois eixos: <b>inadimplemento das obrigações</b> (com a nova disciplina dos juros pela <b>Lei 14.905/2024</b>) e <b>classificação dos contratos</b> (incl. preliminar × definitivo).</p></div>
+  <div class="mem-box"><b>Âncoras do bloco:</b><br>• <span class="mnemo">TAXA LEGAL = SELIC − IPCA</span> piso ZERO · supletiva IPCA/IBGE · CMN define / BACEN divulga<br>• <span class="mnemo">ABSOLUTO × MORA = UTILIDADE</span> (não é atraso × total)<br>• <span class="mnemo">CONTRATO REAL = ENTREGA</span></div>
+  <table class="map-table">
+    <tr><th>Págs.</th><th>Assunto</th></tr>
+    <tr><td class="pg">439</td><td>Inadimplemento — conceito; responsabilidade civil contratual</td></tr>
+    <tr><td class="pg">440–445</td><td>Lei 14.905/2024 — taxa legal (Selic − IPCA), piso zero, correção IPCA/IBGE (arts. 389, 406, 591)</td></tr>
+    <tr><td class="pg">445–448</td><td>Modalidades — inadimplemento absoluto × mora (critério: utilidade)</td></tr>
+    <tr><td class="pg">448–451</td><td>Mora: conceito tríplice (art. 394); ex re / ex persona / presumida (arts. 397-398)</td></tr>
+    <tr><td class="pg">451</td><td>Mora do credor (accipiendi) e efeitos (art. 400)</td></tr>
+    <tr><td class="pg">452</td><td>Purgação × cessação da mora (art. 401)</td></tr>
+    <tr><td class="pg">452–453</td><td>Caso fortuito / força maior (arts. 393, 399); fortuito interno × externo (CDC)</td></tr>
+    <tr><td class="pg">453</td><td>Responsabilidade patrimonial — todos os bens (art. 391)</td></tr>
+    <tr><td class="pg">486–489</td><td>Classificação dos contratos (consensual/real, típico/atípico, adesão, solene)</td></tr>
+    <tr><td class="pg">489–491</td><td>Contrato preliminar × definitivo (arts. 462-466); quebra antecipada; adjudicação compulsória (Súm. 239)</td></tr>
+  </table>
+</div>
+
+<div class="card" id="c1">
+  <div class="card-meta"><span class="badge badge-tema">Lei 14.905/2024</span><span class="badge badge-pag">págs. 440–445</span></div>
+  <div class="card-title">1 · Lei nº 14.905/2024 — Nova Taxa Legal de Juros</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>A <b>Lei nº 14.905/2024</b> (publicada em 1º/07/2024) reorganizou <b>atualização monetária</b> e <b>juros</b> no CC, encerrando a controvérsia de 20+ anos sobre a taxa do art. 406 (Selic × 1% a.m. do art. 161, §1º, CTN).</p>
+    <p><b>Correção monetária supletiva (art. 389, p.ú.):</b> sem índice convencionado nem em lei específica, aplica-se o <b>IPCA/IBGE</b> (não INPC, não TR).</p>
+    <p><b>Taxa legal (art. 406, §1º):</b> = <b>Selic deduzido o índice de atualização monetária</b> (Selic − IPCA). Metodologia: <b>CMN</b>; divulgação: <b>BACEN</b> (§2º).</p>
+    <p><b>Piso zero (art. 406, §3º):</b> se a taxa legal for <b>negativa</b>, considera-se <b>igual a zero</b>. <b>Mútuo (art. 591):</b> não pactuada a taxa, aplica-se a do art. 406.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 406, §1º:</span> a taxa legal corresponderá à Selic, deduzido o índice de atualização monetária do art. 389, p.ú.</p>
+    <p><span class="art-num">Art. 406, §2º:</span> metodologia definida pelo CMN e divulgada pelo Banco Central.</p>
+    <p><span class="art-num">Art. 406, §3º:</span> resultado negativo será considerado igual a 0 (zero).</p>
+    <p><span class="art-num">Art. 389, p.ú.:</span> sem índice convencionado/legal, aplica-se a variação do IPCA, apurado e divulgado pelo IBGE.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">TAXA LEGAL = SELIC − IPCA</span> — nunca Selic pura!<br><span class="mnemo">CMN define · BACEN divulga</span><br>Negativa → <b>ZERO</b> (art. 406, §3º). Supletiva = <b>IPCA/IBGE</b>.<br><b>Vigência escalonada:</b> §2º do art. 406 na publicação (1º/07/2024); o resto <b>60 dias depois</b> = <b>30/08/2024</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a fórmula da taxa legal após a Lei 14.905/2024?</span><span class="chev">▸</span></summary><div class="recall-a">Selic MENOS o índice de atualização monetária (IPCA) — art. 406, §1º. Selic pura é pegadinha.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem define a metodologia e quem a divulga?</span><span class="chev">▸</span></summary><div class="recall-a">Metodologia: CMN; divulgação: BACEN — art. 406, §2º.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>E se a taxa legal resultar negativa?</span><span class="chev">▸</span></summary><div class="recall-a">Conta como ZERO no período (art. 406, §3º), nunca negativa.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Correção supletiva e vigência da lei?</span><span class="chev">▸</span></summary><div class="recall-a">IPCA/IBGE (art. 389, p.ú.). Vigência escalonada: §2º do art. 406 na publicação (1º/07/2024); demais dispositivos 60 dias depois (30/08/2024).</div></details>
+</div>
+
+<div class="card" id="c2">
+  <div class="card-meta"><span class="badge badge-tema">Inadimplemento</span><span class="badge badge-pag">págs. 445–448</span></div>
+  <div class="card-title">2 · Modalidades de Inadimplemento (Absoluto × Mora)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>Com o inadimplemento nasce a <b>responsabilidade civil contratual</b> (arts. 389-391) e o dever de indenizar <b>perdas e danos</b>.</p>
+    <p><b>Absoluto/total:</b> obrigação <b>não pode mais</b> ser cumprida ou se tornou <b>inútil</b> ao credor (art. 395, p.ú.) → resolução + perdas e danos.</p>
+    <p><b>Relativo/parcial (mora):</b> descumprimento parcial; a obrigação <b>ainda pode</b> ser cumprida → purgação possível.</p>
+    <p><b>Critério = UTILIDADE da prestação ao credor</b>, NÃO "atraso × descumprimento total". O atraso pode gerar inadimplemento <b>absoluto</b> se a prestação perder utilidade (café que perde o navio). <span class="art">(Schreiber/Tartuce/Simão)</span></p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 389.</span> Não cumprida a obrigação, responde o devedor por perdas e danos, mais juros, atualização monetária e honorários.</p>
+    <p><span class="art-num">Art. 395, p.ú.:</span> se a prestação se tornar inútil ao credor, este poderá enjeitá-la e exigir perdas e danos.</p>
+    <p><span class="art-num">Enunciado 162 JDC:</span> a inutilidade afere-se objetivamente (boa-fé + sinalagma), não pelo mero interesse subjetivo do credor.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">ABSOLUTO × MORA = UTILIDADE</span> — não é "atraso × total".<br>Prestação <b>inútil</b> → credor pode <b>enjeitar</b> (absoluto). Ainda útil → <b>mora</b> (purgável).<br>Atraso PODE virar absoluto (café que perde o navio).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual o critério que separa absoluto de mora?</span><span class="chev">▸</span></summary><div class="recall-a">A UTILIDADE da prestação ao credor, não o mero atraso. Impossível/inútil = absoluto; ainda útil = mora.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O atraso sempre configura mora?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Se a prestação perde utilidade pelo atraso, há inadimplemento ABSOLUTO (art. 395, p.ú.).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Como se afere a inutilidade (Enunciado 162)?</span><span class="chev">▸</span></summary><div class="recall-a">Objetivamente, conforme a boa-fé e o sinalagma — não pelo mero interesse subjetivo do credor.</div></details>
+</div>
+
+<div class="card" id="c3">
+  <div class="card-meta"><span class="badge badge-tema">Mora — conceito</span><span class="badge badge-pag">págs. 448–451</span></div>
+  <div class="card-title">3 · Mora — Conceito Tríplice (Devedor × Credor)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Conceito tríplice (art. 394):</b> está em mora quem não cumpre no <b>TEMPO, LUGAR e FORMA</b> — não se reduz a atraso temporal.</p>
+    <p><b>Mora do devedor (solvendi):</b> descumprimento, em regra culposo. Responde por prejuízos + juros + atualização + honorários (art. 395).</p>
+    <p><b>Mora do credor (accipiendi):</b> recusa injustificada de receber. <b>Dispensa culpa</b>. Efeitos (art. 400): afasta a responsabilidade do devedor isento de dolo pela conservação; obriga o credor a ressarcir despesas; sujeita-o à <b>estimação mais favorável ao devedor</b>.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 394.</span> Considera-se em mora o devedor que não efetuar o pagamento e o credor que não quiser recebê-lo no tempo, lugar e forma que a lei ou a convenção estabelecer.</p>
+    <p><span class="art-num">Art. 400.</span> A mora do credor subtrai o devedor isento de dolo à responsabilidade pela conservação; obriga o credor a ressarcir despesas; sujeita-o à estimação mais favorável ao devedor.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">MORA = TEMPO · LUGAR · FORMA</span> (tríplice).<br><span class="mnemo">accipiendi = sem culpa</span> (credor que recusa). Solvendi = devedor.<br>3 efeitos do art. 400: <b>afasta · ressarce · estimação pró-devedor</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O conceito de mora é simples ou tríplice?</span><span class="chev">▸</span></summary><div class="recall-a">Tríplice (art. 394): descumprimento quanto a TEMPO, LUGAR e FORMA — não é só atraso.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A mora do credor exige culpa?</span><span class="chev">▸</span></summary><div class="recall-a">Não — dispensa culpa, basta a recusa injustificada.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os três efeitos da mora do credor (art. 400)?</span><span class="chev">▸</span></summary><div class="recall-a">(1) Afasta a responsabilidade do devedor isento de dolo pela conservação; (2) obriga o credor a ressarcir despesas; (3) sujeita-o à estimação mais favorável ao devedor.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferencie mora solvendi e accipiendi.</span><span class="chev">▸</span></summary><div class="recall-a">Solvendi = do devedor (em regra culposa). Accipiendi = do credor (recusa injustificada, dispensa culpa).</div></details>
+</div>
+
+<div class="card" id="c4">
+  <div class="card-meta"><span class="badge badge-tema">Mora — espécies</span><span class="badge badge-pag">págs. 449–451</span></div>
+  <div class="card-title">4 · Mora Ex Re × Ex Persona × Presumida</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Ex re / automática (art. 397, caput):</b> obrigação <b>positiva, líquida e com termo certo</b> → <i>dies interpellat pro homine</i>; independe de interpelação.</p>
+    <p><b>Ex persona / pendente (art. 397, p.ú.):</b> <b>sem termo</b> → exige <b>interpelação</b> judicial ou extrajudicial.</p>
+    <p><b>Presumida (art. 398):</b> nos <b>atos ilícitos</b>, o devedor está em mora <b>desde que o praticou</b> (casa com a Súmula 54/STJ).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 397.</span> O inadimplemento da obrigação positiva e líquida, no seu termo, constitui de pleno direito em mora o devedor. P.ú.: não havendo termo, a mora se constitui por interpelação judicial ou extrajudicial.</p>
+    <p><span class="art-num">Art. 398.</span> Nas obrigações de ato ilícito, considera-se o devedor em mora desde que o praticou.</p>
+    <p><span class="art-num">Súmula 369/STJ:</span> no leasing, mesmo com cláusula resolutiva expressa, é necessária a notificação prévia.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">EX RE = RElógio</span> (termo certo, automática). <span class="mnemo">EX PERSONA = PESSOA avisa</span> (interpelação).<br>Ato ilícito → mora <b>presumida</b> desde o ato (art. 398 + Súm. 54).<br>Leasing/seguro: a <b>resolução</b> exige notificação (Súm. 369).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferencie mora ex re, ex persona e presumida.</span><span class="chev">▸</span></summary><div class="recall-a">Ex re (art. 397, caput): termo certo, automática. Ex persona (art. 397, p.ú.): sem termo, exige interpelação. Presumida (art. 398): ato ilícito, desde que o praticou.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A mora ex re exige interpelação?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Constitui-se de pleno direito no termo (dies interpellat pro homine). Só a ex persona exige interpelação.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>No leasing, basta a cláusula resolutiva para a mora?</span><span class="chev">▸</span></summary><div class="recall-a">A mora segue ex re, mas a RESOLUÇÃO exige notificação prévia do arrendatário (Súmula 369/STJ). No seguro, idem.</div></details>
+</div>
+
+<div class="card" id="c5">
+  <div class="card-meta"><span class="badge badge-tema">Purgação × cessação</span><span class="badge badge-pag">pág. 452</span></div>
+  <div class="card-title">5 · Purgação (Emenda) × Cessação da Mora</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Purgação/emenda (art. 401):</b> afasta os efeitos do inadimplemento parcial. Pelo <b>devedor</b>, oferecendo a prestação + prejuízos até o dia da oferta; pelo <b>credor</b>, dispondo-se a receber + sujeitando-se aos efeitos da mora até a mesma data. <b>Efeitos ex nunc</b> (só futuro).</p>
+    <p><b>Cessação:</b> fato extintivo de efeitos <b>pretéritos e futuros</b> (novação, remissão, renúncia do credor). <span class="art">(M. H. Diniz, apud Tartuce)</span></p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 401.</span> Purga-se a mora: I — pelo devedor, oferecendo a prestação mais os prejuízos até o dia da oferta; II — pelo credor, oferecendo-se a receber e sujeitando-se aos efeitos da mora até a mesma data.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">PURGA = ex Nunc</span> (Now em diante). <span class="mnemo">CESSAÇÃO = tudo</span> (pretérito + futuro).<br>Purgar não destrói os danos já produzidos.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Purgação × cessação quanto aos efeitos no tempo?</span><span class="chev">▸</span></summary><div class="recall-a">Purgação (art. 401): ex nunc, só futuro; não apaga danos já produzidos. Cessação: atinge efeitos pretéritos E futuros (novação, remissão, renúncia).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Como o devedor purga a mora (art. 401, I)?</span><span class="chev">▸</span></summary><div class="recall-a">Oferecendo a prestação mais a importância dos prejuízos decorrentes até o dia da oferta.</div></details>
+</div>
+
+<div class="card" id="c6">
+  <div class="card-meta"><span class="badge badge-tema">Fortuito / força maior</span><span class="badge badge-pag">págs. 452–453</span></div>
+  <div class="card-title">6 · Caso Fortuito e Força Maior (CC × CDC)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Regra (art. 393):</b> o devedor <b>não responde</b> por prejuízos de caso fortuito/força maior, salvo se expressamente se responsabilizou. São fatos necessários de efeitos inevitáveis → <b>rompem o nexo causal</b>.</p>
+    <p><b>Exceção (art. 399):</b> o devedor <b>em mora</b> responde mesmo por fortuito/força maior — salvo se provar isenção de culpa ou que o dano sobreviria de qualquer modo.</p>
+    <p><b>No CDC:</b> <b>fortuito interno</b> (ligado à atividade → <b>não</b> exclui) × <b>fortuito externo</b> (estranho → <b>exclui</b>). Enunciado 443: só exclui se o fato não for conexo à atividade.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 393.</span> O devedor não responde por prejuízos de caso fortuito/força maior se não se houver por eles responsabilizado. P.ú.: fato necessário cujos efeitos não era possível evitar.</p>
+    <p><span class="art-num">Art. 399.</span> O devedor em mora responde pela impossibilidade, ainda que de fortuito/força maior, salvo isenção de culpa ou dano inevitável.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">EM MORA → responde até por fortuito</span> (art. 399).<br>CDC: <span class="mnemo">INTERNO não exclui · EXTERNO exclui</span> (Enunciado 443).<br>Fortuito rompe o <b>nexo causal</b> (regra do art. 393).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O devedor em mora responde por caso fortuito?</span><span class="chev">▸</span></summary><div class="recall-a">Sim (art. 399), salvo se provar isenção de culpa ou que o dano sobreviria de qualquer modo.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Distinga fortuito interno e externo no CDC.</span><span class="chev">▸</span></summary><div class="recall-a">Interno: ligado à atividade → NÃO exclui. Externo: estranho à atividade → EXCLUI (Enunciado 443).</div></details>
+</div>
+
+<div class="card" id="c7">
+  <div class="card-meta"><span class="badge badge-tema">Resp. patrimonial</span><span class="badge badge-pag">pág. 453</span></div>
+  <div class="card-title">7 · Responsabilidade Patrimonial (art. 391)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>Pelo inadimplemento respondem <b>todos os bens</b> do devedor (princípio da <b>responsabilidade patrimonial</b>).</p>
+    <p>Desde a <i>Lex Poetelia Papiria</i> (326 a.C.), a responsabilidade deixou de ser <b>pessoal</b> e passou a ser <b>patrimonial</b>. O "todos" é inexato: há <b>impenhorabilidades</b> (bem de família — Lei 8.009/90) e resquício de prisão civil só para o <b>devedor de alimentos</b> (art. 5º, LXVII, CF).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 391.</span> Pelo inadimplemento das obrigações respondem todos os bens do devedor.</p>
+    <p><span class="art-num">REsp 1.268.998/RS:</span> imóvel encravado com matrícula própria é segundo bem, à parte do bem de família → penhorável.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">Poetelia Papiria → patrimonial</span> (não mais o corpo do devedor).<br>"Todos os bens" salvo <b>impenhorabilidades</b> (bem de família). Prisão civil só p/ alimentos.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Sobre que bens recai a responsabilidade? Exceção?</span><span class="chev">▸</span></summary><div class="recall-a">Todos os bens do devedor (art. 391), ressalvadas impenhorabilidades — sobretudo o bem de família (Lei 8.009/90).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Imóvel encravado com matrícula própria é penhorável?</span><span class="chev">▸</span></summary><div class="recall-a">Sim — por ter matrícula própria, é segundo bem, à parte do bem de família (REsp 1.268.998/RS).</div></details>
+</div>
+
+<div class="card" id="c8">
+  <div class="card-meta"><span class="badge badge-tema">Classificação contratos</span><span class="badge badge-pag">págs. 486–489</span></div>
+  <div class="card-title">8 · Classificação dos Contratos (Eixos)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Consensual × real:</b> consensual aperfeiçoa-se com o <b>consenso</b> (compra e venda, locação, mandato); real exige a <b>entrega da coisa</b> (traditio — depósito, comodato, mútuo), é <b>unilateral</b> e gera obrigação de <b>restituir</b>.</p>
+    <p><b>Típico × atípico (art. 425):</b> típico tem estatuto legal mínimo; atípico é lícito criar. <b>Não confundir</b> com nominado/inominado (se o nome consta em lei). Garagem/estacionamento = <b>nominado E atípico</b>.</p>
+    <p><b>Adesão × paritário (arts. 423-424):</b> cláusulas ambíguas → interpretação <b>pró-aderente</b>; nula a renúncia antecipada. <b>Adesão ≠ consumo</b> (Enunciado 171).</p>
+    <p><b>Solene × não solene:</b> regra é a <b>liberdade de forma</b> (art. 107); solenidade é excepcional. <b>Principal × acessório:</b> "acessório segue o principal" (<b>gravitação jurídica</b>).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 425.</span> É lícito às partes estipular contratos atípicos, observadas as normas gerais.</p>
+    <p><span class="art-num">Art. 423.</span> No contrato de adesão, cláusulas ambíguas/contraditórias → interpretação mais favorável ao aderente.</p>
+    <p><span class="art-num">Art. 424.</span> São nulas as cláusulas que estipulem renúncia antecipada do aderente a direito da natureza do negócio.</p>
+    <p><span class="art-num">Enunciado 171 JDC:</span> contrato de adesão não se confunde com contrato de consumo.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">REAL = ENTREGA</span> → unilateral, obrigação de <b>restituir</b>.<br><span class="mnemo">TÍPICO/ATÍPICO ≠ NOMINADO/INOMINADO</span> — garagem = <b>nominado E atípico</b>.<br>Adesão: <b>pró-aderente</b> · adesão ≠ consumo (Enunc. 171).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Consensual × real? O real gera que obrigação?</span><span class="chev">▸</span></summary><div class="recall-a">Consensual: pelo consenso. Real: exige entrega (traditio); é unilateral e gera obrigação de RESTITUIR (mútuo, comodato, depósito).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Típico/atípico = nominado/inominado?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Típico/atípico = tem (ou não) estatuto legal (art. 425); nominado/inominado = o nome consta (ou não) em lei. Garagem é nominado E atípico.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Cláusula ambígua na adesão? Adesão é consumo?</span><span class="chev">▸</span></summary><div class="recall-a">Interpretação pró-aderente (art. 423); nula a renúncia antecipada (art. 424). Adesão NÃO se confunde com consumo (Enunciado 171).</div></details>
+</div>
+
+<div class="card" id="c9">
+  <div class="card-meta"><span class="badge badge-tema">Preliminar × definitivo</span><span class="badge badge-pag">págs. 489–491</span></div>
+  <div class="card-title">9 · Contrato Preliminar × Definitivo · Quebra Antecipada</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Preliminar (pactum de contrahendo):</b> tende à celebração de <b>outro contrato futuro</b> (ex.: compromisso de compra e venda). Salvo cláusula de arrependimento, qualquer parte pode <b>exigir o definitivo</b> (art. 463); recusando-se, o juiz pode <b>suprir a vontade</b> (art. 464) ou conceder perdas e danos (art. 465).</p>
+    <p><b>Adjudicação compulsória (Súm. 239/STJ):</b> <b>não depende de registro</b> do compromisso no cartório de imóveis.</p>
+    <p><b>Quebra antecipada (breach by anticipation):</b> se o devedor manifesta inequivocamente, antes do termo, que não cumprirá, o credor antecipa a resolução com perdas e danos — fundamento na <b>boa-fé objetiva</b> (art. 422) e na <b>função social</b> (art. 421).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 462.</span> O contrato preliminar, exceto quanto à forma, deve conter todos os requisitos essenciais ao contrato a ser celebrado.</p>
+    <p><span class="art-num">Art. 463.</span> Sem cláusula de arrependimento, qualquer parte pode exigir a celebração do definitivo.</p>
+    <p><span class="art-num">Art. 464.</span> Esgotado o prazo, o juiz pode suprir a vontade da parte inadimplente, conferindo caráter definitivo ao preliminar.</p>
+    <p><span class="art-num">Súmula 239/STJ:</span> a adjudicação compulsória não se condiciona ao registro do compromisso.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">ADJUDICAÇÃO ≠ REGISTRO</span> (Súmula 239/STJ).<br>Recusou o definitivo → juiz <b>supre a vontade</b> (art. 464) ou perdas e danos (art. 465).<br><span class="mnemo">QUEBRA ANTECIPADA = boa-fé (422) + função social (421)</span>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que é contrato preliminar? Exemplo?</span><span class="chev">▸</span></summary><div class="recall-a">Contrato que tende à celebração de outro futuro; ex.: compromisso de compra e venda (arts. 462-466).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Recusando-se a parte ao definitivo, o que faz o juiz?</span><span class="chev">▸</span></summary><div class="recall-a">Supre a vontade, conferindo caráter definitivo ao preliminar (art. 464), ou concede perdas e danos (art. 465).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A adjudicação compulsória depende de registro?</span><span class="chev">▸</span></summary><div class="recall-a">Não — Súmula 239/STJ: não se condiciona ao registro do compromisso no cartório de imóveis.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que é quebra antecipada e seu fundamento?</span><span class="chev">▸</span></summary><div class="recall-a">Inadimplemento antecipado: o devedor declara, antes do termo, que não cumprirá; o credor antecipa a resolução com perdas e danos. Fundamento: boa-fé objetiva (art. 422) e função social (art. 421).</div></details>
+</div>
+
+<div class="card" id="tab">
+  <div class="card-meta"><span class="badge badge-tema">Tabelas</span><span class="badge badge-pag">Comparativos</span></div>
+  <div class="card-title">📊 Tabelas Comparativas</div>
+  <div class="sec-label sintese">Absoluto × Mora</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>Absoluto</th><th>Mora (relativo)</th></tr>
+    <tr><td>Critério</td><td>Prestação impossível ou INÚTIL</td><td>Cumprimento ainda viável/útil</td></tr>
+    <tr><td>Base legal</td><td>arts. 389-393</td><td>arts. 394-401</td></tr>
+    <tr><td>Consequência</td><td>Resolução + perdas e danos</td><td>Purgação; perpetuação + encargos</td></tr>
+    <tr><td>Recusa</td><td>Credor pode enjeitar (395, p.ú.)</td><td>Não cabe enjeição enquanto útil</td></tr>
+  </table>
+  <div class="sec-label sintese">Ex re × Ex persona × Presumida</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>Ex re</th><th>Ex persona</th><th>Presumida</th></tr>
+    <tr><td>Base</td><td>397, caput</td><td>397, p.ú.</td><td>398</td></tr>
+    <tr><td>Requisito</td><td>Termo certo</td><td>Sem termo</td><td>Ato ilícito</td></tr>
+    <tr><td>Constituição</td><td>Automática</td><td>Interpelação</td><td>Desde o ato</td></tr>
+  </table>
+  <div class="sec-label sintese">Purgação × Cessação</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>Purgação (401)</th><th>Cessação</th></tr>
+    <tr><td>Natureza</td><td>Remedia o atraso</td><td>Fato extintivo</td></tr>
+    <tr><td>Efeitos</td><td>Ex nunc (futuro)</td><td>Pretéritos e futuros</td></tr>
+    <tr><td>Exemplos</td><td>Oferta de prestação + prejuízos</td><td>Novação, remissão, renúncia</td></tr>
+  </table>
+  <div class="sec-label sintese">Fortuito CC × CDC</div>
+  <table class="cmp-table">
+    <tr><th>Aspecto</th><th>CC (393, 399)</th><th>CDC</th></tr>
+    <tr><td>Categorias</td><td>Caso fortuito / força maior</td><td>Interno × externo</td></tr>
+    <tr><td>Efeito</td><td>Rompem nexo → excluem</td><td>Interno não exclui; externo exclui</td></tr>
+    <tr><td>Devedor em mora</td><td>Responde (399), salvo isenção</td><td>—</td></tr>
+  </table>
+</div>
+
+<div class="card" id="sum">
+  <div class="card-meta"><span class="badge badge-tema">Súmulas / Enunciados</span></div>
+  <div class="card-title">⚖️ Súmulas e Enunciados</div>
+  <div class="prose">
+    <p><b>Súmula 54/STJ:</b> juros moratórios fluem a partir do <b>evento danoso</b> (responsabilidade extracontratual).</p>
+    <p><b>Súmula 145/STJ:</b> transporte de cortesia — responde só por <b>dolo ou culpa grave</b>.</p>
+    <p><b>Súmula 369/STJ:</b> leasing — necessária <b>notificação prévia</b> mesmo com cláusula resolutiva expressa.</p>
+    <p><b>Súmula 239/STJ:</b> adjudicação compulsória <b>não</b> se condiciona ao registro do compromisso.</p>
+    <p><b>Enunciado 161 JDC:</b> honorários dos arts. 389/404 só cabem com <b>efetiva atuação</b> do advogado.</p>
+    <p><b>Enunciado 162 JDC:</b> inutilidade da prestação aferida <b>objetivamente</b> (boa-fé + sinalagma).</p>
+    <p><b>Enunciado 419 JDC:</b> prazo de <b>3 anos</b> para reparação civil — contratual e extracontratual.</p>
+    <p><b>Enunciado 443 JDC:</b> fortuito/força maior só excluem se o fato <b>não for conexo</b> à atividade.</p>
+    <p><b>Enunciado 548 JDC:</b> violado dever contratual, cabe ao <b>devedor</b> provar que o dano não lhe é imputável.</p>
+    <p><b>Enunciado 171 JDC:</b> contrato de adesão <b>≠</b> contrato de consumo.</p>
+    <p><span class="art">Prescrição da reparação por inadimplemento: controvérsia STJ — 10 anos (art. 205, EREsp 1.280.825/RJ) × 3 anos (art. 206, §3º, V, REsp 1.281.594/SP).</span></p>
+  </div>
+</div>
+
+<div class="card" id="peg">
+  <div class="card-meta"><span class="badge badge-tema">Pegadinhas</span></div>
+  <div class="card-title">⚠️ Pegadinhas e Pontos de Prova</div>
+  <ol class="list-pega">
+    <li>Taxa legal <b>NÃO</b> é a Selic pura — é <b>Selic MENOS IPCA</b> (art. 406, §1º).</li>
+    <li>Taxa legal <b>negativa</b> conta como <b>ZERO</b> (art. 406, §3º), nunca negativa.</li>
+    <li>Correção supletiva = <b>IPCA/IBGE</b> (art. 389, p.ú.) — não INPC, não TR.</li>
+    <li>Metodologia é do <b>CMN</b>; divulgação é do <b>BACEN</b> — não inverta.</li>
+    <li>Vigência da Lei 14.905 é <b>escalonada</b>: §2º do art. 406 na publicação; o resto 60 dias depois (30/08/2024).</li>
+    <li>Critério absoluto × mora = <b>utilidade</b>, NÃO "atraso × descumprimento total".</li>
+    <li>Atraso <b>pode</b> gerar inadimplemento <b>absoluto</b> se a prestação perde utilidade.</li>
+    <li>Mora é conceito <b>tríplice</b>: tempo, lugar e forma (art. 394).</li>
+    <li>Mora <b>ex re</b> dispensa interpelação; <b>ex persona</b> SÓ se constitui com interpelação.</li>
+    <li>Mora do <b>credor</b> (accipiendi) <b>dispensa culpa</b>.</li>
+    <li>Ato ilícito: mora <b>presumida</b> desde a prática (art. 398 + Súm. 54).</li>
+    <li>Purgação = <b>ex nunc</b>; cessação atinge <b>pretéritos e futuros</b>.</li>
+    <li>Devedor <b>em mora</b> responde <b>mesmo</b> por caso fortuito (art. 399), salvo isenção.</li>
+    <li>CDC: fortuito <b>interno NÃO</b> exclui; só o <b>externo</b> exclui.</li>
+    <li>Honorários (arts. 389/404) só com <b>efetiva atuação</b> do advogado (Enunc. 161).</li>
+    <li>Leasing: notificação prévia necessária mesmo com cláusula resolutiva (Súm. 369).</li>
+    <li>Imóvel encravado com <b>matrícula própria</b> é penhorável.</li>
+    <li>Contrato <b>real</b> só nasce com a <b>ENTREGA</b>; é unilateral, gera obrigação de restituir.</li>
+    <li>Típico/atípico <b>≠</b> nominado/inominado — garagem é nominado E atípico.</li>
+    <li><b>Adjudicação compulsória NÃO depende de registro</b> (Súm. 239/STJ).</li>
+    <li><b>Quebra antecipada</b> funda-se em <b>boa-fé objetiva</b> (art. 422), sem norma expressa própria.</li>
+    <li>Prazo da reparação por inadimplemento é <b>controverso</b>: 10 anos × 3 anos.</li>
+  </ol>
+</div>
+
+<div class="card" id="flash">
+  <div class="card-meta"><span class="badge badge-tema">Flashcards</span></div>
+  <div class="card-title">🔁 Flashcards (clique para virar)</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Fórmula da taxa legal pós-Lei 14.905/2024?</span><span class="chev">▸</span></summary><div class="recall-a">Selic − IPCA (art. 406, §1º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Taxa legal negativa conta como?</span><span class="chev">▸</span></summary><div class="recall-a">Zero (art. 406, §3º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Correção monetária supletiva?</span><span class="chev">▸</span></summary><div class="recall-a">IPCA/IBGE (art. 389, p.ú.).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Vigência geral da Lei 14.905/2024?</span><span class="chev">▸</span></summary><div class="recall-a">60 dias após publicação → 30/08/2024.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Critério absoluto × mora?</span><span class="chev">▸</span></summary><div class="recall-a">Utilidade da prestação ao credor.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Conceito de mora (art. 394)?</span><span class="chev">▸</span></summary><div class="recall-a">Descumprimento de tempo, lugar e forma (tríplice).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Mora do credor exige culpa?</span><span class="chev">▸</span></summary><div class="recall-a">Não — basta o atraso (accipiendi).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Devedor em mora + caso fortuito?</span><span class="chev">▸</span></summary><div class="recall-a">Responde (art. 399), salvo prova de isenção/dano inevitável.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Contrato real → que obrigação gera?</span><span class="chev">▸</span></summary><div class="recall-a">Restituir (é unilateral; mútuo, comodato, depósito).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Súmula 239/STJ?</span><span class="chev">▸</span></summary><div class="recall-a">Adjudicação compulsória não depende de registro.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">F</span><span>Quebra antecipada — fundamento?</span><span class="chev">▸</span></summary><div class="recall-a">Boa-fé objetiva (422) + função social (421).</div></details>
+</div>
+
+<div class="card" id="check">
+  <div class="card-meta"><span class="badge badge-tema">Checklist</span></div>
+  <div class="card-title">✅ Checklist de Domínio</div>
+  <div class="prose"><ul>
+    <li>Explicar a fórmula da taxa legal (Selic − IPCA) e o piso zero (art. 406)</li>
+    <li>Identificar o IPCA/IBGE como correção supletiva (art. 389, p.ú.)</li>
+    <li>Saber a vigência escalonada da Lei 14.905/2024</li>
+    <li>Distinguir absoluto × mora pelo critério da utilidade</li>
+    <li>Memorizar o conceito tríplice de mora (art. 394)</li>
+    <li>Diferenciar mora ex re × ex persona × presumida com base legal</li>
+    <li>Dominar a mora do credor (accipiendi) e os três efeitos do art. 400</li>
+    <li>Diferenciar purgação × cessação (efeitos no tempo)</li>
+    <li>Explicar o art. 399 (mora + fortuito) e a exceção</li>
+    <li>Distinguir fortuito interno × externo (CDC)</li>
+    <li>Citar a responsabilidade patrimonial (art. 391) e a exceção do bem de família</li>
+    <li>Memorizar Súmulas 54, 145, 369 e 239 do STJ</li>
+    <li>Memorizar Enunciados 161, 162, 419, 443, 548 e 171 das JDC</li>
+    <li>Conhecer as duas correntes do STJ sobre prescrição (10 × 3 anos)</li>
+    <li>Classificar os contratos pelos principais eixos</li>
+    <li>Diferenciar típico/atípico de nominado/inominado (garagem)</li>
+    <li>Dominar o contrato de adesão (arts. 423-424) e o Enunciado 171</li>
+    <li>Conceituar contrato preliminar × definitivo (arts. 462-466)</li>
+    <li>Explicar a adjudicação compulsória e a Súmula 239/STJ</li>
+    <li>Conceituar a quebra antecipada e seu fundamento (arts. 421-422)</li>
+  </ul></div>
+</div>
+
+</div>
+<footer>Caderno de Revisão · Civil — Inadimplemento (Lei 14.905/2024) e Contratos · págs. 439–490 · CC/02 · Fonte: Dizer o Direito, Planalto, Banco Prova Oral (Notion)</footer>
+</div>
+</body>
+</html>
