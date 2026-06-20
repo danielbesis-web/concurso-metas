@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Empresarial — Teoria da Empresa, Princípios, Fontes e Empresário (págs. 10–42)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:760px;margin:0 auto}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.sec-label.jur{color:#f472b6}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.jur-box{background:#1a0a1c;border:1px solid #4a1f4a;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:13px;line-height:1.55;color:#f5cce8}
+.jur-box .info{display:inline-block;background:#3a1a3a;color:#f9b8e6;border:1px solid #6b2a6b;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:4px}
+.jur-box b{color:#fce4f5}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0;counter-increment:p}
+.list-pega li:before{content:counter(p);position:absolute;left:0;top:0;background:#1a1200;border:1px solid #4a3200;color:#fbbf24;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#f3dca8}
+.flash-hint{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.flip-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flip{perspective:1200px;height:175px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow-y:auto}
+.flip-front{background:#0d2040;border:1.5px solid #1d4a78}
+.flip-front .fq{font-size:13.5px;font-weight:600;color:#dceaff;line-height:1.45}
+.flip-front .ftag{position:absolute;top:8px;left:10px;font-size:10px;font-weight:700;color:#5b86b3;letter-spacing:.5px}
+.flip-front .fhint{position:absolute;bottom:8px;font-size:10px;color:#4f7199}
+.flip-back{background:#08160f;border:1.5px solid #1f6b4d;transform:rotateY(180deg)}
+.flip-back .fa{font-size:12.5px;color:#9fe6bd;line-height:1.5}
+.flip-back .fa b{color:#d6ffe9}
+@media(max-width:560px){.flip-grid{grid-template-columns:1fr}.flip{height:165px}}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner-save">📘 Caderno interativo · clique nos blocos 📜 e 🎯 para revelar letra da lei e respostas · clique nos cartões 🔁 para virar</div>
+<div class="header">
+  <h1>📘 Caderno de Revisão · Direito Empresarial</h1>
+  <div class="sub"><b>Noções Gerais</b> · <b>Evolução / 3 Fases</b> · <b>Teoria da Empresa</b> · <b>Princípios</b> · <b>Fontes</b> · <b>Empresário (art. 966)</b> · <b>Exclusões</b> · <b>Conceito de Empresa</b> · e-Book de Empresarial, <b>págs. 10–42</b></div>
+  <div class="toc">
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#c1">1 Comerciante</a>
+    <a href="#c2">2 Três Fases</a>
+    <a href="#c3">3 CCom 1850</a>
+    <a href="#c4">4 T. Empresa</a>
+    <a href="#c5">5 Princ. I</a>
+    <a href="#c6">6 Princ. II</a>
+    <a href="#c7">7 Fontes</a>
+    <a href="#c8">8 Empresário</a>
+    <a href="#c9">9 Não-empresário</a>
+    <a href="#c10">10 Soc. Simples/Adv</a>
+    <a href="#c11">11 Rural</a>
+    <a href="#c12">12 Cooperativa</a>
+    <a href="#c13">13 Impedidos</a>
+    <a href="#c14">14 Incapaz</a>
+    <a href="#c15">15 Casado</a>
+    <a href="#c16">16 Empresa</a>
+    <a href="#tab">📊 Tabelas</a>
+    <a href="#sum">⚖️ Enunciados/Júris</a>
+    <a href="#peg">⚠️ Pegadinhas</a>
+    <a href="#flash">🔁 Flashcards</a>
+    <a href="#check">✅ Checklist</a>
+  </div>
+</div>
+<div class="content">
+
+<div class="card mapa" id="mapa">
+  <div class="card-meta"><span class="badge badge-tema">Mapa</span><span class="badge badge-pag">págs. 10–42</span></div>
+  <div class="card-title">🗺️ Faixa de Páginas × Assuntos</div>
+  <div class="prose"><p>Bloco de <b>Teoria Geral do Direito Empresarial</b>: da evolução histórica (atos de comércio → empresa) até o conceito de empresário do <b>art. 966 do CC/02</b>, suas exclusões e o conceito doutrinário de empresa. Conteúdo de altíssima recorrência em prova objetiva e oral de Cartório/Magistratura.</p></div>
+  <div class="mem-box"><b>Âncoras do bloco:</b><br>• <span class="mnemo">3 FASES: SUBJETIVA → OBJETIVA → EMPRESARIAL</span><br>• <span class="mnemo">CC/02 art. 966 = PROFISSIONAL + ECONÔMICA + ORGANIZADA + BENS/SERVIÇOS</span><br>• <span class="mnemo">NÃO-EMPRESÁRIO: intelectual · soc. simples · rural (s/ registro) · cooperativa</span><br>• <span class="mnemo">RURAL = registro CONSTITUTIVO da opção (mas STJ Tema 1145: declaratório)</span><br>• <span class="mnemo">COOPERATIVA = SEMPRE SIMPLES · S/A = SEMPRE EMPRESÁRIA</span></div>
+  <table class="map-table">
+    <tr><th>Págs.</th><th>Assunto</th></tr>
+    <tr><td class="pg">10–11</td><td>Comerciante e atos de comércio; origens do direito comercial (Vidari, Negrão, Sacramone)</td></tr>
+    <tr><td class="pg">12–15</td><td><b>Três fases</b>: subjetiva-corporativista, objetiva (napoleônica), empresarial (italiana)</td></tr>
+    <tr><td class="pg">16–17</td><td><b>Código Comercial de 1850</b> e a Teoria dos Atos de Comércio (Reg. 737/1850)</td></tr>
+    <tr><td class="pg">17–18</td><td><b>Teoria da Empresa</b> (italiana); CC/02 art. 966 e 2.045; atividade rural (art. 984)</td></tr>
+    <tr><td class="pg">19–20</td><td>Princípios: <b>livre iniciativa</b> e <b>livre concorrência</b></td></tr>
+    <tr><td class="pg">20–22</td><td>Princípios: <b>função social da empresa</b> e <b>intervenção mínima</b> (art. 421-A)</td></tr>
+    <tr><td class="pg">22–23</td><td><b>Fontes formais</b>: primárias (leis) e secundárias (analogia, costumes, princípios)</td></tr>
+    <tr><td class="pg">24–27</td><td><b>Empresário</b> (art. 966): profissionalmente, atividade econômica, organizada, bens/serviços (CMIT)</td></tr>
+    <tr><td class="pg">28–29</td><td>Quem <b>não</b> é empresário: profissional intelectual + <b>elemento de empresa</b> (Enun. 193-195)</td></tr>
+    <tr><td class="pg">30–32</td><td>Sociedades simples/uniprofissionais; <b>sociedade de advogados</b> (Lei 8.906/94)</td></tr>
+    <tr><td class="pg">33–35</td><td><b>Empresário rural</b> (arts. 971, 984); natureza do registro; STJ Tema 1.145; futebol (Lei 14.193/21)</td></tr>
+    <tr><td class="pg">36–37</td><td><b>Cooperativas</b> — sempre sociedade simples (art. 982, p.ú.)</td></tr>
+    <tr><td class="pg">37–39</td><td>Empresário individual: <b>impedimentos legais</b> (arts. 972, 973)</td></tr>
+    <tr><td class="pg">39–41</td><td>Empresário individual <b>incapaz</b> (arts. 974-976) e <b>casado</b> (arts. 977-980)</td></tr>
+    <tr><td class="pg">42–43</td><td><b>Conceito de empresa</b>: Coase (feixes de contratos) e <b>Asquini</b> (4 perfis)</td></tr>
+  </table>
+</div>
+
+<div class="card" id="c1">
+  <div class="card-meta"><span class="badge badge-tema">Noções Gerais</span><span class="badge badge-pag">págs. 10–11</span></div>
+  <div class="card-title">1 · Comerciante, Atos de Comércio e Origens</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>Definir <b>comerciante</b> sempre foi uma <i>celeuma</i> doutrinária. Historicamente, ligou-se o comerciante ao exercício de <b>atos de comércio</b>, e estes à manufatura e à distribuição de mercadorias.</p>
+    <p><b>Vidari</b> conceituou ato de comércio como o complexo de atos de <b>mediação</b> entre produtor e consumidor, exercidos com <b>habitualidade</b> e <b>fim de lucro</b>. Daí três elementos: <b>mediação, fim lucrativo e profissionalidade</b>. Negrão alerta: isoladamente, nenhum deles dá noção exata de comerciante.</p>
+    <p><b>O comércio é mais antigo que o direito comercial.</b> Existe desde a Antiguidade (permuta do excedente; depois a moeda intensifica as trocas), mas só com a sistematização medieval surge um <b>regime jurídico próprio</b>. Exemplos históricos citados por Sacramone: <b>Código de Hamurabi</b> (~2083 a.C.) e a <b>Lex Rhodia de Iactu</b> (comércio marítimo dos fenícios).</p>
+  </div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">VIDARI: MEDIAÇÃO + LUCRO + PROFISSIONALIDADE</span> = elementos do ato de comércio.<br>O <b>comércio</b> (fato econômico) nasce antes do <b>direito comercial</b> (regime jurídico).<br>Marcos antigos: <b>Hamurabi</b> (terrestre) · <b>Lex Rhodia de Iactu</b> (marítimo).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os 3 elementos do conceito de ato de comércio de Vidari?</span><span class="chev">▸</span></summary><div class="recall-a">Mediação (entre produtor e consumidor), fim lucrativo e profissionalidade (habitualidade).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O comércio surgiu antes ou depois do direito comercial?</span><span class="chev">▸</span></summary><div class="recall-a">Antes. O comércio remonta à Antiguidade; o direito comercial, como regime jurídico sistematizado, é construção posterior (medieval).</div></details>
+</div>
+
+<div class="card" id="c2">
+  <div class="card-meta"><span class="badge badge-tema">Evolução</span><span class="badge badge-pag">págs. 12–15</span></div>
+  <div class="card-title">2 · As Três Fases do Direito Comercial</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>1ª Fase — Subjetiva-Corporativista (Idade Média):</b> direito <b>de classe/profissional</b>, feito <i>pelos</i> e <i>para</i> os comerciantes filiados às <b>corporações de ofício</b>. Aplicado pelos <b>cônsules</b> (cônsules mercatorum). Surgem títulos de crédito (letra de câmbio), sociedades (comendas), seguro e bancos. Critério: <b>ser membro da corporação</b> (subjetivo).</p>
+    <p><b>2ª Fase — Objetiva / Napoleônica / Francesa (1804/1808):</b> com o liberalismo, a atividade comercial passa a ser <b>facultada a todos</b>, rompendo o monopólio de classe. O foco se desloca para o <b>ato</b> praticado (critério objetivo). Códigos franceses: <b>Civil (1804)</b> e <b>Comercial (1808)</b>. O direito comercial deixa de ser corporativo e passa a ser <b>posto e aplicado pelo Estado</b>. Influencia o <b>CCom brasileiro (Lei 556/1850)</b> e o Reg. 737/1850.</p>
+    <p><b>3ª Fase — Empresarial / Italiana (séc. XX):</b> abandona-se o foco no "ato" e passa-se à figura do <b>empresário</b> — quem exerce profissionalmente <b>atividade econômica organizada</b> (exceto a intelectual) para produção de bens ou circulação de serviços. Adotada pelo <b>CC/02</b>.</p>
+  </div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">SU-OB-EM</span> = <b>SU</b>bjetiva → <b>OB</b>jetiva → <b>EM</b>presarial.<br><span class="mnemo">SUBJETIVA = QUEM (corporação) · OBJETIVA = O QUÊ (ato) · EMPRESARIAL = COMO (forma de exercer)</span>.<br>Datas francesas: <b>CC 1804 · CCom 1808</b>. Brasil: <b>CCom 1850</b> + Reg. 737/1850.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferencie o critério de cada uma das três fases.</span><span class="chev">▸</span></summary><div class="recall-a">1ª (subjetiva): ser membro de corporação. 2ª (objetiva): praticar atos de comércio. 3ª (empresarial): exercer atividade econômica de forma empresarial (organizada).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Que fase inspirou o Código Comercial brasileiro de 1850?</span><span class="chev">▸</span></summary><div class="recall-a">A 2ª fase (objetiva/napoleônica). O CCom de 1850 adotou a teoria dos atos de comércio.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem aplicava o direito comercial na 1ª fase?</span><span class="chev">▸</span></summary><div class="recall-a">Os próprios comerciantes, por meio dos cônsules (cônsules mercatorum) das corporações de ofício.</div></details>
+</div>
+
+<div class="card" id="c3">
+  <div class="card-meta"><span class="badge badge-tema">Atos de Comércio</span><span class="badge badge-pag">págs. 16–17</span></div>
+  <div class="card-title">3 · Código Comercial de 1850 e a Teoria dos Atos de Comércio</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Estrutura do CCom/1850:</b> (I) do comércio em geral; (II) do comércio marítimo; (III) das quebras. A <b>Parte III (quebras)</b> foi revogada pelo DL 7.661/45, depois substituído pela <b>Lei 11.101/05</b> (falências e recuperação).</p>
+    <p>A <b>Parte I</b> adotou a <b>Teoria dos Atos de Comércio</b> (origem francesa): quem praticasse atos de comércio adquiria a qualidade de <b>comerciante</b>, pressuposto para aplicação do Código. Os atos eram arrolados pelo <b>Regulamento 737/1850</b> (compra e venda de móveis, seguro, atividade bancária, frete marítimo etc.).</p>
+    <p><b>Problema central:</b> ficavam <b>de fora</b> atividades econômicas relevantes — <b>prestação de serviços, atividade rural e negociação imobiliária</b>. Isso gerou uma <b>dicotomia obrigacional</b> (regras distintas para comerciantes × não comerciantes) e até <b>Tribunais de Comércio</b> (extintos em 1875). A partir dos anos 1940, a teoria perde força e cede à <b>Teoria da Empresa</b>.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / marcos normativos</summary><div class="lei-body">
+    <p><span class="art-num">CCom/1850 (Lei 556, de 25/06/1850).</span> Parte I — do comércio em geral (adotou a teoria dos atos de comércio); Parte II — comércio marítimo; Parte III — das quebras (revogada).</p>
+    <p><span class="art-num">Regulamento 737/1850.</span> Arrolava os atos de comércio (compra e venda de móveis, seguro, atividade bancária, frete marítimo etc.).</p>
+    <p><span class="art-num">DL 7.661/45 → Lei 11.101/05.</span> Sucessivos diplomas de falência/recuperação que substituíram a Parte III do CCom.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">CCom 1850 = GERAL · MARÍTIMO · QUEBRAS</span> (a 3ª caiu → hoje Lei 11.101/05).<br>O que <b>derrubou</b> a teoria dos atos: ela <b>não cobria SERVIÇOS, RURAL e IMOBILIÁRIO</b>.<br><span class="mnemo">Tribunais de Comércio extintos em 1875</span>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais atividades a teoria dos atos de comércio deixava de fora?</span><span class="chev">▸</span></summary><div class="recall-a">Prestação de serviços, atividade rural e negociação/atividade imobiliária — não constavam do Reg. 737/1850.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Onde estavam arrolados os atos de comércio?</span><span class="chev">▸</span></summary><div class="recall-a">No Regulamento 737/1850 (compra e venda de móveis, seguro, atividade bancária, frete marítimo etc.).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual parte do CCom/1850 foi revogada e por quê?</span><span class="chev">▸</span></summary><div class="recall-a">A Parte III ("das quebras"), pelo DL 7.661/45, hoje substituído pela Lei 11.101/05.</div></details>
+</div>
+
+<div class="card" id="c4">
+  <div class="card-meta"><span class="badge badge-tema">Teoria da Empresa</span><span class="badge badge-pag">págs. 17–18</span></div>
+  <div class="card-title">4 · Teoria da Empresa (Italiana) e o CC/02</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>Surgida na <b>Itália</b>, a Teoria da Empresa desloca o núcleo da disciplina: o direito comercial não se ocupa de <b>atos</b> taxativos, mas de uma <b>forma de exercer atividade econômica — a forma empresarial</b>. Em princípio, qualquer atividade econômica exercida <b>empresarialmente</b> submete-se ao direito empresarial.</p>
+    <p>O <b>CC/02 adotou a Teoria da Empresa</b>, criando os conceitos de <b>empresário</b> (art. 966) e revogando a <b>Parte I do CCom/1850</b> (art. 2.045). Trouxe ainda a <b>atividade rural como faculdade</b> de enquadramento empresarial (art. 984).</p>
+    <p><b>Atenção terminológica:</b> persiste a <b>polêmica</b> sobre a definição jurídica de <b>empresa</b> — para Asquini é fenômeno econômico (fatores de produção: natureza, capital, trabalho, tecnologia) que, transposto ao direito, ganha <b>várias acepções</b>, não um sentido unitário.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC/02, art. 966.</span> Considera-se empresário quem exerce profissionalmente atividade econômica organizada para a produção ou a circulação de bens ou de serviços.</p>
+    <p><span class="art-num">CC/02, art. 2.045.</span> Revogam-se a Lei 3.071/1916 (Código Civil) e a Parte Primeira do Código Comercial (Lei 556/1850).</p>
+    <p><span class="art-num">CC/02, art. 984.</span> A sociedade com objeto de atividade própria de empresário rural, constituída/transformada conforme tipo de sociedade empresária, pode requerer inscrição no RPEM; depois de inscrita, fica equiparada à sociedade empresária.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">ATOS = O QUE FAZ · EMPRESA = COMO FAZ</span> (empresarialmente).<br><span class="mnemo">CC/02 art. 2.045 revogou a PARTE I do CCom/1850</span> (a parte marítima — Parte II — sobrevive).<br>Asquini: empresa = fenômeno econômico → <b>várias acepções</b>, sem sentido unitário.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual teoria o CC/02 adotou e o que ele revogou?</span><span class="chev">▸</span></summary><div class="recall-a">A Teoria da Empresa (italiana). Revogou a Parte I do Código Comercial de 1850 (art. 2.045) — a Parte II (comércio marítimo) permanece.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Para a Teoria da Empresa, o que define a incidência do direito empresarial?</span><span class="chev">▸</span></summary><div class="recall-a">A forma de exercer a atividade: se exercida empresarialmente (organizada), submete-se ao direito empresarial, qualquer que seja o ramo.</div></details>
+</div>
+
+<div class="card" id="c5">
+  <div class="card-meta"><span class="badge badge-tema">Princípios I</span><span class="badge badge-pag">págs. 19–20</span></div>
+  <div class="card-title">5 · Livre Iniciativa e Livre Concorrência</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Livre iniciativa</b> é <b>fundamento da República</b> (CF art. 1º, IV) e <b>fundamento da ordem econômica</b> (CF art. 170, <i>caput</i>). Assegura a liberdade de <b>empreender</b> — escolher o quê, como e quando produzir/circular — sendo, em regra, dispensável autorização de órgãos públicos (CF art. 170, p.ú.). Não é absoluta: convive com a <b>valorização do trabalho humano</b> e com a função social.</p>
+    <p><b>Livre concorrência</b> (CF art. 170, IV) é desdobramento da livre iniciativa: protege a <b>disputa leal</b> no mercado. O Estado <b>reprime o abuso do poder econômico</b> que vise à dominação de mercados, à eliminação da concorrência e ao aumento arbitrário de lucros (CF art. 173, §4º) — tutelado pela <b>Lei 12.529/11</b> (SBDC/CADE) e pela repressão à <b>concorrência desleal</b> (Lei 9.279/96, art. 195).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF, art. 1º, IV.</span> São fundamentos da República os valores sociais do trabalho e da <b>livre iniciativa</b>.</p>
+    <p><span class="art-num">CF, art. 170.</span> A ordem econômica funda-se na valorização do trabalho humano e na livre iniciativa... observados, entre outros, o princípio da <b>livre concorrência (IV)</b>. <b>Parágrafo único:</b> é assegurado a todos o livre exercício de qualquer atividade econômica, independentemente de autorização, salvo casos previstos em lei.</p>
+    <p><span class="art-num">CF, art. 173, §4º.</span> A lei reprimirá o abuso do poder econômico que vise à dominação dos mercados, à eliminação da concorrência e ao aumento arbitrário dos lucros.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">LIVRE INICIATIVA = ART. 1º IV (fundamento da República) + ART. 170 caput</span>.<br><span class="mnemo">LIVRE CONCORRÊNCIA = ART. 170, IV</span> (princípio da ordem econômica).<br>Liberdade <b>sem autorização</b> = regra (art. 170, p.ú.); abuso do poder econômico = <b>art. 173, §4º</b> + CADE (Lei 12.529/11).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em que dispositivos a livre iniciativa aparece na CF?</span><span class="chev">▸</span></summary><div class="recall-a">Como fundamento da República (art. 1º, IV) e como fundamento da ordem econômica (art. 170, caput).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a regra quanto à autorização estatal para exercer atividade econômica?</span><span class="chev">▸</span></summary><div class="recall-a">Em regra é dispensável (art. 170, p.ú.) — só se exige autorização nos casos previstos em lei.</div></details>
+</div>
+
+<div class="card" id="c6">
+  <div class="card-meta"><span class="badge badge-tema">Princípios II</span><span class="badge badge-pag">págs. 20–22</span></div>
+  <div class="card-title">6 · Função Social da Empresa e Intervenção Mínima</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Função social da empresa:</b> a propriedade — inclusive a dos meios de produção — deve atender a sua <b>função social</b> (CF arts. 5º, XXIII; 170, III). A empresa gera empregos, tributos, riqueza e desenvolvimento; daí o interesse na sua <b>preservação</b> (princípio da preservação da empresa, base da Lei 11.101/05). <b>Função social não se confunde com filantropia</b>: é o exercício da atividade em harmonia com os interesses dos trabalhadores, consumidores, fisco e comunidade.</p>
+    <p><b>Intervenção mínima e autonomia da vontade:</b> a <b>Lei da Liberdade Econômica (Lei 13.874/19)</b> introduziu o <b>art. 421-A</b> e reforçou o <b>art. 421</b> do CC: nos contratos <b>empresariais (paritários)</b> presume-se a <b>simetria</b> das partes, prevalece a <b>autonomia</b>, a revisão contratual é <b>excepcional</b> e a intervenção do Estado/juiz deve ser <b>mínima</b>. O parágrafo único do art. 421 consagra o <b>princípio da intervenção mínima</b> e a <b>excepcionalidade da revisão</b>.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC, art. 421.</span> A liberdade contratual será exercida nos limites da função social do contrato. <b>Parágrafo único:</b> nas relações contratuais privadas prevalecerão o princípio da <b>intervenção mínima</b> e a <b>excepcionalidade da revisão</b> contratual.</p>
+    <p><span class="art-num">CC, art. 421-A.</span> Os contratos civis e empresariais presumem-se <b>paritários e simétricos</b> até a presença de elementos concretos que justifiquem o afastamento dessa presunção... (I) liberdade de pactuar parâmetros; (II) alocação de riscos definida pelas partes respeitada; (III) revisão somente de maneira excepcional e limitada.</p>
+    <p><span class="art-num">CF, art. 170, III.</span> Função social da propriedade como princípio da ordem econômica.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">FUNÇÃO SOCIAL ≠ FILANTROPIA</span> — é exercer atendendo a trabalhadores, fisco, consumidores e comunidade.<br><span class="mnemo">421 + 421-A = INTERVENÇÃO MÍNIMA + PARITÁRIO/SIMÉTRICO + REVISÃO EXCEPCIONAL</span> (Lei 13.874/19).<br>Preservação da empresa = fundamento da recuperação (Lei 11.101/05).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Função social da empresa é o mesmo que filantropia?</span><span class="chev">▸</span></summary><div class="recall-a">Não. É exercer a atividade em harmonia com os interesses de trabalhadores, consumidores, fisco e comunidade — gerando empregos, tributos e riqueza.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Que artigo do CC consagra a intervenção mínima e a revisão excepcional?</span><span class="chev">▸</span></summary><div class="recall-a">O art. 421, parágrafo único (com o art. 421-A), inserido pela Lei da Liberdade Econômica (13.874/19).</div></details>
+</div>
+
+<div class="card" id="c7">
+  <div class="card-meta"><span class="badge badge-tema">Fontes</span><span class="badge badge-pag">págs. 22–23</span></div>
+  <div class="card-title">7 · Fontes Formais do Direito Empresarial</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>As fontes formais dividem-se em <b>primárias (imediatas)</b> e <b>secundárias (mediatas/subsidiárias)</b>.</p>
+    <p><b>Fonte primária:</b> a <b>lei</b> em sentido amplo (CF, leis empresariais — CC/02 Livro II, Lei 11.101/05, Lei 6.404/76 etc.).</p>
+    <p><b>Fontes secundárias:</b> aplicáveis na <b>lacuna</b> da lei, na ordem do art. 4º da LINDB — <b>analogia, costumes e princípios gerais do direito</b>. No direito empresarial, destaque para os <b>usos e costumes mercantis</b>, que historicamente moldaram o ramo; hoje seu registro/assentamento cabe às <b>Juntas Comerciais</b> (Lei 8.934/94, art. 8º, VI). Parte da doutrina inclui ainda a <b>jurisprudência</b> e a <b>doutrina</b> como fontes mediatas.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">LINDB, art. 4º.</span> Quando a lei for omissa, o juiz decidirá o caso de acordo com a <b>analogia, os costumes e os princípios gerais de direito</b>.</p>
+    <p><span class="art-num">Lei 8.934/94, art. 8º, VI.</span> Compete às Juntas Comerciais o <b>assentamento dos usos e práticas mercantis</b>.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">PRIMÁRIA = LEI · SECUNDÁRIA = A-C-P (Analogia, Costumes, Princípios)</span> — ordem do art. 4º da LINDB.<br>Costume mercantil é assentado pela <b>JUNTA COMERCIAL</b> (Lei 8.934/94, art. 8º, VI).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais as fontes secundárias e em que ordem se aplicam?</span><span class="chev">▸</span></summary><div class="recall-a">Analogia, costumes e princípios gerais do direito, nessa ordem (art. 4º da LINDB), na omissão da lei.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A quem cabe o assentamento dos usos e costumes mercantis?</span><span class="chev">▸</span></summary><div class="recall-a">Às Juntas Comerciais (Lei 8.934/94, art. 8º, VI).</div></details>
+</div>
+
+<div class="card" id="c8">
+  <div class="card-meta"><span class="badge badge-tema">Empresário</span><span class="badge badge-pag">págs. 24–27</span></div>
+  <div class="card-title">8 · Conceito de Empresário (art. 966, caput)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>«<i>Considera-se empresário quem exerce <b>profissionalmente</b> atividade <b>econômica organizada</b> para a <b>produção ou circulação de bens ou de serviços</b></i>». Quatro elementos cumulativos:</p>
+    <ul>
+      <li><b>Profissionalmente:</b> habitualidade + pessoalidade + em nome próprio + assunção do risco (não é ato isolado).</li>
+      <li><b>Econômica:</b> visa a lucro/proveito econômico (atividade com finalidade lucrativa).</li>
+      <li><b>Organizada:</b> articula os <b>4 fatores de produção</b> — <b>capital, mão de obra (trabalho), insumos e tecnologia</b>. É o elemento que distingue o empresário do profissional intelectual.</li>
+      <li><b>Produção/circulação de bens ou serviços:</b> objeto da atividade.</li>
+    </ul>
+    <p>O empresário pode ser <b>individual</b> (pessoa física), <b>EIRELI</b> (extinta/convertida pela Lei 14.195/21 em SLU) ou <b>sociedade empresária</b>. <b>Empresário</b> ≠ <b>sócio</b>: na sociedade, a empresária é a <b>pessoa jurídica</b>, não os sócios.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC, art. 966, caput.</span> Considera-se empresário quem exerce profissionalmente atividade econômica organizada para a produção ou a circulação de bens ou de serviços.</p>
+    <p><span class="art-num">CC, art. 967.</span> É obrigatória a inscrição do empresário no Registro Público de Empresas Mercantis (RPEM/Junta Comercial) <b>antes</b> do início de sua atividade — registro <b>declaratório</b> (a condição de empresário decorre do exercício da atividade, não do registro).</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">EMPRESÁRIO = PRO-E-O-B/S</span>: <b>PRO</b>fissionalmente · <b>E</b>conômica · <b>O</b>rganizada · <b>B</b>ens/<b>S</b>erviços.<br>Os 4 fatores da organização: <span class="mnemo">CAPITAL · TRABALHO · INSUMOS · TECNOLOGIA (CMIT)</span>.<br>Registro do empresário = <b>obrigatório</b> mas <b>declaratório</b> (art. 967).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os 4 elementos do conceito de empresário do art. 966?</span><span class="chev">▸</span></summary><div class="recall-a">Exercício profissional, atividade econômica, organização (dos fatores de produção) e produção/circulação de bens ou serviços.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O registro na Junta confere a qualidade de empresário?</span><span class="chev">▸</span></summary><div class="recall-a">Não. O registro é obrigatório (art. 967), mas declaratório: a condição de empresário decorre do exercício efetivo da atividade.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os 4 fatores de produção organizados pelo empresário?</span><span class="chev">▸</span></summary><div class="recall-a">Capital, mão de obra (trabalho), insumos e tecnologia.</div></details>
+</div>
+
+<div class="card" id="c9">
+  <div class="card-meta"><span class="badge badge-tema">Exclusões</span><span class="badge badge-pag">págs. 28–29</span></div>
+  <div class="card-title">9 · Quem NÃO é Empresário — Profissional Intelectual e o Elemento de Empresa</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Art. 966, parágrafo único:</b> não se considera empresário quem exerce profissão <b>intelectual</b> — de natureza <b>científica, literária ou artística</b> —, ainda que com auxiliares ou colaboradores, <b>salvo se o exercício da profissão constituir elemento de empresa</b>.</p>
+    <p>A regra: médico, advogado, dentista, escritor, artista <b>não</b> são empresários, pois a atividade tem caráter <b>personalíssimo/intelectual</b>. A <b>exceção</b> ocorre quando a atividade intelectual se torna <b>elemento de empresa</b> — isto é, quando o fator intelectual é <b>absorvido por uma organização empresarial</b> (estrutura, capital, equipe e impessoalidade preponderam sobre o trabalho pessoal). Ex.: o médico que monta um <b>hospital</b>; o farmacêutico que estrutura uma <b>rede de farmácias</b>.</p>
+    <p><b>Enunciados das Jornadas de Direito Civil (CJF):</b> 193, 194 e 195 detalham a figura do "elemento de empresa".</p>
+  </div>
+  <div class="sec-label jur">⚖️ Enunciados / Jurisprudência</div>
+  <div class="jur-box"><span class="info">Enun. 193 CJF</span> O exercício das atividades de natureza exclusivamente intelectual está excluído do conceito de empresa.<br><span class="info">Enun. 194 CJF</span> Os profissionais liberais não são considerados empresários, salvo se a organização dos fatores de produção for mais importante que a atividade pessoal desenvolvida.<br><span class="info">Enun. 195 CJF</span> A expressão "elemento de empresa" demanda interpretação econômica, devendo ser analisada sob a ótica da <b>preponderância da atividade</b>.</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">Intelectual (<span class="mnemo">CientífiCo · Literário · Artístico = CLA</span>) <b>não</b> é empresário...<br>...<b>salvo</b> se virar <span class="mnemo">ELEMENTO DE EMPRESA</span> (a organização preponderar sobre o trabalho pessoal).<br>Enunciados <b>193-194-195</b> do CJF.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quando o profissional intelectual passa a ser empresário?</span><span class="chev">▸</span></summary><div class="recall-a">Quando sua atividade constitui "elemento de empresa" — a organização dos fatores de produção (estrutura, capital, equipe) preponderar sobre o trabalho intelectual pessoal.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Cite as 3 naturezas de profissão intelectual do art. 966, p.ú.</span><span class="chev">▸</span></summary><div class="recall-a">Científica, literária e artística.</div></details>
+</div>
+
+<div class="card" id="c10">
+  <div class="card-meta"><span class="badge badge-tema">Exclusões</span><span class="badge badge-pag">págs. 30–32</span></div>
+  <div class="card-title">10 · Sociedade Simples e Sociedade de Advogados</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>A distinção <b>empresária × simples</b> é o critério do <b>art. 982</b>: é <b>empresária</b> a sociedade que tem por objeto o exercício de atividade própria de empresário (art. 966) sujeita a registro; <b>simples</b>, as demais. Independe do registro a natureza: <b>a S/A é sempre empresária</b> e a <b>cooperativa é sempre simples</b> (art. 982, p.ú.), por força de lei.</p>
+    <p>As <b>sociedades uniprofissionais</b> (reunião de profissionais intelectuais — médicos, contadores) tendem a ser <b>simples</b>, salvo elemento de empresa. A <b>sociedade de advogados</b> tem regime <b>especial</b>: regida pelo <b>Estatuto da OAB (Lei 8.906/94)</b>, registra-se no <b>Conselho da OAB</b> (não na Junta), <b>não</b> pode ter natureza mercantil/empresária e <b>não</b> pode adotar nome fantasia nem caráter empresarial.</p>
+  </div>
+  <div class="sec-label jur">⚖️ Enunciados / Jurisprudência</div>
+  <div class="jur-box"><span class="info">STJ · REsp 1.227.240/SP · Info 564</span> A sociedade de advogados <b>não</b> pode ter caráter empresarial; é sociedade <b>simples</b>, regida pelo Estatuto da Advocacia, vedado o registro na Junta Comercial.<br><span class="info">Lei 8.906/94, art. 16</span> Não são admitidas registro nem funcionamento de sociedade de advogados com características mercantis.</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">S/A = SEMPRE EMPRESÁRIA · COOPERATIVA = SEMPRE SIMPLES</span> (art. 982, p.ú.).<br><span class="mnemo">ADVOGADOS: SIMPLES · registro na OAB · sem caráter mercantil</span> (Lei 8.906/94; STJ Info 564).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Onde se registra a sociedade de advogados e qual sua natureza?</span><span class="chev">▸</span></summary><div class="recall-a">No Conselho Seccional da OAB; é sociedade simples, sem caráter empresarial (Lei 8.906/94; STJ Info 564).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Independem do objeto: que sociedade é sempre empresária e qual é sempre simples?</span><span class="chev">▸</span></summary><div class="recall-a">A sociedade anônima é sempre empresária; a cooperativa é sempre simples (art. 982, parágrafo único).</div></details>
+</div>
+
+<div class="card" id="c11">
+  <div class="card-meta"><span class="badge badge-tema">Rural</span><span class="badge badge-pag">págs. 33–35</span></div>
+  <div class="card-title">11 · Empresário Rural e o Registro Facultativo</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>O exercente de <b>atividade rural</b> tem <b>faculdade</b> de se inscrever no RPEM (Junta Comercial). Feita a opção e <b>inscrito</b>, fica <b>equiparado ao empresário</b> sujeito a registro (art. 971); a sociedade rural, idem (art. 984). Sem registro, submete-se ao regime <b>civil comum</b> (sociedade simples / pessoa natural não empresária).</p>
+    <p><b>Natureza do registro do rural — divergência:</b> a doutrina clássica o tratava como <b>constitutivo</b> da condição empresarial (a opção é que torna empresário). Mas o <b>STJ (Tema 1.145, REsp 1.811.953/MT)</b> fixou que, para o produtor rural, o registro tem efeito <b>declaratório</b> quanto à contagem do tempo de exercício para fins de <b>recuperação judicial</b>: pode computar o período de atividade anterior ao registro, desde que comprovado o exercício regular.</p>
+    <p><b>Futebol:</b> a <b>Lei 14.193/21 (SAF — Sociedade Anônima do Futebol)</b> criou tipo societário próprio para clubes, sempre empresária (S/A).</p>
+  </div>
+  <div class="sec-label jur">⚖️ Enunciados / Jurisprudência</div>
+  <div class="jur-box"><span class="info">STJ · Tema 1.145 · REsp 1.811.953/MT</span> O produtor rural, ao registrar-se, pode computar para a recuperação judicial o tempo de exercício <b>anterior</b> ao registro (efeito declaratório quanto ao exercício); o registro confere a condição de empresário, mas não cria a atividade.<br><span class="info">Enun. 202 CJF</span> O registro do empresário/sociedade rural é <b>facultativo</b> e de natureza constitutiva, sujeitando-o ao regime empresarial.</div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">RURAL = REGISTRO FACULTATIVO (arts. 971/984)</span>. Optou + inscreveu → empresário.<br>Natureza: <b>constitutiva</b> da opção, MAS <span class="mnemo">STJ Tema 1.145 = DECLARATÓRIO quanto ao tempo p/ recuperação judicial</span>.<br>Futebol: <b>SAF</b> — Lei 14.193/21.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O registro do empresário rural é obrigatório?</span><span class="chev">▸</span></summary><div class="recall-a">Não. É facultativo (arts. 971 e 984). Sem registro, fica no regime civil; com registro, equipara-se ao empresário.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que decidiu o STJ no Tema 1.145 sobre o produtor rural?</span><span class="chev">▸</span></summary><div class="recall-a">Que o registro tem efeito declaratório quanto ao exercício: o rural pode computar o tempo de atividade anterior ao registro para fins do biênio da recuperação judicial.</div></details>
+</div>
+
+<div class="card" id="c12">
+  <div class="card-meta"><span class="badge badge-tema">Cooperativa</span><span class="badge badge-pag">págs. 36–37</span></div>
+  <div class="card-title">12 · Cooperativas — Sempre Sociedade Simples</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>A <b>cooperativa</b> é, por determinação legal, <b>sempre sociedade simples</b> (art. 982, p.ú.), <b>independentemente do objeto</b> que explore. Regida pela <b>Lei 5.764/71</b> (Política Nacional de Cooperativismo) e pelos arts. 1.093-1.096 do CC.</p>
+    <p>Características: adesão <b>voluntária e livre</b>; <b>variabilidade</b> do capital social; <b>singularidade do voto</b> (cada cooperado = 1 voto, independentemente da quota); <b>quórum</b> baseado no nº de cooperados; retorno das sobras proporcional às operações. Apesar de exercer atividade econômica, a lei lhe nega caráter empresário.</p>
+    <p><b>Registro:</b> embora simples, a cooperativa registra-se na <b>Junta Comercial</b> (IN DREI 81/2020 e legislação cooperativista) — particularidade que cai em prova.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC, art. 982, p.ú.</span> Independentemente de seu objeto, considera-se empresária a sociedade por ações; e, <b>simples, a cooperativa</b>.</p>
+    <p><span class="art-num">CC, art. 1.094.</span> Características da cooperativa: variabilidade/dispensa do capital, concurso de sócios em número mínimo, limitação do valor das quotas, intransferibilidade das quotas a terceiros, <b>quórum por nº de sócios</b>, <b>direito de um só voto</b> nas deliberações, distribuição de resultados proporcional ao valor das operações.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">COOPERATIVA = SEMPRE SIMPLES</span> (art. 982, p.ú.) — mesmo exercendo atividade econômica.<br><span class="mnemo">1 COOPERADO = 1 VOTO</span> (singularidade), capital <b>variável</b>, Lei 5.764/71.<br>Pega: <b>é simples mas registra na JUNTA COMERCIAL</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a natureza da cooperativa e em que ela depende do objeto?</span><span class="chev">▸</span></summary><div class="recall-a">É sempre sociedade simples (art. 982, p.ú.), independentemente do objeto que explore.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Como funciona o voto na cooperativa?</span><span class="chev">▸</span></summary><div class="recall-a">Singularidade do voto: cada cooperado tem um único voto, independentemente do número de quotas que detenha.</div></details>
+</div>
+
+<div class="card" id="c13">
+  <div class="card-meta"><span class="badge badge-tema">Emp. Individual</span><span class="badge badge-pag">págs. 37–39</span></div>
+  <div class="card-title">13 · Impedimentos Legais para Ser Empresário</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Capacidade ≠ legitimação.</b> Pode exercer a empresa quem estiver em <b>pleno gozo da capacidade civil</b> e <b>não for legalmente impedido</b> (art. 972). O <b>impedimento</b> não retira a capacidade civil — apenas <b>veda</b> àquela pessoa o exercício de empresa (falta de legitimação), por razões de interesse público.</p>
+    <p><b>Exemplos de impedidos:</b> magistrados, membros do MP, militares da ativa, servidores públicos (em regra), falidos não reabilitados, deputados/senadores quanto a contratos com pessoas jurídicas de direito público, estrangeiros em atividades vedadas, despachantes etc.</p>
+    <p><b>Consequência (art. 973):</b> o impedido que exercer empresa <b>responde pelas obrigações contraídas</b>. O ato <b>é válido</b> perante terceiros de boa-fé — o impedimento gera responsabilidade e sanções administrativas/funcionais, mas <b>não invalida</b> os negócios praticados.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC, art. 972.</span> Podem exercer a atividade de empresário os que estiverem em pleno gozo da capacidade civil e não forem legalmente impedidos.</p>
+    <p><span class="art-num">CC, art. 973.</span> A pessoa legalmente impedida de exercer atividade própria de empresário, se a exercer, <b>responderá pelas obrigações contraídas</b>.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">CAPACIDADE (ter) ≠ LEGITIMAÇÃO (poder exercer)</span>. O impedido <b>tem</b> capacidade, mas <b>não pode</b> ser empresário.<br><span class="mnemo">ART. 973: IMPEDIDO QUE EXERCE = RESPONDE PELAS OBRIGAÇÕES</span> (ato válido p/ terceiros).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O impedido que exerce empresa pratica atos nulos?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Os atos são válidos perante terceiros; o impedido responde pelas obrigações contraídas (art. 973), além de sofrer sanções funcionais.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Impedimento retira a capacidade civil?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Retira apenas a legitimação para exercer empresa; a capacidade civil permanece íntegra.</div></details>
+</div>
+
+<div class="card" id="c14">
+  <div class="card-meta"><span class="badge badge-tema">Incapaz</span><span class="badge badge-pag">págs. 39–40</span></div>
+  <div class="card-title">14 · Empresário Incapaz (continuação da empresa)</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p>O incapaz <b>não pode iniciar</b> uma empresa, mas pode <b>continuar</b> a que era exercida por ele (quando capaz), por seus pais ou pelo autor da herança, mediante <b>autorização judicial</b> (art. 974). O juiz, ouvido o MP, examina riscos e conveniência; pode revogar a autorização.</p>
+    <p><b>Proteção patrimonial (art. 974, §2º):</b> os bens que o incapaz <b>já possuía</b> ao tempo da sucessão/interdição, <b>estranhos ao acervo da empresa</b>, <b>não ficam sujeitos</b> ao resultado da atividade — devem ser listados no alvará. Protege-se o patrimônio anterior do incapaz.</p>
+    <p>O incapaz é <b>representado</b> (absolutamente incapaz) ou <b>assistido</b> (relativamente incapaz). Se o representante/assistente for impedido, nomeia-se <b>gerente</b> (art. 975). <b>Enun. 203 CJF:</b> o exercício é por meio de representante/assistente, mas a empresa é do incapaz.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC, art. 974.</span> Poderá o incapaz, por meio de representante ou devidamente assistido, <b>continuar</b> a empresa antes exercida por ele enquanto capaz, por seus pais ou pelo autor da herança.</p>
+    <p><span class="art-num">CC, art. 974, §2º.</span> Não ficam sujeitos ao resultado da empresa os bens que o incapaz já possuía, ao tempo da sucessão ou interdição, <b>desde que estranhos ao acervo</b> daquela, devendo constar do alvará.</p>
+    <p><span class="art-num">CC, art. 976/977.</span> Averbação do alvará no RPEM; o incapaz não responde com o patrimônio estranho à empresa.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">INCAPAZ: NÃO INICIA, mas CONTINUA</span> (art. 974) — com <b>autorização judicial</b> + MP.<br><span class="mnemo">BENS ANTERIORES ESTRANHOS À EMPRESA = BLINDADOS (§2º)</span>, constam do alvará.<br>Representado/assistido; representante impedido → <b>gerente</b> (art. 975).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O incapaz pode iniciar uma empresa?</span><span class="chev">▸</span></summary><div class="recall-a">Não pode iniciar; só pode continuar a empresa antes exercida por ele (quando capaz), pelos pais ou pelo autor da herança, com autorização judicial (art. 974).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais bens do incapaz ficam protegidos do risco da empresa?</span><span class="chev">▸</span></summary><div class="recall-a">Os que ele já possuía ao tempo da sucessão/interdição e que sejam estranhos ao acervo da empresa (art. 974, §2º), listados no alvará.</div></details>
+</div>
+
+<div class="card" id="c15">
+  <div class="card-meta"><span class="badge badge-tema">Casado</span><span class="badge badge-pag">págs. 40–41</span></div>
+  <div class="card-title">15 · Empresário Casado</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Alienação de imóveis (art. 978):</b> o empresário casado pode, <b>sem necessidade de outorga conjugal</b>, alienar ou gravar de ônus real os <b>imóveis que integrem o patrimônio da empresa</b>, qualquer que seja o regime de bens. É exceção à outorga uxória/marital do art. 1.647 — afasta a anuência do cônjuge para os bens <b>afetados à atividade empresarial</b>. <b>Enun. 58 CJF:</b> a regra alcança também a hipoteca e demais ônus reais sobre tais imóveis.</p>
+    <p><b>Sociedade entre cônjuges (art. 977):</b> podem os cônjuges contratar sociedade entre si ou com terceiros, <b>salvo</b> se casados no regime da <b>comunhão universal de bens</b> ou no da <b>separação obrigatória/legal</b>. Visa evitar fraude e confusão patrimonial.</p>
+    <p><b>Registro (arts. 979-980):</b> averbam-se no RPEM o pacto antenupcial, o título de doação/herança com cláusula de incomunicabilidade, a sentença que decretar/aprovar separação judicial e o ato de reconciliação — para oponibilidade a terceiros.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CC, art. 977.</span> Faculta-se aos cônjuges contratar sociedade, entre si ou com terceiros, desde que não tenham casado no regime da <b>comunhão universal</b> de bens, ou no da <b>separação obrigatória</b>.</p>
+    <p><span class="art-num">CC, art. 978.</span> O empresário casado pode, <b>sem necessidade de outorga conjugal</b>, qualquer que seja o regime de bens, alienar os imóveis que integrem o patrimônio da empresa ou gravá-los de ônus real.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">ART. 978: IMÓVEL DA EMPRESA = ALIENA SEM OUTORGA</span> (qualquer regime) — Enun. 58 inclui hipoteca.<br><span class="mnemo">ART. 977: CÔNJUGES NÃO PODEM SOCIEDADE se COMUNHÃO UNIVERSAL ou SEPARAÇÃO OBRIGATÓRIA</span> (CU + SO = proibido).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em quais regimes os cônjuges NÃO podem contratar sociedade entre si?</span><span class="chev">▸</span></summary><div class="recall-a">Comunhão universal de bens e separação obrigatória (legal) de bens — art. 977.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O empresário casado precisa de outorga para vender imóvel da empresa?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Pode alienar ou gravar de ônus real os imóveis da empresa sem outorga conjugal, qualquer que seja o regime (art. 978; Enun. 58 CJF).</div></details>
+</div>
+
+<div class="card" id="c16">
+  <div class="card-meta"><span class="badge badge-tema">Conceito de Empresa</span><span class="badge badge-pag">págs. 42–43</span></div>
+  <div class="card-title">16 · Conceito de Empresa — Coase e os 4 Perfis de Asquini</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Empresa</b> é <b>atividade</b> (não é sujeito nem coisa). O empresário é o <b>sujeito</b>; o estabelecimento, o <b>objeto/instrumento</b>; a empresa, a <b>atividade econômica organizada</b> em si.</p>
+    <p><b>Ronald Coase</b> ("The Nature of the Firm", 1937): a firma/empresa é um <b>feixe (nexo) de contratos</b> — existe porque internalizar atividades pode ter <b>custo de transação</b> menor que recorrer sempre ao mercado.</p>
+    <p><b>Alberto Asquini</b> — <b>teoria poliédrica</b>: a empresa é fenômeno econômico polifacético, captado pelo direito sob <b>4 perfis</b>:</p>
+    <ul>
+      <li><b>Subjetivo:</b> a empresa como <b>empresário</b> (sujeito que exerce a atividade).</li>
+      <li><b>Funcional:</b> a empresa como <b>atividade</b> empresarial (o agir do empresário).</li>
+      <li><b>Objetivo (patrimonial):</b> a empresa como <b>estabelecimento</b> (complexo de bens — <i>azienda</i>).</li>
+      <li><b>Corporativo (institucional):</b> a empresa como <b>instituição</b> — comunidade de pessoas (empresário + colaboradores) unidas por um fim comum.</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box"><span class="mnemo">EMPRESÁRIO (sujeito) · EMPRESA (atividade) · ESTABELECIMENTO (objeto)</span> — os "3 E".<br><b>Coase</b> = empresa é <b>feixe/nexo de contratos</b> (custo de transação).<br>Asquini — 4 perfis: <span class="mnemo">SU-FU-OB-CO</span>: <b>SU</b>bjetivo (empresário) · <b>FU</b>ncional (atividade) · <b>OB</b>jetivo (estabelecimento) · <b>CO</b>rporativo (instituição).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os 4 perfis da empresa segundo Asquini?</span><span class="chev">▸</span></summary><div class="recall-a">Subjetivo (empresário), funcional (atividade), objetivo/patrimonial (estabelecimento) e corporativo/institucional (instituição).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Para Coase, o que é a empresa?</span><span class="chev">▸</span></summary><div class="recall-a">Um feixe (nexo) de contratos — existe para reduzir custos de transação frente ao mercado.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Distinga empresário, empresa e estabelecimento.</span><span class="chev">▸</span></summary><div class="recall-a">Empresário = sujeito; empresa = atividade econômica organizada; estabelecimento = objeto (complexo de bens usado no exercício).</div></details>
+</div>
+
+<div class="card" id="tab">
+  <div class="card-meta"><span class="badge badge-tema">Tabelas</span><span class="badge badge-pag">comparativos</span></div>
+  <div class="card-title">📊 Tabelas Comparativas</div>
+
+  <div class="sec-label sintese">As Três Fases do Direito Comercial</div>
+  <table class="cmp-table">
+    <tr><th>Fase</th><th>Critério</th><th>Marco</th></tr>
+    <tr><td>1ª Subjetiva (corporativista)</td><td>Ser membro da corporação de ofício</td><td>Idade Média · cônsules</td></tr>
+    <tr><td>2ª Objetiva (napoleônica)</td><td>Praticar atos de comércio</td><td>CC fr. 1804 · CCom fr. 1808 · CCom BR 1850</td></tr>
+    <tr><td>3ª Empresarial (italiana)</td><td>Exercer atividade de forma empresarial</td><td>CC italiano 1942 · CC/02 BR</td></tr>
+  </table>
+
+  <div class="sec-label sintese">Empresária × Simples (art. 982)</div>
+  <table class="cmp-table">
+    <tr><th>—</th><th>Empresária</th><th>Simples</th></tr>
+    <tr><td>Objeto</td><td>Atividade de empresário (art. 966) c/ organização</td><td>Demais (inclui intelectual sem elemento de empresa)</td></tr>
+    <tr><td>Registro</td><td>Junta Comercial (RPEM)</td><td>Cartório RCPJ (regra)</td></tr>
+    <tr><td>Por força de lei</td><td>S/A = SEMPRE empresária</td><td>Cooperativa = SEMPRE simples</td></tr>
+    <tr><td>Falência/Recuperação</td><td>Sujeita (Lei 11.101/05)</td><td>Não sujeita (regra)</td></tr>
+  </table>
+
+  <div class="sec-label sintese">Quem NÃO é empresário (resumo)</div>
+  <table class="cmp-table">
+    <tr><th>Figura</th><th>Regra</th><th>Exceção / observação</th></tr>
+    <tr><td>Profissional intelectual</td><td>Não é empresário (art. 966, p.ú.)</td><td>Salvo se constituir elemento de empresa</td></tr>
+    <tr><td>Sociedade de advogados</td><td>Simples; registro na OAB</td><td>Vedado caráter mercantil (Info 564)</td></tr>
+    <tr><td>Empresário rural sem registro</td><td>Regime civil comum</td><td>Registro facultativo o equipara (arts. 971/984)</td></tr>
+    <tr><td>Cooperativa</td><td>Sempre simples (art. 982, p.ú.)</td><td>Mas registra na Junta Comercial</td></tr>
+  </table>
+
+  <div class="sec-label sintese">Capacidade × Legitimação</div>
+  <table class="cmp-table">
+    <tr><th>—</th><th>Impedido (art. 972/973)</th><th>Incapaz (art. 974)</th></tr>
+    <tr><td>Tem capacidade civil?</td><td>Sim (só falta legitimação)</td><td>Não (representado/assistido)</td></tr>
+    <tr><td>Pode iniciar empresa?</td><td>Não (vedado)</td><td>Não — só continuar</td></tr>
+    <tr><td>Efeito do exercício</td><td>Atos válidos; responde pelas obrigações (973)</td><td>Continua c/ autorização judicial; bens anteriores blindados (§2º)</td></tr>
+  </table>
+</div>
+
+<div class="card" id="sum">
+  <div class="card-meta"><span class="badge badge-tema">Enunciados / Júris</span><span class="badge badge-pag">CJF · STJ</span></div>
+  <div class="card-title">⚖️ Enunciados CJF e Jurisprudência</div>
+  <div class="jur-box"><span class="info">Enun. 193 CJF</span> O exercício de atividade exclusivamente intelectual está fora do conceito de empresa.</div>
+  <div class="jur-box"><span class="info">Enun. 194 CJF</span> Os profissionais liberais não são empresários, salvo se a organização dos fatores de produção for mais relevante que a atividade pessoal.</div>
+  <div class="jur-box"><span class="info">Enun. 195 CJF</span> "Elemento de empresa" exige interpretação econômica, pela preponderância da atividade organizada sobre a pessoal.</div>
+  <div class="jur-box"><span class="info">Enun. 202 CJF</span> O registro do empresário/sociedade rural é facultativo (arts. 971/984).</div>
+  <div class="jur-box"><span class="info">Enun. 203 CJF</span> O incapaz, na continuação da empresa, atua por representante/assistente; a empresa é dele.</div>
+  <div class="jur-box"><span class="info">Enun. 58 CJF</span> A regra do art. 978 (dispensa de outorga p/ imóveis da empresa) abrange a hipoteca e demais ônus reais.</div>
+  <div class="jur-box"><span class="info">STJ · REsp 1.227.240/SP · Info 564</span> Sociedade de advogados é simples, sem caráter empresarial; não se registra na Junta.</div>
+  <div class="jur-box"><span class="info">STJ · Tema 1.145 · REsp 1.811.953/MT</span> O produtor rural pode computar o tempo de exercício anterior ao registro para o biênio da recuperação judicial (registro com efeito declaratório quanto ao exercício).</div>
+</div>
+
+<div class="card" id="peg">
+  <div class="card-meta"><span class="badge badge-tema">Pegadinhas</span><span class="badge badge-pag">estilo Cebraspe</span></div>
+  <div class="card-title">⚠️ Pegadinhas Clássicas de Banca</div>
+  <ol class="list-pega">
+    <li><b>Inverter a fase:</b> dizer que a fase <b>objetiva</b> centrou-se no <i>empresário</i> ou que a <b>subjetiva</b> exigia <i>atos de comércio</i>. Subjetiva = corporação; objetiva = ato; empresarial = forma de exercer.</li>
+    <li><b>"O CC/02 revogou todo o Código Comercial de 1850."</b> ERRADO — revogou só a <b>Parte I</b> (art. 2.045); a <b>Parte II (comércio marítimo)</b> continua vigente.</li>
+    <li><b>"O registro na Junta confere a condição de empresário."</b> ERRADO — é <b>declaratório</b> (art. 967); a condição decorre do exercício efetivo.</li>
+    <li><b>"Profissional intelectual nunca é empresário."</b> ERRADO — é, <b>quando constitui elemento de empresa</b> (art. 966, p.ú.).</li>
+    <li><b>"A S/A pode ser simples se tiver objeto não-empresarial."</b> ERRADO — S/A é <b>sempre empresária</b> (art. 982, p.ú.), independentemente do objeto.</li>
+    <li><b>"A cooperativa é sempre empresária por exercer atividade econômica."</b> ERRADO — é <b>sempre simples</b> (art. 982, p.ú.); pega adicional: ainda assim <b>registra na Junta</b>.</li>
+    <li><b>"O empresário rural é obrigado a se registrar na Junta."</b> ERRADO — o registro é <b>facultativo</b> (arts. 971/984).</li>
+    <li><b>"O impedido que exerce empresa pratica atos nulos."</b> ERRADO — os atos são <b>válidos</b>; ele <b>responde pelas obrigações</b> (art. 973).</li>
+    <li><b>"Impedimento retira a capacidade civil."</b> ERRADO — retira a <b>legitimação</b>, não a capacidade.</li>
+    <li><b>"O incapaz pode iniciar atividade empresarial com autorização judicial."</b> ERRADO — só pode <b>continuar</b>, não iniciar (art. 974).</li>
+    <li><b>"O empresário casado precisa de outorga conjugal para vender imóvel da empresa."</b> ERRADO — <b>dispensada</b>, qualquer regime (art. 978).</li>
+    <li><b>"Cônjuges em separação obrigatória podem contratar sociedade entre si."</b> ERRADO — vedado, tal como na <b>comunhão universal</b> (art. 977).</li>
+    <li><b>"Empresa é o conjunto de bens organizados."</b> ERRADO — isso é <b>estabelecimento</b>; empresa é <b>atividade</b>. (perfil objetivo de Asquini ≠ perfil funcional).</li>
+    <li><b>"Função social da empresa = filantropia."</b> ERRADO — é exercer a atividade em harmonia com trabalhadores, fisco, consumidores e comunidade.</li>
+  </ol>
+</div>
+
+<div class="card" id="flash">
+  <div class="card-meta"><span class="badge badge-tema">Flashcards</span><span class="badge badge-pag">cartão de virar</span></div>
+  <div class="card-title">🔁 Flashcards — clique para virar</div>
+  <div class="flash-hint">Leia a pergunta, formule a resposta em voz alta e <b>clique no cartão</b> para conferir o verso.</div>
+  <div class="flip-grid">
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">FASES</span><span class="fq">Critério de cada uma das 3 fases do direito comercial?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Subjetiva:</b> ser membro de corporação. <b>Objetiva:</b> praticar atos de comércio. <b>Empresarial:</b> exercer atividade de forma empresarial (organizada).</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">CC/02</span><span class="fq">O que o art. 2.045 do CC/02 revogou do CCom/1850?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa">Apenas a <b>Parte I</b> (do comércio em geral). A <b>Parte II — comércio marítimo</b> — permanece vigente.</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">ART. 966</span><span class="fq">Os 4 elementos do conceito de empresário?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>PRO-E-O-B/S:</b> exercício <b>profissional</b>, atividade <b>econômica</b>, <b>organizada</b> (capital, trabalho, insumos, tecnologia), p/ produção/circulação de <b>bens ou serviços</b>.</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">REGISTRO</span><span class="fq">O registro do empresário é constitutivo ou declaratório?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Declaratório</b> (art. 967). Obrigatório antes de iniciar, mas a condição de empresário decorre do <b>exercício efetivo</b>, não do registro.</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">INTELECTUAL</span><span class="fq">Quando o profissional intelectual vira empresário?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa">Quando constitui <b>elemento de empresa</b> — a organização dos fatores de produção <b>prepondera</b> sobre o trabalho pessoal (art. 966, p.ú.; Enun. 193-195).</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">ART. 982</span><span class="fq">Que sociedade é sempre empresária e qual é sempre simples?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>S/A = sempre empresária</b>; <b>cooperativa = sempre simples</b> (art. 982, p.ú.), independentemente do objeto. Obs.: cooperativa registra na Junta.</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">ADVOGADOS</span><span class="fq">Natureza e registro da sociedade de advogados?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Simples</b>, sem caráter mercantil; registra-se no <b>Conselho da OAB</b> (Lei 8.906/94; STJ Info 564 · REsp 1.227.240/SP).</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">RURAL</span><span class="fq">O registro do empresário rural — natureza e STJ Tema 1.145?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Facultativo</b> (arts. 971/984). STJ Tema 1.145 (REsp 1.811.953/MT): efeito <b>declaratório</b> quanto ao exercício — computa tempo anterior ao registro p/ recuperação judicial.</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">IMPEDIDO</span><span class="fq">Capacidade × legitimação: e o impedido que exerce empresa?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa">Impedido <b>tem capacidade</b>, falta-lhe <b>legitimação</b>. Se exercer: atos <b>válidos</b> e <b>responde</b> pelas obrigações (arts. 972/973).</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">INCAPAZ</span><span class="fq">O incapaz pode iniciar empresa? E os bens anteriores?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Não inicia, só continua</b> (art. 974) com autorização judicial. Bens anteriores <b>estranhos ao acervo</b> ficam <b>blindados</b> e constam do alvará (§2º).</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">CASADO</span><span class="fq">Em quais regimes cônjuges NÃO podem contratar sociedade entre si?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Comunhão universal</b> e <b>separação obrigatória</b> de bens (art. 977). Imóvel da empresa: vende <b>sem outorga</b>, qualquer regime (art. 978).</span></div>
+    </div></div>
+
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">ASQUINI</span><span class="fq">Os 4 perfis da empresa (teoria poliédrica)?</span><span class="fhint">clique para virar ↻</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>SU-FU-OB-CO:</b> Subjetivo (empresário), Funcional (atividade), Objetivo (estabelecimento), Corporativo (instituição). Coase: feixe de contratos.</span></div>
+    </div></div>
+
+  </div>
+</div>
+
+<div class="card" id="check">
+  <div class="card-meta"><span class="badge badge-tema">Checklist</span><span class="badge badge-pag">domínio</span></div>
+  <div class="card-title">✅ Checklist de Domínio</div>
+  <div class="prose">
+    <p>Marque mentalmente: você consegue, sem consultar...</p>
+    <ul>
+      <li>Explicar os <b>3 elementos de Vidari</b> e por que o comércio antecede o direito comercial?</li>
+      <li>Distinguir o <b>critério</b> das três fases (corporação · ato · forma empresarial) e suas datas?</li>
+      <li>Dizer a <b>estrutura do CCom/1850</b> e o que o art. 2.045 do CC/02 revogou (só a Parte I)?</li>
+      <li>Recitar o <b>art. 966</b> e os 4 fatores de produção (capital, trabalho, insumos, tecnologia)?</li>
+      <li>Localizar <b>livre iniciativa</b> (art. 1º, IV + 170) e <b>livre concorrência</b> (170, IV) na CF?</li>
+      <li>Diferenciar <b>função social</b> de filantropia e citar o art. 421/421-A (intervenção mínima)?</li>
+      <li>Listar as <b>fontes</b> (lei → analogia, costumes, princípios) e quem assenta o costume mercantil?</li>
+      <li>Explicar o <b>elemento de empresa</b> e os Enunciados 193-195?</li>
+      <li>Saber que <b>S/A</b> é sempre empresária e <b>cooperativa</b> sempre simples (art. 982, p.ú.)?</li>
+      <li>Tratar a <b>sociedade de advogados</b> (simples · OAB · Info 564)?</li>
+      <li>Explicar o registro <b>facultativo</b> do rural e o <b>STJ Tema 1.145</b>?</li>
+      <li>Distinguir <b>capacidade × legitimação</b> e o efeito do art. 973?</li>
+      <li>Explicar o incapaz (<b>continua, não inicia</b>; §2º) e o casado (arts. 977/978)?</li>
+      <li>Recitar os <b>4 perfis de Asquini</b> e a tese de Coase (feixe de contratos)?</li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /wrap -->
+<footer>Caderno de Revisão · Direito Empresarial — Teoria da Empresa, Princípios, Fontes e Empresário (págs. 10–42) · uso pessoal de estudo · CEBRASPE/Magistratura</footer>
+<script>
+document.querySelectorAll('.flip').forEach(function(c){
+  c.addEventListener('click', function(){ c.classList.toggle('flipped'); });
+});
+</script>
+</body>
+</html>
+
