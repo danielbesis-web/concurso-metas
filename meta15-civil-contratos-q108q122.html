@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 15 · Direito Civil — Contratos — Q108–Q122</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 15 · Direito Civil — Contratos — Q108–Q122</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 15 · Direito Civil · Contratos (arts. 422–489 CC) · Q108–Q122</footer>
+<script>
+const STORE_KEY = 'concurso_meta15_civil_contratos_q108q122_v1';
+const QUESTOES = [
+  {id:'q108', materia:'Princípios contratuais (boa-fé objetiva)', banca:'Ieses · TJ-PA · 2026', tipo:'multipla',
+   enunciado:`Considerando os termos do art. 422 e seguintes da Lei 10.406/02, marque a alternativa <b>incorreta</b>:`,
+   alternativas:[
+     {letra:'A',texto:'Não pode ser objeto de contrato a herança de pessoa viva.'},
+     {letra:'B',texto:'É lícito às partes estipular contratos atípicos, observadas as normas gerais fixadas neste Código.'},
+     {letra:'C',texto:'Nos contratos de adesão, são nulas as cláusulas que estipulem a renúncia antecipada do aderente a direito resultante da natureza do negócio.'},
+     {letra:'D',texto:'Os contratantes são obrigados a respeitar, na conclusão do contrato, todas as cláusulas do contrato.'},
+     {letra:'E',texto:'Quando houver no contrato de adesão cláusulas ambíguas ou contraditórias, dever-se-á adotar a interpretação mais favorável ao aderente.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando NEGATIVO ("marque a incorreta").<br><br><b>⚖️ Por quê:</b> a alternativa distorce o art. 422. Boa-fé e probidade incidem na <b>conclusão E na execução</b> do contrato — a redação troca o dever por "respeitar todas as cláusulas pactuadas", que não é o conteúdo do art. 422.<br><br><b>⚠️ Pegadinha:</b> alternativa que começa certa citando o dever de conduta e enxerta o erro trocando "probidade e boa-fé" por "cumprir o pactuado". As demais são literais: A (art. 426), B (art. 425), C (art. 424), E (art. 423).<br><br><b>📌 Fundamento:</b> CC, art. 422 (c/c arts. 113 e 187); arts. 423, 424, 425 e 426.<br><br><b>📎 Frases de revisão (banco):</b> "A boa-fé objetiva (art. 422) impõe deveres anexos de lealdade, informação, cooperação e proteção, exigíveis antes, durante e após a execução"; "Pacta sunt servanda é relativizado pela função social e pela boa-fé objetiva." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> Art. 422 = <b>boa-fé e probidade</b>, NÃO "respeitar todas as cláusulas". A boa-fé cobre <b>antes, durante e depois</b>.<br><br><b>🎙️ Da prova oral (real):</b> "Como atuam os princípios da função social e da boa-fé nos contratos? O que é paridade e simetria?" — função social (421) + boa-fé (422) gerando <b>deveres anexos mesmo sem previsão contratual</b>; a boa-fé alcança a fase pré-contratual (tratativas) e o pós-contrato (pós-eficácia). [Banco Prova Oral]`},
+
+  {id:'q109', materia:'Vícios redibitórios (alienante de má-fé)', banca:'Cespe · TJ-RR · 2025', tipo:'multipla',
+   enunciado:`Carlos vendeu a João um imóvel que sabia conter vício oculto (laudo de demolição). Seis meses após a tradição, João descobre o defeito. Considerando que o vendedor conhecia o vício, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'João não pode redibir o contrato, restando-lhe apenas exigir o abatimento proporcional do preço.'},
+     {letra:'B',texto:'João nada pode reclamar, pois já decaiu do direito, ultrapassado o prazo decadencial.'},
+     {letra:'C',texto:'João não pode mais rescindir o contrato em razão da decadência, cabendo somente a ação estimatória.'},
+     {letra:'D',texto:'João pode rescindir o contrato e reaver o valor pago, sem direito, porém, a perdas e danos.'},
+     {letra:'E',texto:'João pode optar entre redibir o contrato ou pedir abatimento do preço e, por ter o alienante conhecido o vício, exigir também perdas e danos.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b> — comando positivo.<br><br><b>⚖️ Por quê:</b> vício oculto em contrato comutativo → o adquirente pode <b>redibir</b> ou pedir <b>abatimento</b> (arts. 441/442). Como o alienante <b>conhecia o vício</b> (má-fé), responde também por <b>perdas e danos</b> (art. 443, 1ª parte). O prazo do imóvel é de 1 ano, e 6 meses < 1 ano — direito em dia (art. 445).<br><br><b>⚠️ Pegadinha:</b> D concede a rescisão mas <b>corta as perdas e danos</b> do alienante de má-fé — é o erro clássico. B e C invocam decadência inexistente.<br><br><b>📌 Fundamento:</b> CC, arts. 441, 442, 443 e 445 (imóvel: 1 ano).<br><br><b>📎 Frases de revisão (banco):</b> "Alienante de má-fé = restituição + perdas e danos (art. 443)"; "Prazos: 30 dias (móvel)/1 ano (imóvel) da entrega efetiva — metade se já na posse (art. 445)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> boa-fé = devolve dinheiro; <b>má-fé = dinheiro + danos</b>.<br><br><b>🎙️ Da prova oral (real · PO-622, TJMT Civil · Ponto 06):</b> "Em que consiste o vício redibitório? O vício aparente é protegido? Quais os prazos?" — garantia legal contra defeito <b>oculto</b> (441–446); causa objetiva; duas ações (redibitória / quanti minoris); <b>vício aparente não é protegido</b>. ⚠️ Pegadinha do banco: cobrar prazos do CDC e confundir com evicção. [Banco Prova Oral]`},
+
+  {id:'q110', materia:'Onerosidade excessiva / revisão', banca:'Cespe · TJ-RR · 2025', tipo:'multipla',
+   enunciado:`Empresa tomou empréstimo milionário e, com a pandemia, viu sua atividade inviabilizada, tornando a prestação excessivamente onerosa. Diante da nova realidade econômica, assinale a alternativa correta quanto ao remédio cabível.`,
+   alternativas:[
+     {letra:'A',texto:'Suspender o pagamento das parcelas até a reabertura das atividades.'},
+     {letra:'B',texto:'Prorrogar automaticamente o prazo de carência do empréstimo.'},
+     {letra:'C',texto:'Resolver o contrato com suspensão automática de todas as obrigações.'},
+     {letra:'D',texto:'Devolver 50% do valor recebido, sem incidência de juros.'},
+     {letra:'E',texto:'Pleitear a resolução ou a revisão das cláusulas do contrato, dada a nova realidade econômica.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b> <span style="color:#f5a623">⚠️ (atrito técnico — confira o oficial)</span><br><br><b>⚖️ Por quê:</b> fato extraordinário e imprevisível (pandemia) que torna a prestação excessivamente onerosa → o remédio é <b>resolução</b> (art. 478) ou <b>revisão</b> das cláusulas (arts. 479/480). E é a única que oferece resolução/revisão; as demais inventam remédios sem amparo legal.<br><br><b>⚠️ Atrito:</b> a <b>resolução</b> (art. 478) pressupõe contrato <b>bilateral</b>. No mútuo (unilateral), o caminho técnico é o <b>art. 480</b> (redução da prestação). E cita "resolução ou revisão", mas é a única defensável — confira o gabarito oficial.<br><br><b>📌 Fundamento:</b> CC, arts. 317, 478, 479 e 480.<br><br><b>📎 Frases de revisão (banco):</b> "A onerosidade excessiva por fato extraordinário e imprevisível autoriza resolução OU revisão"; "Art. 317: o juiz corrige o valor da prestação diante de desproporção por motivo imprevisível." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> bilateral → <b>resolve</b> (478); unilateral → <b>reduz</b> (480). Nunca "suspendo de ofício" ou "devolvo X%".<br><br><b>🎙️ Da prova oral (real · PO-632, TJMT Civil · Ponto 24):</b> "Distinga rescisão, resolução e resilição; quais os pressupostos da onerosidade excessiva?" — resilição (vontade, 472/473); resolução (inadimplemento 474 / onerosidade 478); rescisão (gênero / lesão 157 / estado de perigo 156). Onerosidade: pressupostos cumulativos, art. 479 revisão, art. 480 unilaterais. [Banco Prova Oral]`},
+
+  {id:'q111', materia:'Interpretação dos contratos (art. 113, §2º)', banca:'Cespe · TJ-RR · 2025', tipo:'multipla',
+   enunciado:`Acerca da interpretação dos negócios jurídicos e da autonomia das partes após a Lei da Liberdade Econômica, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'As partes podem livremente pactuar regras de interpretação, de integração e de preenchimento de lacunas diversas das previstas em lei, seja o contrato celebrado por instrumento público ou particular.'},
+     {letra:'B',texto:'As partes somente podem pactuar tais regras quando o contrato versar sobre bens móveis ou semoventes.'},
+     {letra:'C',texto:'As partes somente podem pactuar tais regras quando o contrato não envolver pessoa incapaz.'},
+     {letra:'D',texto:'As partes não podem afastar, por convenção, as regras legais de interpretação.'},
+     {letra:'E',texto:'As partes somente podem pactuar tais regras em contrato celebrado por instrumento público.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> — comando positivo.<br><br><b>⚖️ Por quê:</b> o art. 113, §2º (Lei 13.874/19) permite às partes <b>pactuar livremente</b> regras de interpretação, integração e preenchimento de lacunas diversas das da lei — <b>sem</b> restrição quanto à forma. Vale por instrumento público <b>ou</b> particular.<br><br><b>⚠️ Pegadinha:</b> as palavras-bandeira "somente" (B, C, E) e "não podem" (D) restringem indevidamente o §2º — nenhuma dessas limitações existe no texto.<br><br><b>📌 Fundamento:</b> CC, art. 113, caput e §§ 1º e 2º (redação da Lei 13.874/2019); arts. 112 e 114.<br><br><b>📎 Frases de revisão (banco):</b> "As partes podem livremente pactuar regras de interpretação, integração e preenchimento de lacunas diversas das previstas em lei"; "Interpreta-se conforme boa-fé, usos do lugar e comportamento das partes (art. 113, §1º)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> §1º = critérios objetivos; <b>§2º = autonomia para criar as próprias regras</b>. Qualquer "somente"/"não podem" é a casca da pegadinha.<br><br><b>☑ Verificação:</b> confirmado o texto literal do art. 113, §2º — "as partes poderão livremente pactuar regras de interpretação, de preenchimento de lacunas e de integração... diversas daquelas previstas em lei".<br><br><b>🎙️ Da prova oral (real):</b> "Distinga negócio jurídico e ato jurídico em sentido estrito e cite as regras de interpretação." — intenção > literalidade; boa-fé; negócios benéficos/renúncia = interpretação <b>estrita</b>; somar o art. 113, §2º. Essa liberdade não é absoluta: encontra limite nas normas cogentes, na função social e na boa-fé. [Banco Prova Oral]`},
+
+  {id:'q112', materia:'Teoria da imprevisão (jurisprudência STJ)', banca:'Cespe · TJ-RO · 2025', tipo:'multipla',
+   enunciado:`Assinale a alternativa que apresenta a situação em que se admite a aplicação da teoria da imprevisão (onerosidade excessiva por fato extraordinário e imprevisível).`,
+   alternativas:[
+     {letra:'A',texto:'Estiagem que reduz a produção em contrato de fornecimento agrícola.'},
+     {letra:'B',texto:'Pandemia que provoca drástica queda de faturamento de empresa de coworking.'},
+     {letra:'C',texto:'Variação da cotação em contratos derivativos (swap cambial).'},
+     {letra:'D',texto:'Aumento salarial decorrente de dissídio coletivo da categoria.'},
+     {letra:'E',texto:'Pragas que atingem a lavoura em contrato agrícola.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b> — comando positivo.<br><br><b>⚖️ Por quê:</b> a <b>pandemia</b> é o fato genuinamente <b>extraordinário e imprevisível</b>; havendo prova da drástica queda de faturamento, cabe a teoria da imprevisão.<br><br><b>⚠️ Pegadinha (todas são riscos PREVISÍVEIS para o STJ):</b> A) estiagem e E) pragas em contrato agrícola = risco inerente/previsível da atividade. C) derivativos = risco da própria natureza do negócio (álea normal). D) dissídio = previsível e ordinário.<br><br><b>📌 Fundamento:</b> CC, arts. 478 e 393, par. único; jurisprudência do STJ (estiagem/pragas e variação cambial em derivativos = riscos previsíveis).<br><br><b>📎 Frases de revisão (banco):</b> "Estiagem e pragas em contratos agrícolas são riscos previsíveis e não autorizam a imprevisão (STJ)"; "Risco e desequilíbrio em derivativos integram a álea normal e afastam a imprevisão (STJ)"; "A pandemia é fato extraordinário e imprevisível e pode fundamentar revisão/resolução." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> risco <b>do ramo</b> = previsível; choque <b>externo extraordinário</b> = imprevisível.<br><br><b>🎙️ Da prova oral (real · PO-616, TJMT Civil · Ponto 17 · recorrência ALTA):</b> "Em que consiste a teoria da base do negócio e qual a distinção em relação à teoria da imprevisão?" — imprevisão (478, exige imprevisibilidade) × base objetiva (CDC art. 6º, V, dispensa); pandemia → imprevisão (478), STJ em locações comerciais. [Banco Prova Oral]`},
+
+  {id:'q113', materia:'Evicção — valor da restituição', banca:'Cespe · TJ-RO · 2025', tipo:'multipla',
+   enunciado:`Quanto à garantia contra a evicção, assinale a alternativa correta a respeito do valor a ser restituído ao evicto.`,
+   alternativas:[
+     {letra:'A',texto:'A restituição corresponde ao preço pago no contrato (valor histórico do negócio).'},
+     {letra:'B',texto:'A restituição corresponde ao valor da coisa na época em que se evenceu (valor ao tempo da perda).'},
+     {letra:'C',texto:'Cabe apenas restituição proporcional, ainda que a evicção seja total.'},
+     {letra:'D',texto:'A restituição limita-se ao preço, vedada a inclusão de frutos e despesas do contrato.'},
+     {letra:'E',texto:'Havendo cláusula de exclusão da garantia, nada será restituído ao evicto, ainda que ignorasse o risco.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê:</b> na evicção, a restituição é <b>integral</b>, apurada pelo <b>valor da coisa no momento em que se evenceu</b> (do desapossamento), e não pelo preço do negócio — art. 450, parágrafo único. O STJ confirma: usa-se o valor atual do bem ao tempo da perda, para evitar enriquecimento sem causa do alienante.<br><br><b>⚠️ Pegadinha:</b> as erradas ancoram no <b>preço pago/valor do contrato</b> (A) ou afirmam restituição só "proporcional" mesmo na evicção <b>total</b> (C — o proporcional só vale na parcial).<br><br><b>📌 Fundamento:</b> CC, arts. 447, 448 e 450, parágrafo único; jurisprudência do STJ.<br><br><b>📎 Frases de revisão (banco):</b> "Na evicção, a restituição é pelo valor da coisa ao tempo em que se evenceu — não pelo preço pago"; "Cláusula pode reforçar, reduzir ou excluir a responsabilidade pela evicção (art. 448), mas a renúncia só exime do valor se o adquirente foi informado do risco (art. 449)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"vale o do DIA da perda, não o do dia da compra"</b> — evicção paga o presente, não o passado.<br><br><b>☑ Verificação:</b> STJ — "a restituição... calculada com base no valor atual da coisa na época em que ela foi perdida, e não conforme o valor original do negócio jurídico."<br><br><b>🎙️ Da prova oral (real):</b> "Em que consiste a garantia contra a evicção e como se calcula a indenização devida ao evicto?" — perda da coisa por decisão judicial/administrativa que reconhece direito anterior de terceiro; o alienante responde independentemente de cláusula; restituição abrange valor ao tempo da evicção, frutos, despesas e prejuízos (art. 450, I a III). [Banco Prova Oral]`},
+
+  {id:'q114', materia:'Emancipação legal (relação de emprego / economia própria)', banca:'FGV · Enac · 2025', tipo:'multipla',
+   enunciado:`Menor com 16 anos completos passa a ter relação de emprego da qual resulta economia própria. A respeito da emancipação, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'A emancipação depende de prévia autorização judicial e homologação pelo juiz.'},
+     {letra:'B',texto:'Trata-se de emancipação legal, que opera automaticamente, por força de lei, independentemente de registro ou de decisão judicial.'},
+     {letra:'C',texto:'A emancipação só se aperfeiçoa com escritura pública lavrada pelos pais e registrada no cartório.'},
+     {letra:'D',texto:'A capacidade plena só seria adquirida aos 18 anos, sendo irrelevante a economia própria.'},
+     {letra:'E',texto:'A emancipação exige que o menor tenha ao menos 17 anos completos.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê:</b> é <b>emancipação legal</b> (art. 5º, parágrafo único, V): o menor com <b>16 anos completos</b> que tenha estabelecimento civil/comercial ou relação de emprego com <b>economia própria</b> emancipa-se <b>automaticamente, por força de lei</b> — independe de escritura, autorização dos pais ou homologação judicial.<br><br><b>⚠️ Pegadinha:</b> exigir <b>registro em cartório</b> (C) ou <b>autorização judicial</b> (A) — isso só existe na emancipação voluntária (pais) e na judicial (tutor). Exigir 18 anos (D) ou 17 anos (E) ignora o piso dos 16.<br><br><b>📌 Fundamento:</b> CC, art. 5º, parágrafo único, V (e incisos I a IV para as demais hipóteses).<br><br><b>📎 Frases de revisão (banco):</b> "Emancipação legal (art. 5º, V) é automática: 16 anos + relação de emprego/economia própria = capacidade plena, sem registro nem juiz"; "Só a voluntária (pais) e a judicial (tutor) exigem instrumento/decisão; a legal opera ipso iure." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"a legal dispensa cartório e juiz"</b> — quem se sustenta sozinho aos 16 já é emancipado, sem papelada.<br><br><b>☑ Verificação:</b> conforme literalidade do art. 5º, p.ú., V, CC.<br><br><b>🎙️ Da prova oral (real):</b> "Quais as espécies de emancipação e qual independe de registro ou de decisão judicial?" — voluntária (instrumento público dos pais), judicial (sentença, tutor) e legal (casamento, emprego público efetivo, colação de grau, estabelecimento/economia própria). A <b>legal</b> opera automaticamente. [Banco Prova Oral]`},
+
+  {id:'q115', materia:'Pacta corvina — herança de pessoa viva', banca:'Cespe · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`A respeito do contrato que tem por objeto a herança de pessoa viva (pacta corvina), assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'É válido se houver concordância expressa do autor da herança ainda vivo.'},
+     {letra:'B',texto:'É válido se houver concordância do futuro herdeiro.'},
+     {letra:'C',texto:'É anulável, podendo ser confirmado após a abertura da sucessão.'},
+     {letra:'D',texto:'É nulo, pois a herança de pessoa viva não pode ser objeto de contrato, ainda que haja consentimento dos interessados.'},
+     {letra:'E',texto:'É plenamente válido, equiparando-se à partilha em vida.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê:</b> é <b>nulo</b> o contrato que tenha por objeto <b>herança de pessoa viva</b> — pacta corvina (art. 426). Nulidade absoluta por <b>ilicitude do objeto</b>, ainda que haja consentimento do futuro herdeiro ou do próprio autor da herança.<br><br><b>⚠️ Pegadinha:</b> dizer que é válido <b>se houver concordância</b> do de cujus ou do herdeiro (A/B) — o consentimento não convalida. Confundir com a <b>partilha em vida</b> (doação/art. 2.018), que é lícita (E).<br><br><b>📌 Fundamento:</b> CC, art. 426; art. 166, II (objeto ilícito → nulidade).<br><br><b>📎 Frases de revisão (banco):</b> "Herança de pessoa viva não pode ser objeto de contrato (art. 426) — pacta corvina é nulo, e o consentimento não salva." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"corvo não come quem ainda respira"</b> — pacta corvina = apostar na herança de quem está vivo = nulo.<br><br><b>🎙️ Da prova oral (real):</b> "É válida a cláusula de transação que impõe renúncia antecipada a direitos hereditários de pessoa viva?" — não; viola o art. 426. A renúncia/disposição sobre herança só é possível <b>após a abertura da sucessão</b> (morte). Antes, o objeto é juridicamente impossível e o ato, nulo. [Banco Prova Oral]`},
+
+  {id:'q116', materia:'Venire contra factum proprium / suppressio', banca:'Vunesp · TJ-SP · 2024', tipo:'multipla',
+   enunciado:`Credor que, por longo tempo (mais de 48 meses), deixa de aplicar reajuste previsto em contrato e depois pretende cobrá-lo retroativamente. À luz da boa-fé objetiva, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'O credor pode cobrar todo o retroativo, pois o contrato previa expressamente o reajuste.'},
+     {letra:'B',texto:'O credor pode exigir o reajuste integral, já que o devedor jamais se opôs à cláusula.'},
+     {letra:'C',texto:'A cobrança retroativa é vedada: a inércia prolongada configura suppressio e a pretensão atual, venire contra factum proprium, limites internos do exercício do direito pela boa-fé objetiva.'},
+     {letra:'D',texto:'O reajuste é nulo desde a origem, por falta de previsão contratual.'},
+     {letra:'E',texto:'A boa-fé objetiva não incide sobre o modo de exercício de direitos contratuais.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê:</b> cobrar reajuste <b>retroativamente</b> após longa inércia é comportamento contraditório vedado pela <b>boa-fé objetiva</b> (art. 422). Atuam a <b>suppressio</b> (a inércia prolongada faz perder a pretensão) e o <b>venire contra factum proprium</b> (proibição de comportamento contraditório). Ultrapassado o prazo sem oposição, o contrato tende ao prazo indeterminado, afastando penalidade fundada no prazo original.<br><br><b>⚠️ Pegadinha:</b> a alternativa que diz caber <b>todo o retroativo</b> "porque o contrato previa o reajuste" (A) começa certa (existe cláusula) e erra na 2ª parte — o direito existe, mas o <b>modo de exercício</b> é limitado pela boa-fé.<br><br><b>📌 Fundamento:</b> CC, art. 422 (boa-fé objetiva); art. 187 (abuso de direito); Enunciados CJF sobre suppressio/surrectio/venire.<br><br><b>📎 Frases de revisão (banco):</b> "Suppressio: quem se cala por muito tempo perde a pretensão; cobrar reajuste retroativo após anos de inércia é venire contra factum proprium"; "Boa-fé objetiva (art. 422) controla o modo de exercício do direito — o direito existe, mas não pode ser exercido de forma desleal." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"quem dormiu no reajuste não acorda cobrando o passado"</b> — silêncio prolongado = suppressio.<br><br><b>☑ Verificação:</b> doutrina e enunciados CJF; STJ aplica suppressio/venire como limites internos ao exercício de direitos contratuais (linha do REsp 2.078.517-RJ). Tese de aplicação controvertida em pontos, mas o gabarito segue a corrente majoritária da boa-fé objetiva.<br><br><b>🎙️ Da prova oral (real):</b> "O que é suppressio e como se distingue de venire contra factum proprium?" — ambos derivam da boa-fé objetiva. Venire veda o comportamento contraditório; suppressio é a perda de posição jurídica pelo <b>não exercício prolongado</b>, com seu reverso, a surrectio. [Banco Prova Oral]`},
+
+  {id:'q117', materia:'Contrato preliminar — registro e oponibilidade', banca:'FGV · TJ-SE · 2023', tipo:'multipla',
+   enunciado:`A respeito do contrato preliminar (promessa) e da exigência de registro, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'Sem registro, o contrato preliminar não produz efeito algum.'},
+     {letra:'B',texto:'Sem registro, o contrato preliminar não gera obrigação de concluir o contrato definitivo.'},
+     {letra:'C',texto:'O registro é requisito de validade do contrato preliminar.'},
+     {letra:'D',texto:'O contrato preliminar é válido e exigível entre as partes independentemente de registro, que serve apenas à oponibilidade perante terceiros.'},
+     {letra:'E',texto:'A adjudicação compulsória do imóvel depende sempre do registro da promessa.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê:</b> o contrato preliminar é <b>válido e eficaz entre as partes independentemente de registro</b>; o registro confere apenas <b>oponibilidade a terceiros</b> (eficácia erga omnes) e, na promessa irretratável, direito real à aquisição. Entre promitente e promissário a obrigação de concluir o definitivo é exigível <b>sem o registro</b> (arts. 462/463; Enunciado 30 CJF).<br><br><b>⚠️ Pegadinha:</b> afirmar que <b>sem registro o preliminar não produz efeito / não gera obrigação</b> (A/B/C) confunde o plano da validade com o da eficácia perante terceiros. E erra ao condicionar a adjudicação ao registro.<br><br><b>📌 Fundamento:</b> CC, arts. 462, 463 e parágrafo único; Enunciado 30 da I Jornada de Direito Civil (CJF); Súmula 239/STJ (adjudicação compulsória independe de registro).<br><br><b>📎 Frases de revisão (banco):</b> "Contrato preliminar vale entre as partes sem registro; o registro só dá oponibilidade a terceiros (Enunciado 30 CJF)"; "Súmula 239 STJ: o direito à adjudicação compulsória não se condiciona ao registro do compromisso de compra e venda." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"registro é para o mundo, não para as partes"</b> — entre vendedor e comprador a promessa já vale; o registro só blinda contra terceiros.<br><br><b>☑ Verificação:</b> Enunciado 30 CJF e Súmula 239/STJ confirmam que o registro não condiciona a execução específica/adjudicação entre as partes.<br><br><b>🎙️ Da prova oral (real):</b> "O registro do preliminar é requisito de validade ou só de oponibilidade? Cabe adjudicação compulsória sem registro?" — não é requisito de validade (462/463); serve à oponibilidade erga omnes; a adjudicação dispensa o registro (Súmula 239/STJ; Enunciado 30 CJF). [Banco Prova Oral]`},
+
+  {id:'q118', materia:'Forma do distrato (art. 472 c/c 108)', banca:'FGV · TJ-SE · 2023', tipo:'multipla',
+   enunciado:`Contrato de compra e venda de imóvel de valor inferior a 30 salários mínimos foi celebrado, por liberalidade das partes, mediante escritura pública. Posteriormente, as partes desfazem o negócio por instrumento particular (distrato). A respeito da validade do distrato, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'O distrato é nulo, pois deveria seguir a mesma forma (escritura pública) adotada para o contrato.'},
+     {letra:'B',texto:'O distrato é ineficaz enquanto não for lavrado por escritura pública.'},
+     {letra:'C',texto:'O distrato é anulável por vício de forma.'},
+     {letra:'D',texto:'O distrato depende de homologação judicial para produzir efeitos.'},
+     {letra:'E',texto:'O distrato é válido, pois a lei não exigia escritura pública para o contrato (imóvel inferior a 30 salários mínimos), bastando o instrumento particular.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E (válido)</b><br><br><b>⚖️ Por quê:</b> o art. 472 manda que o distrato se faça "pela mesma forma <b>exigida</b> para o contrato" — e "exigida" significa a forma <b>imposta por lei</b>, não a adotada por liberalidade. A escritura só é da substância quando o imóvel vale <b>mais de 30 salários mínimos</b> (art. 108). Como aqui é inferior, a lei não exigia instrumento público; o distrato por instrumento particular é <b>válido</b>.<br><br><b>⚠️ Pegadinha:</b> induzir a "nulo/ineficaz" por simetria visual (contrato foi público → distrato teria que ser público). Falso — o paralelismo de formas mede-se pela exigência <b>legal</b>, não pela forma voluntariamente escolhida.<br><br><b>📌 Fundamento:</b> CC, art. 472 c/c art. 108; STJ/doutrina.<br><br><b>📎 Frases de revisão (banco):</b> "Cláusula resolutiva expressa opera de pleno direito; a tácita depende de interpelação judicial (art. 474)"; "Distrato faz-se pela forma EXIGIDA por lei, não pela adotada por liberalidade (art. 472)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"forma exigida ≠ forma escolhida"</b> — se a lei não pedia escritura, o desfazimento pode ser por papel particular.<br><br><b>☑ Verificação:</b> confirmado — "o art. 472 não exige que o distrato siga a forma adotada por livre escolha das partes, mas a forma exigida por lei para o contrato originário."<br><br><b>🎙️ Da prova oral (real):</b> "Distinga rescisão, distrato, resilição e resolução — e qual a forma do distrato?" — distrato é a resilição <b>bilateral</b> (472); resilição unilateral é denúncia (473); resolução decorre de inadimplemento (474-475); rescisão é termo genérico. O distrato segue a forma <b>exigida em lei</b>. [Banco Prova Oral]`},
+
+  {id:'q119', materia:'Evicção — conceito e efeitos (cláusula de exclusão)', banca:'Consulplan · TJ-MA · 2023', tipo:'multipla',
+   enunciado:`Acerca da garantia contra a evicção e de seus efeitos, mesmo havendo cláusula que exclui a responsabilidade, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'Os direitos da evicção só podem ser exercidos após o trânsito em julgado da decisão que reconhece o direito de terceiro.'},
+     {letra:'B',texto:'É inviável a evicção quando a perda decorre de apreensão administrativa por autoridade competente.'},
+     {letra:'C',texto:'Ainda com cláusula de exclusão da garantia, se o evicto não sabia do risco da evicção, o alienante responde pelo preço da coisa.'},
+     {letra:'D',texto:'A cláusula que reforça a garantia limita a indenização ao valor da coisa.'},
+     {letra:'E',texto:'A cláusula de exclusão da garantia exime o alienante de toda e qualquer responsabilidade, inclusive do preço.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê:</b> mesmo com <b>cláusula de irresponsabilidade</b>, se a evicção ocorre e o <b>evicto não sabia do risco</b>, o alienante ainda <b>responde pelo preço</b> — art. 449. A exclusão genérica só dispensa as indenizações suplementares; o preço o evicto reaverá, salvo se assumiu o risco específico, informado.<br><br><b>⚠️ Pegadinha:</b> A) exige "trânsito em julgado" → o STJ <b>dispensa</b> (REsp 1.332.112). B) "inviável em apreensão administrativa" → o STJ admite evicção por <b>ato administrativo</b> de causa anterior. D) confunde <b>reforço</b> com limitação — reforçar agrava os efeitos.<br><br><b>📌 Fundamento:</b> CC, arts. 447, 448, 449 e 450; STJ.<br><br><b>📎 Frases de revisão (banco):</b> "É válida a cláusula que exclui ou reforça a garantia da evicção (art. 448); ainda assim, salvo se o adquirente assumiu o risco, o evicto reaverá o preço pago (art. 449)"; "Cabe evicção em bem adquirido em hasta pública (art. 447, parte final)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"cláusula de exclusão não tira o preço de volta"</b> — só tira o "a mais"; o preço o evicto reaverá se não sabia do risco.<br><br><b>☑ Verificação:</b> STJ — "não é necessário o trânsito em julgado" e reconhecimento de evicção por apreensão administrativa de fato anterior à aquisição.<br><br><b>🎙️ Da prova oral (real):</b> "Em que consiste a garantia contra a evicção e qual sua distinção do vício redibitório?" — evicção é a <b>perda da coisa</b> por decisão judicial ou administrativa de causa <b>anterior</b>; garantia legal dos contratos onerosos (447), dispensa trânsito em julgado, pode ser reforçada/reduzida/excluída (448), mas a exclusão não retira o direito ao preço se o evicto ignorava o risco (449). [Banco Prova Oral]`},
+
+  {id:'q120', materia:'Safra futura / inadimplemento antecipado', banca:'Consulplan · TJ-MA · 2023', tipo:'multipla',
+   enunciado:`Em contrato de venda de safra futura, antes do termo de entrega já ficou evidenciado que Marcolino (devedor) não cumprirá a obrigação. A respeito da providência cabível ao credor, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'É válido deixar a fixação do preço ao arbítrio exclusivo de uma das partes.'},
+     {letra:'B',texto:'A venda de safra futura é obrigação personalíssima e a morte do devedor extingue o contrato.'},
+     {letra:'C',texto:'Chuvas, pragas e oscilação de preço autorizam a revisão por onerosidade excessiva.'},
+     {letra:'D',texto:'O credor pode pedir a extinção do pacto e a devolução do antecipado, pela teoria do inadimplemento antecipado (anticipatory breach), já evidenciada a quebra certa antes do termo.'},
+     {letra:'E',texto:'O credor deve aguardar o vencimento para só então pleitear a resolução.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê:</b> se, <b>antes do termo</b>, já ficou evidenciado que o devedor <b>não cumprirá</b>, o credor pode pedir a extinção do pacto com devolução do antecipado — <b>teoria do inadimplemento antecipado</b> (anticipatory breach), acolhida pela doutrina e pelo STJ. Não se espera o vencimento para reconhecer a quebra já certa.<br><br><b>⚠️ Pegadinha:</b> A) preço ao <b>arbítrio exclusivo</b> de uma parte → nulo (art. 489). B) safra futura não é personalíssima; a morte não extingue. C) chuvas, pragas e oscilação de preço são <b>riscos previsíveis</b> da atividade agrícola — o STJ não admite revisão por imprevisão (REsp 945.166).<br><br><b>📌 Fundamento:</b> teoria do inadimplemento antecipado (doutrina + STJ); CC, art. 475; contraste com art. 489 (preço ao arbítrio = nulo) e art. 478 (imprevisão afastada em risco agrícola previsível).<br><br><b>📎 Frases de revisão (banco):</b> "Onerosidade excessiva (art. 478) exige fato extraordinário E imprevisível; riscos agrícolas (chuva, praga, preço) são previsíveis e não autorizam revisão (STJ REsp 945.166)"; "Preço ao arbítrio exclusivo de uma das partes torna a compra e venda nula (art. 489)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"chuva e praga o agricultor já sabe que vêm"</b> — não é imprevisão; e "quebra certa antes do prazo já é quebra".<br><br><b>☑ Verificação:</b> STJ — risco climático/praga em contrato agrícola é previsível e afasta a imprevisão (linha do REsp 945.166); doutrina majoritária reconhece o inadimplemento antecipado.<br><br><b>🎙️ Da prova oral (real):</b> "Diferencie mora e inadimplemento absoluto. Reconhece a quebra antecipada do contrato?" — mora é o cumprimento imperfeito/atrasado ainda útil (394); inadimplemento absoluto, quando a prestação se torna inútil (389/475); sim, admite-se a quebra antecipada quando, antes do vencimento, é inequívoco que o devedor não cumprirá. [Banco Prova Oral]`},
+
+  {id:'q121', materia:'Evicção — cláusulas e extensão da indenização', banca:'Consulplan · TJ-AC · 2023', tipo:'multipla',
+   enunciado:`Imóvel é perdido em leilão (execução contra o alienante, por causa anterior à venda). O evicto havia locado o bem e teve de pagar multa ao inquilino. A respeito da extensão da indenização da evicção, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'Todos os contratos podem excluir a garantia da evicção por simples cláusula.'},
+     {letra:'B',texto:'O adquirente terá sempre direito à garantia, mesmo sabendo que a coisa era alheia ou litigiosa.'},
+     {letra:'C',texto:'A cláusula genérica de exclusão retira do evicto qualquer indenização, inclusive o preço.'},
+     {letra:'D',texto:'O evicto tem direito à restituição pelo valor atual do bem e também aos prejuízos que diretamente resultarem da evicção, como os lucros cessantes e a multa paga ao inquilino.'},
+     {letra:'E',texto:'A indenização limita-se ao preço histórico, vedados frutos e despesas.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê:</b> o evicto tem direito não só à restituição pelo <b>valor atual</b> do bem (art. 450, par. único — valor ao tempo em que se evenceu), <b>mas também</b> aos <b>prejuízos que diretamente resultarem da evicção</b> (art. 450, II): lucros cessantes do aluguel rescindido e multas pagas ao inquilino. Indenização <b>integral</b>.<br><br><b>⚠️ Pegadinha:</b> A) "todos os contratos" → só os <b>onerosos</b> (447). B) "terá sempre o direito" mesmo sabendo da coisa alheia/litigiosa → art. 457 veda demandar quem sabia. C) cláusula genérica de exclusão tiraria "qualquer indenização" → mesmo assim o evicto que não conhecia o risco reaverá o <b>preço</b> (449).<br><br><b>📌 Fundamento:</b> CC, arts. 447, 449, 450 (I, II, III e par. único) e 457.<br><br><b>📎 Frases de revisão (banco):</b> "O evicto tem direito à restituição integral do preço, indenização de frutos, despesas do contrato, prejuízos e custas (art. 450)"; "Não pode demandar pela evicção quem sabia que a coisa era alheia ou litigiosa (art. 457)." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"evicção paga tudo que dela decorreu"</b> — valor atual do bem + lucros cessantes + o que pagou ao inquilino.<br><br><b>☑ Verificação:</b> art. 450 CC e jurisprudência do STJ sobre restituição integral e prejuízos diretos da evicção.<br><br><b>🎙️ Da prova oral (real):</b> "Quais parcelas integram a indenização do evicto e o que são 'prejuízos que diretamente resultarem da evicção'?" — preço (valor ao tempo da evicção), frutos, despesas do contrato, prejuízos diretos e custas/honorários (art. 450). Prejuízos diretos abrangem danos emergentes e lucros cessantes consequência imediata da perda. [Banco Prova Oral]`},
+
+  {id:'q122', materia:'Pacta corvina — forma x objeto (nulidade)', banca:'Cespe · TJ-SC · 2023', tipo:'multipla',
+   enunciado:`Letícia firma com os filhos contrato, com firmas não reconhecidas, para regular a partilha de sua própria herança ainda em vida. A respeito do plano do negócio jurídico afetado e de sua consequência, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'O contrato é válido e faz as vezes de testamento.'},
+     {letra:'B',texto:'O contrato é nulo por ilicitude/impossibilidade do objeto (herança de pessoa viva), independentemente de qualquer questão de forma.'},
+     {letra:'C',texto:'O contrato é anulável por vício de forma (firmas não reconhecidas).'},
+     {letra:'D',texto:'O contrato é anulável, podendo ser confirmado pelo reconhecimento posterior das firmas.'},
+     {letra:'E',texto:'O contrato é válido quanto aos bens e anulável quanto aos direitos.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B (nulo)</b><br><br><b>⚖️ Por quê:</b> Letícia regula a <b>própria herança</b> (de pessoa <b>viva</b>) — pacta corvina. <b>Nulo</b> por <b>ilicitude/impossibilidade do objeto</b> (art. 426 c/c art. 166, II), <b>independentemente</b> da forma (reconhecimento de firma é irrelevante). O vício está no <b>objeto</b>, não na forma — e vício de objeto gera <b>nulidade absoluta</b>, não anulabilidade.<br><br><b>⚠️ Pegadinha:</b> C, D e E apostam em "anulável" e jogam o foco na forma (firmas) ou tentam dividir "bens x direitos" — distração: é <b>nulo</b> porque herança de pessoa viva não pode ser objeto de contrato. A ("válido, faz as vezes de testamento") é a mais grosseira: testamento é ato unilateral e revogável, não contrato.<br><br><b>📌 Fundamento:</b> CC, art. 426 (vedação à pacta corvina) c/c art. 166, II (objeto ilícito/impossível → nulidade).<br><br><b>📎 Frases de revisão (banco):</b> "Herança de pessoa viva não pode ser objeto de contrato (art. 426); o vício é de objeto → nulidade absoluta, independente da forma." [Banco Revisão — Frases]<br><br><b>🔁 Revisar:</b> <b>"vício no objeto = nulo; firma não salva nem condena"</b> — pacta corvina é nulidade, não anulabilidade.<br><br><b>☑ Verificação:</b> art. 426 e art. 166, II, CC — literal.<br><br><b>🎙️ Da prova oral (real):</b> "É válido o contrato que dispõe sobre herança de pessoa viva? Qual a consequência e qual o plano afetado?" — não; viola o art. 426. Consequência: <b>nulidade absoluta</b> (166, II), pois o vício atinge o <b>objeto</b> (juridicamente impossível enquanto vivo o titular), não a forma. Só após a abertura da sucessão a herança pode ser objeto de cessão/renúncia. [Banco Prova Oral]`}
+];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_meta15_civil_contratos_q108q122_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — Direito Civil · Contratos · Meta 15 (Q108–Q122)\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_meta15_civil_contratos_q108q122_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx='Meta 15 · Direito Civil — Contratos · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai/share/335a7657-2c2d-46ea-84f6-8c9e4d01edb5','_blank');}
+init();
+</script>
+</body>
+</html>
