@@ -158,22 +158,11 @@ body{
     <span>⚠️ Abra as ferramentas por esta página — elas funcionam como página normal no navegador. Não as acesse por dentro do Notion ou iframe: o progresso não é salvo.</span>
   </div>
 
-  <div id="diagMeta14Box" style="background:#0b1828;border:1px solid #16365a;border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#90a6c0">
-    <strong style="color:#e9f0f8">🔍 Meta 14 — diagnóstico localStorage</strong><br><br>
-    <div id="diagMeta14Out" style="line-height:1.8">carregando…</div>
-    <div style="margin-top:8px;font-size:11px;color:#4a6080">Origem: <span id="diagOrigem"></span></div>
-  </div>
 
   <div class="timeline" id="timeline"></div>
 
   <div class="end">Abra este link no navegador e salve nos favoritos · Cada pessoa tem seu próprio progresso</div>
 
-  <div style="text-align:center;margin-top:16px">
-    <button onclick="diagMeta14()" style="background:#0b1828;border:1px solid #16365a;color:#90a6c0;font-size:12px;padding:8px 16px;border-radius:8px;cursor:pointer">
-      🔍 Diagnóstico Meta 14
-    </button>
-    <div id="diagOut" style="margin-top:10px;font-size:12px;color:#e9f0f8;white-space:pre-wrap;text-align:left;max-width:500px;margin-left:auto;margin-right:auto"></div>
-  </div>
 </div>
 
 <script>
@@ -417,36 +406,7 @@ function renderDiscPanel(){
 
 render();
 renderDiscPanel();
-diagMeta14();
 
-function diagMeta14(){
-  const m14=[
-    {label:'Parte 1 (Q165–Q179)', key:'concurso_notarial_protesto_q165q179_v1'},
-    {label:'Parte 2 (Q180–Q194)', key:'concurso_meta14_protesto_cancel_certidoes_q180q194_v1'},
-    {label:'Parte 3 (Q195–Q208)', key:'concurso_meta15_protesto_cartorios_q195q208_v1'}
-  ];
-  const el=document.getElementById('diagMeta14Out');
-  const orig=document.getElementById('diagOrigem');
-  if(orig) orig.textContent=location.origin;
-  if(!el) return;
-  let html='';
-  m14.forEach(({label,key})=>{
-    const raw=localStorage.getItem(key);
-    if(raw){
-      try{
-        const s=JSON.parse(raw);
-        const resp=s.respostas?Object.keys(s.respostas).length:0;
-        html+=`<span style="color:#27c06a">✅ ${label}: ${resp} respondidas</span><br>`;
-      }catch(e){ html+=`<span style="color:#f5a623">⚠️ ${label}: erro ao ler</span><br>`; }
-    } else {
-      html+=`<span style="color:#e05555">❌ ${label}: nada salvo aqui</span><br>`;
-    }
-  });
-  el.innerHTML=html;
-  // remove o diagnóstico do fundo da página
-  const old=document.getElementById('diagOut');
-  if(old) old.parentElement.style.display='none';
-}
 </script>
 </body>
 </html>
