@@ -161,6 +161,13 @@ body{
   <div class="timeline" id="timeline"></div>
 
   <div class="end">Abra este link no navegador e salve nos favoritos · Cada pessoa tem seu próprio progresso</div>
+
+  <div style="text-align:center;margin-top:16px">
+    <button onclick="diagMeta14()" style="background:#0b1828;border:1px solid #16365a;color:#90a6c0;font-size:12px;padding:8px 16px;border-radius:8px;cursor:pointer">
+      🔍 Diagnóstico Meta 14
+    </button>
+    <div id="diagOut" style="margin-top:10px;font-size:12px;color:#e9f0f8;white-space:pre-wrap;text-align:left;max-width:500px;margin-left:auto;margin-right:auto"></div>
+  </div>
 </div>
 
 <script>
@@ -405,24 +412,27 @@ function renderDiscPanel(){
 render();
 renderDiscPanel();
 
-// diagnóstico Meta 14 — abre o console do navegador para ver
-(function(){
+function diagMeta14(){
   const m14=[
-    'concurso_notarial_protesto_q165q179_v1',
-    'concurso_meta14_protesto_cancel_certidoes_q180q194_v1',
-    'concurso_meta15_protesto_cartorios_q195q208_v1'
+    {label:'Parte 1 (Q165–Q179)', key:'concurso_notarial_protesto_q165q179_v1'},
+    {label:'Parte 2 (Q180–Q194)', key:'concurso_meta14_protesto_cancel_certidoes_q180q194_v1'},
+    {label:'Parte 3 (Q195–Q208)', key:'concurso_meta15_protesto_cartorios_q195q208_v1'}
   ];
-  m14.forEach(k=>{
-    const raw=localStorage.getItem(k);
+  let out='Origem: '+location.origin+'\n\n';
+  m14.forEach(({label,key})=>{
+    const raw=localStorage.getItem(key);
     if(raw){
-      const s=JSON.parse(raw);
-      const resp=s.respostas?Object.keys(s.respostas).length:0;
-      console.log('[Meta14] '+k+' → '+resp+' respondidas');
+      try{
+        const s=JSON.parse(raw);
+        const resp=s.respostas?Object.keys(s.respostas).length:0;
+        out+=label+': '+resp+' respondidas ✅\n';
+      }catch(e){ out+=label+': erro ao ler dados\n'; }
     } else {
-      console.log('[Meta14] '+k+' → NÃO ENCONTRADO no localStorage desta origem');
+      out+=label+': nada salvo nesta origem ❌\n';
     }
   });
-})();
+  document.getElementById('diagOut').textContent=out;
+}
 </script>
 </body>
 </html>
