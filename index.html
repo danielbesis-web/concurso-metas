@@ -404,6 +404,25 @@ function renderDiscPanel(){
 
 render();
 renderDiscPanel();
+
+// diagnóstico Meta 14 — abre o console do navegador para ver
+(function(){
+  const m14=[
+    'concurso_notarial_protesto_q165q179_v1',
+    'concurso_meta14_protesto_cancel_certidoes_q180q194_v1',
+    'concurso_meta15_protesto_cartorios_q195q208_v1'
+  ];
+  m14.forEach(k=>{
+    const raw=localStorage.getItem(k);
+    if(raw){
+      const s=JSON.parse(raw);
+      const resp=s.respostas?Object.keys(s.respostas).length:0;
+      console.log('[Meta14] '+k+' → '+resp+' respondidas');
+    } else {
+      console.log('[Meta14] '+k+' → NÃO ENCONTRADO no localStorage desta origem');
+    }
+  });
+})();
 </script>
 </body>
 </html>
