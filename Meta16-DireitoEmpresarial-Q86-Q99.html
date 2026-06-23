@@ -350,14 +350,15 @@ function save(){
   try{localStorage.setItem(KEY,JSON.stringify({nome,order,answers,flags,cur,elapsed,ts:Date.now()}));}catch(e){}
   try{writeMirror();}catch(e){}
 }
-function writeMirror(){
+function writeMirror(ans){
+  ans=ans||answers;
   var respostas={},caderno={},revisao={};
   QUESTIONS.forEach(function(q,ri){
-    if(answers[ri]!=null){
+    if(ans[ri]!=null){
       var pos=String(ri+1);
-      var alt=q.alts[answers[ri]];
+      var alt=q.alts[ans[ri]];
       respostas[pos]=alt?alt.l:'?';
-      if(answers[ri]!==q.correct)caderno[pos]=1;
+      if(ans[ri]!==q.correct)caderno[pos]=1;
     }
   });
   try{localStorage.setItem(MIRROR_STORE,JSON.stringify({respostas:respostas,caderno:caderno,revisao:revisao}));}catch(e){}
@@ -484,6 +485,7 @@ function checkResume(){
     $("btnResume").style.display="inline-flex";
     $("resumeBox").innerHTML='<span class="badge ok">progresso salvo: '+Object.keys(s.answers||{}).length+'/'+QUESTIONS.length+'</span>';
     if(s.nome)$("nome").value=s.nome;
+    try{writeMirror(s.answers||{});}catch(e){}
   }
 }
 checkResume();
