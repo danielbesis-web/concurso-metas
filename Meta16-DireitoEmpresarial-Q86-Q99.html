@@ -182,6 +182,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:16px 0}
 <script>
 "use strict";
 const KEY = "sim_emp_q86_q99_v1";
+const MIRROR_STORE = "concurso_meta16_empresarial_q86q99_v1";
 
 /* ================== DADOS ================== */
 const QUESTIONS = [
@@ -347,6 +348,19 @@ function show(sec){["scrIntro","scrQuiz","scrResult"].forEach(s=>$(s).classList.
 
 function save(){
   try{localStorage.setItem(KEY,JSON.stringify({nome,order,answers,flags,cur,elapsed,ts:Date.now()}));}catch(e){}
+  try{writeMirror();}catch(e){}
+}
+function writeMirror(){
+  var respostas={},caderno={},revisao={};
+  QUESTIONS.forEach(function(q,ri){
+    if(answers[ri]!=null){
+      var pos=String(ri+1);
+      var alt=q.alts[answers[ri]];
+      respostas[pos]=alt?alt.l:'?';
+      if(answers[ri]!==q.correct)caderno[pos]=1;
+    }
+  });
+  try{localStorage.setItem(MIRROR_STORE,JSON.stringify({respostas:respostas,caderno:caderno,revisao:revisao}));}catch(e){}
 }
 function loadSaved(){
   try{return JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){return null;}

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — Direito Empresarial · Parte 4 · Questões 100 a 114</title>
+<style>
+:root{
+  --bg:#0f1419; --bg2:#161c24; --card:#1c242e; --card2:#222c38;
+  --border:#2c3947; --txt:#e6edf3; --muted:#8a99a8; --accent:#4c8dff;
+  --accent2:#3a6fd8; --ok:#33c27f; --okbg:#11321f; --err:#ff5c6c; --errbg:#3a1418;
+  --warn:#ffc24c; --warnbg:#3a2e10; --radius:14px; --shadow:0 6px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.55;min-height:100vh}
+.wrap{max-width:880px;margin:0 auto;padding:18px 16px 60px}
+.hidden{display:none!important}
+h1{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+.sub{color:var(--muted);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:.98rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--txt)}
+.btn.ghost:hover{background:var(--card2)}
+.btn.sm{padding:8px 14px;font-size:.85rem}
+.btn.ok{background:var(--ok)} .btn.ok:hover{background:#2aa869}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+input[type=text]{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--txt);font-size:1rem;width:100%}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:3px 11px;font-size:.74rem;color:var(--muted);font-weight:600}
+.badge.meta{background:#16263d;color:#7db4ff;border-color:#234a73}
+.badge.ok{background:var(--okbg);color:var(--ok);border-color:#2c5e45}
+.topbar{position:sticky;top:0;z-index:30;background:rgba(15,20,25,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 16px;margin:-18px -16px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.05rem;color:var(--accent)}
+.progress{flex:1;min-width:120px;height:8px;background:var(--bg2);border-radius:6px;overflow:hidden}
+.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0%;transition:.3s}
+.qnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:7px;margin-top:6px}
+.qnav button{aspect-ratio:1;border:1px solid var(--border);background:var(--card2);color:var(--muted);border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;position:relative;transition:.1s}
+.qnav button:hover{border-color:var(--accent)}
+.qnav button.answered{background:#1d3a2c;color:var(--ok);border-color:#2c5e45}
+.qnav button.current{outline:2px solid var(--accent);outline-offset:1px;color:var(--txt)}
+.qnav button.flagged::after{content:'';position:absolute;top:3px;right:3px;width:7px;height:7px;background:var(--warn);border-radius:50%}
+.alt{display:flex;gap:12px;align-items:flex-start;background:var(--card2);border:1.5px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:.12s}
+.alt:hover{border-color:var(--accent)}
+.alt.sel{border-color:var(--accent);background:#15263d}
+.alt .letra{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem}
+.alt.sel .letra{background:var(--accent);color:#fff;border-color:var(--accent)}
+.alt.correct{border-color:var(--ok);background:var(--okbg)} .alt.correct .letra{background:var(--ok);color:#fff;border-color:var(--ok)}
+.alt.wrong{border-color:var(--err);background:var(--errbg)} .alt.wrong .letra{background:var(--err);color:#fff;border-color:var(--err)}
+.alt.disabled{cursor:default}
+.alt .txt{flex:1;padding-top:2px}
+.enun{font-size:1.02rem;margin:6px 0 16px;white-space:pre-wrap}
+.coment{margin-top:14px;padding:14px;background:var(--bg2);border-left:3px solid var(--accent);border-radius:8px;font-size:.92rem}
+.coment b{color:var(--txt)}
+.coment .lbl{display:inline-block;font-weight:800;color:var(--accent);margin-right:6px}
+.coment p{margin:8px 0}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:14px 0}
+.stat{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.stat .n{font-size:1.7rem;font-weight:800}
+.stat .l{font-size:.78rem;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);padding:12px 20px;border-radius:10px;box-shadow:var(--shadow);z-index:99;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.seg button{background:none;border:none;color:var(--muted);padding:7px 13px;font-size:.82rem;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+textarea{width:100%;min-height:90px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--txt);font-family:inherit;font-size:.9rem;resize:vertical}
+.chip{display:inline-flex;gap:5px;align-items:center;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.83rem;cursor:pointer}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+hr.div{border:none;border-top:1px solid var(--border);margin:16px 0}
+.note{background:var(--warnbg);border:1px solid #6b5414;border-radius:10px;padding:12px 14px;font-size:.86rem;color:#f0d68a;margin-top:12px}
+@media(max-width:560px){.wrap{padding:14px 11px 50px}.topbar{margin:-14px -11px 14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ============ INTRO ============ -->
+<section id="scrIntro">
+  <div class="card" style="text-align:center">
+    <div class="badge meta">META 16 · DIREITO EMPRESARIAL · PARTE 4</div>
+    <h1 style="margin:12px 0 6px">Leasing, Garantias Fiduciárias e Contratos Bancários</h1>
+    <p class="sub">Parte 4 · Questões 100 a 114 do caderno · 15 questões — completo · arrendamento mercantil · busca e apreensão (DL 911/69) · liberdade contratual (Lei 13.874/19) · propriedade fiduciária · falência (Lei 11.101/05)</p>
+    <p class="sub" style="margin-top:6px">Banca-style: CEBRASPE / VUNESP / FGV / IESES / Consulplan — gabarito comentado por questão</p>
+    <div class="note">✅ Conjunto completo: <b>15 questões</b> (nº 100 a 114), todas transcritas ao pé da letra das págs. 266–268 do Garcia & Roberval. A nº 100 (questão 85) e a nº 105 (questão 90) já entraram com enunciado e alternativas integrais.</div>
+  </div>
+  <div class="card">
+    <h2>Como funciona</h2>
+    <p class="sub" style="margin-bottom:12px">Você responde <b>uma questão por vez</b>. Ao marcar a alternativa, o <b>gabarito comentado</b> aparece na hora (fundamento legal, súmula, pegadinha e gancho de prova oral). No final, vê o desempenho e pode refazer só as que errou. O progresso fica salvo neste aparelho.</p>
+    <label class="sub" style="font-weight:700;display:block;margin-bottom:6px">Seu nome</label>
+    <input type="text" id="nome" placeholder="Ex.: Daniel" maxlength="40" autocomplete="off">
+    <div class="row between" style="margin-top:16px">
+      <label class="chip"><input type="checkbox" id="optShuffle" style="accent-color:var(--accent)"> Embaralhar ordem</label>
+      <span id="resumeBox"></span>
+    </div>
+    <div class="row" style="margin-top:16px">
+      <button class="btn" id="btnStart">▶ Começar</button>
+      <button class="btn ghost" id="btnResume" style="display:none">↻ Continuar de onde parei</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="scrQuiz" class="hidden">
+  <div class="topbar">
+    <span class="timer" id="timer">00:00</span>
+    <div class="progress"><i id="progBar"></i></div>
+    <span class="sub" id="progTxt">0/15</span>
+    <button class="btn ghost sm" id="btnSave">💾 Salvar</button>
+  </div>
+  <div class="card" id="qCard">
+    <div class="row between" style="margin-bottom:10px">
+      <div class="row" style="gap:7px">
+        <span class="badge meta" id="qNum"></span>
+        <span class="badge" id="qBanca"></span>
+      </div>
+      <button class="chip" id="btnFlag">⚑ Revisar</button>
+    </div>
+    <div class="sub" id="qTema" style="margin-bottom:6px"></div>
+    <div class="enun" id="qEnun"></div>
+    <div id="qAlts"></div>
+    <div class="coment hidden" id="qComent"></div>
+    <div class="row between" style="margin-top:18px">
+      <button class="btn ghost" id="btnPrev">← Anterior</button>
+      <button class="btn" id="btnNext">Próxima →</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="row between" style="margin-bottom:8px">
+      <h2 style="margin:0;font-size:1rem">Navegação</h2>
+      <button class="btn ok sm" id="btnFinish">✓ Finalizar e ver desempenho</button>
+    </div>
+    <div class="qnav" id="qnav"></div>
+    <p class="sub" style="margin-top:10px">Respondidas <span style="color:var(--ok)">●</span> · Para revisar <span style="color:var(--warn)">●</span></p>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section id="scrResult" class="hidden">
+  <div class="card" style="text-align:center">
+    <div class="badge meta">DESEMPENHO</div>
+    <h1 style="margin:10px 0" id="rNome"></h1>
+    <div style="font-size:3rem;font-weight:800" id="rScore">0/15</div>
+    <div class="sub" id="rPct"></div>
+    <div class="statgrid">
+      <div class="stat"><div class="n" style="color:var(--ok)" id="rOk">0</div><div class="l">Acertos</div></div>
+      <div class="stat"><div class="n" style="color:var(--err)" id="rErr">0</div><div class="l">Erros</div></div>
+      <div class="stat"><div class="n" id="rTime">00:00</div><div class="l">Tempo</div></div>
+      <div class="stat"><div class="n" id="rRend">0%</div><div class="l">Rendimento</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Seu cartão de resultado</h2>
+    <p class="sub" style="margin-bottom:10px">Copie e cole no grupo de estudo para comparar.</p>
+    <textarea id="rCard" readonly></textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn sm" id="btnCopyCard">📋 Copiar cartão</button>
+      <button class="btn ghost sm" id="btnDownCard">⬇ Baixar .txt</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Revisar questões</h2>
+    <div class="row" style="margin:10px 0">
+      <button class="chip on" data-f="all">Todas</button>
+      <button class="chip" data-f="wrong">Só erradas</button>
+      <button class="chip" data-f="flagged">Marcadas</button>
+    </div>
+    <div class="row">
+      <button class="btn" id="btnRedoWrong">↻ Refazer só as erradas</button>
+      <button class="btn ghost" id="btnRestart">🔄 Recomeçar do zero</button>
+    </div>
+    <div id="reviewList" style="margin-top:16px"></div>
+  </div>
+</section>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const KEY = "sim_emp_p4_q100_q114_v3";
+const MIRROR_STORE = "concurso_meta16_empresarial_parte4_v1";
+
+/* ================== DADOS ================== */
+const QUESTIONS = [
+ {
+  id:"Q85", banca:"CEBRASPE · TJ-PE · Remoção · 2024", tema:"Contratos empresariais — representação comercial, VRG e del credere (STJ/CC)",
+  enun:"Julgue os itens a seguir, relativos aos contratos empresariais, conforme a legislação de regência e jurisprudência dos tribunais superiores.\n\nI. O contrato de representação comercial caracteriza-se como empresarial, e a relação entre representante comercial autônomo e a sociedade representada não se submete às regras do CDC.\nII. É devida devolução em dobro do valor residual garantido (VRG) em caso de reintegração de posse do bem objeto de arrendamento mercantil celebrado entre empresários.\nIII. No âmbito dos contratos de comissão, admite-se, desde que prevista em caráter integral, a cláusula \"del credere\", mediante a qual o comissário responderá solidariamente com as pessoas com que houver tratado em nome do comitente.\n\nAssinale a opção correta.",
+  alts:[
+   {l:"A",t:"Apenas o item I está certo."},
+   {l:"B",t:"Apenas o item II está certo."},
+   {l:"C",t:"Apenas os itens I e III estão certos."},
+   {l:"D",t:"Apenas os itens II e III estão certos."},
+   {l:"E",t:"Todos os itens estão certos."}
+  ],
+  correct:2,
+  coment:`<p><span class="lbl">Por quê</span>Certos os itens <b>I</b> e <b>III</b>. <b>I</b> — a representação comercial é atividade empresarial e a relação entre o representante autônomo e a representada <b>não é de consumo</b> (regida pela Lei 4.886/65, não pelo CDC — o representante não é destinatário final). <b>III</b> — a cláusula <i>del credere</i> é admitida no contrato de comissão e, uma vez estipulada, o comissário responde <b>solidariamente</b> com aqueles com quem contratou em nome do comitente (CC, art. 698).</p>
+  <p><span class="lbl">As outras</span>O <b>item II é falso</b>: na reintegração de posse do leasing, o VRG pago antecipadamente deve ser <b>restituído ou compensado</b> com o saldo devedor — mas <b>não em dobro</b>. O "em dobro" é o erro que derruba as alternativas B, D e E.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>O "<b>em dobro</b>" do VRG (item II). A devolução é simples (com compensação do que se deve), nunca dobrada.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>STJ: relação representante × representada não é de consumo (Lei 4.886/65); VRG antecipado se devolve/compensa, não em dobro (Súm. 293 ao fundo); CC art. 698 (del credere ⇒ solidariedade).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Representação comercial: sem CDC; VRG na reintegração volta <b>simples</b>, não em dobro; del credere = comissário solidário (art. 698)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"A relação entre representante comercial e representada é de consumo?" → Não; é empresarial, regida pela Lei 4.886/65.</p>`
+ },
+ {
+  id:"Q86", banca:"CEBRASPE · TJ-PE · Ingresso · 2024", tema:"Contratos empresariais — leasing e mora (STJ)",
+  enun:"Acerca dos contratos empresariais, assinale a opção correta.",
+  alts:[
+   {l:"A",t:"Nos contratos de arrendamento mercantil, a notificação prévia do arrendatário é indispensável para constituí-lo em mora, ainda que haja cláusula resolutiva expressa."},
+   {l:"B",t:"A renegociação da dívida impede que o devedor discuta judicialmente ilegalidades praticadas no contrato anterior."},
+   {l:"C",t:"Na representação comercial, presume-se a exclusividade da representação em favor do representante, salvo disposição em contrário."},
+   {l:"D",t:"A cobrança antecipada do valor residual garantido (VRG) descaracteriza o contrato de arrendamento mercantil, convertendo-o em compra e venda a prestação."},
+   {l:"E",t:"No contrato de comissão, o comissário responde, em regra, pela insolvência das pessoas com quem contratar em nome do comitente."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>A alternativa A transcreve a <b>Súmula 369/STJ</b>: no leasing, ainda que haja cláusula resolutiva expressa, é necessária a notificação prévia do arrendatário para constituí-lo em mora.</p>
+  <p><span class="lbl">As outras</span>(b) contraria a Súm. 286/STJ (a renegociação não veda a discussão de ilegalidades anteriores); (c) a exclusividade do representante <b>não se presume</b> (Lei 4.886/65); (d) contraria a Súm. 293/STJ (VRG antecipado não descaracteriza o leasing); (e) o comissário só responde pela insolvência se houver cláusula <i>del credere</i> (art. 698, CC).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Quatro alternativas invertem súmula. A correta é a única que repete a Súm. 369 sem "tempero".</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 369 (mora ⇒ notificação) + Súm. 286 (renegociação não veda discussão) + Súm. 293 (VRG antecipado não descaracteriza).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Leasing: mora só com notificação prévia, mesmo com cláusula resolutiva (Súm. 369)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"A cobrança antecipada do VRG transforma o leasing em compra e venda?" → Não (Súm. 293); e a mora pende de notificação (Súm. 369).</p>`
+ },
+ {
+  id:"Q87", banca:"VUNESP · TJ-SP · Remoção · 2024", tema:"Contratos bancários — comissão de permanência (STJ)",
+  enun:"Sobre os encargos cobrados em contratos bancários, assinale a alternativa correta.",
+  alts:[
+   {l:"A",t:"A comissão de permanência é limitada à soma dos encargos remuneratórios e moratórios previstos no contrato e pode ser calculada segundo a taxa média de mercado apurada pelo Banco Central, limitada ao percentual contratado."},
+   {l:"B",t:"Os juros remuneratórios são cumuláveis com a comissão de permanência no período de inadimplência."},
+   {l:"C",t:"A confissão de dívida originada de contrato de abertura de crédito não constitui título executivo."},
+   {l:"D",t:"A cobrança da comissão de permanência não exclui a exigibilidade dos juros moratórios e da multa contratual."},
+   {l:"E",t:"A comissão de permanência pode ser cobrada à taxa livre de mercado, sem teto contratual."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>A alternativa A sintetiza as <b>Súmulas 294 e 472/STJ</b>: comissão de permanência limitada à soma dos encargos do contrato, calculada pela taxa média de mercado do BCB, <b>limitada à taxa do contrato</b>.</p>
+  <p><span class="lbl">As outras</span>(b) contraria a Súm. 296 (não cumula com juros remuneratórios); (c) contraria a Súm. 300 (a confissão de dívida de abertura de crédito é título executivo); (d) contraria a Súm. 472 (a comissão <b>exclui</b> juros, mora e multa); (e) contraria a Súm. 294 (há teto = taxa do contrato).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>"Cumuláveis" (b) e o "não exclui" (d) são as bandeiras vermelhas. A comissão de permanência <b>isola</b> os demais encargos.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 294 (teto = taxa do contrato) + Súm. 296 (não soma juros remuneratórios) + Súm. 472 (exclui juros, mora e multa) + Súm. 30 (não soma correção) + Súm. 300 (título executivo).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Comissão de permanência: sozinha, no teto do contrato, nunca somada a juros/multa/correção (294/296/472)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Comissão de permanência pode ser cobrada com correção monetária?" → Não (Súm. 30).</p>`
+ },
+ {
+  id:"Q88", banca:"VUNESP · TJ-SP · Remoção · 2024", tema:"Contratos mercantis — vendor",
+  enun:"Assinale a alternativa que define corretamente o contrato de vendor.",
+  alts:[
+   {l:"A",t:"Cessão de crédito em que a faturizadora assume o risco da insolvência do devedor."},
+   {l:"B",t:"Arrendamento de bem com opção de compra ao final do prazo."},
+   {l:"C",t:"Mútuo bancário garantido por alienação fiduciária de bem imóvel."},
+   {l:"D",t:"Financiamento de vendas em que a instituição financeira paga à vista ao vendedor e financia o comprador, figurando o vendedor como garantidor da operação."},
+   {l:"E",t:"Compra e venda com reserva de domínio até o pagamento integral do preço."}
+  ],
+  correct:3,
+  coment:`<p><span class="lbl">Por quê</span>No <b>vendor</b>, a instituição financeira <b>paga à vista ao vendedor</b> e <b>financia o comprador</b>; o vendedor permanece como <b>garantidor</b> da operação. É técnica de financiamento de vendas a prazo, por iniciativa do fornecedor.</p>
+  <p><span class="lbl">As outras</span>(a) descreve factoring; (b) leasing; (c) é mútuo com garantia real; (e) compra e venda com reserva de domínio. No <b>compror</b> (a outra face), quem aciona o financiamento é o comprador.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Inverter os polos — no <b>vendor</b> quem aciona o financiamento é o fornecedor/vendedor; no <b>compror</b>, é o comprador.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Contrato atípico/misto; regido pela autonomia privada e art. 425 do CC (contratos atípicos).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Vendor: banco paga o vendedor à vista, financia o comprador, vendedor é garantidor; compror = comprador toma o crédito."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Distinga vendor de compror." → guarde pela iniciativa: fornecedor (vendor) × comprador (compror).</p>`
+ },
+ {
+  id:"Q89", banca:"CEBRASPE · TJ-PE · 2024", tema:"Contratos mercantis — factoring (fomento mercantil)",
+  enun:"No contrato de factoring (fomento mercantil), em relação aos créditos cedidos pela faturizada, assinale a alternativa correta.",
+  alts:[
+   {l:"A",t:"A faturizada responde pela existência e também pela solvência dos créditos cedidos."},
+   {l:"B",t:"É válida cláusula de regresso que obrigue a faturizada a recomprar o crédito em caso de insolvência do devedor."},
+   {l:"C",t:"A faturizadora não assume risco algum, transferindo-o integralmente à faturizada."},
+   {l:"D",t:"A faturizada responde apenas pela existência do crédito (veritas nominis), não pela solvência do devedor (bonitas nominis), sendo nula a cláusula de regresso por insolvência."},
+   {l:"E",t:"O factoring equipara-se ao desconto bancário, com direito de regresso contra a cedente."}
+  ],
+  correct:3,
+  coment:`<p><span class="lbl">Por quê</span>No factoring, a faturizada garante a <b>existência</b> do crédito (<i>veritas nominis</i>), mas <b>não a solvência</b> do devedor (<i>bonitas nominis</i>) — esse risco é da faturizadora. Por isso é <b>nula</b> a cláusula de regresso/recompra por mera insolvência.</p>
+  <p><span class="lbl">As outras</span>A faturizada não responde pela solvência (a); cláusula de regresso por insolvência é nula (b); a faturizadora assume sim o risco da inadimplência (c); no factoring <b>não</b> há regresso como no desconto bancário (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Confundir factoring com desconto bancário. No desconto há regresso contra o cedente; no factoring, não.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>STJ, REsp 2.106.765/CE (3ª T., Nancy Andrighi, 2024) e REsp 1.711.412: risco da insolvência é da faturizadora; nula a cláusula de recompra por inadimplemento.</p>
+  <p><span class="lbl">🔁 Revisão</span>"Factoring: cedente garante <b>existência</b> (veritas nominis), nunca a <b>solvência</b> (bonitas nominis); regresso por insolvência = nulo."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"A faturizada responde pela solvência do devedor?" → Não; só pela existência (tema real TJPE/CEBRASPE 2024).</p>`
+ },
+ {
+  id:"Q90", banca:"VUNESP · TJ-SP · Remoção · 2024", tema:"Liberdade contratual — presunção de paridade e simetria (CC art. 421-A · Lei 13.874/19)",
+  enun:"Os contratos empresariais presumem-se paritários e simétricos até a presença de elementos concretos que justifiquem o afastamento dessa presunção. Desse postulado de intervenção mínima e de excepcionalidade da revisão contratual decorre que:",
+  alts:[
+   {l:"A",t:"a alocação de riscos definida pelas partes deve ser respeitada e observada, sendo-lhes inaplicável a teoria da imprevisão."},
+   {l:"B",t:"a cláusula penal não comporta redução equitativa, ainda que a obrigação principal tenha sido cumprida em parte e o montante da penalidade revele-se, manifestamente, excessivo, tendo-se em vista a natureza e a finalidade do negócio."},
+   {l:"C",t:"as partes podem estabelecer parâmetros objetivos para interpretação das cláusulas contratuais, inclusive no que tange a hipóteses e requisitos de revisão ou de resolução."},
+   {l:"D",t:"a presunção de paridade e simetria aplica-se também aos regimes jurídicos previstos em leis especiais, ante o caráter principiológico da liberdade contratual estabelecida no Código Civil."}
+  ],
+  correct:2,
+  coment:`<p><span class="lbl">Por quê</span>A alternativa C reproduz o <b>art. 421-A, I, do CC</b> (incluído pela Lei 13.874/2019): nos contratos civis e empresariais — presumidos paritários e simétricos — "as partes negociantes poderão estabelecer parâmetros objetivos para a interpretação das cláusulas negociais e de seus pressupostos de revisão ou de resolução".</p>
+  <p><span class="lbl">As outras</span>(a) <b>errada</b> — começa certa (a alocação de riscos definida pelas partes deve ser respeitada e observada — art. 421-A, II), mas acrescenta erro ao dizer que é <b>inaplicável a teoria da imprevisão</b>: a revisão contratual não é vedada, apenas <b>excepcional e limitada</b> (art. 421-A, III); (b) <b>errada</b> — a cláusula penal <b>deve</b> ser reduzida equitativamente quando a obrigação principal for cumprida em parte ou o valor for manifestamente excessivo (<b>CC art. 413</b>, norma cogente, não derrogável pela vontade das partes); (d) <b>errada</b> — a presunção de paridade e simetria <b>não</b> alcança os regimes jurídicos previstos em leis especiais, que são <b>expressamente ressalvados</b> no caput do art. 421-A.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>A alternativa (a) é a clássica "começa certa e enxerta erro": junta o art. 421-A, II (verdadeiro) com a falsa conclusão de que a imprevisão seria "inaplicável". Também caem (b) "cláusula penal não comporta redução" e (d) presunção estendida às leis especiais.</p>
+  <p><span class="lbl">⚖️ Fundamento</span>CC, arts. 421 (liberdade contratual), 421-A (presunção de paridade/simetria + parâmetros de interpretação e revisão) e 413 (redução da cláusula penal); Lei 13.874/2019.</p>
+  <p><span class="lbl">🔁 Revisão</span>"Contratos civis/empresariais: paritários e simétricos, salvo leis especiais (421-A); partes podem fixar critérios de interpretação/revisão; cláusula penal sempre redutível (413)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"A presunção de paridade do art. 421-A aplica-se a contrato regido por lei especial (consumo, trabalho)?" → Não; tais regimes são ressalvados.</p>`
+ },
+ {
+  id:"Q91", banca:"Consulplan · TJ-MA · Ingresso · 2023", tema:"Arrendamento mercantil — natureza jurídica (STJ)",
+  enun:"De acordo com as jurisprudências dos tribunais superiores, o contrato de arrendamento mercantil é uma espécie que se caracteriza da seguinte forma:",
+  alts:[
+   {l:"A",t:"Natureza jurídica de contrato de comodato e de promessa bilateral de compra e venda, sendo possível a cobrança antecipada do valor residual garantido."},
+   {l:"B",t:"É contrato complexo, com características de locação, de promessa unilateral de venda e de financiamento, sendo que o pagamento dos aluguéis não confere propriedade dos bens ao arrendatário."},
+   {l:"C",t:"Compra e venda com direito real de garantia, cuja transferência antecipada da propriedade é realizada ao arrendatário que esteja adimplente com os aluguéis, sendo o bem integrado ao ativo fixo deste."},
+   {l:"D",t:"Possibilidade de aquisição do bem pelo arrendatário pelo valor de mercado ao final, não sendo possível a cobrança antecipada do valor residual garantido sob pena de descaracterização da natureza jurídica contratual."}
+  ],
+  correct:1,
+  coment:`<p><span class="lbl">Por quê</span>O STJ caracteriza o leasing como <b>contrato complexo</b>, com traços de <b>locação</b>, <b>promessa unilateral de venda</b> e <b>financiamento</b>. O pagamento dos aluguéis <b>não</b> confere a propriedade — esta só passa se exercida a opção de compra ao final.</p>
+  <p><span class="lbl">As outras</span>(a) comodato é gratuito e a promessa de compra no leasing é <b>unilateral</b> (opção do arrendatário), não bilateral; além disso o VRG antecipado não o desnatura (Súm. 293); (c) a propriedade não se transfere durante a vigência; (d) contraria a Súm. 293/STJ (a cobrança antecipada do VRG não descaracteriza o leasing).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Trocar promessa <b>unilateral</b> por <b>bilateral</b> (a) e dizer que o VRG antecipado descaracteriza (d).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 293 (VRG antecipado não descaracteriza) + Súm. 369 (mora pende de notificação).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Leasing = locação + promessa unilateral de venda + financiamento; aluguel pago não dá propriedade."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Qual a natureza jurídica do leasing e suas modalidades?" → complexo/misto; financeiro, operacional e lease-back.</p>`
+ },
+ {
+  id:"Q92", banca:"Consulplan · TJ-MA · Ingresso · 2023", tema:"Alienação fiduciária — busca e apreensão (DL 911/69)",
+  enun:"José comprou um veículo por meio de financiamento e ofereceu como garantia uma alienação fiduciária em favor da instituição financeira. Depois de algumas parcelas pagas, José não conseguiu mais arcar com o financiamento e o veículo foi retomado pela instituição financeira. De acordo com o DL 911/69, assinale a afirmativa correta.",
+  alts:[
+   {l:"A",t:"A instituição financeira pode reter o veículo retomado até que o devedor pague integralmente a dívida remanescente."},
+   {l:"B",t:"Após a retomada do veículo, a instituição financeira deve notificar o devedor para pagar a dívida remanescente em quinze dias, sob pena de venda do veículo em leilão público."},
+   {l:"C",t:"Na sentença que decretar a improcedência da ação de busca e apreensão, o juiz condenará o credor fiduciário ao pagamento de multa, em favor do devedor fiduciante, equivalente a quarenta por cento do valor originalmente financiado, devidamente atualizado, caso o bem já tenha sido alienado."},
+   {l:"D",t:"A instituição financeira pode vender o veículo em leilão público, independentemente de qualquer procedimento judicial ou extrajudicial, salvo disposição expressa em contrário prevista no contrato, devendo aplicar o preço da venda no pagamento de seu crédito e das despesas decorrentes e entregar ao devedor o saldo apurado, se houver, com a devida prestação de contas."}
+  ],
+  correct:3,
+  coment:`<p><span class="lbl">Por quê</span>Consolidada a propriedade e a posse, o credor pode <b>vender o bem</b> (independentemente de leilão, avaliação ou autorização judicial, salvo disposição contratual em contrário) e <b>aplicar o preço</b> no crédito e despesas, <b>entregando o saldo ao devedor com prestação de contas</b> — art. 2º do DL 911/69.</p>
+  <p><span class="lbl">As outras</span>(a) não há retenção — consolida e vende; (b) não existe essa etapa de notificação pós-retomada; o prazo de <b>5 dias</b> é anterior, para o devedor pagar a <b>integralidade</b> e reaver o bem (art. 3º, §§1º/2º); (c) a multa do art. 3º, §6º é de <b>50%</b>, não 40%.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>O "40%" da alternativa C — o percentual legal é <b>50%</b>.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>DL 911/69, arts. 2º e 3º; o prazo de 5 dias para pagar a integralidade flui da execução da liminar (STJ).</p>
+  <p><span class="lbl">🔁 Revisão</span>"AF: vende independentemente de leilão/autorização e devolve o saldo (art. 2º); improcedência = multa de 50% (art. 3º, §6º); purga = 5 dias para pagar tudo."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Após a consolidação, o credor precisa de avaliação ou leilão para vender? Cabe entrega do saldo?" → Não precisa; sim, com prestação de contas.</p>`
+ },
+ {
+  id:"Q93", banca:"Consulplan · TJ-MA · Remoção · 2023", tema:"Alienação fiduciária — mora e purga (STJ)",
+  enun:"Sobre o instituto da alienação fiduciária em garantia, à luz da jurisprudência do STJ, assinale a afirmativa correta.",
+  alts:[
+   {l:"A",t:"Dispensa-se a indicação do valor da dívida na notificação para comprovação de mora nas obrigações garantidas por alienação fiduciária."},
+   {l:"B",t:"Mesmo que a alienação fiduciária não esteja anotada no certificado de registro do veículo automotor, ela é oponível a terceiro de boa-fé."},
+   {l:"C",t:"A purga da mora, nos contratos de alienação fiduciária posteriores à Lei 10.931/04, só é permitida quando já pagos pelo menos quarenta por cento do valor financiado."},
+   {l:"D",t:"A comprovação da mora é imprescindível à busca e apreensão do bem alienado fiduciariamente, sendo exigido que a carta registrada seja expedida pelo Cartório de Títulos e Documentos."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>A alternativa A é a <b>Súmula 245/STJ</b>: a notificação destinada a comprovar a mora nas dívidas garantidas por alienação fiduciária <b>dispensa a indicação do valor do débito</b>.</p>
+  <p><span class="lbl">As outras</span>(b) contraria a Súm. 92/STJ (AF não anotada no certificado <b>não</b> é oponível a terceiro de boa-fé); (c) após a Lei 10.931/04 o STJ exige o pagamento da <b>integralidade</b> da dívida — vencidas e vincendas (Tema 722, REsp 1.418.593), não 40%; (d) a mora é mesmo imprescindível (Súm. 72), mas a notificação <b>não</b> precisa ser expedida pelo Cartório de TD — admite-se carta registrada com aviso de recebimento, dispensada a assinatura do próprio destinatário.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>O "40%" (c) é regra <b>superada</b> após a Lei 10.931/04; e a notificação <b>não</b> está restrita ao Cartório de TD (d).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 245 (dispensa valor) + Súm. 92 (não anotada ≠ oponível a 3º de boa-fé) + Súm. 72 (mora imprescindível) + Tema 722/STJ (purga = integralidade).</p>
+  <p><span class="lbl">🔁 Revisão</span>"AF: notificação dispensa o valor do débito (Súm. 245); purga pós-2004 = pagar tudo, não 40% (Tema 722)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Como se purga a mora na AF depois da Lei 10.931/04?" → pagando a integralidade (vencidas e vincendas), em 5 dias da execução da liminar.</p>`
+ },
+ {
+  id:"Q94", banca:"Consulplan · TJ-AC · Ingresso · 2023", tema:"Arrendamento mercantil — requisitos",
+  enun:"Sobre os contratos de arrendamento mercantil, assinale a afirmativa correta.",
+  alts:[
+   {l:"A",t:"Recebem o tratamento jurídico de operação de compra e venda à prestação."},
+   {l:"B",t:"Podem ser firmados com pessoas físicas ou jurídicas na qualidade de arrendadora."},
+   {l:"C",t:"Transferem a propriedade do bem para a arrendatária durante a vigência do contrato."},
+   {l:"D",t:"Devem prever opção de compra ou renovação de contrato, como faculdade do arrendatário."}
+  ],
+  correct:3,
+  coment:`<p><span class="lbl">Por quê</span>O leasing <b>deve prever a opção de compra ou a renovação</b> ao final, como <b>faculdade do arrendatário</b> — é da essência do contrato (Lei 6.099/74). Ao fim, o arrendatário compra pelo VRG, renova ou devolve.</p>
+  <p><span class="lbl">As outras</span>(a) o leasing não recebe tratamento de compra e venda à prestação — se assim fosse tratado, descaracteriza-se (Lei 6.099/74, art. 11, §1º); (b) a arrendadora deve ser instituição financeira/sociedade de arrendamento autorizada pelo Bacen, <b>não</b> pessoa física; (c) a propriedade fica com a arrendadora durante a vigência.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Pessoa física como <b>arrendadora</b> (b) — o polo arrendador é institucional.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 293 + Súm. 369 (STJ); Lei 6.099/74.</p>
+  <p><span class="lbl">🔁 Revisão</span>"Leasing: tríplice opção do arrendatário ao final (comprar pelo VRG, renovar ou devolver); arrendadora é instituição autorizada."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Quem pode figurar como arrendador no leasing?" → instituições financeiras e sociedades de arrendamento mercantil autorizadas pelo Bacen — não pessoa física.</p>`
+ },
+ {
+  id:"Q95", banca:"CEBRASPE · TJ-SC · Ingresso · 2023", tema:"Leasing operacional — prazo e teto (Res. CMN 2.309/96)",
+  enun:"Assinale a opção que apresenta, respectivamente, o prazo mínimo de duração dos contratos empresariais de leasing operacional e o somatório de todos os pagamentos devidos nesse contrato.",
+  alts:[
+   {l:"A",t:"90 dias; até 90% do valor do bem arrendado."},
+   {l:"B",t:"6 meses; até 90% do valor do bem arrendado."},
+   {l:"C",t:"6 meses; até 100% do valor do bem arrendado."},
+   {l:"D",t:"12 meses; até 90% do valor do bem arrendado."},
+   {l:"E",t:"12 meses; até 100% do valor do bem arrendado."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>No <b>arrendamento operacional</b>, o prazo mínimo é de <b>90 dias</b> e o somatório das contraprestações <b>não pode ultrapassar 90% do custo do bem</b> arrendado (Resolução CMN/Bacen 2.309/96). É o que o distingue do financeiro (soma podendo superar 100%, com VRG, e prazos mínimos de 2 ou 3 anos).</p>
+  <p><span class="lbl">As outras</span>Combinam prazo (6 ou 12 meses) e teto (100%) que não correspondem ao operacional.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Confundir os parâmetros do <b>operacional</b> (90 dias / 90%) com os do <b>financeiro</b> (prazos de 2–3 anos, soma podendo superar 100% com VRG).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Matéria regulamentar (Resolução CMN 2.309/96); Súm. 293/STJ ao fundo (VRG não descaracteriza).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Leasing operacional: 90 dias mínimo, contraprestações ≤ 90% do custo do bem."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Diferencie leasing financeiro de operacional." → Operacional: curto, sem VRG relevante, manutenção pelo arrendador, opção de compra pelo valor de mercado; financeiro: longo, com VRG, intenção de aquisição.</p>`
+ },
+ {
+  id:"Q96", banca:"IESES · TJ-TO · Ingresso · 2022", tema:"Garantias e contratos empresariais — assertivas",
+  enun:"De acordo com a legislação brasileira vigente, analise as sentenças abaixo e assinale a alternativa correta:\n\nI. As diversas formas de infração da ordem econômica implicam a responsabilidade da sociedade empresária, mas a responsabilidade dos sócios, dirigentes e administradores se dá de forma subsidiária.\nII. O representante comercial só poderá exercer sua atividade para mais de uma empresa se houver expressa autorização contratual;\nIII. Nos contratos de franquia celebrados em território nacional, as partes só poderão optar no contrato pelo foro também em território nacional.\nIV. Pelo contrato de cessão fiduciária em garantia, a titularidade do crédito a ser cedido pelo devedor é transferida ao credor após o inadimplemento da dívida garantida.",
+  alts:[
+   {l:"A",t:"Nenhuma assertiva está correta."},
+   {l:"B",t:"Todas as assertivas estão corretas."},
+   {l:"C",t:"Apenas as assertivas II e IV estão corretas."},
+   {l:"D",t:"Apenas a assertiva IV está correta."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>As quatro têm erro objetivo, logo <b>nenhuma está correta</b>. <b>I</b> — a responsabilidade dos dirigentes/administradores por infração à ordem econômica é <b>solidária</b> (Lei 12.529/2011, art. 32), não subsidiária. <b>II</b> — o representante comercial <b>pode</b> atuar para mais de uma empresa; a exclusividade/limitação é que depende de cláusula expressa, não a atuação plural (Lei 4.886/65). <b>III</b> — não há essa restrição: a Lei de Franquia (13.966/2019) admite, inclusive na franquia internacional, eleição de foro de país de domicílio das partes. <b>IV</b> — na cessão fiduciária a titularidade (resolúvel) transfere-se ao credor já na <b>contratação/registro</b>, em garantia, e <b>não</b> após o inadimplemento.</p>
+  <p><span class="lbl">As outras</span>(b), (c) e (d) validam assertivas falsas pelos fundamentos acima.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>"Subsidiária" no lugar de "solidária" (I) e a falsa exigência de "autorização expressa" para o representante atuar para várias empresas (II).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Lei 12.529/2011, art. 32 (CADE — solidária); Lei 4.886/65; Lei 13.966/2019 (franquia); cessão fiduciária: crédito cedido não se sujeita à recuperação judicial (STJ — "trava bancária").</p>
+  <p><span class="lbl">🔁 Revisão</span>"CADE = solidária; representante pode atuar para <b>várias</b> empresas salvo vedação; cessão fiduciária transfere a titularidade <b>na contratação</b>, não no inadimplemento."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Qual a natureza da responsabilidade dos administradores por infração à ordem econômica?" → solidária (art. 32).</p>`
+ },
+ {
+  id:"Q97", banca:"FGV · TJ-SC · Ingresso · 2021", tema:"Propriedade fiduciária de bem móvel — constituição",
+  enun:"A microempresária individual Rosa celebrou, com escopo de garantia, contrato de alienação fiduciária de duas máquinas para uso em sua empresa. Sendo certo que as máquinas descritas no contrato são bens móveis infungíveis, constitui-se tal propriedade:",
+  alts:[
+   {l:"A",t:"com o registro do contrato que lhe serve de título no Registro de Títulos e Documentos do domicílio do devedor."},
+   {l:"B",t:"com a entrega das máquinas ao credor fiduciário, que exercerá doravante a posse direta e indireta sobre os bens alienados até a quitação da dívida."},
+   {l:"C",t:"com a assinatura do contrato, independentemente de qualquer formalidade complementar, inclusive a tradição dos bens alienados."},
+   {l:"D",t:"com a publicação do contrato que lhe serve de título, após averbação no Registro Público de Empresas Mercantis do domicílio do credor."},
+   {l:"E",t:"com o registro do contrato, que deve ser por instrumento público, no Registro de Imóveis do lugar da localização dos bens alienados."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>CC, art. 1.361, §1º: a propriedade fiduciária de coisa móvel <b>constitui-se com o registro do contrato</b> (instrumento público ou particular) no <b>Registro de Títulos e Documentos do domicílio do devedor</b> (ou, em se tratando de veículos, na repartição competente para o licenciamento). O fiduciante mantém a <b>posse direta</b> (constituto possessório).</p>
+  <p><span class="lbl">As outras</span>(b) o devedor fica com a posse direta, não entrega ao credor; (c) a mera assinatura não basta — exige registro; (d) não é averbação na Junta nem domicílio do credor; (e) não é instrumento público obrigatório nem Registro de Imóveis.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Confundir a constituição (registro no RTD) com a simples celebração do contrato; ou trocar "domicílio do devedor" por "do credor".</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>CC art. 1.361 §1º; Súm. 92/STJ (AF não anotada no certificado não é oponível a terceiro de boa-fé).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Propriedade fiduciária de móvel = <b>registro no RTD do domicílio do devedor</b>; fiduciante fica com a <b>posse direta</b>."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Quando se constitui a propriedade fiduciária sobre bem móvel?" → com o registro do contrato no RTD do domicílio do devedor.</p>`
+ },
+ {
+  id:"Q98", banca:"VUNESP · TJ-GO · Ingresso · 2021", tema:"Alienação fiduciária de aeronave — registro",
+  enun:"A alienação fiduciária em garantia de aeronave:",
+  alts:[
+   {l:"A",t:"deve ser feita por instrumento público ou particular e só tem validade e eficácia após a inscrição no Registro Aeronáutico Brasileiro e no Cartório de Registro de Imóveis onde se situa o hangar da aeronave alienada fiduciariamente."},
+   {l:"B",t:"deve ser feita por instrumento público ou particular, e só tem validade e eficácia após a inscrição no Registro Aeronáutico Brasileiro."},
+   {l:"C",t:"deve ser feita por instrumento público ou particular e só tem validade e eficácia após a inscrição no Cartório de Registro de Imóveis onde se situa o hangar da aeronave alienada fiduciariamente."},
+   {l:"D",t:"deve ser feita apenas por instrumento público, e só tem validade e eficácia após a inscrição no Registro Aeronáutico Brasileiro e no Cartório de Registro de Imóveis onde se situa o hangar da aeronave alienada fiduciariamente."}
+  ],
+  correct:1,
+  coment:`<p><span class="lbl">Por quê</span>A aeronave é bem móvel sujeito a <b>registro especial próprio</b>: a garantia fiduciária pode ser por instrumento público <b>ou</b> particular e se constitui/produz efeitos com a <b>inscrição no Registro Aeronáutico Brasileiro (RAB)</b> — CBA (Lei 7.565/86).</p>
+  <p><span class="lbl">As outras</span>Não se exige inscrição no Cartório de Registro de Imóveis do hangar (a, c, d); não é só instrumento público (d).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Misturar o registro especial (RAB) com o registro imobiliário do local onde a aeronave fica guardada.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Lei 7.565/86 (CBA) — RAB; aeronaves e embarcações têm registro especial, distinto do RTD (móveis comuns) e do RGI (imóveis).</p>
+  <p><span class="lbl">🔁 Revisão</span>"AF de aeronave: instrumento público <b>ou</b> particular + inscrição <b>só no RAB</b>; nada de Registro de Imóveis."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Onde se registra a garantia fiduciária sobre aeronave?" → Registro Aeronáutico Brasileiro (RAB).</p>`
+ },
+ {
+  id:"Q99", banca:"CEBRASPE · TJ-RR · Remoção · 2025", tema:"Falência — efeitos sobre as obrigações do devedor",
+  enun:"Assinale a opção correta em relação aos efeitos da decretação da falência sobre as obrigações do devedor.",
+  alts:[
+   {l:"A",t:"As contas correntes com o devedor consideram-se encerradas no momento de decretação da falência, verificando-se o respectivo saldo."},
+   {l:"B",t:"Em contratos de locação, a falência do locador resolve o contrato de locação e, na falência do locatário, o administrador judicial pode, a qualquer tempo, denunciar o contrato."},
+   {l:"C",t:"Os efeitos do mandato conferido pelo devedor para a realização de negócios cessarão a partir do requerimento da falência, cabendo ao mandatário prestar contas de sua gestão."},
+   {l:"D",t:"A distribuição do pedido de falência suspende o exercício do direito de retirada ou de recebimento de valor de quotas ou ações dos sócios da sociedade."},
+   {l:"E",t:"Os contratos bilaterais resolvem-se pela falência."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>Lei 11.101/2005, <b>art. 121</b>: as <b>contas correntes</b> com o devedor consideram-se <b>encerradas no momento da decretação</b> da falência, verificando-se o respectivo saldo.</p>
+  <p><span class="lbl">As outras</span>(b) a falência do locador <b>não</b> resolve a locação (art. 119, VII) — a primeira parte inverte a lei; (c) o mandato cessa com a <b>decretação</b>, não com o requerimento (art. 120); (d) é a <b>decretação</b> (não a distribuição do pedido) que suspende o direito de retirada/recebimento de quotas (art. 116, II); (e) contratos <b>bilaterais não se resolvem</b> pela falência e podem ser cumpridos pelo administrador se reduzirem ou evitarem prejuízo à massa (art. 117).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Trocar o marco temporal: o termo certo é "<b>decretação</b>", não "requerimento" (c) nem "distribuição" (d).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Lei 11.101/2005, arts. 116, 117, 119 (VII), 120 e 121 (efeitos da falência sobre os contratos e obrigações do devedor).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Falência: contas correntes <b>encerram na decretação</b> (121); mandato cessa na decretação (120); bilaterais <b>não se resolvem</b> (117)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"O que acontece com as contas correntes do falido?" → encerram-se na decretação, apurando-se o saldo (art. 121).</p>`
+ }
+];
+
+/* ================== ESTADO ================== */
+const POS={Q85:100,Q86:101,Q87:102,Q88:103,Q89:104,Q90:105,Q91:106,Q92:107,Q93:108,Q94:109,Q95:110,Q96:111,Q97:112,Q98:113,Q99:114};
+let order = QUESTIONS.map((_,i)=>i);
+let answers = {};     // realIndex -> letterIndex
+let flags = {};       // realIndex -> bool
+let cur = 0;          // position in order
+let startTs = null, timerInt = null, elapsed = 0;
+let nome = "";
+
+/* ================== HELPERS ================== */
+const $ = id => document.getElementById(id);
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+function fmt(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,"0")+":"+String(x).padStart(2,"0");}
+function show(sec){["scrIntro","scrQuiz","scrResult"].forEach(s=>$(s).classList.add("hidden"));$(sec).classList.remove("hidden");window.scrollTo(0,0);}
+
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify({nome,order,answers,flags,cur,elapsed,ts:Date.now()}));}catch(e){}
+  try{writeMirror();}catch(e){}
+}
+function writeMirror(){
+  var respostas={},caderno={},revisao={};
+  QUESTIONS.forEach(function(q,ri){
+    if(answers[ri]!=null){
+      var pos=String(ri+1);
+      var alt=q.alts[answers[ri]];
+      respostas[pos]=alt?alt.l:'?';
+      if(answers[ri]!==q.correct)caderno[pos]=1;
+    }
+  });
+  try{localStorage.setItem(MIRROR_STORE,JSON.stringify({respostas:respostas,caderno:caderno,revisao:revisao}));}catch(e){}
+}
+function loadSaved(){
+  try{return JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){return null;}
+}
+
+/* ================== TIMER ================== */
+function startTimer(){
+  if(timerInt)clearInterval(timerInt);
+  startTs=Date.now()-elapsed*1000;
+  timerInt=setInterval(()=>{elapsed=Math.floor((Date.now()-startTs)/1000);$("timer").textContent=fmt(elapsed);},1000);
+}
+function stopTimer(){if(timerInt)clearInterval(timerInt);timerInt=null;}
+
+/* ================== RENDER ================== */
+function renderNav(){
+  const nav=$("qnav");nav.innerHTML="";
+  order.forEach((ri,pos)=>{
+    const b=document.createElement("button");
+    b.textContent=pos+1;
+    if(answers[ri]!=null)b.classList.add("answered");
+    if(flags[ri])b.classList.add("flagged");
+    if(pos===cur)b.classList.add("current");
+    b.onclick=()=>{cur=pos;renderQ();};
+    nav.appendChild(b);
+  });
+}
+function renderProgress(){
+  const ans=Object.keys(answers).length, tot=QUESTIONS.length;
+  $("progTxt").textContent=ans+"/"+tot;
+  $("progBar").style.width=(ans/tot*100)+"%";
+}
+function renderQ(){
+  const ri=order[cur], q=QUESTIONS[ri];
+  $("qNum").textContent="Questão "+POS[q.id]+" · "+q.id+" · "+(cur+1)+"/"+QUESTIONS.length;
+  $("qBanca").textContent=q.banca;
+  $("qTema").textContent=q.tema;
+  $("qEnun").textContent=q.enun;
+  $("btnFlag").classList.toggle("on",!!flags[ri]);
+  const wrap=$("qAlts");wrap.innerHTML="";
+  const answered=answers[ri]!=null;
+  q.alts.forEach((a,i)=>{
+    const d=document.createElement("div");
+    d.className="alt";
+    d.innerHTML=`<div class="letra">${a.l}</div><div class="txt">${a.t}</div>`;
+    if(answered){
+      d.classList.add("disabled");
+      if(i===q.correct)d.classList.add("correct");
+      if(i===answers[ri]&&answers[ri]!==q.correct)d.classList.add("wrong");
+      if(i===answers[ri])d.classList.add("sel");
+    }else{
+      d.onclick=()=>{answers[ri]=i;save();renderQ();renderNav();renderProgress();};
+    }
+    wrap.appendChild(d);
+  });
+  const cm=$("qComent");
+  if(answered){cm.innerHTML=`<p><b>Gabarito: ${q.alts[q.correct].l}</b> ${answers[ri]===q.correct?'✅ você acertou':'❌ você marcou '+q.alts[answers[ri]].l}</p>`+q.coment;cm.classList.remove("hidden");}
+  else{cm.classList.add("hidden");}
+  $("btnPrev").disabled=cur===0;
+  $("btnNext").disabled=cur===QUESTIONS.length-1;
+  renderNav();
+}
+
+/* ================== FLUXO ================== */
+function begin(resume){
+  nome=$("nome").value.trim()||"Anônimo";
+  if($("optShuffle").checked&&!resume){
+    for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  }
+  show("scrQuiz");startTimer();renderQ();renderProgress();save();
+}
+function finish(){
+  stopTimer();
+  let ok=0;
+  QUESTIONS.forEach((q,ri)=>{if(answers[ri]===q.correct)ok++;});
+  const tot=QUESTIONS.length, err=Object.keys(answers).length-ok, pct=Math.round(ok/tot*100);
+  $("rNome").textContent=nome;
+  $("rScore").textContent=ok+"/"+tot;
+  $("rPct").textContent=pct+"% de acerto · "+Object.keys(answers).length+" respondidas";
+  $("rOk").textContent=ok;$("rErr").textContent=err<0?0:err;
+  $("rTime").textContent=fmt(elapsed);$("rRend").textContent=pct+"%";
+  const card=`📊 SIMULADO — Dir. Empresarial · Parte 4 (Questões 100–114)\n👤 ${nome}\n✅ ${ok}/${tot} (${pct}%) · ⏱ ${fmt(elapsed)}\nGabarito: 85-C · 86-A · 87-A · 88-D · 89-D · 90-C · 91-B · 92-D · 93-A · 94-D · 95-A · 96-A · 97-A · 98-B · 99-A`;
+  $("rCard").value=card;
+  renderReview("all");
+  show("scrResult");save();
+}
+function renderReview(filter){
+  const list=$("reviewList");list.innerHTML="";
+  QUESTIONS.forEach((q,ri)=>{
+    const got=answers[ri], isWrong=got!=null&&got!==q.correct;
+    if(filter==="wrong"&&!isWrong)return;
+    if(filter==="flagged"&&!flags[ri])return;
+    const div=document.createElement("div");div.className="card";div.style.marginBottom="12px";
+    const mark=got==null?'<span class="badge">não respondida</span>':(isWrong?'<span class="badge" style="color:var(--err)">errou</span>':'<span class="badge ok">acertou</span>');
+    div.innerHTML=`<div class="row between"><span class="badge meta">Q. ${POS[q.id]} · ${q.id}</span>${mark}</div>
+      <div class="sub" style="margin:6px 0">${q.tema}</div>
+      <div style="margin-bottom:8px">${q.enun.split("\n")[0]}</div>
+      <div class="coment"><p><b>Gabarito: ${q.alts[q.correct].l})</b> ${q.alts[q.correct].t}</p>${q.coment}</div>`;
+    list.appendChild(div);
+  });
+  if(!list.children.length)list.innerHTML='<p class="sub">Nada para mostrar neste filtro.</p>';
+}
+
+/* ================== EVENTOS ================== */
+$("btnStart").onclick=()=>begin(false);
+$("btnResume").onclick=()=>{const s=loadSaved();if(s){nome=s.nome;order=s.order;answers=s.answers||{};flags=s.flags||{};cur=s.cur||0;elapsed=s.elapsed||0;begin(true);}};
+$("btnPrev").onclick=()=>{if(cur>0){cur--;renderQ();}};
+$("btnNext").onclick=()=>{if(cur<QUESTIONS.length-1){cur++;renderQ();}};
+$("btnFlag").onclick=()=>{const ri=order[cur];flags[ri]=!flags[ri];save();renderQ();};
+$("btnSave").onclick=()=>{save();toast("Progresso salvo ✓");};
+$("btnFinish").onclick=()=>{const n=Object.keys(answers).length;if(n<QUESTIONS.length&&!confirm("Faltam "+(QUESTIONS.length-n)+" questões. Finalizar mesmo assim?"))return;finish();};
+$("btnCopyCard").onclick=()=>{$("rCard").select();document.execCommand("copy");toast("Cartão copiado 📋");};
+$("btnDownCard").onclick=()=>{const a=document.createElement("a");a.href="data:text/plain;charset=utf-8,"+encodeURIComponent($("rCard").value);a.download="resultado-"+nome+".txt";a.click();};
+$("btnRedoWrong").onclick=()=>{const wrong=QUESTIONS.map((q,ri)=>({ri,w:answers[ri]!=null&&answers[ri]!==q.correct})).filter(x=>x.w).map(x=>x.ri);if(!wrong.length){toast("Sem erradas — parabéns!");return;}order=wrong;wrong.forEach(ri=>{delete answers[ri];});cur=0;show("scrQuiz");startTimer();renderQ();renderProgress();save();};
+$("btnRestart").onclick=()=>{if(!confirm("Apagar progresso e recomeçar?"))return;localStorage.removeItem(KEY);order=QUESTIONS.map((_,i)=>i);answers={};flags={};cur=0;elapsed=0;$("nome").value="";show("scrIntro");checkResume();};
+document.querySelectorAll("#scrResult .chip[data-f]").forEach(c=>c.onclick=()=>{document.querySelectorAll("#scrResult .chip[data-f]").forEach(x=>x.classList.remove("on"));c.classList.add("on");renderReview(c.dataset.f);});
+
+/* ================== INIT ================== */
+function checkResume(){
+  const s=loadSaved();
+  if(s&&s.order){
+    $("btnResume").style.display="inline-flex";
+    $("resumeBox").innerHTML='<span class="badge ok">progresso salvo: '+Object.keys(s.answers||{}).length+'/'+QUESTIONS.length+'</span>';
+    if(s.nome)$("nome").value=s.nome;
+  }
+}
+checkResume();
+</script>
+</body>
+</html>
