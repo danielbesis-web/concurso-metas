@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — Direito Empresarial · Contratos, Garantias e Falência (Q86–Q99)</title>
+<style>
+:root{
+  --bg:#0f1419; --bg2:#161c24; --card:#1c242e; --card2:#222c38;
+  --border:#2c3947; --txt:#e6edf3; --muted:#8a99a8; --accent:#4c8dff;
+  --accent2:#3a6fd8; --ok:#33c27f; --okbg:#11321f; --err:#ff5c6c; --errbg:#3a1418;
+  --warn:#ffc24c; --warnbg:#3a2e10; --radius:14px; --shadow:0 6px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.55;min-height:100vh}
+.wrap{max-width:880px;margin:0 auto;padding:18px 16px 60px}
+.hidden{display:none!important}
+h1{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+.sub{color:var(--muted);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:.98rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--txt)}
+.btn.ghost:hover{background:var(--card2)}
+.btn.sm{padding:8px 14px;font-size:.85rem}
+.btn.ok{background:var(--ok)} .btn.ok:hover{background:#2aa869}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+input[type=text]{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--txt);font-size:1rem;width:100%}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:3px 11px;font-size:.74rem;color:var(--muted);font-weight:600}
+.badge.meta{background:#16263d;color:#7db4ff;border-color:#234a73}
+.badge.ok{background:var(--okbg);color:var(--ok);border-color:#2c5e45}
+.topbar{position:sticky;top:0;z-index:30;background:rgba(15,20,25,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 16px;margin:-18px -16px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.05rem;color:var(--accent)}
+.progress{flex:1;min-width:120px;height:8px;background:var(--bg2);border-radius:6px;overflow:hidden}
+.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0%;transition:.3s}
+.qnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:7px;margin-top:6px}
+.qnav button{aspect-ratio:1;border:1px solid var(--border);background:var(--card2);color:var(--muted);border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;position:relative;transition:.1s}
+.qnav button:hover{border-color:var(--accent)}
+.qnav button.answered{background:#1d3a2c;color:var(--ok);border-color:#2c5e45}
+.qnav button.current{outline:2px solid var(--accent);outline-offset:1px;color:var(--txt)}
+.qnav button.flagged::after{content:'';position:absolute;top:3px;right:3px;width:7px;height:7px;background:var(--warn);border-radius:50%}
+.alt{display:flex;gap:12px;align-items:flex-start;background:var(--card2);border:1.5px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:.12s}
+.alt:hover{border-color:var(--accent)}
+.alt.sel{border-color:var(--accent);background:#15263d}
+.alt .letra{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem}
+.alt.sel .letra{background:var(--accent);color:#fff;border-color:var(--accent)}
+.alt.correct{border-color:var(--ok);background:var(--okbg)} .alt.correct .letra{background:var(--ok);color:#fff;border-color:var(--ok)}
+.alt.wrong{border-color:var(--err);background:var(--errbg)} .alt.wrong .letra{background:var(--err);color:#fff;border-color:var(--err)}
+.alt.disabled{cursor:default}
+.alt .txt{flex:1;padding-top:2px}
+.enun{font-size:1.02rem;margin:6px 0 16px;white-space:pre-wrap}
+.coment{margin-top:14px;padding:14px;background:var(--bg2);border-left:3px solid var(--accent);border-radius:8px;font-size:.92rem}
+.coment b{color:var(--txt)}
+.coment .lbl{display:inline-block;font-weight:800;color:var(--accent);margin-right:6px}
+.coment p{margin:8px 0}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:14px 0}
+.stat{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.stat .n{font-size:1.7rem;font-weight:800}
+.stat .l{font-size:.78rem;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);padding:12px 20px;border-radius:10px;box-shadow:var(--shadow);z-index:99;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.seg button{background:none;border:none;color:var(--muted);padding:7px 13px;font-size:.82rem;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+textarea{width:100%;min-height:90px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--txt);font-family:inherit;font-size:.9rem;resize:vertical}
+.chip{display:inline-flex;gap:5px;align-items:center;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.83rem;cursor:pointer}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+hr.div{border:none;border-top:1px solid var(--border);margin:16px 0}
+@media(max-width:560px){.wrap{padding:14px 11px 50px}.topbar{margin:-14px -11px 14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ============ INTRO ============ -->
+<section id="scrIntro">
+  <div class="card" style="text-align:center">
+    <div class="badge meta">META 16 · DIREITO EMPRESARIAL</div>
+    <h1 style="margin:12px 0 6px">Contratos, Garantias e Falência</h1>
+    <p class="sub">Bloco Q86–Q99 · 8 questões · contratos bancários e mercantis · alienação/propriedade fiduciária · efeitos da falência sobre contratos</p>
+    <p class="sub" style="margin-top:6px">Banca-style: VUNESP / CEBRASPE / FGV / IESES — gabarito comentado por questão</p>
+  </div>
+  <div class="card">
+    <h2>Como funciona</h2>
+    <p class="sub" style="margin-bottom:12px">Você responde <b>uma questão por vez</b>. Ao marcar a alternativa, o <b>gabarito comentado</b> aparece na hora (fundamento legal, súmula, pegadinha e gancho de prova oral). No final, vê o desempenho e pode refazer só as que errou. O progresso fica salvo neste aparelho.</p>
+    <label class="sub" style="font-weight:700;display:block;margin-bottom:6px">Seu nome</label>
+    <input type="text" id="nome" placeholder="Ex.: Daniel" maxlength="40" autocomplete="off">
+    <div class="row between" style="margin-top:16px">
+      <label class="chip"><input type="checkbox" id="optShuffle" style="accent-color:var(--accent)"> Embaralhar ordem</label>
+      <span id="resumeBox"></span>
+    </div>
+    <div class="row" style="margin-top:16px">
+      <button class="btn" id="btnStart">▶ Começar</button>
+      <button class="btn ghost" id="btnResume" style="display:none">↻ Continuar de onde parei</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="scrQuiz" class="hidden">
+  <div class="topbar">
+    <span class="timer" id="timer">00:00</span>
+    <div class="progress"><i id="progBar"></i></div>
+    <span class="sub" id="progTxt">0/8</span>
+    <button class="btn ghost sm" id="btnSave">💾 Salvar</button>
+  </div>
+  <div class="card" id="qCard">
+    <div class="row between" style="margin-bottom:10px">
+      <div class="row" style="gap:7px">
+        <span class="badge meta" id="qNum"></span>
+        <span class="badge" id="qBanca"></span>
+      </div>
+      <button class="chip" id="btnFlag">⚑ Revisar</button>
+    </div>
+    <div class="sub" id="qTema" style="margin-bottom:6px"></div>
+    <div class="enun" id="qEnun"></div>
+    <div id="qAlts"></div>
+    <div class="coment hidden" id="qComent"></div>
+    <div class="row between" style="margin-top:18px">
+      <button class="btn ghost" id="btnPrev">← Anterior</button>
+      <button class="btn" id="btnNext">Próxima →</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="row between" style="margin-bottom:8px">
+      <h2 style="margin:0;font-size:1rem">Navegação</h2>
+      <button class="btn ok sm" id="btnFinish">✓ Finalizar e ver desempenho</button>
+    </div>
+    <div class="qnav" id="qnav"></div>
+    <p class="sub" style="margin-top:10px">Respondidas <span style="color:var(--ok)">●</span> · Para revisar <span style="color:var(--warn)">●</span></p>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section id="scrResult" class="hidden">
+  <div class="card" style="text-align:center">
+    <div class="badge meta">DESEMPENHO</div>
+    <h1 style="margin:10px 0" id="rNome"></h1>
+    <div style="font-size:3rem;font-weight:800" id="rScore">0/8</div>
+    <div class="sub" id="rPct"></div>
+    <div class="statgrid">
+      <div class="stat"><div class="n" style="color:var(--ok)" id="rOk">0</div><div class="l">Acertos</div></div>
+      <div class="stat"><div class="n" style="color:var(--err)" id="rErr">0</div><div class="l">Erros</div></div>
+      <div class="stat"><div class="n" id="rTime">00:00</div><div class="l">Tempo</div></div>
+      <div class="stat"><div class="n" id="rRend">0%</div><div class="l">Rendimento</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Seu cartão de resultado</h2>
+    <p class="sub" style="margin-bottom:10px">Copie e cole no grupo de estudo para comparar.</p>
+    <textarea id="rCard" readonly></textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn sm" id="btnCopyCard">📋 Copiar cartão</button>
+      <button class="btn ghost sm" id="btnDownCard">⬇ Baixar .txt</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Revisar questões</h2>
+    <div class="row" style="margin:10px 0">
+      <button class="chip on" data-f="all">Todas</button>
+      <button class="chip" data-f="wrong">Só erradas</button>
+      <button class="chip" data-f="flagged">Marcadas</button>
+    </div>
+    <div class="row">
+      <button class="btn" id="btnRedoWrong">↻ Refazer só as erradas</button>
+      <button class="btn ghost" id="btnRestart">🔄 Recomeçar do zero</button>
+    </div>
+    <div id="reviewList" style="margin-top:16px"></div>
+  </div>
+</section>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const KEY = "sim_emp_q86_q99_v1";
+
+/* ================== DADOS ================== */
+const QUESTIONS = [
+ {
+  id:"Q86", banca:"VUNESP · TJ-SP · Remoção · 2024", tema:"Contratos bancários — arrendamento mercantil (leasing) e mora",
+  enun:"No contrato de arrendamento mercantil (leasing), havendo inadimplemento do arrendatário, assinale a alternativa correta quanto à constituição em mora.",
+  alts:[
+   {l:"A",t:"Ainda que haja cláusula resolutiva expressa, é necessária a notificação prévia do arrendatário para constituí-lo em mora."},
+   {l:"B",t:"A simples cláusula resolutiva expressa basta para a resolução do contrato, dispensada qualquer notificação."},
+   {l:"C",t:"A mora decorre automaticamente do vencimento (mora ex re), sendo vedada a notificação prévia."},
+   {l:"D",t:"A notificação somente é exigível quando o contrato não prevê cláusula resolutiva expressa."},
+   {l:"E",t:"A constituição em mora depende de ação judicial de rescisão, não bastando notificação extrajudicial."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>Súmula 369 do STJ: no leasing, <b>ainda que haja cláusula resolutiva expressa, é necessária a notificação prévia do arrendatário para constituí-lo em mora</b>.</p>
+  <p><span class="lbl">As outras</span>A cláusula resolutiva, por si só, não dispensa a interpelação (b, d); a mora aqui não é puramente <i>ex re</i> a ponto de vedar notificação (c); a constituição em mora se faz por notificação, não por prévia ação (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>"Cláusula resolutiva expressa dispensa notificação" — é o contrário: precisa notificar mesmo havendo a cláusula.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 369/STJ; diálogo com a Súm. 245 (notificação para constituição em mora na busca e apreensão dispensa indicação do valor do débito).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Leasing + cláusula resolutiva = <b>ainda assim notifica</b> (Súm. 369)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"No leasing, a cláusula resolutiva expressa dispensa a notificação do arrendatário?" → Não (Súm. 369).</p>`
+ },
+ {
+  id:"Q87", banca:"VUNESP · TJ-SP · Remoção · 2024", tema:"Contratos bancários — comissão de permanência",
+  enun:"Sobre a comissão de permanência cobrada em contratos bancários após o vencimento, assinale a alternativa correta.",
+  alts:[
+   {l:"A",t:"Seu valor não pode ultrapassar a soma dos encargos remuneratórios e moratórios previstos no contrato e sua cobrança exclui a exigibilidade dos juros remuneratórios, moratórios e da multa contratual."},
+   {l:"B",t:"Pode ser cumulada livremente com juros remuneratórios, multa e correção monetária."},
+   {l:"C",t:"É calculada pela taxa de mercado do dia do pagamento, sem qualquer limite contratual."},
+   {l:"D",t:"É nula em qualquer hipótese, por configurar anatocismo."},
+   {l:"E",t:"Pode ser cumulada com a correção monetária no mesmo período."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>Súmula 472 do STJ: a comissão de permanência <b>não pode ultrapassar a soma dos encargos</b> remuneratórios e moratórios do contrato e sua cobrança <b>exclui</b> a exigibilidade dos juros (remuneratórios e moratórios) e da multa. Complementa a Súm. 294 (cálculo pela taxa média de mercado, limitada à taxa do contrato).</p>
+  <p><span class="lbl">As outras</span>Não há cumulação livre (b); há limite à taxa do contrato (c); a comissão é válida, não é nula por anatocismo (d); Súm. 30 veda cumulação com correção monetária (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Trocar "exclui" por "pode ser cumulada com" os demais encargos — é justamente o que a súmula proíbe.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Súm. 30, 294, 296 e 472 do STJ (comissão de permanência).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Comissão de permanência: limitada à soma dos encargos e <b>exclui</b> juros e multa (Súm. 472)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Comissão de permanência pode ser cumulada com multa e juros moratórios?" → Não (Súm. 472).</p>`
+ },
+ {
+  id:"Q88", banca:"VUNESP · TJ-SP · Remoção · 2024", tema:"Contratos mercantis — vendor (financiamento de vendas)",
+  enun:"Assinale a alternativa que define corretamente o contrato de vendor.",
+  alts:[
+   {l:"A",t:"Cessão de crédito em que a faturizadora assume o risco da insolvência do devedor."},
+   {l:"B",t:"Arrendamento de bem com opção de compra ao final do prazo."},
+   {l:"C",t:"Mútuo bancário garantido por alienação fiduciária de bem imóvel."},
+   {l:"D",t:"Financiamento de vendas em que a instituição financeira paga à vista ao vendedor e financia o comprador, figurando o vendedor como garantidor da operação."},
+   {l:"E",t:"Compra e venda com reserva de domínio até o pagamento integral do preço."}
+  ],
+  correct:3,
+  coment:`<p><span class="lbl">Por quê</span>No <b>vendor</b>, a instituição financeira <b>paga à vista ao vendedor</b> e <b>financia o comprador</b>; o vendedor permanece como <b>garantidor (fiador)</b> da operação. É técnica de financiamento de vendas a prazo.</p>
+  <p><span class="lbl">As outras</span>(a) descreve factoring; (b) leasing; (c) é mútuo com garantia real; (e) compra e venda com reserva de domínio. No <b>compror</b> (a outra face), quem contrata o financiamento é o comprador.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Confundir vendor com factoring ou inverter vendor (vendedor garante) × compror (comprador toma o crédito).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Contratos atípicos de financiamento de vendas; regem-se pela autonomia privada e arts. 421 e 421-A do CC (contratos empresariais paritários).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Vendor: banco paga o <b>vendedor</b> à vista, financia o comprador, vendedor é <b>fiador</b>."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Diferença entre vendor e compror?" → vendor: vendedor garante; compror: comprador toma o financiamento.</p>`
+ },
+ {
+  id:"Q89", banca:"CEBRASPE · TJ-PE · 2024", tema:"Contratos mercantis — factoring (fomento mercantil)",
+  enun:"No contrato de factoring (fomento mercantil), em relação aos créditos cedidos pela faturizada, assinale a alternativa correta.",
+  alts:[
+   {l:"A",t:"A faturizada responde pela existência e também pela solvência dos créditos cedidos."},
+   {l:"B",t:"É válida cláusula de regresso que obrigue a faturizada a recomprar o crédito em caso de insolvência do devedor."},
+   {l:"C",t:"A faturizadora não assume risco algum, transferindo-o integralmente à faturizada."},
+   {l:"D",t:"A faturizada responde apenas pela existência do crédito (veritas nominis), não pela solvência do devedor (bonitas nominis), sendo nula a cláusula de regresso por insolvência."},
+   {l:"E",t:"O factoring equipara-se a mútuo bancário, sujeitando-se às normas do Sistema Financeiro Nacional."}
+  ],
+  correct:3,
+  coment:`<p><span class="lbl">Por quê</span>No factoring, a faturizada garante a <b>existência</b> do crédito (<i>veritas nominis</i>), mas <b>não a solvência</b> do devedor (<i>bonitas nominis</i>) — esse risco é da faturizadora. Por isso é <b>nula</b> a cláusula de regresso/recompra por mera insolvência.</p>
+  <p><span class="lbl">As outras</span>A faturizada não responde pela solvência (a); cláusula de regresso por insolvência é nula (b); a faturizadora assume sim o risco da inadimplência (c); factoring não é atividade financeira nem integra o SFN (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>"Responde pela existência e solvência" / "cláusula de regresso válida" — descaracterizam o factoring (viraria simples cessão pro solvendo / mútuo).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>STJ, REsp 2.106.765/CE (3ª T., Nancy Andrighi, 2024) e REsp 1.711.412: risco da insolvência é da faturizadora; nula a cláusula de recompra por inadimplemento.</p>
+  <p><span class="lbl">🔁 Revisão</span>"Factoring: faturizada garante <b>existência</b>, não <b>solvência</b>; regresso por insolvência = <b>nulo</b>."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"A faturizada responde pela solvência do devedor?" → Não; só pela existência do crédito (tema real TJPE 2024).</p>`
+ },
+ {
+  id:"Q96", banca:"IESES · TJ-TO · Ingresso · 2022", tema:"Garantias e contratos empresariais — assertivas",
+  enun:"Analise as assertivas sobre contratos e garantias empresariais:\n\nI. A responsabilidade dos administradores e dirigentes por infração à ordem econômica é subsidiária.\nII. O representante comercial autônomo não pode, em hipótese alguma, prestar serviços para mais de uma empresa.\nIII. A atuação do representante comercial é restrita ao território nacional.\nIV. Na cessão fiduciária de crédito, a titularidade do crédito só se transfere ao credor após o inadimplemento do devedor.\n\nAssinale a alternativa correta.",
+  alts:[
+   {l:"A",t:"Nenhuma assertiva está correta."},
+   {l:"B",t:"Apenas a assertiva I está correta."},
+   {l:"C",t:"Apenas as assertivas II e III estão corretas."},
+   {l:"D",t:"Apenas a assertiva IV está correta."},
+   {l:"E",t:"Todas as assertivas estão corretas."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>As quatro têm erro objetivo. <b>I</b> — a responsabilidade dos dirigentes por infração à ordem econômica é <b>solidária</b> (Lei 12.529/2011, art. 32), não subsidiária. <b>II</b> — o representante comercial <b>pode</b> atuar para mais de uma empresa, salvo cláusula de exclusividade/vedação expressa (Lei 4.886/65, art. 41). <b>III</b> — não há restrição legal de atuação ao território nacional. <b>IV</b> — na cessão fiduciária, a titularidade (resolúvel) transfere-se ao credor já na <b>contratação/registro</b>, em garantia, não após o inadimplemento.</p>
+  <p><span class="lbl">As outras</span>Qualquer opção que valide I, II, III ou IV está errada pelos fundamentos acima.</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>"Subsidiária" no lugar de "solidária" (I) e a falsa exclusividade do representante comercial (II).</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Lei 12.529/2011, art. 32 (CADE — solidária); Lei 4.886/65, art. 41; cessão fiduciária: o crédito cedido não se sujeita à recuperação judicial (STJ — "trava bancária").</p>
+  <p><span class="lbl">🔁 Revisão</span>"CADE = solidária; representante pode atuar para <b>várias</b> empresas salvo vedação; cessão fiduciária transfere a titularidade <b>na contratação</b>."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Qual a natureza da responsabilidade dos administradores por infração à ordem econômica?" → solidária (art. 32).</p>`
+ },
+ {
+  id:"Q97", banca:"FGV · TJ-SC · Ingresso · 2021", tema:"Propriedade fiduciária de bem móvel — constituição",
+  enun:"A propriedade fiduciária em garantia de bem móvel infungível constitui-se:",
+  alts:[
+   {l:"A",t:"Com o registro do contrato (por instrumento público ou particular) no Registro de Títulos e Documentos do domicílio do devedor."},
+   {l:"B",t:"Com a entrega da posse direta do bem ao credor fiduciário."},
+   {l:"C",t:"Com a simples assinatura do contrato pelas partes, independentemente de registro."},
+   {l:"D",t:"Com a inscrição do contrato no Registro Geral de Imóveis do domicílio do credor."},
+   {l:"E",t:"Com a tradição simbólica do bem, dispensado qualquer registro."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>CC, art. 1.361, §1º: a propriedade fiduciária de coisa móvel <b>constitui-se com o registro do contrato</b> (instrumento público ou particular) no <b>RTD do domicílio do devedor</b>. O fiduciante mantém a <b>posse direta</b> (constituto possessório).</p>
+  <p><span class="lbl">As outras</span>O devedor fica com a posse direta, não entrega ao credor (b); a mera assinatura não basta — exige registro (c); não é RGI nem domicílio do credor (d); a tradição simbólica não constitui a garantia (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Confundir constituição (registro no RTD) com a simples celebração do contrato; ou trocar "domicílio do devedor" por "do credor".</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>CC art. 1.361 §1º; Súm. 92/STJ (AF não anotada no certificado não é oponível a terceiro de boa-fé).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Propriedade fiduciária de móvel = <b>registro no RTD do domicílio do devedor</b>; fiduciante fica com a <b>posse direta</b>."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Quando se constitui a propriedade fiduciária sobre bem móvel?" → com o registro do contrato no RTD do domicílio do devedor.</p>`
+ },
+ {
+  id:"Q98", banca:"VUNESP · TJ-GO · Ingresso · 2021", tema:"Alienação fiduciária de aeronave — registro",
+  enun:"A alienação fiduciária em garantia que tenha por objeto uma aeronave constitui-se e produz efeitos perante terceiros mediante:",
+  alts:[
+   {l:"A",t:"Instrumento público ou particular e inscrição no Registro de Títulos e Documentos e no Registro Geral de Imóveis do hangar."},
+   {l:"B",t:"Instrumento público ou particular e inscrição no Registro Aeronáutico Brasileiro (RAB)."},
+   {l:"C",t:"Instrumento público ou particular e inscrição no Registro Aeronáutico Brasileiro e no Registro Geral de Imóveis do hangar."},
+   {l:"D",t:"Exclusivamente instrumento público e inscrição no Registro Geral de Imóveis do local de guarda da aeronave."},
+   {l:"E",t:"Apenas a tradição da aeronave ao credor fiduciário, sem registro especial."}
+  ],
+  correct:1,
+  coment:`<p><span class="lbl">Por quê</span>A aeronave é bem móvel sujeito a <b>registro especial próprio</b>: a garantia fiduciária pode ser por instrumento público <b>ou</b> particular e se constitui/produz efeitos com a <b>inscrição no Registro Aeronáutico Brasileiro (RAB)</b> — CBA (Lei 7.565/86).</p>
+  <p><span class="lbl">As outras</span>Não se exige RGI do hangar (a, c, d); não é só instrumento público (d); a mera tradição não constitui a garantia (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Misturar o registro especial (RAB) com o registro imobiliário do local onde a aeronave fica guardada.</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Lei 7.565/86 (CBA) — RAB; aeronaves e embarcações têm registro especial, distinto do RTD (móveis comuns) e do RGI (imóveis).</p>
+  <p><span class="lbl">🔁 Revisão</span>"AF de aeronave: instrumento público <b>ou</b> particular + inscrição <b>só no RAB</b>; nada de RGI."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"Onde se registra a garantia fiduciária sobre aeronave?" → Registro Aeronáutico Brasileiro (RAB).</p>`
+ },
+ {
+  id:"Q99", banca:"CEBRASPE · TJ-RR · Remoção · 2025", tema:"Falência — efeitos sobre os contratos do devedor",
+  enun:"Decretada a falência, assinale a alternativa correta quanto aos efeitos sobre os contratos do devedor (Lei 11.101/2005).",
+  alts:[
+   {l:"A",t:"As contas correntes do devedor com terceiros consideram-se encerradas no momento da decretação da falência, apurando-se o respectivo saldo."},
+   {l:"B",t:"A locação resolve-se automaticamente com a decretação da falência."},
+   {l:"C",t:"O mandato conferido pelo devedor cessa no momento do requerimento da falência."},
+   {l:"D",t:"O marco dos efeitos sobre os contratos é a data da distribuição do pedido de falência."},
+   {l:"E",t:"Os contratos bilaterais resolvem-se de pleno direito pela falência, vedado o cumprimento pelo administrador."}
+  ],
+  correct:0,
+  coment:`<p><span class="lbl">Por quê</span>Lei 11.101/2005, <b>art. 121</b>: as <b>contas correntes</b> do devedor com terceiros consideram-se <b>encerradas no momento da decretação</b> da falência, apurando-se o saldo.</p>
+  <p><span class="lbl">As outras</span>A locação não se resolve automaticamente — o administrador pode denunciá-la (art. 119, VII) (b); o mandato cessa com a <b>decretação</b>, não com o requerimento (art. 120) (c); o marco é a <b>decretação</b>, não a distribuição (art. 116) (d); contratos <b>bilaterais não se resolvem</b> e podem ser cumpridos pelo administrador se reduzirem/evitarem prejuízo à massa (art. 117) (e).</p>
+  <p><span class="lbl">⚠️ Pegadinha</span>Trocar o marco temporal: o termo certo é "<b>decretação</b>", não "requerimento" nem "distribuição".</p>
+  <p><span class="lbl">⚖️ Jurisprudência</span>Lei 11.101/2005, arts. 116, 117, 119 (VII), 120 e 121 (efeitos da falência sobre os contratos).</p>
+  <p><span class="lbl">🔁 Revisão</span>"Falência: contas correntes <b>encerram na decretação</b> (121); mandato cessa na decretação (120); bilaterais <b>não se resolvem</b> (117)."</p>
+  <p><span class="lbl">🎤 Prova oral</span>"O que acontece com as contas correntes do falido?" → encerram-se na decretação, apurando-se o saldo (art. 121).</p>`
+ }
+];
+
+/* ================== ESTADO ================== */
+let order = QUESTIONS.map((_,i)=>i);
+let answers = {};     // realIndex -> letterIndex
+let flags = {};       // realIndex -> bool
+let cur = 0;          // position in order
+let startTs = null, timerInt = null, elapsed = 0;
+let nome = "";
+
+/* ================== HELPERS ================== */
+const $ = id => document.getElementById(id);
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+function fmt(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,"0")+":"+String(x).padStart(2,"0");}
+function show(sec){["scrIntro","scrQuiz","scrResult"].forEach(s=>$(s).classList.add("hidden"));$(sec).classList.remove("hidden");window.scrollTo(0,0);}
+
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify({nome,order,answers,flags,cur,elapsed,ts:Date.now()}));}catch(e){}
+}
+function loadSaved(){
+  try{return JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){return null;}
+}
+
+/* ================== TIMER ================== */
+function startTimer(){
+  if(timerInt)clearInterval(timerInt);
+  startTs=Date.now()-elapsed*1000;
+  timerInt=setInterval(()=>{elapsed=Math.floor((Date.now()-startTs)/1000);$("timer").textContent=fmt(elapsed);},1000);
+}
+function stopTimer(){if(timerInt)clearInterval(timerInt);timerInt=null;}
+
+/* ================== RENDER ================== */
+function renderNav(){
+  const nav=$("qnav");nav.innerHTML="";
+  order.forEach((ri,pos)=>{
+    const b=document.createElement("button");
+    b.textContent=pos+1;
+    if(answers[ri]!=null)b.classList.add("answered");
+    if(flags[ri])b.classList.add("flagged");
+    if(pos===cur)b.classList.add("current");
+    b.onclick=()=>{cur=pos;renderQ();};
+    nav.appendChild(b);
+  });
+}
+function renderProgress(){
+  const ans=Object.keys(answers).length, tot=QUESTIONS.length;
+  $("progTxt").textContent=ans+"/"+tot;
+  $("progBar").style.width=(ans/tot*100)+"%";
+}
+function renderQ(){
+  const ri=order[cur], q=QUESTIONS[ri];
+  $("qNum").textContent=q.id+" · "+(cur+1)+"/"+QUESTIONS.length;
+  $("qBanca").textContent=q.banca;
+  $("qTema").textContent=q.tema;
+  $("qEnun").textContent=q.enun;
+  $("btnFlag").classList.toggle("on",!!flags[ri]);
+  const wrap=$("qAlts");wrap.innerHTML="";
+  const answered=answers[ri]!=null;
+  q.alts.forEach((a,i)=>{
+    const d=document.createElement("div");
+    d.className="alt";
+    d.innerHTML=`<div class="letra">${a.l}</div><div class="txt">${a.t}</div>`;
+    if(answered){
+      d.classList.add("disabled");
+      if(i===q.correct)d.classList.add("correct");
+      if(i===answers[ri]&&answers[ri]!==q.correct)d.classList.add("wrong");
+      if(i===answers[ri])d.classList.add("sel");
+    }else{
+      d.onclick=()=>{answers[ri]=i;save();renderQ();renderNav();renderProgress();};
+    }
+    wrap.appendChild(d);
+  });
+  const cm=$("qComent");
+  if(answered){cm.innerHTML=`<p><b>Gabarito: ${q.alts[q.correct].l}</b> ${answers[ri]===q.correct?'✅ você acertou':'❌ você marcou '+q.alts[answers[ri]].l}</p>`+q.coment;cm.classList.remove("hidden");}
+  else{cm.classList.add("hidden");}
+  $("btnPrev").disabled=cur===0;
+  $("btnNext").disabled=cur===QUESTIONS.length-1;
+  renderNav();
+}
+
+/* ================== FLUXO ================== */
+function begin(resume){
+  nome=$("nome").value.trim()||"Anônimo";
+  if($("optShuffle").checked&&!resume){
+    for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  }
+  show("scrQuiz");startTimer();renderQ();renderProgress();save();
+}
+function finish(){
+  stopTimer();
+  let ok=0;
+  QUESTIONS.forEach((q,ri)=>{if(answers[ri]===q.correct)ok++;});
+  const tot=QUESTIONS.length, err=Object.keys(answers).length-ok, pct=Math.round(ok/tot*100);
+  $("rNome").textContent=nome;
+  $("rScore").textContent=ok+"/"+tot;
+  $("rPct").textContent=pct+"% de acerto · "+Object.keys(answers).length+" respondidas";
+  $("rOk").textContent=ok;$("rErr").textContent=err<0?0:err;
+  $("rTime").textContent=fmt(elapsed);$("rRend").textContent=pct+"%";
+  const card=`📊 SIMULADO — Dir. Empresarial (Q86–Q99)\n👤 ${nome}\n✅ ${ok}/${tot} (${pct}%) · ⏱ ${fmt(elapsed)}\nGabarito: 86-A · 87-A · 88-D · 89-D · 96-A · 97-A · 98-B · 99-A`;
+  $("rCard").value=card;
+  renderReview("all");
+  show("scrResult");save();
+}
+function renderReview(filter){
+  const list=$("reviewList");list.innerHTML="";
+  QUESTIONS.forEach((q,ri)=>{
+    const got=answers[ri], isWrong=got!=null&&got!==q.correct;
+    if(filter==="wrong"&&!isWrong)return;
+    if(filter==="flagged"&&!flags[ri])return;
+    const div=document.createElement("div");div.className="card";div.style.marginBottom="12px";
+    const mark=got==null?'<span class="badge">não respondida</span>':(isWrong?'<span class="badge" style="color:var(--err)">errou</span>':'<span class="badge ok">acertou</span>');
+    div.innerHTML=`<div class="row between"><span class="badge meta">${q.id}</span>${mark}</div>
+      <div class="sub" style="margin:6px 0">${q.tema}</div>
+      <div style="margin-bottom:8px">${q.enun.split("\n")[0]}</div>
+      <div class="coment"><p><b>Gabarito: ${q.alts[q.correct].l})</b> ${q.alts[q.correct].t}</p>${q.coment}</div>`;
+    list.appendChild(div);
+  });
+  if(!list.children.length)list.innerHTML='<p class="sub">Nada para mostrar neste filtro.</p>';
+}
+
+/* ================== EVENTOS ================== */
+$("btnStart").onclick=()=>begin(false);
+$("btnResume").onclick=()=>{const s=loadSaved();if(s){nome=s.nome;order=s.order;answers=s.answers||{};flags=s.flags||{};cur=s.cur||0;elapsed=s.elapsed||0;begin(true);}};
+$("btnPrev").onclick=()=>{if(cur>0){cur--;renderQ();}};
+$("btnNext").onclick=()=>{if(cur<QUESTIONS.length-1){cur++;renderQ();}};
+$("btnFlag").onclick=()=>{const ri=order[cur];flags[ri]=!flags[ri];save();renderQ();};
+$("btnSave").onclick=()=>{save();toast("Progresso salvo ✓");};
+$("btnFinish").onclick=()=>{const n=Object.keys(answers).length;if(n<QUESTIONS.length&&!confirm("Faltam "+(QUESTIONS.length-n)+" questões. Finalizar mesmo assim?"))return;finish();};
+$("btnCopyCard").onclick=()=>{$("rCard").select();document.execCommand("copy");toast("Cartão copiado 📋");};
+$("btnDownCard").onclick=()=>{const a=document.createElement("a");a.href="data:text/plain;charset=utf-8,"+encodeURIComponent($("rCard").value);a.download="resultado-"+nome+".txt";a.click();};
+$("btnRedoWrong").onclick=()=>{const wrong=QUESTIONS.map((q,ri)=>({ri,w:answers[ri]!=null&&answers[ri]!==q.correct})).filter(x=>x.w).map(x=>x.ri);if(!wrong.length){toast("Sem erradas — parabéns!");return;}order=wrong;wrong.forEach(ri=>{delete answers[ri];});cur=0;show("scrQuiz");startTimer();renderQ();renderProgress();save();};
+$("btnRestart").onclick=()=>{if(!confirm("Apagar progresso e recomeçar?"))return;localStorage.removeItem(KEY);order=QUESTIONS.map((_,i)=>i);answers={};flags={};cur=0;elapsed=0;$("nome").value="";show("scrIntro");checkResume();};
+document.querySelectorAll("#scrResult .chip[data-f]").forEach(c=>c.onclick=()=>{document.querySelectorAll("#scrResult .chip[data-f]").forEach(x=>x.classList.remove("on"));c.classList.add("on");renderReview(c.dataset.f);});
+
+/* ================== INIT ================== */
+function checkResume(){
+  const s=loadSaved();
+  if(s&&s.order){
+    $("btnResume").style.display="inline-flex";
+    $("resumeBox").innerHTML='<span class="badge ok">progresso salvo: '+Object.keys(s.answers||{}).length+'/'+QUESTIONS.length+'</span>';
+    if(s.nome)$("nome").value=s.nome;
+  }
+}
+checkResume();
+</script>
+</body>
+</html>

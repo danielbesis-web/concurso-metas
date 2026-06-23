@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 16 · Direito Empresarial — Q49–Q63</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 16 · Direito Empresarial — Q49–Q63</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 16 · Direito Empresarial · Sociedades, cooperativas, operações societárias e estabelecimento (CC + Lei 6.404/76) · Q49–Q63</footer>
+<script>
+const STORE_KEY = 'concurso_meta16_empresarial_q49q63_v1';
+const QUESTOES = [
+  {id:'q49', materia:'Sociedade limitada / conselho fiscal', banca:'Ieses · TJ-AM · Cartórios · Remoção · 2023', tipo:'multipla',
+   enunciado:`As sociedades limitadas regidas pelo Código Civil preveem um conselho fiscal que, além de outras atribuições determinadas na lei ou no contrato social, aos membros do conselho fiscal, incumbem, individual ou conjuntamente, os seguintes deveres:<br><br>I. Examinar, mensalmente, os livros e papéis da sociedade e o estado da caixa e da carteira, devendo os administradores ou liquidantes prestar-lhes as informações solicitadas.<br>II. Denunciar apenas fraudes ou crimes que descobrirem, sugerindo providências úteis à sociedade.<br>III. Convocar a assembleia dos sócios se a diretoria retardar por mais de trinta dias a sua convocação anual, ou sempre que ocorram motivos graves e urgentes.<br>IV. Praticar, durante o período da liquidação da sociedade, os atos a que se refere este artigo, tendo em vista as disposições especiais reguladoras da liquidação.<br><br>A sequência correta é:`,
+   alternativas:[
+     {letra:'A',texto:'Apenas as assertivas III e IV estão corretas.'},
+     {letra:'B',texto:'Apenas as assertivas II, III e IV estão corretas.'},
+     {letra:'C',texto:'Apenas as assertivas I, III, e IV estão corretas.'},
+     {letra:'D',texto:'Apenas a assertiva I, II e III estão corretas.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> — comando: marcar a sequência correta.<br><br><b>⚖️ Por quê (ICOL):</b> o art. 1.069 do CC lista os deveres dos membros do conselho fiscal. A assertiva <b>I erra</b>: o exame dos livros é <b>"pelo menos trimestralmente"</b> (inc. I), não "mensalmente". A <b>II erra</b> ao restringir com "<b>apenas</b>": o inc. IV manda denunciar "os <b>erros, fraudes ou crimes</b>", sem limitar. A <b>III</b> (inc. V) e a <b>IV</b> (inc. VI) reproduzem fielmente a lei → só III e IV corretas.<br><br><b>⚠️ Pegadinha:</b> duas trocas clássicas na mesma questão — periodicidade ("mensalmente" × trimestralmente) e o advérbio restritivo "apenas".<br><br><b>📌 Fundamento:</b> CC, art. 1.069, I, IV, V e VI.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma (sem tese de STF/STJ aplicável).<br><br><b>🔁 Revisar:</b> conselho fiscal da Ltda examina os livros "pelo menos trimestralmente"; dever de denúncia abrange erros, fraudes e crimes.<br><br><b>☑ Verificação:</b> QConcursos [Q2272817 ✔ — gabarito oficial A] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.069 CC ✔].`},
+
+  {id:'q50', materia:'Nome empresarial / termo "companhia"', banca:'Cespe · TJ-SC · Cartórios · Remoção · 2023', tipo:'multipla',
+   enunciado:`De acordo com o disposto no Código Civil, o termo "companhia" ou sua abreviatura aplica-se à sociedade:`,
+   alternativas:[
+     {letra:'A',texto:'limitada.'},
+     {letra:'B',texto:'cooperativa.'},
+     {letra:'C',texto:'anônima.'},
+     {letra:'D',texto:'comandita por ações.'},
+     {letra:'E',texto:'em conta de participação.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> a sociedade anônima opera sob <b>denominação</b> integrada pelas expressões "<b>sociedade anônima</b>" ou "<b>companhia</b>" (art. 1.160 CC c/c art. 3º da LSA). O termo "companhia" é <b>exclusivo da S.A.</b><br><br><b>⚠️ Pegadinha:</b> "companhia" pode vir no início ou no meio do nome, mas <b>não ao final</b> (para não confundir com comandita); ainda assim, é privativo da anônima — não serve para Ltda, cooperativa, comandita por ações nem conta de participação.<br><br><b>📌 Fundamento:</b> CC, art. 1.160; Lei 6.404/76, art. 3º.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> "companhia" = S.A.; não pode figurar ao final da denominação.<br><br><b>☑ Verificação:</b> QConcursos [Q2211486 ✔ — gabarito oficial C] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.160 CC ✔].`},
+
+  {id:'q51', materia:'S.A. / operações societárias', banca:'Ieses · TJ-TO · Cartórios · Ingresso · 2022', tipo:'multipla',
+   enunciado:`De acordo com a legislação brasileira vigente sobre Sociedade Anônima, analise as sentenças abaixo e assinale a alternativa correta:<br><br>I. Na operação de transformação, a sociedade que teve o tipo transformado é extinta.<br>II. Na omissão do estatuto, contrato social ou eventual acordo de acionistas ou quotistas, a transformação da sociedade exige o consentimento da unanimidade dos sócios ou acionistas.<br>III. A incorporação, fusão ou cisão podem ser operadas entre sociedades de tipos iguais ou diferentes.<br>IV. A cisão com versão de parcela de patrimônio em sociedade já existente obedecerá às disposições sobre incorporação.`,
+   alternativas:[
+     {letra:'A',texto:'Todas as assertivas estão corretas.'},
+     {letra:'B',texto:'Apenas as assertivas III e IV estão corretas.'},
+     {letra:'C',texto:'Apenas as assertivas II, III e IV estão corretas.'},
+     {letra:'D',texto:'Nenhuma assertiva está correta.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> a <b>I erra</b> — a transformação <b>independe de dissolução ou liquidação</b> e a sociedade <b>não se extingue</b> (art. 220 LSA), apenas muda de tipo. A <b>II</b> está correta (art. 221: na omissão, exige unanimidade). A <b>III</b> está correta (art. 223: operações entre tipos iguais ou diferentes). A <b>IV</b> está correta (art. 229, §3º: cisão com versão em sociedade existente segue regras da incorporação) → II, III e IV.<br><br><b>⚠️ Pegadinha:</b> confundir transformação com extinção. Transformar ≠ extinguir.<br><br><b>📌 Fundamento:</b> LSA, arts. 220, 221, 223 e 229, §3º.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> transformação independe de dissolução/liquidação; na omissão do título, exige unanimidade.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 220/221/223/229 LSA ✔].`},
+
+  {id:'q52', materia:'S.A. / direito de recesso', banca:'Vunesp · TJ-SP · Cartórios · Ingresso · 2022', tipo:'multipla',
+   enunciado:`Qual das seguintes matérias confere ao acionista dissidente o direito de retirar-se de uma Sociedade Anônima?`,
+   alternativas:[
+     {letra:'A',texto:'O aumento do dividendo obrigatório.'},
+     {letra:'B',texto:'A criação de ações preferenciais ou o aumento de classe de ações preferenciais existentes, sem guardar proporção com as demais classes de ações preferenciais, salvo se já previstas ou autorizadas pelo estatuto.'},
+     {letra:'C',texto:'O aumento do Capital Social mediante a emissão de novas ações pela companhia.'},
+     {letra:'D',texto:'A rejeição das contas dos administradores.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> o art. 137 da LSA garante o <b>recesso</b> ao dissidente nas hipóteses do art. 136. Entre elas está a <b>criação/aumento de classe de ações preferenciais sem guardar proporção</b> com as demais (art. 136, II). As demais opções não são hipóteses legais de retirada.<br><br><b>⚠️ Pegadinha:</b> aumento de capital por emissão de novas ações (C) e rejeição de contas (D) <b>não</b> geram recesso; aumento do dividendo (A) favorece o acionista, não enseja retirada.<br><br><b>📌 Fundamento:</b> LSA, art. 136, II c/c art. 137.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> rol de recesso é taxativo (art. 136); mero aumento de capital por novas ações não dá direito de retirada.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 136/137 LSA ✔].`},
+
+  {id:'q53', materia:'Sociedade limitada / uso do nome empresarial', banca:'FGV · TJ-SC · Cartórios · Ingresso · 2021', tipo:'multipla',
+   enunciado:`A prática de atos jurídicos por parte de uma sociedade empresária deve estar pautada na legitimidade da atuação de seu órgão de administração e nos poderes que lhe forem atribuídos pelo contrato ou ato separado, inclusive perante os tabeliães e oficiais de registro. No tocante às sociedades limitadas, o uso do nome empresarial, de modo a obrigar a pessoa jurídica, é:`,
+   alternativas:[
+     {letra:'A',texto:'uma faculdade dos atuais sócios, sejam ou não administradores da sociedade.'},
+     {letra:'B',texto:'uma faculdade apenas do administrador ou do sócio majoritário no capital, administrador ou não.'},
+     {letra:'C',texto:'uma faculdade de todos os sócios, atuais e futuros, pois a administração se estende de pleno direito a novos sócios.'},
+     {letra:'D',texto:'privativo dos administradores que tenham os necessários poderes e não pode ser delegado a sócio não administrador ou a terceiro, nem mesmo como mandatário da sociedade.'},
+     {letra:'E',texto:'privativo dos administradores que tenham os necessários poderes, todavia, é possível a constituição de mandatários da sociedade pelo administrador nos limites de seus poderes.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> o uso da firma/denominação é <b>privativo dos administradores com poderes</b> (art. 1.064 CC), mas é <b>facultado ao administrador constituir mandatários</b> da sociedade, especificando no instrumento os atos e operações (art. 1.018 CC). A "E" reúne corretamente as duas regras.<br><br><b>⚠️ Pegadinha:</b> a "D" começa certa (privativo dos administradores) e <b>enxerta erro</b> ao negar a possibilidade de mandatário — contraria o art. 1.018.<br><br><b>📌 Fundamento:</b> CC, arts. 1.064 e 1.018.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> uso do nome = privativo do administrador; admite mandatário nos limites dos poderes (art. 1.018).<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 1.064/1.018 CC ✔].`},
+
+  {id:'q54', materia:'S.A. / constituição por escritura pública', banca:'FGV · TJ-SC · Cartórios · Ingresso · 2021', tipo:'multipla',
+   enunciado:`Concluída a subscrição particular das ações de uma companhia em organização, os subscritores preferiram adotar a forma pública para o ato constitutivo e solicitaram ao tabelião de notas a lavratura da escritura. Considerando-se tratar de documento público, formal e solene, a escritura pública de constituição de companhia deve conter:`,
+   alternativas:[
+     {letra:'A',texto:'a transcrição dos acordos de acionistas.'},
+     {letra:'B',texto:'a transcrição do prospecto da subscrição.'},
+     {letra:'C',texto:'a transcrição do laudo de avaliação dos peritos, caso tenha havido subscrição do capital social em bens.'},
+     {letra:'D',texto:'a assinatura de subscritores que representem, no mínimo, metade das ações em que foi dividido o capital social.'},
+     {letra:'E',texto:'a nomeação dos conselheiros fiscais e, se for o caso, dos primeiros administradores, que poderá ser feita em documento privado em separado.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> quando a constituição da companhia se faz por <b>escritura pública</b>, o art. 88, §2º da LSA exige que ela contenha, entre outros, a <b>transcrição do laudo de avaliação dos peritos</b>, caso tenha havido subscrição do capital em <b>bens</b> (alínea "e"). A escritura deve ser assinada por <b>todos</b> os subscritores.<br><br><b>⚠️ Pegadinha:</b> a "D" troca "todos os subscritores" por "no mínimo metade das ações"; "A" e "B" inserem itens que não constam do dispositivo.<br><br><b>📌 Fundamento:</b> LSA, art. 88, §2º.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> escritura pública de constituição = laudo dos peritos se subscrição em bens; assinada por todos os subscritores.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [art. 88, §2º LSA ✔].`},
+
+  {id:'q55', materia:'Sociedade limitada / responsabilidade dos sócios', banca:'Consulplan · TJ-MS · Cartórios · Ingresso · 2021', tipo:'multipla',
+   enunciado:`O Código Civil em vigor dispõe que, na sociedade limitada, a responsabilidade de cada sócio é restrita ao valor de suas quotas, mas todos respondem solidariamente pela integralização do capital social. Assim, a sociedade, por ser pessoa jurídica a quem o ordenamento jurídico confere existência individual, possui em consequência, responsabilidade patrimonial própria. Aqui tem-se o chamado princípio da autonomia patrimonial das pessoas jurídicas. No que tange à responsabilidade dos sócios na sociedade limitada, assinale a afirmativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'O sócio, admitido em sociedade já constituída, se exime das dívidas sociais anteriores à admissão.'},
+     {letra:'B',texto:'A responsabilidade do sócio na sociedade limitada é sempre subsidiária não podendo, em hipótese alguma, o sócio responder com seus bens pessoais por dívidas empresariais.'},
+     {letra:'C',texto:'Os herdeiros do cônjuge de sócio, ou o cônjuge do que se separou judicialmente, podem exigir desde logo a parte que lhes couber na quota social, liquidando-se a sociedade antecipadamente.'},
+     {letra:'D',texto:'O credor particular de sócio pode, na insuficiência de outros bens do devedor, fazer recair a execução sobre o que a este couber nos lucros da sociedade, ou na parte que lhe tocar em liquidação.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> a "D" reproduz o art. 1.026 do CC — o credor particular do sócio, na insuficiência de outros bens, pode executar o que couber ao sócio nos <b>lucros</b> ou na <b>parte que lhe tocar em liquidação</b>.<br><br><b>⚠️ Pegadinha:</b> "A" contraria o art. 1.025 (o sócio admitido <b>não</b> se exime das dívidas anteriores); "B" traz palavras absolutas ("sempre", "em hipótese alguma"); "C" contraria o art. 1.027 (herdeiros/cônjuge <b>não</b> podem exigir desde logo, só concorrem à divisão periódica dos lucros).<br><br><b>📌 Fundamento:</b> CC, arts. 1.025, 1.026 e 1.027.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> credor do sócio penhora lucros / quota em liquidação (1.026); sócio novo responde por dívidas anteriores (1.025).<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 1.025/1.026/1.027 CC ✔].`},
+
+  {id:'q56', materia:'Sociedade estrangeira', banca:'Consulplan · TJ-MA · Cartórios · Ingresso · 2023', tipo:'multipla',
+   enunciado:`Foi submetida a registro no Registro Civil de Pessoas Jurídicas sociedade estrangeira. De acordo com o Código Civil e a LRP, o registrador deverá:`,
+   alternativas:[
+     {letra:'A',texto:'realizar o registro, independentemente de aprovação do Poder Executivo e início de fato das atividades no país.'},
+     {letra:'B',texto:'realizar o registro, independentemente de aprovação do Poder Executivo, não podendo funcionar antes do registro.'},
+     {letra:'C',texto:'realizar o registro somente após a aprovação do funcionamento pelo Poder Executivo mediante a individuação de representante permanente no exterior.'},
+     {letra:'D',texto:'realizar o registro somente após a aprovação do funcionamento pelo Poder Executivo e solicitar a individuação de seu representante permanente no Brasil.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> a sociedade estrangeira <b>não pode funcionar no país sem autorização do Poder Executivo</b> (art. 1.134 CC), e deve ter <b>representante permanente no Brasil</b>, com poderes para resolver questões e ser demandada (art. 1.138 CC). Logo o registro só ocorre após a aprovação e com a individuação do representante no Brasil.<br><br><b>⚠️ Pegadinha:</b> a "C" troca "no Brasil" por "<b>no exterior</b>"; as opções "A"/"B" dispensam indevidamente a aprovação do Executivo.<br><br><b>📌 Fundamento:</b> CC, arts. 1.134 e 1.138.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> sociedade estrangeira = autorização do Executivo + representante permanente no Brasil.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 1.134/1.138 CC ✔].`},
+
+  {id:'q57', materia:'Cooperativas', banca:'Consulplan · TJ-AC · Cartórios · Remoção · 2023', tipo:'multipla',
+   enunciado:`Sobre as cooperativas, considerando as previsões contidas no Código Civil, assinale a afirmativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'As cooperativas podem ter um número limitado de associados, a depender de seu objeto.'},
+     {letra:'B',texto:'Considerando a natureza das cooperativas, seus sócios têm sempre responsabilidade limitada ao valor de suas quotas.'},
+     {letra:'C',texto:'As chamadas instituições financeiras cooperativas têm natureza jurídica de sociedade empresária, já que visam, também, à obtenção de lucros.'},
+     {letra:'D',texto:'Independentemente do objetivo da cooperativa e do valor de participação de cada sócio, todos têm direito a um único voto nas deliberações.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> nas cooperativas vale a regra <b>"um sócio, um voto"</b>, independentemente do capital (art. 1.094, VI CC).<br><br><b>⚠️ Pegadinha:</b> "A" erra — não há limite máximo de sócios (inc. II); "B" traz "sempre" e ignora que a responsabilidade pode ser <b>limitada ou ilimitada</b> (art. 1.095); "C" erra — cooperativa é <b>sempre sociedade simples</b> (art. 982, §ú), não empresária.<br><br><b>📌 Fundamento:</b> CC, art. 1.094, VI; art. 1.095; art. 982, §ú.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> cooperativa = sociedade simples; um voto por sócio; responsabilidade pode ser limitada ou ilimitada.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.094 CC ✔].`},
+
+  {id:'q58', materia:'Cooperativas / ato constitutivo', banca:'Consulplan · TJ-MA · Cartórios · Ingresso · 2023', tipo:'multipla',
+   enunciado:`Foi submetido a registro perante o Cartório de Registro de Pessoas Jurídicas o estatuto que constituiu cooperativa. De acordo com o Código Civil, o titular do Cartório de Registro de Pessoas Jurídicas deverá conferir que o ato constitutivo, obrigatoriamente, tenha:`,
+   alternativas:[
+     {letra:'A',texto:'concurso de sócios em números, mínimo e máximo necessários a compor a administração da sociedade e que haja previsão de capital social mínimo.'},
+     {letra:'B',texto:'que a responsabilidade seja limitada e que haja a previsão de capital social mínimo, prevendo o direito de voto de acordo com o capital social integralizado.'},
+     {letra:'C',texto:'concurso de sócios em número mínimo necessário à administração da sociedade, sem limitação de número máximo e variabilidade ou dispensa do capital social.'},
+     {letra:'D',texto:'intransferibilidade das quotas do capital a terceiros estranhos à sociedade, salvo no caso de herança, e que preveja o direito de cada sócio a um só voto nas deliberações.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> o art. 1.094 do CC traz como características: <b>concurso de sócios em número mínimo</b> necessário à administração, <b>sem limitação de número máximo</b> (inc. I e II) e <b>variabilidade ou dispensa do capital social</b> (inc. I). A "C" reúne corretamente.<br><br><b>⚠️ Pegadinha:</b> a "D" começa certa (intransferibilidade das quotas) mas erra ao dizer "<b>salvo no caso de herança</b>": o inc. IV veda a transferência a terceiros estranhos "<b>ainda que por herança</b>". "A" e "B" exigem capital mínimo, incompatível com a variabilidade/dispensa do capital.<br><br><b>📌 Fundamento:</b> CC, art. 1.094, I, II e IV.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> cooperativa = nº mínimo de sócios sem máximo + capital variável/dispensado; quota intransferível ainda que por herança.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.094 CC ✔].`},
+
+  {id:'q59', materia:'Cooperativas / características', banca:'Vunesp · TJ-SP · Cartórios · Ingresso · 2022', tipo:'multipla',
+   enunciado:`Com relação às sociedades cooperativas, é correto afirmar que elas se caracterizam:`,
+   alternativas:[
+     {letra:'A',texto:'pelo fato de serem aptas a auferir lucro e, quando isso ocorre, distribuí-lo aos cooperados de acordo com sua participação no capital social da cooperativa.'},
+     {letra:'B',texto:'pelo fato de cada cooperado ter direito de voto proporcional à sua participação no capital da cooperativa.'},
+     {letra:'C',texto:'pela divisibilidade do fundo social entre os sócios.'},
+     {letra:'D',texto:'pela distribuição dos seus resultados proporcionalmente ao valor das operações efetuadas pelo sócio com a sociedade.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> nas cooperativas os resultados são distribuídos <b>proporcionalmente ao valor das operações</b> efetuadas pelo sócio com a sociedade, e não conforme o capital (art. 1.094, VII CC).<br><br><b>⚠️ Pegadinha:</b> "A" e "B" vinculam distribuição/voto ao <b>capital</b> — errado; "C" afirma divisibilidade do fundo, mas o inc. VIII prevê a <b>indivisibilidade do fundo de reserva</b> entre os sócios.<br><br><b>📌 Fundamento:</b> CC, art. 1.094, VII e VIII.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> resultados pelas operações, não pelo capital; fundo de reserva indivisível.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.094 CC ✔].`},
+
+  {id:'q60', materia:'Operações societárias / dissolução', banca:'Cespe · TJ-RR · Cartórios · Remoção · 2025', tipo:'multipla',
+   enunciado:`A respeito das operações societárias, da dissolução e liquidação das sociedades, assinale a opção correta.`,
+   alternativas:[
+     {letra:'A',texto:'Em caso de cisão, seja parcial, seja total, a sociedade cindida se extingue.'},
+     {letra:'B',texto:'Em caso de falência, a dissolução de uma companhia ocorre, de pleno direito, por deliberação da assembleia geral.'},
+     {letra:'C',texto:'Na liquidação judicial, o liquidante será nomeado pela assembleia geral caso o estatuto seja silente a respeito da competência de nomeação.'},
+     {letra:'D',texto:'A incorporação e a fusão são formas de extinção de uma companhia.'},
+     {letra:'E',texto:'O ato de transformação depende de dissolução ou liquidação da sociedade.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> o art. 219, II da LSA dispõe que se <b>extingue</b> a companhia pela <b>incorporação ou fusão</b>.<br><br><b>⚠️ Pegadinha:</b> "A" erra — só a cisão <b>total</b> extingue; a parcial não (art. 229). "B" erra — a falência não dissolve a companhia por deliberação da AG. "C" erra — na liquidação <b>judicial</b> o liquidante é nomeado pelo <b>juiz</b>. "E" erra — a transformação <b>independe</b> de dissolução/liquidação (art. 220).<br><br><b>📌 Fundamento:</b> LSA, arts. 219, II; 220; 229.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> incorporação e fusão extinguem a companhia; cisão parcial não; transformação independe de dissolução.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 219/220/229 LSA ✔].`},
+
+  {id:'q61', materia:'Operações societárias / fusão', banca:'Cespe · TJ-RR · Cartórios · Ingresso · 2025', tipo:'multipla',
+   enunciado:`A operação por meio da qual duas ou mais sociedades se unem para a formação de sociedade nova, que lhes sucederá em todos os direitos e obrigações, denomina-se:`,
+   alternativas:[
+     {letra:'A',texto:'fusão.'},
+     {letra:'B',texto:'cisão.'},
+     {letra:'C',texto:'joint venture.'},
+     {letra:'D',texto:'aquisição.'},
+     {letra:'E',texto:'incorporação.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> a <b>fusão</b> é a operação pela qual <b>duas ou mais sociedades se unem para formar sociedade nova</b>, que lhes sucede em todos os direitos e obrigações (art. 1.119 CC / art. 228 LSA).<br><br><b>⚠️ Pegadinha:</b> não confundir com a <b>incorporação</b> (E), em que uma sociedade <b>já existente</b> absorve outra(s), sem criação de sociedade nova.<br><br><b>📌 Fundamento:</b> CC, art. 1.119; LSA, art. 228.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> fusão = nasce sociedade nova; incorporação = absorção por sociedade já existente.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.119 CC / art. 228 LSA ✔].`},
+
+  {id:'q62', materia:'Operações societárias / itens', banca:'Cespe · TJ-PE · Cartórios · Ingresso · 2024', tipo:'multipla',
+   enunciado:`Julgue os próximos itens, referentes às operações societárias.<br><br>I. O ato de transformação está condicionado à liquidação ou dissolução da sociedade transformada.<br>II. Uma vez aprovada a incorporação, a incorporada será extinta, devendo a incorporadora promover a respectiva averbação no registro próprio.<br>III. A fusão pressupõe extinção das sociedades que se unem, para dar origem a uma sociedade nova.<br><br>Assinale a opção correta.`,
+   alternativas:[
+     {letra:'A',texto:'Apenas o item I está certo.'},
+     {letra:'B',texto:'Apenas o item II está certo.'},
+     {letra:'C',texto:'Apenas os itens I e III estão certos.'},
+     {letra:'D',texto:'Apenas os itens II e III estão certos.'},
+     {letra:'E',texto:'Todos os itens estão certos.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> o item <b>I erra</b> — a transformação <b>independe</b> de dissolução ou liquidação (art. 1.113 CC). O <b>II</b> está correto (art. 1.118: aprovada a incorporação, a incorporadora declara extinta a incorporada e promove a averbação). O <b>III</b> está correto (art. 1.119: a fusão extingue as sociedades unidas, criando sociedade nova) → II e III.<br><br><b>⚠️ Pegadinha:</b> repetição do erro clássico — transformar não exige dissolução/liquidação.<br><br><b>📌 Fundamento:</b> CC, arts. 1.113, 1.118 e 1.119.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma.<br><br><b>🔁 Revisar:</b> transformação independe de dissolução; incorporação extingue a incorporada; fusão extingue as fundidas.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [arts. 1.113/1.118/1.119 CC ✔].`},
+
+  {id:'q63', materia:'Estabelecimento empresarial / bem material', banca:'Cespe · TJ-RR · Cartórios · Remoção · 2025', tipo:'multipla',
+   enunciado:`Assinale a opção em que é corretamente indicado item que se insere no conceito de bem material do estabelecimento comercial.`,
+   alternativas:[
+     {letra:'A',texto:'contrato.'},
+     {letra:'B',texto:'nome empresarial.'},
+     {letra:'C',texto:'mercadoria.'},
+     {letra:'D',texto:'ponto comercial.'},
+     {letra:'E',texto:'marca/patente.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> — comando positivo.<br><br><b>⚖️ Por quê (ICOL):</b> o estabelecimento (art. 1.142 CC) é o complexo de bens organizado para o exercício da empresa, formado por bens <b>materiais (corpóreos)</b> e <b>imateriais (incorpóreos)</b>. <b>Mercadoria</b> é bem <b>material/corpóreo</b>.<br><br><b>⚠️ Pegadinha:</b> contrato, nome empresarial, ponto comercial e marca/patente são bens <b>imateriais (incorpóreos)</b> — só a mercadoria é corpórea.<br><br><b>📌 Fundamento:</b> CC, arts. 1.142 e ss.<br><br><b>⚖️ Dizer o Direito:</b> N/A — tema de letra de norma/doutrina.<br><br><b>🎙️ Da prova oral (real):</b> "Diferencie os bens corpóreos e incorpóreos do estabelecimento empresarial e o que se transfere no trespasse." [Banco Prova Oral — Estabelecimento empresarial e trespasse]<br><br><b>🔁 Revisar:</b> mercadoria = corpórea; nome, ponto, marca, contrato = incorpóreos.<br><br><b>☑ Verificação:</b> QConcursos [não indexada — gabarito por lei seca] · Dizer o Direito [N/A — letra de norma] · Norma [art. 1.142 CC ✔] · Prova Oral [tópico estabelecimento/trespasse ✔].`}
+];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_meta16_empresarial_q49q63_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — Direito Empresarial · Meta 16 (Q49–Q63)\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_meta16_empresarial_q49q63_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx='Meta 16 · Direito Empresarial · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+</script>
+</body>
+</html>
