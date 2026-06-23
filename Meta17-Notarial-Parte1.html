@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Simulado</title>
+<style>
+  :root{
+    --bg:#0f1419; --card:#1a212b; --card2:#222c38; --line:#2c3845;
+    --txt:#e6edf3; --muted:#8b97a6; --accent:#4ea1ff;
+    --ok:#3fb950; --err:#f85149; --warn:#e3b341;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:18px}
+  .hidden{display:none!important}
+  h1{font-size:1.4rem;margin:.2em 0 .4em}
+  h2{font-size:1.05rem;margin:1.2em 0 .5em;color:var(--accent)}
+  .badge{display:inline-block;background:var(--card2);color:var(--accent);
+    font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:4px 10px;
+    border-radius:999px;border:1px solid var(--line);text-transform:uppercase}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;margin:14px 0}
+  .muted{color:var(--muted);font-size:.9rem}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:10px;
+    font-size:.95rem;font-weight:600;padding:11px 18px;transition:.12s}
+  .btn{background:var(--accent);color:#06121f}
+  .btn:hover{filter:brightness(1.1)}
+  .btn-ghost{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--accent)}
+  input[type=text]{width:100%;background:var(--card2);border:1px solid var(--line);
+    color:var(--txt);border-radius:10px;padding:11px 13px;font-size:.95rem;font-family:inherit}
+  label.chk{display:flex;align-items:center;gap:9px;cursor:pointer;margin:12px 0;font-size:.92rem}
+  label.chk input{width:17px;height:17px;accent-color:var(--accent)}
+  .how{font-size:.9rem;color:var(--muted)}
+  .how b{color:var(--txt)}
+
+  /* QUIZ */
+  .topbar{position:sticky;top:0;z-index:5;background:var(--bg);
+    padding:10px 0;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  #timer{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.05rem;color:var(--warn)}
+  .progwrap{flex:1;min-width:120px}
+  .progtrack{height:7px;background:var(--card2);border-radius:99px;overflow:hidden}
+  #progBar{height:100%;width:0;background:var(--accent);transition:width .2s}
+  #progTxt{font-size:.8rem;color:var(--muted);margin-top:4px;display:block}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .enun{white-space:pre-wrap;font-size:1rem;margin:6px 0 14px}
+  .alt{display:flex;gap:12px;align-items:flex-start;background:var(--card2);
+    border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:9px 0;
+    cursor:pointer;transition:.12s}
+  .alt:hover{border-color:var(--accent)}
+  .alt .letra{font-weight:700;color:var(--accent);min-width:18px}
+  .alt.correct{border-color:var(--ok);background:rgba(63,185,80,.12)}
+  .alt.wrong{border-color:var(--err);background:rgba(248,81,73,.12)}
+  .alt.locked{cursor:default}
+  .alt.correct .letra{color:var(--ok)}
+  .alt.wrong .letra{color:var(--err)}
+  #qComment{margin-top:14px;padding:14px 16px;background:var(--card2);
+    border-left:3px solid var(--accent);border-radius:8px;font-size:.93rem}
+  #qComment .lbl{display:inline-block;font-weight:700;color:var(--accent);
+    margin:10px 0 3px;font-size:.82rem;text-transform:uppercase;letter-spacing:.03em}
+  #qComment .lbl:first-child{margin-top:0}
+  .navbtns{display:flex;gap:10px;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
+  #qnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:7px;margin:10px 0}
+  .qnav-b{background:var(--card2);border:1px solid var(--line);color:var(--txt);
+    border-radius:8px;padding:8px 0;font-size:.85rem;position:relative}
+  .qnav-b.answered{background:rgba(63,185,80,.18);border-color:var(--ok)}
+  .qnav-b.current{outline:2px solid var(--accent);outline-offset:1px}
+  .qnav-b.flagged::after{content:"";position:absolute;top:3px;right:3px;
+    width:7px;height:7px;border-radius:50%;background:var(--warn)}
+
+  /* RESULT */
+  .score{font-size:2.4rem;font-weight:800}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+  .stat{background:var(--card2);border:1px solid var(--line);border-radius:11px;
+    padding:12px;text-align:center}
+  .stat .v{font-size:1.35rem;font-weight:700}
+  .stat .k{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  textarea#rCard{width:100%;min-height:120px;background:var(--card2);border:1px solid var(--line);
+    color:var(--txt);border-radius:10px;padding:12px;font-family:ui-monospace,monospace;font-size:.85rem}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .chip{background:var(--card2);border:1px solid var(--line);color:var(--muted);
+    border-radius:99px;padding:6px 14px;font-size:.82rem;cursor:pointer}
+  .chip.active{background:var(--accent);color:#06121f;border-color:var(--accent)}
+  .rev-item{background:var(--card);border:1px solid var(--line);border-radius:11px;
+    padding:13px 15px;margin:9px 0}
+  .rev-item .rq{font-size:.93rem;margin-bottom:6px;white-space:pre-wrap}
+  .rev-item .tag{font-size:.74rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:6px}
+  .tag.ok{background:rgba(63,185,80,.2);color:var(--ok)}
+  .tag.er{background:rgba(248,81,73,.2);color:var(--err)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===================== INTRO ===================== -->
+  <section id="scrIntro">
+    <span class="badge" id="introBadge">META · DISCIPLINA</span>
+    <h1 id="introTitle">Tema do bloco</h1>
+    <div class="card" style="border-left:4px solid var(--ok);background:rgba(63,185,80,.08)"><b style="color:var(--ok)">✅ Gabarito conferido com o oficial</b><br>As 45 respostas foram conferidas contra o gabarito oficial do livro. <b>12 questões</b> divergiam da minha leitura provisória e foram <b>corrigidas para o oficial</b>; nelas o tema traz "⚠️ conferir redação" porque a divergência costuma indicar imprecisão na leitura da foto.</div>
+    <div class="card how">
+      <b>Como funciona:</b> responda as questões, o gabarito comentado aparece após cada
+      resposta. Há cronômetro, barra de progresso e salvamento automático — você pode
+      fechar e <b>retomar</b> de onde parou. Ao final, gera um cartão de resultado e a
+      lista de revisão (só erradas / marcadas).
+    </div>
+    <div class="card">
+      <label class="muted" for="nome">Seu nome (para o cartão de resultado)</label>
+      <input type="text" id="nome" placeholder="Digite seu nome">
+      <label class="chk"><input type="checkbox" id="optShuffle"> Embaralhar a ordem das questões</label>
+      <div class="navbtns">
+        <button class="btn" id="btnStart">Começar</button>
+        <button class="btn-ghost hidden" id="btnResume">Retomar de onde parei</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section id="scrQuiz" class="hidden">
+    <div class="topbar">
+      <span id="timer">00:00</span>
+      <div class="progwrap">
+        <div class="progtrack"><div id="progBar"></div></div>
+        <span id="progTxt">0/0</span>
+      </div>
+      <button class="btn-ghost" id="btnSave">Salvar</button>
+    </div>
+
+    <div class="card">
+      <div class="badges">
+        <span class="badge" id="qNum">1/1</span>
+        <span class="badge" id="qBanca"></span>
+      </div>
+      <div class="muted" id="qTema"></div>
+      <div class="enun" id="qEnun"></div>
+      <div id="qAlts"></div>
+      <div id="qComment" class="hidden"></div>
+      <div class="navbtns">
+        <button class="btn-ghost" id="btnPrev">← Anterior</button>
+        <button class="btn-ghost" id="btnFlag">⚑ Revisar</button>
+        <button class="btn" id="btnNext">Próxima →</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Navegação</h2>
+      <div id="qnav"></div>
+      <button class="btn" id="btnFinish">Finalizar e ver resultado</button>
+    </div>
+  </section>
+
+  <!-- ===================== RESULT ===================== -->
+  <section id="scrResult" class="hidden">
+    <span class="badge">Resultado</span>
+    <h1><span class="score" id="rScore">0/0</span> <span class="muted" id="rPct"></span></h1>
+    <div class="statgrid">
+      <div class="stat"><div class="v" id="rAcertos">0</div><div class="k">Acertos</div></div>
+      <div class="stat"><div class="v" id="rErros">0</div><div class="k">Erros</div></div>
+      <div class="stat"><div class="v" id="rTempo">00:00</div><div class="k">Tempo</div></div>
+      <div class="stat"><div class="v" id="rRend">0%</div><div class="k">Rendimento</div></div>
+    </div>
+
+    <div class="card">
+      <h2>Cartão de resultado</h2>
+      <p class="muted">Copie e cole no grupo.</p>
+      <textarea id="rCard" readonly></textarea>
+      <div class="navbtns">
+        <button class="btn" id="btnCopyCard">Copiar cartão</button>
+        <button class="btn-ghost" id="btnDownCard">Baixar .txt</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Revisar</h2>
+      <div class="chips">
+        <span class="chip active" data-f="all">Todas</span>
+        <span class="chip" data-f="wrong">Só erradas</span>
+        <span class="chip" data-f="flag">Marcadas</span>
+      </div>
+      <div id="reviewList"></div>
+      <div class="navbtns">
+        <button class="btn" id="btnRedoWrong">Refazer só as erradas</button>
+        <button class="btn-ghost" id="btnRestart">Recomeçar do zero</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ===================== CONFIG ===================== */
+const META       = "META 17";
+const DISCIPLINA = "Notarial e Registral";
+const TEMA       = "RCPN · RCPJ · RTD — Bloco completo (45 questões)";
+const KEY        = "sim_notarial_p375_parte1_v1";
+const STORE      = "concurso_meta17_notarial_p375_v1";
+
+/* ===================== QUESTÕES ===================== */
+const QUESTIONS = [
+  {
+    "id": "NR-uniaoestavel-livroE",
+    "banca": "VUNESP · TJ-SP · Ingresso · 2022",
+    "tema": "RCPN — Livro E / União estável",
+    "enun": "As sentenças declaratórias de reconhecimento, dissolução e extinção de união estável, bem como as escrituras públicas de contrato e distrato envolvendo união estável:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "são registradas no Livro \"B\"."
+      },
+      {
+        "l": "B",
+        "t": "são registradas no Livro \"B Auxiliar\"."
+      },
+      {
+        "l": "C",
+        "t": "são registradas no Livro \"E\"."
+      },
+      {
+        "l": "D",
+        "t": "não são inscritas no Registro Civil das Pessoas Naturais."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> O registro dos títulos de reconhecimento, dissolução e extinção da união estável — judiciais (sentença) ou extrajudiciais (escritura/termo) — é feito no <b>Livro \"E\"</b> do RCPN do cartório em que os companheiros têm ou tiveram a última residência (Prov. 37/2014, hoje consolidado no Prov. 149/2023-CNJ). O Livro \"E\" é o livro de \"demais atos\" do RCPN.\n              <span class=\"lbl\">As outras</span> Livro \"A\" = nascimento; \"B\" = casamento; \"B Auxiliar\" = casamento religioso com efeito civil; \"C\" = óbito; \"C Auxiliar\" = natimorto. A união estável não entra em nenhum desses — vai para o \"E\". Por isso \"D\" também está errada.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Confundir com Livro \"B\". O ato é facultativo, mas, quando levado a registro, é sempre no \"E\".\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> Após a Lei 14.382/2022, o RCPN passou a concentrar atos de estado civil antes dispersos; o registro da união estável no Livro \"E\" segue essa lógica de centralização e publicidade.\n              <span class=\"lbl\">🔁 Revisão</span> União estável (reconhecimento, dissolução, alteração de regime) → Livro \"E\" → cartório da última residência dos companheiros.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Onde se registra a união estável e desde quando isso é possível administrativamente?\" — Livro \"E\", Prov. 37/CNJ, reforçado pela Lei 14.382/2022."
+  },
+  {
+    "id": "NR-emancipacao-expensas",
+    "banca": "IESES · TJ-TO · Remoção · 2022",
+    "tema": "RCPN — Emancipação / anotações",
+    "enun": "A emancipação concedida por sentença judicial será anotada:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "gratuitamente, independentemente de hipossuficiência do interessado."
+      },
+      {
+        "l": "B",
+        "t": "às expensas do interessado."
+      },
+      {
+        "l": "C",
+        "t": "às expensas dos Estados, por se tratar de ato de Juiz Estadual."
+      },
+      {
+        "l": "D",
+        "t": "às expensas da União, por se tratar de ato de Juiz Federal."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> A LRP (Lei 6.015/1973) determina que a emancipação concedida por <b>sentença judicial</b> será anotada <b>às expensas do interessado</b>. A gratuidade do art. 30 alcança o registro e a 1ª certidão de nascimento e óbito; a <i>anotação</i> da emancipação judicial não é abrangida.\n              <span class=\"lbl\">As outras</span> \"A\" inventa gratuidade incondicional. \"C\" e \"D\" criam custeio estatal por \"tipo de juiz\" que a lei não prevê.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Misturar a gratuidade do <b>registro</b> de nascimento (art. 30) com a <b>anotação</b> da emancipação.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A emancipação por sentença (menor sob tutela) só produz efeito após o registro (LRP art. 92) — antes, não vale contra terceiros.\n              <span class=\"lbl\">🔁 Revisão</span> Emancipação judicial → registro no Livro \"E\" + anotação às expensas do interessado; sem registro, sem efeito.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quando a emancipação produz efeitos perante terceiros?\" — só depois do registro. \"Quem paga a anotação?\" — o interessado."
+  },
+  {
+    "id": "NR-interdicao-registro-livroE",
+    "banca": "VUNESP · TJ-GO · Remoção · 2021",
+    "tema": "RCPN — Interdição",
+    "enun": "Sobre a interdição no Registro Civil das Pessoas Naturais, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "A sentença de interdição é objeto de averbação no Livro \"E\" do cartório do domicílio do interdito."
+      },
+      {
+        "l": "B",
+        "t": "A sentença de interdição é objeto de registro no Livro \"E\" do cartório do domicílio do interdito."
+      },
+      {
+        "l": "C",
+        "t": "A sentença de interdição é objeto de registro no Livro \"E\" do cartório onde lavrado o registro de nascimento do interdito."
+      },
+      {
+        "l": "D",
+        "t": "A sentença de interdição é objeto de averbação no Livro \"E\" do cartório onde lavrado o registro de nascimento do interdito."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> A sentença de interdição é objeto de <b>REGISTRO</b> (não averbação) — LRP art. 29, V — no <b>Livro \"E\"</b> do <b>1º Ofício da comarca do domicílio do interdito</b> (arts. 89, 92 e 93). Depois, comunica-se ao cartório do nascimento para a <i>anotação</i>.\n              <span class=\"lbl\">As outras</span> \"A\" e \"D\" trocam registro por averbação. \"C\" e \"D\" deslocam para o cartório do nascimento — que só recebe a <b>anotação</b> (art. 106).\n              <span class=\"lbl\">⚠️ Pegadinha</span> Registro × averbação × anotação. A interdição se <b>registra</b> (no domicílio) e se <b>anota</b> (no nascimento).\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> Antes do registro da sentença, o curador não pode assinar o termo de curatela (LRP art. 93). O registro é condição de eficácia perante terceiros.\n              <span class=\"lbl\">🔁 Revisão</span> Interdição → REGISTRO no Livro \"E\" do domicílio → ANOTAÇÃO no cartório do nascimento/casamento.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Interdição se registra ou se averba, e onde?\" — Registra-se, no Livro E do domicílio do interdito."
+  },
+  {
+    "id": "NR-objeto-registro-legitimacaoadotiva",
+    "banca": "CEBRASPE · TJ-SC · Remoção · 2023",
+    "tema": "RCPN — Registro × averbação",
+    "enun": "A Lei de Registros Públicos segrega os atos sujeitos a registro daqueles sujeitos a averbação. No registro civil de pessoas naturais, são objeto de REGISTRO as sentenças que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "declararem a filiação legítima."
+      },
+      {
+        "l": "B",
+        "t": "decidirem a nulidade ou a anulação do casamento."
+      },
+      {
+        "l": "C",
+        "t": "decidirem o restabelecimento da sociedade conjugal."
+      },
+      {
+        "l": "D",
+        "t": "deferirem a legitimação adotiva."
+      },
+      {
+        "l": "E",
+        "t": "julgarem ilegítimos os filhos concebidos na constância do casamento."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> Pela LRP art. 29, são objeto de <b>REGISTRO</b> as sentenças que <b>deferirem a legitimação adotiva</b> (art. 29, VI). As demais hipóteses são casos de <b>AVERBAÇÃO</b> (art. 29, §1º).\n              <span class=\"lbl\">As outras</span> Nulidade/anulação (B), restabelecimento da sociedade conjugal (C), filiação legítima por sentença (A) e ilegitimidade de filhos (E) estão no rol de <b>averbações</b> do §1º.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Tudo que \"altera/modifica\" assento já existente tende a ser averbação; ato novo e autônomo (legitimação adotiva) é registro.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A \"legitimação adotiva\" (Lei 4.655/65) hoje está absorvida pela adoção do ECA, mas o art. 29 da LRP ainda a lista como registro — cobra-se a literalidade.\n              <span class=\"lbl\">🔁 Revisão</span> REGISTRO (art. 29): nascimento, casamento, óbito, emancipação, interdição, ausência, opção de nacionalidade, legitimação adotiva. AVERBAÇÃO (§1º): nulidade/anulação, separação/restabelecimento, reconhecimento de filho, alteração de nome.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Uma sentença que se REGISTRA e uma que se AVERBA no RCPN.\" — Registra: legitimação adotiva. Averba: nulidade de casamento."
+  },
+  {
+    "id": "NR-adocao-clara-mandado",
+    "banca": "FGV · TJ-SC · Remoção · 2021",
+    "tema": "RCPN — Adoção / novo registro",
+    "enun": "Clara foi adotada. Sobre os efeitos registrais da adoção, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "A adoção é averbada à margem do registro original, que permanece em vigor."
+      },
+      {
+        "l": "B",
+        "t": "A adoção independe de mandado judicial, bastando requerimento dos adotantes."
+      },
+      {
+        "l": "C",
+        "t": "O registro original é mantido e a ele se acrescentam os nomes dos adotantes."
+      },
+      {
+        "l": "D",
+        "t": "A adoção é constituída pela sentença, inscrita mediante mandado, com novo registro e cancelamento do registro original."
+      },
+      {
+        "l": "E",
+        "t": "O novo registro consigna expressamente a origem adotiva do registrado."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> A adoção constitui-se por <b>sentença</b> (ECA art. 47); inscreve-se no RCPN mediante <b>mandado</b>, com <b>novo registro</b> e <b>cancelamento do registro original</b>, que fica arquivado. Nenhuma observação sobre a origem adotiva pode constar do novo assento ou da certidão.\n              <span class=\"lbl\">As outras</span> \"A\"/\"C\" mantêm o registro original — errado, ele é cancelado. \"B\" dispensa mandado — errado. \"E\" viola a vedação de constar origem adotiva.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Adoção NÃO é averbação no registro antigo: é registro NOVO + cancelamento do anterior.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O sigilo da origem adotiva é garantia do adotado (ECA art. 47, §4º); a certidão não revela a adoção, mas o adotado tem direito de conhecer sua origem ao atingir a maioridade.\n              <span class=\"lbl\">🔁 Revisão</span> Adoção → sentença → mandado → novo registro + cancelamento do original (arquivado e sigiloso).\n              <span class=\"lbl\">🎤 Prova oral</span> \"O que acontece com o registro original na adoção?\" — É cancelado e arquivado; lavra-se novo registro sem menção à adoção."
+  },
+  {
+    "id": "NR-adocao-maior-livroA",
+    "banca": "VUNESP · TJ-GO · Remoção · 2021",
+    "tema": "RCPN — Adoção do maior ⚠️ conferir redação",
+    "enun": "A adoção de pessoa maior de idade é levada ao Registro Civil das Pessoas Naturais por meio de:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "novo registro no Livro \"A\", com cancelamento do registro de nascimento original."
+      },
+      {
+        "l": "B",
+        "t": "averbação no Livro \"E\" do domicílio do adotando."
+      },
+      {
+        "l": "C",
+        "t": "registro no Livro \"E\", por se tratar de maior."
+      },
+      {
+        "l": "D",
+        "t": "simples anotação no registro de nascimento original."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>B</b> (antes eu havia provisoriamente marcado A). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa B.\n              <span class=\"lbl\">Por quê</span> A adoção — de menor ou de maior — produz o mesmo efeito registral: <b>novo registro no Livro \"A\"</b> (nascimento), com <b>cancelamento</b> do registro original (ECA art. 47, aplicável à adoção de maiores por força do art. 1.619 do CC).\n              <span class=\"lbl\">As outras</span> \"B\"/\"C\" mandam para o Livro \"E\" — não é o caso da adoção, que gera assento de nascimento. \"D\" reduz a adoção a anotação.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A maioridade do adotando não muda o livro: continua sendo registro de nascimento no Livro \"A\".\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A adoção de maiores segue o rito do ECA no que couber (CC art. 1.619), inclusive quanto ao sigilo e ao novo assento — o regime registral é idêntico.\n              <span class=\"lbl\">🔁 Revisão</span> Adoção (qualquer idade) → novo registro no Livro \"A\" + cancelamento do original.\n              <span class=\"lbl\">🎤 Prova oral</span> \"A adoção de maior muda o livro do registro?\" — Não. Continua no Livro A (nascimento)."
+  },
+  {
+    "id": "NR-averbacao-alteracaonomes",
+    "banca": "CESPE · TJ-RR · Ingresso · 2025",
+    "tema": "RCPN — Averbação",
+    "enun": "Assinale a opção que apresenta ato que, no registro civil de pessoas naturais, constitui hipótese de AVERBAÇÃO.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "alterações de nome."
+      },
+      {
+        "l": "B",
+        "t": "interdições."
+      },
+      {
+        "l": "C",
+        "t": "sentenças declaratórias de ausência."
+      },
+      {
+        "l": "D",
+        "t": "opções de nacionalidade."
+      },
+      {
+        "l": "E",
+        "t": "sentenças que deferirem a legitimação adotiva."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> <b>Alteração de nome</b> é hipótese de <b>averbação</b> (LRP art. 29, §1º). As demais opções — interdição, ausência, opção de nacionalidade e legitimação adotiva — são todas hipóteses de <b>registro</b> (art. 29).\n              <span class=\"lbl\">As outras</span> B, C, D e E estão no rol do <i>caput</i> do art. 29 (registro), não no §1º (averbação).\n              <span class=\"lbl\">⚠️ Pegadinha</span> Questão-espelho do tema registro × averbação. Decore: o §1º (averbação) é o rol dos atos que alteram/desfazem casamento e nome.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A Lei 14.382/2022 ampliou as hipóteses de alteração de nome por via administrativa (extrajudicial), reforçando a desjudicialização — mas a natureza do ato no assento segue sendo averbação.\n              <span class=\"lbl\">🔁 Revisão</span> Averbação (§1º): nulidade/anulação de casamento, separação/divórcio, restabelecimento, reconhecimento de filho, alteração de nome.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Alteração de nome se registra ou se averba?\" — Averba-se, à margem do assento de nascimento."
+  },
+  {
+    "id": "NR-anulacao-casamento-efeitosuspensivo",
+    "banca": "FGV · Enac · 2025",
+    "tema": "RCPN — Averbação de sentença ⚠️ conferir redação",
+    "enun": "Ana e Pedro tiveram o casamento anulado por sentença. Sobre a averbação dessa sentença, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "A sentença pode ser averbada caso o recurso interposto não tenha sido recebido no efeito suspensivo."
+      },
+      {
+        "l": "B",
+        "t": "A averbação só pode ocorrer após o trânsito em julgado, sem exceção."
+      },
+      {
+        "l": "C",
+        "t": "A averbação independe de provocação, sendo feita de ofício pelo oficial."
+      },
+      {
+        "l": "D",
+        "t": "A sentença de anulação é objeto de registro, não de averbação."
+      },
+      {
+        "l": "E",
+        "t": "A averbação cabe ao juízo, não ao oficial registrador."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>D</b> (antes eu havia provisoriamente marcado A). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa D.\n              <span class=\"lbl\">Por quê</span> A sentença de nulidade/anulação de casamento é <b>averbada</b> (LRP art. 29, §1º, \"a\"). Em regra exige trânsito em julgado, mas <b>pode ser averbada quando o recurso não foi recebido no efeito suspensivo</b> — a decisão produz efeitos imediatos.\n              <span class=\"lbl\">As outras</span> \"B\" ignora a exceção do recurso sem efeito suspensivo. \"C\" dispensa requerimento — a averbação de sentença depende de mandado/provocação. \"D\" troca averbação por registro. \"E\" tira do oficial a competência registral.\n              <span class=\"lbl\">⚠️ Pegadinha</span> O \"sem exceção\" da alt. B é a marca da resposta errada — há a exceção do efeito suspensivo.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A eficácia da decisão recorrida sem efeito suspensivo (CPC art. 995 e 1.012) permite a prática de atos registrais antes do trânsito em julgado, observada a reversibilidade.\n              <span class=\"lbl\">🔁 Revisão</span> Anulação de casamento → averbação (§1º \"a\"); cabível se o recurso não tem efeito suspensivo.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Precisa de trânsito em julgado para averbar anulação de casamento?\" — Em regra sim, salvo se o recurso não foi recebido no efeito suspensivo."
+  },
+  {
+    "id": "NR-averbacao-art97-cartasentenca",
+    "banca": "Consulplan · TJ-AC · Remoção · 2023",
+    "tema": "RCPN — Averbação (art. 97)",
+    "enun": "A averbação, no registro civil de pessoas naturais, será feita pelo oficial:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "somente mediante autorização do juiz corregedor permanente."
+      },
+      {
+        "l": "B",
+        "t": "de ofício, independentemente de qualquer documento."
+      },
+      {
+        "l": "C",
+        "t": "à vista da carta de sentença, do mandado ou da petição acompanhada de certidão ou documento legal e autêntico, com firma reconhecida."
+      },
+      {
+        "l": "D",
+        "t": "exclusivamente à vista de mandado judicial, vedada a via administrativa."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> A LRP art. 97 prevê que a averbação será feita pelo oficial <b>à vista da carta de sentença, do mandado ou da petição acompanhada de certidão ou documento legal e autêntico</b>, com firma reconhecida. É o dispositivo literal.\n              <span class=\"lbl\">As outras</span> \"A\" exige autorização judicial sempre — não é o caso. \"B\" dispensa documento — a averbação tem base documental. \"D\" veda a via administrativa, hoje ampliada pela desjudicialização.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A questão é literalidade pura do art. 97. Decorar o trio: carta de sentença / mandado / petição+documento autêntico.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A Lei 14.382/2022 reforçou a possibilidade de averbações diretas no registro, sem prévia autorização judicial, em hipóteses de averbação administrativa.\n              <span class=\"lbl\">🔁 Revisão</span> Averbação (art. 97): carta de sentença, mandado, ou petição + certidão/documento autêntico com firma reconhecida.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Com base em que documentos o oficial averba?\" — Carta de sentença, mandado ou petição acompanhada de documento legal e autêntico (art. 97)."
+  },
+  {
+    "id": "NR-ods-agenda2030-erro-averbados",
+    "banca": "IESES · TJ-TO · Ingresso · 2022",
+    "tema": "RCPN — Registro × averbação",
+    "enun": "Sobre os atos do registro civil de pessoas naturais, assinale a afirmação ERRADA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O registro civil promove a cidadania e dialoga com os Objetivos de Desenvolvimento Sustentável da Agenda 2030."
+      },
+      {
+        "l": "B",
+        "t": "O nascimento e o óbito são objeto de registro."
+      },
+      {
+        "l": "C",
+        "t": "A emancipação é objeto de registro."
+      },
+      {
+        "l": "D",
+        "t": "São averbados os nascimentos, óbitos, emancipações, interdições, ausências e opções de nacionalidade."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"D\" é ERRADA: nascimentos, óbitos, emancipações, interdições, ausências e opções de nacionalidade são objeto de <b>REGISTRO</b> (LRP art. 29), e não de averbação.\n              <span class=\"lbl\">As outras</span> \"A\" liga registro civil à Agenda 2030/ODS (registro universal como cidadania) — correta. \"B\" e \"C\" descrevem registros — corretas.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A banca enfileira os atos do <i>caput</i> do art. 29 e troca \"registrados\" por \"averbados\". Atenção ao verbo.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O sub-registro de nascimento é tema de políticas públicas (ODS 16.9 — identidade legal para todos); o registro civil tardio gratuito é instrumento dessa meta.\n              <span class=\"lbl\">🔁 Revisão</span> REGISTRO (art. 29): nascimento, casamento, óbito, emancipação, interdição, ausência, opção de nacionalidade, legitimação adotiva.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Emancipação e interdição se registram ou se averbam?\" — Registram-se (art. 29, IV e V)."
+  },
+  {
+    "id": "NR-anotacoes-incorreta-responsaveis",
+    "banca": "IESES · TJ-AM · Remoção · 2023",
+    "tema": "RCPN — Anotações ⚠️ conferir redação",
+    "enun": "Sobre as anotações no registro civil de pessoas naturais, assinale a alternativa INCORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O oficial fará a anotação de referência nos atos anteriores, com remissões recíprocas."
+      },
+      {
+        "l": "B",
+        "t": "As anotações comunicam-se entre cartórios por meio dos respectivos ofícios."
+      },
+      {
+        "l": "C",
+        "t": "A anotação é feita à margem do assento, mencionando o ato que a determinou."
+      },
+      {
+        "l": "D",
+        "t": "O oficial que deixar de fazer a anotação responde apenas civilmente, nunca criminalmente."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>C</b> (antes eu havia provisoriamente marcado D). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa C.\n              <span class=\"lbl\">Por quê</span> A alt. \"D\" é INCORRETA: o oficial que descumpre o dever de anotação responde <b>civil e criminalmente</b> (LRP arts. 106 e 107 c/c o regime de responsabilidade dos arts. 28 e 109). Não há exclusão da responsabilidade penal.\n              <span class=\"lbl\">As outras</span> \"A\", \"B\" e \"C\" descrevem corretamente o mecanismo de anotações e remissões recíprocas entre assentos e cartórios (arts. 106-107).\n              <span class=\"lbl\">⚠️ Pegadinha</span> O \"apenas civilmente, nunca criminalmente\" é a marca do distrator — responsabilidade é dupla.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A responsabilidade do registrador é subjetiva (Lei 8.935/94, art. 22, na redação da Lei 13.286/2016) — depende de dolo ou culpa, mas alcança as esferas civil e criminal.\n              <span class=\"lbl\">🔁 Revisão</span> Anotação → remissão recíproca entre assentos; descumprimento → responsabilidade civil E criminal do oficial.\n              <span class=\"lbl\">🎤 Prova oral</span> \"O registrador responde só civilmente?\" — Não: responde civil e penalmente, com responsabilidade civil subjetiva."
+  },
+  {
+    "id": "NR-retificacao-art109-mandado",
+    "banca": "FGV · Enac · 2025",
+    "tema": "RCPN — Retificação (art. 109)",
+    "enun": "Sobre a retificação de registro no procedimento do art. 109 da Lei de Registros Públicos, assinale a alternativa CORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "Julgado procedente o pedido, o juiz ordenará a expedição de mandado para que seja feita a retificação."
+      },
+      {
+        "l": "B",
+        "t": "A retificação independe de manifestação do Ministério Público em qualquer hipótese."
+      },
+      {
+        "l": "C",
+        "t": "A retificação é cumprida mediante carta rogatória dirigida ao oficial."
+      },
+      {
+        "l": "D",
+        "t": "O pedido de retificação é sempre da competência administrativa do oficial."
+      },
+      {
+        "l": "E",
+        "t": "A sentença de retificação não admite recurso."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> No procedimento judicial do art. 109 da LRP, julgado procedente, <b>o juiz ordena a expedição de mandado</b> para a retificação, com ciência ao MP (art. 109, §§).\n              <span class=\"lbl\">As outras</span> \"B\" exclui o MP de forma absoluta — ele atua no procedimento judicial. \"C\" troca mandado por \"carta rogatória\" (erro). \"D\" generaliza a via administrativa. \"E\" nega cabimento de recurso à sentença.\n              <span class=\"lbl\">⚠️ Pegadinha</span> \"carta rogatória\" (alt. C) é o distrator clássico — o cumprimento é por <b>mandado</b>.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A Lei 14.382/2022 alargou a retificação administrativa (art. 110) para erros evidentes, reservando o art. 109 (judicial) aos casos que exigem cognição; mas, na via judicial, o cumprimento é por mandado.\n              <span class=\"lbl\">🔁 Revisão</span> Retificação judicial (art. 109): juiz julga → ordena mandado → oficial retifica; MP intervém.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Como se cumpre a retificação deferida judicialmente?\" — Por mandado expedido pelo juiz ao oficial."
+  },
+  {
+    "id": "NR-retificacao-incorreta-mpfavoravel",
+    "banca": "IESES · TJ-AM · Remoção · 2023",
+    "tema": "RCPN — Retificação administrativa",
+    "enun": "Sobre a retificação de registro na via administrativa, assinale a alternativa INCORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "Erros que não exijam indagação para a constatação imediata podem ser corrigidos de ofício pelo oficial."
+      },
+      {
+        "l": "B",
+        "t": "A retificação administrativa de erro evidente depende de prévia manifestação favorável do Ministério Público."
+      },
+      {
+        "l": "C",
+        "t": "A retificação não pode prejudicar direitos de terceiros."
+      },
+      {
+        "l": "D",
+        "t": "O oficial dará ciência ao interessado da correção realizada de ofício."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"B\" é INCORRETA: a retificação administrativa de <b>erro evidente</b> (LRP art. 110, com redação da Lei 14.382/2022) é feita <b>de ofício pelo oficial</b>, <b>independentemente</b> de prévia manifestação do MP. O MP é apenas cientificado.\n              <span class=\"lbl\">As outras</span> \"A\", \"C\" e \"D\" reproduzem corretamente o regime do art. 110 — correção de ofício de erros evidentes, vedação de prejuízo a terceiros e ciência ao interessado.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Antes da Lei 14.382/2022 a retificação dependia do MP/juiz; hoje, erro evidente é corrigido administrativamente sem prévia chancela do MP.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A Lei 14.382/2022 (Marco da Desjudicialização) reescreveu o art. 110 da LRP, transferindo ao oficial a correção de erros evidentes, com mero controle posterior.\n              <span class=\"lbl\">🔁 Revisão</span> Art. 110: erro evidente → retificação de ofício pelo oficial, sem prévia manifestação do MP (só ciência).\n              <span class=\"lbl\">🎤 Prova oral</span> \"A retificação de erro evidente exige manifestação prévia do MP?\" — Não, após a Lei 14.382/2022; é feita de ofício pelo oficial."
+  },
+  {
+    "id": "NR-retificacao-transposicao-sem-judicial",
+    "banca": "VUNESP · TJ-SP · Ingresso · 2022",
+    "tema": "RCPN — Retificação",
+    "enun": "Sobre a retificação de registro civil, é correto afirmar que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "toda retificação depende de autorização judicial."
+      },
+      {
+        "l": "B",
+        "t": "a retificação de erro de grafia depende sempre de manifestação do Ministério Público."
+      },
+      {
+        "l": "C",
+        "t": "a retificação de erro de transposição, evidente, independe de autorização judicial ou de manifestação do Ministério Público."
+      },
+      {
+        "l": "D",
+        "t": "a retificação não pode ser feita pelo próprio oficial em nenhuma hipótese."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> Erro de <b>transposição</b> (de letras, datas, números) é erro evidente e pode ser <b>retificado de ofício pelo oficial, sem autorização judicial nem manifestação do MP</b> (LRP art. 110, redação da Lei 14.382/2022).\n              <span class=\"lbl\">As outras</span> \"A\" e \"D\" engessam a retificação à via judicial — superado. \"B\" exige MP para erro de grafia — não exige.\n              <span class=\"lbl\">⚠️ Pegadinha</span> \"sempre\"/\"toda\"/\"nenhuma hipótese\" — quantificadores absolutos costumam denunciar o distrator.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A desjudicialização (Lei 14.382/2022) tornou a regra a correção administrativa de erros evidentes, reservando o juiz aos casos de cognição mais profunda.\n              <span class=\"lbl\">🔁 Revisão</span> Erro de transposição/grafia evidente → retificação administrativa de ofício, sem juiz e sem MP prévio.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Erro de transposição precisa ir ao juiz?\" — Não; é corrigido administrativamente pelo oficial."
+  },
+  {
+    "id": "NR-rcpj-registraveis-I-II-IV",
+    "banca": "IESES · TJ-PA · Remoção · 2026",
+    "tema": "RCPJ — Atos registráveis",
+    "enun": "No Registro Civil de Pessoas Jurídicas, são registráveis:\nI. as organizações religiosas;\nII. os sindicatos;\nIII. as sociedades de advogados;\nIV. as agências de notícias.\nAssinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "Apenas I e II."
+      },
+      {
+        "l": "B",
+        "t": "Apenas II e III."
+      },
+      {
+        "l": "C",
+        "t": "Apenas I, II e IV."
+      },
+      {
+        "l": "D",
+        "t": "Apenas III e IV."
+      },
+      {
+        "l": "E",
+        "t": "I, II, III e IV."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> No RCPJ registram-se as <b>organizações religiosas</b> (I), os <b>sindicatos</b> (II) e as <b>agências de notícias</b> (IV) — itens corretos. As <b>sociedades de advogados</b> (III) registram-se na <b>OAB</b> (Lei 8.906/94, art. 15, §1º), não no RCPJ. Logo, I, II e IV.\n              <span class=\"lbl\">As outras</span> Qualquer combinação que inclua III (sociedade de advogados) está errada, pois seu registro é na OAB.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Sociedade de advogados e cooperativas/sociedades empresárias NÃO vão ao RCPJ — vão à OAB e à Junta Comercial, respectivamente.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A personalidade jurídica da sociedade de advogados nasce do registro na OAB; o RCPJ cuida de associações, fundações, organizações religiosas, partidos, sindicatos e das matrículas de jornais/agências de notícias.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ: associações, fundações, org. religiosas, partidos, sindicatos, agências de notícias. FORA: sociedade de advogados (OAB), empresárias (Junta).\n              <span class=\"lbl\">🎤 Prova oral</span> \"Onde se registra a sociedade de advogados?\" — Na OAB, não no RCPJ."
+  },
+  {
+    "id": "NR-rcpj-fundacao-mp-previa",
+    "banca": "CESPE · TJ-RR · Ingresso · 2025",
+    "tema": "RCPJ — Fundações",
+    "enun": "Acerca do registro de fundações no Registro Civil de Pessoas Jurídicas, assinale a opção correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O registro da fundação depende de prévia aprovação do estatuto pelo Ministério Público."
+      },
+      {
+        "l": "B",
+        "t": "A fundação adquire personalidade jurídica com a lavratura da escritura, independentemente de registro."
+      },
+      {
+        "l": "C",
+        "t": "O registro da fundação dispensa a indicação de seus fins."
+      },
+      {
+        "l": "D",
+        "t": "A fiscalização das fundações cabe exclusivamente ao Poder Judiciário."
+      },
+      {
+        "l": "E",
+        "t": "A fundação pode ter fins lucrativos, desde que registrada no RCPJ."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> O estatuto da fundação deve ser <b>previamente aprovado pelo Ministério Público</b> (CC art. 65 e art. 1.201 do CPC/Lei) antes do registro no RCPJ — o MP é o velador das fundações (CC art. 66).\n              <span class=\"lbl\">As outras</span> \"B\" dispensa registro — personalidade jurídica nasce do registro (CC art. 45). \"C\" dispensa os fins — fundação só pode ter fins do art. 62, par. único. \"D\" dá fiscalização exclusiva ao Judiciário — é do MP. \"E\" admite fins lucrativos — vedado.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Fundação = patrimônio + fim não lucrativo + velamento do MP. A aprovação do estatuto pelo MP é prévia ao registro.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A personalidade jurídica das pessoas jurídicas de direito privado começa com a inscrição do ato constitutivo no registro (CC art. 45) — antes disso, fundação não existe como sujeito de direito.\n              <span class=\"lbl\">🔁 Revisão</span> Fundação → escritura/testamento + estatuto aprovado pelo MP → registro no RCPJ → personalidade jurídica; velamento do MP.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quando a fundação adquire personalidade?\" — Com o registro do ato constitutivo, após aprovação do estatuto pelo MP."
+  },
+  {
+    "id": "NR-rcpj-extrapola-comanditasimples",
+    "banca": "CESPE · TJ-PE · Remoção · 2024",
+    "tema": "RCPJ — Atribuição ⚠️ conferir redação",
+    "enun": "Assinale a opção que apresenta entidade cujo registro EXTRAPOLA a competência do Registro Civil de Pessoas Jurídicas.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "sociedade em comandita simples."
+      },
+      {
+        "l": "B",
+        "t": "associação civil."
+      },
+      {
+        "l": "C",
+        "t": "organização religiosa."
+      },
+      {
+        "l": "D",
+        "t": "partido político."
+      },
+      {
+        "l": "E",
+        "t": "fundação."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>D</b> (antes eu havia provisoriamente marcado A). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa D.\n              <span class=\"lbl\">Por quê</span> A <b>sociedade em comandita simples</b> é sociedade <b>empresária</b>: registra-se na <b>Junta Comercial</b> (Registro Público de Empresas Mercantis), não no RCPJ. Extrapola a competência do registro civil de PJ.\n              <span class=\"lbl\">As outras</span> Associação (B), organização religiosa (C), partido político (D) e fundação (E) são todas inscritas no RCPJ (LRP art. 114).\n              <span class=\"lbl\">⚠️ Pegadinha</span> Sociedades empresárias → Junta Comercial. Sociedades simples e demais PJ não empresárias → RCPJ.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O critério é o art. 982 do CC: sociedade empresária (exercício de empresa) vai à Junta; sociedade simples e associações/fundações vão ao RCPJ.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ: associações, fundações, org. religiosas, partidos, sociedades simples. Junta: sociedades empresárias (inclui comandita simples).\n              <span class=\"lbl\">🎤 Prova oral</span> \"Onde se registra a sociedade em comandita simples?\" — Na Junta Comercial, por ser empresária."
+  },
+  {
+    "id": "NR-rcpj-objeto-nocivo-duvida-oficio",
+    "banca": "VUNESP · TJ-SP · Remoção · 2024",
+    "tema": "RCPJ — Recusa / dúvida",
+    "enun": "Apresentado a registro estatuto de pessoa jurídica cujo objeto seja nocivo ou contrário à lei, o oficial:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "sobrestará o registro e suscitará dúvida, de ofício, ao juiz corregedor permanente."
+      },
+      {
+        "l": "B",
+        "t": "recusará o registro e arquivará o pedido, sem comunicação ao juiz."
+      },
+      {
+        "l": "C",
+        "t": "registrará e comunicará posteriormente o Ministério Público."
+      },
+      {
+        "l": "D",
+        "t": "registrará sob protesto, aguardando manifestação do interessado."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> Diante de objeto ilícito/nocivo, o oficial do RCPJ <b>sobresta o registro e suscita dúvida, de ofício, ao juiz competente (corregedor permanente)</b> — LRP art. 115. A recusa não é arbitrária: submete-se ao crivo judicial.\n              <span class=\"lbl\">As outras</span> \"B\" arquiva sem comunicar o juiz — errado, há dúvida de ofício. \"C\" e \"D\" registram apesar da ilicitude — vedado.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A dúvida no RCPJ é suscitada <b>de ofício</b> pelo oficial (diferente da dúvida no RI, em regra provocada pelo apresentante).\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O registro não pode dar publicidade e personalidade a entes com objeto ilícito (CC art. 166); o controle de legalidade do registrador é qualificação registral.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ + objeto nocivo/ilícito → sobresta + suscita dúvida de ofício ao juiz (art. 115).\n              <span class=\"lbl\">🎤 Prova oral</span> \"O que faz o oficial diante de estatuto com objeto ilícito?\" — Sobresta e suscita dúvida de ofício ao juiz."
+  },
+  {
+    "id": "NR-rcpj-umavia-art121",
+    "banca": "IESES · TJ-AM · Remoção · 2023",
+    "tema": "RCPJ — Forma do registro",
+    "enun": "O registro das pessoas jurídicas, no Registro Civil de Pessoas Jurídicas, será feito com base em:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "duas vias do ato constitutivo, exclusivamente em papel."
+      },
+      {
+        "l": "B",
+        "t": "três vias, sendo uma arquivada e duas devolvidas."
+      },
+      {
+        "l": "C",
+        "t": "uma via, em papel ou em meio eletrônico."
+      },
+      {
+        "l": "D",
+        "t": "requerimento verbal, dispensado o documento escrito."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> Após a Lei 14.382/2022, o registro no RCPJ é feito com base em <b>uma via</b> do instrumento, <b>em papel ou em meio eletrônico</b> (LRP art. 121, nova redação). Acabou a exigência de via dupla.\n              <span class=\"lbl\">As outras</span> \"A\" e \"B\" repetem a antiga exigência de duas/três vias — superada. \"D\" admite requerimento verbal — não cabe.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A redação anterior pedia \"duas vias\"; a banca cobra a atualização para \"uma via, papel ou eletrônico\".\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A Lei 14.382/2022 instituiu o registro eletrônico e o Sistema Eletrônico dos Registros Públicos (Serp), reduzindo formalidades e admitindo o meio eletrônico em todos os registros.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ (art. 121, pós-14.382/2022): registro com base em UMA via, em papel OU meio eletrônico.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quantas vias para registrar PJ hoje?\" — Uma, em papel ou eletrônica (Lei 14.382/2022)."
+  },
+  {
+    "id": "NR-rcpj-art120-V-administracao",
+    "banca": "IESES · TJ-AM · Ingresso · 2023",
+    "tema": "RCPJ — Conteúdo do registro (art. 120)",
+    "enun": "Do registro do ato constitutivo da pessoa jurídica deve necessariamente constar:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "o valor de mercado dos bens da entidade."
+      },
+      {
+        "l": "B",
+        "t": "o modo por que se administra e representa, ativa e passivamente, judicial e extrajudicialmente."
+      },
+      {
+        "l": "C",
+        "t": "a relação nominal de todos os futuros associados."
+      },
+      {
+        "l": "D",
+        "t": "o número de inscrição no cadastro de contribuintes municipais."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> O art. 120, V, da LRP exige que conste do registro <b>o modo por que se administra e representa a pessoa jurídica, ativa e passivamente, judicial e extrajudicialmente</b>. É requisito essencial do assento.\n              <span class=\"lbl\">As outras</span> \"A\", \"C\" e \"D\" inventam exigências (valor de mercado, lista de futuros associados, inscrição municipal) que o art. 120 não prevê.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Decorar os incisos do art. 120: denominação, fins, sede, tempo de duração, fundo social, nomes dos fundadores/diretores, modo de administração/representação, condições de extinção e destino do patrimônio.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A indicação do modo de representação dá segurança jurídica a terceiros sobre quem pode obrigar a PJ — conecta-se à teoria da representação orgânica (CC art. 47).\n              <span class=\"lbl\">🔁 Revisão</span> Art. 120, V: deve constar o modo de administração e representação (ativa/passiva, judicial/extrajudicial).\n              <span class=\"lbl\">🎤 Prova oral</span> \"Cite um requisito do registro do ato constitutivo.\" — O modo de administração e representação da PJ (art. 120, V)."
+  },
+  {
+    "id": "NR-rcpj-requerimento-fatima-umavia",
+    "banca": "FGV · TJ-SE · Remoção · 2023",
+    "tema": "RCPJ — Requerimento ⚠️ conferir redação",
+    "enun": "Fátima, representante legal de uma associação, requer o registro do ato constitutivo. O registro será efetuado mediante:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "requerimento de qualquer associado, com duas vias do estatuto."
+      },
+      {
+        "l": "B",
+        "t": "ofício do Ministério Público, dispensado requerimento."
+      },
+      {
+        "l": "C",
+        "t": "requerimento do representante legal, acompanhado de uma via do estatuto."
+      },
+      {
+        "l": "D",
+        "t": "mandado judicial, por se tratar de pessoa jurídica."
+      },
+      {
+        "l": "E",
+        "t": "requerimento verbal do interessado, reduzido a termo."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>B</b> (antes eu havia provisoriamente marcado C). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa B.\n              <span class=\"lbl\">Por quê</span> O registro se faz por <b>requerimento do representante legal</b> da PJ, acompanhado de <b>uma via</b> do estatuto (LRP arts. 120-121, na redação da Lei 14.382/2022). Fátima, representante legal, é quem requer.\n              <span class=\"lbl\">As outras</span> \"A\" pede duas vias e legitima \"qualquer associado\". \"B\" e \"D\" exigem MP/mandado. \"E\" admite requerimento verbal.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Atualização da via dupla → via única; legitimação do representante legal.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O representante legal age pela teoria da representação orgânica (CC art. 47) — a vontade do órgão é a vontade da PJ.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ: requerimento do representante legal + uma via do estatuto.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quem pode requerer o registro da associação?\" — O representante legal, com uma via do ato constitutivo."
+  },
+  {
+    "id": "NR-rcpj-objeto-ilicito-orgaos-duvida",
+    "banca": "FGV · TJ-SE · Ingresso · 2023",
+    "tema": "RCPJ — Recusa / dúvida (art. 115)",
+    "enun": "Apresentado a registro estatuto de associação cujo objeto envolve a comercialização de órgãos humanos, o oficial do RCPJ deverá:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "registrar e comunicar a autoridade policial."
+      },
+      {
+        "l": "B",
+        "t": "sobrestar o registro e suscitar dúvida ao juiz competente."
+      },
+      {
+        "l": "C",
+        "t": "registrar sob condição resolutiva."
+      },
+      {
+        "l": "D",
+        "t": "arquivar o pedido sem qualquer comunicação."
+      },
+      {
+        "l": "E",
+        "t": "encaminhar diretamente ao Ministério Público para denúncia."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> Objeto ilícito (comércio de órgãos é crime — Lei 9.434/97) impõe ao oficial <b>sobrestar o registro e suscitar dúvida ao juiz competente</b> (LRP art. 115). Não cabe registrar.\n              <span class=\"lbl\">As outras</span> \"A\" e \"C\" registram apesar da ilicitude. \"D\" arquiva sem comunicação. \"E\" pula a dúvida judicial e vai direto ao MP.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A solução do art. 115 é sempre a mesma: sobresta + suscita dúvida ao juiz, de ofício.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A qualificação registral é controle de legalidade; o registrador não pode emprestar personalidade jurídica a objeto que o ordenamento reputa ilícito (CC art. 166, II).\n              <span class=\"lbl\">🔁 Revisão</span> Objeto ilícito no RCPJ → sobresta + suscita dúvida ao juiz (art. 115).\n              <span class=\"lbl\">🎤 Prova oral</span> \"Estatuto com objeto criminoso: o oficial registra?\" — Não; sobresta e suscita dúvida ao juiz."
+  },
+  {
+    "id": "NR-rcpj-art114-rol-correta",
+    "banca": "IESES · TJ-AM · Ingresso · 2023",
+    "tema": "RCPJ — Rol do art. 114",
+    "enun": "Sobre o rol de atos inscritos no Registro Civil de Pessoas Jurídicas, assinale a alternativa CORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "No RCPJ inscrevem-se os contratos, atos constitutivos, estatutos ou compromissos das sociedades civis, religiosas, pias, morais, científicas ou literárias, das fundações e das associações de utilidade pública."
+      },
+      {
+        "l": "B",
+        "t": "No RCPJ inscrevem-se as sociedades empresárias e os empresários individuais."
+      },
+      {
+        "l": "C",
+        "t": "No RCPJ inscrevem-se as cooperativas de crédito, exclusivamente."
+      },
+      {
+        "l": "D",
+        "t": "No RCPJ inscrevem-se apenas as fundações privadas."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"A\" reproduz o art. 114, I, da LRP: inscrevem-se no RCPJ os <b>contratos, atos constitutivos, estatutos ou compromissos das sociedades civis, religiosas, pias, morais, científicas ou literárias, fundações e associações de utilidade pública</b>.\n              <span class=\"lbl\">As outras</span> \"B\" coloca empresárias/empresário individual — vão à Junta. \"C\" restringe a cooperativas de crédito. \"D\" reduz a fundações privadas.\n              <span class=\"lbl\">⚠️ Pegadinha</span> O art. 114 é amplo: o erro vem das alternativas que restringem (\"exclusivamente\", \"apenas\") ou que incluem entes empresariais.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O RCPJ também faz a matrícula de jornais, oficinas impressoras, empresas de radiodifusão e agências de notícias (art. 114, II e III) — função de transparência da imprensa.\n              <span class=\"lbl\">🔁 Revisão</span> Art. 114, I: sociedades civis/religiosas/pias/científicas/literárias, fundações, associações de utilidade pública.\n              <span class=\"lbl\">🎤 Prova oral</span> \"O que se inscreve no RCPJ pelo art. 114, I?\" — Atos constitutivos de sociedades civis, fundações e associações."
+  },
+  {
+    "id": "NR-rcpj-partidos-correta",
+    "banca": "Consulplan · TJ-AC · Remoção · 2023",
+    "tema": "RCPJ — Partidos políticos",
+    "enun": "Sobre o registro de partidos políticos, assinale a alternativa CORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O partido político adquire personalidade jurídica com o registro de seu estatuto no Registro Civil de Pessoas Jurídicas."
+      },
+      {
+        "l": "B",
+        "t": "O partido adquire personalidade com o registro no Tribunal Superior Eleitoral, dispensado o RCPJ."
+      },
+      {
+        "l": "C",
+        "t": "O partido não tem personalidade jurídica de direito privado."
+      },
+      {
+        "l": "D",
+        "t": "O registro do partido é feito exclusivamente na Junta Comercial."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> O partido político <b>adquire personalidade jurídica de direito privado com o registro do estatuto no RCPJ</b> (Lei 9.096/95, art. 7º, §2º; CC art. 44, V). Só depois disso registra o estatuto no TSE para adquirir capacidade eleitoral.\n              <span class=\"lbl\">As outras</span> \"B\" inverte a ordem — a personalidade nasce no RCPJ; o TSE confere a condição de partido. \"C\" nega a personalidade de direito privado. \"D\" manda para a Junta.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Duplo registro: <b>RCPJ</b> (personalidade jurídica) + <b>TSE</b> (registro do estatuto/capacidade eleitoral). A ordem é RCPJ → TSE.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> STF (ADI 1.354) e a Lei 9.096/95 confirmam: a personalidade do partido surge no registro civil; o registro no TSE é condição para participar do processo eleitoral e acessar fundo partidário.\n              <span class=\"lbl\">🔁 Revisão</span> Partido: RCPJ (personalidade jurídica) → depois TSE (capacidade eleitoral).\n              <span class=\"lbl\">🎤 Prova oral</span> \"Onde o partido adquire personalidade jurídica?\" — No RCPJ; o TSE vem depois para a capacidade eleitoral."
+  },
+  {
+    "id": "NR-rcpj-incorreta-2022",
+    "banca": "IESES · TJ-TO · Ingresso · 2022",
+    "tema": "RCPJ — Disposições gerais ⚠️ conferir redação",
+    "enun": "Sobre o Registro Civil de Pessoas Jurídicas, assinale a alternativa INCORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "A existência legal das pessoas jurídicas de direito privado começa com a inscrição do ato constitutivo no respectivo registro, independentemente de autorização ou aprovação."
+      },
+      {
+        "l": "B",
+        "t": "No registro civil de pessoas jurídicas serão inscritos os atos constitutivos das associações e fundações."
+      },
+      {
+        "l": "C",
+        "t": "A matrícula dos jornais e demais publicações periódicas é feita no RCPJ."
+      },
+      {
+        "l": "D",
+        "t": "O registro declarará o modo por que se administra e representa a pessoa jurídica."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>B</b> (antes eu havia provisoriamente marcado A). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa B.\n              <span class=\"lbl\">Por quê</span> A alt. \"A\" é INCORRETA na parte final: a existência legal das PJ de direito privado começa com a inscrição do ato constitutivo, <b>precedendo-a, quando necessário, de autorização ou aprovação do Poder Executivo</b> (CC art. 45). A fundação, por exemplo, depende de aprovação do estatuto pelo MP. Logo, o \"independentemente de autorização ou aprovação\" torna a assertiva errada.\n              <span class=\"lbl\">As outras</span> \"B\", \"C\" e \"D\" reproduzem corretamente os arts. 114 e 120 da LRP.\n              <span class=\"lbl\">⚠️ Pegadinha</span> O art. 45 do CC ressalva os casos em que se exige <b>prévia autorização/aprovação</b> — a banca suprime a ressalva para criar o erro.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O CC art. 45 ainda fixa prazo decadencial de 3 anos para anular a constituição das PJ por defeito do ato — detalhe cobrado em prova.\n              <span class=\"lbl\">🔁 Revisão</span> CC art. 45: existência da PJ = inscrição do ato; quando exigido, precedida de autorização/aprovação do Executivo.\n              <span class=\"lbl\">🎤 Prova oral</span> \"A inscrição da PJ dispensa sempre autorização?\" — Não; em certos casos exige prévia autorização/aprovação (CC art. 45)."
+  },
+  {
+    "id": "NR-rcpj-vf-todasV",
+    "banca": "IESES · TJ-TO · Ingresso · 2022",
+    "tema": "RCPJ — V/F",
+    "enun": "Analise as assertivas sobre o RCPJ:\nI. Inscrevem-se os atos constitutivos das fundações.\nII. O registro declarará a denominação, os fins, a sede e o tempo de duração.\nIII. Constará o modo de administração e representação.\nIV. Constarão as condições de extinção da pessoa jurídica e o destino do seu patrimônio.\nAssinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "F, F, F, V."
+      },
+      {
+        "l": "B",
+        "t": "V, V, V, F."
+      },
+      {
+        "l": "C",
+        "t": "F, F, V, V."
+      },
+      {
+        "l": "D",
+        "t": "V, V, V, V."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> Todas as assertivas (I a IV) são <b>verdadeiras</b> — reproduzem os arts. 114 e 120 da LRP (fins, sede, duração, administração/representação, condições de extinção e destino do patrimônio). Gabarito \"D\" (V,V,V,V).\n              <span class=\"lbl\">As outras</span> Qualquer alternativa que marque uma assertiva como F está errada.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Em V/F com \"todas verdadeiras\", a tentação é achar um \"pega\" inexistente. Aqui todos os itens são literais da lei.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O destino do patrimônio em caso de extinção (art. 120, VIII) conecta-se ao CC art. 61 — patrimônio remanescente de associação vai a entidade de fins não econômicos.\n              <span class=\"lbl\">🔁 Revisão</span> Art. 120: denominação, fins, sede, duração, fundo social, fundadores/diretores, administração/representação, extinção e destino do patrimônio.\n              <span class=\"lbl\">🎤 Prova oral</span> \"O que consta sobre a extinção no registro da PJ?\" — As condições de extinção e o destino do patrimônio (art. 120, VIII)."
+  },
+  {
+    "id": "NR-rcpj-duvida-oficio-incorreta",
+    "banca": "IESES · TJ-TO · Ingresso · 2022",
+    "tema": "RCPJ — Dúvida",
+    "enun": "Sobre a qualificação e a dúvida no RCPJ, assinale a alternativa INCORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O oficial procederá à qualificação do título apresentado, examinando sua legalidade."
+      },
+      {
+        "l": "B",
+        "t": "Verificada a ilicitude do objeto, o oficial suscitará dúvida somente se houver provocação do interessado."
+      },
+      {
+        "l": "C",
+        "t": "O oficial sobrestará o registro até a decisão judicial sobre a dúvida."
+      },
+      {
+        "l": "D",
+        "t": "O juiz competente decidirá a dúvida suscitada pelo oficial."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"B\" é INCORRETA: diante de objeto ilícito, o oficial suscita dúvida <b>de ofício</b>, <b>independentemente de provocação</b> (LRP art. 115). O \"somente se houver provocação\" inverte a regra.\n              <span class=\"lbl\">As outras</span> \"A\", \"C\" e \"D\" descrevem corretamente a qualificação, o sobrestamento e a competência do juiz para decidir a dúvida.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A dúvida no RCPJ por objeto ilícito é de ofício — diferente da dúvida registral imobiliária, em regra suscitada a requerimento do apresentante.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A qualificação registral negativa que culmina em dúvida é controle de legalidade preventivo; no RCPJ, a iniciativa do oficial é dever funcional.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ + ilicitude → dúvida de ofício ao juiz (art. 115), sem depender de provocação.\n              <span class=\"lbl\">🎤 Prova oral</span> \"A dúvida do RCPJ por objeto ilícito depende de provocação?\" — Não; é suscitada de ofício."
+  },
+  {
+    "id": "NR-rcpj-fundadores-entidade-partidaria",
+    "banca": "IESES · TJ-TO · Ingresso · 2022",
+    "tema": "RCPJ — Partidos",
+    "enun": "Sobre a constituição de partido político, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O partido se constitui com o registro no TSE, dispensado qualquer outro."
+      },
+      {
+        "l": "B",
+        "t": "Os fundadores não precisam de domicílio eleitoral em número mínimo de Estados."
+      },
+      {
+        "l": "C",
+        "t": "Bastam 50 fundadores para a constituição do partido."
+      },
+      {
+        "l": "D",
+        "t": "Os fundadores, em número mínimo legal, registram a entidade partidária no RCPJ competente, adquirindo personalidade jurídica."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"D\" está correta: os fundadores (no mínimo <b>101</b>, com domicílio eleitoral em pelo menos <b>1/3 dos Estados</b> — Lei 9.096/95, art. 8º) registram a entidade partidária no <b>RCPJ</b>, que lhe confere <b>personalidade jurídica</b> de direito privado (art. 7º).\n              <span class=\"lbl\">As outras</span> \"A\" dispensa o RCPJ. \"B\" nega o requisito de domicílio em 1/3 dos Estados. \"C\" diz 50 fundadores — são 101.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Números: ≥101 fundadores e domicílio eleitoral em ≥1/3 dos Estados; personalidade no RCPJ; registro do estatuto no TSE depois.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A EC e a jurisprudência do STF mantêm o duplo registro; o acesso ao fundo partidário e ao horário eleitoral depende do registro definitivo no TSE.\n              <span class=\"lbl\">🔁 Revisão</span> Partido: 101 fundadores + 1/3 dos Estados → RCPJ (personalidade) → TSE (capacidade eleitoral).\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quantos fundadores e qual a base territorial para criar partido?\" — 101 fundadores com domicílio eleitoral em pelo menos 1/3 dos Estados."
+  },
+  {
+    "id": "NR-rcpj-fundacoes-todas-corretas",
+    "banca": "VUNESP · TJ-SP · Ingresso · 2022",
+    "tema": "RCPJ — Fundações ⚠️ conferir redação",
+    "enun": "Sobre as fundações, considere:\nI. A fundação só pode constituir-se para fins de assistência, cultura, saúde, educação e afins.\nII. O estatuto é submetido à aprovação do Ministério Público.\nIII. O patrimônio é vinculado à finalidade.\nIV. A personalidade jurídica decorre do registro no RCPJ.\nAssinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "Apenas I e II."
+      },
+      {
+        "l": "B",
+        "t": "Apenas III e IV."
+      },
+      {
+        "l": "C",
+        "t": "Todas as indicações estão corretas."
+      },
+      {
+        "l": "D",
+        "t": "Apenas II, III e IV."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>A</b> (antes eu havia provisoriamente marcado C). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa A.\n              <span class=\"lbl\">Por quê</span> <b>Todas</b> as assertivas estão corretas: fins restritos (CC art. 62, par. único — assistência social, cultura, saúde, educação etc.); estatuto aprovado pelo MP (art. 65); patrimônio vinculado à finalidade; personalidade pelo registro no RCPJ (art. 45). Gabarito \"C\".\n              <span class=\"lbl\">As outras</span> Qualquer alternativa que exclua um item está errada — os quatro são verdadeiros.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Após a Lei 13.151/2015, os fins das fundações são taxativos (art. 62, par. único) — a banca pode tentar negar a taxatividade.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O rol de finalidades do art. 62, par. único, do CC foi ampliado pela Lei 13.151/2015 (incluindo defesa de direitos, atividades religiosas etc.), mas continua sendo numerus clausus.\n              <span class=\"lbl\">🔁 Revisão</span> Fundação: fins taxativos (art. 62), estatuto aprovado pelo MP, patrimônio afetado, personalidade pelo registro.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Os fins da fundação são livres?\" — Não; são taxativos no art. 62, par. único, do CC."
+  },
+  {
+    "id": "NR-rcpj-partido-autonomia-cf17",
+    "banca": "VUNESP · TJ-GO · Remoção · 2021",
+    "tema": "RCPJ — Partidos / CF art. 17",
+    "enun": "Sobre os partidos políticos e seu registro, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "É assegurada aos partidos políticos autonomia para definir sua estrutura interna e funcionamento, adquirindo personalidade jurídica na forma da lei civil."
+      },
+      {
+        "l": "B",
+        "t": "Os fundadores devem ter domicílio eleitoral em pelo menos 1/4 dos Estados."
+      },
+      {
+        "l": "C",
+        "t": "O partido adquire personalidade jurídica diretamente no TSE."
+      },
+      {
+        "l": "D",
+        "t": "Os partidos não gozam de autonomia, subordinando-se integralmente à Justiça Eleitoral."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">Por quê</span> A CF art. 17, §1º, assegura aos partidos <b>autonomia</b> para definir estrutura, organização e funcionamento; e o §2º diz que <b>adquirem personalidade jurídica na forma da lei civil</b> (registro no RCPJ). Alt. \"A\".\n              <span class=\"lbl\">As outras</span> \"B\" diz 1/4 dos Estados — é <b>1/3</b> (Lei 9.096/95, art. 8º). \"C\" dá personalidade no TSE — ela nasce no RCPJ. \"D\" nega a autonomia constitucional.\n              <span class=\"lbl\">⚠️ Pegadinha</span> O número é 1/3 dos Estados, não 1/4 — distrator clássico.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A autonomia partidária (CF art. 17, §1º) foi reforçada pela EC 97/2017, que tratou de cláusula de desempenho e fim das coligações proporcionais.\n              <span class=\"lbl\">🔁 Revisão</span> CF art. 17: autonomia partidária + personalidade pela lei civil (RCPJ); base territorial de 1/3 dos Estados.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Os fundadores precisam de domicílio em quantos Estados?\" — Pelo menos 1/3 dos Estados."
+  },
+  {
+    "id": "NR-rcpj-recusa-administrador-condenado",
+    "banca": "VUNESP · TJ-GO · Remoção · 2021",
+    "tema": "RCPJ — Impedimento de administrador",
+    "enun": "Não pode ser administrador de pessoa jurídica e, por isso, o registro do ato pode ser recusado quando indicada como administradora pessoa:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "que tenha menos de 21 anos de idade."
+      },
+      {
+        "l": "B",
+        "t": "que resida em comarca diversa da sede."
+      },
+      {
+        "l": "C",
+        "t": "condenada por crime cuja pena vede o acesso a cargo público, ou por crime falimentar, peculato, contra a economia popular, o sistema financeiro, as relações de consumo, a fé ou a propriedade pública, enquanto perdurarem os efeitos da condenação."
+      },
+      {
+        "l": "D",
+        "t": "que exerça outra atividade empresarial."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> O CC art. 1.011, §1º, impede de ser administrador quem foi <b>condenado</b> por crime falimentar, peculato, contra a economia popular, o sistema financeiro, as <b>relações de consumo</b>, a fé pública ou a propriedade, ou por crime cuja pena vede o acesso a cargo público — enquanto perdurarem os efeitos da condenação. Alt. \"C\".\n              <span class=\"lbl\">As outras</span> \"A\" inventa idade mínima de 21. \"B\" cria impedimento por residência. \"D\" veda exercício de outra atividade — nada disso impede.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A lista de crimes do art. 1.011, §1º, é fechada; \"enquanto perdurarem os efeitos da condenação\" é elemento essencial.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O impedimento cessa com a reabilitação penal ou o decurso dos efeitos da condenação — não é perpétuo.\n              <span class=\"lbl\">🔁 Revisão</span> CC art. 1.011, §1º: condenação por crimes ali listados impede ser administrador enquanto durarem os efeitos.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Condenado por crime contra as relações de consumo pode administrar PJ?\" — Não, enquanto perdurarem os efeitos da condenação."
+  },
+  {
+    "id": "NR-rcpj-incorreta-matricula-livroA",
+    "banca": "IESES · TJ-AM · Remoção · 2023",
+    "tema": "RCPJ — Matrícula (Livro B)",
+    "enun": "Sobre as matrículas no Registro Civil de Pessoas Jurídicas, assinale a alternativa INCORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "A matrícula é exigida dos jornais e demais publicações periódicas."
+      },
+      {
+        "l": "B",
+        "t": "A matrícula é exigida das oficinas impressoras."
+      },
+      {
+        "l": "C",
+        "t": "As matrículas de jornais, oficinas impressoras, empresas de radiodifusão e agências de notícias são feitas no Livro \"A\"."
+      },
+      {
+        "l": "D",
+        "t": "A matrícula é exigida das empresas de radiodifusão e das agências de notícias."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"C\" é INCORRETA: as matrículas de jornais, oficinas impressoras, empresas de radiodifusão e agências de notícias são feitas no <b>Livro \"B\"</b> do RCPJ, e não no Livro \"A\" (que é o de registro dos atos constitutivos das PJ). LRP art. 116 e 122-126.\n              <span class=\"lbl\">As outras</span> \"A\", \"B\" e \"D\" listam corretamente quem se submete à matrícula (art. 122).\n              <span class=\"lbl\">⚠️ Pegadinha</span> No RCPJ: Livro \"A\" = registro das PJ; Livro \"B\" = matrícula dos veículos de comunicação. A banca troca os livros.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A matrícula dá transparência sobre quem responde pela imprensa (CF art. 220 e 222) — finalidade de identificação dos responsáveis pela atividade jornalística e de radiodifusão.\n              <span class=\"lbl\">🔁 Revisão</span> RCPJ: Livro A = atos constitutivos das PJ; Livro B = matrícula de jornais, oficinas, radiodifusão e agências de notícias.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Em que livro se matriculam os jornais?\" — No Livro B do RCPJ."
+  },
+  {
+    "id": "NR-rcpj-radiodifusao-alteracoes-8dias",
+    "banca": "FGV · TJ-SE · Remoção · 2023",
+    "tema": "RCPJ — Matrícula / averbação de alterações ⚠️ conferir redação",
+    "enun": "Uma empresa de radiodifusão alterou sua sede e seu diretor responsável. Quanto à matrícula no RCPJ, é correto afirmar que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "as alterações dispensam comunicação ao registro."
+      },
+      {
+        "l": "B",
+        "t": "as alterações devem ser comunicadas em um único requerimento que abranja todas elas."
+      },
+      {
+        "l": "C",
+        "t": "as alterações são anotadas independentemente de requerimento."
+      },
+      {
+        "l": "D",
+        "t": "as alterações exigem nova matrícula integral."
+      },
+      {
+        "l": "E",
+        "t": "cada alteração deve constar de declaração autônoma, com requerimento próprio, e ser averbada na matrícula no prazo de oito dias."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>D</b> (antes eu havia provisoriamente marcado E). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa D.\n              <span class=\"lbl\">Por quê</span> As alterações nos dados da matrícula (sede, diretor etc.) devem ser <b>averbadas em 8 dias</b>, constando <b>cada alteração de declaração autônoma com requerimento próprio</b> (LRP arts. 122-126). Alt. \"E\".\n              <span class=\"lbl\">As outras</span> \"A\" dispensa comunicação. \"B\" admite requerimento único — cada alteração é declaração autônoma. \"C\" dispensa requerimento. \"D\" exige nova matrícula integral.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Prazo de <b>8 dias</b> e exigência de declaração/requerimento por alteração são os pontos cobrados.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A atualização da matrícula assegura a identificação permanente do responsável pela radiodifusão (CF art. 222), inclusive para fins de responsabilidade por conteúdo.\n              <span class=\"lbl\">🔁 Revisão</span> Matrícula: cada alteração = declaração autônoma + requerimento próprio; averbada em 8 dias.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Em quanto tempo se averba alteração na matrícula?\" — Em 8 dias, com requerimento próprio para cada alteração."
+  },
+  {
+    "id": "NR-rcpj-matricula-jornais-informacoes-8dias",
+    "banca": "IESES · TJ-TO · Ingresso · 2022",
+    "tema": "RCPJ — Matrícula de jornais",
+    "enun": "Sobre a matrícula dos jornais e demais publicações periódicas, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "A matrícula dispensa a indicação do diretor ou redator responsável."
+      },
+      {
+        "l": "B",
+        "t": "As alterações independem de averbação."
+      },
+      {
+        "l": "C",
+        "t": "A matrícula é facultativa para os jornais."
+      },
+      {
+        "l": "D",
+        "t": "O pedido de matrícula conterá as informações exigidas em lei; as alterações serão averbadas no prazo de oito dias; e cada declaração corresponderá a um requerimento."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"D\" reúne corretamente o regime: o <b>pedido de matrícula conterá as informações legais</b>, as <b>alterações são averbadas em 8 dias</b> e <b>cada declaração corresponde a um requerimento</b> (LRP arts. 122-126).\n              <span class=\"lbl\">As outras</span> \"A\" dispensa o responsável — a identificação do diretor/redator é essencial. \"B\" dispensa averbação das alterações. \"C\" diz facultativa — é obrigatória para circular.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A matrícula é condição para o funcionamento regular do veículo (sem ela, presume-se clandestino).\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A exigência de matrícula e de indicação do responsável concretiza o regime de responsabilidade da imprensa, hoje sem a Lei de Imprensa (declarada não recepcionada — ADPF 130), mas com base na LRP e na CF.\n              <span class=\"lbl\">🔁 Revisão</span> Matrícula de jornais: informações legais + alterações averbadas em 8 dias + uma declaração por requerimento.\n              <span class=\"lbl\">🎤 Prova oral</span> \"A matrícula de jornal é facultativa?\" — Não; é obrigatória, com indicação do responsável."
+  },
+  {
+    "id": "NR-rcpj-matricula-jornais-conteudo-incorreta",
+    "banca": "VUNESP · TJ-SP · Ingresso · 2022",
+    "tema": "RCPJ — Matrícula (conteúdo) ⚠️ conferir redação",
+    "enun": "O pedido de matrícula dos jornais e demais publicações periódicas conterá as informações abaixo, à EXCEÇÃO de:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "o regime de bens dos sócios e a observância da Lei 6.515/77."
+      },
+      {
+        "l": "B",
+        "t": "o título do jornal ou periódico, sede da redação, administração e oficinas impressoras."
+      },
+      {
+        "l": "C",
+        "t": "o nome, a idade, a residência e a prova da nacionalidade do diretor ou redator responsável."
+      },
+      {
+        "l": "D",
+        "t": "o nome, a idade, a residência e a prova da nacionalidade do proprietário."
+      }
+    ],
+    "correct": 2,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>C</b> (antes eu havia provisoriamente marcado A). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa C.\n              <span class=\"lbl\">Por quê</span> O pedido de matrícula (LRP art. 123) exige: título da publicação, sede, oficinas; e nome/idade/residência/nacionalidade do <b>diretor ou redator responsável</b> e do <b>proprietário</b>. <b>Não</b> se exige \"regime de bens\" nem referência à Lei do Divórcio (6.515/77) — informação estranha à matrícula. Logo, a exceção é a alt. \"A\".\n              <span class=\"lbl\">As outras</span> \"B\", \"C\" e \"D\" reproduzem o conteúdo legal da matrícula (art. 123).\n              <span class=\"lbl\">⚠️ Pegadinha</span> A alt. \"A\" insere um dado de direito de família (regime de bens) sem qualquer relação com a matrícula de imprensa.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A matrícula identifica os responsáveis pela publicação para fins de responsabilidade civil e penal por conteúdo (CF art. 220, §1º).\n              <span class=\"lbl\">🔁 Revisão</span> Matrícula (art. 123): título, sede, oficinas + dados do diretor/redator responsável e do proprietário. NÃO inclui regime de bens.\n              <span class=\"lbl\">🎤 Prova oral</span> \"O que NÃO consta da matrícula de um jornal?\" — Dados patrimoniais/familiares dos sócios, como regime de bens."
+  },
+  {
+    "id": "NR-rcpj-radiodifusao-nacionalidade-cf222",
+    "banca": "FGV · TJ-SC · Ingresso · 2021",
+    "tema": "RCPJ — Imprensa / nacionalidade (CF 222) ⚠️ conferir redação",
+    "enun": "A sociedade ZZ, cujas sócias são naturalizadas brasileiras há 8 anos, pretende explorar empresa jornalística e de radiodifusão. Quanto à matrícula no RCPJ, é correto afirmar que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "a matrícula é livre, independentemente da nacionalidade das sócias."
+      },
+      {
+        "l": "B",
+        "t": "a matrícula é possível, pois a naturalização equipara as sócias a brasileiras natas para todos os fins."
+      },
+      {
+        "l": "C",
+        "t": "a matrícula é vedada porque empresa jornalística exige sócios brasileiros natos."
+      },
+      {
+        "l": "D",
+        "t": "a matrícula pode ser deferida, pois bastam 5 anos de naturalização."
+      },
+      {
+        "l": "E",
+        "t": "a matrícula não pode ser deferida, pois a propriedade de empresa jornalística e de radiodifusão é privativa de brasileiros natos ou naturalizados há mais de dez anos."
+      }
+    ],
+    "correct": 0,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>A</b> (antes eu havia provisoriamente marcado E). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa A.\n              <span class=\"lbl\">Por quê</span> A CF art. 222 reserva a propriedade de <b>empresa jornalística e de radiodifusão</b> a <b>brasileiros natos ou naturalizados há mais de 10 anos</b> (ou PJ constituídas sob leis brasileiras com sede no país). Como as sócias são naturalizadas há apenas 8 anos, a matrícula <b>não pode ser deferida</b>. Alt. \"E\".\n              <span class=\"lbl\">As outras</span> \"A\" e \"B\" ignoram o requisito temporal. \"C\" exige natos — naturalizado há +10 anos serve. \"D\" diz 5 anos — são 10.\n              <span class=\"lbl\">⚠️ Pegadinha</span> O prazo é <b>mais de 10 anos</b> de naturalização — distratores põem 5 ou equiparam ao nato.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A CF art. 222, §§1º a 3º, ainda limita a participação de capital estrangeiro (até 30%) e exige gestão por brasileiros natos ou naturalizados há +10 anos — proteção à soberania da comunicação.\n              <span class=\"lbl\">🔁 Revisão</span> CF art. 222: empresa jornalística/radiodifusão → brasileiro nato ou naturalizado há +10 anos.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Naturalizado há 8 anos pode ser dono de jornal?\" — Não; exige-se naturalização há mais de 10 anos (CF art. 222)."
+  },
+  {
+    "id": "NR-rtd-incorreta-facultativo-terceiros",
+    "banca": "IESES · TJ-PA · Remoção · 2026",
+    "tema": "RTD — Registro × averbação",
+    "enun": "Sobre o Registro de Títulos e Documentos (RTD), assinale a alternativa INCORRETA.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O RTD tem por finalidade a conservação e a publicidade de documentos e a produção de efeitos em relação a terceiros."
+      },
+      {
+        "l": "B",
+        "t": "O registro no RTD é meramente facultativo e não gera efeitos perante terceiros em nenhuma hipótese."
+      },
+      {
+        "l": "C",
+        "t": "Estão sujeitos a registro obrigatório no RTD certos atos para surtirem efeitos em relação a terceiros."
+      },
+      {
+        "l": "D",
+        "t": "O RTD também serve à conservação de quaisquer documentos, a critério do interessado."
+      },
+      {
+        "l": "E",
+        "t": "A falta de registro de atos sujeitos a registro obrigatório os torna ineficazes perante terceiros."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> A alt. \"B\" é INCORRETA: o RTD tem hipóteses de <b>registro obrigatório</b> que <b>geram efeitos perante terceiros</b> (LRP art. 129). Dizer que é \"meramente facultativo e não gera efeitos perante terceiros em nenhuma hipótese\" contraria a lei.\n              <span class=\"lbl\">As outras</span> \"A\", \"C\", \"D\" e \"E\" descrevem corretamente as funções (conservação, publicidade e oponibilidade a terceiros) e a distinção entre registro facultativo (art. 127) e obrigatório (art. 129).\n              <span class=\"lbl\">⚠️ Pegadinha</span> \"em nenhuma hipótese\" é o quantificador-armadilha — há, sim, efeitos perante terceiros no RTD.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O registro no RTD confere oponibilidade <i>erga omnes</i> (publicidade) e a data certa do documento contra terceiros (CC art. 221) — função central do registro de títulos e documentos.\n              <span class=\"lbl\">🔁 Revisão</span> RTD: art. 127 (facultativo, p/ conservação/publicidade) × art. 129 (obrigatório, p/ efeitos contra terceiros).\n              <span class=\"lbl\">🎤 Prova oral</span> \"O registro no RTD nunca gera efeitos perante terceiros?\" — Falso; o registro obrigatório do art. 129 produz oponibilidade a terceiros."
+  },
+  {
+    "id": "NR-rtd-conservacao-termo-chancela",
+    "banca": "FGV · TJ-ES · Ingresso · 2025",
+    "tema": "RTD — Conservação de documentos ⚠️ conferir redação",
+    "enun": "João leva a registro, para conservação, um título de crédito já prescrito. Sobre esse registro para conservação, assinale a alternativa correta.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "O documento prescrito não pode ser registrado para conservação."
+      },
+      {
+        "l": "B",
+        "t": "A conservação exige a transcrição integral, vedado o registro por simples arquivamento."
+      },
+      {
+        "l": "C",
+        "t": "O registro para conservação confere ao título efeitos executivos."
+      },
+      {
+        "l": "D",
+        "t": "A conservação independe de qualquer certificação pelo oficial."
+      },
+      {
+        "l": "E",
+        "t": "O registro para conservação é certificado por termo, com indicação do número de páginas, e o documento recebe chancela ou rubrica do oficial."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>B</b> (antes eu havia provisoriamente marcado E). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa B.\n              <span class=\"lbl\">Por quê</span> O registro para <b>conservação</b> (LRP art. 127, par. único, e arts. 161-163) é certificado por <b>termo</b>, com indicação do <b>número de páginas/folhas</b>, e o documento recebe <b>chancela ou rubrica</b> do oficial — garantindo integridade e autenticidade do arquivado.\n              <span class=\"lbl\">As outras</span> \"A\" veda o registro de prescrito — pode-se conservar qualquer documento. \"B\" exige transcrição integral — a conservação admite arquivamento. \"C\" dá efeito executivo — o registro não cria executividade. \"D\" dispensa certificação.\n              <span class=\"lbl\">⚠️ Pegadinha</span> A prescrição do título não impede a conservação — o RTD conserva qualquer documento a critério do interessado.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A conservação no RTD assegura data certa e prova da existência e do teor do documento (CC art. 221), independentemente de o crédito estar ou não exigível.\n              <span class=\"lbl\">🔁 Revisão</span> Conservação no RTD: termo + nº de páginas + chancela/rubrica do oficial; admite qualquer documento.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Posso conservar no RTD um título prescrito?\" — Sim; conserva-se qualquer documento, com termo e rubrica do oficial."
+  },
+  {
+    "id": "NR-rtd-locacao-apresentante-autenticidade",
+    "banca": "FGV · TJ-ES · Remoção · 2025",
+    "tema": "RTD — Responsabilidade do apresentante",
+    "enun": "Pedro apresenta a registro, no RTD, contrato de locação assinado por ele e por Maria. Sobre a autenticidade das assinaturas, é correto afirmar que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "o oficial responde pela autenticidade das assinaturas."
+      },
+      {
+        "l": "B",
+        "t": "exige-se reconhecimento de firma de ambos os signatários como condição do registro."
+      },
+      {
+        "l": "C",
+        "t": "a responsabilidade pela autenticidade é solidária entre apresentante e oficial."
+      },
+      {
+        "l": "D",
+        "t": "o apresentante é responsável pela autenticidade das assinaturas constantes do documento."
+      },
+      {
+        "l": "E",
+        "t": "o registro convalida eventual falsidade das assinaturas."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> No RTD, a responsabilidade pela <b>autenticidade das assinaturas</b> do documento é do <b>apresentante</b> (LRP art. 161 e regramento do registro de documentos) — o oficial registra o que lhe é apresentado, sem garantir a veracidade das firmas.\n              <span class=\"lbl\">As outras</span> \"A\" e \"C\" atribuem responsabilidade ao oficial. \"B\" exige reconhecimento de firma como condição — não é requisito geral. \"E\" diz que o registro convalida falsidade — o registro não sana vício.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Registro ≠ validação. O RTD dá publicidade e data certa, mas não atesta a autenticidade das assinaturas; isso é ônus do apresentante.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> O registro confere oponibilidade e data certa, mas eventual falsidade documental pode ser arguida e não é convalidada pelo ato registral — princípio da fé pública relativa do RTD.\n              <span class=\"lbl\">🔁 Revisão</span> RTD: autenticidade das assinaturas é responsabilidade do apresentante; registro não convalida falsidade.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quem responde pela autenticidade das firmas no documento levado a RTD?\" — O apresentante."
+  },
+  {
+    "id": "NR-rtd-parceria-agricola-transcricao",
+    "banca": "CESPE · TJ-RR · Remoção · 2025",
+    "tema": "RTD — Atribuições",
+    "enun": "Assinale a opção que apresenta atribuição do Registro de Títulos e Documentos.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "o registro de pacto antenupcial."
+      },
+      {
+        "l": "B",
+        "t": "a transcrição de contrato de parceria agrícola ou pecuária."
+      },
+      {
+        "l": "C",
+        "t": "o registro da propriedade imóvel."
+      },
+      {
+        "l": "D",
+        "t": "a matrícula de imóvel rural."
+      },
+      {
+        "l": "E",
+        "t": "o registro de hipoteca."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">Por quê</span> A <b>transcrição de contrato de parceria agrícola ou pecuária</b> é atribuição do RTD (LRP art. 127, II/III), pois é título sem natureza real que se registra para publicidade e efeitos contra terceiros.\n              <span class=\"lbl\">As outras</span> Pacto antenupcial (A) registra-se no Registro de Imóveis; propriedade imóvel (C), matrícula rural (D) e hipoteca (E) são todos do RI.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Tudo que envolve direito real sobre imóvel é do RI; contratos pessoais (parceria rural) vão ao RTD.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A parceria/arrendamento rural (Estatuto da Terra) é relação obrigacional; seu registro no RTD garante data certa e oponibilidade, sem transferir direito real.\n              <span class=\"lbl\">🔁 Revisão</span> RTD: parceria agrícola/pecuária, contratos em geral. RI: pacto antenupcial, propriedade, hipoteca, matrícula rural.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Onde se registra contrato de parceria pecuária?\" — No RTD (transcrição)."
+  },
+  {
+    "id": "NR-rtd-reconhecimento-firma-quitacao-fisico",
+    "banca": "CESPE · TJ-RR · Ingresso · 2025",
+    "tema": "RTD — Requisitos",
+    "enun": "No âmbito do Registro de Títulos e Documentos, o reconhecimento de firma é exigido:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "em todo e qualquer documento apresentado a registro."
+      },
+      {
+        "l": "B",
+        "t": "apenas nos documentos eletrônicos."
+      },
+      {
+        "l": "C",
+        "t": "nunca, sendo vedado ao oficial exigi-lo."
+      },
+      {
+        "l": "D",
+        "t": "em documento de quitação ou de obrigação apresentado em meio físico, quando exigido em lei."
+      },
+      {
+        "l": "E",
+        "t": "somente em procurações."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> O reconhecimento de firma, no RTD, é exigido em <b>documento de quitação/obrigação apresentado em meio físico</b>, nas hipóteses previstas em lei (LRP, com adaptações da Lei 14.382/2022 para o meio eletrônico). Alt. \"D\".\n              <span class=\"lbl\">As outras</span> \"A\" generaliza para todo documento. \"B\" inverte (eletrônico tem assinatura digital, não firma). \"C\" veda em absoluto. \"E\" restringe a procurações.\n              <span class=\"lbl\">⚠️ Pegadinha</span> No meio eletrônico, a firma é substituída por assinatura eletrônica qualificada — daí a referência ao \"meio físico\".\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A Lei 14.382/2022 e o Prov. 149/2023-CNJ equipararam a assinatura eletrônica avançada/qualificada à firma reconhecida nos atos registrais eletrônicos.\n              <span class=\"lbl\">🔁 Revisão</span> RTD: reconhecimento de firma em documento físico de quitação/obrigação, quando a lei exigir; no eletrônico, assinatura qualificada.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quando se exige reconhecimento de firma no RTD?\" — Em documento de quitação/obrigação em meio físico, nos casos legais."
+  },
+  {
+    "id": "NR-rtd-facultativo-arquivamento-conteudo-data",
+    "banca": "CESPE · TJ-RR · Ingresso · 2025",
+    "tema": "RTD — Registro facultativo",
+    "enun": "Assinale a opção que indica finalidade do REGISTRO FACULTATIVO no Registro de Títulos e Documentos.",
+    "alts": [
+      {
+        "l": "A",
+        "t": "a notificação extrajudicial do devedor."
+      },
+      {
+        "l": "B",
+        "t": "a produção de efeitos em relação a terceiros."
+      },
+      {
+        "l": "C",
+        "t": "a preparação do título para protesto."
+      },
+      {
+        "l": "D",
+        "t": "o arquivamento de quaisquer documentos, para sua conservação, com prova do conteúdo e da data."
+      },
+      {
+        "l": "E",
+        "t": "a cobrança de dívidas líquidas e certas."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> O <b>registro facultativo</b> (LRP art. 127, par. único) destina-se ao <b>arquivamento de quaisquer documentos para conservação</b>, com prova do <b>conteúdo</b> e da <b>data</b>. Alt. \"D\".\n              <span class=\"lbl\">As outras</span> \"A\" notificação é serviço do RTD, mas não é a finalidade do \"registro facultativo\" para conservação. \"B\" é efeito do registro obrigatório (art. 129). \"C\" protesto é do tabelionato de protesto. \"E\" cobrança não é função registral.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Distinguir registro facultativo (conservação/data certa) do obrigatório (efeitos contra terceiros, art. 129).\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A prova de conteúdo e data certa (CC art. 221) é a utilidade central da conservação no RTD — opõe-se a terceiros quanto à existência e teor do documento.\n              <span class=\"lbl\">🔁 Revisão</span> RTD facultativo: arquivamento/conservação + prova de conteúdo e data. Obrigatório (art. 129): efeitos contra terceiros.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Para que serve o registro facultativo no RTD?\" — Conservar o documento e provar seu conteúdo e data."
+  },
+  {
+    "id": "NR-rtd-confissao-divida-livroB-certidao",
+    "banca": "FGV · Enac · 2025",
+    "tema": "RTD — Transcrição (Livro B) / certidão ⚠️ conferir redação",
+    "enun": "Uma confissão de dívida é levada a registro no RTD. Sobre esse registro e a expedição de certidões, é correto afirmar que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "a confissão de dívida não é registrável no RTD."
+      },
+      {
+        "l": "B",
+        "t": "o registro é feito por simples averbação à margem de outro título."
+      },
+      {
+        "l": "C",
+        "t": "a confissão de dívida é objeto de transcrição no Livro \"B\"; e a instituição financeira interessada obtém certidão resumida mediante requerimento justificado."
+      },
+      {
+        "l": "D",
+        "t": "as certidões do RTD são fornecidas apenas mediante ordem judicial."
+      },
+      {
+        "l": "E",
+        "t": "o registro converte a confissão em título executivo extrajudicial."
+      }
+    ],
+    "correct": 1,
+    "comment": "<span class=\"lbl\">⚠️ Correção — gabarito oficial</span> Resposta oficial: <b>B</b> (antes eu havia provisoriamente marcado C). A divergência costuma indicar que a alternativa foi lida com imprecisão na foto — confira a redação no livro. O comentário abaixo foi escrito para a minha leitura provisória e pode não refletir exatamente a alternativa B.\n              <span class=\"lbl\">Por quê</span> No RTD, a confissão de dívida (integral) é objeto de <b>transcrição no Livro \"B\"</b> (LRP art. 132, II). Terceiro interessado — como instituição financeira — pode obter <b>certidão resumida mediante requerimento justificado</b> (LRP art. 17 e 19, com as restrições de publicidade).\n              <span class=\"lbl\">As outras</span> \"A\" nega a registrabilidade. \"B\" reduz a averbação. \"D\" exige ordem judicial para toda certidão. \"E\" cria executividade pelo registro.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Livros do RTD: Livro \"A\" (protocolo), Livro \"B\" (transcrição/trasladação integral), Livro \"C\" (averbações), Livro \"D\" (indicador pessoal). Transcrição integral = Livro B.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A publicidade registral pode ser restringida por sigilo (dados pessoais — LGPD/Lei 14.382/2022); daí a exigência de requerimento justificado para certas certidões.\n              <span class=\"lbl\">🔁 Revisão</span> RTD: confissão de dívida → transcrição no Livro B; certidão resumida a interessado mediante requerimento justificado.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Em que livro do RTD se transcreve a confissão de dívida?\" — No Livro B (trasladação integral)."
+  },
+  {
+    "id": "NR-rtd-carta-fianca-apresentante-joao",
+    "banca": "FGV · Enac · 2025",
+    "tema": "RTD — Responsabilidade do apresentante",
+    "enun": "João apresenta a registro, no RTD, carta de fiança subscrita por terceiros. Sobre a responsabilidade pela autenticidade das assinaturas, é correto afirmar que:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "cabe ao oficial do RTD aferir a autenticidade das assinaturas dos fiadores."
+      },
+      {
+        "l": "B",
+        "t": "a responsabilidade é do credor beneficiário da fiança."
+      },
+      {
+        "l": "C",
+        "t": "a responsabilidade é solidária entre João e os fiadores."
+      },
+      {
+        "l": "D",
+        "t": "o registro convalida as assinaturas, afastando questionamentos."
+      },
+      {
+        "l": "E",
+        "t": "cabe exclusivamente a João, na qualidade de apresentante, a responsabilidade pela autenticidade das assinaturas constantes do documento."
+      }
+    ],
+    "correct": 4,
+    "comment": "<span class=\"lbl\">Por quê</span> A responsabilidade pela <b>autenticidade das assinaturas</b> do documento apresentado ao RTD recai <b>exclusivamente sobre o apresentante</b> (João) — o oficial registra o título sem garantir a veracidade das firmas (LRP art. 161). Alt. \"E\".\n              <span class=\"lbl\">As outras</span> \"A\" responsabiliza o oficial. \"B\" o credor. \"C\" cria solidariedade com os fiadores. \"D\" afirma que o registro convalida — não convalida vício.\n              <span class=\"lbl\">⚠️ Pegadinha</span> Mesmo tema da q39: registro dá publicidade/data certa, não atesta autenticidade — ônus do apresentante.\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> A fé pública do RTD é relativa quanto às firmas: a falsidade documental pode ser apurada e não é sanada pelo registro.\n              <span class=\"lbl\">🔁 Revisão</span> RTD: apresentante responde pela autenticidade das assinaturas; oficial não garante firmas.\n              <span class=\"lbl\">🎤 Prova oral</span> \"Quem responde pelas firmas da carta de fiança levada a RTD?\" — O apresentante, exclusivamente."
+  },
+  {
+    "id": "NR-rtd-locacao-competencia-domicilio-partes",
+    "banca": "CESPE · TJ-PE · Ingresso · 2024",
+    "tema": "RTD — Competência territorial (art. 130)",
+    "enun": "Maria (domiciliada em Petrolina) celebra contrato de locação de imóvel situado em Caruaru, tendo como fiadora Joana (domiciliada em Recife). Quanto ao registro no RTD para produzir efeitos contra terceiros, o registro deve ser feito:",
+    "alts": [
+      {
+        "l": "A",
+        "t": "obrigatoriamente em Caruaru, lugar do imóvel."
+      },
+      {
+        "l": "B",
+        "t": "exclusivamente no domicílio da fiadora, em Recife."
+      },
+      {
+        "l": "C",
+        "t": "em qualquer comarca do país, à escolha do apresentante."
+      },
+      {
+        "l": "D",
+        "t": "no domicílio das partes contratantes — Petrolina ou Recife — e, se residirem em circunscrições diversas, far-se-á o registro em todas elas."
+      },
+      {
+        "l": "E",
+        "t": "no foro de eleição indicado no contrato, ainda que diverso do domicílio das partes."
+      }
+    ],
+    "correct": 3,
+    "comment": "<span class=\"lbl\">Por quê</span> O RTD para valer contra terceiros é feito no <b>domicílio das partes contratantes</b>; residindo em circunscrições diversas, registra-se <b>em todas elas</b> (LRP art. 130, par. único). Como Maria está em Petrolina e a fiadora em Recife, o registro se faz em ambas. Alt. \"D\".\n              <span class=\"lbl\">As outras</span> \"A\" usa o lugar do imóvel — esse é critério do RI, não do RTD. \"B\" só o domicílio da fiadora. \"C\" qualquer comarca. \"E\" foro de eleição — não rege a competência registral.\n              <span class=\"lbl\">⚠️ Pegadinha</span> No RTD a competência é pelo <b>domicílio das partes</b>, não pelo local do imóvel (que é critério do Registro de Imóveis).\n              <span class=\"lbl\">⚖️ Dizer o Direito</span> Para oponibilidade plena a terceiros, residindo as partes em comarcas diversas, exige-se o registro em todas — a publicidade segue o domicílio de cada contratante (art. 130, par. único).\n              <span class=\"lbl\">🔁 Revisão</span> RTD competência: domicílio das partes; circunscrições diversas → registro em todas. (Imóvel = critério do RI.)\n              <span class=\"lbl\">🎤 Prova oral</span> \"Onde registrar no RTD um contrato com partes em comarcas diferentes?\" — No domicílio de cada parte; em todas as circunscrições."
+  }
+];
+
+/* ===================== ESTADO ===================== */
+let order=[], answers=[], flags=[], cur=0, elapsed=0, timerId=null, nome="";
+
+const $=id=>document.getElementById(id);
+function show(sec){ ["scrIntro","scrQuiz","scrResult"].forEach(s=>$(s).classList.toggle("hidden",s!==sec)); }
+function fmt(s){ const m=Math.floor(s/60),x=s%60; return String(m).padStart(2,"0")+":"+String(x).padStart(2,"0"); }
+
+function plusDays(n){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+function writeStore(){
+  const prog={respostas:{},caderno:{},revisao:{}};
+  QUESTIONS.forEach((q,qi)=>{
+    const pos=order.indexOf(qi); if(pos<0) return;
+    const a=answers[pos]; if(a==null) return;
+    const id=String(qi+1);
+    prog.respostas[id]=q.alts[a].l;
+    if(a!==q.correct){ prog.caderno[id]=1; prog.revisao[id]={nextDate:plusDays(1)}; }
+    else { prog.revisao[id]={nextDate:plusDays(7)}; }
+  });
+  localStorage.setItem(STORE, JSON.stringify(prog));
+}
+function save(){
+  localStorage.setItem(KEY, JSON.stringify({order,answers,flags,cur,elapsed,nome}));
+  writeStore();
+  flash($("btnSave"),"Salvo ✓");
+}
+function flash(btn,txt){ const o=btn.textContent; btn.textContent=txt; setTimeout(()=>btn.textContent=o,900); }
+function loadSaved(){ try{ return JSON.parse(localStorage.getItem(KEY)); }catch(e){ return null; } }
+function clearSaved(){ localStorage.removeItem(KEY); }
+
+function startTimer(){ stopTimer(); timerId=setInterval(()=>{ elapsed++; $("timer").textContent=fmt(elapsed); },1000); }
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
+
+function renderProgress(){
+  const done=answers.filter(a=>a!=null).length, N=order.length;
+  $("progBar").style.width=(done/N*100)+"%";
+  $("progTxt").textContent=done+"/"+N;
+}
+function renderNav(){
+  const nav=$("qnav"); nav.innerHTML="";
+  order.forEach((qi,pos)=>{
+    const b=document.createElement("button");
+    b.className="qnav-b"+(answers[pos]!=null?" answered":"")+(pos===cur?" current":"")+(flags[pos]?" flagged":"");
+    b.textContent=pos+1;
+    b.onclick=()=>{ cur=pos; renderQ(); };
+    nav.appendChild(b);
+  });
+}
+function renderQ(){
+  const q=QUESTIONS[order[cur]], N=order.length;
+  $("qNum").textContent=(cur+1)+"/"+N;
+  $("qBanca").textContent=q.banca||"";
+  $("qTema").textContent=q.tema||"";
+  $("qEnun").textContent=q.enun;
+  const answered=answers[cur]!=null;
+  const alts=$("qAlts"); alts.innerHTML="";
+  q.alts.forEach((a,i)=>{
+    const d=document.createElement("div");
+    d.className="alt"+(answered?" locked":"");
+    if(answered){
+      if(i===q.correct) d.classList.add("correct");
+      else if(i===answers[cur]) d.classList.add("wrong");
+    }
+    d.innerHTML=`<span class="letra">${a.l}</span><span class="txt">${a.t}</span>`;
+    if(!answered) d.onclick=()=>answer(i);
+    alts.appendChild(d);
+  });
+  const c=$("qComment");
+  if(answered){ c.innerHTML=q.comment; c.classList.remove("hidden"); }
+  else c.classList.add("hidden");
+  $("btnFlag").textContent=flags[cur]?"⚑ Marcada":"⚑ Revisar";
+  renderNav(); renderProgress();
+}
+function answer(i){
+  if(answers[cur]!=null) return;
+  answers[cur]=i; save(); renderQ();
+}
+
+function begin(resume){
+  if(!resume){
+    order=QUESTIONS.map((_,i)=>i);
+    if($("optShuffle").checked) for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+    answers=Array(order.length).fill(null);
+    flags=Array(order.length).fill(false);
+    cur=0; elapsed=0;
+  }
+  nome=$("nome").value.trim()||nome;
+  show("scrQuiz"); startTimer(); renderQ();
+}
+function finish(){
+  stopTimer();
+  const N=order.length;
+  let ac=0; order.forEach((qi,pos)=>{ if(answers[pos]===QUESTIONS[qi].correct) ac++; });
+  const er=N-ac, pct=Math.round(ac/N*100);
+  $("rScore").textContent=ac+"/"+N;
+  $("rPct").textContent="("+pct+"%)";
+  $("rAcertos").textContent=ac; $("rErros").textContent=er;
+  $("rTempo").textContent=fmt(elapsed); $("rRend").textContent=pct+"%";
+  buildCard(ac,N,pct);
+  writeStore();
+  renderReview("all");
+  show("scrResult");
+}
+function buildCard(ac,N,pct){
+  const gab=order.map((qi,pos)=>{
+    const sel=answers[pos]; const letra=sel!=null?QUESTIONS[qi].alts[sel].l:"–";
+    return (pos+1)+"-"+letra;
+  }).join(" · ");
+  const txt=
+`📋 ${META} — ${DISCIPLINA}
+${nome?("👤 "+nome+"\n"):""}✅ ${ac}/${N}  (${pct}%)
+⏱️ ${fmt(elapsed)}
+Gabarito: ${gab}`;
+  $("rCard").value=txt;
+}
+function renderReview(f){
+  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.f===f));
+  const list=$("reviewList"); list.innerHTML="";
+  order.forEach((qi,pos)=>{
+    const q=QUESTIONS[qi], ok=answers[pos]===q.correct;
+    if(f==="wrong"&&ok) return;
+    if(f==="flag"&&!flags[pos]) return;
+    const d=document.createElement("div"); d.className="rev-item";
+    const sel=answers[pos]!=null?q.alts[answers[pos]].l:"–";
+    const cor=q.alts[q.correct].l;
+    d.innerHTML=
+      `<div class="rq"><span class="tag ${ok?'ok':'er'}">${ok?'Acertou':'Errou'}</span>`+
+      `<b>${pos+1}.</b> ${q.tema?('· '+q.tema):''}</div>`+
+      `<div class="rq">${q.enun}</div>`+
+      `<div class="muted">Sua resposta: <b>${sel}</b> · Correta: <b>${cor}</b></div>`+
+      `<div id="rc${pos}" style="margin-top:8px">${q.comment}</div>`;
+    list.appendChild(d);
+  });
+}
+
+function checkResume(){
+  const s=loadSaved();
+  if(s&&s.order&&s.answers&&s.answers.some(a=>a!=null)){
+    $("btnResume").classList.remove("hidden");
+    if(s.nome) $("nome").value=s.nome;
+  }
+}
+
+$("introBadge").textContent=META+" · "+DISCIPLINA;
+$("introTitle").textContent=TEMA;
+document.title=META+" — "+DISCIPLINA;
+
+$("btnStart").onclick=()=>begin(false);
+$("btnResume").onclick=()=>{ const s=loadSaved(); if(!s)return; ({order,answers,flags,cur,elapsed,nome}=s); $("nome").value=nome||""; begin(true); };
+$("btnSave").onclick=save;
+$("btnPrev").onclick=()=>{ if(cur>0){cur--;renderQ();} };
+$("btnNext").onclick=()=>{ if(cur<order.length-1){cur++;renderQ();} };
+$("btnFlag").onclick=()=>{ flags[cur]=!flags[cur]; save(); renderQ(); };
+$("btnFinish").onclick=finish;
+$("btnCopyCard").onclick=()=>{ navigator.clipboard.writeText($("rCard").value); flash($("btnCopyCard"),"Copiado ✓"); };
+$("btnDownCard").onclick=()=>{
+  const blob=new Blob([$("rCard").value],{type:"text/plain"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download=(META+"-"+DISCIPLINA).replace(/\s+/g,"_")+".txt"; a.click();
+};
+$("btnRedoWrong").onclick=()=>{
+  const wrong=order.filter((qi,pos)=>answers[pos]!==QUESTIONS[qi].correct);
+  if(!wrong.length){ alert("Nenhuma errada 🎉"); return; }
+  order=wrong; answers=Array(order.length).fill(null); flags=Array(order.length).fill(false);
+  cur=0; elapsed=0; clearSaved(); show("scrQuiz"); startTimer(); renderQ();
+};
+$("btnRestart").onclick=()=>{ clearSaved(); location.reload(); };
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>renderReview(c.dataset.f));
+
+checkResume();
+show("scrIntro");
+</script>
+</body>
+</html>

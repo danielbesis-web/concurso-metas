@@ -6,20 +6,20 @@
 <title>1ª Fase — Cronograma de Metas</title>
 <style>
 :root{
-  --bg:#050b18;--card:#0b1828;--border:#16365a;--glow:rgba(46,120,200,.28);
-  --text:#e9f0f8;--muted:#90a6c0;--soft:#b9c8dc;
-  --green:#27c06a;--greenbg:#0a2016;--greenb:#1c5e3a;--greenglow:rgba(34,197,105,.28);
-  --amber:#f5a623;--amberbg:#241a08;--amberb:#6a4a14;--amberglow:rgba(245,166,35,.28);
-  --cyan:#38bdf8;--cyanbg:#06212e;--cyanb:#155a72;
-  --purple:#b06bf2;--purplebg:#190f2c;--purpleb:#432a6e;
-  --red:#f25555;--redbg:#240c0c;--redb:#6a1f1f;
+--bg:#050b18;--card:#0b1828;--border:#16365a;--glow:rgba(46,120,200,.28);
+--text:#e9f0f8;--muted:#90a6c0;--soft:#b9c8dc;
+--green:#27c06a;--greenbg:#0a2016;--greenb:#1c5e3a;--greenglow:rgba(34,197,105,.28);
+--amber:#f5a623;--amberbg:#241a08;--amberb:#6a4a14;--amberglow:rgba(245,166,35,.28);
+--cyan:#38bdf8;--cyanbg:#06212e;--cyanb:#155a72;
+--purple:#b06bf2;--purplebg:#190f2c;--purpleb:#432a6e;
+--red:#f25555;--redbg:#240c0c;--redb:#6a1f1f;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  background:radial-gradient(1200px 700px at 50% -120px,#0c1d33 0%,var(--bg) 60%);
-  color:var(--text);min-height:100vh;padding:28px 16px 80px;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  line-height:1.5;-webkit-font-smoothing:antialiased;
+background:radial-gradient(1200px 700px at 50% -120px,#0c1d33 0%,var(--bg) 60%);
+color:var(--text);min-height:100vh;padding:28px 16px 80px;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+line-height:1.5;-webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:680px;margin:0 auto}
 
@@ -30,8 +30,8 @@ body{
 
 /* Aviso */
 .aviso{
-  background:var(--amberbg);border:1px solid var(--amberb);border-radius:13px;
-  padding:12px 16px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;font-size:13px;
+background:var(--amberbg);border:1px solid var(--amberb);border-radius:13px;
+padding:12px 16px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;font-size:13px;
 }
 .aviso span{color:var(--amber);flex:1;line-height:1.5}
 
@@ -41,20 +41,20 @@ body{
 
 /* Linha vertical */
 .titem::before{
-  content:"";position:absolute;left:19px;top:40px;bottom:-1px;
-  width:2px;background:var(--border);z-index:0;
+content:"";position:absolute;left:19px;top:40px;bottom:-1px;
+width:2px;background:var(--border);z-index:0;
 }
 .titem:last-child::before{display:none}
 
 /* Bolinha do dia */
 .tday{
-  flex:0 0 40px;display:flex;flex-direction:column;align-items:center;
-  padding-top:12px;z-index:1;
+flex:0 0 40px;display:flex;flex-direction:column;align-items:center;
+padding-top:12px;z-index:1;
 }
 .tball{
-  width:38px;height:38px;border-radius:50%;border:2px solid var(--border);
-  background:var(--card);display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;
+width:38px;height:38px;border-radius:50%;border:2px solid var(--border);
+background:var(--card);display:flex;align-items:center;justify-content:center;
+font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;
 }
 .tball.active{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 14px -4px var(--cyan)}
 .tball.done{border-color:var(--green);color:var(--green);box-shadow:0 0 14px -4px var(--greenglow)}
@@ -62,10 +62,10 @@ body{
 
 /* Card da meta */
 .tcard{
-  flex:1;margin:8px 0 20px 14px;
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:16px 18px;
-  box-shadow:0 0 0 1px rgba(255,255,255,.02),0 12px 32px -20px var(--glow);
+flex:1;margin:8px 0 20px 14px;
+background:var(--card);border:1px solid var(--border);border-radius:16px;
+padding:16px 18px;
+box-shadow:0 0 0 1px rgba(255,255,255,.02),0 12px 32px -20px var(--glow);
 }
 .tcard.active{border-color:var(--cyanb)}
 .tcard.done{border-color:var(--greenb);box-shadow:0 0 0 1px rgba(34,197,105,.06),0 12px 32px -20px var(--greenglow)}
@@ -78,10 +78,10 @@ body{
 /* Ferramentas da meta */
 .tools{display:flex;flex-direction:column;gap:8px}
 .tool{
-  display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 13px;
-  text-decoration:none;color:var(--soft);font-size:13px;cursor:pointer;
-  transition:.14s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 13px;
+text-decoration:none;color:var(--soft);font-size:13px;cursor:pointer;
+transition:.14s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
 }
 .tool:hover{border-color:var(--cyanb);background:rgba(56,189,248,.07);color:var(--text)}
 .tool .ticon{font-size:16px;flex-shrink:0}
@@ -96,18 +96,18 @@ body{
 
 /* Badge "em breve" */
 .soon{
-  display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:7px 12px;
-  color:var(--muted);font-size:12px;font-weight:600;
+display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:7px 12px;
+color:var(--muted);font-size:12px;font-weight:600;
 }
 
 /* Stats globais */
 .stats{
-  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;
+display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;
 }
 .stt{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:9px 16px;text-align:center;min-width:80px;
+background:var(--card);border:1px solid var(--border);border-radius:12px;
+padding:9px 16px;text-align:center;min-width:80px;
 }
 .stt .n{font-size:20px;font-weight:800;display:block;line-height:1.1}
 .stt .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
@@ -118,9 +118,9 @@ body{
 /* Painel por disciplina */
 .disc-panel{margin-bottom:24px}
 .disc-section-title{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
 .disc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:14px 16px;margin-bottom:8px}
+padding:14px 16px;margin-bottom:8px}
 .disc-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:10px}
 .disc-nome{font-size:13px;font-weight:800;color:var(--text)}
 .disc-num{font-size:13px;font-weight:800;white-space:nowrap}
@@ -131,8 +131,8 @@ body{
 .disc-erros-label{font-size:11px;font-weight:800;color:var(--red);white-space:nowrap;padding-top:2px}
 .disc-tags{display:flex;flex-wrap:wrap;gap:4px;flex:1}
 .disc-tag{background:rgba(242,85,85,.1);border:1px solid rgba(242,85,85,.22);
-  border-radius:5px;padding:2px 7px;font-size:11px;font-weight:700;color:var(--red);
-  text-decoration:none;transition:.12s}
+border-radius:5px;padding:2px 7px;font-size:11px;font-weight:700;color:var(--red);
+text-decoration:none;transition:.12s}
 .disc-tag:hover{background:rgba(242,85,85,.22)}
 .disc-zero{font-size:12px;color:var(--green);font-weight:700}
 .disc-pending{font-size:12px;color:var(--muted);font-style:italic}
@@ -141,276 +141,278 @@ body{
 <body>
 <div class="wrap">
 
-  <div class="head">
-    <h1>1ª Fase — Cronograma de Metas</h1>
-    <p>Cartório · Prova Objetiva · Seu progresso é salvo neste aparelho</p>
-  </div>
+<div class="head">
+<h1>1ª Fase — Cronograma de Metas</h1>
+<p>Cartório · Prova Objetiva · Seu progresso é salvo neste aparelho</p>
+</div>
 
-  <div class="stats" id="statsGlobal"></div>
+<div class="stats" id="statsGlobal"></div>
 
-  <div id="disc-panel" class="disc-panel"></div>
+<div id="disc-panel" class="disc-panel"></div>
 
-  <div style="text-align:center;margin-bottom:20px">
-    <a href="cadernos.html" style="display:inline-flex;align-items:center;gap:7px;background:#0b1828;border:1px solid #155a72;border-radius:10px;padding:9px 18px;color:#38bdf8;font-size:13px;font-weight:700;text-decoration:none;">📓 Cadernos de Revisão</a>
-  </div>
+<div style="text-align:center;margin-bottom:20px">
+<a href="cadernos.html" style="display:inline-flex;align-items:center;gap:7px;background:#0b1828;border:1px solid #155a72;border-radius:10px;padding:9px 18px;color:#38bdf8;font-size:13px;font-weight:700;text-decoration:none;">📓 Cadernos de Revisão</a>
+</div>
 
-  <div class="aviso">
-    <span>⚠️ Abra as ferramentas por esta página — elas funcionam como página normal no navegador. Não as acesse por dentro do Notion ou iframe: o progresso não é salvo.</span>
-  </div>
+<div class="aviso">
+<span>⚠️ Abra as ferramentas por esta página — elas funcionam como página normal no navegador. Não as acesse por dentro do Notion ou iframe: o progresso não é salvo.</span>
+</div>
 
+<div class="timeline" id="timeline"></div>
 
-  <div class="timeline" id="timeline"></div>
-
-  <div class="end">Abra este link no navegador e salve nos favoritos · Cada pessoa tem seu próprio progresso</div>
+<div class="end">Abra este link no navegador e salve nos favoritos · Cada pessoa tem seu próprio progresso</div>
 
 </div>
 
 <script>
 // ─── EDITE AQUI: todas as metas do cronograma ───────────────────────────────
 const METAS = [
-  {dia:1, titulo:"Meta 1 · Notarial", sub:"Atos notariais fundamentais", ferramentas:[]},
-  {dia:2, titulo:"Meta 2 · Civil",    sub:"Parte geral e obrigações",    ferramentas:[]},
-  {dia:3, titulo:"Meta 3 · Notarial", sub:"Registros e escrituras",      ferramentas:[]},
-  {dia:4, titulo:"Meta 4 · Empresarial", sub:"Direito empresarial",      ferramentas:[]},
-  {dia:5, titulo:"Meta 5 · Constitucional", sub:"Direito constitucional",ferramentas:[]},
-  {dia:6, titulo:"Meta 6 · Notarial", sub:"Normas cartoriais",           ferramentas:[]},
-  {dia:7, titulo:"Meta 7 · Tributário", sub:"Direito tributário",        ferramentas:[]},
-  {dia:8, titulo:"Meta 8 · Administrativo", sub:"Direito administrativo",ferramentas:[]},
-  {dia:9, titulo:"Meta 9 · Civil", sub:"Defeitos do NJ · Prescrição · Obrigações", disc:"Civil",
-    ferramentas:[
-      {nome:"Q54 a Q68", icon:"📝", url:"meta9-q54-q68.html", store:"concurso_q54_q68_v2", total:15},
-      {nome:"Q69 a Q83", icon:"📝", url:"meta9-q69-q83.html", store:"concurso_q69_q83_v2", total:15},
-      {nome:"Q84 a Q98", icon:"📝", url:"meta9-q84-q98.html", store:"concurso_q84_q98_v2", total:15}
-    ]
-  },
-  {dia:10, titulo:"Meta 10 · Notarial", sub:"Lei do Protesto", disc:"Lei do Protesto",
-    ferramentas:[
-      {nome:"Lei do Protesto — Parte 1", icon:"📝", url:"meta10-notarial.html", store:"concurso_q130_q144_v1", total:15},
-      {nome:"Lei do Protesto — Parte 2", icon:"📝", url:"meta10-notarial-parte2.html", store:"concurso_meta10_parte2_v1", total:15},
-      {nome:"Lei do Protesto — Parte 3", icon:"📝", url:"meta10-notarial-parte3.html", store:"concurso_meta10_parte3_v1", total:15}
-    ]
-  },
-  {dia:11, titulo:"Meta 11 · Processual Civil", sub:"Direito Processual Civil", disc:"Processual Civil",
-    ferramentas:[
-      {nome:"Processual Civil — Parte 1", icon:"📝", url:"meta11-procesocivil.html", store:"concurso_meta11_procivil_v1", total:14},
-      {nome:"Processual Civil — Parte 2", icon:"📝", url:"meta11-procesocivil-parte2.html", store:"concurso_meta11_procivil_p2_v1", total:16},
-      {nome:"Processual Civil — Parte 3", icon:"📝", url:"meta11-procesocivil-parte3.html", store:"concurso_meta11_procivil_p3_v1", total:15}
-    ]
-  },
-  {dia:12, titulo:"Meta 12 · Direito Penal", sub:"Direito Penal", disc:"Direito Penal",
-    ferramentas:[
-      {nome:"Direito Penal — Q1 a Q15", icon:"📝", url:"meta12-direitopenal-q1-q15.html", store:"concurso_meta12_penal_q1q15_v1", total:15},
-      {nome:"Direito Penal — Q16 a Q30", icon:"📝", url:"meta12-direitopenal-q16-q30.html", store:"concurso_meta12_penal_q16q30_v1", total:15},
-      {nome:"Direito Penal — Q31 a Q45", icon:"📝", url:"meta12-direitopenal-q31-q45.html", store:"concurso_meta12_penal_q31q45_v1", total:15}
-    ]
-  },
-  {dia:13, titulo:"Meta 13 · Processual Penal", sub:"Direito Processual Penal", disc:"Processual Penal",
-    ferramentas:[
-      {nome:"Processual Penal — Q1 a Q15", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta13-q1q15.html", store:"concurso_meta13_procpenal_q1q15_v1", total:15},
-      {nome:"Processual Penal — Q16 a Q30", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta13-q16q30.html", store:"concurso_meta13_procpenal_q16q30_v1", total:15},
-      {nome:"Processual Penal — Q31 a Q44", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta13-q31q44.html", store:"concurso_meta13_procpenal_q31q44_v1", total:14}
-    ]
-  },
-  {dia:14, titulo:"Meta 14 · Notarial — Protesto", sub:"Protesto de Títulos · Cancelamento · Certidões · Cartórios", disc:"Notarial",
-    ferramentas:[
-      {nome:"Protesto — Q165 a Q179", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta14-q165q179.html", store:"concurso_notarial_protesto_q165q179_v1", total:15},
-      {nome:"Cancelamento e Certidões — Q180 a Q194", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta14-q180q194.html", store:"concurso_meta14_protesto_cancel_certidoes_q180q194_v1", total:15},
-      {nome:"Certidões e Cartórios — Q195 a Q208", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta14-q195q208.html", store:"concurso_meta15_protesto_cartorios_q195q208_v1", total:14}
-    ]
-  },
-  {dia:15, titulo:"Meta 15 · Civil — Contratos", sub:"Direito Civil · Contratos", disc:"Civil",
-    ferramentas:[
-      {nome:"Contratos — Q108 a Q122", icon:"📝", url:"meta15-civil-contratos-q108q122.html", store:"concurso_meta15_civil_contratos_q108q122_v1", total:15},
-      {nome:"Contratos — Q123 a Q137", icon:"📝", url:"meta15-civil-contratos-q123q137.html", store:"concurso_meta16_civil_contratos_q123q137_v1", total:15},
-      {nome:"Contratos — Q138 a Q152", icon:"📝", url:"meta15-civil-contratos-q138q152.html", store:"concurso_meta17_civil_contratos_q138q152_v1", total:15}
-    ]
-  }
-  ,
-{dia:16, titulo:"Meta 16 · Empresarial — Direito Empresarial", sub:"Direito Empresarial · Simulados", disc:"Empresarial",
-  ferramentas:[
-    {nome:"Direito Empresarial — Q49 a Q63", icon:"📄", url:"Meta16-DireitoEmpresarial-Q49-Q63.html", store:"concurso_meta16_empresarial_q49q63"},
-    {nome:"Direito Empresarial — Q86 a Q99", icon:"📄", url:"Meta16-DireitoEmpresarial-Q86-Q99.html", store:"concurso_meta16_empresarial_q86q99"},
-    {nome:"Direito Empresarial — Parte 3", icon:"📄", url:"Meta16-DireitoEmpresarial-Parte 3.html", store:"concurso_meta16_empresarial_parte3"}
-  ]
+{dia:1, titulo:"Meta 1 · Notarial", sub:"Atos notariais fundamentais", ferramentas:[]},
+{dia:2, titulo:"Meta 2 · Civil", sub:"Parte geral e obrigações", ferramentas:[]},
+{dia:3, titulo:"Meta 3 · Notarial", sub:"Registros e escrituras", ferramentas:[]},
+{dia:4, titulo:"Meta 4 · Empresarial", sub:"Direito empresarial", ferramentas:[]},
+{dia:5, titulo:"Meta 5 · Constitucional", sub:"Direito constitucional",ferramentas:[]},
+{dia:6, titulo:"Meta 6 · Notarial", sub:"Normas cartoriais", ferramentas:[]},
+{dia:7, titulo:"Meta 7 · Tributário", sub:"Direito tributário", ferramentas:[]},
+{dia:8, titulo:"Meta 8 · Administrativo", sub:"Direito administrativo",ferramentas:[]},
+{dia:9, titulo:"Meta 9 · Civil", sub:"Defeitos do NJ · Prescrição · Obrigações", disc:"Civil",
+ferramentas:[
+{nome:"Q54 a Q68", icon:"📝", url:"meta9-q54-q68.html", store:"concurso_q54_q68_v2", total:15},
+{nome:"Q69 a Q83", icon:"📝", url:"meta9-q69-q83.html", store:"concurso_q69_q83_v2", total:15},
+{nome:"Q84 a Q98", icon:"📝", url:"meta9-q84-q98.html", store:"concurso_q84_q98_v2", total:15}
+]
+},
+{dia:10, titulo:"Meta 10 · Notarial", sub:"Lei do Protesto", disc:"Lei do Protesto",
+ferramentas:[
+{nome:"Lei do Protesto — Parte 1", icon:"📝", url:"meta10-notarial.html", store:"concurso_q130_q144_v1", total:15},
+{nome:"Lei do Protesto — Parte 2", icon:"📝", url:"meta10-notarial-parte2.html", store:"concurso_meta10_parte2_v1", total:15},
+{nome:"Lei do Protesto — Parte 3", icon:"📝", url:"meta10-notarial-parte3.html", store:"concurso_meta10_parte3_v1", total:15}
+]
+},
+{dia:11, titulo:"Meta 11 · Processual Civil", sub:"Direito Processual Civil", disc:"Processual Civil",
+ferramentas:[
+{nome:"Processual Civil — Parte 1", icon:"📝", url:"meta11-procesocivil.html", store:"concurso_meta11_procivil_v1", total:14},
+{nome:"Processual Civil — Parte 2", icon:"📝", url:"meta11-procesocivil-parte2.html", store:"concurso_meta11_procivil_p2_v1", total:16},
+{nome:"Processual Civil — Parte 3", icon:"📝", url:"meta11-procesocivil-parte3.html", store:"concurso_meta11_procivil_p3_v1", total:15}
+]
+},
+{dia:12, titulo:"Meta 12 · Direito Penal", sub:"Direito Penal", disc:"Direito Penal",
+ferramentas:[
+{nome:"Direito Penal — Q1 a Q15", icon:"📝", url:"meta12-direitopenal-q1-q15.html", store:"concurso_meta12_penal_q1q15_v1", total:15},
+{nome:"Direito Penal — Q16 a Q30", icon:"📝", url:"meta12-direitopenal-q16-q30.html", store:"concurso_meta12_penal_q16q30_v1", total:15},
+{nome:"Direito Penal — Q31 a Q45", icon:"📝", url:"meta12-direitopenal-q31-q45.html", store:"concurso_meta12_penal_q31q45_v1", total:15}
+]
+},
+{dia:13, titulo:"Meta 13 · Processual Penal", sub:"Direito Processual Penal", disc:"Processual Penal",
+ferramentas:[
+{nome:"Processual Penal — Q1 a Q15", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta13-q1q15.html", store:"concurso_meta13_procpenal_q1q15_v1", total:15},
+{nome:"Processual Penal — Q16 a Q30", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta13-q16q30.html", store:"concurso_meta13_procpenal_q16q30_v1", total:15},
+{nome:"Processual Penal — Q31 a Q44", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta13-q31q44.html", store:"concurso_meta13_procpenal_q31q44_v1", total:14}
+]
+},
+{dia:14, titulo:"Meta 14 · Notarial — Protesto", sub:"Protesto de Títulos · Cancelamento · Certidões · Cartórios", disc:"Notarial",
+ferramentas:[
+{nome:"Protesto — Q165 a Q179", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta14-q165q179.html", store:"concurso_notarial_protesto_q165q179_v1", total:15},
+{nome:"Cancelamento e Certidões — Q180 a Q194", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta14-q180q194.html", store:"concurso_meta14_protesto_cancel_certidoes_q180q194_v1", total:15},
+{nome:"Certidões e Cartórios — Q195 a Q208", icon:"📝", url:"https://danielbesis-web.github.io/prova-oral/meta14-q195q208.html", store:"concurso_meta15_protesto_cartorios_q195q208_v1", total:14}
+]
+},
+{dia:15, titulo:"Meta 15 · Civil — Contratos", sub:"Direito Civil · Contratos", disc:"Civil",
+ferramentas:[
+{nome:"Contratos — Q108 a Q122", icon:"📝", url:"meta15-civil-contratos-q108q122.html", store:"concurso_meta15_civil_contratos_q108q122_v1", total:15},
+{nome:"Contratos — Q123 a Q137", icon:"📝", url:"meta15-civil-contratos-q123q137.html", store:"concurso_meta16_civil_contratos_q123q137_v1", total:15},
+{nome:"Contratos — Q138 a Q152", icon:"📝", url:"meta15-civil-contratos-q138q152.html", store:"concurso_meta17_civil_contratos_q138q152_v1", total:15}
+]
+},
+{dia:16, titulo:"Meta 16 · Empresarial", sub:"Direito Empresarial · Contratos · Garantias · Falência", disc:"Empresarial",
+ferramentas:[
+{nome:"Empresarial — Q49 a Q63", icon:"📝", url:"Meta16-DireitoEmpresarial-Q49-Q63.html", store:"concurso_meta16_empresarial_q49q63_v1", total:15},
+{nome:"Empresarial — Contratos, Garantias e Falência", icon:"📝", url:"Meta16-DireitoEmpresarial-Q86-Q99.html", store:"concurso_meta16_empresarial_q86q99_v1", total:8},
+{nome:"Empresarial — Contratos empresariais (Parte 3)", icon:"📝", url:"Meta16-DireitoEmpresarial-Parte3.html", store:"concurso_meta16_empresarial_parte4_v1", total:15}
+]
+},
+{dia:17, titulo:"Meta 17 · Notarial — RCPN/RCPJ/RTD", sub:"Registro Civil PN · Registro de PJ · Títulos e Documentos", disc:"Notarial",
+ferramentas:[
+{nome:"RCPN · RCPJ · RTD — 45 questões", icon:"📝", url:"Meta17-Notarial-Parte1.html", store:"concurso_meta17_notarial_p375_v1", total:45}
+]
 }
-
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
 function hojeISO(){
-  const d=new Date(); d.setHours(0,0,0,0); return d.toISOString().slice(0,10);
+const d=new Date(); d.setHours(0,0,0,0); return d.toISOString().slice(0,10);
 }
 
 function lerProgresso(store, total, revStore){
-  try{
-    const s = JSON.parse(localStorage.getItem(store)||'{}');
-    const hoje = hojeISO();
-    let respondidas=0, acertos=0, erros=0, revisarHoje=0;
-    if(s.respostas){
-      const respostas = s.respostas;
-      const revisao = s.revisao || {};
-      respondidas = Object.keys(respostas).length;
-      const errantes = new Set(Object.keys(s.caderno||{}));
-      acertos = Object.keys(respostas).filter(id=>!errantes.has(id)).length;
-      erros = respondidas - acertos;
-      revisarHoje = Object.values(revisao).filter(r=>r.nextDate && r.nextDate<=hoje).length;
-    } else if(s.resp){
-      respondidas = Object.keys(s.resp).length;
-      acertos = respondidas; erros = 0;
-      if(revStore){
-        const rev = JSON.parse(localStorage.getItem(revStore)||'{}');
-        revisarHoje = Object.values(rev).filter(v=>typeof v==='string'&&v<=hoje).length;
-      }
-    }
-    return {respondidas, acertos, erros, revisarHoje, total};
-  }catch(e){ return {respondidas:0, acertos:0, erros:0, revisarHoje:0, total}; }
+try{
+const s = JSON.parse(localStorage.getItem(store)||'{}');
+const hoje = hojeISO();
+let respondidas=0, acertos=0, erros=0, revisarHoje=0;
+if(s.respostas){
+const respostas = s.respostas;
+const revisao = s.revisao || {};
+respondidas = Object.keys(respostas).length;
+const errantes = new Set(Object.keys(s.caderno||{}));
+acertos = Object.keys(respostas).filter(id=>!errantes.has(id)).length;
+erros = respondidas - acertos;
+revisarHoje = Object.values(revisao).filter(r=>r.nextDate && r.nextDate<=hoje).length;
+} else if(s.resp){
+respondidas = Object.keys(s.resp).length;
+acertos = respondidas; erros = 0;
+if(revStore){
+const rev = JSON.parse(localStorage.getItem(revStore)||'{}');
+revisarHoje = Object.values(rev).filter(v=>typeof v==='string'&&v<=hoje).length;
+}
+}
+return {respondidas, acertos, erros, revisarHoje, total};
+}catch(e){ return {respondidas:0, acertos:0, erros:0, revisarHoje:0, total}; }
 }
 
 function renderTool(f){
-  const p = lerProgresso(f.store, f.total, f.revStore);
-  const pct = Math.round((p.respondidas/f.total)*100);
-  let progTxt = p.respondidas===0 ? 'Não iniciado'
-    : p.respondidas===f.total ? `✓ Concluído · ${p.acertos} acertos`
-    : `${p.respondidas}/${f.total} questões`;
-  let progClass = p.respondidas===f.total ? 'ok' : p.revisarHoje>0 ? 'due' : '';
-  if(p.revisarHoje>0) progTxt += ` · ⏰ ${p.revisarHoje} p/ revisar`;
+const p = lerProgresso(f.store, f.total, f.revStore);
+const pct = Math.round((p.respondidas/f.total)*100);
+let progTxt = p.respondidas===0 ? 'Não iniciado'
+: p.respondidas===f.total ? `✓ Concluído · ${p.acertos} acertos`
+: `${p.respondidas}/${f.total} questões`;
+let progClass = p.respondidas===f.total ? 'ok' : p.revisarHoje>0 ? 'due' : '';
+if(p.revisarHoje>0) progTxt += ` · ⏰ ${p.revisarHoje} p/ revisar`;
 
-  return `
-    <a class="tool" href="${f.url}" target="_blank" rel="noopener">
-      <span class="ticon">${f.icon}</span>
-      <span class="tname">${f.nome}</span>
-      <span class="tprog ${progClass}">${progTxt}</span>
-    </a>
-    ${p.respondidas>0?`<div class="progbar"><div class="progfill" style="width:${pct}%"></div></div>`:''}
-  `;
+return `
+<a class="tool" href="${f.url}" target="_blank" rel="noopener">
+<span class="ticon">${f.icon}</span>
+<span class="tname">${f.nome}</span>
+<span class="tprog ${progClass}">${progTxt}</span>
+</a>
+${p.respondidas>0?`<div class="progbar"><div class="progfill" style="width:${pct}%"></div></div>`:''}
+`;
 }
 
 function render(){
-  const hoje = hojeISO();
-  let totalAc=0, totalEr=0, totalRev=0;
+const hoje = hojeISO();
+let totalAc=0, totalEr=0, totalRev=0;
 
-  const tl = document.getElementById('timeline');
-  tl.innerHTML = METAS.map(m=>{
-    const temFerramenta = m.ferramentas.length > 0;
-    let status = 'pending';
-    let toolsHTML = '';
+const tl = document.getElementById('timeline');
+tl.innerHTML = METAS.map(m=>{
+const temFerramenta = m.ferramentas.length > 0;
+let status = 'pending';
+let toolsHTML = '';
 
-    if(temFerramenta){
-      let algumIniciado=false, todoConcluido=true, algumDue=false;
-      m.ferramentas.forEach(f=>{
-        const p=lerProgresso(f.store,f.total,f.revStore);
-        if(p.respondidas>0) algumIniciado=true;
-        if(p.respondidas<f.total) todoConcluido=false;
-        if(p.revisarHoje>0) algumDue=true;
-        totalAc+=p.acertos; totalEr+=p.erros; totalRev+=p.revisarHoje;
-      });
-      if(algumDue) status='due';
-      else if(todoConcluido) status='done';
-      else if(algumIniciado) status='active';
+if(temFerramenta){
+let algumIniciado=false, todoConcluido=true, algumDue=false;
+m.ferramentas.forEach(f=>{
+const p=lerProgresso(f.store,f.total,f.revStore);
+if(p.respondidas>0) algumIniciado=true;
+if(p.respondidas<f.total) todoConcluido=false;
+if(p.revisarHoje>0) algumDue=true;
+totalAc+=p.acertos; totalEr+=p.erros; totalRev+=p.revisarHoje;
+});
+if(algumDue) status='due';
+else if(todoConcluido) status='done';
+else if(algumIniciado) status='active';
 
-      toolsHTML = `<div class="tools">${m.ferramentas.map(renderTool).join('')}</div>`;
-    } else {
-      toolsHTML = `<span class="soon">🔒 Em breve</span>`;
-    }
+toolsHTML = `<div class="tools">${m.ferramentas.map(renderTool).join('')}</div>`;
+} else {
+toolsHTML = `<span class="soon">🔒 Em breve</span>`;
+}
 
-    const ballClass = status==='done'?'done':status==='due'?'due':temFerramenta?'active':'';
-    const cardClass = status==='done'?'done':status==='due'?'due':temFerramenta?'active':'';
+const ballClass = status==='done'?'done':status==='due'?'due':temFerramenta?'active':'';
+const cardClass = status==='done'?'done':status==='due'?'due':temFerramenta?'active':'';
 
-    return `
-    <div class="titem">
-      <div class="tday"><div class="tball ${ballClass}">${m.dia}</div></div>
-      <div class="tcard ${cardClass}">
-        <div class="tmeta">Dia ${m.dia}</div>
-        <div class="ttitle">${m.titulo}</div>
-        <div class="tsub">${m.sub}</div>
-        ${toolsHTML}
-      </div>
-    </div>`;
-  }).join('');
+return `
+<div class="titem">
+<div class="tday"><div class="tball ${ballClass}">${m.dia}</div></div>
+<div class="tcard ${cardClass}">
+<div class="tmeta">Dia ${m.dia}</div>
+<div class="ttitle">${m.titulo}</div>
+<div class="tsub">${m.sub}</div>
+${toolsHTML}
+</div>
+</div>`;
+}).join('');
 
-  // Stats globais
-  const sg = document.getElementById('statsGlobal');
-  sg.innerHTML = `
-    <div class="stt ac"><span class="n">${totalAc}</span><span class="l">Acertos</span></div>
-    <div class="stt er"><span class="n">${totalEr}</span><span class="l">Erros</span></div>
-    <div class="stt rev"><span class="n">${totalRev}</span><span class="l">Revisar hoje</span></div>
-  `;
+// Stats globais
+const sg = document.getElementById('statsGlobal');
+sg.innerHTML = `
+<div class="stt ac"><span class="n">${totalAc}</span><span class="l">Acertos</span></div>
+<div class="stt er"><span class="n">${totalEr}</span><span class="l">Erros</span></div>
+<div class="stt rev"><span class="n">${totalRev}</span><span class="l">Revisar hoje</span></div>
+`;
 }
 
 function lerQuestoesErradas(store, url){
-  try{
-    const s=JSON.parse(localStorage.getItem(store)||'{}');
-    if(s.caderno && Object.keys(s.caderno).length){
-      return Object.keys(s.caderno)
-        .sort((a,b)=>parseInt(a.replace(/\D/g,''))-parseInt(b.replace(/\D/g,'')))
-        .map(id=>({label:'Q'+id.replace(/\D/g,''), url}));
-    }
-    return [];
-  }catch(e){return[];}
+try{
+const s=JSON.parse(localStorage.getItem(store)||'{}');
+if(s.caderno && Object.keys(s.caderno).length){
+return Object.keys(s.caderno)
+.sort((a,b)=>parseInt(a.replace(/\D/g,''))-parseInt(b.replace(/\D/g,'')))
+.map(id=>({label:'Q'+id.replace(/\D/g,''), url}));
+}
+return [];
+}catch(e){return[];}
 }
 
 function renderDiscPanel(){
-  const discs={};
-  METAS.forEach(m=>{
-    if(!m.disc||!m.ferramentas.length) return;
-    if(!discs[m.disc]) discs[m.disc]={acertos:0,erros:0,total:0,respondidas:0,erradas:[]};
-    m.ferramentas.forEach(f=>{
-      const p=lerProgresso(f.store,f.total,f.revStore);
-      discs[m.disc].acertos+=p.acertos;
-      discs[m.disc].erros+=p.erros;
-      discs[m.disc].total+=f.total;
-      discs[m.disc].respondidas+=p.respondidas;
-      lerQuestoesErradas(f.store, f.url).forEach(q=>discs[m.disc].erradas.push(q));
-    });
-  });
+const discs={};
+METAS.forEach(m=>{
+if(!m.disc||!m.ferramentas.length) return;
+if(!discs[m.disc]) discs[m.disc]={acertos:0,erros:0,total:0,respondidas:0,erradas:[]};
+m.ferramentas.forEach(f=>{
+const p=lerProgresso(f.store,f.total,f.revStore);
+discs[m.disc].acertos+=p.acertos;
+discs[m.disc].erros+=p.erros;
+discs[m.disc].total+=f.total;
+discs[m.disc].respondidas+=p.respondidas;
+lerQuestoesErradas(f.store, f.url).forEach(q=>discs[m.disc].erradas.push(q));
+});
+});
 
-  const entries=Object.entries(discs);
-  const comDados=entries.filter(([,d])=>d.respondidas>0);
-  if(!comDados.length) return;
+const entries=Object.entries(discs);
+const comDados=entries.filter(([,d])=>d.respondidas>0);
+if(!comDados.length) return;
 
-  const cards=entries.map(([nome,d])=>{
-    if(!d.respondidas){
-      return `<div class="disc-card">
-        <div class="disc-card-top">
-          <span class="disc-nome">${nome}</span>
-          <span class="disc-num" style="color:var(--muted)">${d.total} questões</span>
-        </div>
-        <span class="disc-pending">Não iniciado</span>
-      </div>`;
-    }
-    const pct=Math.round(d.acertos/d.respondidas*100);
-    const numClass=pct>=80?'bom':pct>=60?'med':'fraco';
-    const fillColor=pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--red)';
-    const resto=d.total-d.respondidas;
+const cards=entries.map(([nome,d])=>{
+if(!d.respondidas){
+return `<div class="disc-card">
+<div class="disc-card-top">
+<span class="disc-nome">${nome}</span>
+<span class="disc-num" style="color:var(--muted)">${d.total} questões</span>
+</div>
+<span class="disc-pending">Não iniciado</span>
+</div>`;
+}
+const pct=Math.round(d.acertos/d.respondidas*100);
+const numClass=pct>=80?'bom':pct>=60?'med':'fraco';
+const fillColor=pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--red)';
+const resto=d.total-d.respondidas;
 
-    let erroHTML='';
-    if(d.erradas.length===0){
-      erroHTML=`<span class="disc-zero">✓ Nenhum erro registrado</span>`;
-    } else {
-      const tags=d.erradas.map(q=>`<a class="disc-tag" href="${q.url}" target="_blank">${q.label}</a>`).join('');
-      erroHTML=`<div class="disc-erros">
-        <span class="disc-erros-label">❌ ${d.erros}:</span>
-        <div class="disc-tags">${tags}</div>
-      </div>`;
-    }
+let erroHTML='';
+if(d.erradas.length===0){
+erroHTML=`<span class="disc-zero">✓ Nenhum erro registrado</span>`;
+} else {
+const tags=d.erradas.map(q=>`<a class="disc-tag" href="${q.url}" target="_blank">${q.label}</a>`).join('');
+erroHTML=`<div class="disc-erros">
+<span class="disc-erros-label">❌ ${d.erros}:</span>
+<div class="disc-tags">${tags}</div>
+</div>`;
+}
 
-    const restoTxt=resto>0?` <span style="font-size:11px;color:var(--muted)">(+${resto} pendentes)</span>`:'';
+const restoTxt=resto>0?` <span style="font-size:11px;color:var(--muted)">(+${resto} pendentes)</span>`:'';
 
-    return `<div class="disc-card">
-      <div class="disc-card-top">
-        <span class="disc-nome">${nome}${restoTxt}</span>
-        <span class="disc-num ${numClass}">${d.acertos}/${d.respondidas} · ${pct}%</span>
-      </div>
-      <div class="disc-bar"><div class="disc-fill" style="width:${pct}%;background:${fillColor}"></div></div>
-      ${erroHTML}
-    </div>`;
-  }).join('');
+return `<div class="disc-card">
+<div class="disc-card-top">
+<span class="disc-nome">${nome}${restoTxt}</span>
+<span class="disc-num ${numClass}">${d.acertos}/${d.respondidas} · ${pct}%</span>
+</div>
+<div class="disc-bar"><div class="disc-fill" style="width:${pct}%;background:${fillColor}"></div></div>
+${erroHTML}
+</div>`;
+}).join('');
 
-  document.getElementById('disc-panel').innerHTML=
-    `<div class="disc-section-title">
-       <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>
-       Desempenho por Disciplina
-     </div>${cards}`;
+document.getElementById('disc-panel').innerHTML=
+`<div class="disc-section-title">
+<div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>
+Desempenho por Disciplina
+</div>${cards}`;
 }
 
 render();
