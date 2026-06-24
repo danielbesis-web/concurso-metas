@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 18 · Constitucional — Parte 2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 18 · Constitucional — Parte 2</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 18 · Constitucional · MS coletivo e Controle de constitucionalidade · Parte 2</footer>
+<script>
+const STORE_KEY = 'concurso_meta18_constitucional_parte2_v1';   // chave do localStorage deste simulado
+const SLUG = STORE_KEY.replace(/^concurso_/,'');   // usado nos nomes dos arquivos de exportação
+const QUESTOES = [
+  {id:'q1', materia:'MS coletivo / lei em tese', banca:'CESPE · TJ/SC · 2023', tipo:'multipla',
+   enunciado:`Associação de notários e registradores impetrou mandado de segurança coletivo para impugnar lei estadual, supostamente inconstitucional, que alterou regras de provimento de serventias e teria prejudicado direitos individuais homogêneos de seus associados. Na inicial, embora não tenha juntado autorização dos associados, afirmou que o prejuízo da categoria era presumido. Conforme a legislação e a jurisprudência dos tribunais superiores, o processo deve ser extinto sem resolução de mérito porque:`,
+   alternativas:[
+     {letra:'A',texto:`a legitimidade em mandado de segurança coletivo é exclusiva de organização sindical, de modo que a associação deve valer-se de outro instrumento.`},
+     {letra:'B',texto:`o mandado de segurança coletivo não pode ser utilizado para a tutela de direitos individuais homogêneos.`},
+     {letra:'C',texto:`a instrução probatória em mandado de segurança é limitada, sendo esse instrumento incompatível com a tutela de direitos subjetivos.`},
+     {letra:'D',texto:`não cabe mandado de segurança contra ato normativo em abstrato.`},
+     {letra:'E',texto:`a impetração de mandado de segurança coletivo depende de autorização expressa de seus associados.`}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê (ICOL):</b> não cabe MS contra lei em tese (ato normativo em abstrato). A impetração atacava lei estadual em abstrato → extinção sem resolução de mérito por inadequação da via.<br><br><b>⚠️ Pegadinha:</b> E é o engodo — o MS coletivo de associação NÃO exige autorização expressa dos associados; B também engana — o MS coletivo PODE tutelar direitos individuais homogêneos. O motivo real da extinção é a impossibilidade de MS contra lei em tese.<br><br><b>📌 Fundamento:</b> Súmula 266/STF (não cabe MS contra lei em tese); Súmulas 629 e 630/STF.<br><br><b>⚖️ Da jurisprudência:</b> Súmula 266/STF — não cabe MS contra lei em tese.<br><br><b>🔁 Revisar:</b> não cabe MS contra lei em tese; MS coletivo de associação dispensa autorização e alcança direitos individuais homogêneos.`},
+
+  {id:'q2', materia:'Suspensão de segurança', banca:'IESES · TJ/TO · 2022', tipo:'multipla',
+   enunciado:`Marque a alternativa correta no que se refere às normas procedimentais nos processos perante o STJ e o STF.`,
+   alternativas:[
+     {letra:'A',texto:`Salvo quando a causa tiver por fundamento matéria constitucional, compete ao Presidente do STJ, a requerimento do PGR ou da pessoa jurídica de direito público interessada, e para evitar grave lesão à ordem, à saúde, à segurança e à economia públicas, suspender, em despacho fundamentado, a execução de liminar ou da decisão concessiva de mandado de segurança, proferida em única ou última instância pelos TRFs ou pelos Tribunais dos Estados e do DF.`},
+     {letra:'B',texto:`Finda a instrução, o Tribunal procederá ao julgamento, tendo a acusação e a defesa, sucessivamente, prazo de 2 horas para sustentação oral, assegurado ao assistente o dobro do tempo da acusação.`},
+     {letra:'C',texto:`O recurso ordinário para o STJ, das decisões denegatórias de Habeas Corpus proferidas pelos TRFs ou pelos Tribunais dos Estados e do DF, será interposto no prazo de 30 dias, independentemente das razões do pedido de reforma.`},
+     {letra:'D',texto:`Realizadas as diligências, ou não sendo requeridas nem determinadas pelo relator, serão intimadas a acusação e a defesa para, sucessivamente, apresentarem alegações escritas no prazo de 30 dias.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> a suspensão de liminar/decisão concessiva de MS (suspensão de segurança) compete ao presidente do tribunal a que couber o recurso — em regra ao Presidente do STJ quando a matéria for infraconstitucional —, a requerimento do PGR ou da pessoa jurídica de direito público interessada, para evitar grave lesão à ordem, à saúde, à segurança e à economia públicas.<br><br><b>⚠️ Pegadinha:</b> as demais distorcem prazos e procedimento (tempo de sustentação oral, prazo do recurso, alegações).<br><br><b>📌 Fundamento:</b> art. 15 da Lei 12.016/2009.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> suspensão de segurança = presidente do tribunal competente para o recurso, a pedido do PGR/PJ de direito público, contra grave lesão à ordem/saúde/segurança/economia.`},
+
+  {id:'q3', materia:'MS coletivo — legitimados', banca:'IESES · TJ/TO · 2022', tipo:'multipla',
+   enunciado:`Assinale a alternativa correta:`,
+   alternativas:[
+     {letra:'A',texto:`O cargo de Ministro do Superior Tribunal Militar é privativo de brasileiro nato.`},
+     {letra:'B',texto:`Conceder-se-á "habeas corpus" sempre que alguém sofrer ou se achar ameaçado de violência ou coação em sua liberdade de locomoção, inclusive em relação a punições disciplinares administrativas e militares.`},
+     {letra:'C',texto:`O mandado de segurança coletivo pode ser impetrado por partido político com representação no Congresso Nacional, bem como por organização sindical, entidade de classe ou associação legalmente constituída e em funcionamento há pelo menos um ano, em defesa dos interesses de seus membros ou associados.`},
+     {letra:'D',texto:`A lei que alterar o processo eleitoral entrará em vigor um ano após a data da sua publicação no Diário Oficial Eletrônico.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> o MS coletivo pode ser impetrado por partido político com representação no Congresso Nacional e por organização sindical, entidade de classe ou associação legalmente constituída e em funcionamento há pelo menos um ano, em defesa de seus membros ou associados.<br><br><b>⚠️ Pegadinha:</b> A — o cargo de Ministro do STM não consta no rol de privativos de brasileiro nato (art. 12, §3º); B — não cabe HC contra punição disciplinar militar (art. 142, §2º); D — a lei eleitoral entra em vigor na publicação, mas só se aplica à eleição que ocorra após 1 ano (anterioridade eleitoral).<br><br><b>📌 Fundamento:</b> art. 5º, LXX, CF.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> MS coletivo — partido com representação no CN OU sindicato/entidade de classe/associação (≥ 1 ano).`},
+
+  {id:'q4', materia:'MS — competência', banca:'CONSULPLAN · TJ/MS · 2021', tipo:'multipla',
+   enunciado:`Igor apresentou requerimento ao Ministro de Estado da Defesa, buscando o reconhecimento de direitos. Após o prazo regulamentado em lei, o Ministro indeferiu o pedido. Inconformado e esgotada a via administrativa, Igor impetrou mandado de segurança de competência do:`,
+   alternativas:[
+     {letra:'A',texto:`Superior Tribunal Militar.`},
+     {letra:'B',texto:`STF.`},
+     {letra:'C',texto:`STJ.`},
+     {letra:'D',texto:`Superior Tribunal Administrativo.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> mandado de segurança contra ato de Ministro de Estado é de competência originária do STJ.<br><br><b>⚠️ Pegadinha:</b> "Superior Tribunal Administrativo" (D) não existe; não é STF (B) nem STM (A).<br><br><b>📌 Fundamento:</b> art. 105, I, b, CF.<br><br><b>⚖️ Da jurisprudência:</b> N/A — competência constitucional.<br><br><b>🔁 Revisar:</b> ato de Ministro de Estado → MS no STJ.`},
+
+  {id:'q5', materia:'Controle concentrado estadual', banca:'FGV · TJ/ES · 2025', tipo:'multipla',
+   enunciado:`Aprovado na Assembleia Legislativa do Estado Alfa e sancionado pelo governador, foi publicado diploma normativo outorgando à Defensoria Pública estadual o poder de requisitar a instauração de inquérito policial. Como a Constituição Estadual não dispunha sobre o tema, um legitimado para a deflagração do controle concentrado perante o TJEA consultou sua assessoria. A resposta correta foi que o diploma normativo:`,
+   alternativas:[
+     {letra:'A',texto:`deve ser considerado constitucional caso tenha a forma de lei complementar.`},
+     {letra:'B',texto:`foi editado no exercício da competência concorrente de Alfa para legislar sobre procedimento.`},
+     {letra:'C',texto:`afronta a competência legislativa privativa da União, mas não pode ser submetido ao controle concentrado perante o TJEA.`},
+     {letra:'D',texto:`deve ser considerado inconstitucional, ressalvada a existência de lei complementar da União autorizando a sua edição, podendo ser submetido ao controle concentrado perante o TJEA.`},
+     {letra:'E',texto:`deve ser considerado constitucional por se tratar de matéria tipicamente administrativa, refletindo a competência legislativa residual de Alfa.`}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê (ICOL):</b> requisição de inquérito é matéria processual penal, de competência privativa da União (art. 22, I), só cabendo ao Estado legislar sobre questões específicas se houver lei complementar autorizando (art. 22, parágrafo único). Logo o diploma estadual é inconstitucional, podendo ser submetido ao controle concentrado perante o TJ quando o parâmetro for norma de reprodução obrigatória.<br><br><b>⚠️ Pegadinha:</b> tratar como competência concorrente/residual do Estado (B/E) ou "constitucional se for lei complementar estadual" (A).<br><br><b>📌 Fundamento:</b> art. 22, I e parágrafo único, CF.<br><br><b>⚖️ Da jurisprudência:</b> N/A — repartição de competências.<br><br><b>🔁 Revisar:</b> requisição de inquérito = matéria processual (União); Estado só legisla se houver lei complementar autorizando.`},
+
+  {id:'q6', materia:'ADI estadual / RE', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`Ao julgar procedente uma ADI, determinado tribunal de justiça estadual declarou inconstitucional uma lei municipal, com fundamento em norma formal. De acordo com a jurisprudência do STF, contra a referida decisão:`,
+   alternativas:[
+     {letra:'A',texto:`é cabível apenas recurso extraordinário ao STF, mesmo que o parâmetro de controle não seja norma da CF de reprodução obrigatória.`},
+     {letra:'B',texto:`são cabíveis simultaneamente recurso especial ao STJ e recurso extraordinário ao STF, mesmo que o parâmetro não seja norma de reprodução obrigatória.`},
+     {letra:'C',texto:`é cabível apenas recurso especial ao STJ.`},
+     {letra:'D',texto:`não cabe recurso especial ao STJ nem recurso extraordinário ao STF, pois a decisão do tribunal de justiça, no controle concentrado, é irrecorrível.`},
+     {letra:'E',texto:`é cabível recurso extraordinário ao STF apenas se o parâmetro de controle for norma da CF de reprodução obrigatória pelas constituições estaduais, e desde que se alegue violação à norma de repetição obrigatória constante na constituição estadual.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b><br><br><b>⚖️ Por quê (ICOL):</b> cabe recurso extraordinário ao STF contra decisão de ADI estadual (controle concentrado no TJ) quando o parâmetro for norma da Constituição Estadual de reprodução obrigatória da CF, alegando-se violação a essa norma de repetição obrigatória.<br><br><b>⚠️ Pegadinha:</b> não cabe recurso especial (controle de constitucionalidade não é matéria de REsp); a decisão não é irrecorrível (D).<br><br><b>📌 Fundamento:</b> art. 102, III, CF.<br><br><b>⚖️ Da jurisprudência:</b> STF — cabe RE de ADI estadual quando o parâmetro é norma de reprodução obrigatória.<br><br><b>🔁 Revisar:</b> ADI estadual + parâmetro de reprodução obrigatória → cabe RE ao STF.`},
+
+  {id:'q7', materia:'Modulação de efeitos', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`De acordo com o entendimento do STF, a modulação dos efeitos temporais na declaração de inconstitucionalidade:`,
+   alternativas:[
+     {letra:'A',texto:`é admitida por razões de excepcional interesse social, mas seus efeitos ficam restritos ao prazo de 12 meses, contados da publicação do ato de declaração.`},
+     {letra:'B',texto:`é admitida, por ausência de previsão legal expressa.`},
+     {letra:'C',texto:`é admitida por razões de segurança jurídica, mas os efeitos ficam restritos ao período anterior à data da sessão de julgamento.`},
+     {letra:'D',texto:`não é admitida, por implicar o afastamento da supremacia da Constituição.`},
+     {letra:'E',texto:`é admitida, por representar uma ponderação entre a norma constitucional violada e os princípios constitucionais que resguardam os efeitos já produzidos pela norma inconstitucional, como a segurança jurídica e o excepcional interesse social.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b><br><br><b>⚖️ Por quê (ICOL):</b> a modulação é admitida — por razões de segurança jurídica ou de excepcional interesse social, e por maioria de 2/3, o STF pondera entre a nulidade da norma inconstitucional e a proteção dos efeitos já produzidos, podendo restringir os efeitos ou fixar o momento de sua eficácia.<br><br><b>⚠️ Pegadinha:</b> dizer que não é admitida (D) ou prendê-la a prazo fixo de 12 meses (A); há, sim, previsão legal expressa (afasta B).<br><br><b>📌 Fundamento:</b> art. 27 da Lei 9.868/1999.<br><br><b>⚖️ Da jurisprudência:</b> N/A — base legal expressa.<br><br><b>🔁 Revisar:</b> modulação = 2/3 do STF, por segurança jurídica ou excepcional interesse social.`},
+
+  {id:'q8', materia:'ADI — embargos de declaração', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`Segundo a jurisprudência do STF, a legitimidade para interpor embargos de declaração em sede de ADI é atribuída:`,
+   alternativas:[
+     {letra:'A',texto:`a qualquer dos legitimados universais para a propositura da ADI, ainda que não tenha atuado como parte no processo julgado.`},
+     {letra:'B',texto:`a pessoas naturais com interesse na solução da controvérsia.`},
+     {letra:'C',texto:`ao Advogado-Geral da União.`},
+     {letra:'D',texto:`ao estado-membro, no caso de norma estadual, ou à União no caso de norma federal.`},
+     {letra:'E',texto:`ao "amicus curiae", desde que apresente informações relevantes ou dados técnicos que contribuam para o exame da causa.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> no controle abstrato, o STF reconhece ao Advogado-Geral da União legitimidade para opor embargos de declaração em ADI, pois atua no processo como defensor da norma impugnada.<br><br><b>⚠️ Pegadinha:</b> o amicus curiae, em regra, não tem legitimidade recursal (salvo contra a decisão que indefere seu ingresso); pessoas naturais não têm interesse recursal no processo objetivo; e a legitimidade pressupõe ter atuado como parte (afasta A).<br><br><b>📌 Fundamento:</b> art. 103, §3º, CF; jurisprudência do STF.<br><br><b>⚖️ Da jurisprudência:</b> STF — AGU tem legitimidade para ED em ADI; amicus curiae, em regra, não.<br><br><b>🔁 Revisar:</b> ED em ADI — legitimidade do AGU (parte); amicus curiae não recorre, em regra.`},
+
+  {id:'q9', materia:'Lei pré-constitucional / ADPF', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`Determinado município editou, no ano de 1977, uma lei cuja constitucionalidade se pretende impugnar na via do controle concentrado junto ao STF. Conforme a jurisprudência do STF, é:`,
+   alternativas:[
+     {letra:'A',texto:`cabível ação declaratória de constitucionalidade.`},
+     {letra:'B',texto:`cabível a interposição de recurso extraordinário.`},
+     {letra:'C',texto:`incabível a proposição de ação de controle concentrado diretamente ao STF.`},
+     {letra:'D',texto:`cabível arguição de descumprimento de preceito fundamental.`},
+     {letra:'E',texto:`cabível ação direta de inconstitucionalidade.`}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê (ICOL):</b> lei municipal de 1977 é direito pré-constitucional e municipal — não cabe ADI no STF. O instrumento adequado é a ADPF, cabível contra atos municipais e anteriores à CF (juízo de recepção).<br><br><b>⚠️ Pegadinha:</b> tentar ADI/ADC ou RE; dizer que é incabível qualquer controle concentrado direto (C) ignora a ADPF.<br><br><b>📌 Fundamento:</b> art. 102, §1º, CF; Lei 9.882/1999.<br><br><b>⚖️ Da jurisprudência:</b> STF — ADPF é a via para direito pré-constitucional e municipal.<br><br><b>🔁 Revisar:</b> lei municipal e/ou pré-constitucional → ADPF (não ADI).`},
+
+  {id:'q10', materia:'ADPF — cabimento', banca:'CESPE · TJ/RO · 2025', tipo:'multipla',
+   enunciado:`A respeito do controle concentrado de constitucionalidade, observada a jurisprudência do STF, assinale a opção correta.`,
+   alternativas:[
+     {letra:'A',texto:`As decisões denegatórias de liminares pleiteadas no âmbito das ações declaratórias de constitucionalidade são dotadas de efeitos vinculantes.`},
+     {letra:'B',texto:`Os tribunais de justiça estaduais podem exercer o controle abstrato de leis e atos normativos municipais utilizando como parâmetro todos os preceitos da CF.`},
+     {letra:'C',texto:`O juízo de subsidiariedade que autoriza a propositura da ADPF não pressupõe a investigação do cabimento de ação direta de inconstitucionalidade por omissão.`},
+     {letra:'D',texto:`A arguição de descumprimento de preceito fundamental é meio inadequado para o questionamento de leis municipais.`},
+     {letra:'E',texto:`Admite-se o manejo da arguição de descumprimento de preceito fundamental para o exame da inconstitucionalidade de conduta, comissiva e omissiva, que impeça a produção de efeitos de norma aprovada pelo Congresso Nacional.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b><br><br><b>⚖️ Por quê (ICOL):</b> admite-se ADPF para examinar a inconstitucionalidade de conduta comissiva ou omissiva que impeça a produção de efeitos de norma — reflexo da amplitude do objeto da ADPF.<br><br><b>⚠️ Pegadinha:</b> A — liminar denegatória em ADC não tem efeito vinculante; B — o TJ controla lei municipal tendo por parâmetro a Constituição Estadual, não "todos os preceitos da CF"; D — a ADPF é adequada para leis municipais.<br><br><b>📌 Fundamento:</b> Lei 9.882/1999; art. 102, §1º, CF.<br><br><b>⚖️ Da jurisprudência:</b> STF — ADPF alcança condutas comissivas e omissivas.<br><br><b>🔁 Revisar:</b> ADPF alcança condutas comissivas e omissivas; TJ controla lei municipal pela Constituição Estadual.`},
+
+  {id:'q11', materia:'Controle concentrado — parâmetro', banca:'CESPE · TJ/RO · 2025', tipo:'multipla',
+   enunciado:`Acerca do controle de constitucionalidade, assinale a opção correta, de acordo com a jurisprudência do STF.`,
+   alternativas:[
+     {letra:'A',texto:`Em atenção à colegialidade e à reserva de plenário, todas as decisões do STF nas ações de controle concentrado devem ser proferidas pelo plenário.`},
+     {letra:'B',texto:`O controle incidental de constitucionalidade, realizado pelos juízes de primeiro grau, depende de prévia declaração de inconstitucionalidade pelo tribunal ao qual o magistrado esteja vinculado.`},
+     {letra:'C',texto:`Não se admite o controle concentrado de constitucionalidade de leis ou atos normativos municipais contra a lei orgânica do respectivo município.`},
+     {letra:'D',texto:`A técnica da causa de pedir aberta, que caracteriza as ações de controle concentrado, confere aos interessados a faculdade de reabrir a discussão de mérito à luz de parâmetros não invocados a tempo e modo.`},
+     {letra:'E',texto:`As entidades que participam dos processos objetivos como amigos da corte têm legitimidade recursal para opor embargos de declaração da decisão final, desde que aportem informações relevantes.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> não se admite controle concentrado de lei/ato municipal tendo como parâmetro a Lei Orgânica do Município — o confronto lei municipal × LOM é de legalidade, não de constitucionalidade.<br><br><b>⚠️ Pegadinha:</b> D — a causa de pedir aberta não autoriza reabrir o mérito por parâmetros não invocados; E — o amicus curiae, em regra, não tem legitimidade recursal; B — o juiz de 1º grau faz controle incidental sem depender de prévia declaração do tribunal.<br><br><b>📌 Fundamento:</b> jurisprudência do STF; art. 102, CF.<br><br><b>⚖️ Da jurisprudência:</b> STF — Lei Orgânica Municipal não é parâmetro de controle de constitucionalidade.<br><br><b>🔁 Revisar:</b> LOM não é parâmetro de controle concentrado (lei municipal × LOM = legalidade).`},
+
+  {id:'q12', materia:'TJ — controle abstrato municipal', banca:'FGV · 2025', tipo:'multipla',
+   enunciado:`Analise a afirmativa: "Os tribunais de justiça estaduais podem exercer controle abstrato de constitucionalidade de leis municipais utilizando como parâmetro normas da CF." A afirmativa está:`,
+   alternativas:[
+     {letra:'A',texto:`correta, pois as leis municipais estão sujeitas a controle abstrato perante os tribunais de justiça estaduais, e não perante o STF.`},
+     {letra:'B',texto:`incorreta, pois os tribunais de justiça dos estados não exercem a função de controle abstrato de leis municipais.`},
+     {letra:'C',texto:`correta, pois a CF pode servir de parâmetro de controle abstrato também em âmbito estadual.`},
+     {letra:'D',texto:`incorreta, pois a CF não pode servir de parâmetro de controle abstrato também em âmbito estadual.`},
+     {letra:'E',texto:`correta, desde que normas de reprodução obrigatória pelos estados sejam o parâmetro de controle da CF.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b><br><br><b>⚖️ Por quê (ICOL):</b> o TJ pode exercer controle abstrato de lei municipal tendo por parâmetro a Constituição Estadual; quando esta reproduz normas de reprodução obrigatória da CF, a Constituição Federal funciona indiretamente como parâmetro.<br><br><b>⚠️ Pegadinha:</b> afirmar que a CF é parâmetro direto no controle estadual (A/C) ou negar de todo o controle pelo TJ (B/D).<br><br><b>📌 Fundamento:</b> art. 125, §2º, CF.<br><br><b>⚖️ Da jurisprudência:</b> STF — o controle estadual usa a Constituição Estadual; normas de reprodução obrigatória permitem RE ao STF.<br><br><b>🔁 Revisar:</b> TJ controla lei municipal pela Constituição Estadual; CF só indiretamente (normas de reprodução obrigatória).`},
+
+  {id:'q13', materia:'ADPF — objeto', banca:'FGV · 2025', tipo:'multipla',
+   enunciado:`Um legitimado à deflagração do controle concentrado perante o STF definiu que adotaria as medidas possíveis para sustentar a inconstitucionalidade de determinado ato do poder público, sugerindo o uso da ADPF. A assessoria jurídica observou, corretamente, que esse instrumento:`,
+   alternativas:[
+     {letra:'A',texto:`pode ser utilizado para impugnar tanto atos normativos como atos destituídos de generalidade e abstração.`},
+     {letra:'B',texto:`acarretará a prolação de acórdão com efeitos "erga omnes", vinculando todas as estruturas estatais de poder.`},
+     {letra:'C',texto:`pressupõe a demonstração da repercussão geral sempre que utilizado para impugnar atos de entes subnacionais.`},
+     {letra:'D',texto:`em razão da não recepção, não desperta interesse de agir na sua utilização para impugnar atos pré-constitucionais.`},
+     {letra:'E',texto:`não pode ser utilizado para impugnar atos normativos anteriores a uma emenda constitucional que seria utilizada como paradigma de controle.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> a ADPF pode impugnar tanto atos normativos quanto atos destituídos de generalidade e abstração (atos concretos), inclusive municipais e pré-constitucionais — é o mais amplo instrumento do controle concentrado.<br><br><b>⚠️ Pegadinha:</b> B — não vincula o Legislativo em sua função típica de legislar; C — a ADPF não exige repercussão geral; D — cabe contra atos pré-constitucionais (juízo de não recepção); E — cabe contra atos anteriores a emenda.<br><br><b>📌 Fundamento:</b> Lei 9.882/1999.<br><br><b>⚖️ Da jurisprudência:</b> STF — ADPF alcança atos normativos e concretos, municipais e pré-constitucionais.<br><br><b>🔁 Revisar:</b> ADPF é a mais ampla — atos normativos e concretos, municipais e pré-constitucionais.`},
+
+  {id:'q14', materia:'ADI — ato regulamentar', banca:'CESPE · TJ/PE · 2024', tipo:'multipla',
+   enunciado:`Conforme a jurisprudência tradicional do STF, o controle de constitucionalidade do ato regulamentar pela via da ação direta de inconstitucionalidade:`,
+   alternativas:[
+     {letra:'A',texto:`é admissível, se os efeitos da declaração de inconstitucionalidade ficarem restritos às partes da lide.`},
+     {letra:'B',texto:`é admissível, desde que a impugnação chegue ao STF pela via difusa.`},
+     {letra:'C',texto:`não é admissível, pois essa situação caracterizaria uma violação indireta ao texto constitucional.`},
+     {letra:'D',texto:`não é admissível, pois se trata de ato cuja constitucionalidade só pode ser examinada por meio do controle difuso.`},
+     {letra:'E',texto:`não é admissível, pois deve ser efetuado de forma repressiva.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> o controle do ato regulamentar (decreto que regulamenta lei) pela via da ADI não é admitido quando o vício é de extrapolação da lei — trata-se de crise de legalidade, ou seja, violação INDIRETA/reflexa à Constituição.<br><br><b>⚠️ Pegadinha:</b> confundir com controle difuso (D) ou condicionar a efeitos inter partes (A).<br><br><b>📌 Fundamento:</b> jurisprudência tradicional do STF (inconstitucionalidade reflexa).<br><br><b>⚖️ Da jurisprudência:</b> STF — decreto que extrapola a lei gera ilegalidade (violação indireta), não enseja ADI.<br><br><b>🔁 Revisar:</b> ato regulamentar que extravasa a lei = ilegalidade (violação indireta) → não cabe ADI.`},
+
+  {id:'q15', materia:'ADC — legitimados', banca:'VUNESP · TJ/SP · 2024', tipo:'multipla',
+   enunciado:`Acerca da proposição da ação declaratória de constitucionalidade (ADC), assinale a alternativa correta relativamente aos legitimados para a sua propositura.`,
+   alternativas:[
+     {letra:'A',texto:`São, apenas, a confederação sindical ou entidade de classe de âmbito estadual.`},
+     {letra:'B',texto:`São os mesmos indicados para a propositura de Ação Direta de Inconstitucionalidade.`},
+     {letra:'C',texto:`São, apenas, o Presidente da República, a Mesa do Senado Federal, a Mesa da Câmara dos Deputados ou o Procurador-Geral da República.`},
+     {letra:'D',texto:`Apenas o partido político com representação no Congresso Nacional pode propor a ação.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> após a EC 45/2004, os legitimados para a ADC são os MESMOS da ADI (rol único do art. 103 da CF).<br><br><b>⚠️ Pegadinha:</b> as demais restringem o rol (só PR/Mesas/PGR, só partido, ou entidade de âmbito estadual).<br><br><b>📌 Fundamento:</b> art. 103, CF (com a EC 45/2004).<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> legitimados da ADC = os mesmos da ADI (rol único do art. 103).`}
+];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_'+SLUG+'_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — '+document.title+'\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_'+SLUG+'_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx=document.title+' · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+</script>
+</body>
+</html>
