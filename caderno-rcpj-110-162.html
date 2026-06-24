@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · RCPJ (págs. 110–162)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:760px;margin:0 auto}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0;counter-increment:p}
+.list-pega li:before{content:counter(p);position:absolute;left:0;top:0;background:#1a1200;border:1px solid #4a3200;color:#fbbf24;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#f3dca8}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner-save">📘 Caderno interativo · clique nos blocos 📜 e 🎯 para revelar letra da lei e respostas</div>
+<div class="header">
+  <h1>📘 Caderno de Revisão · RTD/RCPJ</h1>
+  <div class="sub"><b>Registro Civil das Pessoas Jurídicas — Competência · Procedimento · Sociedade Simples · Fundação · Associação · Partidos Políticos · Organizações Religiosas</b> · e-Book RTD/RCPJ, <b>págs. 110–162</b></div>
+  <div class="toc">
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#c1">1 Competência/Proc.</a>
+    <a href="#c2">2 Soc. Simples</a>
+    <a href="#c3">3 Fundação</a>
+    <a href="#c4">4 Associação</a>
+    <a href="#c5">5 Partidos</a>
+    <a href="#c6">6 Org. Religiosas</a>
+    <a href="#c7">7 Igreja Católica</a>
+    <a href="#tab">📊 Tabelas</a>
+    <a href="#peg">⚠️ Pegadinhas</a>
+    <a href="#flash">🔁 Flashcards</a>
+  </div>
+</div>
+<div class="content">
+
+<!-- MAPA -->
+<div class="card mapa" id="mapa">
+  <div class="card-meta"><span class="badge badge-tema">Mapa</span><span class="badge badge-pag">págs. 110–162</span></div>
+  <div class="card-title">🗺️ Faixa de Páginas × Assuntos</div>
+  <div class="mem-box"><b>Âncoras do bloco:</b><br>
+    • <span class="mnemo">RCPJ ≠ JUNTA</span> — soc. simples, fundações, associações, org. religiosas, partidos: RCPJ; empresária: Junta Comercial<br>
+    • <span class="mnemo">OAB OBRIGATÓRIA</span> — exceto ME/EPP (LC 123/06)<br>
+    • <span class="mnemo">PARTIDO: RCPJ + TSE</span> — dois registros obrigatórios<br>
+    • <span class="mnemo">FUNDAÇÃO: 4 FASES</span> — ato/estatuto/MP/registro<br>
+    • <span class="mnemo">OR: CULTO E LITURGIA</span> — liberdade limitada à finalidade religiosa
+  </div>
+  <table class="map-table">
+    <tr><th>Págs.</th><th>Assunto</th></tr>
+    <tr><td class="pg">110</td><td>Do Registro das Pessoas Jurídicas — Da Competência (Soc. Simples e Partidos: local da sede)</td></tr>
+    <tr><td class="pg">111</td><td>Procedimento do Registro (art. 120 Lei 6.015/73 — 6 incisos); OAB — visto obrigatório (exceto ME/EPP)</td></tr>
+    <tr><td class="pg">112–113</td><td>Lei 14.382/2022 — 1 via do estatuto (papel ou eletrônico); documentos papel: 180 dias</td></tr>
+    <tr><td class="pg">113–115</td><td>Sociedade Simples x Sociedade Empresária — distinção pelo objeto social (arts. 966 e 982 CC)</td></tr>
+    <tr><td class="pg">116–118</td><td>Registro da Sociedade Simples — 30 dias, rogação, efeitos retroativos, administrador em separado</td></tr>
+    <tr><td class="pg">118–121</td><td>Da Fundação — 4 fases; fins taxativos (Lei 13.151/2015); papel do MP; alteração e extinção</td></tr>
+    <tr><td class="pg">122–138</td><td>Da Associação — estatuto (art. 54 CC); direitos dos associados; dissolução; transformação × SAF; IN DREI 81/2020; caso Rosa Penido (CGJ/SP 2024)</td></tr>
+    <tr><td class="pg">139–140</td><td>IN DREI 01/2024 — soc. advocacia pode converter para soc. empresária</td></tr>
+    <tr><td class="pg">140–149</td><td>Dos Partidos Políticos — natureza associativa; registro RCPJ + TSE; caráter nacional; EC 97/2017; EC 111/2021; EC 117/2022; diretórios (Lei 14.063/2020)</td></tr>
+    <tr><td class="pg">150–159</td><td>Das Organizações Religiosas — liberdade de criação (art. 44 §1º CC); limitada ao culto/liturgia; Enunciado 143 JDC; mandato vitalício</td></tr>
+    <tr><td class="pg">160–162</td><td>Igreja Católica — Decreto 7.107/2010; bens eclesiásticos: averbação; PJ de direito público no RCPJ (SESC/SESI)</td></tr>
+  </table>
+</div>
+
+<!-- CARD 1 -->
+<div class="card" id="c1">
+  <div class="card-meta"><span class="badge badge-tema">RCPJ — Competência e Procedimento</span><span class="badge badge-pag">págs. 110–113</span></div>
+  <div class="card-title">1 · Do Registro das PJ — Competência e Procedimento</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Da Competência (p. 110):</b> O RCPJ possui atribuições para registrar determinadas pessoas jurídicas de direito privado, conferindo-lhes personalidade jurídica. A <b>Sociedade Simples</b> deve ser inscrita no <b>RCPJ do local de sua sede</b> nos 30 dias subsequentes à sua constituição (art. 998 CC/02). Para <b>Partidos Políticos</b>, o requerimento é dirigido ao <b>RCPJ do local de sua sede</b> — regra alterada pela <span class="art">Lei 13.877/2019</span> (antes era exigido o RCPJ da Capital Federal).</p>
+    <p><b>Procedimento do Registro (p. 111):</b> Consiste em declaração feita em livro, pelo oficial, do número de ordem, data da apresentação e espécie do ato constitutivo, com as seguintes indicações (<span class="art">art. 120, Lei 6.015/73</span>):<br>
+    <b>I</b> — denominação, fundo social (se houver), fins, sede e tempo de duração;<br>
+    <b>II</b> — modo de administrar e representar (ativa/passiva, judicial/extrajudicial);<br>
+    <b>III</b> — se o estatuto/contrato/compromisso é reformável quanto à administração;<br>
+    <b>IV</b> — se os membros respondem ou não subsidiariamente pelas obrigações sociais;<br>
+    <b>V</b> — condições de extinção e destino do patrimônio;<br>
+    <b>VI</b> — nomes dos fundadores, diretores (com nacionalidade, estado civil, profissão) e nome do apresentante.</p>
+    <p><b>OAB — Visto de Advogado (p. 111):</b> Os atos constitutivos de pessoas jurídicas, <b>sob pena de nulidade</b>, só podem ser admitidos a registro quando visados por advogados (<span class="art">art. 1º §2º Lei 8.906/94</span>). <b>Exceção</b>: microempresas e empresas de pequeno porte — não se aplica (<span class="art">LC 123/06 art. 9º §2º</span>).</p>
+    <p><b>Lei 14.382/2022 — Nova redação do art. 121 Lei 6.015/73 (pp. 112–113):</b><br>
+    • Registro feito com base em <b>1 (uma) via</b> do estatuto, compromisso ou contrato, em papel <b>ou em meio eletrônico</b>.<br>
+    • O requerimento do representante legal é <b>dispensado</b> se ele subscreveu o estatuto, compromisso ou contrato.<br>
+    • Documentos em papel: podem ser retirados em <b>180 dias</b> após a certificação do registro ou expedição de nota devolutiva — após, são <b>descartados</b>.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 998 CC/02:</span> Nos trinta dias subsequentes à sua constituição, a sociedade deverá requerer a inscrição do contrato social no Registro Civil das Pessoas Jurídicas do local de sua sede.</p>
+    <p><span class="art-num">Art. 1º §2º Lei 8.906/94:</span> Os atos e contratos constitutivos de pessoas jurídicas, sob pena de nulidade, só podem ser admitidos a registro, nos órgãos competentes, quando visados por advogados. (Exceto ME/EPP — LC 123/06)</p>
+    <p><span class="art-num">Art. 121 Lei 6.015/73 (Lei 14.382/2022):</span> O registro será feito com base em uma via do estatuto, compromisso ou contrato, apresentada em papel ou em meio eletrônico, a requerimento do representante legal da pessoa jurídica. §1º É dispensado o requerimento de que trata o caput deste artigo caso o representante legal da pessoa jurídica tenha subscrito o estatuto, compromisso ou contrato. §2º Os documentos apresentados em papel poderão ser retirados pelo apresentante nos 180 dias após a data da certificação do registro ou da expedição de nota devolutiva. §3º Decorrido o prazo, os documentos serão descartados.</p>
+    <p><span class="art-num">Lei 9.096/95. Art. 8º:</span> O requerimento do registro de partido político, dirigido ao cartório competente do Registro Civil das Pessoas Jurídicas do local de sua sede. (Redação dada pela Lei 13.877/2019)</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">6 INCISOS art. 120</span> = <b>Den</b>ominação/fins/sede · <b>Mod</b>o de administrar · <b>Re</b>formabilidade · <b>Re</b>sponsabilidade sócios · <b>Ext</b>inção/patrimônio · <b>Fun</b>dadores/diretores<br>
+    <span class="mnemo">OAB OBRIGATÓRIA</span> exceto <span class="mnemo">ME/EPP</span> (LC 123/06)<br>
+    <span class="mnemo">14.382/2022</span> = <b>1 via</b> · eletrônico · 180 dias para retirar docs em papel<br>
+    Competência partido: antes = Capital Federal → depois da <span class="mnemo">Lei 13.877/2019</span> = local da sede
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os 6 elementos obrigatórios do procedimento de registro (art. 120 Lei 6.015/73)?</span><span class="chev">›</span></summary><div class="recall-a">I - denominação/fundo social/fins/sede/duração; II - modo de administrar e representar; III - reformabilidade do estatuto/contrato; IV - responsabilidade subsidiária dos sócios; V - condições de extinção e destino do patrimônio; VI - nomes dos fundadores e diretores.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O visto de advogado é sempre obrigatório para registro de PJ?</span><span class="chev">›</span></summary><div class="recall-a">Não. É obrigatório como regra (sob pena de nulidade — art. 1º §2º Lei 8.906/94), mas não se aplica às microempresas e às empresas de pequeno porte (LC 123/06 art. 9º §2º).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que mudou com a Lei 14.382/2022 no procedimento de registro?</span><span class="chev">›</span></summary><div class="recall-a">O registro passou a ser feito com base em 1 (uma) via do estatuto/compromisso/contrato (em papel ou eletrônico). O requerimento é dispensado se o representante legal subscreveu o instrumento. Documentos em papel ficam disponíveis por 180 dias, depois descartados.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Onde é feito o requerimento de registro de partido político e qual foi a mudança?</span><span class="chev">›</span></summary><div class="recall-a">Desde a Lei 13.877/2019, o requerimento é dirigido ao RCPJ do local de sua sede. Antes era exigido o RCPJ da Capital Federal.</div></details>
+</div>
+
+<!-- CARD 2 -->
+<div class="card" id="c2">
+  <div class="card-meta"><span class="badge badge-tema">Sociedade Simples</span><span class="badge badge-pag">págs. 113–118</span></div>
+  <div class="card-title">2 · Sociedade Simples — Distinção e Registro</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Distinção Soc. Simples x Soc. Empresária (pp. 113–115):</b> A definição está no <b>objeto social</b> — não na finalidade lucrativa (ambas podem ter lucro). <b>Soc. empresária</b>: atividade econômica organizada para produção ou circulação de bens/serviços (atividade própria de empresário — art. 966 CC). <b>Soc. simples</b>: objeto distinto — atividade econômica não empresarial (ex.: profissão intelectual, artística, científica, literária).</p>
+    <p><b>Exceção do art. 982 p.único CC:</b> <b>Por ações</b> = sempre empresária (independentemente do objeto). <b>Cooperativa</b> = sempre simples (independentemente do objeto).</p>
+    <p><b>Registro (pp. 116–118):</b> Soc. simples se constitui mediante <b>contrato escrito</b> (particular ou público — art. 997 CC). Deve ser inscrita no RCPJ do local de sua sede nos <b>30 dias</b> subsequentes à sua constituição (art. 998 CC). Pedido acompanhado de instrumento autenticado + procuração (se representado por procurador). Inscrição tomada por <b>termo no livro próprio</b> com número de ordem contínua.</p>
+    <p><b>Quem pode requerer:</b> a pessoa obrigada em lei; em caso de omissão/demora → o sócio ou <b>qualquer interessado</b> (<span class="art">art. 1.151 CC</span> — princípio da rogação).</p>
+    <p><b>Efeitos do registro:</b> retroagem à data da celebração do contrato social. Se requerido <b>fora do prazo de 30 dias</b>: efeitos somente a partir da data do protocolo (<span class="art">art. 1.151 §2º CC</span>). Omissão total → sociedade irregular → regida pelas regras da <b>sociedade em comum</b> (arts. 986-990 CC).</p>
+    <p><b>Sucursal/filial/agência</b> em outra circunscrição: deve também ser inscrita, com prova da inscrição originária; a constituição da sucursal deve ser <b>averbada</b> no RCPJ da respectiva sede (<span class="art">art. 1.000 CC</span>).</p>
+    <p><b>Deliberações:</b> por maioria de votos, contados segundo o valor das quotas (<span class="art">art. 1.010 CC</span>). Obrigações dos sócios: começam imediatamente com o contrato (<span class="art">art. 1.001 CC</span>). <b>Administrador nomeado em instrumento separado:</b> deve <b>averbar à margem</b> da inscrição (<span class="art">art. 1.012 CC</span>); antes da averbação responde pessoal e solidariamente pelos atos praticados.</p>
+    <p><b>Livre iniciativa:</b> regra é que a criação independe de autorização do Estado. Exceção: casos determinados em lei (ex.: instituições financeiras, seguradoras) → pedido de inscrição acompanhado da prova de autorização estatal.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 966 CC/02:</span> Considera-se empresário quem exerce profissionalmente atividade econômica organizada para a produção ou a circulação de bens ou de serviços. Parágrafo único. Não se considera empresário quem exerce profissão intelectual, de natureza científica, literária ou artística, ainda com o concurso de auxiliares ou colaboradores, salvo se o exercício da profissão constituir elemento de empresa.</p>
+    <p><span class="art-num">Art. 982 CC/02:</span> Salvo as exceções expressas, considera-se empresária a sociedade que tem por objeto o exercício de atividade própria de empresário sujeito a registro (art. 967); e simples, as demais. Parágrafo único. Independentemente de seu objeto, considera-se empresária a sociedade por ações; e simples, a cooperativa.</p>
+    <p><span class="art-num">Art. 1.150 CC/02:</span> O empresário e a sociedade empresária vinculam-se ao Registro Público de Empresas Mercantis a cargo das Juntas Comerciais, e a sociedade simples ao Registro Civil das Pessoas Jurídicas.</p>
+    <p><span class="art-num">Art. 1.151 CC/02:</span> O registro dos atos sujeitos à formalidade exigida no artigo antecedente será requerido pela pessoa obrigada em lei, e, no caso de omissão ou demora, pelo sócio ou qualquer interessado. §1º Os documentos necessários ao registro deverão ser apresentados no prazo de trinta dias, contado da lavratura dos atos respectivos. §2º Requerido além do prazo previsto neste artigo, o registro somente produzirá efeito a partir da data de sua concessão.</p>
+    <p><span class="art-num">Art. 1.012 CC/02:</span> O administrador, nomeado por instrumento em separado, deve averbá-lo à margem da inscrição da sociedade, e, pelos atos que praticar, antes de requerer a averbação, responde pessoal e solidariamente com a sociedade.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">OBJETO = DESTINO</span> — quem define se é simples ou empresária é o objeto social, não o lucro<br>
+    Exceções pelo TIPO: <span class="mnemo">AÇÃO = EMPRESÁRIA</span> · <span class="mnemo">COOPERATIVA = SIMPLES</span> (sempre!)<br>
+    Administrador separado: <span class="mnemo">AVERBA ou RESPONDE</span> — pessoal e solidariamente, antes da averbação<br>
+    Fora do prazo 30 dias: <span class="mnemo">EFEITO A PARTIR DO PROTOCOLO</span> (não retroage à data do contrato)
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que define se uma sociedade é simples ou empresária?</span><span class="chev">›</span></summary><div class="recall-a">O objeto social. Se tem por objeto o exercício de atividade própria de empresário (economicidade + organização + profissionalidade/habitualidade) → empresária. Caso contrário → simples. A finalidade lucrativa não é o critério, pois ambas podem ter lucro.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Cooperativa de atividade empresarial organizada: simples ou empresária?</span><span class="chev">›</span></summary><div class="recall-a">Sempre simples. O art. 982 p.único estabelece que cooperativa é sempre simples, independentemente de seu objeto.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que acontece se o registro da soc. simples for requerido fora do prazo de 30 dias?</span><span class="chev">›</span></summary><div class="recall-a">Os efeitos somente produzem a partir da data de sua concessão (data do protocolo), não retroagindo à data da celebração do contrato social (art. 1.151 §2º CC).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Administrador de soc. simples nomeado em instrumento separado: qual a obrigação registral?</span><span class="chev">›</span></summary><div class="recall-a">Deve averbar o instrumento à margem da inscrição da sociedade no RCPJ. Antes da averbação, responde pessoal e solidariamente com a sociedade pelos atos praticados (art. 1.012 CC).</div></details>
+</div>
+
+<!-- CARD 3 -->
+<div class="card" id="c3">
+  <div class="card-meta"><span class="badge badge-tema">Fundação</span><span class="badge badge-pag">págs. 118–121</span></div>
+  <div class="card-title">3 · Da Fundação</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Conceito:</b> dotação de bens livres com um fim específico. Diferentemente da associação (reunião de pessoas), a fundação é uma <b>universalidade de bens</b>. É instituída por <b>escritura pública ou testamento</b> (<span class="art">art. 62 CC</span>). O registro se dá no RCPJ, que lhe confere personalidade jurídica.</p>
+    <p><b>Fins taxativos (art. 62 p.único, Lei 13.151/2015):</b> assistência social; cultura/patrimônio histórico; educação; saúde; segurança alimentar e nutricional; meio ambiente/desenvolvimento sustentável; pesquisa científica/tecnologias alternativas; ética, cidadania, democracia e direitos humanos; atividades religiosas. (<b>inciso X: VETADO</b>)</p>
+    <p><b>Patrimônio insuficiente (art. 63 CC):</b> os bens serão incorporados em outra fundação que se proponha a fim igual ou semelhante (salvo se o instituidor dispuser de outro modo).</p>
+    <p><b>As 4 fases de constituição:</b><br>
+    <b>1) Ato inter vivos</b> (escritura pública) <b>ou causa mortis</b> (testamento): instituidor transfere bens livres. Se não o fizer → mandado judicial (<span class="art">art. 64 CC</span>).<br>
+    <b>2) Elaboração do estatuto:</b> direta/própria (pelo instituidor) ou indireta/fiduciária (por pessoa de confiança). Se não elaborado no prazo ou, não havendo prazo, em <b>180 dias</b> → a incumbência caberá ao <b>Ministério Público</b> (<span class="art">art. 65 p.único CC</span>).<br>
+    <b>3) Aprovação do estatuto pelo MP Estadual:</b> 30 dias para aprovar, apresentar modificações ou denegar. Nos dois últimos casos → <b>recurso ao juiz</b> (<span class="art">CPC art. 764</span>).<br>
+    <b>4) Registro no RCPJ:</b> confere existência legal e personalidade jurídica. A aprovação do MP deve ser <b>prévia</b> ao registro (exceto fundação previdenciária → aprovação pelo órgão regulador).</p>
+    <p><b>Fiscalização:</b> MP vela pelas fundações do Estado onde situadas (<span class="art">art. 66 CC</span>). Se estender a atividade por mais de 1 Estado → caberá o encargo, em cada um deles, ao respectivo MP.</p>
+    <p><b>Alteração do estatuto (art. 67 CC):</b> reforma deve ser deliberada por <b>2/3 dos competentes</b> para gerir e representar a fundação + não contrarie o fim + aprovada pelo <b>MP no prazo máximo de 45 dias</b> (findo o prazo ou se o MP denegar → o juiz supre). Alteração não unânime → administradores comunicam a minoria vencida em <b>10 dias</b> (<span class="art">art. 68 CC</span>).</p>
+    <p><b>Extinção (art. 69 CC):</b> finalidade ilícita/impossível/inútil ou vencido o prazo → MP ou qualquer interessado promove a extinção, incorporando-se o patrimônio em outra fundação de fim igual ou semelhante designada pelo juiz.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 62 CC/02:</span> Para criar uma fundação, o seu instituidor fará, por escritura pública ou testamento, dotação especial de bens livres, especificando o fim a que se destina, e declarando, se quiser, a maneira de administrá-la.</p>
+    <p><span class="art-num">Art. 65 p.único CC/02:</span> Se o estatuto não for elaborado no prazo assinado pelo instituidor, ou, não havendo prazo, em cento e oitenta dias, a incumbência caberá ao Ministério Público.</p>
+    <p><span class="art-num">Art. 66 CC/02:</span> Velará pelas fundações o Ministério Público do Estado onde situadas. §1º Se funcionarem no Distrito Federal ou em Território, caberá o encargo ao Ministério Público do Distrito Federal e Territórios. §2º Se estenderem a atividade por mais de um Estado, caberá o encargo, em cada um deles, ao respectivo Ministério Público.</p>
+    <p><span class="art-num">Art. 67 CC/02:</span> Para que se possa alterar o estatuto da fundação é mister que a reforma: I - seja deliberada por dois terços dos competentes para gerir e representar a fundação; II - não contrarie ou desvirtue o fim desta; III - seja aprovada pelo órgão do Ministério Público no prazo máximo de 45 dias, findo o qual ou no caso de o Ministério Público a denegar, poderá o juiz supri-la, a requerimento do interessado.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">4 FASES: A-E-A-R</span> = <b>A</b>to constitutivo → <b>E</b>laboração estatuto → <b>A</b>provação MP → <b>R</b>egistro RCPJ<br>
+    Estatuto sem elaboração: <span class="mnemo">180 DIAS → MP</span><br>
+    Alteração estatuto: <span class="mnemo">2/3 + NÃO CONTRARIE + MP 45 DIAS</span><br>
+    Extinção: <span class="mnemo">ILÍCITA/IMPOSSÍVEL/INÚTIL/PRAZO</span> → MP promove; patrimônio → fundação de fim igual/semelhante<br>
+    Fins: <span class="mnemo">ACES³PEAR</span> = <b>A</b>ssistência social, <b>C</b>ultura, <b>E</b>ducação, <b>S</b>aúde, <b>S</b>egurança alimentar, <b>S</b>ustentabilidade ambiental, <b>P</b>esquisa, <b>É</b>tica/cidadania, <b>A</b>tividades religiosas, <b>R</b>emovido (X vetado)
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais são as 4 fases de constituição de uma fundação?</span><span class="chev">›</span></summary><div class="recall-a">1) Ato inter vivos (escritura pública) ou causa mortis (testamento) para dotação dos bens; 2) Elaboração do estatuto (pelo instituidor ou por pessoa fiduciária; se não elaborado em 180 dias → MP); 3) Aprovação do estatuto pelo MP Estadual (30 dias; recurso ao juiz se denegar/modificar); 4) Registro no RCPJ (personalidade jurídica).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais as condições para alterar o estatuto de uma fundação?</span><span class="chev">›</span></summary><div class="recall-a">1) Deliberação de 2/3 dos competentes para gerir e representar; 2) A reforma não pode contrarie ou desvirtuar o fim da fundação; 3) Aprovação pelo MP no prazo máximo de 45 dias (findo o prazo ou se denegar → juiz supre, a requerimento do interessado).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que ocorre se o patrimônio da fundação for insuficiente para constituí-la?</span><span class="chev">›</span></summary><div class="recall-a">Salvo disposição em contrário do instituidor, os bens serão incorporados em outra fundação que se proponha a fim igual ou semelhante (art. 63 CC).</div></details>
+</div>
+
+<!-- CARD 4 -->
+<div class="card" id="c4">
+  <div class="card-meta"><span class="badge badge-tema">Associação</span><span class="badge badge-pag">págs. 122–138</span></div>
+  <div class="card-title">4 · Da Associação</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Conceito (art. 53 CC):</b> <b>união de pessoas</b> que se organizam para <b>fins não econômicos</b>. Não há, entre os associados, direitos e obrigações recíprocos (≠ sociedade). Não tem finalidade de realizar atividade econômica (≠ sociedade simples). Não é universalidade de bens (≠ fundação). Finalidade não econômica ≠ proibição de lucro — eventual superávit reverte à própria associação.</p>
+    <p><b>Criação:</b> garantida pela CF/88 art. 5º (XVII-XXI). Independem de autorização; vedada interferência estatal no funcionamento. Dissolução/suspensão: só por decisão judicial.</p>
+    <p><b>Estatuto (art. 54 CC, sob pena de nulidade):</b> I - denominação/fins/sede; II - admissão/demissão/exclusão; III - direitos/deveres; IV - fontes de recursos; V - modo de funcionamento dos órgãos deliberativos; VI - condições de alteração estatutária e dissolução; VII - forma de gestão administrativa e aprovação de contas.</p>
+    <p><b>Direitos dos associados:</b> devem ter iguais direitos (art. 55), mas o estatuto pode instituir categorias com vantagens especiais. Qualidade de associado é <b>intransmissível</b>, salvo disposição contrária no estatuto (art. 56). Transferência de quota ≠ transferência da qualidade de associado (art. 56 p.único). Exclusão: só por <b>justa causa</b> + procedimento com defesa e recurso (art. 57). Nenhum associado pode ser impedido de exercer direito/função legitimamente conferido (art. 58).</p>
+    <p><b>Assembleia geral:</b> <b>competência privativa</b> para destituir administradores e alterar o estatuto (art. 59); assembleia especialmente convocada; quorum definido no estatuto. Convocação: 1/5 dos associados têm direito de promovê-la (art. 60).</p>
+    <p><b>Dissolução (art. 61 CC):</b> patrimônio líquido → entidade de fins não econômicos designada no estatuto; omisso → deliberação dos associados → instituição municipal/estadual/federal de fins idênticos/semelhantes. Inexistente → Fazenda do Estado/DF/União. Associados que contribuíram com o patrimônio podem receber restituição atualizada (art. 61 §1º).</p>
+    <p><b>Transformação de associação em soc. empresária:</b> vedada — o instituto da transformação só se opera entre SOCIEDADES (CC arts. 1.113 e 1.114 — CGJSP reiteradamente). <b>Exceção SAF (Lei 14.193/2021):</b> clube/associação pode ser transformado em Sociedade Anônima do Futebol, ou pela cisão do departamento de futebol, ou por iniciativa de pessoa natural/jurídica ou fundo de investimento.</p>
+    <p><b>IN DREI 81/2020 (alterada pela IN 88/2022):</b> passou a prever a aplicabilidade dos atos de transformação societária às associações e cooperativas (conversão de soc. simples ou associação em empresário individual, soc. empresária ou cooperativa — e vice-versa).</p>
+    <p><b>Caso Rosa Penido — CGJ/SP 19/06/2024 (Des. Francisco Loureiro):</b> modificou entendimento anterior e deferiu a inscrição da Associação Rosa Penido (transformação da Roncador Imobiliário Ltda. em associação). Fundamentos: art. 2.033 CC aplica regras de transformação às PJs do art. 44 (inclusive associações); Lei da Liberdade Econômica; IN DREI 81/2020 e 88/2022. <b>Conclusão:</b> é possível a transformação de soc. empresária em associação, desde que cumpridos os requisitos para tanto e não se pretenda evitar falência ou prejudicar terceiros.</p>
+    <p><b>IN DREI 01/2024:</b> incluiu art. 85-A na IN 81/2020 — a <b>sociedade de advocacia registrada na OAB</b> pode promover a conversão para sociedade empresária, desde que promova alteração contratual retirando as atividades privativas de advogados.</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 53 CC/02:</span> Constituem-se as associações pela união de pessoas que se organizem para fins não econômicos. Parágrafo único. Não há, entre os associados, direitos e obrigações recíprocos.</p>
+    <p><span class="art-num">Art. 54 CC/02 (sob pena de nulidade):</span> I - denominação, fins e sede; II - requisitos para admissão, demissão e exclusão dos associados; III - direitos e deveres dos associados; IV - fontes de recursos; V - modo de constituição e funcionamento dos órgãos deliberativos; VI - condições para alteração das disposições estatutárias e para a dissolução; VII - forma de gestão administrativa e de aprovação das respectivas contas.</p>
+    <p><span class="art-num">Art. 56 CC/02:</span> A qualidade de associado é intransmissível, se o estatuto não dispuser o contrário. Parágrafo único. Se o associado for titular de quota ou fração ideal do patrimônio da associação, a transferência daquela não importará, de per si, na atribuição da qualidade de associado ao adquirente ou ao herdeiro, salvo disposição diversa do estatuto.</p>
+    <p><span class="art-num">Art. 57 CC/02:</span> A exclusão do associado só é admissível havendo justa causa, assim reconhecida em procedimento que assegure direito de defesa e de recurso, nos termos previstos no estatuto.</p>
+    <p><span class="art-num">Art. 59 CC/02:</span> Compete privativamente à assembleia geral: I - destituir os administradores; II - alterar o estatuto. Parágrafo único. Para as deliberações a que se referem os incisos I e II deste artigo é exigido deliberação da assembleia especialmente convocada para esse fim, cujo quorum será o estabelecido no estatuto.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">ASSOCIAÇÃO ≠ FUNDAÇÃO ≠ SOCIEDADE</span><br>
+    · Fundação = bens · Sociedade = obrigações recíprocas + fim econômico<br>
+    Estatuto art. 54: <span class="mnemo">DE-AD-DD-FR-ÓR-AL-GA</span> = Denominação · Admissão/Demissão · Direitos/Deveres · Fontes Recursos · Órgãos deliberativos · Alteração/dissolução · Gestão administrativa<br>
+    Transformação: <span class="mnemo">SÓ ENTRE SOCIEDADES</span> (regra) — exceto <span class="mnemo">SAF (Lei 14.193/2021)</span> e decisão <span class="mnemo">CGJ 2024</span> (case Rosa Penido)
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais são as matérias de competência privativa da assembleia geral da associação?</span><span class="chev">›</span></summary><div class="recall-a">Destituir os administradores e alterar o estatuto (art. 59 CC). Para ambos, exige-se assembleia especialmente convocada para esse fim, com quorum definido no estatuto.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A qualidade de associado pode ser transmitida? E a quota patrimonial?</span><span class="chev">›</span></summary><div class="recall-a">A qualidade de associado é intransmissível, salvo disposição contrária no estatuto. A transferência de quota ou fração ideal do patrimônio da associação NÃO importa, por si só, na atribuição da qualidade de associado ao adquirente ou herdeiro (art. 56 CC).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Uma sociedade empresária pode ser transformada em associação?</span><span class="chev">›</span></summary><div class="recall-a">Pelo entendimento histórico (CC arts. 1.113-1.114), a transformação só opera entre sociedades — vedada para associação. Contudo, a CGJ/SP em 19/06/2024 (caso Rosa Penido, Des. Francisco Loureiro) deferiu o registro, mudando o entendimento: é possível a transformação desde que cumpridos os requisitos e sem intuito de prejudicar credores ou evitar falência.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que prevê a IN DREI 01/2024 sobre sociedades de advocacia?</span><span class="chev">›</span></summary><div class="recall-a">A sociedade de advocacia registrada na OAB pode promover a conversão para sociedade empresária, desde que promova alteração contratual retirando as atividades privativas de advogados (art. 85-A da IN 81/2020, incluído pela IN DREI 01/2024).</div></details>
+</div>
+
+<!-- CARD 5 -->
+<div class="card" id="c5">
+  <div class="card-meta"><span class="badge badge-tema">Partidos Políticos</span><span class="badge badge-pag">págs. 140–149</span></div>
+  <div class="card-title">5 · Dos Partidos Políticos</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Natureza jurídica:</b> pessoas jurídicas de direito privado (art. 44 V CC); <b>natureza associativa</b> (Enunciado 142 JDC); disciplinados pela <b>Lei 9.096/95</b>; NÃO se equiparam a entidades paraestatais (art. 1º p.único Lei 9.096/95).</p>
+    <p><b>CF/88, art. 17 — Criação:</b> livre a criação, fusão, incorporação e extinção de partidos políticos, respeitados: I - caráter nacional; II - proibição de recursos financeiros de entidade/governo estrangeiros; III - prestação de contas à Justiça Eleitoral; IV - funcionamento parlamentar conforme a lei. Vedada organização <b>paramilitar</b> (§4º art. 17). Vedado ministrar instrução militar/paramilitar e adotar uniforme (art. 6º Lei 9.096/95).</p>
+    <p><b>Candidatura nata:</b> <b>inconstitucional</b> — STF, ADI 2530/DF (Info 1026, 18/08/2021). Viola a isonomia entre postulantes e a autonomia partidária (arts. 5º e 17 CF/88).</p>
+    <p><b>EC 97/2017 (art. 17 §1º):</b> autonomia partidária para definir estrutura interna; coligações <b>vedadas nas eleições proporcionais</b>; sem obrigatoriedade de vinculação candidaturas nacional-estadual-distrital-municipal.</p>
+    <p><b>EC 111/2021 (§6º art. 17):</b> Deputados Federais, Estaduais, Distritais e Vereadores que se desligarem do partido pelo qual foram eleitos <b>perderão o mandato</b>, salvo nos casos de anuência do partido ou de outras hipóteses de justa causa estabelecidas em lei; não computa a migração para fins de distribuição de recursos do fundo partidário ou de acesso ao rádio/TV.</p>
+    <p><b>EC 117/2022:</b> §7º — mínimo <b>5%</b> do fundo partidário para programas de participação política das mulheres; §8º — mínimo <b>30%</b> do FEFC e da propaganda gratuita proporcional ao número de candidatas.</p>
+    <p><b>Personalidade jurídica:</b> 2 etapas obrigatórias: (1) <b>RCPJ</b> do local da sede (Lei 13.877/2019) — constitui a PJ de direito privado; (2) <b>TSE</b> — registro do estatuto (CF/88 art. 17 §2º; art. 7º Lei 9.096/95). Só com o registro no TSE pode participar do processo eleitoral, receber recursos do Fundo Partidário e ter acesso gratuito ao rádio e à televisão.</p>
+    <p><b>Caráter nacional (art. 7º §1º Lei 9.096/95):</b> comprovar, no período de 2 anos, o apoiamento de eleitores não filiados, correspondente a pelo menos <b>0,5% dos votos</b> dados na última eleição geral para a Câmara dos Deputados (não computados branco/nulo), <b>distribuídos por 1/3 ou mais dos Estados</b>, com <b>mínimo de 0,1%</b> do eleitorado que haja votado em cada um deles.</p>
+    <p><b>Requerimento de registro no RCPJ:</b> subscrito pelos fundadores em número nunca inferior a <b>101 fundadores</b> com domicílio eleitoral em pelo menos <b>1/3 dos Estados</b>; acompanhado de: cópia autêntica da ata de reunião de fundação + exemplares do DO com programa e estatuto + relação de todos os fundadores. Oficial registra no <b>Livro "A"</b> e expede certidão de inteiro teor.</p>
+    <p><b>Fundo partidário e rádio/TV (art. 17 §3º EC 97/2017):</b> somente os partidos que alternativa mente obtiverem: <b>3% dos votos válidos</b> para Câmara dos Deputados em pelo menos 1/3 das UF (com mínimo de 2% em cada) OU <b>15 Deputados Federais eleitos</b> em pelo menos 1/3 das UF.</p>
+    <p><b>Diretórios e comissões:</b> NÃO têm personalidade jurídica → não podem ser objeto de registro no RCPJ. Lei 14.063/2020 alterou art. 10 §2º Lei 9.096/95: competência de registro obrigatória somente no <b>TSE</b> (facultativo no RTD).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">CF/88. Art. 17. §2º:</span> Os partidos políticos, após adquirirem personalidade jurídica, na forma da lei civil, registrarão seus estatutos no Tribunal Superior Eleitoral.</p>
+    <p><span class="art-num">Lei 9.096/95. Art. 7º §1º:</span> Só é admitido o registro do estatuto de partido político que tenha caráter nacional, considerando-se como tal aquele que comprove, no período de dois anos, o apoiamento de eleitores não filiados a partido político, correspondente a, pelo menos, 0,5% (cinco décimos por cento) dos votos dados na última eleição geral para a Câmara dos Deputados, não computados os votos em branco e os nulos, distribuídos por um terço, ou mais, dos Estados, com um mínimo de 0,1% (um décimo por cento) do eleitorado que haja votado em cada um deles.</p>
+    <p><span class="art-num">Enunciado 142 JDC (III Jornada):</span> Os partidos políticos, os sindicatos e as organizações religiosas possuem natureza associativa, aplicando-se lhes o Código Civil.</p>
+    <p><span class="art-num">CF/88. Art. 17. §6º (EC 111/2021):</span> Os Deputados Federais, os Deputados Estaduais, os Deputados Distritais e os Vereadores que se desligarem do partido pelo qual tenham sido eleitos perderão o mandato, salvo nos casos de anuência do partido ou de outras hipóteses de justa causa estabelecidas em lei.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">PARTIDO = RCPJ + TSE</span> (dois registros obrigatórios)<br>
+    Caráter nacional: <span class="mnemo">0,5% votos Câmara + 1/3 Estados + 0,1% eleitorado em cada</span><br>
+    Fundadores: <span class="mnemo">MÍNIMO 101</span> + domicílio em <span class="mnemo">1/3 DOS ESTADOS</span><br>
+    Fundo/TV: <span class="mnemo">3% votos em 1/3 UF</span> (mín. 2% cada) OU <span class="mnemo">15 deputados em 1/3 UF</span><br>
+    Diretórios: <span class="mnemo">NÃO têm PJ → Lei 14.063/2020: só TSE obrigatório</span><br>
+    <span class="mnemo">EC 97</span>: coligações vedadas proporcionais · <span class="mnemo">EC 111</span>: perda mandato por troca partido · <span class="mnemo">EC 117</span>: 5% fundo para mulheres + 30% FEFC/propaganda
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais são as duas etapas obrigatórias para o partido político adquirir personalidade jurídica e funcionar?</span><span class="chev">›</span></summary><div class="recall-a">1ª) Registro no RCPJ do local de sua sede (Lei 13.877/2019) — constitui a PJ de direito privado. 2ª) Registro do estatuto no TSE (art. 17 §2º CF/88; art. 7º Lei 9.096/95) — somente então pode participar do processo eleitoral, receber recursos do Fundo Partidário e ter acesso ao rádio/TV.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que é necessário para o partido demonstrar caráter nacional?</span><span class="chev">›</span></summary><div class="recall-a">Comprovar, em 2 anos, apoiamento de 0,5% dos votos válidos na última eleição para a Câmara dos Deputados, distribuídos em pelo menos 1/3 dos Estados, com mínimo de 0,1% do eleitorado em cada um deles (art. 7º §1º Lei 9.096/95).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que ocorre com o deputado ou vereador que troca de partido?</span><span class="chev">›</span></summary><div class="recall-a">Perde o mandato (EC 111/2021, §6º art. 17 CF), salvo nos casos de anuência do partido ou de hipóteses de justa causa estabelecidas em lei. Essa migração não é computada para fins de distribuição de recursos do fundo partidário ou acesso ao rádio/TV.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diretórios e comissões partidárias são registrados no RCPJ?</span><span class="chev">›</span></summary><div class="recall-a">Não. Não têm personalidade jurídica. Com a Lei 14.063/2020, o registro é obrigatório somente perante o TSE. O registro no RTD é facultativo.</div></details>
+</div>
+
+<!-- CARD 6 -->
+<div class="card" id="c6">
+  <div class="card-meta"><span class="badge badge-tema">Organizações Religiosas</span><span class="badge badge-pag">págs. 150–159</span></div>
+  <div class="card-title">6 · Das Organizações Religiosas</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Natureza jurídica:</b> pessoas jurídicas de direito privado (art. 44 IV CC, incluído pela Lei 10.825/2003); <b>natureza associativa</b> (Enunciado 142 JDC); elemento essencial: a <b>espiritualidade</b> (não apenas fins não econômicos). Não se confundem com meras associações civis.</p>
+    <p><b>Art. 44 §1º CC (Lei 10.825/2003):</b> são <b>livres a criação, a organização, a estruturação interna e o funcionamento</b> das organizações religiosas, sendo vedado ao poder público negar-lhes reconhecimento ou registro dos atos constitutivos e necessários ao seu funcionamento.</p>
+    <p><b>Liberdade NÃO é absoluta:</b> <b>Enunciado 143 JDC</b> — a liberdade de funcionamento das OR não afasta o controle de legalidade e legitimidade constitucional de seu registro, nem a possibilidade de reexame, pelo Judiciário, da compatibilidade de seus atos com a lei e com seus estatutos. O Oficial qualifica adequadamente o título; irregularidades → devolução para cumprimento de exigências.</p>
+    <p><b>Para criação:</b> basta ato de fundação (ata de assembleia); não precisa ter forma de associação civil. Contudo, a <b>liberdade de organização está limitada às finalidades de culto e liturgia</b> (jurisprudência majoritária CGJSP).</p>
+    <p><b>Atividades não religiosas:</b> atividades econômicas ou de serviços que não se destinem diretamente ao culto → devem ser organizadas sob outras formas de personalidade jurídica (associação ou fundação subsidiária). A OR pode exercer atividades com fins não religiosos que sejam <b>instrumentais, consequenciais ou complementares</b> às funções religiosas (<b>Lei Estadual SP 17.346/2021, art. 26</b>).</p>
+    <p><b>Assistência a membros:</b> OR pode prestar assistência <b>a seus próprios membros</b> sem descaracterizar a natureza religiosa (decisões mais recentes CGJSP). Se estendida a terceiros não filiados → pode caracterizar natureza mista ou finalidade não estritamente religiosa.</p>
+    <p><b>Mandato vitalício</b> de pastores/diretores: sendo lícita a associação religiosa, <b>não cabe ao Estado interferir</b>, inclusive quanto à vitaliciedade do cargo de pastor presidente da igreja, autorizado pela assembleia geral (TJPR 4686779; CGJSP 121.069/2014 — descabimento da recusa pelo prazo máximo de 3 anos do CC para administradores).</p>
+    <p><b>Enunciado 144 JDC:</b> o rol do art. 44 CC <b>não é exaustivo</b>; possível a PJ "associação religiosa" para entidades que além do culto prestam assistência a terceiros (associações mistas).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Art. 44 §1º CC/02 (Lei 10.825/2003):</span> São livres a criação, a organização, a estruturação interna e o funcionamento das organizações religiosas, sendo vedado ao poder público negar-lhes reconhecimento ou registro dos atos constitutivos e necessários ao seu funcionamento.</p>
+    <p><span class="art-num">Enunciado 142 JDC:</span> Os partidos políticos, os sindicatos e as organizações religiosas possuem natureza associativa, aplicando-se lhes o Código Civil.</p>
+    <p><span class="art-num">Enunciado 143 JDC:</span> A liberdade de funcionamento das organizações religiosas não afasta o controle de legalidade e legitimidade constitucional de seu registro, nem a possibilidade de reexame, pelo Judiciário, da compatibilidade de seus atos com a lei e com seus estatutos.</p>
+    <p><span class="art-num">Enunciado 144 JDC:</span> Art. 44: A relação das pessoas jurídicas de direito privado constante do art. 44, incs. I a V, do Código Civil não é exaustiva.</p>
+    <p><span class="art-num">Lei Estadual SP 17.346/2021. Art. 26:</span> As organizações religiosas podem ainda exercer atividades com fins não religiosos que sejam instrumentais, consequenciais ou complementares das suas funções religiosas, assim como: I - criar e manter escolas particulares e confessionais; II - praticar beneficência dos seus membros; III - promover as próprias expressões culturais ou a educação e a cultura em geral; IV - utilizar meios de comunicação social próprios para o prosseguimento das suas atividades.</p>
+    <p><span class="art-num">CF/88. Art. 19. I:</span> É vedado à União, aos Estados, ao Distrito Federal e aos Municípios: I - estabelecer cultos religiosos ou igrejas, subvencioná-los, embaraçar-lhes o funcionamento ou manter com eles ou seus representantes relações de dependência ou aliança, ressalvada, na forma da lei, a colaboração de interesse público.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">OR = LIVRE MAS LIMITADA</span> — livre criação/organização/funcionamento, mas limitada ao culto e liturgia<br>
+    <span class="mnemo">ENUNCIADO 142</span>: OR + Partido + Sindicato = natureza <b>associativa</b><br>
+    <span class="mnemo">ENUNCIADO 143</span>: liberdade ≠ afasta controle de legalidade pelo oficial<br>
+    <span class="mnemo">ENUNCIADO 144</span>: rol art. 44 NÃO é exaustivo<br>
+    Mandato vitalício: <span class="mnemo">ESTADO NÃO INTERFERE</span> — liberdade de estruturação interna
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O Oficial do RCPJ pode negar o registro de atos constitutivos de uma organização religiosa?</span><span class="chev">›</span></summary><div class="recall-a">Não pode fazê-lo de forma imotivada (art. 44 §1º CC). Contudo, a liberdade não é absoluta: o Enunciado 143 JDC preserva o controle de legalidade e legitimidade constitucional. Se houver irregularidades ou vícios sanáveis, cabe devolução para cumprimento de exigências.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Uma OR pode exercer atividades econômicas (ex.: escola, clínica) em seu próprio estatuto?</span><span class="chev">›</span></summary><div class="recall-a">Como regra, a liberdade de OR está limitada às finalidades de culto e liturgia. Atividades com fins não religiosos devem ser organizadas sob outra PJ (associação ou fundação). Contudo, a Lei Estadual SP 17.346/2021 (art. 26) permite atividades não religiosas que sejam instrumentais, consequenciais ou complementares às funções religiosas.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O estatuto de uma OR pode prever mandato vitalício para o pastor presidente?</span><span class="chev">›</span></summary><div class="recall-a">Sim. Sendo lícita a OR, não cabe ao Estado interferir no funcionamento, inclusive quanto à vitaliciedade do cargo autorizado pela assembleia geral. A CGJSP pacificou que a qualificação registral deve se limitar ao regramento legal das associações — não ao prazo de 3 anos do CC para administradores, que se aplica às associações civis, não necessariamente às OR.</div></details>
+</div>
+
+<!-- CARD 7 -->
+<div class="card" id="c7">
+  <div class="card-meta"><span class="badge badge-tema">Igreja Católica · PJ Dir. Público no RCPJ</span><span class="badge badge-pag">págs. 160–162</span></div>
+  <div class="card-title">7 · Igreja Católica e Exceções</div>
+  <div class="sec-label sintese">📑 Síntese para revisão</div>
+  <div class="prose">
+    <p><b>Decreto 7.107/2010 — Acordo com a Santa Sé:</b> promulgou o Acordo entre o Brasil e a Santa Sé, relativo ao Estatuto Jurídico da Igreja Católica no Brasil. Considera-se a <b>Santa Sé como Suprema Autoridade</b> da Igreja Católica, regida pelo Direito Canônico.</p>
+    <p><b>Instituições eclesiásticas:</b> Conferência Episcopal, Províncias Eclesiásticas, Dioceses, Paróquias, Institutos de Vida Consagrada, Sociedades de Vida Apostólica etc. — têm personalidade jurídica reconhecida pela RF do Brasil mediante a <b>inscrição no respectivo registro do ato de criação</b>. Vedado ao poder público negar-lhes reconhecimento ou registro. Todas as alterações devem também ser averbadas.</p>
+    <p><b>Propriedade dos bens eclesiásticos:</b> são da <b>Igreja Católica una</b> — não desta ou daquela divisão eclesiástica (Diocese, Paróquia etc.). Não existe, portanto, transferência de domínio entre divisões eclesiásticas. A forma de acolher no âmbito registral é a <b>AVERBAÇÃO</b> (não escritura pública de transmissão). No exemplo da Diocese: será feita averbação nas matrículas dos imóveis daquela circunscrição, destacada da anterior, com a própria <b>Bula Papal instituidora da nova diocese</b>.</p>
+    <p><b>Conclusão Igreja Católica (Kumpel, 2020):</b> há dois tipos de reconhecimento: (i) reconhecimento da personalidade, nos moldes do <b>Direito Canônico</b>; e (ii) reconhecimento da personalidade jurídica, mediante inscrição no respectivo registro do ato de criação, nos termos da <b>lei brasileira</b>.</p>
+    <p><b>PJ de direito público no RCPJ (p. 162 — exceção):</b> regra geral = somente PJ de direito privado aderem à publicidade registral do RCPJ. Exceção: PJ de direito público cuja criação <b>não decorra diretamente da lei</b>, mas que apenas possibilita a criação por meio de um estatuto. Ex.: <b>SESC</b> e <b>SESI</b> (matriz e órgãos regionais/filiais) — devem ser registrados no RCPJ (art. 9º Decreto 57.375/1965 e art. 4º Decreto 6.1836/1967).</p>
+  </div>
+  <details><summary class="lei-toggle">📜 Ver letra da lei / artigos-chave</summary><div class="lei-body">
+    <p><span class="art-num">Decreto 7.107/2010. Estatuto Jurídico Igreja Católica. Art. 3º §2º:</span> A personalidade jurídica das Instituições Eclesiásticas será reconhecida pela República Federativa do Brasil mediante a inscrição no respectivo registro do ato de criação, nos termos da legislação brasileira, vedado ao poder público negar-lhes reconhecimento ou registro do ato de criação, devedo também ser averbadas todas as alterações por que passar o ato.</p>
+  </div></details>
+  <div class="sec-label mem">🧠 Técnica de memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">IGREJA CATÓLICA = BENS UNA</span> — propriedade é da Igreja, não da Diocese/Paróquia<br>
+    Divisão eclesiástica: <span class="mnemo">AVERBAÇÃO</span> (não escritura pública de transmissão)<br>
+    Bula Papal = instrumento registral<br>
+    PJ Dir. Público no RCPJ: <span class="mnemo">SESC + SESI</span> (exceção — criação por estatuto, não diretamente pela lei)
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual o instrumento registral para transferência de imóveis entre divisões eclesiásticas da Igreja Católica?</span><span class="chev">›</span></summary><div class="recall-a">A averbação, e não escritura pública de transmissão — pois não existe transferência de domínio (os bens são da Igreja Católica una). O instrumento é a Bula Papal instituidora da nova diocese, lançada no fólio real por averbação.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>PJ de direito público pode ser registrada no RCPJ? Dê um exemplo.</span><span class="chev">›</span></summary><div class="recall-a">Sim, como exceção. Quando a criação não decorre diretamente da lei, mas apenas possibilita a criação por meio de estatuto. Exemplos: SESC e SESI (matriz e órgãos regionais/filiais), que devem ser registrados no RCPJ por determinação dos Decretos 57.375/1965 e 6.1836/1967.</div></details>
+</div>
+
+<!-- TABELAS -->
+<div class="card" id="tab">
+  <div class="card-meta"><span class="badge badge-tema">Tabelas Comparativas</span></div>
+  <div class="card-title">📊 Comparativos Essenciais</div>
+
+  <div class="sec-label sintese">Sociedade Simples × Sociedade Empresária × Associação × Fundação</div>
+  <table class="cmp-table">
+    <tr><th>Critério</th><th>Soc. Simples</th><th>Soc. Empresária</th><th>Associação</th><th>Fundação</th></tr>
+    <tr><td>Registro</td><td>RCPJ</td><td>Junta Comercial</td><td>RCPJ</td><td>RCPJ</td></tr>
+    <tr><td>Essência</td><td>Reunião de pessoas sem organização empresarial</td><td>Reunião de pessoas com organização empresarial</td><td>Reunião de pessoas para fins não econômicos</td><td>Universalidade de bens com fim específico</td></tr>
+    <tr><td>Fins</td><td>Econômico (sem organização empres.)</td><td>Econômico (organização empresarial)</td><td>Não econômico</td><td>Taxativos (Lei 13.151/2015)</td></tr>
+    <tr><td>Obrigações recíprocas</td><td>Sim</td><td>Sim</td><td>Não (art. 53 p.ú.)</td><td>N/A</td></tr>
+    <tr><td>Prazo de registro</td><td>30 dias (art. 998 CC)</td><td>Imediato (atos</td><td>Sem prazo certo</td><td>Após aprovação MP</td></tr>
+    <tr><td>Fiscalização/MP</td><td>Não</td><td>Não</td><td>Não (salvo dissolução)</td><td>Sim (art. 66 CC)</td></tr>
+  </table>
+
+  <div class="sec-label sintese" style="margin-top:18px">Registro de Partidos Políticos: RCPJ × TSE</div>
+  <table class="cmp-table">
+    <tr><th>Etapa</th><th>RCPJ (local da sede)</th><th>TSE</th></tr>
+    <tr><td>Finalidade</td><td>Personalidade jurídica de direito privado</td><td>Autorização para atuar politicamente</td></tr>
+    <tr><td>Base legal</td><td>Lei 6.015/73 + Lei 9.096/95 art. 8º</td><td>CF/88 art. 17 §2º + Lei 9.096/95 art. 7º</td></tr>
+    <tr><td>Livro</td><td>Livro "A"</td><td>Registro próprio TSE</td></tr>
+    <tr><td>Consequência</td><td>Existência como PJ</td><td>Fundo Partidário + rádio/TV + exclusividade sigla</td></tr>
+  </table>
+
+  <div class="sec-label sintese" style="margin-top:18px">Organizações Religiosas: Jurisprudência Comparada</div>
+  <table class="cmp-table">
+    <tr><th>Ponto</th><th>Entendimento</th></tr>
+    <tr><td>Criação</td><td>Basta ato de fundação; não precisa seguir forma de associação civil</td></tr>
+    <tr><td>Finalidade</td><td>Limitada ao culto e liturgia (CGJSP); atividades não religiosas → outra PJ ou instrumentais/consequenciais (Lei SP 17.346/2021)</td></tr>
+    <tr><td>Mandato vitalício</td><td>Possível — Estado não interfere na estrutura interna (TJPR 4686779; CGJSP 121.069/2014)</td></tr>
+    <tr><td>Controle registral</td><td>O Oficial qualifica — Enunciado 143 JDC preserva o controle de legalidade</td></tr>
+    <tr><td>Rol art. 44 CC</td><td>Não exaustivo — Enunciado 144 JDC; "associação religiosa" (mista) é possível</td></tr>
+  </table>
+</div>
+
+<!-- PEGADINHAS -->
+<div class="card" id="peg">
+  <div class="card-meta"><span class="badge badge-tema">Pegadinhas</span></div>
+  <div class="card-title">⚠️ Armadilhas Clássicas de Prova</div>
+  <ol class="list-pega">
+    <li><b>Partido político → Capital Federal:</b> antes da Lei 13.877/2019 o requerimento era dirigido ao RCPJ da Capital Federal. Hoje: local da sua sede. Cuidado com questões que usam a regra antiga!</li>
+    <li><b>Duas etapas do Partido:</b> RCPJ ≠ suficiente para atuar politicamente. Sem o registro no TSE, o partido não participa de eleições, não recebe Fundo Partidário, não tem acesso ao rádio/TV e não tem exclusividade da sigla.</li>
+    <li><b>Cooperativa = sempre simples:</b> não importa o objeto; cooperativa é sempre soc. simples (art. 982 p.único). Soc. por ações = sempre empresária.</li>
+    <li><b>Fundação: elaboração do estatuto em 180 dias:</b> se o instituidor ou o indicado não elaborar no prazo ou, não havendo prazo, em 180 dias → o MP elabora (não extingue a fundação!).</li>
+    <li><b>Alteração do estatuto da fundação: 2/3 ≠ unanimidade:</b> basta 2/3 dos competentes para gerir/representar. Se não for unânime → administradores devem comunicar a minoria vencida em 10 dias para impugnar.</li>
+    <li><b>Art. 44 §1º CC: vedação ao poder público ≠ dispensa total de qualificação:</b> o Enunciado 143 JDC preserva o controle de legalidade e legitimidade constitucional. A vedação se aplica apenas à negativa imotivada e sem amparo legal.</li>
+    <li><b>OAB: visto obrigatório, mas ≠ micro/EPP:</b> atos constitutivos de PJ em geral exigem visto de advogado sob pena de nulidade. Exceto microempresas e EPPs (LC 123/06).</li>
+    <li><b>Administrador de soc. simples em separado: responde antes da averbação:</b> pessoal e solidariamente com a sociedade. A averbação no RCPJ é condição para que a responsabilidade seja apenas da sociedade.</li>
+    <li><b>Fundo partidário + TV ≠ igual para todos os partidos:</b> só os que atingiram 3% dos votos válidos para Câmara em 1/3 das UF (mín. 2% em cada) OU 15 Deputados Federais em 1/3 das UF (§3º art. 17 CF — EC 97/2017).</li>
+    <li><b>Igreja Católica: bens são da Igreja UNA:</b> não existe transmissão de domínio entre Diocese, Paróquia etc. O instrumento registral é a AVERBAÇÃO (Bula Papal) — não se exige escritura pública de transmissão.</li>
+    <li><b>Diretórios partidários: não têm PJ:</b> desde a Lei 14.063/2020, o registro é obrigatório apenas no TSE — e facultativo no RTD. O RCPJ não tem mais competência obrigatória para tais atos.</li>
+    <li><b>Candidatura nata: inconstitucional:</b> STF ADI 2530/DF (Info 1026, 18/08/2021) — viola isonomia e autonomia partidária. O detentor do mandato não tem direito subjetivo de ser escolhido como candidato pelo partido.</li>
+  </ol>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="card" id="flash">
+  <div class="card-meta"><span class="badge badge-tema">Flashcards</span></div>
+  <div class="card-title">🔁 Active Recall — Rodada Final</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem vela pelas fundações e o que ocorre se atuar em mais de um Estado?</span><span class="chev">›</span></summary><div class="recall-a">O MP do Estado onde situadas (art. 66 CC). Se estender a atividade por mais de um Estado → caberá o encargo, em cada um deles, ao respectivo MP. No DF: MP do DF e Territórios.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O requerimento de registro de soc. simples é sempre necessário?</span><span class="chev">›</span></summary><div class="recall-a">Não, desde a Lei 14.382/2022: o requerimento é dispensado se o representante legal da pessoa jurídica tiver subscrito o estatuto, compromisso ou contrato (art. 121 §1º Lei 6.015/73).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual o quorum para dissolução de partido e qual o destino dos bens?</span><span class="chev">›</span></summary><div class="recall-a">Não há quorum específico no bloco de páginas estudado. Para referência: dissolução é regulada pela Lei 9.096/95, não detalhada nestas páginas. O destino do patrimônio de associação dissolvida: entidade de fins não econômicos designada no estatuto, ou por deliberação dos associados para instituição municipal/estadual/federal de fins idênticos/semelhantes; inexistente → Fazenda do Estado/DF/União (art. 61 CC).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais PJs de direito público devem ser registradas no RCPJ? Por quê?</span><span class="chev">›</span></summary><div class="recall-a">SESC e SESI (matriz e órgãos regionais/filiais). A razão é que sua criação não decorre diretamente da lei, mas apenas é possibilitada por meio de um estatuto. Portanto, precisam da publicidade registral do RCPJ para existir.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a diferença entre a transformação (IN DREI 81/2020) e a conversão?</span><span class="chev">›</span></summary><div class="recall-a">Segundo o DREI: transformação é a operação pela qual uma empresa ou sociedade empresária passa de um tipo jurídico para outro (no âmbito das Juntas Comerciais). Conversão é a operação onde uma sociedade simples se converte em sociedade empresária, passando do RCPJ para o registro empresarial (Junta Comercial) — e vice-versa.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Uma OR pode ter mandato vitalício de diretor e o RCPJ pode negar o registro por esse motivo?</span><span class="chev">›</span></summary><div class="recall-a">Não. O mandato vitalício é permitido em razão da liberdade de estruturação interna das OR (art. 44 §1º CC). O Oficial não pode fazer juízo negativo quanto a isso, pois o prazo máximo de 3 anos previsto para administradores de associações se destina às associações civis, não necessariamente às OR (TJPR 4686779; CGJSP proc. 121.069/2014).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais as 3 formas de constituição de uma SAF (Lei 14.193/2021)?</span><span class="chev">›</span></summary><div class="recall-a">I - pela TRANSFORMAÇÃO do clube (associação) ou pessoa jurídica original em SAF; II - pela CISÃO do departamento de futebol do clube ou pessoa jurídica original e transferência do patrimônio relacionado à atividade futebol; III - pela iniciativa de PESSOA natural ou jurídica ou de FUNDO DE INVESTIMENTO.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual o prazo para retirar documentos em papel apresentados para registro no RCPJ?</span><span class="chev">›</span></summary><div class="recall-a">180 (cento e oitenta) dias após a data da certificação do registro ou da expedição de nota devolutiva (art. 121 §2º Lei 6.015/73, com redação da Lei 14.382/2022). Decorrido o prazo → descartados.</div></details>
+</div>
+
+<footer>Caderno de Revisão · RTD/RCPJ págs. 110–162 · concurso-metas</footer>
+</div>
+</div>
+</body>
+</html>
