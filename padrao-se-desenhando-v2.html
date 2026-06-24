@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>O padrão da peça prática se desenhando</title>
+<style>
+  :root{
+    --bg:#0f1720;--card:#15212e;--linha:#27384a;--txt:#e7eef5;--mut:#9fb2c4;--ouro:#c69a3a;
+    --espinha:#1769a3;--variavel:#854f0b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5}
+  header{padding:26px 22px 12px}
+  h1{margin:0 0 4px;font-size:1.4rem;font-weight:600}
+  header p{margin:0;color:var(--mut);font-size:.92rem;max-width:760px}
+  main{padding:8px 18px 40px;max-width:1180px;margin:0 auto}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 18px}
+  button{font:inherit;font-size:.86rem;background:#1d2c3c;color:var(--txt);border:1px solid var(--linha);border-radius:8px;padding:8px 14px;cursor:pointer;transition:.15s}
+  button:hover{border-color:var(--ouro)}
+  button.primary{background:var(--ouro);color:#1b1300;border-color:var(--ouro);font-weight:600}
+  .esp-toggles{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+  .chip-tog{font-size:.78rem;padding:5px 10px;border-radius:20px;border:1px solid var(--linha);cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:6px;opacity:.45;transition:.15s}
+  .chip-tog.on{opacity:1}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .grid{display:grid;grid-template-columns:170px repeat(6,1fr);gap:8px;align-items:stretch}
+  .h{position:sticky;top:0;background:var(--bg);padding:6px 2px;z-index:2}
+  .elo-head{background:var(--card);border:1px solid var(--linha);border-top:3px solid var(--espinha);border-radius:8px;padding:8px 10px;font-size:.8rem;font-weight:600}
+  .elo-head small{display:block;color:var(--mut);font-weight:400;font-size:.72rem;margin-top:2px}
+  .corner{font-size:.8rem;color:var(--mut);display:flex;align-items:flex-end;padding:0 4px 6px}
+  .row-label{background:var(--card);border:1px solid var(--linha);border-radius:8px;padding:8px 10px;font-size:.8rem;display:flex;align-items:center;gap:8px}
+  .cell{background:var(--card);border:1px solid var(--linha);border-radius:8px;padding:8px 10px;font-size:.78rem;color:var(--txt);
+        opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease;cursor:pointer}
+  .cell.show{opacity:1;transform:none}
+  .cell:hover{border-color:var(--ouro)}
+  .cell:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+  .cell.active{box-shadow:0 0 0 2px var(--ouro) inset}
+  .cell .b{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .row.hidden .cell,.row.hidden .row-label{display:none}
+  body.mark .elo-head.variavel{border-top-color:var(--variavel)}
+  body.mark .col-var{outline:2px dashed rgba(133,79,11,.55);outline-offset:-2px}
+  .legenda{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0;font-size:.8rem;color:var(--mut)}
+  .legenda span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:14px;height:3px;border-radius:2px;display:inline-block}
+  .band{margin-top:18px;background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:14px 16px}
+  .band h3{margin:0 0 8px;font-size:.95rem;color:var(--ouro)}
+  .band p{margin:4px 0;font-size:.84rem;color:var(--txt)}
+  .callout{border-left:3px solid var(--ouro);padding:4px 12px;margin-top:10px;color:var(--mut);font-size:.82rem}
+  /* painel de detalhe */
+  #panel{margin-top:18px;background:var(--card);border:1px solid var(--linha);border-radius:10px;padding:0;overflow:hidden;display:none}
+  #panel.open{display:block}
+  .panel-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--linha);border-top:3px solid var(--ouro)}
+  .panel-head .pdot{width:12px;height:12px;border-radius:50%;flex:0 0 auto}
+  .panel-head h2{margin:0;font-size:1rem;font-weight:600;flex:1}
+  .panel-head .sub{display:block;color:var(--mut);font-weight:400;font-size:.78rem;margin-top:2px}
+  .panel-head .close{margin-left:auto;font-size:.8rem;padding:6px 12px}
+  .panel-body{padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .sec h4{margin:0 0 8px;font-size:.82rem;color:var(--ouro);text-transform:uppercase;letter-spacing:.04em}
+  .minuta{font-family:"Iowan Old Style",Georgia,"Times New Roman",serif;font-size:.86rem;line-height:1.6;
+          white-space:pre-wrap;background:#0e1822;border:1px solid var(--linha);border-radius:8px;padding:12px 14px;color:#dfe9f2}
+  .minuta-bar{display:flex;justify-content:flex-end;margin-top:8px}
+  .copy{font-size:.78rem;padding:6px 12px}
+  .copy.ok{border-color:var(--ouro);color:var(--ouro)}
+  .consid{list-style:none;margin:0;padding:0}
+  .consid li{position:relative;padding:6px 0 6px 22px;font-size:.84rem;border-bottom:1px solid rgba(39,56,74,.5)}
+  .consid li:last-child{border-bottom:none}
+  .consid li::before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--ouro)}
+  .consid li.bad::before{background:#d85a30}
+  .consid li.good::before{background:#1d9e75}
+  @media(max-width:880px){
+    .grid{grid-template-columns:1fr;}
+    .h,.corner{display:none}
+    .row{border:1px solid var(--linha);border-radius:10px;padding:8px;margin-bottom:10px;display:grid;gap:6px}
+    .cell::before{content:attr(data-elo);display:block;color:var(--mut);font-size:.68rem;margin-bottom:2px}
+    .panel-body{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>O padrão da peça prática — se desenhando</h1>
+  <p>Cada linha é um espelho real da CEBRASPE. Repare: todas preenchem as mesmas 6 colunas (os elos). Clique em <strong>Desenhar o padrão</strong> e veja as provas, uma a uma, caírem no mesmo esqueleto. Agora cada célula é clicável: abre a <strong>minuta daquele pedaço</strong> + as <strong>considerações da banca</strong>.</p>
+</header>
+<main>
+  <div class="controls">
+    <button class="primary" id="draw">▶ Desenhar o padrão</button>
+    <button id="all">Mostrar todos</button>
+    <button id="reset">Limpar</button>
+    <button id="markBtn">Destacar espinha × meio variável</button>
+    <div class="esp-toggles" id="togs"></div>
+  </div>
+
+  <div class="legenda">
+    <span><span class="swatch" style="background:var(--espinha)"></span> espinha fixa (sempre igual)</span>
+    <span><span class="swatch" style="background:var(--variavel)"></span> meio variável (o recheio muda por ato)</span>
+    <span>Cada cor = um espelho</span>
+    <span style="color:var(--ouro)">▸ clique numa célula para ver a minuta + o que dá/perde ponto</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <!-- PAINEL DE DETALHE (em fluxo, abaixo da grade) -->
+  <section id="panel" aria-live="polite">
+    <div class="panel-head">
+      <span class="pdot" id="pPdot"></span>
+      <h2 id="pTitle">—<span class="sub" id="pSub"></span></h2>
+      <button class="close" id="pClose">✕ Fechar</button>
+    </div>
+    <div class="panel-body">
+      <div class="sec">
+        <h4>Minuta deste pedaço</h4>
+        <div class="minuta" id="pMinuta"></div>
+        <div class="minuta-bar"><button class="copy" id="pCopy">Copiar minuta</button></div>
+      </div>
+      <div class="sec">
+        <h4>Considerações da banca</h4>
+        <ul class="consid" id="pConsid"></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <h3>O que se repete (a leitura do desenho)</h3>
+    <p><strong>Espinha fixa:</strong> nomear a peça → qualificar os sujeitos → núcleo → fechar/assinar. Muda o tema, não a ordem.</p>
+    <p><strong>Meio variável (colunas 4–5):</strong> é onde o recheio troca — tributos, certidões, vícios, fundamentos. É aí que o ponto é ganho.</p>
+    <p><strong>Camadas transversais:</strong> em toda peça, a banca ainda pontua "articulação de raciocínio" + "capacidade de argumentação"; e há a forma que ZERA (assinar com nome próprio, passar do limite de linhas, criar fatos).</p>
+    <div class="callout"><strong>Regra de ouro — coluna 1:</strong> acertar QUAL é a peça. Errar o enquadramento zera a base; a banca lista as "peças erradas" como conceito 0.</div>
+  </div>
+</main>
+
+<script>
+const elos=[
+ {t:"1 · Nomear a peça",s:"qual é a peça",var:false},
+ {t:"2 · Abrir / pressupor",s:"preâmbulo, habilitação",var:false},
+ {t:"3 · Qualificar sujeitos",s:"quem figura",var:false},
+ {t:"4 · Núcleo",s:"declarações / vícios",var:true},
+ {t:"5 · Efeitos / fiscal",s:"tributos, certidões",var:true},
+ {t:"6 · Fechar / assinar",s:"saneamento + assinaturas",var:false}
+];
+const espelhos=[
+ {id:"BA",nome:"TJ-BA · assento de casamento",cor:"#378add",fill:"#13314a",
+  e:["assento de casamento (Livro B)","habilitação + proclamas","qualificação dos nubentes","celebração + manifestação de vontade","regime de bens + alteração de nome","testemunhas + assinaturas"]},
+ {id:"RR",nome:"TJ-RR · escritura de inventário",cor:"#1d9e75",fill:"#0e3a30",
+  e:["escritura de inventário e partilha","preâmbulo / abertura","autor da herança, meeira, advogado","bens e partilha + declarações","ITCD + documentos","certidões (óbito/CENSEC) + fecho"]},
+ {id:"SC",nome:"TJ-SC · termo socioafetivo",cor:"#7f77dd",fill:"#2a2752",
+  e:["termo de reconhecimento socioafetivo","abertura do termo","reconhecente, filha, genitores","declarações + fundamento de cada uma","efeitos: igualdade, irrevogabilidade","assinaturas (5)"]},
+ {id:"RO",nome:"TJ-RO · nota devolutiva",cor:"#d85a30",fill:"#42190d",
+  e:["qualificação registral negativa","identificação do título / protocolo","partes do título (e quem faltou)","análise dos vícios (continuidade…)","consequência: impossibilidade","conclusão + prazo art. 198"]},
+ {id:"PE",nome:"TJ-PE · ata de usucapião",cor:"#ef9f27",fill:"#3d2a08",
+  e:["ata notarial de usucapião","introdução","solicitante + advogado","fatos da diligência + declarações","enquadramento: usucapião ordinária","declarações finais / fecho"]}
+];
+
+/* ===== Conteúdo das 30 células: minuta + considerações da banca ===== */
+/* chave = espelhoId + "-" + indiceElo (0..5) */
+const DET = {
+/* ---------- BA · assento de casamento civil (Livro B / RCPN) ---------- */
+"BA-0":{minuta:"ASSENTO DE CASAMENTO CIVIL\nLivro B, Termo nº [____], Folha [____].\n\nAos [__] dias do mês de [______] de [____], neste Cartório do Registro Civil das Pessoas Naturais da Comarca de [______]/[UF], procede-se ao registro do casamento civil entre os nubentes abaixo qualificados.",
+  consid:["Identificar corretamente o ato: assento de casamento civil, Livro B, lavrado em termo — é o conceito 1 da escada (id. do ato).","ZERA / conceito 0: chamar de \"escritura\", \"certidão\" ou \"contrato\" de casamento — peça errada perde a base.","Não confundir com Livro B-Auxiliar (religioso com efeito civil) nem com conversão de união estável.","Ganha ponto quem nomeia a peça já indicando livro e termo."]},
+"BA-1":{minuta:"Precedida a regular HABILITAÇÃO (arts. 1.525–1.532 do CC; arts. 67–69 da LRP), com publicação eletrônica dos editais de proclamas no Livro D e expedição do certificado de habilitação (eficácia de 90 dias), verificou-se a capacidade dos nubentes e a inexistência de impedimentos e de causas suspensivas.",
+  consid:["Conceito 2 (habilitação/regularidade prévia): citar procedimento + proclamas + certificado + ausência de impedimento.","Pegadinha: proclamas hoje são só eletrônicos (Lei 14.382/2022) — não mencionar publicação \"pela imprensa\".","Certificado de habilitação vale 90 dias e em todo o território nacional.","MP só se manifesta se houver oposição de impedimento/causa suspensiva — não há manifestação geral obrigatória."]},
+"BA-2":{minuta:"NUBENTE 1: [nome], [nacionalidade], [estado civil], [profissão], nascido(a) em [__/__/____], filho(a) de [pai] e de [mãe], portador(a) do RG [____] e CPF [____], residente em [endereço].\nNUBENTE 2: [qualificação completa, nos mesmos moldes].",
+  consid:["Conceito 3 (qualificação dos nubentes): completa, preenchendo todos os placeholders (nome, nacionalidade, estado civil, profissão, filiação, RG/CPF, residência).","Perde ponto a qualificação \"pela metade\" — faltou filiação, faltou estado civil anterior.","Indicar cônjuge precedente e a dissolução do casamento anterior, se houver.","16–18 anos exige autorização dos pais — atenção quando o enunciado trouxer menor."]},
+"BA-3":{minuta:"Em cerimônia solene, pública e de portas abertas, perante o(a) Juiz(a) de Paz [nome] e as testemunhas adiante nomeadas, os nubentes manifestaram, de forma livre e espontânea, a vontade de se casar; e o(a) celebrante os declarou casados nos termos do art. 1.514 do CC.",
+  consid:["Conceito 4 (celebração + manifestação de vontade): registrar a vontade livre dos nubentes E a declaração do celebrante.","Núcleo do ato — não basta dizer que casaram; tem de aparecer a fórmula \"declaro-os casados\".","Cerimônia: solene, pública, a portas abertas — elementos que a banca procura.","A celebração é gratuita (art. 226, §1º CF); a habilitação e o registro não, salvo pobreza."]},
+"BA-4":{minuta:"Regime de bens: COMUNHÃO PARCIAL, dispensado o pacto antenupcial (regime legal supletivo). Nome: o(a) nubente [nome] passa a assinar [novo nome], acrescido o sobrenome do consorte (art. 1.565, §1º, CC).",
+  consid:["Conceito 5 (regime + nome): comunhão parcial dispensa pacto; só há pacto antenupcial se o regime for diverso.","Pegadinha do nome: pode-se ACRESCER sobrenome do outro, não substituir o prenome nem excluir todos os sobrenomes de solteiro.","Causas suspensivas inobservadas impõem separação obrigatória de bens (art. 1.641).","Aqui está o \"meio variável\" — descrever o efeito patrimonial e o efeito sobre o nome é onde se ganha ponto."]},
+"BA-5":{minuta:"Lavrado o assento, lido e achado conforme, vai assinado pelo(a) Juiz(a) de Paz, pelos cônjuges, pelas duas testemunhas ([nomes]) e por mim, Oficial/Preposto, que o subscrevo.\nExpede-se a respectiva certidão. Comunicações aos RCPN dos nascimentos para anotação.",
+  consid:["Conceito 6 (testemunhas + assinaturas): duas testemunhas (quatro se fora da sede ou nubente que não saiba/possa assinar); amigos não são impedidos.","Assinam: Juiz de Paz, cônjuges, testemunhas e Oficial.","Não esquecer as comunicações aos cartórios de nascimento para anotação à margem.","Forma: assinatura como \"Oficial\", nunca com nome próprio do candidato — assinar com nome real ZERA a peça."]},
+
+/* ---------- RR · escritura de inventário e partilha (Notas, Lei 11.441/07) ---------- */
+"RR-0":{minuta:"ESCRITURA PÚBLICA DE INVENTÁRIO E PARTILHA EXTRAJUDICIAL\n\nSAIBAM quantos esta virem que, aos [__] dias do mês de [______] de [____], neste Tabelionato de Notas da Comarca de [______]/[UF], compareceram as partes adiante nomeadas e qualificadas, a fim de promover o inventário e a partilha dos bens deixados por [autor da herança].",
+  consid:["Identificar a peça: escritura pública de inventário e partilha extrajudicial (Lei 11.441/07).","Cabível só com herdeiros capazes e concordes e ausência de testamento (ou testamento já cumprido/caduco).","ZERA: confundir com formal de partilha (judicial) ou com alvará.","Abre-se na forma notarial — \"Saibam quantos...\" — e não como petição."]},
+"RR-1":{minuta:"Pelas partes, perante este Tabelião, foi dito que pretendem promover, por esta escritura, o inventário e a partilha amigável dos bens deixados pelo falecimento de [autor da herança], assistidas por advogado(a) comum, na forma da Lei 11.441/2007 e do art. 610, §1º, do CPC.",
+  consid:["Conceito 2 (preâmbulo/abertura): declarar o objeto (inventário e partilha amigável) e a base legal.","Indicar desde já a presença obrigatória de advogado (art. 610, §2º CPC) — sua falta inviabiliza a escritura.","Articulação de raciocínio é pontuada de forma transversal — abrir bem organiza a peça.","Mencionar a via extrajudicial pressupõe afirmar consenso e capacidade."]},
+"RR-2":{minuta:"AUTOR DA HERANÇA: [nome], falecido(a) em [__/__/____], conforme certidão de óbito. MEEIRO(A)/CÔNJUGE-COMPANHEIRO(A): [qualificação completa], com quem mantinha [casamento/união estável] sob o regime de [____]. HERDEIROS: [qualificação de cada um]. ADVOGADO(A): [nome e OAB].",
+  consid:["Conceito 3 (qualificação): autor da herança, meeira(o) com indicação da meação/união estável, herdeiros e advogado, todos completos.","Pegadinha: declarar a inexistência de herdeiros incapazes e de testamento — se houver incapaz, a via extrajudicial não serve.","Identificar o regime de bens define a meação — erro aqui contamina a partilha.","Advogado deve estar qualificado com número da OAB."]},
+"RR-3":{minuta:"Declaram as partes que o falecido deixou os seguintes BENS: [descrição de cada bem e valor], perfazendo o MONTE-MOR de R$ [____]. Apurada a meação do(a) cônjuge (R$ [____]), partilha-se a herança líquida em quinhões iguais, cabendo a cada herdeiro [____]. Declaram inexistir dívidas/outros bens a inventariar.",
+  consid:["Conceito 4 (núcleo): descrever bens, apurar monte-mor, separar a meação e distribuir os quinhões — é o coração da escritura.","Meio variável: aqui muda o recheio (quais bens, qual partilha). Erro de conta ou de meação derruba o conceito.","Incluir as declarações: inexistência de outros herdeiros, de testamento, de dívidas, de incapazes.","Partilha desigual exige justificativa (pode caracterizar doação, com reflexo no ITCD)."]},
+"RR-4":{minuta:"Declaram as partes o recolhimento do ITCD (guia nº [____], R$ [____]) e apresentam: certidão de óbito; certidões negativas da Fazenda; CND/CNDT; certidão da CENSEC quanto a testamento; documentos dos bens. Fica o presente ato condicionado à comprovação tributária exigida.",
+  consid:["Conceito 5 (ITCD + documentos): exigir a guia do ITCD recolhida e o rol de certidões (óbito, CENSEC, CNDT, fiscais, dos bens).","Meio variável/fiscal — é onde o ponto se ganha: faltou ITCD ou faltou CENSEC, perde.","CENSEC comprova a inexistência de testamento — requisito da via extrajudicial.","Não exigir documento que a lei não pede também conta (bom-senso); o foco é o ITCD e as certidões essenciais."]},
+"RR-5":{minuta:"E, de tudo cientes, assim o disseram e outorgaram. Lida e achada conforme, vai esta escritura assinada pelas partes, pelo(a) advogado(a) [nome/OAB] e por mim, Tabelião/Preposto, que a lavrei e subscrevo. Expedem-se traslados; procede-se ao registro/averbação cabíveis.",
+  consid:["Conceito 6 (certidões/fecho + assinaturas): fechar com a fórmula notarial e colher assinaturas de TODAS as partes + advogado + Tabelião.","Não esquecer o advogado na assinatura — sua participação é da essência (Lei 11.441/07).","Encaminhar a escritura ao RI (transmissão de imóveis) e demais registros.","Forma: subscrever como Tabelião/Preposto, jamais com nome próprio do candidato."]},
+
+/* ---------- SC · termo de reconhecimento de filiação socioafetiva (RCPN) ---------- */
+"SC-0":{minuta:"TERMO DE RECONHECIMENTO DE FILIAÇÃO SOCIOAFETIVA\nLivro [E/de termos], Termo nº [____].\n\nAos [__] de [______] de [____], neste Registro Civil das Pessoas Naturais da Comarca de [______]/[UF], comparece [reconhecente] para reconhecer, de forma voluntária, a paternidade/maternidade socioafetiva de [filho(a)].",
+  consid:["Conceito (id. do título, escada 0–1): nomear corretamente — termo de reconhecimento de filiação socioafetiva (Prov. 63/2017 CNJ).","ZERA: tratar como \"averbação\" ou \"ação de investigação\" — não é judicial; é ato voluntário no RCPN.","Reconhecente deve ser maior e ter ao menos 16 anos a mais que o reconhecido.","Diferença etária mínima e voluntariedade são pressupostos do ato."]},
+"SC-1":{minuta:"Aberto o presente termo perante este Oficial, manifesta o(a) reconhecente o propósito de reconhecer espontaneamente o vínculo socioafetivo já existente, declarando ciência de que o ato é irrevogável e produz os mesmos efeitos da filiação biológica.",
+  consid:["Abertura do termo: registrar a voluntariedade e a espontaneidade do reconhecimento.","Deixar claro, desde a abertura, que o ato é extrajudicial e definitivo.","Articulação de raciocínio (transversal) — organizar a abertura conduz às declarações seguintes.","O fluxo é: termo → parecer do MP → registro/averbação."]},
+"SC-2":{minuta:"RECONHECENTE: [qualificação completa]. RECONHECIDO(A): [filho(a)], maior de 12 anos, que comparece e CONSENTE com o reconhecimento. GENITORES REGISTRAIS: [pai] e [mãe], que ANUEM ao ato. Todos identificados e qualificados na forma do Prov. 63/2017.",
+  consid:["Conceito 2.2 (qualificação das partes, escala 0–8): as quatro pessoas — reconhecente, filho(a) >12, e os dois genitores — todas qualificadas.","O reconhecido maior de 12 anos precisa CONSENTIR; sem o consentimento, não se lavra o termo.","Os genitores registrais devem ANUIR — a anuência integra o ato.","Perde escala quem deixa de qualificar ou de colher manifestação de qualquer dos quatro."]},
+"SC-3":{minuta:"DECLARA o(a) reconhecente: 1) que o vínculo socioafetivo é verdadeiro e estável; 2) que não tramita ação judicial sobre a filiação; 3) que inexiste vínculo biológico; 4) que há diferença mínima de 16 anos para o reconhecido; 5) que tem ciência dos efeitos e da igualdade entre os filhos; 6) que o reconhecimento é IRREVOGÁVEL.\nFundamentos: art. 13, p.ú. e art. 10, §§3º e 4º (Prov. 63/2017); arts. 1.596 e 1.610 do CC.",
+  consid:["Conceito 2.3 (6 declarações, escala 0–6) + 2.4 (fundamento de cada uma, 0–6): cada declaração vale ponto E o fundamento legal de cada uma também.","As 6: veracidade do vínculo; ausência de ação judicial; ausência de vínculo biológico; diferença ≥16 anos; ciência dos efeitos/igualdade; irrevogabilidade.","Pegadinha de maior peso: esquecer de amarrar o fundamento legal a cada declaração — a banca pontua o par declaração+fundamento.","É o núcleo \"variável\": é aqui que a peça ganha ou perde a maior parte dos pontos."]},
+"SC-4":{minuta:"O reconhecimento socioafetivo produz EFEITOS pessoais e patrimoniais idênticos aos da filiação biológica (igualdade entre os filhos, art. 227, §6º, CF; art. 1.596 CC), é IRREVOGÁVEL e gera os direitos sucessórios e o dever de sustento, guarda e educação.",
+  consid:["Conceito (efeitos): consignar a igualdade entre os filhos e a irrevogabilidade do ato.","Efeitos abrangem nome, sucessão, alimentos, poder familiar — equiparação plena.","Vedada a multiparentalidade automática: o ato não exclui a filiação biológica, soma-se a ela quando for o caso.","Meio variável/efeitos — descrever as consequências jurídicas é o que distingue a peça nota máxima."]},
+"SC-5":{minuta:"Lavrado e lido o presente termo, achado conforme, vai assinado por: (1) o(a) reconhecente; (2) o(a) reconhecido(a) maior de 12 anos; (3) o genitor registral; (4) a genitora registral; e (5) o Oficial/Preposto. Colhido o parecer do Ministério Público, procede-se à averbação no assento de nascimento.",
+  consid:["Conceito 2.5 (assinaturas, escala 0–5): exatamente CINCO assinaturas — reconhecente, filho >12, os dois genitores e o Oficial.","Faltou uma assinatura, perde escala; a banca conta as cinco.","Após o termo, o fluxo exige parecer do MP antes do registro/averbação.","Forma: assinar como Oficial, nunca com nome próprio."]},
+
+/* ---------- RO · nota devolutiva / qualificação registral negativa (RI) ---------- */
+"RO-0":{minuta:"REGISTRO DE IMÓVEIS DA [N.ª] CIRCUNSCRIÇÃO DA COMARCA DE [COMARCA]/[UF]\nOficial: [Nome do Oficial]\nPrenotação nº [____], de [__/__/____].\n\nNOTA DEVOLUTIVA",
+  consid:["Identificar a peça como qualificação registral NEGATIVA (nota devolutiva), não como decisão judicial nem como dúvida já suscitada.","Cabeçalho é parte formal obrigatória: cartório, comarca, oficial, prenotação e data (§5 do caderno-mãe).","Mencionar o número da prenotação amarra o ato ao princípio da prioridade — esquecê-lo perde ponto.","ZERA o enquadramento: redigir a peça como sentença de dúvida ou como mero ofício informal."]},
+"RO-1":{minuta:"Foi apresentado a este Registro Imobiliário, sob o protocolo nº [____], em [__/__/____], o título consistente em [escritura pública de compra e venda / instrumento particular etc.], lavrado em [__/__/____], visando à prática de [registro da transmissão / averbação] referente ao imóvel matriculado sob o nº [____] deste Registro.",
+  consid:["Parte expositiva (§5): descrever o título (natureza, data, objeto) e o ato pretendido (registro/averbação, livro).","Ancorar pela conjunção \"Foi apresentado...\" — frase-chave que organiza o expositivo (§6 do modelo verbatim).","Vincular ao protocolo/prenotação e à matrícula correta.","Erro comum: confundir registro com averbação (art. 167) — descrever o ato pretendido errado contamina toda a nota."]},
+"RO-2":{minuta:"O título indica como transmitente [qualificação] e como adquirente [qualificação]. Da matrícula nº [____] consta como atual titular [nome], registro R-[__]. [Apontar quem deveria figurar e não figura — p.ex.: ausência de outorga do cônjuge / de representação do incapaz / de poderes do representante].",
+  consid:["Qualificar as partes do título e confrontá-las com a matrícula — o que a banca chama de \"partes e quem faltou\".","Pegadinha: outorga uxória/marital (art. 1.647 CC), salvo separação convencional total — faltou cônjuge, há exigência.","Especialidade subjetiva (art. 222 LRP): qualificação completa de pessoas naturais e jurídicas; PJ exige poderes do representante.","Identificar a quebra de continuidade subjetiva (alienante não é o titular registral) já encaminha o vício do elo 4."]},
+"RO-3":{minuta:"Procedida a qualificação registral, nos termos dos arts. 198 e 199 da LRP, constata-se a impossibilidade do ato, em razão das seguintes EXIGÊNCIAS:\n1. [vício mais grave — p.ex. penhora/indisponibilidade]. — Fundamento: art. [__] da LRP c/c art. [__]; princípio da [disponibilidade].\n2. [continuidade — alienante não consta na matrícula]. — Fundamento: art. 195 da LRP; princípio da continuidade.\n3. [especialidade objetiva / georreferenciamento]. — Fundamento: art. 176, §1º; Lei 10.267/2001.",
+  consid:["Núcleo (parte fundamentativa, §5–§6): exigências NUMERADAS, cada uma com defeito + dispositivo + princípio violado.","Ordenar da mais grave (impeditiva) para a mais simples (formal) — misturar é lido como falta de critério.","Ancorar por \"Procedida a qualificação registral...\" e citar três níveis: LRP + CC/extravagante + Provimento CNJ.","Vícios típicos do espelho RO: adjudicação compulsória, continuidade/disponibilidade, especialidade/georreferenciamento.","Pegadinhas que perdem ponto: exigência abusiva (pedir o que a lei não exige) e citar o art. 198 sem o prazo."]},
+"RO-4":{minuta:"Diante do exposto, este Oficial DEIXA DE PRATICAR o ato registral pretendido, por impossibilidade decorrente das exigências acima, devolvendo o título ao apresentante para que, no prazo legal, sejam supridas — sob pena de não ingresso no fólio real.",
+  consid:["Consequência (conclusão): afirmar expressamente a impossibilidade/recusa fundamentada do registro até o cumprimento.","Não basta listar vícios — a banca quer a conclusão pela impossibilidade, ligada às exigências.","Lembrar que a nota não faz coisa julgada: o título pode ser reapresentado e a qualificação é renovada.","Capacidade de argumentação (transversal): conectar cada vício à recusa demonstra raciocínio."]},
+"RO-5":{minuta:"Ficam observados: (i) o prazo de 30 (trinta) dias para suscitação de dúvida, contado da intimação, na forma do art. 198 da LRP; (ii) o prazo de validade da prenotação (art. 188), prorrogado enquanto pendente a dúvida (art. 205, p.ú.); (iii) a possibilidade de reapresentação.\n\n[Comarca]/[UF], [__] de [______] de [____].\n____________________\n[Nome do Oficial] — Oficial Registrador / Substituto",
+  consid:["Conclusão/encerramento (§5): indicar EXPRESSAMENTE o prazo de 30 dias do art. 198 (citar só o número do artigo é insuficiente).","Mencionar a validade da prenotação (art. 188) e a prorrogação enquanto pendente a dúvida (art. 205, p.ú.).","Encerrar com local, data e assinatura do Oficial/Substituto — assinar com nome próprio do candidato ZERA.","Entrega em duas vias; recusa do apresentante → intimação por carta com AR (art. 198, p.ú.)."]},
+
+/* ---------- PE · ata notarial de usucapião extrajudicial (Notas; art. 216-A LRP) ---------- */
+"PE-0":{minuta:"ATA NOTARIAL PARA FINS DE USUCAPIÃO EXTRAJUDICIAL\n\nSAIBAM quantos esta ata notarial virem que, aos [__] de [______] de [____], neste Tabelionato de Notas da Comarca de [______]/[UF], a pedido da parte adiante qualificada, lavro a presente ata para instruir o procedimento de usucapião extrajudicial (art. 216-A da LRP; Prov. 65/2017 CNJ).",
+  consid:["Conceito 2.1 (id./formato): nomear como ATA NOTARIAL para fins de usucapião extrajudicial — não é escritura nem sentença.","Base: art. 216-A da LRP e Prov. 65/2017 do CNJ.","A ata é instrumento de prova de fatos; o registro da usucapião é ato posterior, no RI.","ZERA o enquadramento: redigir como petição de ação de usucapião ou como escritura de compra e venda."]},
+"PE-1":{minuta:"Comparece como SOLICITANTE [nome/qualificação], acompanhado(a) de seu(sua) advogado(a) [nome/OAB], que requer a lavratura da presente ata notarial a fim de comprovar o tempo e as características da posse exercida sobre o imóvel adiante descrito, para fins de reconhecimento extrajudicial da usucapião.",
+  consid:["Conceito 2.2 (introdução): identificar o solicitante e o advogado e declarar a finalidade da ata.","Presença/assinatura de advogado é exigida no procedimento de usucapião extrajudicial.","Indicar desde já o imóvel objeto e a pretensão (reconhecimento da usucapião).","Articulação (transversal) — abrir bem encadeia os fatos da diligência."]},
+"PE-2":{minuta:"O Tabelião responsável, no exercício da fé pública (arts. 6º e 7º da Lei 8.935/94), e com fundamento nos arts. 215 e 217 do CC, no art. 1.243 do CC e no art. 216-A da LRP, atesta os fatos a seguir, presenciados e/ou apurados em diligência.",
+  consid:["Conceito 2.3 (oficial responsável + fundamentação): identificar o tabelião e a base legal (arts. 215, 217 e 1.243 do CC; 216-A LRP).","A fé pública notarial é o que dá força probante à ata — convém invocá-la.","Distinguir o que o tabelião PRESENCIOU do que apenas declararam terceiros.","Citar a soma de posses (art. 1.243 CC) já prepara o enquadramento do elo 5."]},
+"PE-3":{minuta:"Em diligência ao imóvel situado em [endereço/descrição, área e confrontações], o Tabelião constatou: a posse exercida pelo solicitante; as benfeitorias [____]; as confrontações com [confrontantes]. DECLARA o solicitante exercer posse MANSA, PACÍFICA, CONTÍNUA e com ANIMUS DOMINI desde [__/__/____], somando a posse de [antecessor].",
+  consid:["Conceito 2.4 (fatos da diligência) + 2.6 (declarações do solicitante): localização, posse, confrontações + posse mansa/pacífica/contínua, soma de posses, animus domini.","Núcleo variável — descrever os fatos efetivamente presenciados e as declarações é onde se ganha ponto.","A descrição do imóvel deve permitir a especialidade objetiva (área, confrontações).","Pegadinha: o tabelião atesta fatos; juízo de valor sobre o direito não substitui a prova dos requisitos."]},
+"PE-4":{minuta:"Dos fatos atestados resulta o enquadramento na USUCAPIÃO ORDINÁRIA (art. 1.242 do CC): posse de [10] anos, com JUSTO TÍTULO ([____]) e BOA-FÉ, sobre imóvel cujo VALOR VENAL é de R$ [____]. [Indicar, se o caso, a modalidade aplicável e o prazo correspondente.]",
+  consid:["Conceito 2.5 (enquadramento): identificar a modalidade — ordinária exige justo título + boa-fé + prazo de 10 anos.","Meio variável: errar a modalidade (ordinária × extraordinária × especial) compromete o enquadramento.","Declarar o valor venal do imóvel (exigência do procedimento e base de emolumentos).","Boa técnica: justificar o prazo e os requisitos da modalidade escolhida com o art. correspondente do CC."]},
+"PE-5":{minuta:"Nada mais havendo, são prestadas as DECLARAÇÕES FINAIS e colhidas as informações de eventuais terceiros/confrontantes. Lavrada e lida a presente ata, achada conforme, vai assinada pelo solicitante, pelo(a) advogado(a) e por mim, Tabelião/Preposto, que a subscrevo. Expede-se traslado para instrução do pedido no RI.",
+  consid:["Conceito (declarações finais/fecho): encerrar a ata, colher as informações de terceiros (item 2.5 do espelho) e as assinaturas.","Assinam o solicitante, o advogado e o Tabelião; a ata segue para o RI instruir o pedido (art. 216-A).","Não confundir o fecho da ata com o registro da usucapião — são atos distintos.","Forma: subscrever como Tabelião/Preposto, jamais com nome próprio do candidato."]}
+};
+
+const grid=document.getElementById('grid');
+function build(){
+  grid.innerHTML='';
+  const corner=document.createElement('div');corner.className='corner h';corner.textContent='espelho \\ elo';grid.appendChild(corner);
+  elos.forEach((el,i)=>{const d=document.createElement('div');d.className='elo-head h'+(el.var?' variavel':'');d.innerHTML=el.t+'<small>'+el.s+'</small>';grid.appendChild(d);});
+  espelhos.forEach((sp,r)=>{
+    const lab=document.createElement('div');lab.className='row-label';
+    lab.innerHTML='<span class="dot" style="background:'+sp.cor+'"></span>'+sp.nome;
+    const cells=[lab];
+    sp.e.forEach((txt,c)=>{
+      const cell=document.createElement('div');
+      cell.className='cell'+(elos[c].var?' col-var':'');
+      cell.dataset.elo=elos[c].t;
+      cell.dataset.sp=sp.id;cell.dataset.c=c;
+      cell.tabIndex=0;cell.setAttribute('role','button');
+      cell.setAttribute('aria-label',sp.nome+' — '+elos[c].t+'. Abrir minuta e considerações da banca.');
+      cell.style.borderColor=sp.cor+'66';cell.style.background=sp.fill;
+      cell.innerHTML='<span class="b" style="background:'+sp.cor+'"></span>'+txt;
+      cell.addEventListener('click',()=>openPanel(sp.id,c));
+      cell.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPanel(sp.id,c);}});
+      cells.push(cell);
+    });
+    const rowWrap=document.createElement('div');rowWrap.style.display='contents';rowWrap.className='row';rowWrap.dataset.id=sp.id;
+    cells.forEach(c=>rowWrap.appendChild(c));
+    grid.appendChild(rowWrap);
+  });
+}
+build();
+
+/* ---------- Painel de detalhe ---------- */
+const panel=document.getElementById('panel');
+const pTitle=document.getElementById('pTitle'),pSub=document.getElementById('pSub'),pPdot=document.getElementById('pPdot');
+const pMinuta=document.getElementById('pMinuta'),pConsid=document.getElementById('pConsid');
+const pCopy=document.getElementById('pCopy');
+let currentMinuta='';
+
+function classifyConsid(t){
+  const low=t.toLowerCase();
+  if(low.startsWith('zera')||low.includes('perde')||low.includes('pegadinha')||low.includes('erro')||low.includes('não esquec')||low.includes('faltou')) return 'bad';
+  if(low.startsWith('ganha')||low.includes('dá ponto')||low.includes('boa técnica')||low.includes('boa tec')) return 'good';
+  return '';
+}
+
+function openPanel(spId,c){
+  const sp=espelhos.find(s=>s.id===spId);
+  const d=DET[spId+'-'+c];
+  if(!d)return;
+  document.querySelectorAll('.cell.active').forEach(x=>x.classList.remove('active'));
+  const cell=document.querySelector('.cell[data-sp="'+spId+'"][data-c="'+c+'"]');
+  if(cell){cell.classList.add('active');cell.classList.add('show');}
+  pPdot.style.background=sp.cor;
+  pTitle.childNodes[0].nodeValue=sp.nome+' · '+elos[c].t+' ';
+  pSub.textContent=elos[c].s;
+  pMinuta.textContent=d.minuta;currentMinuta=d.minuta;
+  pConsid.innerHTML='';
+  d.consid.forEach(t=>{const li=document.createElement('li');const cls=classifyConsid(t);if(cls)li.className=cls;li.textContent=t;pConsid.appendChild(li);});
+  pCopy.textContent='Copiar minuta';pCopy.classList.remove('ok');
+  panel.classList.add('open');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+document.getElementById('pClose').onclick=()=>{
+  panel.classList.remove('open');
+  document.querySelectorAll('.cell.active').forEach(x=>x.classList.remove('active'));
+};
+pCopy.onclick=async()=>{
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(currentMinuta);}
+    else{const ta=document.createElement('textarea');ta.value=currentMinuta;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
+    pCopy.textContent='✓ Copiado';pCopy.classList.add('ok');
+    setTimeout(()=>{pCopy.textContent='Copiar minuta';pCopy.classList.remove('ok');},1600);
+  }catch(e){pCopy.textContent='Copie manualmente';}
+};
+
+/* ---------- Controles existentes (animação) ---------- */
+function rows(){return [...document.querySelectorAll('.row')];}
+function cellsOf(row){return [...row.querySelectorAll('.cell')];}
+function showRow(row,on){cellsOf(row).forEach((c,i)=>setTimeout(()=>c.classList.toggle('show',on), on?i*70:0));}
+
+document.getElementById('draw').onclick=()=>{
+  rows().forEach(r=>cellsOf(r).forEach(c=>c.classList.remove('show')));
+  rows().forEach((r,i)=>setTimeout(()=>showRow(r,true), i*560));
+};
+document.getElementById('all').onclick=()=>rows().forEach(r=>cellsOf(r).forEach(c=>c.classList.add('show')));
+document.getElementById('reset').onclick=()=>rows().forEach(r=>cellsOf(r).forEach(c=>c.classList.remove('show')));
+document.getElementById('markBtn').onclick=()=>document.body.classList.toggle('mark');
+
+const togs=document.getElementById('togs');
+espelhos.forEach(sp=>{
+  const t=document.createElement('span');t.className='chip-tog on';t.dataset.id=sp.id;
+  t.innerHTML='<span class="dot" style="background:'+sp.cor+'"></span>'+sp.id;
+  t.onclick=()=>{t.classList.toggle('on');const r=document.querySelector('.row[data-id="'+sp.id+'"]');r.classList.toggle('hidden',!t.classList.contains('on'));};
+  togs.appendChild(t);
+});
+</script>
+</body>
+</html>
