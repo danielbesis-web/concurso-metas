@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Civil — Contratos: Classificações, Garantias, Extinção e Espécies (págs. 491–546)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:760px;margin:0 auto}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.sec-label.jur{color:#f472b6}
+.sec-label.pega{color:#f25555}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"\25B8";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.jur-box{background:#1a0a1c;border:1px solid #4a1f4a;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:13px;line-height:1.55;color:#f5cce8}
+.jur-box+.jur-box{margin-top:8px}
+.jur-box .info{display:inline-block;background:#3a1a3a;color:#f9b8e6;border:1px solid #6b2a6b;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:4px}
+.jur-box b{color:#fce4f5}
+.jur-box a{color:#f9b8e6}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0}
+.list-pega li:before{counter-increment:p;content:counter(p);position:absolute;left:0;top:0;background:#2a0808;border:1px solid #f25555;color:#f88;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#ffd0d0}
+.cloze-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.cloze-table td{padding:7px 8px;border-bottom:1px solid #0f2030;vertical-align:top}
+.cloze-table td:first-child{color:#cdddf0;width:62%}
+.cloze-table td:last-child{color:#fbbf24;font-weight:600}
+.fc-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.fc-q{padding:11px 14px;font-size:13.5px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start}
+.fc-q:hover{background:#0b1828}
+.fc-q .chev{margin-left:auto;color:#55738e;transition:transform .2s}
+details[open] .fc-q .chev{transform:rotate(90deg)}
+.fc-a{padding:10px 14px 12px 14px;font-size:13.5px;line-height:1.55;color:#9fe6bd;border-top:1px dashed #16463a}
+.check{list-style:none}
+.check li{position:relative;padding-left:26px;margin-bottom:7px;font-size:13.5px;line-height:1.5;color:#cdddf0}
+.check li:before{content:"\2610";position:absolute;left:0;color:#38bdf8;font-size:16px;top:-1px}
+.foot{padding:14px;text-align:center;font-size:11.5px;color:#55738e}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="banner-save">💾 Salve este arquivo no Drive · Caderno gerado a partir do e-Book de Civil (pp 491–546) + Banco Prova Oral / Banco Revisão — Frases (Notion) + Dizer o Direito + QConcursos + ENAC 2026.1</div>
+
+<div class="header">
+<h1>Caderno de Revisão · Civil — Contratos: Classificações, Formação, Garantias, Extinção e Espécies</h1>
+<div class="sub">Fonte: <b>Direito Civil.pdf (ENAC)</b> págs. <b>491–546</b> · Foco: Cartório (CEBRASPE/FGV), Magistratura, MP e OAB · Atualizado em 24/06/2026</div>
+<div class="toc">
+<a href="#mapa">🗺️ Mapa</a>
+<a href="#class">① Classificações</a>
+<a href="#form">② Formação</a>
+<a href="#vicios">③ Vícios redibitórios</a>
+<a href="#eviccao">④ Evicção</a>
+<a href="#extincao">⑤ Extinção</a>
+<a href="#deposito">⑥ Depósito</a>
+<a href="#pega">⚠️ Pegadinhas</a>
+<a href="#recall">✅ Active Recall</a>
+<a href="#cloze">✍️ Cloze</a>
+<a href="#flash">🃏 Flashcards</a>
+<a href="#check">☑️ Checklist</a>
+</div>
+</div>
+
+<div class="content">
+
+<div class="card intro">
+<div class="card-meta"><span class="badge badge-tema">Visão geral</span><span class="badge badge-pag">pp 491–546</span></div>
+<div class="prose">
+<p>Este caderno percorre o intervalo <b>pp 491–546</b> do e-Book: as <b>classificações modernas</b> de contrato (DPVAT, relacional, eletrônico, cativo de longa duração e <b>coativo/necessário</b>), a <b>formação</b> do contrato, as <b>garantias contratuais</b> (vícios redibitórios e evicção), a <b>extinção</b> e as <b>espécies em espécie</b> até o <b>contrato de depósito</b> e o tema do <b>depositário infiel</b>.</p>
+<p>Enriquecido com o <b>Banco Prova Oral</b> e o <b>Banco Revisão — Frases</b> (Notion), com a jurisprudência do <b>Dizer o Direito</b>, a recorrência do <b>QConcursos</b> e os julgados do material <b>ENAC 2026.1</b>.</p>
+</div>
+</div>
+
+<div class="card mapa" id="mapa">
+<div class="card-title">🗺️ Quadro Sinótico</div>
+<table class="map-table">
+<tr><th>Eixo</th><th>Núcleo</th><th>Norma-chave</th></tr>
+<tr><td>Coativo/necessário</td><td>Vontade da lei substitui a vontade livre; igualdade nas relações privadas</td><td class="pg">Igualdade · CDC</td></tr>
+<tr><td>Relacional</td><td>Relação duradoura, cláusulas abertas e evolutivas</td><td class="pg">Doutrina</td></tr>
+<tr><td>Formação</td><td>4 fases; boa-fé inclusive na pré-contratual</td><td class="pg">arts. 427–435, 462–466</td></tr>
+<tr><td>Entre ausentes</td><td>Regra: expedição; eletrônico: recepção</td><td class="pg">art. 434 · Enunc. 173</td></tr>
+<tr><td>Vícios redibitórios</td><td>Defeito oculto em contrato comutativo</td><td class="pg">arts. 441–446</td></tr>
+<tr><td>Ações edilícias</td><td>Redibitória × estimatória (quanti minoris)</td><td class="pg">art. 442</td></tr>
+<tr><td>Prazos (CC)</td><td>30 dias (móvel) / 1 ano (imóvel); tardio até 180 dias / 1 ano</td><td class="pg">art. 445</td></tr>
+<tr><td>Evicção</td><td>Perda por sentença/ato adm. de causa anterior; contrato oneroso</td><td class="pg">arts. 447–457</td></tr>
+<tr><td>Extinção</td><td>Normal; anterior; posterior (resolução × resilição); morte</td><td class="pg">arts. 472–480</td></tr>
+<tr><td>Depósito</td><td>Real, gratuito, unilateral, personalíssimo; objeto = bem móvel</td><td class="pg">arts. 627–652</td></tr>
+<tr><td>Depositário infiel</td><td>Prisão civil abolida em qualquer modalidade</td><td class="pg">SV 25 · Súm. 419</td></tr>
+</table>
+</div>
+
+<div class="card" id="class">
+<div class="card-meta"><span class="badge badge-tema">① Classificações modernas</span><span class="badge badge-pag">pp 491–493</span></div>
+<div class="card-title">Contratos especiais: DPVAT, relacional, eletrônico, cativo e coativo</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p><b>DPVAT</b>: seguro de <b>origem legal</b> e <b>contratação impositiva</b> a todo proprietário de veículo, com <i>mens legis</i> de <b>proteção das vítimas</b> — difere do seguro privado livremente contratado.</p>
+<p><b>Relacional</b>: opõe-se ao "contrato pontual"; relação <b>duradoura e complexa</b>, cláusulas informais e evolutivas, baixa intervenção judicial.</p>
+<p><b>Eletrônico</b>: celebrado por meio eletrônico; aplica-se o <b>CDC</b>. Surgem a <b>desmaterialização</b> e a <b>desterritorialização</b> (espaço cibernético).</p>
+<p><b>Cativo de longa duração</b>: contratação <b>em massa</b>, trato sucessivo, definidor = <b>catividade/dependência</b> (plano de saúde, seguro).</p>
+<p><b>De direito de personalidade</b>: alcança direitos <b>dúplices</b> (existencial + patrimonial), como imagem e direito autoral — limitação voluntária válida se <b>não permanente nem geral</b> (Enunc. 4 CJF).</p>
+<p><b>Esponsais</b> (noivado): <b>não é contrato nem pré-contrato</b>; mas ruptura ilícita pode gerar <b>responsabilidade civil</b>.</p>
+<ul>
+<li><b>Coativo/necessário</b>: há <b>substituição da vontade livre pela vontade da lei</b> — aplicação da igualdade nas relações privadas, evitando discriminação (ex.: consumo).</li>
+</ul>
+</div>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">
+DPVAT = <b>legal + impositivo + protege a vítima</b>. Cativo = <b>catividade do consumidor</b>. Coativo = <b>vontade da lei no lugar da vontade livre</b>. Esponsais <span class="mnemo">NÃO É CONTRATO</span> — só geram responsabilidade civil se houver ilicitude.
+</div>
+</div>
+
+<div class="card" id="form">
+<div class="card-meta"><span class="badge badge-tema">② Formação do contrato</span><span class="badge badge-pag">pp 494–497</span></div>
+<div class="card-title">As quatro fases e a teoria do contrato entre ausentes</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<ul>
+<li><b>1. Negociações preliminares/puntuação</b>: não prevista no CC; não vincula, mas atrai a <b>boa-fé objetiva</b> (Enunc. 25 e 170 CJF).</li>
+<li><b>2. Proposta/policitação/oblação</b>: declaração unilateral receptícia que <b>obriga o proponente</b> (art. 427).</li>
+<li><b>3. Contrato preliminar</b>: dispensável (arts. 462–466).</li>
+<li><b>4. Contrato definitivo</b>: aperfeiçoa o vínculo.</li>
+</ul>
+<p><b>Entre ausentes</b>: regra = <b>teoria da expedição (agnição)</b> — concluído quando a aceitação é <b>expedida</b>; exceções do art. 434 seguem a <b>recepção</b>. <b>Contrato eletrônico → recepção</b> (Enunc. 173 CJF).</p>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 427, 434</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 427.</span> A proposta de contrato obriga o proponente, se o contrário não resultar dos termos dela, da natureza do negócio, ou das circunstâncias do caso.</p>
+<p><span class="art-num">Art. 434.</span> Os contratos entre ausentes tornam-se perfeitos desde que a aceitação é expedida, exceto: I – no caso do artigo antecedente; II – se o proponente se houver comprometido a esperar resposta; III – se ela não chegar no prazo convencionado.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">
+Regra = <span class="mnemo">EXPEDIÇÃO</span>; exceções e <b>e-mail/eletrônico</b> = <span class="mnemo">RECEPÇÃO</span>. Boa-fé vale <b>antes, durante e depois</b> do contrato (Enunc. 25/170).
+</div>
+</div>
+
+<div class="card" id="vicios">
+<div class="card-meta"><span class="badge badge-tema">③ Garantias — Vícios Redibitórios</span><span class="badge badge-pag">pp 498–501</span></div>
+<div class="card-title">Defeito oculto, ações edilícias e prazos decadenciais</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Defeito <b>oculto</b> em coisa recebida por contrato <b>comutativo</b> que a torna imprópria ao uso ou lhe diminui o valor. Aplica-se às <b>doações onerosas</b> e — Enunc. 583 CJF — aos <b>contratos aleatórios</b> (parte comutativa).</p>
+<ul>
+<li><b>Ação redibitória</b>: rejeita a coisa, desfaz o contrato e devolve o valor.</li>
+<li><b>Ação estimatória / quanti minoris</b>: abate proporcionalmente o preço.</li>
+<li><b>Perdas e danos</b>: só com <b>má-fé</b> do alienante (art. 443).</li>
+</ul>
+</div>
+<table class="cmp-table">
+<tr><th>Critério</th><th>Vício Redibitório</th><th>Erro</th></tr>
+<tr><td>Onde está o vício</td><td>Na coisa (objeto)</td><td>No consentimento (vontade)</td></tr>
+<tr><td>Plano</td><td>Eficácia (resolução/abatimento)</td><td>Validade (anulabilidade)</td></tr>
+</table>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 441, 442, 445</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 441.</span> A coisa recebida em virtude de contrato comutativo pode ser enjeitada por vícios ou defeitos ocultos, que a tornem imprópria ao uso a que é destinada, ou lhe diminuam o valor. Parágrafo único. É aplicável a disposição deste artigo às doações onerosas.</p>
+<p><span class="art-num">Art. 442.</span> Em vez de rejeitar a coisa, redibindo o contrato, pode o adquirente reclamar abatimento no preço.</p>
+<p><span class="art-num">Art. 445.</span> O adquirente decai do direito de obter a redibição ou abatimento no preço no prazo de trinta dias se a coisa for móvel, e de um ano se for imóvel, contado da entrega efetiva; se já estava na posse, o prazo conta-se da alienação, reduzido à metade.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">
+Prazo <b>do CC</b> (≠ CDC): <span class="mnemo">30 DIAS móvel / 1 ANO imóvel</span>. Vício tardio: percebe em até <b>180 dias</b> (móvel) / <b>1 ano</b> (imóvel) e ajuíza em <b>30 dias</b>. <b>Não</b> use os prazos do CDC (90 dias).
+</div>
+<div class="sec-label jur">⚖️ Jurisprudência</div>
+<div class="jur-box"><span class="info">STJ · Info 610</span> <b>Vício saneado afasta o abatimento.</b> Cobertura cujo limite de altura foi depois liberado pelo Município → comprador perde o direito ao abatimento. <i>REsp 1.478.254-RJ, 4ª T., Rel. Min. Luis Felipe Salomão, j. 8/8/2017.</i> <a href="https://www.buscadordizerodireito.com.br/jurisprudencia/detalhes/f885a14eaf260d7d9f93c750e1174228">Dizer o Direito</a></div>
+<div class="jur-box"><span class="info">STJ · Info 554</span> <b>Prazo da redibitória (móvel):</b> até <b>180 dias</b> para perceber o vício e <b>30 dias</b> para ajuizar. <i>REsp 1.095.882-SP, 4ª T., Rel. Min. Maria Isabel Gallotti, j. 9/12/2014.</i></div>
+<div class="jur-box"><span class="info">QConcursos</span> <b>Recorrência alta</b> em vícios redibitórios/evicção (CEBRASPE e FGV). Mais cobrado: distinção vício na coisa × evicção no direito e os <b>prazos do CC</b> (pegadinha CC × CDC). <a href="https://www.qconcursos.com/questoes-de-concursos/disciplinas/direito-direito-civil/vicios-redibitorios-e-eviccao/questoes">ver questões</a></div>
+</div>
+
+<div class="card" id="eviccao">
+<div class="card-meta"><span class="badge badge-tema">④ Garantias — Evicção</span><span class="badge badge-pag">pp 501–503</span></div>
+<div class="card-title">Perda da coisa por causa jurídica anterior</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Perda da coisa por <b>sentença</b> (ou ato administrativo) que a atribui a outrem por <b>causa preexistente</b> ao contrato. Nos contratos <b>onerosos</b>, o alienante responde — subsiste <b>mesmo em hasta pública</b> (art. 447).</p>
+<ul>
+<li><b>Evicto/adquirente</b>: perde o bem.</li>
+<li><b>Alienante</b>: transferiu a coisa viciada.</li>
+<li><b>Evictor/terceiro</b>: readquire o bem.</li>
+</ul>
+<p>Cláusula <i>non praestaenda evictione</i> pode reforçar, diminuir ou <b>excluir</b> a garantia (art. 448) — mas o evicto ainda recebe o <b>preço</b> se não soube/assumiu o risco (art. 449). <b>Parcial considerável</b> → rescisão ou restituição proporcional; <b>não considerável</b> → só indenização.</p>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 447, 448, 457</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 447.</span> Nos contratos onerosos, o alienante responde pela evicção. Subsiste esta garantia ainda que a aquisição se tenha realizado em hasta pública.</p>
+<p><span class="art-num">Art. 448.</span> Podem as partes, por cláusula expressa, reforçar, diminuir ou excluir a responsabilidade pela evicção.</p>
+<p><span class="art-num">Art. 457.</span> Não pode o adquirente demandar pela evicção, se sabia que a coisa era alheia ou litigiosa.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">
+Evicção = <b>perda no DIREITO</b> (vício redibitório = <b>defeito na COISA</b>). Garante até em <b>hasta pública</b>. <span class="mnemo">SABIA QUE ERA ALHEIA/LITIGIOSA → SEM EVICÇÃO</span> (art. 457).
+</div>
+<div class="sec-label jur">⚖️ Jurisprudência</div>
+<div class="jur-box"><span class="info">STJ</span> <b>Evicção dispensa trânsito em julgado</b> e admite <b>ato administrativo</b> (ex.: apreensão), de causa anterior à alienação. <i>REsp 1.332.112/GO, 4ª T., Rel. Min. Luis Felipe Salomão.</i> <a href="https://buscadordizerodireito.com.br/jurisprudencia/detalhes/6d0f846348a856321729a2f36734d1a7">Dizer o Direito</a> · <i>(Banco Revisão — Frases, Meta 15)</i></div>
+<div class="jur-box"><span class="info">STJ · Súm. 239</span> O direito à adjudicação compulsória <b>não se condiciona ao registro</b> do compromisso de compra e venda — registro dá oponibilidade, não validade (Enunc. 30 CJF). <i>(Banco Revisão — Frases, Meta 15)</i></div>
+<div class="jur-box"><span class="info">ENAC · Julgados 300</span> <b>Distrato de lote não edificado (pós-Lei 13.786/2018):</b> cabível dedução da <b>taxa de fruição</b> (até 0,75%/mês do valor atualizado) dos valores restituídos, com previsão contratual expressa. <i>REsp 2.104.086-SP, 4ª T., j. 7/10/2025.</i></div>
+</div>
+
+<div class="card" id="extincao">
+<div class="card-meta"><span class="badge badge-tema">⑤ Extinção do contrato</span><span class="badge badge-pag">pp 503–507</span></div>
+<div class="card-title">Resolução, resilição e extinção por morte</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<ul>
+<li><b>Normal</b>: cumprimento da obrigação / termo final.</li>
+<li><b>Por fatos anteriores</b>: invalidade; cláusula de arrependimento; cláusula resolutiva expressa.</li>
+<li><b>Por fatos posteriores (rescisão — gênero)</b>: <b>resolução</b> (descumprimento — art. 475; inclui onerosidade excessiva, arts. 478–480) e <b>resilição</b> (bilateral/distrato — art. 472; ou unilateral/denúncia — art. 473).</li>
+<li><b>Por morte</b>: obrigações personalíssimas (<i>intuitu personae</i>).</li>
+</ul>
+</div>
+<table class="cmp-table">
+<tr><th>Forma</th><th>Causa</th><th>Efeito</th></tr>
+<tr><td>Resolução</td><td>Inadimplemento / onerosidade excessiva</td><td>Desfaz + perdas e danos (se culpa)</td></tr>
+<tr><td>Distrato (resilição bilateral)</td><td>Vontade de ambos</td><td>Mesma forma do contrato (art. 472)</td></tr>
+<tr><td>Resilição unilateral</td><td>Vontade de um, quando a lei permite</td><td>Denúncia; sem perdas e danos</td></tr>
+</table>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 472, 474, 475</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 472.</span> O distrato faz-se pela mesma forma exigida para o contrato.</p>
+<p><span class="art-num">Art. 474.</span> A cláusula resolutiva expressa opera de pleno direito; a tácita depende de interpelação judicial.</p>
+<p><span class="art-num">Art. 475.</span> A parte lesada pelo inadimplemento pode pedir a resolução do contrato, se não preferir exigir-lhe o cumprimento, cabendo, em qualquer dos casos, indenização por perdas e danos.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">
+Resolutiva <b>expressa</b> = <span class="mnemo">PLENO DIREITO</span>; <b>tácita</b> = <span class="mnemo">INTERPELAÇÃO JUDICIAL</span>. <b>Distrato</b> = mesma forma do contrato.
+</div>
+</div>
+
+<div class="card" id="deposito">
+<div class="card-meta"><span class="badge badge-tema">⑥ Contrato de depósito</span><span class="badge badge-pag">pp 543–548</span></div>
+<div class="card-title">Natureza, incapacidade superveniente e depositário infiel</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Contrato <b>real</b> (aperfeiçoa-se com a entrega), em regra <b>gratuito e unilateral</b>, <b>personalíssimo</b>, com objeto = <b>bem móvel</b> (art. 627). <b>Prova-se por escrito</b> (art. 646).</p>
+<ul>
+<li><b>Voluntário</b> × <b>necessário</b> (legal · miserável · do hospedeiro).</li>
+<li><b>Uso da coisa</b>: vedado sem <b>licença expressa</b> (art. 640).</li>
+<li><b>Incapacidade superveniente</b> (art. 641): quem administra os bens restitui de imediato; senão → <b>Depósito Público</b> ou novo depositário. É <b>depósito legal</b>.</li>
+<li><b>Força maior</b> (art. 642): não responde, mas <b>tem de provar</b>.</li>
+<li><b>Coisa fungível</b> → rege-se pelo <b>mútuo</b> (art. 645).</li>
+<li><b>Necessário não se presume gratuito</b> (art. 651).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 627, 640, 641, 642</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 627.</span> Pelo contrato de depósito recebe o depositário um objeto móvel, para guardar, até que o depositante o reclame.</p>
+<p><span class="art-num">Art. 640.</span> Sob pena de responder por perdas e danos, não poderá o depositário, sem licença expressa do depositante, servir-se da coisa depositada, nem a dar em depósito a outrem.</p>
+<p><span class="art-num">Art. 641.</span> Se o depositário se tornar incapaz, a pessoa que lhe assumir a administração dos bens diligenciará imediatamente restituir a coisa depositada e, não querendo ou não podendo o depositante recebê-la, recolhê-la-á ao Depósito Público ou promoverá nomeação de outro depositário.</p>
+<p><span class="art-num">Art. 642.</span> O depositário não responde pelos casos de força maior; mas, para que lhe valha a escusa, terá de prová-los.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">
+Depósito = <span class="mnemo">REAL · GRATUITO · UNILATERAL · PERSONALÍSSIMO · BEM MÓVEL</span>. Incapacidade superveniente = <b>depósito legal</b>. Fungível → <b>mútuo</b>.
+</div>
+<div class="sec-label jur">⚖️ Jurisprudência</div>
+<div class="jur-box"><span class="info">SV 25 · Súm. 419</span> <b>Prisão civil do depositário infiel é ilícita</b> em qualquer modalidade (efeito do Pacto de San José — CADH, Dec. 678/92), apesar do art. 652 do CC e do art. 5º, LXVII, da CF. <i>SV 25/STF; Súmula 419/STJ.</i> <a href="https://www.buscadordizerodireito.com.br/jurisprudencia/detalhes/641d77dd5271fca28764612a028d9c8e">Dizer o Direito</a></div>
+</div>
+
+<div class="card">
+<div class="card-meta"><span class="badge badge-tema">🎙️ Banco Prova Oral (TJMT)</span><span class="badge badge-pag">Teoria geral</span></div>
+<div class="card-title">Perguntas reais de banca encadeadas a este conteúdo</div>
+<div class="sec-label recall">▣ PO-617 · Exceção de contrato não cumprido</div>
+<div class="prose">
+<p>Defesa peremptória em contratos <b>sinalagmáticos</b> (art. 476): ninguém pode exigir o implemento da obrigação alheia antes de cumprir a sua. Pressupostos: contrato bilateral; inadimplemento da contraprestação; ausência de prazo/simultaneidade; <b>boa-fé</b> do excepcionante.</p>
+<ul>
+<li><i>Exceptio non rite adimpleti contractus</i>: cumprimento imperfeito → recusa proporcional.</li>
+<li><b>Art. 477</b>: insegurança patrimonial superveniente — recusa até prestar garantia.</li>
+<li><b>Limites</b>: má-fé/abuso; <b>mora ínfima</b> (gravidade do inadimplemento); contrato administrativo é mitigado (Lei 14.133/2021, art. 137 — 2 meses); CDC art. 39, V.</li>
+</ul>
+</div>
+<div class="sec-label recall">▣ PO-612 · Unilateral × Bilateral × Plurilateral</div>
+<table class="cmp-table">
+<tr><th>Tipo</th><th>Obrigações</th><th>Consequência</th></tr>
+<tr><td>Unilateral</td><td>Doação pura, mútuo, comodato, depósito gratuito</td><td>Não cabe exceptio (476)</td></tr>
+<tr><td>Bilateral</td><td>Compra e venda, locação, seguro</td><td>Cabem exceptio, riscos, cláusula resolutiva</td></tr>
+<tr><td>Plurilateral</td><td>Sociedade (981 — affectio societatis)</td><td>Preservação do contrato</td></tr>
+</table>
+<div class="mem-box">Todo contrato é <b>bilateral na formação</b>; a classificação é quanto às <b>obrigações geradas</b>. Cuidado: contrato unilateral ≠ negócio jurídico unilateral (testamento).</div>
+</div>
+
+<div class="card" id="pega">
+<div class="sec-label pega">⚠️ Pegadinhas e Pontos de Prova</div>
+<ol class="list-pega">
+<li><b>DPVAT</b> é impositivo e de origem legal — não é seguro privado.</li>
+<li><b>Esponsais NÃO são contrato nem pré-contrato</b> (mas ruptura ilícita gera resp. civil).</li>
+<li>Vício redibitório exige contrato <b>comutativo</b> — Enunc. 583 estende aos aleatórios (parte comutativa).</li>
+<li><b>Prazo do CC ≠ CDC</b>: 30 dias (móvel) / 1 ano (imóvel). Não é 90 dias.</li>
+<li>Vício tardio: até <b>180 dias</b> (móvel) para perceber; depois <b>30 dias</b> para a ação (Info 554).</li>
+<li><b>Perdas e danos</b> na redibitória só com <b>má-fé</b> do alienante.</li>
+<li><b>Vício saneado</b> → perde o abatimento (Info 610).</li>
+<li><b>Evicção</b> dispensa trânsito em julgado e admite ato administrativo.</li>
+<li>Evicção subsiste <b>mesmo em hasta pública</b> (art. 447).</li>
+<li>Sem evicção se o adquirente sabia que a coisa era <b>alheia ou litigiosa</b> (art. 457).</li>
+<li>Resolutiva <b>expressa</b> opera de pleno direito; <b>tácita</b> exige interpelação (art. 474).</li>
+<li><b>Distrato</b> exige a mesma forma do contrato (art. 472).</li>
+<li>Entre ausentes: regra é <b>expedição</b>; eletrônico segue <b>recepção</b> (Enunc. 173).</li>
+<li><b>Depósito</b> tem por objeto <b>bem móvel</b> e é contrato <b>real</b>.</li>
+<li>Depósito é <b>personalíssimo</b>: extingue-se com a morte do depositário.</li>
+<li>Depositário <b>não pode usar</b> a coisa sem licença expressa (art. 640).</li>
+<li><b>Incapacidade superveniente</b> do depositário (art. 641) = depósito <b>legal</b>.</li>
+<li>Depositário <b>não responde</b> por força maior, mas <b>tem de prová-la</b> (art. 642).</li>
+<li>Depósito de coisa <b>fungível</b> rege-se pelo <b>mútuo</b> (art. 645).</li>
+<li>Depósito necessário <b>não se presume gratuito</b> (art. 651).</li>
+<li><b>Prisão civil do depositário infiel abolida</b> — não confundir com a do devedor de alimentos.</li>
+<li><i>Exceptio</i> (art. 476) só nos <b>bilaterais</b>; não cabe por <b>mora ínfima</b>.</li>
+</ol>
+</div>
+
+<div class="card" id="recall">
+<div class="sec-label recall">✅ Active Recall — toque para revelar</div>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os prazos decadenciais do CC para vício redibitório?</span><span class="chev">▸</span></summary><div class="recall-a">30 dias (móvel) e 1 ano (imóvel), da entrega efetiva; se já na posse, conta da alienação pela metade.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que ocorre se o vício redibitório for saneado?</span><span class="chev">▸</span></summary><div class="recall-a">O adquirente perde o direito ao abatimento do preço (STJ, Info 610, REsp 1.478.254-RJ).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A evicção exige trânsito em julgado? Admite ato administrativo?</span><span class="chev">▸</span></summary><div class="recall-a">Não exige trânsito em julgado e admite ato administrativo (ex.: apreensão), de causa anterior (REsp 1.332.112/GO).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferença entre vício redibitório e evicção?</span><span class="chev">▸</span></summary><div class="recall-a">Vício redibitório = defeito na coisa (plano da eficácia); evicção = perda no direito por causa jurídica anterior.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Cláusula resolutiva expressa × tácita: qual exige interpelação?</span><span class="chev">▸</span></summary><div class="recall-a">A tácita depende de interpelação judicial; a expressa opera de pleno direito (art. 474).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a natureza jurídica do contrato de depósito?</span><span class="chev">▸</span></summary><div class="recall-a">Real, em regra gratuito e unilateral, personalíssimo; objeto = bem móvel.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que ocorre na incapacidade superveniente do depositário (art. 641)?</span><span class="chev">▸</span></summary><div class="recall-a">Quem assume a administração restitui de imediato; não podendo o depositante receber → Depósito Público ou novo depositário. É depósito legal.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Ainda cabe prisão civil do depositário infiel?</span><span class="chev">▸</span></summary><div class="recall-a">Não — SV 25/STF e Súmula 419/STJ, por efeito do Pacto de San José (CADH).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Pressupostos da exceptio non adimpleti contractus?</span><span class="chev">▸</span></summary><div class="recall-a">Contrato bilateral; inadimplemento da contraprestação; ausência de prazo/simultaneidade; boa-fé. Não cabe por mora ínfima (art. 476).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Teoria-regra do contrato entre ausentes e a do eletrônico?</span><span class="chev">▸</span></summary><div class="recall-a">Regra = expedição (agnição, art. 434); eletrônico = recepção (Enunc. 173 CJF).</div></details>
+</div>
+
+<div class="card" id="cloze">
+<div class="sec-label mem">✍️ Cloze Deletions</div>
+<table class="cloze-table">
+<tr><td>Vício redibitório pressupõe contrato ______.</td><td>comutativo</td></tr>
+<tr><td>Prazo do CC: ______ (móvel) / ______ (imóvel).</td><td>30 dias · 1 ano</td></tr>
+<tr><td>Vício ______ afasta o abatimento do preço.</td><td>saneado</td></tr>
+<tr><td>Evicção decorre de causa jurídica ______ ao contrato.</td><td>preexistente/anterior</td></tr>
+<tr><td>A evicção ______ exige trânsito em julgado.</td><td>não</td></tr>
+<tr><td>Cláusula resolutiva ______ opera de pleno direito.</td><td>expressa</td></tr>
+<tr><td>O distrato faz-se pela ______ exigida para o contrato.</td><td>mesma forma</td></tr>
+<tr><td>Entre ausentes: regra = teoria da ______.</td><td>expedição/agnição</td></tr>
+<tr><td>Contrato eletrônico segue a teoria da ______.</td><td>recepção</td></tr>
+<tr><td>O depósito tem por objeto bem ______.</td><td>móvel</td></tr>
+<tr><td>O depósito é contrato ______ (aperfeiçoa-se com a entrega).</td><td>real</td></tr>
+<tr><td>Incapacidade superveniente do depositário → depósito ______.</td><td>legal</td></tr>
+<tr><td>Depósito de coisa fungível rege-se pelo ______.</td><td>mútuo</td></tr>
+<tr><td>A SV ______ e a Súmula ______ afastam a prisão do depositário infiel.</td><td>25/STF · 419/STJ</td></tr>
+<tr><td>A exceptio do art. 476 só cabe nos contratos ______.</td><td>bilaterais</td></tr>
+</table>
+</div>
+
+<div class="card" id="flash">
+<div class="sec-label recall">🃏 Flashcards — toque para virar</div>
+<details class="fc-item"><summary class="fc-q"><span>Ação redibitória × estimatória</span><span class="chev">▸</span></summary><div class="fc-a">Redibitória desfaz o contrato; estimatória (quanti minoris) abate o preço.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Prazo CC vício redibitório (móvel / imóvel)</span><span class="chev">▸</span></summary><div class="fc-a">30 dias / 1 ano.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Evicção exige trânsito em julgado?</span><span class="chev">▸</span></summary><div class="fc-a">Não; admite ato administrativo (REsp 1.332.112).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Limite da evicção (art. 457)</span><span class="chev">▸</span></summary><div class="fc-a">Adquirente sabia que a coisa era alheia/litigiosa.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Teoria-regra entre ausentes</span><span class="chev">▸</span></summary><div class="fc-a">Expedição/agnição (art. 434); eletrônico = recepção.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Objeto e natureza do depósito</span><span class="chev">▸</span></summary><div class="fc-a">Bem móvel; contrato real, gratuito, unilateral, personalíssimo.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Art. 641 (incapacidade superveniente)</span><span class="chev">▸</span></summary><div class="fc-a">Restitui imediatamente; senão → Depósito Público / novo depositário. Depósito legal.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Força maior no depósito (art. 642)</span><span class="chev">▸</span></summary><div class="fc-a">Depositário não responde, mas tem de provar.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Prisão do depositário infiel</span><span class="chev">▸</span></summary><div class="fc-a">Abolida — SV 25/STF e Súmula 419/STJ.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Distrato — forma</span><span class="chev">▸</span></summary><div class="fc-a">Mesma forma exigida para o contrato (art. 472).</div></details>
+</div>
+
+<div class="card" id="check">
+<div class="sec-label sintese">☑️ Checklist de Domínio</div>
+<ul class="check">
+<li>Distingo DPVAT, relacional, eletrônico, cativo e coativo/necessário.</li>
+<li>Sei as quatro fases de formação e a boa-fé pré-contratual.</li>
+<li>Domino expedição × recepção e a regra do eletrônico.</li>
+<li>Conceituo vício redibitório e as ações edilícias.</li>
+<li>Memorizei os prazos do CC (sem confundir com o CDC).</li>
+<li>Sei o efeito do vício saneado (Info 610) e quando cabem perdas e danos.</li>
+<li>Conceituo evicção, suas partes e a dispensa do trânsito em julgado.</li>
+<li>Diferencio resolução, resilição (bilateral/unilateral) e morte.</li>
+<li>Domino o regime do depósito (arts. 627–652) e o art. 641/642.</li>
+<li>Sei o estado da prisão do depositário infiel (SV 25 / Súm. 419).</li>
+<li>Domino a exceptio e a classificação unilateral/bilateral/plurilateral.</li>
+<li>Conheço o julgado ENAC do distrato + taxa de fruição (REsp 2.104.086-SP).</li>
+</ul>
+</div>
+
+</div>
+<div class="foot">Caderno de Revisão · Civil — Contratos (pp 491–546) · Fontes: e-Book ENAC · Notion (Banco Prova Oral / Banco Revisão — Frases) · Dizer o Direito · QConcursos · ENAC 2026.1</div>
+</div>
+</body>
+</html>
