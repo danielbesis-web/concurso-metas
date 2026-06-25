@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 19 · Notarial/Registral — Parte 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 19 · Notarial/Registral — Parte 1</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 19 · Notarial/Registral · Responsabilidade civil (Tema 777) e Lei 8.935 · Parte 1</footer>
+<script>
+const STORE_KEY = 'concurso_meta19_notarial_parte1_v1';   // chave do localStorage deste simulado
+const SLUG = STORE_KEY.replace(/^concurso_/,'');   // usado nos nomes dos arquivos de exportação
+const QUESTOES = [
+  {id:'q1', materia:'Prescrição', banca:'CESPE · TJ/PE · 2024', tipo:'multipla',
+   enunciado:`De acordo com o STJ, a pretensão de reparação civil decorrente de reconhecimento judicial de nulidade de negócio jurídico causada por ato praticado por tabelião no exercício da atividade cartorária:`,
+   alternativas:[
+     {letra:'A',texto:`decai em quatro anos, iniciando-se o prazo da prática do ato lesivo.`},
+     {letra:'B',texto:`prescreve em dez anos, iniciando-se o prazo do trânsito em julgado da ação anulatória.`},
+     {letra:'C',texto:`prescreve em quatro anos, iniciando-se o prazo da prática do ato lesivo.`},
+     {letra:'D',texto:`prescreve em três anos, iniciando-se o prazo da prática do ato lesivo.`},
+     {letra:'E',texto:`prescreve em três anos, iniciando-se o prazo do trânsito em julgado da ação anulatória.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b><br><br><b>⚖️ Por quê (ICOL):</b> a pretensão de reparação civil por ato do tabelião prescreve em 3 anos (art. 206, §3º, V, do CC); o termo inicial, segundo o STJ, conta-se do trânsito em julgado da ação que reconheceu a nulidade do negócio.<br><br><b>⚠️ Pegadinha:</b> trocar 3 por 4/10 anos, ou fixar o início na prática do ato (e não no trânsito da anulatória).<br><br><b>📌 Fundamento:</b> art. 206, §3º, V, do CC.<br><br><b>⚖️ Da jurisprudência:</b> STJ — prescrição trienal contada do trânsito em julgado da anulatória.<br><br><b>🔁 Revisar:</b> reparação por ato do tabelião = 3 anos, a partir do trânsito em julgado da anulatória.`},
+
+  {id:'q2', materia:'Natureza do cartório', banca:'CESPE · TJ/RO · 2025', tipo:'multipla',
+   enunciado:`Assinale a opção correta à luz do posicionamento do STJ acerca da natureza dos cartórios extrajudiciais.`,
+   alternativas:[
+     {letra:'A',texto:`Os cartórios têm legitimidade passiva para ser parte em ações judiciais.`},
+     {letra:'B',texto:`Os cartórios caracterizam-se como empresa.`},
+     {letra:'C',texto:`Na hipótese de substituição do titular do cartório, a responsabilidade não se transmite ao sucessor.`},
+     {letra:'D',texto:`Os referidos órgãos têm personalidade jurídica.`},
+     {letra:'E',texto:`O patrimônio da serventia pertence a ela própria.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> a responsabilidade do delegatário é pessoal e não se transmite ao sucessor — o novo titular não responde pelos danos causados pela atuação do antecessor.<br><br><b>⚠️ Pegadinha:</b> A, D e E partem da ideia de que o cartório teria personalidade jurídica/patrimônio próprio — não tem; B erra ao equipará-lo a empresa.<br><br><b>📌 Fundamento:</b> art. 236 da CF; Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> STJ — a serventia não tem personalidade jurídica; responde o titular ou o Estado, e a responsabilidade não passa ao sucessor.<br><br><b>🔁 Revisar:</b> cartório não é PJ nem empresa; responsabilidade pessoal e intransmissível ao sucessor.`},
+
+  {id:'q3', materia:'Responsabilidade pelo substituto', banca:'FGV · Enac · 2025', tipo:'multipla',
+   enunciado:`João, notário em Porto Velho/RO, designou Marcos como substituto. Ao atender Lucas, Marcos, agindo de forma negligente na lavratura de ato notarial, causou-lhe graves prejuízos. Lucas pretende ser ressarcido. Considerando a Lei 8.935/94, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:`na qualidade de notário, João responderá pessoalmente pelos prejuízos causados pelo substituto que designou, não existindo o direito de regresso, já que Marcos não agiu com dolo.`},
+     {letra:'B',texto:`como a conduta negligente foi praticada pelo substituto, João não tem qualquer responsabilidade em relação aos eventos danosos.`},
+     {letra:'C',texto:`como a conduta negligente foi praticada pelo substituto, João responderá subsidiariamente pelos danos causados a Lucas.`},
+     {letra:'D',texto:`na qualidade de notário, João responderá pessoalmente pelos prejuízos causados pelo substituto que designou, assegurado o direito de regresso.`},
+     {letra:'E',texto:`a pretensão de reparação civil por parte de Lucas prescreve em cinco anos, a contar da data de lavratura do ato notarial.`},
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê (ICOL):</b> o notário responde pessoalmente pelos prejuízos causados pelos substitutos que designou (e escreventes que autorizou), assegurado o direito de regresso (Lei 8.935/94, art. 22).<br><br><b>⚠️ Pegadinha:</b> negar o regresso por ausência de dolo (A); afastar a responsabilidade do titular (B); dizer que é subsidiária (C); fixar prazo de 5 anos (E — é 3).<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> responsabilidade pessoal do titular pelos prepostos, com regresso.<br><br><b>🔁 Revisar:</b> titular responde pelos atos de substitutos/escreventes, com direito de regresso.`},
+
+  {id:'q4', materia:'Quem responde', banca:'IESES · TJ/PA · 2026', tipo:'multipla',
+   enunciado:`Joana sofreu prejuízos pela negativa de benefício previdenciário porque apresentou registro com dados incorretos lavrado em serventia onde os funcionários atuavam com desídia. Quer ser indenizada. Sobre a pretensão de Joana, assinale a alternativa INCORRETA.`,
+   alternativas:[
+     {letra:'A',texto:`Joana pode escolher entre processar o Estado, o delegatário ou o cartório.`},
+     {letra:'B',texto:`Joana pode optar entre processar o titular do cartório ou o Estado.`},
+     {letra:'C',texto:`Joana pode processar o registrador, ainda que ele não estivesse lá no dia, porque os oficiais de registro são civilmente responsáveis por todos os prejuízos que causarem a terceiros, por culpa ou dolo, pessoalmente, pelos substitutos que designarem ou escreventes que autorizarem.`},
+     {letra:'D',texto:`Joana pode processar o Estado, uma vez que ele responde, objetivamente, pelos atos dos tabeliães e registradores oficiais que, no exercício de suas funções, causem dano a terceiros.`},
+     {letra:'E',texto:`Se Joana escolher processar o titular, a pretensão prescreve em três anos, contados da data da lavratura do registro.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> (a INCORRETA).<br><br><b>⚖️ Por quê (ICOL):</b> não cabe demandar "o cartório", que não tem personalidade jurídica. Demanda-se o Estado (responsabilidade objetiva, Tema 777) ou o delegatário — nunca a serventia em si. Por isso A é a errada.<br><br><b>⚠️ Pegadinha:</b> incluir "o cartório" entre os legitimados passivos; as demais (B–E) são corretas.<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94; art. 37, §6º, CF; art. 206, §3º, V, CC.<br><br><b>⚖️ Da jurisprudência:</b> STF Tema 777 (Estado objetivo + regresso); serventia sem PJ.<br><br><b>🔁 Revisar:</b> processa-se o Estado ou o delegatário — nunca "o cartório".`},
+
+  {id:'q5', materia:'Responsabilidade civil (art. 22)', banca:'IESES · TJ/PA · 2026', tipo:'multipla',
+   enunciado:`Sobre a responsabilidade civil dos notários e registradores, assinale a alternativa correta:`,
+   alternativas:[
+     {letra:'A',texto:`A responsabilidade civil dos notários e registradores fica condicionada e depende da condenação criminal.`},
+     {letra:'B',texto:`São civilmente responsáveis por todos os prejuízos que causarem a terceiros, por dolo, pessoalmente, pelos substitutos que designarem ou escreventes que autorizarem, assegurado o direito de regresso.`},
+     {letra:'C',texto:`São civilmente responsáveis por todos os prejuízos que causarem a terceiros, por culpa, pessoalmente, pelos substitutos que designarem ou escreventes que autorizarem, assegurado o direito de regresso.`},
+     {letra:'D',texto:`A responsabilidade criminal será individualizada, aplicando-se, no que couber, a legislação relativa aos crimes contra a honra.`},
+     {letra:'E',texto:`São civilmente responsáveis por todos os prejuízos que causarem a terceiros, por culpa ou dolo, pessoalmente, pelos substitutos que designarem ou escreventes que autorizarem, assegurado o direito de regresso.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b><br><br><b>⚖️ Por quê (ICOL):</b> o art. 22 da Lei 8.935/94 fixa a responsabilidade por CULPA OU DOLO, pessoalmente, pelos substitutos/escreventes, com direito de regresso. A letra E é a única completa.<br><br><b>⚠️ Pegadinha:</b> B (só dolo) e C (só culpa) são incompletas; A condiciona à condenação criminal (instâncias independentes); D fala em crimes contra a honra.<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> art. 22 = culpa OU dolo, pessoalmente, com regresso.`},
+
+  {id:'q6', materia:'Tema 777', banca:'FGV · TJ/ES · 2025', tipo:'multipla',
+   enunciado:`Morgana teve imóvel de sua propriedade alienado por Cinthia, que obteve procuração pública falsa em certo tabelionato. Morgana quer responsabilizar civilmente o Estado e o tabelião. À luz da orientação do STF, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:`a atividade notarial e de registro é de titularidade do estado, de modo que o tabelião não pode ser civilmente responsabilizado pelos atos praticados no exercício da função.`},
+     {letra:'B',texto:`o tabelião responde subjetivamente pelo exercício de suas atribuições, mas a responsabilidade do estado é objetiva, de modo que o ente federativo tem o dever de regresso contra o responsável, nos casos de dolo ou culpa.`},
+     {letra:'C',texto:`a responsabilidade civil do tabelião é primária e objetiva, enquanto a do estado, apesar de objetiva, é subsidiária, por ser a delegação equiparada à concessão de serviços públicos.`},
+     {letra:'D',texto:`a serventia extrajudicial tem personalidade jurídica própria, razão pela qual tem responsabilidade primária pelos danos do tabelião, exigida a prova de dolo ou culpa do titular.`},
+     {letra:'E',texto:`a situação do tabelião é equivalente à do permissionário de serviço público, sendo sua responsabilidade civil objetiva e concorrente com o estado.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> no STF (Tema 777), a responsabilidade do Estado é OBJETIVA pelos atos de tabeliães e registradores; o tabelião responde SUBJETIVAMENTE (culpa ou dolo), no regresso do Estado contra ele.<br><br><b>⚠️ Pegadinha:</b> A isenta o tabelião; C/E falam em responsabilidade objetiva ou subsidiária do tabelião/serventia; D atribui personalidade jurídica à serventia.<br><br><b>📌 Fundamento:</b> art. 37, §6º, CF; art. 236, §1º, CF; art. 22 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> STF Tema 777 (RE 842.846) — Estado objetivo, delegatário subjetivo no regresso.<br><br><b>🔁 Revisar:</b> Tema 777 — Estado objetivo; tabelião subjetivo (regresso).`},
+
+  {id:'q7', materia:'Responsabilidade civil/penal/disciplinar', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`Em relação à responsabilidade civil, penal e disciplinar dos notários e registradores, assinale a opção correta.`,
+   alternativas:[
+     {letra:'A',texto:`Um substituto não poderá ser designado interino, ainda que seja o mais antigo, caso haja sido antes condenado por crime contra a fé pública ou de lavagem de bens, ainda que a condenação penda de recurso.`},
+     {letra:'B',texto:`Um julgamento penal condenatório de notário ou registrador pode dar causa à instauração de processo administrativo disciplinar contra o delegatário, ainda que tal julgamento não determine a instauração do processo.`},
+     {letra:'C',texto:`O processo disciplinar para responsabilizar notários por infração a deveres funcionais é de natureza administrativa, não cabendo ao Poder Judiciário instaurá-lo.`},
+     {letra:'D',texto:`Notários e registradores são funcionários públicos para fins penais, razão por que sua responsabilidade criminal deve ser pautada pelos crimes contra a administração pública.`},
+     {letra:'E',texto:`Havendo processo penal e disciplinar simultâneos, a absolvição penal antes do julgamento disciplinar sempre influirá no processo administrativo.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> pela independência das instâncias, um julgamento penal condenatório pode dar causa à instauração de PAD contra o delegatário, ainda que a sentença penal não determine, por si, a sua abertura.<br><br><b>⚠️ Pegadinha:</b> C nega ao Judiciário/corregedorias o poder disciplinar (que existe); D e A trazem afirmações categóricas com erros de extensão; E generaliza ("sempre") os efeitos da absolvição penal no disciplinar.<br><br><b>📌 Fundamento:</b> Lei 8.935/94; independência das instâncias.<br><br><b>⚖️ Da jurisprudência:</b> instâncias civil, penal e administrativa independentes.<br><br><b>🔁 Revisar:</b> condenação penal pode deflagrar PAD; instâncias independentes.`},
+
+  {id:'q8', materia:'Responsabilidade do Estado', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`Caso um oficial de registro cause, no exercício de suas funções, dano a terceiro, responderá pelo dano:`,
+   alternativas:[
+     {letra:'A',texto:`o Estado, subjetivamente, admitindo-se regresso contra o responsável, nos casos de dolo ou culpa.`},
+     {letra:'B',texto:`o Estado, objetivamente, com o dever de regresso contra o responsável, nos casos de dolo ou culpa.`},
+     {letra:'C',texto:`o Estado, subjetivamente, com o dever de regresso contra o responsável, nos casos de dolo ou culpa.`},
+     {letra:'D',texto:`o Estado, objetivamente, não se admitindo regresso contra o responsável, ainda que se comprove dolo ou culpa.`},
+     {letra:'E',texto:`o oficial de registro, admitindo-se regresso contra o Estado.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> o Estado responde OBJETIVAMENTE, com dever de regresso contra o responsável nos casos de dolo ou culpa (responsabilidade subjetiva do delegatário no regresso).<br><br><b>⚠️ Pegadinha:</b> A e C dizem "subjetivamente" para o Estado (errado); D nega o regresso; E inverte a relação.<br><br><b>📌 Fundamento:</b> art. 37, §6º, CF; STF Tema 777.<br><br><b>⚖️ Da jurisprudência:</b> STF Tema 777 — Estado objetivo + regresso.<br><br><b>🔁 Revisar:</b> Estado objetivo; regresso contra o delegatário (dolo ou culpa).`},
+
+  {id:'q9', materia:'Responsabilidade (registrador exonerado)', banca:'FGV · Enac · 2025', tipo:'multipla',
+   enunciado:`Em 2015, Marcelo, registrador do 2º Ofício, dolosamente procedeu à falsa averbação na matrícula de um imóvel. O fato só foi descoberto em 2019, quando Marcelo já havia sido exonerado, tendo a delegação passado a Altair. Nesse caso, a responsabilidade civil pelo ilícito recai:`,
+   alternativas:[
+     {letra:'A',texto:`direta e objetivamente sobre Marcelo.`},
+     {letra:'B',texto:`primariamente sobre o Estado, de maneira objetiva; em regresso, exclusivamente sobre Marcelo, subjetivamente.`},
+     {letra:'C',texto:`direta e exclusivamente sobre o Estado, de maneira objetiva, considerada a impossibilidade de regresso quanto ao atual titular Altair.`},
+     {letra:'D',texto:`primariamente sobre o Estado, de maneira objetiva; e, em regresso, sobre o atual titular Altair, subjetivamente, por eventual culpa ou dolo em não retificar o registro.`},
+     {letra:'E',texto:`direta e objetivamente sobre Marcelo e, pela cessão ao tabelionato sem personalidade jurídica, também sobre Altair, subjetivamente.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> (resposta da banca).<br><br><b>⚖️ Por quê (ICOL):</b> a banca considerou que a responsabilidade recai direta e objetivamente sobre Marcelo, que agiu com dolo e foi o autor do ato. O ponto-chave das demais é a intransmissibilidade ao sucessor: Altair (novo titular) não responde pelos atos do antecessor (afasta C, D e E).<br><br><b>⚠️ Pegadinha:</b> atenção — a leitura mais comum do Tema 777 levaria à letra B (Estado objetivo + regresso contra Marcelo); aqui a banca preferiu a responsabilização direta do agente que agiu com dolo. Memorize o gabarito desta banca, mas tenha em mente a tese do Tema 777.<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94; STF Tema 777.<br><br><b>⚖️ Da jurisprudência:</b> intransmissibilidade da responsabilidade ao sucessor (STJ).<br><br><b>🔁 Revisar:</b> o sucessor NÃO responde pelo ato do antecessor; questão controvertida quanto à via (agente x Estado).`},
+
+  {id:'q10', materia:'Responsabilidade do Estado (Tema 777)', banca:'FGV · Enac · 2025', tipo:'multipla',
+   enunciado:`Fábio, notário no Estado Alfa, agindo de forma negligente, causou dano material a um particular pela lavratura incorreta de escritura pública. Considerando a CF e o entendimento dominante do STF, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:`o Estado Alfa responderá objetivamente pelos danos, admitido o direito de regresso contra Fábio, que agiu com culpa.`},
+     {letra:'B',texto:`o Estado Alfa responderá subjetivamente pelos danos, admitido o direito de regresso contra Fábio, que agiu com culpa.`},
+     {letra:'C',texto:`Fábio e o Estado Alfa responderão objetiva e solidariamente, independentemente da demonstração de dolo ou culpa.`},
+     {letra:'D',texto:`Fábio e o Estado Alfa responderão subjetiva e solidariamente, dependente a condenação da demonstração de dolo ou culpa de ambos.`},
+     {letra:'E',texto:`Fábio responderá objetivamente pelos danos, independentemente da demonstração de dolo ou culpa.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> o Estado responde objetivamente, com direito de regresso contra Fábio (que agiu com culpa) — exatamente o desenho do Tema 777.<br><br><b>⚠️ Pegadinha:</b> B diz "subjetivamente" para o Estado; C/E dispensam dolo/culpa para responsabilizar o notário (a dele é subjetiva); D fala em solidariedade subjetiva.<br><br><b>📌 Fundamento:</b> art. 37, §6º, CF; STF Tema 777.<br><br><b>⚖️ Da jurisprudência:</b> STF Tema 777 — Estado objetivo + regresso.<br><br><b>🔁 Revisar:</b> Estado objetivo; regresso contra o notário que agiu com culpa/dolo.`},
+
+  {id:'q11', materia:'Diligência do tabelião', banca:'VUNESP · TJ/SP · 2024', tipo:'multipla',
+   enunciado:`Josefina comprou imóvel de quem se passou pelo verdadeiro proprietário, mediante documento de identidade falsificado apresentado ao tabelião. Anulada a escritura, ajuíza ação de indenização contra o tabelião, imputando-lhe negligência na conferência da documentação, embora a fraude fosse de elevada sofisticação. Sobre a pretensão:`,
+   alternativas:[
+     {letra:'A',texto:`procedência, pois a responsabilidade do tabelião é subjetiva e o grau de diligência dele exigível abrange o dever de detectar falsificações grosseiras ou sofisticadas.`},
+     {letra:'B',texto:`procedência, pois o Estado responde objetivamente pelos atos dos tabeliães que, no exercício de suas funções, causem dano a terceiros.`},
+     {letra:'C',texto:`improcedência, pois o tabelião responde subjetivamente e, no caso, o juiz corregedor afastou a culpa do tabelião em sede administrativa.`},
+     {letra:'D',texto:`improcedência, pois a responsabilidade do tabelião é subjetiva e o grau de diligência dele exigível não abrange o dever de detectar fraudes documentais de elevada sofisticação.`}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b><br><br><b>⚖️ Por quê (ICOL):</b> a responsabilidade do tabelião é SUBJETIVA; o dever de diligência alcança a identificação de falsificações grosseiras, mas não exige detectar fraudes documentais de elevada sofisticação — logo, improcedência.<br><br><b>⚠️ Pegadinha:</b> A inclui "sofisticadas" no dever de diligência (erro); B desloca para a responsabilidade objetiva do Estado, que não é o pedido contra o tabelião.<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> STJ — o notário não responde por fraude documental sofisticada, não perceptível pela diligência ordinária.<br><br><b>🔁 Revisar:</b> tabelião responde por culpa; diligência cobre fraude grosseira, não a sofisticada.`},
+
+  {id:'q12', materia:'Responsabilidade civil (V/F)', banca:'IESES · TJ/AM · 2023', tipo:'multipla',
+   enunciado:`Sobre a responsabilidade civil aplicada à atividade notarial e de registro, classifique os itens:<br>I. Os notários e oficiais são civilmente responsáveis por todos os prejuízos que causarem a terceiros, independentemente da apuração de culpa ou dolo, pessoalmente, pelos substitutos que designarem ou escreventes que autorizarem, assegurado o regresso.<br>II. A responsabilidade civil depende da criminal pelos delitos que cometerem.<br>III. A responsabilidade criminal será individualizada, não se aplicando a legislação relativa aos crimes contra a administração pública, pois os titulares não são servidores públicos.<br>IV. A individualização da responsabilidade penal exime os notários e oficiais de sua responsabilidade civil.`,
+   alternativas:[
+     {letra:'A',texto:`Todas as afirmações são verdadeiras.`},
+     {letra:'B',texto:`Todas as afirmações são falsas.`},
+     {letra:'C',texto:`Somente nos itens III e IV as afirmações são verdadeiras.`},
+     {letra:'D',texto:`Somente nos itens I e III as afirmações são verdadeiras.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b> (todas falsas).<br><br><b>⚖️ Por quê (ICOL):</b> I erra ao dizer "independentemente de culpa ou dolo" (o art. 22 exige culpa OU dolo); II erra (civil independe da criminal); III erra (equiparam-se a funcionário público para fins penais — art. 327 CP); IV erra (a individualização penal não exime da civil).<br><br><b>⚠️ Pegadinha:</b> a banca embaralha responsabilidade objetiva/subjetiva e a (in)dependência das instâncias.<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94; art. 327 do CP.<br><br><b>⚖️ Da jurisprudência:</b> instâncias independentes.<br><br><b>🔁 Revisar:</b> notário responde por culpa/dolo; instâncias independentes; equiparação penal a funcionário público.`},
+
+  {id:'q13', materia:'Responsabilidade do Estado (Tema 777)', banca:'CESPE · TJ/PE · 2024', tipo:'multipla',
+   enunciado:`No que se refere à responsabilidade civil do Estado pelos atos dos tabeliães e registradores oficiais que, no exercício de suas funções, causem dano a terceiros, é correto afirmar que o Estado:`,
+   alternativas:[
+     {letra:'A',texto:`responde objetivamente pelos danos, assentado o dever de regresso contra o responsável, nos casos de dolo ou culpa.`},
+     {letra:'B',texto:`não responde diretamente pelos danos.`},
+     {letra:'C',texto:`responde subjetivamente pelos danos, assentado o dever de regresso.`},
+     {letra:'D',texto:`responde objetivamente pelos danos, não havendo dever de regresso.`},
+     {letra:'E',texto:`responde subjetivamente pelos danos, assentado o dever de regresso.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> o Estado responde objetivamente, com dever de regresso contra o responsável nos casos de dolo ou culpa (Tema 777).<br><br><b>⚠️ Pegadinha:</b> B nega a responsabilidade direta do Estado; C/E dizem "subjetivamente"; D suprime o regresso.<br><br><b>📌 Fundamento:</b> art. 37, §6º, CF; STF Tema 777.<br><br><b>⚖️ Da jurisprudência:</b> STF Tema 777 (RE 842.846).<br><br><b>🔁 Revisar:</b> Estado objetivo + regresso (dolo ou culpa).`},
+
+  {id:'q14', materia:'Responsabilidade civil', banca:'CONSULPLAN · TJ/AC · 2023', tipo:'multipla',
+   enunciado:`Sobre a responsabilidade dos notários e oficiais de registro, assinale a afirmativa correta.`,
+   alternativas:[
+     {letra:'A',texto:`Os oficiais são civilmente responsáveis apenas pelos prejuízos que houverem praticado pessoalmente.`},
+     {letra:'B',texto:`A responsabilidade civil dos oficiais independe da responsabilidade criminal pela qual porventura responderem.`},
+     {letra:'C',texto:`Para que o oficial seja responsabilizado civilmente, necessariamente deverá ter sido declarado culpado em procedimento administrativo anterior pelo órgão competente.`},
+     {letra:'D',texto:`Os oficiais são civilmente responsáveis pelos prejuízos causados por seus prepostos por negligência, uma vez que a responsabilidade não se estende à modalidade culposa.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> a responsabilidade civil independe da criminal — as instâncias são independentes.<br><br><b>⚠️ Pegadinha:</b> A limita aos atos pessoais (também responde pelos prepostos); C exige PAD prévio (desnecessário); D nega a modalidade culposa (a responsabilidade abrange culpa).<br><br><b>📌 Fundamento:</b> art. 22 da Lei 8.935/94; independência das instâncias.<br><br><b>⚖️ Da jurisprudência:</b> instâncias civil e criminal independentes.<br><br><b>🔁 Revisar:</b> civil independe da criminal; responde também pelos prepostos, por culpa ou dolo.`},
+
+  {id:'q15', materia:'Responsabilidade do Estado (Tema 777)', banca:'FGV · Enac · 2025', tipo:'multipla',
+   enunciado:`João, notário titular de tabelionato no Estado Alfa, no exercício da função e de forma culposa, causou danos materiais a Maria, usuária do serviço. Maria ajuizou ação indenizatória, ocasião em que lhe foi informado, corretamente, à luz da jurisprudência do STF, que o Estado Alfa:`,
+   alternativas:[
+     {letra:'A',texto:`responde, subjetiva e subsidiariamente, pelo ato de João, pois os serviços notariais e de registro são exercidos em caráter privado, por delegação do poder público.`},
+     {letra:'B',texto:`responde, direta e objetivamente, pelo ato de João, assentado o dever de regresso contra o responsável, pois agiu com culpa.`},
+     {letra:'C',texto:`não responde diretamente pelo ato de João, mas o cartório do tabelionato responde objetivamente, sendo desnecessária a comprovação de dolo ou culpa.`},
+     {letra:'D',texto:`não responde diretamente pelo ato de João, pois os serviços são exercidos em caráter privado, de modo que a responsabilidade de Alfa é objetiva, porém subsidiária.`},
+     {letra:'E',texto:`responde, direta e objetivamente, pelo ato de João, mas é incabível qualquer responsabilização por improbidade no caso de omissão dolosa no manejo da ação de regresso, pois o ilícito de origem foi culposo.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> o Estado responde direta e objetivamente pelo ato do notário (Tema 777), assentado o dever de regresso contra o responsável, que agiu com culpa.<br><br><b>⚠️ Pegadinha:</b> A e D dizem que a responsabilidade do Estado é subsidiária/subjetiva (por ser serviço "privado"); C joga a responsabilidade no "cartório" (sem PJ). O caráter privado da delegação não afasta a responsabilidade objetiva do Estado.<br><br><b>📌 Fundamento:</b> art. 37, §6º, e art. 236, §1º, CF; STF Tema 777.<br><br><b>⚖️ Da jurisprudência:</b> STF Tema 777 (RE 842.846) — Estado direto e objetivo + regresso.<br><br><b>🔁 Revisar:</b> caráter privado da delegação não afasta a responsabilidade objetiva do Estado.`}
+];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_'+SLUG+'_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — '+document.title+'\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_'+SLUG+'_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx=document.title+' · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+</script>
+</body>
+</html>
