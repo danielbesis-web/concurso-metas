@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 19 · Notarial/Registral — Parte 3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 19 · Notarial/Registral — Parte 3</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 19 · Notarial/Registral · Direitos e deveres (Lei 8.935) · Parte 3</footer>
+<script>
+const STORE_KEY = 'concurso_meta19_notarial_parte3_v1';   // chave do localStorage deste simulado
+const SLUG = STORE_KEY.replace(/^concurso_/,'');   // usado nos nomes dos arquivos de exportação
+const QUESTOES = [
+  {id:'q1', materia:'Deveres (art. 30)', banca:'FGV · TJ/ES · 2025', tipo:'multipla',
+   enunciado:`José, experiente notário, foi convidado a palestrar sobre os deveres do notário e do registrador. Considerando a Lei 8.935/94, é(são) dever(es) dos notários e oficiais de registro:`,
+   alternativas:[
+     {letra:'A',texto:`atender às requisições para a defesa das pessoas jurídicas de direito público e de direito privado em juízo; e admitir pagamento por meio eletrônico, vedado o parcelamento.`},
+     {letra:'B',texto:`atender prioritariamente às requisições de papéis, documentos, informações ou providências que lhes forem solicitadas pelas autoridades judiciárias ou administrativas para a defesa das pessoas jurídicas de direito público em juízo; e admitir pagamento dos emolumentos por meio eletrônico, a critério do usuário, inclusive mediante parcelamento.`},
+     {letra:'C',texto:`atender às requisições para a defesa das pessoas jurídicas de direito público e de direito privado em juízo.`},
+     {letra:'D',texto:`admitir pagamento por meio eletrônico, inclusive parcelado, desde que comprovada a hipossuficiência econômica do requerente.`},
+     {letra:'E',texto:`admitir pagamento por meio eletrônico, a critério do usuário, vedado o parcelamento.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> é dever atender PRIORITARIAMENTE às requisições das autoridades para a defesa das pessoas jurídicas de DIREITO PÚBLICO em juízo; e admitir o pagamento dos emolumentos por meio eletrônico, a critério do usuário, inclusive mediante parcelamento.<br><br><b>⚠️ Pegadinha:</b> as demais incluem "direito privado", vedam o parcelamento ou exigem comprovação de hipossuficiência — alterando o texto legal.<br><br><b>📌 Fundamento:</b> art. 30 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> requisições para defesa de PJ de direito PÚBLICO; pagamento eletrônico inclusive parcelado.`},
+
+  {id:'q2', materia:'Independência (V/F)', banca:'CESPE · TJ/RR · 2025', tipo:'multipla',
+   enunciado:`A respeito da independência do notário e registrador no gerenciamento da serventia, julgue:<br>I. A independência não os exime do dever de motivar suas decisões, quando for o caso.<br>II. O princípio da independência é componente fundamental de sua autonomia e da prevenção de responsabilidades.<br>III. A independência significa, essencialmente, que estão sujeitos apenas à lei.<br>IV. A independência abrange a gestão da serventia (contratação de empregados, soluções tecnológicas), quando não houver diretrizes de observância compulsória.`,
+   alternativas:[
+     {letra:'A',texto:`Apenas os itens I e II estão certos.`},
+     {letra:'B',texto:`Apenas os itens I e IV estão certos.`},
+     {letra:'C',texto:`Apenas os itens II e III estão certos.`},
+     {letra:'D',texto:`Apenas os itens II e IV estão certos.`},
+     {letra:'E',texto:`Todos os itens estão certos.`}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b> (todos certos).<br><br><b>⚖️ Por quê (ICOL):</b> a independência do delegatário não afasta o dever de motivar (I); é base da sua autonomia (II); significa sujeição apenas à lei (III); e abrange a gestão administrativa da serventia, salvo diretrizes de observância compulsória (IV).<br><br><b>⚠️ Pegadinha:</b> tentar excluir o dever de motivar ou a gestão administrativa do alcance da independência.<br><br><b>📌 Fundamento:</b> arts. 28 e 29 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> independência = sujeição só à lei; abrange gestão da serventia; não dispensa motivação.`},
+
+  {id:'q3', materia:'Direitos x deveres', banca:'FGV · Enac · 2025', tipo:'multipla',
+   enunciado:`Lucas tomou conhecimento de que os notários e oficiais gozam de independência e só perderão a delegação nas hipóteses legais. Considerando a Lei 8.935/94, é um DIREITO do notário ou registrador:`,
+   alternativas:[
+     {letra:'A',texto:`encaminhar ao juízo competente as dúvidas levantadas pelos interessados.`},
+     {letra:'B',texto:`exercer a opção, nos casos de desmembramento ou desdobramento de sua serventia.`},
+     {letra:'C',texto:`fiscalizar o recolhimento dos impostos incidentes sobre os atos que devem praticar.`},
+     {letra:'D',texto:`dar recibo dos emolumentos percebidos.`},
+     {letra:'E',texto:`observar os emolumentos fixados para a prática dos atos do seu ofício.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> exercer a opção nos casos de desmembramento ou desdobramento da serventia é um DIREITO (art. 28). As demais (encaminhar dúvidas, fiscalizar tributos, dar recibo, observar emolumentos fixados) são DEVERES (art. 30).<br><br><b>⚠️ Pegadinha:</b> o examinador mistura direitos (art. 28) e deveres (art. 30) — saber distinguir é o ponto.<br><br><b>📌 Fundamento:</b> arts. 28 e 30 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> direito = exercer opção em desmembramento/desdobramento; os demais do enunciado são deveres.`},
+
+  {id:'q4', materia:'Direitos e deveres', banca:'IESES · TJ/AM · 2023', tipo:'multipla',
+   enunciado:`Sobre os direitos e deveres dos registradores (Lei 8.935/94), é correto afirmar:`,
+   alternativas:[
+     {letra:'A',texto:`Gozam de independência, têm direito à percepção de 50% dos emolumentos recebidos e só perderão a delegação nas hipóteses legais.`},
+     {letra:'B',texto:`São direitos do registrador exercer opção, nos casos de desmembramento ou desdobramento de sua serventia, e organizar associações ou sindicatos de classe e deles participar.`},
+     {letra:'C',texto:`Devem atender prioritariamente as requisições de papéis e informações solicitadas pelas autoridades judiciárias ou administrativas para qualquer finalidade.`},
+     {letra:'D',texto:`A fiscalização do recolhimento dos impostos fica restrita aos tributos municipais da área de competência, no caso do registrador de imóveis.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> são DIREITOS exercer a opção em desmembramento/desdobramento e organizar associações/sindicatos de classe e deles participar (art. 28).<br><br><b>⚠️ Pegadinha:</b> A inventa "50% dos emolumentos" (são integrais); C amplia para "qualquer finalidade" (é para defesa de PJ de direito público em juízo); D restringe a fiscalização a tributos municipais.<br><br><b>📌 Fundamento:</b> arts. 28 e 30 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> direitos = opção em desmembramento + associar-se; emolumentos integrais.`},
+
+  {id:'q5', materia:'Deveres (sigilo)', banca:'CONSULPLAN · TJ/AC · 2023', tipo:'multipla',
+   enunciado:`Fúlvio recebeu a delegação após aprovação em concurso. Assinale a afirmativa que dispõe corretamente um DEVER a observar:`,
+   alternativas:[
+     {letra:'A',texto:`Organizar associações ou sindicatos de classe e deles participar.`},
+     {letra:'B',texto:`Guardar sigilo sobre a documentação e os assuntos de natureza reservada de que tenha conhecimento em razão do exercício de sua profissão.`},
+     {letra:'C',texto:`Encaminhar ao juízo competente apenas as dúvidas que julgar importantes, independentemente do dia em que o interessado adentrar com o pedido.`},
+     {letra:'D',texto:`Atender as requisições quando, por meio de seu juízo de valor pessoal, entender serem necessárias.`}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b><br><br><b>⚖️ Por quê (ICOL):</b> é dever guardar sigilo sobre a documentação e os assuntos de natureza reservada de que tenha conhecimento em razão da função (art. 30, VI).<br><br><b>⚠️ Pegadinha:</b> A é um DIREITO (associar-se); C e D distorcem o dever de atender (não é "apenas as que julgar importantes" nem por "juízo de valor pessoal").<br><br><b>📌 Fundamento:</b> art. 30, VI, da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> dever de sigilo sobre documentação/assuntos reservados.`},
+
+  {id:'q6', materia:'Deveres (fiscalizar tributos)', banca:'CONSULPLAN · TJ/AC · 2023', tipo:'multipla',
+   enunciado:`Os tabeliães e registradores estão sujeitos a deveres legais. Assinale a afirmativa que apresenta corretamente um de seus DEVERES.`,
+   alternativas:[
+     {letra:'A',texto:`Fiscalizar o recolhimento dos impostos incidentes sobre os atos que devem praticar.`},
+     {letra:'B',texto:`Encaminhar ao Poder Judiciário, por meio de Ação de Impugnação de Registro, as dúvidas levantadas pelos interessados.`},
+     {letra:'C',texto:`Guardar sigilo sobre qualquer documentação, nunca fornecendo qualquer informação ou cópia.`},
+     {letra:'D',texto:`Cobrar valores condizentes com a realidade local, já que inexiste tabelamento dos emolumentos.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> é dever fiscalizar o recolhimento dos impostos incidentes sobre os atos que praticarem (art. 30, XI).<br><br><b>⚠️ Pegadinha:</b> B chama o procedimento de dúvida de "Ação de Impugnação de Registro"; C torna o sigilo absoluto; D nega o tabelamento legal dos emolumentos (que existe).<br><br><b>📌 Fundamento:</b> art. 30, XI, da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> dever de fiscalizar o recolhimento de tributos sobre os atos; emolumentos têm tabelamento legal.`},
+
+  {id:'q7', materia:'Procedimento de dúvida', banca:'CONSULPLAN · TJ/AC · 2023', tipo:'multipla',
+   enunciado:`Sobre a resolução de uma dúvida apresentada pelo tabelião de protesto, é correto afirmar que será resolvida:`,
+   alternativas:[
+     {letra:'A',texto:`pelo juízo competente.`},
+     {letra:'B',texto:`por um dos desembargadores a que o cartório está vinculado.`},
+     {letra:'C',texto:`pela Corregedoria do Tribunal a que o cartório está vinculado.`},
+     {letra:'D',texto:`pelo CNJ, por meio de processo eletrônico, no prazo de setenta e duas horas a partir da suscitação.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> a dúvida (e a dúvida no protesto) é resolvida pelo juízo competente — o procedimento de dúvida tem natureza administrativa e é decidido pelo juiz da serventia.<br><br><b>⚠️ Pegadinha:</b> atribuir a decisão a desembargador isolado, à Corregedoria ou ao CNJ.<br><br><b>📌 Fundamento:</b> arts. 198 a 204 da Lei 6.015/73; Lei 9.492/97 (protesto).<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> dúvida (inclusive no protesto) é decidida pelo juízo competente.`},
+
+  {id:'q8', materia:'Responsabilidade tributária', banca:'CONSULPLAN · TJ/AC · 2023', tipo:'multipla',
+   enunciado:`Quanto à responsabilidade tributária dos notários e oficiais de registro, assinale a afirmativa correta.`,
+   alternativas:[
+     {letra:'A',texto:`Têm o dever de fiscalizar o recolhimento dos impostos incidentes sobre os atos que devem praticar.`},
+     {letra:'B',texto:`Não têm quaisquer responsabilidades tributárias, em razão de expressa previsão constitucional e legal.`},
+     {letra:'C',texto:`Não têm quaisquer responsabilidades tributárias, em razão de ato normativo do CNJ.`},
+     {letra:'D',texto:`Não têm quaisquer responsabilidades tributárias, em razão de jurisprudência do STF em repercussão geral.`}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b><br><br><b>⚖️ Por quê (ICOL):</b> é dever fiscalizar o recolhimento dos impostos incidentes sobre os atos que praticarem; os delegatários têm, sim, responsabilidades tributárias (inclusive como responsáveis por certos tributos).<br><br><b>⚠️ Pegadinha:</b> as letras B, C e D negam, falsamente, qualquer responsabilidade tributária.<br><br><b>📌 Fundamento:</b> art. 30, XI, da Lei 8.935/94; art. 134, VI, do CTN.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> delegatário fiscaliza/responde por tributos sobre os atos (art. 30, XI; art. 134, VI, CTN).`},
+
+  {id:'q9', materia:'Deveres (V/F)', banca:'IESES · TJ/TO · 2022', tipo:'multipla',
+   enunciado:`São deveres dos notários e oficiais de registro:<br>I. Fiscalizar o recolhimento dos impostos incidentes sobre os atos que devem praticar.<br>II. Atender prioritariamente as requisições para a defesa das pessoas jurídicas de direito público em juízo.<br>III. Organizar associações ou sindicatos de classe e deles participar.<br>IV. Proceder de forma a dignificar a função exercida, tanto nas atividades profissionais como na vida privada.<br>A sequência correta é:`,
+   alternativas:[
+     {letra:'A',texto:`Apenas as assertivas I e IV estão corretas.`},
+     {letra:'B',texto:`Apenas as assertivas I e III estão corretas.`},
+     {letra:'C',texto:`As assertivas I, II, III e IV estão corretas.`},
+     {letra:'D',texto:`Apenas a assertiva III está incorreta.`}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> (apenas III não é dever).<br><br><b>⚖️ Por quê (ICOL):</b> I, II e IV são DEVERES (art. 30); o item III (organizar associações/sindicatos) é um DIREITO (art. 28), não dever — por isso é o "incorreto" como dever.<br><br><b>⚠️ Pegadinha:</b> o item III é a clássica troca direito↔dever.<br><br><b>📌 Fundamento:</b> arts. 28 e 30 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> associar-se é DIREITO; fiscalizar tributos, atender requisições e dignificar a função são DEVERES.`},
+
+  {id:'q10', materia:'Gratuidade e infração', banca:'IESES · TJ/PA · 2026', tipo:'multipla',
+   enunciado:`Mário, registrador civil, cobrou emolumentos por um registro de nascimento e a respectiva certidão, realizado com urgência porque o bebê nasceu prematuro e seria transferido a outro hospital. A respeito da situação, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:`As penalidades aplicáveis são censura, multa, suspensão ou perda da delegação, e independem de gradação.`},
+     {letra:'B',texto:`Mário não está sujeito a penalidade porque tem direito aos emolumentos, já que se tratava de urgência.`},
+     {letra:'C',texto:`Mário realizou cobrança indevida, proibida mesmo sob alegação de urgência, o que caracteriza infração disciplinar e pode sujeitá-lo a multa, suspensão ou até perda da delegação, observada a ordem de gradação.`},
+     {letra:'D',texto:`O juiz competente poderá suspendê-lo preventivamente pelo prazo de 60 dias, prorrogáveis por mais 30.`},
+     {letra:'E',texto:`A perda da delegação dependerá exclusivamente de sentença judicial transitada em julgado.`}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b><br><br><b>⚖️ Por quê (ICOL):</b> o registro civil de nascimento e a primeira certidão são GRATUITOS (independem de urgência). Cobrar emolumentos é cobrança indevida e caracteriza infração disciplinar, sujeita às penas (repreensão, multa, suspensão e perda), aplicadas com observância da gradação.<br><br><b>⚠️ Pegadinha:</b> A inventa a pena de "censura" e diz que independem de gradação; B afirma haver direito a emolumentos (não há — é gratuito); E condiciona a perda apenas a sentença judicial (cabe também decisão administrativa).<br><br><b>📌 Fundamento:</b> Lei 9.534/97 (gratuidade do registro de nascimento e da 1ª certidão); arts. 31 a 33 da Lei 8.935/94.<br><br><b>⚖️ Da jurisprudência:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> registro de nascimento e 1ª certidão são GRATUITOS; cobrar = infração disciplinar (penas com gradação).`}
+];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_'+SLUG+'_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — '+document.title+'\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_'+SLUG+'_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx=document.title+' · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+</script>
+</body>
+</html>
