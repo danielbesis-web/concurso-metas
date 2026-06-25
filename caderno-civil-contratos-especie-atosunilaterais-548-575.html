@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Civil — Contratos em Espécie (Mandato → Compromisso + Adm. Fiduciária de Garantias) e Atos Unilaterais (págs. 548–575)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:760px;margin:0 auto}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:12px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.sec-label.jur{color:#f472b6}
+.sec-label.pega{color:#f25555}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"\25B8";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.jur-box{background:#1a0a1c;border:1px solid #4a1f4a;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:13px;line-height:1.55;color:#f5cce8}
+.jur-box+.jur-box{margin-top:8px}
+.jur-box .info{display:inline-block;background:#3a1a3a;color:#f9b8e6;border:1px solid #6b2a6b;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:4px}
+.jur-box b{color:#fce4f5}
+.jur-box a{color:#f9b8e6}
+.map-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0}
+.list-pega li:before{counter-increment:p;content:counter(p);position:absolute;left:0;top:0;background:#2a0808;border:1px solid #f25555;color:#f88;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#ffd0d0}
+.cloze-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.cloze-table td{padding:7px 8px;border-bottom:1px solid #0f2030;vertical-align:top}
+.cloze-table td:first-child{color:#cdddf0;width:62%}
+.cloze-table td:last-child{color:#fbbf24;font-weight:600}
+.fc-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.fc-q{padding:11px 14px;font-size:13.5px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start}
+.fc-q:hover{background:#0b1828}
+.fc-q .chev{margin-left:auto;color:#55738e;transition:transform .2s}
+details[open] .fc-q .chev{transform:rotate(90deg)}
+.fc-a{padding:10px 14px 12px 14px;font-size:13.5px;line-height:1.55;color:#9fe6bd;border-top:1px dashed #16463a}
+.check{list-style:none}
+.check li{position:relative;padding-left:26px;margin-bottom:7px;font-size:13.5px;line-height:1.5;color:#cdddf0}
+.check li:before{content:"\2610";position:absolute;left:0;color:#38bdf8;font-size:16px;top:-1px}
+.foot{padding:14px;text-align:center;font-size:11.5px;color:#55738e}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="banner-save">💾 Salve este arquivo no Drive · Caderno gerado a partir do e-Book de Civil (pp 548–575) + Banco Notion (Meta 17 / Prova Oral) + Dizer o Direito + QConcursos + Simulado e Julgados ENAC 2026.1</div>
+
+<div class="header">
+<h1>Caderno de Revisão · Civil — Contratos em Espécie (Mandato → Compromisso + Adm. Fiduciária de Garantias) e Atos Unilaterais</h1>
+<div class="sub">Fonte: <b>Direito Civil.pdf (ENAC)</b> págs. <b>548–575</b> · Continuação direta do caderno pp 491–546 · Foco: Cartório (CEBRASPE/FGV), Magistratura, MP e OAB · Atualizado em 25/06/2026</div>
+<div class="toc">
+<a href="#mapa">🗺️ Mapa</a>
+<a href="#deposito">⓪ Depositário infiel</a>
+<a href="#mandato">① Mandato</a>
+<a href="#comissao">② Comissão</a>
+<a href="#agencia">③ Agência/Distribuição</a>
+<a href="#corretagem">④ Corretagem</a>
+<a href="#transporte">⑤ Transporte</a>
+<a href="#seguro">⑥ Seguro</a>
+<a href="#renda">⑦ Const. de renda</a>
+<a href="#jogo">⑧ Jogo e aposta</a>
+<a href="#fianca">⑨ Fiança</a>
+<a href="#transacao">⑩ Transação/Compromisso</a>
+<a href="#agente">⑪ Adm. fiduciária (14.711)</a>
+<a href="#unilaterais">⑫ Atos unilaterais</a>
+<a href="#pega">⚠️ Pegadinhas</a>
+<a href="#recall">✅ Active Recall</a>
+<a href="#cloze">✍️ Cloze</a>
+<a href="#flash">🃏 Flashcards</a>
+<a href="#check">☑️ Checklist</a>
+</div>
+</div>
+
+<div class="content">
+
+<div class="card intro">
+<div class="card-meta"><span class="badge badge-tema">Visão geral</span><span class="badge badge-pag">pp 548–575</span></div>
+<div class="prose">
+<p>Este caderno fecha a <b>reta final dos contratos em espécie</b> do CC/02: do <b>mandato</b> ao <b>compromisso</b>, incluindo o novíssimo <b>contrato de administração fiduciária de garantias</b> (Lei 14.711/2023, art. 853-A), e abre os <b>atos unilaterais</b>. Começa retomando o fechamento do <b>depósito</b> (prisão do depositário infiel), que faz a ponte com o caderno anterior (pp 491–546).</p>
+<p>Enriquecido com o <b>Banco Notion — Meta 17</b> (Várias Espécies de Contrato) e cards de <b>Prova Oral</b> de mandato/procuração; com a jurisprudência do <b>Dizer o Direito</b>; a recorrência do <b>QConcursos</b>; a <b>Questão 34</b> do Simulado ENAC 2026.1 e os <b>julgados ENAC 2026.1</b> (Tema 1173/corretor, seguro de vida, transporte aéreo/regressiva, arbitragem).</p>
+</div>
+</div>
+
+<div class="card mapa" id="mapa">
+<div class="card-title">🗺️ Quadro Sinótico</div>
+<table class="map-table">
+<tr><th>Eixo</th><th>Núcleo</th><th>Norma-chave</th></tr>
+<tr><td>Depositário infiel</td><td>Prisão civil ilícita em qualquer modalidade (Pacto de San José)</td><td class="pg">CC 652 · SV 25 · Súm. 419</td></tr>
+<tr><td>Mandato</td><td>Agir <b>em nome</b> de outrem; procuração = instrumento; gratuito presumido</td><td class="pg">arts. 653–658 · 682</td></tr>
+<tr><td>Comissão</td><td>Comissário age <b>em nome próprio</b>; del credere = solidariedade</td><td class="pg">arts. 693–709</td></tr>
+<tr><td>Agência/Distribuição</td><td>Promover negócios sem dependência; distribuição = tem a coisa</td><td class="pg">arts. 710–721</td></tr>
+<tr><td>Corretagem</td><td>Aproximação útil → comissão; sem vínculo de mandato</td><td class="pg">arts. 722–729 · Tema 1173</td></tr>
+<tr><td>Transporte</td><td>Obrigação de resultado; incolumidade; resp. objetiva; cláusula excludente nula</td><td class="pg">arts. 730–756 · 734</td></tr>
+<tr><td>Seguro</td><td>Garantia mediante prêmio; boa-fé; suicídio bienal</td><td class="pg">arts. 757–802 · 768/798</td></tr>
+<tr><td>Constituição de renda</td><td>Capital → prestação periódica; contrato <b>solene</b></td><td class="pg">arts. 803–813 · 807</td></tr>
+<tr><td>Jogo e aposta</td><td>Obrigação natural (não obriga, não se recobra)</td><td class="pg">arts. 814–817</td></tr>
+<tr><td>Fiança</td><td>Garantia fidejussória, acessória; benefício de ordem</td><td class="pg">arts. 818–839 · Súm. 656</td></tr>
+<tr><td>Transação</td><td>Concessões mútuas; interpretação restritiva; só declara</td><td class="pg">arts. 840–843</td></tr>
+<tr><td>Compromisso</td><td>Submissão a árbitros; precede a arbitragem</td><td class="pg">arts. 851–853 · Lei 9.307/96</td></tr>
+<tr><td>Adm. fiduciária de garantias</td><td>Agente de garantia em nome próprio; patrimônio separado 180 dias</td><td class="pg">art. 853-A (Lei 14.711/23)</td></tr>
+<tr><td>Atos unilaterais</td><td>Obrigação nasce da declaração de <b>uma</b> parte</td><td class="pg">arts. 854 · 861 · 876 · 884</td></tr>
+</table>
+</div>
+
+<div class="card" id="deposito">
+<div class="card-meta"><span class="badge badge-tema">⓪ Fechamento do depósito</span><span class="badge badge-pag">p 548</span></div>
+<div class="card-title">Prisão do depositário infiel — abolida</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>A CF (art. 5º, LXVII) e o CC (art. 652) ainda <b>preveem</b> a prisão do depositário infiel. Mas o <b>Pacto de San José da Costa Rica</b> (Decreto 678/92) só admite prisão civil do <b>devedor de alimentos</b>. O STF deu status <b>supralegal</b> ao tratado, <b>paralisando</b> a eficácia dessa prisão.</p>
+<ul>
+<li>Resultado: prisão do depositário infiel é <b>ilícita</b> em qualquer modalidade.</li>
+<li>Única prisão civil por dívida que subsiste: <b>devedor de alimentos</b>.</li>
+</ul>
+</div>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Depósito não se presume <b>gratuito</b> quando há remuneração embutida (ex.: hospedeiro, art. 651). Prisão do depositário infiel = <span class="mnemo">ABOLIDA</span> (SV 25 + Súm. 419).</div>
+<div class="sec-label jur">⚖️ Jurisprudência</div>
+<div class="jur-box"><span class="info">STF · SV 25</span> <b>É ilícita a prisão civil de depositário infiel</b>, qualquer que seja a modalidade do depósito.</div>
+<div class="jur-box"><span class="info">STJ · Súm. 419</span> <b>Descabe a prisão civil do depositário <u>judicial</u> infiel</b> (atenção à redação oficial: "judicial").</div>
+</div>
+
+<div class="card" id="mandato">
+<div class="card-meta"><span class="badge badge-tema">① Mandato</span><span class="badge badge-pag">pp 548–550 · arts. 653–682</span></div>
+<div class="card-title">Outorga de poderes para agir em nome de outrem</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Opera-se quando alguém recebe poderes para, <b>em nome</b> de outrem, praticar atos ou administrar interesses. <b>Mandante</b> outorga; <b>mandatário</b> aceita. Personalíssimo (<i>intuitu personae</i>), consensual, baseado na confiança.</p>
+<ul>
+<li><b>Presume-se gratuito</b> quando não estipulada retribuição — salvo ofício/profissão lucrativa do mandatário (658).</li>
+<li><b>Aceitação tácita</b>, pelo começo de execução (659).</li>
+<li>Em termos gerais → só <b>administração</b> (661); alienar/hipotecar/transigir exige poderes <b>especiais e expressos</b> (661, §1º).</li>
+<li><b>Substabelecimento</b>: mesmo o mandato por instrumento público pode substabelecer-se por instrumento particular (655); pode ser <b>com</b> ou <b>sem reserva</b> de poderes.</li>
+</ul>
+</div>
+<div class="sec-label sintese">◆ Mandato × Procuração</div>
+<table class="cmp-table">
+<tr><th></th><th>Mandato</th><th>Procuração</th></tr>
+<tr><td>Natureza</td><td>Contrato (bilateral)</td><td>Ato unilateral (instrumento)</td></tr>
+<tr><td>Aceitação</td><td>Sim, pressupõe</td><td>Não</td></tr>
+<tr><td>Função</td><td>Regula relação interna</td><td>Confere poderes / representação</td></tr>
+</table>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 653, 658, 661, 682</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 653.</span> Opera-se o mandato quando alguém recebe de outrem poderes para, em seu nome, praticar atos ou administrar interesses. A procuração é o instrumento do mandato.</p>
+<p><span class="art-num">Art. 658.</span> O mandato presume-se gratuito quando não houver sido estipulada retribuição, exceto se o seu objeto corresponder ao daqueles que o mandatário trata por ofício ou profissão lucrativa.</p>
+<p><span class="art-num">Art. 661, §1º.</span> Para alienar, hipotecar, transigir, ou praticar outros quaisquer atos que exorbitem da administração ordinária, depende a procuração de poderes especiais e expressos. §2º O poder de transigir não importa o de firmar compromisso.</p>
+<p><span class="art-num">Art. 682.</span> Cessa o mandato: I – revogação/renúncia; II – morte ou interdição de uma das partes; III – mudança de estado que inabilite; IV – término do prazo ou conclusão do negócio.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box"><b>Mandato ≠ procuração</b>: mandato é o <span class="mnemo">CONTRATO</span>; procuração é o <span class="mnemo">INSTRUMENTO</span>. Poder de <b>transigir</b> NÃO importa o de firmar <b>compromisso</b>.</div>
+<div class="sec-label jur">⚖️ Jurisprudência / Notion / Simulado</div>
+<div class="jur-box"><span class="info">STJ · Súm. 60</span> É nula a obrigação cambial assumida por procurador do mutuário vinculado ao mutuante, no exclusivo interesse deste.</div>
+<div class="jur-box"><span class="info">STJ · Súm. 476</span> O endossatário por endosso-mandato só responde por protesto indevido se <b>extrapolar</b> os poderes de mandatário.</div>
+<div class="jur-box"><span class="info">Notion · Meta 17</span> Discursivas reais: <b>FGV · TJ/RJ Remoção 2024</b> (mandato comum × no interesse do mandatário × em causa própria) e <b>Vunesp · TJ/SP 2021</b> (mandato e procuração são sinônimos? — art. 653).</div>
+<div class="jur-box"><span class="info">Simulado ENAC · Q34</span> <b>Gabarito B.</b> Toda escritura/procuração com substabelecimento ou revogação deve indicar notário, livro, folhas, protocolo e data do ato; a <b>revogação</b> de procuração deve ser comunicada ao notário que lavrou a procuração revogada. Distratores: renúncia do mandatário NÃO depende de aceitação do mandante; substabelecimento com × sem reserva NÃO são idênticos.</div>
+</div>
+
+<div class="card" id="comissao">
+<div class="card-meta"><span class="badge badge-tema">② Comissão</span><span class="badge badge-pag">pp 551–554 · arts. 693–709</span></div>
+<div class="card-title">Comissário age em nome próprio, à conta do comitente</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Aquisição/venda de bens pelo <b>comissário, em nome próprio</b>, à conta do comitente. <b>Difere do mandato</b>: o mandatário age em nome do mandante; o comissário fica <b>diretamente obrigado</b> perante terceiros. Responsabilidade contratual <b>subjetiva</b> (697).</p>
+<ul>
+<li><b>Del credere</b> (698): comissário responde <b>solidariamente</b> com terceiros → remuneração mais elevada.</li>
+<li>Direito de <b>retenção</b> (708) e crédito com <b>privilégio geral</b> na falência do comitente (707).</li>
+<li>Aplicam-se, no que couber, as regras do <b>mandato</b> (709).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 693, 698</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 693.</span> O contrato de comissão tem por objeto a aquisição ou a venda de bens pelo comissário, em seu próprio nome, à conta do comitente.</p>
+<p><span class="art-num">Art. 698.</span> Se do contrato de comissão constar a cláusula del credere, responderá o comissário solidariamente com as pessoas com que houver tratado em nome do comitente, caso em que, salvo estipulação em contrário, tem direito a remuneração mais elevada.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Mandatário = <span class="mnemo">NOME DO MANDANTE</span> · Comissário = <span class="mnemo">NOME PRÓPRIO</span>. <b>Enunciado 68/CJF</b>: responde solidariamente o comissário que cedeu direitos ao comitente.</div>
+</div>
+
+<div class="card" id="agencia">
+<div class="card-meta"><span class="badge badge-tema">③ Agência e distribuição</span><span class="badge badge-pag">pp 554–556 · arts. 710–721</span></div>
+<div class="card-title">Promoção de negócios em zona determinada</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<ul>
+<li><b>Agência</b>: promover negócios à conta de outrem, sem vínculo de dependência, em caráter não eventual.</li>
+<li><b>Distribuição</b>: o agente tem <b>à sua disposição a coisa</b> a ser negociada.</li>
+<li>Em regra, <b>exclusividade</b> na mesma zona (711).</li>
+<li>Remuneração devida mesmo se o negócio não se realizar por <b>fato imputável ao proponente</b> (716).</li>
+<li>Resilição por prazo indeterminado: <b>aviso prévio de 90 dias</b> (720).</li>
+<li>Aplicação residual das regras de <b>mandato e comissão</b> (721).</li>
+</ul>
+</div>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box"><b>Enunciado 710/CJF</b>: distribuição = modalidade de agência. Aviso prévio na resilição = <span class="mnemo">90 DIAS</span>.</div>
+</div>
+
+<div class="card" id="corretagem">
+<div class="card-meta"><span class="badge badge-tema">④ Corretagem / mediação</span><span class="badge badge-pag">pp 556–559 · arts. 722–729</span></div>
+<div class="card-title">Aproximação útil das partes gera a comissão</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Corretor (não ligado por mandato/dependência) obriga-se a <b>obter negócios</b>. Comissão devida pelo <b>resultado útil</b>, ou ainda que o negócio não se efetive por <b>arrependimento</b> das partes (725).</p>
+<ul>
+<li>Negócio concluído <b>diretamente</b> pelas partes → nada devido, <b>salvo</b> exclusividade por escrito (726).</li>
+<li>Comissão devida ainda que o resultado útil seja <b>negócio diverso</b> do contratado (Info 640).</li>
+<li>Responsabilidade pelo pagamento: de <b>quem efetivamente contrata</b> o corretor (Info 556).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 722, 725</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 722.</span> Pelo contrato de corretagem, uma pessoa, não ligada a outra em virtude de mandato, de prestação de serviços ou por qualquer relação de dependência, obriga-se a obter para a segunda um ou mais negócios, conforme as instruções recebidas.</p>
+<p><span class="art-num">Art. 725.</span> A remuneração é devida ao corretor uma vez que tenha conseguido o resultado previsto no contrato de mediação, ou ainda que este não se efetive em virtude de arrependimento das partes.</p>
+</div>
+</details>
+<div class="sec-label jur">⚖️ Jurisprudência (ENAC 2026.1)</div>
+<div class="jur-box"><span class="info">STJ · Tema 1173</span> <b>Corretor de imóveis não responde</b>, em regra, por danos ao consumidor decorrentes do descumprimento da construtora/incorporadora — salvo (i) envolvimento na incorporação/construção, (ii) mesmo grupo econômico ou (iii) confusão/desvio patrimonial em seu benefício. <i>REsp 2.008.542-RJ e 2.008.545-DF, 2ª Seção, Rel. Min. Raul Araújo, j. 08/10/2025.</i></div>
+<div class="jur-box"><span class="info">STJ · Info 556</span> A obrigação de pagar a comissão é de <b>quem efetivamente contrata</b> o corretor; no uso imobiliário, na falta de previsão, 6% sobre o imóvel urbano. <i>REsp 1.288.450-AM.</i></div>
+<div class="jur-box"><span class="info">STJ · Info 640</span> Devida a comissão ainda que o <b>resultado útil</b> seja negócio de <b>natureza diversa</b> da inicialmente contratada. <i>REsp 1.765.004-SP.</i></div>
+</div>
+
+<div class="card" id="transporte">
+<div class="card-meta"><span class="badge badge-tema">⑤ Transporte</span><span class="badge badge-pag">pp 559–565 · arts. 730–756</span></div>
+<div class="card-title">Obrigação de resultado + cláusula de incolumidade</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Transportar pessoas/coisas mediante retribuição. Obrigação de <b>resultado</b> → responsabilidade <b>objetiva</b>.</p>
+<ul>
+<li><b>Art. 734</b>: cláusula excludente da responsabilidade é <b>NULA</b>; culpa de terceiro não elide (735, com regresso).</li>
+<li><b>Carona</b> (gratuito por amizade/cortesia) não se subordina ao contrato (736), salvo vantagem indireta.</li>
+<li>Passageiro pode <b>rescindir antes</b> da viagem (retenção de até 5%) — 740/741.</li>
+<li>Coisas: recusa <b>facultativa</b> (embalagem inadequada, 746) × <b>obrigatória</b> (coisa ilícita, 747); avaria não perceptível → denúncia em <b>10 dias</b> (754).</li>
+<li>Transporte <b>cumulativo</b> → responsabilidade <b>solidária</b> (756).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 730, 734</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 730.</span> Pelo contrato de transporte alguém se obriga, mediante retribuição, a transportar, de um lugar para outro, pessoas ou coisas.</p>
+<p><span class="art-num">Art. 734.</span> O transportador responde pelos danos causados às pessoas transportadas e suas bagagens, salvo motivo de força maior, sendo nula qualquer cláusula excludente da responsabilidade.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box"><b>Enunciado 369/CJF-STJ</b>: relação de consumo no transporte → aplica-se o CDC mais benéfico. Cláusula excludente = <span class="mnemo">NULA</span>.</div>
+<div class="sec-label jur">⚖️ Jurisprudência (ENAC 2026.1)</div>
+<div class="jur-box"><span class="info">STJ · 4ª T. 2025</span> <b>Transporte aéreo / ação regressiva:</b> a <b>transação</b> firmada entre segurada e transportadora <b>sem anuência</b> da seguradora é <b>ineficaz</b> quanto aos direitos <b>sub-rogados</b>; quitação por quem não é titular não impede o regresso. <i>Rel. Min. Antonio Carlos Ferreira, j. 16/12/2025.</i></div>
+</div>
+
+<div class="card" id="seguro">
+<div class="card-meta"><span class="badge badge-tema">⑥ Seguro</span><span class="badge badge-pag">pp 565–567 · arts. 757–802</span></div>
+<div class="card-title">Garantia de interesse legítimo mediante prêmio</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Bilateral, oneroso, consensual e <b>aleatório</b>. Prova-se por apólice/bilhete (ou comprovante do prêmio).</p>
+<ul>
+<li><b>Nulo</b> o seguro de risco proveniente de <b>ato doloso</b> do segurado/beneficiário (762).</li>
+<li>Segurado em <b>mora</b> no prêmio, com sinistro antes da purgação → <b>sem</b> indenização (763).</li>
+<li><b>Dano</b>: garantia não pode ultrapassar o interesse segurado (778/781).</li>
+<li><b>Pessoa</b>: capital <b>livremente</b> estipulado (789); no caso de morte, não é herança nem responde por dívidas (794); apólice <b>ao portador é vedada</b> (760, p.ú.).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 757, 798</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 757.</span> Pelo contrato de seguro, o segurador se obriga, mediante o pagamento do prêmio, a garantir interesse legítimo do segurado, relativo a pessoa ou a coisa, contra riscos predeterminados.</p>
+<p><span class="art-num">Art. 798.</span> O beneficiário não tem direito ao capital estipulado quando o segurado se suicida nos primeiros dois anos de vigência inicial do contrato, ou da sua recondução depois de suspenso.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Suicídio só exclui cobertura nos <span class="mnemo">2 PRIMEIROS ANOS</span> (798). Agravamento intencional (768) é <b>excepcional</b> no seguro de vida: exige <b>intenção deliberada</b>.</div>
+<div class="sec-label jur">⚖️ Jurisprudência (ENAC 2026.1)</div>
+<div class="jur-box"><span class="info">STJ · 4ª T. 2025</span> <b>Suicídio/agravamento:</b> só o suicídio nos 2 primeiros anos exclui cobertura; exposição a local perigoso não é agravamento intencional. <i>REsp 2.130.908-SP, j. 16/12/2025.</i></div>
+<div class="jur-box"><span class="info">STJ · 3ª T. 2025</span> <b>"Roleta-russa" sob embriaguez</b>, sem intenção suicida, não configura agravamento intencional → indenização devida. <i>REsp 2.204.888-PR, Rel. Min. Nancy Andrighi, j. 04/11/2025.</i></div>
+<div class="jur-box"><span class="info">STJ · 3ª T. 2026</span> <b>Seguro multirrisco:</b> declaração expressa da seguradora, mesmo posterior à apólice mas referida a cobertura anterior, vincula-a desde a data declarada (<b>boa-fé objetiva</b>). <i>REsp 2.189.140-SP, Rel. Min. Moura Ribeiro, j. 07/04/2026.</i></div>
+</div>
+
+<div class="card" id="renda">
+<div class="card-meta"><span class="badge badge-tema">⑦ Constituição de renda</span><span class="badge badge-pag">pp 567–569 · arts. 803–813</span></div>
+<div class="card-title">Capital em troca de prestação periódica</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Em regra gratuito, mas pode ser oneroso. Contrato <b>SOLENE</b> → exige <b>escritura pública</b> (807); imóvel demanda registro.</p>
+<ul>
+<li><b>Nula</b> a renda em favor de pessoa já falecida, ou que morra nos <b>30 dias</b> seguintes de moléstia preexistente (808).</li>
+<li><b>Sem direito de acrescer</b> entre beneficiários (812).</li>
+</ul>
+</div>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Constituição de renda = <span class="mnemo">ESCRITURA PÚBLICA</span> (807). Atenção ao ponto cartorário (ato solene).</div>
+</div>
+
+<div class="card" id="jogo">
+<div class="card-meta"><span class="badge badge-tema">⑧ Jogo e aposta</span><span class="badge badge-pag">pp 569–570 · arts. 814–817</span></div>
+<div class="card-title">Obrigação natural</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Contratos bilaterais, onerosos e <b>aleatórios</b>. A dívida <b>não obriga</b> a pagamento, mas o <b>voluntariamente pago não se recobra</b> (salvo dolo, ou se o perdente é menor/interdito). Não se exige reembolso do que se emprestou <b>para</b> jogar (815). Exceção: contratos de bolsa/mercadorias (816).</p>
+</div>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Jogo/aposta = <span class="mnemo">OBRIGAÇÃO NATURAL</span>: não obriga, não se recobra.</div>
+</div>
+
+<div class="card" id="fianca">
+<div class="card-meta"><span class="badge badge-tema">⑨ Fiança</span><span class="badge badge-pag">pp 570–572 · arts. 818–839</span></div>
+<div class="card-title">Caução fidejussória — garantia pessoal e acessória</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>O fiador garante satisfazer obrigação do devedor caso este não cumpra. Garantia <b>pessoal</b>; assume <b>responsabilidade sem débito</b> (<i>Haftung ohne Schuld</i>).</p>
+<ul>
+<li>Forma <b>escrita</b>; <b>não admite</b> interpretação extensiva (819).</li>
+<li>Pode ser dada <b>sem/contra</b> a vontade do devedor (820); exige <b>outorga conjugal</b>.</li>
+<li><b>Benefício de ordem</b> (827): NÃO aproveita se renunciou, se obrigou como principal pagador/solidário, ou se o devedor é insolvente/falido (828).</li>
+<li><b>Notificação resilitória</b> (835): exonera-se da fiança sem prazo, ficando obrigado por <b>60 dias</b> após notificar o credor.</li>
+</ul>
+</div>
+<div class="sec-label sintese">◆ Fiança × Aval</div>
+<table class="cmp-table">
+<tr><th>Fiança</th><th>Aval</th></tr>
+<tr><td>Contrato acessório</td><td>Relação autônoma</td></tr>
+<tr><td>Benefício de ordem (ope legis)</td><td>Obrigação cambial</td></tr>
+<tr><td>Sem solidariedade (regra)</td><td>Há solidariedade</td></tr>
+</table>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 818, 827, 835</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 818.</span> Pelo contrato de fiança, uma pessoa garante satisfazer ao credor uma obrigação assumida pelo devedor, caso este não a cumpra.</p>
+<p><span class="art-num">Art. 827.</span> O fiador demandado pelo pagamento da dívida tem direito a exigir, até a contestação da lide, que sejam primeiro executados os bens do devedor.</p>
+<p><span class="art-num">Art. 835.</span> O fiador poderá exonerar-se da fiança que tiver assinado sem limitação de tempo, sempre que lhe convier, ficando obrigado por todos os efeitos da fiança, durante sessenta dias após a notificação do credor.</p>
+</div>
+</details>
+<div class="sec-label jur">⚖️ Jurisprudência (Dizer o Direito)</div>
+<div class="jur-box"><span class="info">STJ · Súm. 656</span> <b>É válida a cláusula de prorrogação automática de fiança</b> na renovação do contrato principal. A <b>exoneração</b> do fiador depende da notificação do art. 835 (não é abusiva — art. 51 CDC). <i>2ª Seção, aprovada em 09/11/2022.</i> <a href="https://www.dizerodireito.com.br/2022/12/comentarios-sumula-656-do-stj.html">Dizer o Direito</a></div>
+</div>
+
+<div class="card" id="transacao">
+<div class="card-meta"><span class="badge badge-tema">⑩ Transação e Compromisso</span><span class="badge badge-pag">pp 572–573 · arts. 840–853</span></div>
+<div class="card-title">Concessões mútuas × submissão a árbitros</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<ul>
+<li><b>Transação</b> (840–843): previne/termina litígio por <b>concessões mútuas</b>; interpretação <b>restritiva</b>; <b>não transmite</b>, apenas <b>declara/reconhece</b> direitos (843).</li>
+<li><b>Compromisso</b> (851–853): confia a <b>árbitros</b> conflito <b>patrimonial</b>; <b>vedado</b> para estado/família (852). Diferente da arbitragem (Lei 9.307/96).</li>
+<li><b>Cláusula compromissória</b> = antes do conflito; <b>compromisso</b> = depois.</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — arts. 840, 843, 851</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 840.</span> É lícito aos interessados prevenirem ou terminarem o litígio mediante concessões mútuas.</p>
+<p><span class="art-num">Art. 843.</span> A transação interpreta-se restritivamente, e por ela não se transmitem, apenas se declaram ou reconhecem direitos.</p>
+<p><span class="art-num">Art. 851.</span> É admitido compromisso, judicial ou extrajudicial, para resolver litígios entre pessoas que podem contratar.</p>
+</div>
+</details>
+<div class="sec-label jur">⚖️ Jurisprudência (ENAC 2026.1)</div>
+<div class="jur-box"><span class="info">STJ</span> A <b>liquidação extrajudicial</b> superveniente de uma das partes <b>não invalida</b> a cláusula compromissória; a arbitragem coexiste com a liquidação (<i>Kompetenz-Kompetenz</i>: o árbitro decide sobre a própria competência).</div>
+</div>
+
+<div class="card" id="agente">
+<div class="card-meta"><span class="badge badge-tema">⑪ Administração fiduciária de garantias</span><span class="badge badge-pag">pp 573–575 · art. 853-A (Lei 14.711/2023)</span></div>
+<div class="card-title">O agente de garantia — Capítulo XXI, novíssimo</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>O <b>agente de garantia</b>, designado pelos credores, constitui/registra/gere e pleiteia a execução da garantia, atuando <b>em nome próprio e em benefício dos credores</b>.</p>
+<ul>
+<li>Tem <b>dever fiduciário</b> perante os credores (§2º).</li>
+<li>Pode usar <b>execução extrajudicial</b> quando houver previsão legal (§1º).</li>
+<li>Produto da garantia = <b>patrimônio separado</b> por até <b>180 dias</b> (§5º); paga aos credores em <b>10 dias úteis</b> (§6º).</li>
+<li>Atuação assemelhada a <b>substituição processual</b>; deve agir com <b>estrita boa-fé</b> perante o devedor (§8º).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — art. 853-A (caput)</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 853-A.</span> Qualquer garantia poderá ser constituída, levada a registro, gerida e ter a sua execução pleiteada por agente de garantia, que será designado pelos credores da obrigação garantida para esse fim e atuará em nome próprio e em benefício dos credores, inclusive em ações judiciais que envolvam discussões sobre a existência, a validade ou a eficácia do ato jurídico do crédito garantido, vedada qualquer cláusula que afaste essa regra em desfavor do devedor ou do terceiro prestador da garantia. <i>(Incluído pela Lei nº 14.711, de 2023)</i></p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Agente de garantia age em <span class="mnemo">NOME PRÓPRIO</span> e em benefício dos credores. Patrimônio separado = <span class="mnemo">180 DIAS</span>; pagamento aos credores = <span class="mnemo">10 DIAS ÚTEIS</span>.</div>
+</div>
+
+<div class="card" id="unilaterais">
+<div class="card-meta"><span class="badge badge-tema">⑫ Atos unilaterais</span><span class="badge badge-pag">p 575 · arts. 854 e ss.</span></div>
+<div class="card-title">A obrigação nasce da declaração de uma só parte</div>
+<div class="sec-label sintese">◆ Síntese</div>
+<div class="prose">
+<p>Declarações <b>unilaterais de vontade</b>: enquanto o contrato nasce do <b>encontro de vontades</b>, aqui a obrigação nasce da declaração de <b>UMA</b> das partes, no instante em que o agente manifesta a vontade de assumir o dever.</p>
+<ul>
+<li><b>Promessa de recompensa</b> (854).</li>
+<li><b>Gestão de negócios</b> (861).</li>
+<li><b>Pagamento indevido</b> (876).</li>
+<li><b>Enriquecimento sem causa</b> (884).</li>
+</ul>
+</div>
+<details>
+<summary><div class="lei-toggle">📜 Letra da Lei — art. 854</div></summary>
+<div class="lei-body">
+<p><span class="art-num">Art. 854.</span> Aquele que, por anúncios públicos, se comprometer a recompensar, ou gratificar, a quem preencha certa condição, ou desempenhe certo serviço, contrai obrigação de cumprir o prometido.</p>
+</div>
+</details>
+<div class="sec-label mem">★ Memorize</div>
+<div class="mem-box">Mnemônico das 4 espécies: <span class="mnemo">P-G-P-E</span> — <b>P</b>romessa de recompensa, <b>G</b>estão de negócios, <b>P</b>agamento indevido, <b>E</b>nriquecimento sem causa.</div>
+</div>
+
+<div class="card" id="pega">
+<div class="sec-label pega">⚠️ Pegadinhas e Pontos de Prova</div>
+<ol class="list-pega">
+<li>Prisão do depositário infiel é <b>ilícita</b> em qualquer modalidade (SV 25); a única prisão civil é a do <b>devedor de alimentos</b>.</li>
+<li>Súmula 419/STJ fala em depositário <b>judicial</b> infiel (atenção à literalidade).</li>
+<li><b>Mandato ≠ procuração</b>: mandato é contrato; procuração é o instrumento (ato unilateral).</li>
+<li>Mandato <b>presume-se gratuito</b> — salvo ofício/profissão lucrativa do mandatário.</li>
+<li>Mandato em termos gerais só confere <b>administração</b>; alienar/hipotecar/transigir exige poderes <b>especiais e expressos</b>.</li>
+<li>Poder de <b>transigir não</b> importa o de firmar <b>compromisso</b> (661, §2º).</li>
+<li>Comissário age <b>em nome próprio</b> (≠ mandatário); fica diretamente obrigado.</li>
+<li><b>Del credere</b> → solidariedade + remuneração mais elevada.</li>
+<li>Agência: remuneração devida por <b>fato imputável ao proponente</b> (716); resilição = aviso de <b>90 dias</b>.</li>
+<li>Corretagem: comissão devida no <b>resultado útil</b> e <b>ainda que</b> frustrado por <b>arrependimento</b> das partes.</li>
+<li>Negócio concluído <b>diretamente</b> pelas partes → corretor nada recebe, <b>salvo</b> exclusividade por escrito.</li>
+<li>Corretor de imóveis <b>não</b> responde por inadimplemento da incorporadora (Tema 1173), salvo exceções.</li>
+<li>Cláusula <b>excludente</b> de responsabilidade no transporte de pessoas é <b>NULA</b> (734).</li>
+<li><b>Carona</b> não se subordina ao contrato de transporte (736), salvo vantagem indireta.</li>
+<li>Transporte de coisas: recusa <b>facultativa</b> (embalagem) × <b>obrigatória</b> (coisa ilícita); avaria não perceptível → <b>10 dias</b>.</li>
+<li>Transporte <b>cumulativo</b> → responsabilidade <b>solidária</b> (756).</li>
+<li>Seguro de <b>ato doloso</b> do segurado/beneficiário é <b>nulo</b> (762).</li>
+<li>Segurado em <b>mora</b> no prêmio, com sinistro antes da purgação, <b>perde</b> a indenização (763).</li>
+<li>Suicídio só exclui cobertura nos <b>2 primeiros anos</b> (798); conduta temerária ≠ agravamento intencional.</li>
+<li>Seguro de pessoa: capital <b>livre</b>; <b>não</b> é herança nem responde por dívidas (794); apólice <b>ao portador é vedada</b>.</li>
+<li>Constituição de renda é contrato <b>SOLENE</b> → <b>escritura pública</b> (807); nula se beneficiário morre em <b>30 dias</b> de moléstia preexistente.</li>
+<li>Jogo e aposta = <b>obrigação natural</b>: não obriga, mas o pago voluntariamente <b>não se recobra</b>.</li>
+<li>Fiança: forma <b>escrita</b>, <b>não</b> admite interpretação <b>extensiva</b> (819); exige <b>outorga conjugal</b>.</li>
+<li><b>Benefício de ordem</b> não aproveita ao renunciante, principal pagador/solidário, ou se o devedor é insolvente/falido (828).</li>
+<li><b>Notificação resilitória</b>: 60 dias de responsabilidade após notificar (835); Súmula 656 valida prorrogação automática.</li>
+<li>Transação: interpretação <b>restritiva</b>; <b>não transmite</b>, apenas <b>declara/reconhece</b> direitos (843).</li>
+<li>Compromisso é <b>vedado</b> para questões de <b>estado/família</b> e não patrimoniais (852).</li>
+<li>Agente de garantia (853-A) atua <b>em nome próprio</b>; produto da garantia = <b>patrimônio separado</b> por <b>180 dias</b>.</li>
+<li>Mandato <b>ad judicia</b> só a advogado inscrito na OAB (pegadinha CEBRASPE).</li>
+<li>Atos unilaterais: a obrigação nasce da declaração de <b>UMA</b> parte (promessa de recompensa, gestão de negócios, pagamento indevido, enriquecimento sem causa).</li>
+</ol>
+</div>
+
+<div class="card" id="recall">
+<div class="sec-label recall">✅ Active Recall — toque para revelar</div>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a única prisão civil por dívida ainda admitida?</span><span class="chev">▸</span></summary><div class="recall-a">A do devedor de alimentos (CF art. 5º, LXVII + Pacto de San José). A do depositário infiel é ilícita (SV 25).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Mandato e procuração são a mesma coisa?</span><span class="chev">▸</span></summary><div class="recall-a">Não. Mandato é o contrato (bilateral, exige aceitação); procuração é o instrumento, ato unilateral de outorga de poderes (art. 653).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Que poderes o mandato "em termos gerais" confere? E para alienar?</span><span class="chev">▸</span></summary><div class="recall-a">Só administração (661). Para alienar/hipotecar/transigir → poderes especiais e expressos (661, §1º).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em nome de quem age o comissário? E o mandatário?</span><span class="chev">▸</span></summary><div class="recall-a">Comissário em nome próprio, à conta do comitente; mandatário em nome do mandante.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que é a cláusula del credere?</span><span class="chev">▸</span></summary><div class="recall-a">Torna o comissário solidariamente responsável com os terceiros com quem contratou → direito a remuneração mais elevada (698).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quando o corretor faz jus à comissão se o negócio não se efetivar?</span><span class="chev">▸</span></summary><div class="recall-a">Quando obteve o resultado útil, e ainda que o negócio não se efetive por arrependimento das partes (725).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O corretor responde pelo inadimplemento da incorporadora?</span><span class="chev">▸</span></summary><div class="recall-a">Não, em regra (Tema 1173/STJ), salvo envolvimento na construção, mesmo grupo econômico, ou confusão/desvio patrimonial.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A cláusula excludente de responsabilidade no transporte de pessoas é válida?</span><span class="chev">▸</span></summary><div class="recall-a">Não — é nula (art. 734). A responsabilidade do transportador é objetiva (obrigação de resultado).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em que prazo o suicídio exclui a cobertura do seguro de vida?</span><span class="chev">▸</span></summary><div class="recall-a">Nos primeiros 2 anos de vigência (art. 798). Conduta temerária sem intenção não é agravamento intencional (768).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a forma exigida na constituição de renda?</span><span class="chev">▸</span></summary><div class="recall-a">Escritura pública — é contrato solene (art. 807).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Jogo e aposta geram que tipo de obrigação?</span><span class="chev">▸</span></summary><div class="recall-a">Obrigação natural: não obriga a pagamento, mas o pago voluntariamente não se recobra (814).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A quem não aproveita o benefício de ordem na fiança?</span><span class="chev">▸</span></summary><div class="recall-a">Ao que renunciou, ao que se obrigou como principal pagador/solidário, e se o devedor é insolvente/falido (828).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que decidiu a Súmula 656/STJ?</span><span class="chev">▸</span></summary><div class="recall-a">Válida a cláusula de prorrogação automática de fiança; a exoneração depende da notificação do art. 835.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A transação transmite direitos?</span><span class="chev">▸</span></summary><div class="recall-a">Não — interpreta-se restritivamente e apenas declara/reconhece direitos (843).</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem é o agente de garantia (853-A)?</span><span class="chev">▸</span></summary><div class="recall-a">Designado pelos credores; atua em nome próprio e em benefício deles; produto da garantia é patrimônio separado por 180 dias.</div></details>
+<details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais as 4 espécies de atos unilaterais?</span><span class="chev">▸</span></summary><div class="recall-a">Promessa de recompensa (854), gestão de negócios (861), pagamento indevido (876) e enriquecimento sem causa (884).</div></details>
+</div>
+
+<div class="card" id="cloze">
+<div class="sec-label mem">✍️ Cloze Deletions</div>
+<table class="cloze-table">
+<tr><td>SV 25: é ilícita a prisão civil de ______ infiel, qualquer modalidade.</td><td>depositário</td></tr>
+<tr><td>A ______ é o instrumento do mandato (653).</td><td>procuração</td></tr>
+<tr><td>O mandato presume-se ______ quando não estipulada retribuição.</td><td>gratuito</td></tr>
+<tr><td>Alienar/hipotecar/transigir exige poderes ______ e ______.</td><td>especiais · expressos</td></tr>
+<tr><td>O comissário age em nome ______, à conta do comitente.</td><td>próprio</td></tr>
+<tr><td>A cláusula ______ torna o comissário solidariamente responsável.</td><td>del credere</td></tr>
+<tr><td>Resilição da agência por prazo indeterminado: aviso de ______ dias.</td><td>90</td></tr>
+<tr><td>É ______ qualquer cláusula excludente da responsabilidade no transporte (734).</td><td>nula</td></tr>
+<tr><td>Transporte cumulativo → responsabilidade ______.</td><td>solidária</td></tr>
+<tr><td>O suicídio só exclui a cobertura nos primeiros ______ anos.</td><td>dois</td></tr>
+<tr><td>O contrato de constituição de renda requer ______ (807).</td><td>escritura pública</td></tr>
+<tr><td>Dívidas de jogo não obrigam, mas o pago voluntariamente não se ______.</td><td>recobra</td></tr>
+<tr><td>A fiança não admite interpretação ______.</td><td>extensiva</td></tr>
+<tr><td>O fiador fica obrigado por ______ dias após a notificação resilitória.</td><td>sessenta (60)</td></tr>
+<tr><td>A transação interpreta-se ______ e apenas declara direitos.</td><td>restritivamente</td></tr>
+<tr><td>É vedado compromisso sobre questões de ______ e família.</td><td>estado</td></tr>
+<tr><td>O produto da garantia (853-A) é patrimônio separado por até ______ dias.</td><td>180</td></tr>
+</table>
+</div>
+
+<div class="card" id="flash">
+<div class="sec-label recall">🃏 Flashcards — toque para virar</div>
+<details class="fc-item"><summary class="fc-q"><span>Prisão do depositário infiel hoje?</span><span class="chev">▸</span></summary><div class="fc-a">Ilícita em qualquer modalidade — SV 25/STF e Súm. 419/STJ.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Mandato é contrato ou instrumento?</span><span class="chev">▸</span></summary><div class="fc-a">Contrato. A procuração é o instrumento.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Transigir importa firmar compromisso?</span><span class="chev">▸</span></summary><div class="fc-a">Não (661, §2º).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Em nome de quem age o comissário?</span><span class="chev">▸</span></summary><div class="fc-a">Em nome próprio, à conta do comitente.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Efeito da cláusula del credere?</span><span class="chev">▸</span></summary><div class="fc-a">Solidariedade + remuneração mais elevada.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Aviso prévio na agência (prazo indeterminado)?</span><span class="chev">▸</span></summary><div class="fc-a">90 dias (720).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Corretor responde por inadimplemento da incorporadora?</span><span class="chev">▸</span></summary><div class="fc-a">Não, salvo exceções (Tema 1173).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Cláusula excludente no transporte de pessoas?</span><span class="chev">▸</span></summary><div class="fc-a">Nula (734).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Prazo do suicídio que exclui cobertura?</span><span class="chev">▸</span></summary><div class="fc-a">2 anos (798).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Capital do seguro de pessoa é herança?</span><span class="chev">▸</span></summary><div class="fc-a">Não, nem responde por dívidas (794).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Forma da constituição de renda?</span><span class="chev">▸</span></summary><div class="fc-a">Escritura pública — solene (807).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Jogo/aposta gera que obrigação?</span><span class="chev">▸</span></summary><div class="fc-a">Natural (não obriga, não se recobra).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Benefício de ordem não aproveita a quem?</span><span class="chev">▸</span></summary><div class="fc-a">Renunciante; principal pagador/solidário; devedor insolvente/falido (828).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Súmula 656/STJ?</span><span class="chev">▸</span></summary><div class="fc-a">Válida a prorrogação automática da fiança; exoneração depende do art. 835.</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Transação transmite direitos?</span><span class="chev">▸</span></summary><div class="fc-a">Não — apenas declara/reconhece (843).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Compromisso pode versar família/estado?</span><span class="chev">▸</span></summary><div class="fc-a">Não (852).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Quem é o agente de garantia?</span><span class="chev">▸</span></summary><div class="fc-a">Designado pelos credores; atua em nome próprio e em benefício deles (853-A).</div></details>
+<details class="fc-item"><summary class="fc-q"><span>Espécies de atos unilaterais?</span><span class="chev">▸</span></summary><div class="fc-a">Promessa de recompensa, gestão de negócios, pagamento indevido, enriquecimento sem causa.</div></details>
+</div>
+
+<div class="card" id="check">
+<div class="sec-label sintese">☑️ Checklist de Domínio</div>
+<ul class="check">
+<li>Sei justificar por que a prisão do depositário infiel é ilícita (supralegalidade + Pacto de San José).</li>
+<li>Distingo mandato de procuração e domino o art. 661 (poderes gerais × especiais) e a extinção (682).</li>
+<li>Diferencio mandato, comissão, corretagem e agência quanto a "em nome de quem" cada um atua.</li>
+<li>Sei o efeito da cláusula del credere e o Enunciado 68.</li>
+<li>Conheço a regra dos 90 dias (agência), o resultado útil (corretagem) e o Tema 1173.</li>
+<li>Domino a responsabilidade objetiva no transporte e a nulidade da cláusula excludente (734).</li>
+<li>Distingo seguro de dano × pessoa e a regra do suicídio bienal (798) + jurisprudência 2025/26.</li>
+<li>Lembro que constituição de renda é solene (807) e jogo/aposta é obrigação natural.</li>
+<li>Domino a fiança: benefício de ordem (827/828), outorga conjugal, notificação resilitória (835) e Súmula 656.</li>
+<li>Diferencio transação, compromisso e cláusula compromissória.</li>
+<li>Conheço o art. 853-A (administração fiduciária de garantias — Lei 14.711/2023).</li>
+<li>Sei as 4 espécies de atos unilaterais e como nasce a obrigação.</li>
+<li>Resolvi a Questão 34 do Simulado ENAC (revogação/substabelecimento de procuração — gabarito B).</li>
+</ul>
+</div>
+
+</div>
+<div class="foot">Caderno de Revisão · Civil — Contratos em Espécie e Atos Unilaterais (pp 548–575) · Fontes: e-Book ENAC · Notion (Meta 17 / Prova Oral) · Dizer o Direito · QConcursos · Simulado e Julgados ENAC 2026.1</div>
+</div>
+</body>
+</html>
