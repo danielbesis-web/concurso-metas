@@ -132,6 +132,25 @@ details.coment .comentBody{padding:14px;font-size:14px;line-height:1.7;color:#c9
 <script>
 const STORE_KEY = 'concurso_q54_q68_v2';
 
+function syncResultado(){
+  try{
+    var total=QUESTOES.length, acertos=0, erradas=[];
+    QUESTOES.forEach(function(q){
+      var r=state.respostas[q.id];
+      if(r==null) return;
+      var letra=(typeof r==="object")?r.letra:r;
+      if(!letra || letra==="ANULADA") return;
+      if(letra===q.correta) acertos++;
+      else erradas.push({id:q.id, enunciado:q.enunciado, gabarito:q.correta, resposta:letra});
+    });
+    var slug=(typeof SLUG!=="undefined"?SLUG:STORE_KEY.replace(/^concurso_/,""));
+    fetch("https://danielbesis-site.vercel.app/api/resultado",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({slug:slug, metaNumero:9, respostas:state.respostas, total:total, acertos:acertos, erradas:erradas})
+    }).catch(function(){});
+  }catch(e){}
+}
+
 const QUESTOES = [
   {id:'q54', materia:'Fraude contra credores', tipo:'multipla',
    enunciado:`Sobre a fraude contra credores (arts. 158–165 CC), analise as afirmativas.<br><br>
@@ -592,6 +611,7 @@ function confirmar() {
   const correct = letra === q.correta;
 
   state.respostas[q.id] = { letra: letra, data: today() };
+  syncResultado();
   autoSchedule(q.id, correct);
 
   if (!correct) {

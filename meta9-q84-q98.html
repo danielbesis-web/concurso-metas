@@ -192,6 +192,25 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
 <script>
 const STORE_KEY = 'concurso_q84_q98_v2';
 
+function syncResultado(){
+  try{
+    var total=QUESTOES.length, acertos=0, erradas=[];
+    QUESTOES.forEach(function(q){
+      var r=state.respostas[q.id];
+      if(r==null) return;
+      var letra=(typeof r==="object")?r.letra:r;
+      if(!letra || letra==="ANULADA") return;
+      if(letra===q.correta) acertos++;
+      else erradas.push({id:q.id, enunciado:q.enunciado, gabarito:q.correta, resposta:letra});
+    });
+    var slug=(typeof SLUG!=="undefined"?SLUG:STORE_KEY.replace(/^concurso_/,""));
+    fetch("https://danielbesis-site.vercel.app/api/resultado",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({slug:slug, metaNumero:9, respostas:state.respostas, total:total, acertos:acertos, erradas:erradas})
+    }).catch(function(){});
+  }catch(e){}
+}
+
 const QUESTOES = [
   {id:'q84', materia:'Obrigações', tipo:'multipla',
    enunciado:`Sobre as obrigações alternativas, analise as assertivas:<br><br>I. A escolha cabe ao credor como regra, salvo estipulação contrária.<br>II. Nas obrigações divisíveis, o devedor pode obrigar o credor a receber parte em uma prestação e parte em outra, como regra.<br>III. Quando a obrigação for de prestações periódicas, a faculdade de opção poderá ser exercida em cada período.<br><br>Assinale a correta:`,
@@ -504,6 +523,7 @@ function toggleStar(id) {
   if (state.revisarDepois[id]) delete state.revisarDepois[id];
   else state.revisarDepois[id] = true;
   saveState();
+  syncResultado();
   renderCard();
   renderStats();
 }
