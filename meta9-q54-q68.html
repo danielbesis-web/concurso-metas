@@ -746,6 +746,8 @@ renderModos();
 renderPlacar();
 renderCard();
 startTimers();
+
+window.addEventListener("load",function(){try{syncResultado();}catch(e){}});/*sync-on-load*/
 </script>
 </body>
 </html>
