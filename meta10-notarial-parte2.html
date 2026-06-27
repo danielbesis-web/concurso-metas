@@ -307,7 +307,7 @@ function syncResultado(){
       var r=state.respostas[q.id];
       if(!r) return;
       if(r===q.correta) acertos++;
-      else erradas.push({id:q.id, enunciado:q.enunciado, gabarito:q.correta, resposta:r});
+      else erradas.push({id:q.id, enunciado:q.enunciado, gabarito:q.correta, resposta:r, alternativas:q.alternativas, comentario:q.comentario});
     });
     var slug=(typeof SLUG!=="undefined"?SLUG:STORE_KEY.replace(/^concurso_/,""));
     fetch("https://danielbesis-site.vercel.app/api/resultado",{
