@@ -115,6 +115,7 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
     <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
   </div>
   <div class="stats-bar" id="statsBar"></div>
+  <div id="dominioPanel" style="margin-bottom:12px"></div>
   <div class="progress-wrap">
     <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
     <div class="progress-label" id="progressLabel"></div>
@@ -331,7 +332,7 @@ function syncResultado(){
     var slug=(typeof SLUG!=="undefined"?SLUG:STORE_KEY.replace(/^concurso_/,""));
     fetch("https://danielbesis-site.vercel.app/api/resultado",{
       method:"POST", headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({slug:slug, metaNumero:19, respostas:state.respostas, total:total, acertos:acertos, erradas:erradas})
+      body:JSON.stringify({slug:slug, metaNumero:19, respostas:state.respostas, total:total, acertos:acertos, erradas:erradas, dominio:computeDominio().b})
     }).catch(function(){});
   }catch(e){}
 }
@@ -343,7 +344,37 @@ function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
 function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
-function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function computeDominio(){
+  var t=today(), b={dominado:0,revisao:0,aprendendo:0,errando:0,naovisto:0}, due=0;
+  QUESTOES.forEach(function(q){
+    var rv=state.revisao[q.id], ans=!!state.respostas[q.id];
+    if(!rv && !ans){ b.naovisto++; return; }
+    var a=rv?(rv.acertos||0):0;
+    if(a>=3) b.dominado++; else if(a===2) b.revisao++; else if(a===1) b.aprendendo++; else b.errando++;
+    if(rv && rv.nextDate && rv.nextDate<=t) due++;
+  });
+  return {b:b, due:due, total:QUESTOES.length};
+}
+function renderDominio(){
+  var el=document.getElementById('dominioPanel'); if(!el) return;
+  var d=computeDominio(), b=d.b, tot=d.total||1, s=computeStats();
+  var taxa=s.respondidas>0?Math.round(s.acertos/s.respondidas*100):0;
+  var score=Math.round((b.dominado + b.revisao*0.66 + b.aprendendo*0.33)/tot*100);
+  var segs=[['#27c06a',b.dominado,'dominado','30d'],['#4a9eff',b.revisao,'em revisao','7d'],['#f5a623',b.aprendendo,'aprendendo','1d'],['#f25555',b.errando,'errando',''],['#2a3a52',b.naovisto,'nao visto','']];
+  var bar=segs.map(function(x){var w=x[1]/tot*100; return w>0?'<div style="width:'+w+'%;background:'+x[0]+'" title="'+x[2]+': '+x[1]+'"></div>':'';}).join('');
+  var leg=segs.map(function(x){var sub=x[3]?' <span style="color:#5e7290">('+x[3]+')</span>':''; return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#9bb0c9"><span style="width:9px;height:9px;border-radius:2px;background:'+x[0]+'"></span>'+x[2]+' '+x[1]+sub+'</span>';}).join('');
+  var prim=state.primeira||{}, pk=Object.keys(prim), evo='';
+  if(pk.length>=3){var pc=pk.filter(function(k){return prim[k];}).length, p1=Math.round(pc/pk.length*100); evo=' <span style="color:#27c06a;font-size:11px">(1a '+p1+'% -> atual '+taxa+'%)</span>';}
+  el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:13px;color:#cfe0f5">Termometro de dominio</span><span style="font-size:12px;color:#9bb0c9">'+score+'% &middot; '+tot+' questoes</span></div>'
+   +'<div style="display:flex;height:18px;border-radius:7px;overflow:hidden;border:1px solid #16365a">'+bar+'</div>'
+   +'<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:7px">'+leg+'</div>'
+   +'<div style="display:flex;gap:8px;margin-top:9px;flex-wrap:wrap">'
+     +'<div style="flex:1;min-width:130px;background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:7px 10px"><div style="font-size:11px;color:#9bb0c9">taxa de acerto</div><div style="font-size:17px;color:#e6eefb">'+taxa+'%'+evo+'</div></div>'
+     +'<div style="flex:1;min-width:130px;background:'+(d.due>0?'#1a1200':'#0b1828')+';border:1px solid '+(d.due>0?'#5a4410':'#16365a')+';border-radius:8px;padding:7px 10px"><div style="font-size:11px;color:#9bb0c9">revisao hoje</div><div style="font-size:17px;color:#e6eefb">'+d.due+' <span style="font-size:11px;color:#9bb0c9">venceram</span></div></div>'
+   +'</div>';
+}
+
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';renderDominio();}
 function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
 function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
 function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
@@ -355,7 +386,7 @@ function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label
 function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
 function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();syncResultado();renderCard();renderStats();}
 function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
-function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();syncResultado();renderCard();renderStats();}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;if(!state.primeira)state.primeira={};if(state.primeira[id]===undefined)state.primeira[id]=acertou;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();syncResultado();renderCard();renderStats();}
 function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
 function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
 function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
