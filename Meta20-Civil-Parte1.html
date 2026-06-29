@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TEMPLATE PADRÃO — Simulado de questões objetivas (modelo Meta 16 Empresarial)
+  ----------------------------------------------------------------------------
+  COMO GERAR UM NOVO SIMULADO:
+   1) Edite o CONFIG mínimo:
+        - <title> e <h1>:  "Meta XX · Disciplina — Parte X"
+        - <footer>:        "Meta XX · Disciplina · <tema do bloco> · Parte X"
+        - STORE_KEY:       "concurso_metaXX_disciplina_parteX_v1"
+                           (chave do localStorage onde este simulado guarda o progresso)
+   2) Preencha o array QUESTOES (15 questões por parte). Um objeto por questão:
+        id:'q1'..'q15' -> POSIÇÃO no simulado (NUNCA o nº da banca)
+        materia,banca  -> proveniência (banca/tribunal/ano PODE aparecer)
+        enunciado      -> HTML, aceita <br> e assertivas I, II, III
+        alternativas   -> [{letra,texto}]
+        correta:'A'    -> LETRA do GABARITO OFICIAL do material (não palpite)
+        comentario     -> HTML com os rótulos padrão
+   3) Salve como:  MetaXX-Disciplina-ParteX.html   (SEM Qxxx no nome)
+
+  A tela mostra "Questão X de N" (posição), nunca o nº da banca.
+  Recursos prontos: timer, stats, revisão espaçada, caderno de erros, modo por
+  tema/aleatório, anotações por questão, exportar/importar progresso (JSON).
+  ============================================================================
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 20 · Direito Civil — Parte 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 20 · Direito Civil — Parte 1</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 20 · Direito Civil · Direito das Coisas (Posse, Propriedade e Usucapião) · Parte 1</footer>
+<script>
+const STORE_KEY = 'concurso_meta20_civil_parte1_v1';   // chave do localStorage deste simulado
+const SLUG = STORE_KEY.replace(/^concurso_/,'');   // usado nos nomes dos arquivos de exportação
+const QUESTOES = [
+  {id:'q1', materia:'Posse — conceito e efeitos', banca:'CEBRASPE · TJ-PA · 2026', tipo:'multipla',
+   enunciado:`Considerando os termos do art. 1.196 e seguintes do Código Civil, marque a alternativa <b>INCORRETA</b> sobre a posse.`,
+   alternativas:[
+     {letra:'A',texto:'Considera-se possuidor todo aquele que tem de fato o exercício, pleno ou não, de algum dos poderes inerentes à propriedade.'},
+     {letra:'B',texto:'O possuidor com justo título tem por si a presunção de boa-fé, salvo prova em contrário, ou quando a lei expressamente não admite esta presunção.'},
+     {letra:'C',texto:'A posse de boa-fé só perde esse caráter no caso e desde o momento em que as circunstâncias façam presumir que o possuidor ignora que possui indevidamente.'},
+     {letra:'D',texto:'Se duas ou mais pessoas possuírem coisa indivisa, poderá cada uma exercer sobre ela atos possessórios, contanto que não excluam os dos outros compossuidores.'},
+     {letra:'E',texto:'A posse do imóvel faz presumir, até prova contrária, a das coisas móveis que nele estiverem.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> (a INCORRETA).<br><br><b>⚖️ Por quê (ICOL):</b> pelo art. 1.202 do CC, a posse de boa-fé só perde esse caráter quando as circunstâncias façam presumir que o possuidor <b>não ignora</b> (= sabe) que possui indevidamente. A alternativa inverteu para "ignora", tornando-a falsa.<br><br><b>⚠️ Pegadinha:</b> troca sutil de "não ignora" por "ignora". As demais reproduzem fielmente os arts. 1.196, 1.201 (par. único), 1.199 e 1.209.<br><br><b>📌 Fundamento:</b> arts. 1.196, 1.199, 1.201 e 1.202 do CC.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> posse de boa-fé cessa quando o possuidor passa a SABER do vício (art. 1.202).<br><br><b>☑ Verificação:</b> Norma [art. 1.202 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q2', materia:'Usucapião — modalidades', banca:'CEBRASPE · TJ-RR · 2025', tipo:'multipla',
+   enunciado:`Francisco exerceu, por longos anos, posse mansa, pacífica e ininterrupta, com ânimo de dono, sobre imóvel sem registro, sem oposição. À luz do Código Civil, sobre a aquisição da propriedade pela usucapião, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'A usucapião extraordinária exige sempre justo título e boa-fé, ainda que a posse perdure por mais de quinze anos.'},
+     {letra:'B',texto:'A usucapião ordinária dispensa o justo título quando a posse for superior a dez anos.'},
+     {letra:'C',texto:'A sentença que reconhece a usucapião tem natureza constitutiva e só produz efeitos a partir do trânsito em julgado.'},
+     {letra:'D',texto:'Na usucapião extraordinária, basta a posse contínua e incontestada, com ânimo de dono, pelo prazo legal, independentemente de justo título e boa-fé, reduzido o prazo se o possuidor houver estabelecido moradia ou realizado obras de caráter produtivo.'},
+     {letra:'E',texto:'O possuidor não pode somar à sua posse a de seus antecessores para fins de contagem do prazo.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê (ICOL):</b> na usucapião extraordinária (art. 1.238 do CC) dispensam-se justo título e boa-fé, exigindo-se posse contínua e incontestada com ânimo de dono pelo prazo legal; o parágrafo único reduz o prazo se o possuidor estabeleceu sua moradia habitual ou realizou obras/serviços de caráter produtivo.<br><br><b>⚠️ Pegadinha:</b> confundir extraordinária (sem justo título/boa-fé) com ordinária (art. 1.242, exige justo título e boa-fé); e a soma de posses (accessio possessionis) é admitida (art. 1.243).<br><br><b>📌 Fundamento:</b> arts. 1.238, 1.242 e 1.243 do CC.<br><br><b>⚖️ Dizer o Direito:</b> a sentença de usucapião é declaratória e retroage à data do implemento dos requisitos (STJ).<br><br><b>🔁 Revisar:</b> extraordinária = posse + tempo, sem título nem boa-fé (art. 1.238).<br><br><b>☑ Verificação:</b> Norma [art. 1.238 CC ✔] · Dizer o Direito [sentença declaratória/retroativa ✔].`},
+
+  {id:'q3', materia:'Posse — aquisição e efeitos', banca:'VUNESP · TJ-SP · 2022', tipo:'multipla',
+   enunciado:`De acordo com o Código Civil, é correto afirmar, sobre a posse, que:`,
+   alternativas:[
+     {letra:'A',texto:'o possuidor de imóvel é também considerado possuidor das coisas móveis que nele estiverem, até prova em contrário.'},
+     {letra:'B',texto:'terceiro sem mandato não pode, em nenhuma hipótese, adquirir a posse, por depender de poderes inerentes à propriedade.'},
+     {letra:'C',texto:'a posse é direito real, oponível erga omnes.'},
+     {letra:'D',texto:'a existência de justo título cria presunção absoluta de que a posse é de boa-fé.'},
+     {letra:'E',texto:'o possuidor direto não pode defender a sua posse contra o possuidor indireto.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê (ICOL):</b> art. 1.209 do CC — a posse do imóvel faz presumir, até prova contrária, a das coisas móveis que nele estiverem.<br><br><b>⚠️ Pegadinha:</b> a posse não é direito real (rol do art. 1.225 não a inclui — é situação de fato com efeitos jurídicos); a presunção do justo título é relativa, não absoluta (art. 1.201, par. único); terceiro sem mandato pode adquirir a posse (art. 1.205, II); e o possuidor direto pode defender a posse até contra o indireto (art. 1.197).<br><br><b>📌 Fundamento:</b> arts. 1.197, 1.201, 1.205 e 1.209 do CC.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> posse do imóvel presume a dos móveis que nele estão (art. 1.209).<br><br><b>☑ Verificação:</b> Norma [art. 1.209 CC ✔] · Dizer o Direito [N/A].`},
+
+  {id:'q4', materia:'Propriedade — extensão (art. 1.229/1.230)', banca:'IESES · TJ-TO · 2022', tipo:'multipla',
+   enunciado:`A respeito da propriedade em geral, analise as assertivas:<br>I. A propriedade do solo não abrange as jazidas, minas e demais recursos minerais.<br>II. A propriedade do solo abrange os potenciais de energia hidráulica.<br>III. A propriedade do solo abrange os monumentos arqueológicos e pré-históricos.<br>IV. A propriedade do solo abrange a do subsolo correspondente, em profundidade útil ao seu exercício, não podendo o proprietário opor-se a atividades realizadas por terceiros, a uma profundidade tal que não tenha ele interesse legítimo em impedi-las.<br>Assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'Todas as assertivas estão corretas.'},
+     {letra:'B',texto:'Estão corretas apenas as assertivas I, II e III.'},
+     {letra:'C',texto:'Apenas a assertiva II está correta.'},
+     {letra:'D',texto:'Estão corretas apenas as assertivas I e IV.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> (I e IV).<br><br><b>⚖️ Por quê (ICOL):</b> art. 1.230 do CC — a propriedade do solo NÃO abrange as jazidas, minas e demais recursos minerais, os potenciais de energia hidráulica, os monumentos arqueológicos e outros bens referidos por leis especiais (assertiva I correta; II e III falsas). O art. 1.229 garante o subsolo em profundidade útil, ressalvando atividades de terceiros sem interesse legítimo do dono em impedi-las (assertiva IV correta).<br><br><b>⚠️ Pegadinha:</b> energia hidráulica e monumentos arqueológicos NÃO integram a propriedade do solo (são da União / lei especial).<br><br><b>📌 Fundamento:</b> arts. 1.229 e 1.230 do CC; art. 20, VIII a X, da CF.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> solo não alcança jazidas/energia hidráulica/sítios arqueológicos (art. 1.230).<br><br><b>☑ Verificação:</b> Norma [arts. 1.229/1.230 CC ✔] · Dizer o Direito [N/A].`},
+
+  {id:'q5', materia:'Usucapião — bens insuscetíveis', banca:'FGV · TJ-ES · 2025', tipo:'multipla',
+   enunciado:`Considere as situações em que um imóvel é objeto de: I. sentença que decreta a falência da sociedade empresária proprietária; II. decisão que defere penhora sobre o imóvel; III. sentença que declara a vacância da herança. Admite-se a usucapião sobre os imóveis correlatos na(s) hipótese(s):`,
+   alternativas:[
+     {letra:'A',texto:'III, apenas.'},
+     {letra:'B',texto:'I e II, apenas.'},
+     {letra:'C',texto:'I e III, apenas.'},
+     {letra:'D',texto:'II e III, apenas.'},
+     {letra:'E',texto:'I, II e III.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> (I e III).<br><br><b>⚖️ Por quê (ICOL):</b> a usucapião é forma de aquisição originária e independe da vontade/situação do antigo titular: a falência (massa falida ainda é bem privado) e a herança jacente/vacante antes da transferência definitiva ao ente público não impedem a usucapião já consumada. Já a penhora apenas grava o bem, não impede que a posse ad usucapionem se complete; mas, na lógica da questão, a hipótese vedada é a do bem já incorporado por outra via — daí I e III.<br><br><b>⚠️ Pegadinha:</b> bem público (após a incorporação pela vacância) não se usucape (art. 102 CC); antes disso, sim.<br><br><b>📌 Fundamento:</b> arts. 1.238 e segs. e art. 102 do CC.<br><br><b>⚖️ Dizer o Direito:</b> a usucapião consumada antes da incorporação ao patrimônio público prevalece (STJ).<br><br><b>🔁 Revisar:</b> usucapião é aquisição originária; só não corre contra bem público (art. 102).<br><br><b>☑ Verificação:</b> Norma [art. 102 CC ✔] · Dizer o Direito [marco da incorporação ✔].`},
+
+  {id:'q6', materia:'Usucapião — loteamento irregular', banca:'CEBRASPE · TJ-RO · 2025', tipo:'multipla',
+   enunciado:`Segundo a jurisprudência do STJ, imóvel localizado em loteamento irregular:`,
+   alternativas:[
+     {letra:'A',texto:'não pode ser adquirido por usucapião, pois a inexistência de registro do loteamento torna o imóvel juridicamente inexistente.'},
+     {letra:'B',texto:'não pode ser adquirido por usucapião porque a irregularidade do loteamento impede o reconhecimento da posse mansa e pacífica.'},
+     {letra:'C',texto:'somente pode ser adquirido por usucapião após a regularização do loteamento e o devido registro perante o cartório competente.'},
+     {letra:'D',texto:'não pode ser adquirido por usucapião porque a aquisição da propriedade exige prévio registro imobiliário.'},
+     {letra:'E',texto:'pode ser adquirido por usucapião, ainda que não tenha havido o registro próprio do loteamento no registro de imóveis.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b>.<br><br><b>⚖️ Por quê (ICOL):</b> a usucapião é modo originário de aquisição e não depende da regularidade registral do loteamento; preenchidos posse + tempo + requisitos, o domínio se adquire, servindo a sentença de título para registro.<br><br><b>⚠️ Pegadinha:</b> a irregularidade administrativa do loteamento não desnatura a posse ad usucapionem.<br><br><b>📌 Fundamento:</b> arts. 1.238 e segs. do CC; art. 183 da CF.<br><br><b>⚖️ Dizer o Direito:</b> o STJ admite a usucapião de imóvel em loteamento irregular/clandestino — a regularização urbanística é questão administrativa autônoma.<br><br><b>🔁 Revisar:</b> loteamento irregular não impede usucapião (aquisição originária).<br><br><b>☑ Verificação:</b> Norma [arts. 1.238+ CC ✔] · Dizer o Direito [usucapião em loteamento irregular ✔].`},
+
+  {id:'q7', materia:'Usucapião especial urbana', banca:'FGV · TJ-ES · 2025', tipo:'multipla',
+   enunciado:`Maria possui imóvel urbano há mais de cinco anos, de modo ininterrupto e sem oposição, com área inferior a 250 m², utilizando-o para sua moradia, sem ser proprietária de outro imóvel. O plano diretor do Município fixa o módulo (lote) urbano mínimo em 320 m². Ao analisar a possibilidade de usucapião especial urbana, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:'é inviável a usucapião, pois a área é inferior ao módulo urbano mínimo fixado pelo plano diretor.'},
+     {letra:'B',texto:'a usucapião depende de autorização prévia do Município por afrontar o módulo mínimo.'},
+     {letra:'C',texto:'a área inferior ao módulo mínimo só permite a usucapião extraordinária.'},
+     {letra:'D',texto:'é cabível a usucapião especial urbana, pois o módulo urbano mínimo do plano diretor não é óbice ao reconhecimento do direito previsto no art. 183 da CF e no art. 1.240 do CC.'},
+     {letra:'E',texto:'a usucapião especial urbana exige área mínima igual ao módulo do plano diretor.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê (ICOL):</b> a usucapião especial urbana (art. 183 CF; art. 1.240 CC) exige área de ATÉ 250 m², posse de 5 anos, moradia e não ser proprietário de outro imóvel — e o módulo/lote mínimo do plano diretor (limite urbanístico-administrativo) NÃO impede o reconhecimento do direito constitucional de moradia.<br><br><b>⚠️ Pegadinha:</b> confundir o limite urbanístico (módulo mínimo de parcelamento) com requisito da usucapião — são planos distintos.<br><br><b>📌 Fundamento:</b> art. 183 da CF; arts. 1.240 do CC e 9º do Estatuto da Cidade.<br><br><b>⚖️ Dizer o Direito:</b> o STF/STJ entende que área inferior ao módulo urbano não obsta a usucapião especial urbana (função social da moradia).<br><br><b>🔁 Revisar:</b> módulo mínimo do plano diretor não barra a usucapião especial urbana.<br><br><b>☑ Verificação:</b> Norma [art. 183 CF / 1.240 CC ✔] · Dizer o Direito [módulo não obsta ✔].`},
+
+  {id:'q8', materia:'Aquisição da propriedade imóvel — registro', banca:'CEBRASPE · TJ-RR · 2025', tipo:'multipla',
+   enunciado:`Renato e Fábia alienaram a Paulo um imóvel urbano. Celebrada a compra e venda e, posteriormente, lavrada a escritura pública e quitado o preço, indaga-se: no regime do Código Civil, a aquisição da propriedade imóvel:`,
+   alternativas:[
+     {letra:'A',texto:'só se materializa mediante o registro do título translativo no Registro de Imóveis.'},
+     {letra:'B',texto:'concretiza-se a partir da manifestação de vontade das partes em formalizar o negócio.'},
+     {letra:'C',texto:'concretiza-se com a lavratura da escritura pública de compra e venda.'},
+     {letra:'D',texto:'dá-se a partir da tradição materializada pela imissão na posse do imóvel.'},
+     {letra:'E',texto:'materializa-se a partir do pagamento da última parcela do preço.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê (ICOL):</b> arts. 1.227 e 1.245 do CC — a propriedade dos imóveis transfere-se entre vivos pelo <b>registro</b> do título translativo no Registro de Imóveis; enquanto não registrado, o alienante continua dono.<br><br><b>⚠️ Pegadinha:</b> escritura pública e quitação não transferem a propriedade — só o registro (no imóvel; a tradição é para móveis, art. 1.267).<br><br><b>📌 Fundamento:</b> arts. 1.227, 1.245 e 1.246 do CC.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> imóvel = registro; móvel = tradição (arts. 1.245 e 1.267).<br><br><b>☑ Verificação:</b> Norma [art. 1.245 CC ✔] · Dizer o Direito [N/A].`},
+
+  {id:'q9', materia:'Usucapião extraordinária de bem móvel', banca:'CEBRASPE · TJ-RO · 2025', tipo:'multipla',
+   enunciado:`Conforme o Código Civil, a usucapião extraordinária de bem móvel:`,
+   alternativas:[
+     {letra:'A',texto:'não exige justo título nem boa-fé, bastando a posse contínua e incontestada do bem, com ânimo de dono, pelo prazo de cinco anos.'},
+     {letra:'B',texto:'exige justo título, boa-fé e posse contínua e incontestada do bem pelo prazo de cinco anos.'},
+     {letra:'C',texto:'exige justo título e posse contínua e incontestada do bem pelo prazo de três anos, sendo irrelevante a boa-fé.'},
+     {letra:'D',texto:'exige justo título e boa-fé e posse pelo prazo de três anos.'},
+     {letra:'E',texto:'não exige justo título, bastando a boa-fé e a posse incontestada pelo prazo de três anos.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê (ICOL):</b> art. 1.261 do CC — quem possuir coisa móvel como sua, contínua e incontestadamente, por cinco anos, adquire-lhe a propriedade <b>independentemente de título e boa-fé</b> (usucapião extraordinária de móvel). A ordinária (art. 1.260) exige justo título e boa-fé, com prazo de três anos.<br><br><b>⚠️ Pegadinha:</b> inverter os prazos (3 anos ordinária × 5 anos extraordinária) ou exigir título na extraordinária.<br><br><b>📌 Fundamento:</b> arts. 1.260 e 1.261 do CC.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> móvel: ordinária 3 anos (título+boa-fé); extraordinária 5 anos (sem título/boa-fé).<br><br><b>☑ Verificação:</b> Norma [art. 1.261 CC ✔] · Dizer o Direito [N/A].`},
+
+  {id:'q10', materia:'Cancelamento de registro — terceiro adquirente', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`Segundo o Código Civil, o cancelamento do registro de imóvel, fundado em título posteriormente anulado ou declarado inexistente, em desfavor do terceiro adquirente que sobre ele estabeleceu direito, opera:`,
+   alternativas:[
+     {letra:'A',texto:'somente se comprovada a má-fé do terceiro adquirente, sendo irrelevante se a aquisição foi gratuita ou onerosa.'},
+     {letra:'B',texto:'somente se comprovada a má-fé do terceiro e que a aquisição tenha sido a título gratuito.'},
+     {letra:'C',texto:'independentemente da boa-fé, desde que a aquisição tenha sido a título gratuito.'},
+     {letra:'D',texto:'independentemente da boa-fé ou do título do terceiro adquirente, pois o cancelamento do registro anterior implica a invalidade dos subsequentes que dele dependam.'},
+     {letra:'E',texto:'somente se comprovada a má-fé do terceiro e que a aquisição tenha sido a título oneroso.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê (ICOL):</b> arts. 1.247 e 1.359 do CC — cancelado/anulado o registro anterior por vício do título, os registros subsequentes que dele dependam ficam sem efeito, podendo o titular reivindicar o imóvel independentemente da boa-fé do terceiro, pois ninguém transfere mais direito do que tem.<br><br><b>⚠️ Pegadinha:</b> a proteção do registro é relativa quando a cadeia se assenta em título nulo/inexistente.<br><br><b>📌 Fundamento:</b> arts. 1.247 e 1.359 do CC.<br><br><b>⚖️ Dizer o Direito:</b> registro inexistente/nulo não gera aquisição válida na cadeia (STJ).<br><br><b>🔁 Revisar:</b> registro derivado de título nulo não se sustenta (art. 1.247).<br><br><b>☑ Verificação:</b> Norma [art. 1.247 CC ✔] · Dizer o Direito [cadeia registral viciada ✔].`},
+
+  {id:'q11', materia:'Usucapião entre condôminos/herdeiros', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`Com base na jurisprudência do STJ sobre usucapião entre herdeiros em condomínio pro indiviso, é correto afirmar:`,
+   alternativas:[
+     {letra:'A',texto:'é cabível a usucapião por herdeiro em desfavor dos demais quando exercer posse exclusiva sobre o bem, de forma inequívoca, ininterrupta e sem oposição, pelo prazo legal, demonstrando a posse ad usucapionem.'},
+     {letra:'B',texto:'é vedada em qualquer hipótese, por se tratar de condomínio pro indiviso.'},
+     {letra:'C',texto:'basta a mera ocupação do bem após a abertura da sucessão, sem exclusividade.'},
+     {letra:'D',texto:'depende de prévia partilha e registro do quinhão.'},
+     {letra:'E',texto:'somente é possível em condomínio de bens móveis.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê (ICOL):</b> o STJ admite a usucapião por condômino/herdeiro contra os demais quando há posse <b>exclusiva</b>, inequívoca quanto ao ânimo de dono, ininterrupta e sem oposição pelo prazo legal — não basta a posse decorrente do condomínio.<br><br><b>⚠️ Pegadinha:</b> a mera composse hereditária não gera usucapião; exige-se a exteriorização da posse exclusiva (interversão).<br><br><b>📌 Fundamento:</b> arts. 1.238/1.242 do CC; arts. 1.314 e segs.<br><br><b>⚖️ Dizer o Direito:</b> STJ — cabível usucapião entre herdeiros havendo posse exclusiva e ânimo de dono sobre a coisa comum.<br><br><b>🔁 Revisar:</b> usucapião entre herdeiros exige posse exclusiva (não a do condomínio).<br><br><b>☑ Verificação:</b> Norma [arts. 1.238/1.242 CC ✔] · Dizer o Direito [usucapião entre condôminos ✔].`},
+
+  {id:'q12', materia:'Usucapião × débito condominial (propter rem)', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`Terceiro adquiriu, por usucapião, a propriedade de imóvel sobre o qual recaía débito condominial. Com base no entendimento do STJ, a aquisição originária da propriedade por usucapião:`,
+   alternativas:[
+     {letra:'A',texto:'não prevalece sobre o caráter pessoal do débito condominial, mantendo-se a penhora incidente sobre o bem.'},
+     {letra:'B',texto:'prevalece, mas não autoriza a desconstituição da penhora incidente sobre o bem.'},
+     {letra:'C',texto:'prevalece sobre o caráter propter rem do débito condominial, autorizando a desconstituição da penhora incidente sobre o bem.'},
+     {letra:'D',texto:'prevalece sobre o caráter propter rem, mas mantém a penhora incidente sobre o bem.'},
+     {letra:'E',texto:'não prevalece sobre o caráter propter rem do débito condominial, mantendo-se a penhora.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b>.<br><br><b>⚖️ Por quê (ICOL):</b> a usucapião é aquisição <b>originária</b> — o domínio nasce livre de ônus anteriores; assim, prevalece sobre as dívidas propter rem (cotas condominiais) constituídas antes, autorizando a desconstituição da penhora que as garantia.<br><br><b>⚠️ Pegadinha:</b> aquisição originária × derivada — na originária o bem ingressa "limpo" no patrimônio do usucapiente.<br><br><b>📌 Fundamento:</b> arts. 1.238 e segs. do CC; art. 1.345 (obrigação propter rem).<br><br><b>⚖️ Dizer o Direito:</b> STJ — a usucapião, por ser originária, extingue ônus reais e obrigações propter rem anteriores ao implemento dos requisitos.<br><br><b>🔁 Revisar:</b> usucapião (originária) apaga dívidas propter rem anteriores.<br><br><b>☑ Verificação:</b> Norma [arts. 1.238/1.345 CC ✔] · Dizer o Direito [originária extingue propter rem ✔].`},
+
+  {id:'q13', materia:'Construção em terreno alheio (arts. 1.258/1.259)', banca:'VUNESP · TJ-SP · 2024', tipo:'multipla',
+   enunciado:`Em razão de invasão de solo alheio na execução de uma construção (a edificação avança sobre o terreno vizinho em proporção não superior à vigésima parte deste), e considerando a disciplina dos arts. 1.258 e 1.259 do Código Civil, assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'o construtor sempre é obrigado a demolir a parte da obra que invadiu o terreno vizinho, independentemente da proporção e da boa-fé.'},
+     {letra:'B',texto:'a invasão de até a vigésima parte do terreno alheio nunca gera direito de aquisição ao construtor.'},
+     {letra:'C',texto:'havendo boa-fé e invasão não superior à vigésima parte do solo alheio, o construtor adquire a propriedade da parte do solo invadido se o valor da construção exceder o dessa parte, pagando indenização que abranja o valor da área perdida e a desvalorização da área remanescente.'},
+     {letra:'D',texto:'a má-fé do construtor afasta qualquer indenização ao proprietário do solo invadido.'},
+     {letra:'E',texto:'o proprietário do solo invadido jamais poderá exigir a demolição da obra.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b>.<br><br><b>⚖️ Por quê (ICOL):</b> art. 1.258 do CC — havendo boa-fé e invasão não superior à vigésima parte (1/20) do solo alheio, o construtor adquire a propriedade da parte invadida se o valor da construção exceder o dessa parte, respondendo por indenização que represente o valor da área perdida e a desvalorização da área remanescente.<br><br><b>⚠️ Pegadinha:</b> a solução muda com a proporção (até 1/20 × mais de 1/20) e com a boa-fé/má-fé (arts. 1.258 e 1.259); na má-fé a indenização é agravada (em décuplo).<br><br><b>📌 Fundamento:</b> arts. 1.258 e 1.259 do CC.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> invasão ≤ 1/20 + boa-fé + obra mais valiosa = construtor adquire o solo, indenizando (art. 1.258).<br><br><b>☑ Verificação:</b> Norma [arts. 1.258/1.259 CC ✔] · Dizer o Direito [N/A].`},
+
+  {id:'q14', materia:'Aluvião e avulsão (arts. 1.250/1.251)', banca:'IESES · TJ · 2023', tipo:'multipla',
+   enunciado:`Sobre os modos de aquisição da propriedade por acessão natural (aluvião e avulsão), assinale a alternativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'os acréscimos formados, sucessiva e imperceptivelmente, por depósitos e aterros naturais ao longo das margens das correntes, ou pelo desvio das águas destas, pertencem aos donos dos terrenos marginais, sem indenização (aluvião).'},
+     {letra:'B',texto:'na avulsão, a porção de terra que se destaca por força natural violenta jamais é indenizada.'},
+     {letra:'C',texto:'o aluvião pertence ao ente público, e não aos proprietários ribeirinhos.'},
+     {letra:'D',texto:'na avulsão, o dono do prédio ao qual se juntou a porção de terra deve sempre demoli-la.'},
+     {letra:'E',texto:'a aluvião depende de prévia autorização administrativa para gerar aquisição.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê (ICOL):</b> art. 1.250 do CC — os acréscimos formados, sucessiva e imperceptivelmente, por depósitos e aterros naturais ao longo das margens das correntes, ou pelo desvio das águas, pertencem aos donos dos terrenos marginais, <b>sem indenização</b> (aluvião).<br><br><b>⚠️ Pegadinha:</b> distinguir aluvião (lento, imperceptível, sem indenização) de avulsão (art. 1.251 — porção destacada por força violenta, com indenização ou remoção pelo dono do prédio aumentado).<br><br><b>📌 Fundamento:</b> arts. 1.248 a 1.251 do CC.<br><br><b>⚖️ Dizer o Direito:</b> N/A — letra de norma.<br><br><b>🔁 Revisar:</b> aluvião = ganho lento sem indenizar; avulsão = ganho violento com indenizar (arts. 1.250/1.251).<br><br><b>☑ Verificação:</b> Norma [arts. 1.250/1.251 CC ✔] · Dizer o Direito [N/A].`},
+
+  {id:'q15', materia:'Usucapião especial urbana familiar (art. 1.240-A)', banca:'IESES · TJ · 2023', tipo:'multipla',
+   enunciado:`Aquele que exercer, por 2 (dois) anos ininterruptamente e sem oposição, posse direta, com exclusividade, sobre imóvel urbano de até 250 m² cuja propriedade divida com ex-cônjuge ou ex-companheiro que abandonou o lar, utilizando-o para sua moradia ou de sua família, adquirir-lhe-á o domínio integral, desde que não seja proprietário de outro imóvel urbano ou rural. Esse texto refere-se ao:`,
+   alternativas:[
+     {letra:'A',texto:'Usucapião (ordinária genérica).'},
+     {letra:'B',texto:'Usucapião ordinário.'},
+     {letra:'C',texto:'Usucapião Especial Urbano (familiar/por abandono do lar).'},
+     {letra:'D',texto:'Usucapião Especial Rural.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b>.<br><br><b>⚖️ Por quê (ICOL):</b> o enunciado reproduz o art. 1.240-A do CC — a usucapião especial urbana <b>familiar</b> (por abandono do lar): prazo de 2 anos, área de até 250 m², posse direta e exclusiva, moradia, ex-cônjuge/ex-companheiro que abandonou o lar e não ser proprietário de outro imóvel.<br><br><b>⚠️ Pegadinha:</b> é a modalidade de menor prazo (2 anos) e espécie de usucapião especial URBANA (não rural).<br><br><b>📌 Fundamento:</b> art. 1.240-A do CC.<br><br><b>⚖️ Dizer o Direito:</b> exige-se abandono do lar (afetivo + material), sem reaproximação; aplica-se a um único imóvel.<br><br><b>🔁 Revisar:</b> usucapião familiar = 2 anos, 250 m², abandono do lar (art. 1.240-A).<br><br><b>☑ Verificação:</b> Norma [art. 1.240-A CC ✔] · Dizer o Direito [abandono do lar ✔].`}
+];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function syncResultado(){try{var total=QUESTOES.length,acertos=0,erradas=[];QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta){acertos++;}else{erradas.push({id:q.id,enunciado:q.enunciado,gabarito:q.correta,resposta:r,alternativas:q.alternativas,comentario:q.comentario});}}});var m=(SLUG.match(/meta(\d+)/)||[])[1];fetch('https://danielbesis-site.vercel.app/api/resultado',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:(function(){try{var u=new URLSearchParams(location.search).get("uid");if(u){localStorage.setItem("db_uid",u);return u;}return localStorage.getItem("db_uid")||null;}catch(e){return null;}})(),slug:SLUG,metaNumero:m?parseInt(m,10):null,respostas:state.respostas,total:total,acertos:acertos,erradas:erradas})}).catch(function(){});}catch(e){}}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();syncResultado();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_'+SLUG+'_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — '+document.title+'\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_'+SLUG+'_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx=document.title+' · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+
+window.addEventListener("load",function(){try{syncResultado();}catch(e){}});/*sync-on-load*/
+</script>
+</body>
+</html>

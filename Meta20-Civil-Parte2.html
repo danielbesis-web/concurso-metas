@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TEMPLATE PADRÃO — Simulado de questões objetivas (modelo Meta 16 Empresarial)
+  ----------------------------------------------------------------------------
+  COMO GERAR UM NOVO SIMULADO:
+   1) Edite o CONFIG mínimo:
+        - <title> e <h1>:  "Meta XX · Disciplina — Parte X"
+        - <footer>:        "Meta XX · Disciplina · <tema do bloco> · Parte X"
+        - STORE_KEY:       "concurso_metaXX_disciplina_parteX_v1"
+                           (chave do localStorage onde este simulado guarda o progresso)
+   2) Preencha o array QUESTOES (15 questões por parte). Um objeto por questão:
+        id:'q1'..'q15' -> POSIÇÃO no simulado (NUNCA o nº da banca)
+        materia,banca  -> proveniência (banca/tribunal/ano PODE aparecer)
+        enunciado      -> HTML, aceita <br> e assertivas I, II, III
+        alternativas   -> [{letra,texto}]
+        correta:'A'    -> LETRA do GABARITO OFICIAL do material (não palpite)
+        comentario     -> HTML com os rótulos padrão
+   3) Salve como:  MetaXX-Disciplina-ParteX.html   (SEM Qxxx no nome)
+
+  A tela mostra "Questão X de N" (posição), nunca o nº da banca.
+  Recursos prontos: timer, stats, revisão espaçada, caderno de erros, modo por
+  tema/aleatório, anotações por questão, exportar/importar progresso (JSON).
+  ============================================================================
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 20 · Direito Civil — Parte 2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 20 · Direito Civil — Parte 2</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 20 · Direito Civil · Direito das Coisas (Vizinhança, Condomínio e Multipropriedade) · Parte 2</footer>
+<script>
+const STORE_KEY = 'concurso_meta20_civil_parte2_v1';   // chave do localStorage deste simulado
+const SLUG = STORE_KEY.replace(/^concurso_/,'');   // usado nos nomes dos arquivos de exportação
+const QUESTOES = [
+  {id:'q1', materia:'Usucapião — bens de empresa pública', banca:'FGV · TJ-SE · 2023', tipo:'multipla',
+   enunciado:`João invade uma enorme gleba de terras em Feira Nova. Lá constrói uma pequena casa, onde estabelece sua moradia. Concluído o prazo de prescrição aquisitiva, busca os documentos para pleitear a usucapião, no que descobre que o terreno, de mais de mil hectares, constitui um condomínio pro indiviso entre três pessoas jurídicas, uma delas empresa pública prestadora de serviços públicos. Nesse caso, é correto afirmar que João:`,
+   alternativas:[
+     {letra:'A',texto:'poderá usucapir unicamente o domínio útil da acessão que realizou.'},
+     {letra:'B',texto:'poderá usucapir o imóvel, porque não se consideram bens públicos aqueles pertencentes à empresa pública, ainda que prestadora de serviços públicos.'},
+     {letra:'C',texto:'poderá usucapir o imóvel, ainda que não ajuíze, previamente, demanda demarcatória para definir a fração pertencente à empresa pública.'},
+     {letra:'D',texto:'não poderá usucapir o imóvel, que é imprescritível como todos os bens públicos, inclusive aqueles em condomínio, sendo certo que nem mesmo o ajuizamento de demanda demarcatória para definir a fração pertencente à empresa pública poderá superar esse óbice.'},
+     {letra:'E',texto:'não poderá usucapir o imóvel, que é imprescritível como todos os bens públicos, inclusive aqueles em condomínio, sendo certo, no entanto, que o prévio e imprescindível ajuizamento de demanda demarcatória para definir a fração pertencente à empresa pública poderá superar esse óbice.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b>.<br><br><b>⚖️ Por quê:</b> os bens de empresa pública não são, em regra, bens públicos (o art. 98 do CC só qualifica como públicos os bens das pessoas jurídicas de direito público interno). Tratando-se de condomínio pro indiviso entre particulares e a empresa pública, a usucapião é viável e não depende do prévio ajuizamento de ação demarcatória para destacar a fração da empresa pública.<br><br><b>⚠️ Pegadinha:</b> D e E partem da premissa falsa de imprescritibilidade absoluta dos bens da empresa pública; a banca cobrou a desnecessidade de prévia demarcatória (C).<br><br><b>📌 Fundamento:</b> arts. 98 e 102 do CC; CF art. 183, §3º e 191, par. único (imóvel público não se usucape — não alcança bem de empresa pública não afetado).<br><br><b>⚖️ Jurisprudência:</b> bem de empresa pública não afetado a serviço público pode ser usucapido. (confirmar tese específica no Dizer o Direito)<br><br><b>🔁 Revisar:</b> empresa pública ≠ ente público; seus bens, em regra, são usucapíveis.<br><br><b>☑ Verificação:</b> Norma [arts. 98/102 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [a confirmar].`},
+
+  {id:'q2', materia:'Acessão — ilhas, aluvião, avulsão, álveo', banca:'CONSULPLAN · TJ-MA · 2023', tipo:'multipla',
+   enunciado:`O Código Civil denota que a propriedade pode ser adquirida por acessão. Diante do exposto, analise as afirmativas sobre aquisição da propriedade por acessão:<br><br><b>I.</b> Formação de ilhas: em correntes comuns ou particulares, as ilhas que se formarem no meio do rio consideram-se acréscimos sobrevindos aos terrenos ribeirinhos fronteiros de ambas as margens, na proporção de suas testadas, até a linha que dividir o álveo em duas partes iguais.<br><b>II.</b> Aluvião: os acréscimos formados, sucessiva e imperceptivelmente, por depósitos e aterros naturais ao longo das margens das correntes, ou pelo desvio das águas destas, pertencem aos donos dos terrenos marginais, sem indenização.<br><b>III.</b> Avulsão: quando, por força natural violenta, uma porção de terra se destacar de um prédio e se juntar a outro, o dono deste adquirirá a propriedade do acréscimo, se indenizar o dono do primeiro ou, sem indenização, se em um ano ninguém houver reclamado.<br><b>IV.</b> Abandono de álveo: o álveo abandonado de corrente pertence aos proprietários ribeirinhos das duas margens, sem que tenham indenização os donos dos terrenos por onde as águas abrirem novo curso.<br><br>Está correto o que se afirma em:`,
+   alternativas:[
+     {letra:'A',texto:'I, II, III e IV.'},
+     {letra:'B',texto:'III, apenas.'},
+     {letra:'C',texto:'I e IV, apenas.'},
+     {letra:'D',texto:'I, III e IV, apenas.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> (todas corretas).<br><br><b>⚖️ Por quê:</b> as quatro afirmativas reproduzem fielmente a disciplina legal das acessões naturais.<br><br><b>📌 Fundamento:</b> art. 1.249 (ilhas), art. 1.250 (aluvião), art. 1.251 (avulsão) e art. 1.252 (álveo abandonado) do CC.<br><br><b>⚠️ Pegadinha:</b> na avulsão, o prazo decadencial para reclamar é de <b>1 ano</b>; no álveo abandonado, não há indenização aos donos dos terrenos pelos quais as águas abrirem novo curso.<br><br><b>🔁 Revisar:</b> aluvião e álveo = sem indenização; avulsão = indeniza ou aguarda 1 ano.<br><br><b>☑ Verificação:</b> Norma [arts. 1.249–1.252 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q3', materia:'Usucapião — requisitos / especial rural', banca:'CONSULPLAN · TJ-AC · 2023', tipo:'multipla',
+   enunciado:`Com relação aos requisitos para aquisição de propriedade de imóvel por usucapião, assinale a afirmativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'Em se tratando de imóvel urbano, o pedido de reconhecimento de usucapião somente se faz possível, em qualquer hipótese, a partir da posse por, pelo menos, cinco anos ininterruptos.'},
+     {letra:'B',texto:'Em se tratando de imóvel rural, basta que o possuidor esteja na área por mais de cinco anos ininterruptos, sem oposição do proprietário, para que possa pleitear a declaração de aquisição da propriedade.'},
+     {letra:'C',texto:'Para fins de contagem do prazo de usucapião, seja de imóvel rural ou urbano, considera-se apenas o período em que o próprio possuidor está, de fato, no imóvel, sendo vedada a soma de períodos em que o bem esteve na posse de seus antecessores.'},
+     {letra:'D',texto:'Em se tratando de imóvel rural, após cinco anos ininterruptos de posse, sem oposição, é preciso que o possuidor não seja proprietário de outro imóvel rural ou urbano, que a área ocupada seja de até cinquenta hectares e que tenha tornado a área produtiva por seu trabalho ou de sua família e nela estabelecido moradia.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê:</b> D descreve a <b>usucapião especial rural (pro labore)</b>: 5 anos, área não superior a 50 ha, não ser proprietário de outro imóvel, tornar a terra produtiva e nela morar.<br><br><b>📌 Fundamento:</b> CF art. 191 e art. 1.239 do CC.<br><br><b>⚠️ Pegadinha:</b> A ignora a usucapião especial urbana (5 anos, até 250 m²) e as ordinária/extraordinária; C é falsa — o art. 1.243 admite a <b>accessio possessionis</b> (soma das posses); B é incompleta (faltam os demais requisitos).<br><br><b>🔁 Revisar:</b> especial rural = 5 anos + 50 ha + produtiva + moradia + não ter outro imóvel.<br><br><b>☑ Verificação:</b> Norma [art. 1.239/1.243 CC; CF 191 ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q4', materia:'Propriedade fiduciária — art. 1.368-B', banca:'CONSULPLAN · TJ-MS · 2021', tipo:'multipla',
+   enunciado:`O Código Civil, no art. 1.368-B, trata da aquisição da propriedade na alienação fiduciária em garantia. A obrigação do credor fiduciário que adquire a propriedade do bem (por consolidação, adjudicação, dação ou outra forma) de pagar os tributos sobre a propriedade e a posse, taxas, despesas condominiais e demais encargos incidentes sobre o bem inicia-se:`,
+   alternativas:[
+     {letra:'A',texto:'a partir da imissão na posse direta do bem.'},
+     {letra:'B',texto:'a partir da contratação a que se garante com o bem.'},
+     {letra:'C',texto:'no prazo de 30 dias da consolidação da propriedade.'},
+     {letra:'D',texto:'a partir da notificação dos credores das obrigações em questão.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> pelo parágrafo único do art. 1.368-B do CC, a responsabilidade do credor fiduciário pelos encargos do bem (tributos, taxas, condomínio) só se inicia <b>a partir da data em que vier a ser imitido na posse direta</b> do bem.<br><br><b>📌 Fundamento:</b> art. 1.368-B, parágrafo único, do CC.<br><br><b>⚠️ Pegadinha:</b> antes da imissão na posse, o credor fiduciário não responde por esses encargos — protege quem só tem a propriedade resolúvel em garantia.<br><br><b>🔁 Revisar:</b> credor fiduciário só paga encargos do bem após imitir-se na posse direta.<br><br><b>☑ Verificação:</b> Norma [art. 1.368-B CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q5', materia:'Direitos de vizinhança — uso anormal (STJ)', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`De acordo com o Código Civil, o proprietário ou possuidor de um prédio tem direito de fazer cessar as interferências prejudiciais à segurança, ao sossego e à saúde dos que o habitam, provocadas pela utilização de propriedade vizinha. Segundo o STJ, nas relações de vizinhança vigora o princípio da responsabilidade:`,
+   alternativas:[
+     {letra:'A',texto:'objetiva, havendo o dever de indenizar ou compensar se provados a conduta, o dano e o nexo causal.'},
+     {letra:'B',texto:'subjetiva, havendo o dever de indenizar ou compensar se provados a conduta, a culpa ou o dolo, o dano e o nexo causal.'},
+     {letra:'C',texto:'subjetiva, havendo o dever de indenizar ou compensar se provados a conduta, o dolo, o dano e o nexo causal.'},
+     {letra:'D',texto:'objetiva fundada na teoria do risco integral, havendo o dever de indenizar se provados a conduta e o dano, independentemente de haver nexo causal.'},
+     {letra:'E',texto:'subjetiva, havendo o dever de indenizar ou compensar se provados a conduta, a culpa, o dano e o nexo causal.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> o STJ entende que, no uso anormal da propriedade (art. 1.277 do CC), a responsabilidade é <b>objetiva</b> — basta a prova da conduta (interferência), do dano e do nexo causal, dispensada a culpa.<br><br><b>📌 Fundamento:</b> arts. 1.277 a 1.281 do CC.<br><br><b>⚠️ Pegadinha:</b> D erra ao falar em risco integral e dispensar o nexo causal — a objetiva comum exige o nexo. B, C e E pedem culpa/dolo (responsabilidade subjetiva), o que está superado.<br><br><b>⚖️ Jurisprudência:</b> STJ — responsabilidade objetiva por uso anormal da propriedade (relações de vizinhança).<br><br><b>🔁 Revisar:</b> vizinhança / uso anormal = responsabilidade objetiva (conduta + dano + nexo).<br><br><b>☑ Verificação:</b> Norma [art. 1.277 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [tese objetiva — a confirmar].`},
+
+  {id:'q6', materia:'Direitos de vizinhança — construções (art. 1.303)', banca:'IESES · TJ-AM · 2023', tipo:'multipla',
+   enunciado:`Conforme o art. 1.303 do Código Civil, na zona rural não será permitido levantar edificações a menos de quantos metros do terreno vizinho?`,
+   alternativas:[
+     {letra:'A',texto:'6 metros.'},
+     {letra:'B',texto:'2 metros.'},
+     {letra:'C',texto:'4 metros.'},
+     {letra:'D',texto:'3 metros.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> (3 metros).<br><br><b>⚖️ Por quê:</b> o art. 1.303 do CC veda, na zona rural, edificações a menos de <b>três metros</b> do terreno vizinho.<br><br><b>📌 Fundamento:</b> art. 1.303 do CC.<br><br><b>⚠️ Pegadinha:</b> não confundir com a janela/abertura a menos de metro e meio do prédio vizinho (art. 1.301).<br><br><b>🔁 Revisar:</b> zona rural — edificação ≥ 3 m do vizinho.<br><br><b>☑ Verificação:</b> Norma [art. 1.303 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q7', materia:'Condomínio edilício — área comum / usucapião (STJ)', banca:'CEBRASPE · TJ-RO · 2025', tipo:'multipla',
+   enunciado:`Em assembleia condominial de 2010, autorizou-se a um condômino o uso exclusivo de determinada área comum, inacessível aos demais. Desde então ele a ocupa com exclusividade e, além da conservação autorizada, fez modificações estruturais (mobília e paisagismo). À luz da jurisprudência do STJ, a apropriação de área comum de condomínio edilício por condômino para uso privativo:`,
+   alternativas:[
+     {letra:'A',texto:'sujeita-se à prescrição aquisitiva por usucapião ordinária.'},
+     {letra:'B',texto:'não se sujeita à aquisição por usucapião, mas impõe ao condômino o dever de respeitar a utilização da área comum nos limites da autorização assemblear, não podendo retomar a área objeto da permissão sem a demonstração de fato novo, sendo vedado realizar reformas ou modificações sem nova deliberação da assembleia.'},
+     {letra:'C',texto:'sujeita-se à prescrição aquisitiva por usucapião extraordinária.'},
+     {letra:'D',texto:'não se sujeita à aquisição por usucapião, mas impõe ao condômino o dever de respeitar a utilização da área comum nos limites da autorização assemblear, e autoriza o condômino a reformar a área comum sem nova deliberação da assembleia.'},
+     {letra:'E',texto:'não se sujeita à aquisição por usucapião, tampouco gera o dever do condômino de respeitar os limites da autorização assemblear, podendo retomar a área independentemente de fato novo.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> para o STJ, a área comum de condomínio edilício é <b>insuscetível de usucapião</b> por condômino; a autorização assemblear de uso exclusivo não transfere propriedade — apenas gera o dever de respeitar os limites do que foi autorizado, sem retomada sem fato novo e sem reformas sem nova deliberação.<br><br><b>📌 Fundamento:</b> arts. 1.331, §2º, e 1.339 do CC; jurisprudência do STJ.<br><br><b>⚠️ Pegadinha:</b> A e C erram ao admitir usucapião (ordinária/extraordinária) de área comum; D e E ampliam indevidamente os poderes do condômino (reformar/retomar livremente).<br><br><b>⚖️ Jurisprudência:</b> STJ — área comum não pode ser usucapida por condômino; uso exclusivo autorizado não vira propriedade.<br><br><b>🔁 Revisar:</b> área comum = não usucapível; autorização de uso ≠ aquisição.<br><br><b>☑ Verificação:</b> Norma [art. 1.331 §2º CC ✔] · QConcursos [a confirmar] · Dizer o Direito [tese — a confirmar].`},
+
+  {id:'q8', materia:'Multipropriedade — instituição/registro', banca:'FGV · ENAC · 2025', tipo:'multipla',
+   enunciado:`A construtora Alpha planeja um empreendimento turístico em Gramado/RS sob o regime de multipropriedade, com unidades compartilhadas entre adquirentes (cada um com fração de tempo). Antes do registro, surgem dúvidas sobre a constituição da multipropriedade e a individualização das frações de tempo. Com base no Código Civil, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:'o ato de instituição deverá prever expressamente esse regime e ser registrado no cartório de registro de imóveis, com a individualização das frações de tempo, para que a multipropriedade seja válida.'},
+     {letra:'B',texto:'a multipropriedade poderá ser instituída independentemente de registro no cartório de imóveis, desde que conste de instrumento particular com assinatura de todos os interessados e duas testemunhas.'},
+     {letra:'C',texto:'a multipropriedade é um direito pessoal de uso da coisa, conforme fração de tempo adquirida, constante na convenção de condomínio averbada no registro de imóveis.'},
+     {letra:'D',texto:'a constituição da multipropriedade exige o registro do contrato entre adquirentes e construtora para garantir a validade da divisão do imóvel entre os coproprietários.'},
+     {letra:'E',texto:'o proprietário de uma fração de tempo poderá aliená-la a terceiros, mas deverá garantir o direito de preferência dos demais multiproprietários.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> a multipropriedade institui-se por ato registrado no cartório de registro de imóveis, que deve prever o regime e individualizar as frações de tempo. É <b>direito real</b> (não pessoal).<br><br><b>📌 Fundamento:</b> arts. 1.358-C, 1.358-F e 1.358-G do CC (Lei 13.777/2018).<br><br><b>⚠️ Pegadinha:</b> B dispensa o registro (erro); C chama de direito pessoal (é direito real); E afirma direito de preferência, que o art. 1.358-L, §1º, <b>dispensa</b> na alienação da fração.<br><br><b>🔁 Revisar:</b> multipropriedade = direito real, instituída por ato registrado + individualização das frações; sem preferência na alienação.<br><br><b>☑ Verificação:</b> Norma [arts. 1.358-C/F/G/L CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q9', materia:'Condomínio edilício — vaga de garagem (art. 1.331)', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`De acordo com o Código Civil e o entendimento do STJ, a vaga de garagem de condomínio edilício com matrícula própria e registro público:`,
+   alternativas:[
+     {letra:'A',texto:'não pode ser alienada para terceiro estranho ao condomínio sem autorização expressa na convenção condominial.'},
+     {letra:'B',texto:'não pode ser alienada para terceiro estranho ao condomínio por ser propriedade comum dos condôminos.'},
+     {letra:'C',texto:'não pode ser alienada a condômino ou a terceiro estranho ao condomínio sem prévia autorização deliberada em assembleia.'},
+     {letra:'D',texto:'pode ser alienada para terceiro estranho ao condomínio independentemente de autorização, quando decorrer de alienação judicial por hasta pública.'},
+     {letra:'E',texto:'pode ser alienada para terceiro estranho ao condomínio independentemente de autorização, por ser propriedade exclusiva de condômino.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> o abrigo para veículos (vaga) com matrícula própria não pode ser alienado ou alugado a pessoa estranha ao condomínio, <b>salvo autorização expressa na convenção</b> (regra incluída pela Lei 12.607/2012).<br><br><b>📌 Fundamento:</b> art. 1.331, §1º, do CC.<br><br><b>⚠️ Pegadinha:</b> a vaga é propriedade exclusiva do condômino (não comum — afasta B), mas sua alienação a estranho depende de autorização na convenção (afasta D e E).<br><br><b>🔁 Revisar:</b> vaga a estranho ao condomínio só com autorização expressa na convenção.<br><br><b>☑ Verificação:</b> Norma [art. 1.331 §1º CC ✔] · QConcursos [a confirmar] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q10', materia:'Condomínio edilício — assembleia/eleição', banca:'VUNESP · TJ-SP · 2024', tipo:'multipla',
+   enunciado:`Aristóteles, síndico do Condomínio Atenas, disputa a reeleição com o condômino Platão. Dez condôminos partidários de Platão outorgaram procuração para representação na assembleia, em forma e prazo do edital. A mesa diretora recusou as procurações, ao argumento de que o Código Civil veda mandato em causa própria em eleições condominiais. Das 50 unidades, 40 estavam presentes ou representadas; 15 votaram em Platão e 25 em Aristóteles, reconduzido ao cargo. É correto afirmar que a recusa das procurações foi:`,
+   alternativas:[
+     {letra:'A',texto:'ilegal, uma vez que foi determinante para o resultado da eleição.'},
+     {letra:'B',texto:'legal, uma vez que o Código Civil veda mandato em causa própria em eleições condominiais.'},
+     {letra:'C',texto:'ilegal, uma vez que, a despeito do silêncio da convenção, a concentração de poderes de representação na pessoa de um dos candidatos macula o caráter democrático do certame.'},
+     {letra:'D',texto:'ilegal, uma vez que inexiste no Código Civil vedação de mandato em causa própria em eleições condominiais.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê:</b> não há, no Código Civil, vedação a mandato em causa própria nem a voto por procuração em eleições condominiais; logo, a recusa das procurações foi ilegal por falta de amparo legal.<br><br><b>📌 Fundamento:</b> arts. 1.347 a 1.356 do CC (não há a vedação invocada pela mesa).<br><br><b>⚠️ Pegadinha:</b> A condiciona a ilegalidade ao resultado (irrelevante); C cria fundamento inexistente; B afirma vedação que não existe na lei.<br><br><b>🔁 Revisar:</b> CC não veda voto por procuração nem mandato em causa própria em assembleia de condomínio.<br><br><b>☑ Verificação:</b> Norma [arts. 1.347–1.356 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q11', materia:'Condomínio edilício — locação de curta duração (STJ)', banca:'VUNESP · TJ-SP · 2024', tipo:'multipla',
+   enunciado:`Proprietário de unidade autônoma em condomínio edilício passa a locar o imóvel por plataformas digitais, para hospedagens de curta duração (menos de 90 dias). Advertido pelo condomínio — cuja convenção prevê destinação exclusivamente residencial — de que deverá cessar a prática sob pena de multa, ajuíza ação para reconhecer a legalidade de sua conduta. Nesse caso, a locação:`,
+   alternativas:[
+     {letra:'A',texto:'não deve ser permitida, porquanto se trata de contrato atípico de hospedagem, que desvirtua a natureza exclusivamente residencial do edifício prevista na convenção, devido à alta rotatividade de pessoas, que oferece riscos potenciais à segurança, ao sossego e à saúde dos demais condôminos.'},
+     {letra:'B',texto:'deve ser permitida, pois, embora atípica e de curta duração, não desvirtua a natureza exclusivamente residencial, na medida em que os hóspedes utilizam a unidade da mesma forma que o proprietário a utilizaria, e não para fins comerciais.'},
+     {letra:'C',texto:'deve ser permitida, pois, à falta de proibição expressa na convenção, o proprietário pode usar, fruir e dispor livremente de sua unidade autônoma.'},
+     {letra:'D',texto:'não deve ser permitida, pois a convenção teria de ser previamente alterada para admitir expressamente essa possibilidade, por deliberação de maioria simples dos condôminos.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> para o STJ, o condomínio com convenção de destinação <b>exclusivamente residencial</b> pode vedar a exploração de hospedagem atípica de curta duração (tipo Airbnb), pela alta rotatividade e pelos riscos à segurança e ao sossego.<br><br><b>📌 Fundamento:</b> art. 1.336, IV, do CC; convenção condominial (destinação residencial).<br><br><b>⚠️ Pegadinha:</b> C ignora que a destinação residencial da convenção limita o uso; D inventa quórum de maioria simples para alteração da convenção (na verdade 2/3 — art. 1.351).<br><br><b>⚖️ Jurisprudência:</b> STJ — condomínio residencial pode proibir locação por curta temporada via plataformas (destinação residencial).<br><br><b>🔁 Revisar:</b> convenção residencial pode barrar hospedagem atípica de curta duração.<br><br><b>☑ Verificação:</b> Norma [art. 1.336 IV CC ✔] · QConcursos [a confirmar] · Dizer o Direito [tese STJ — a confirmar].`},
+
+  {id:'q12', materia:'Multipropriedade × condomínio (traço comum)', banca:'FGV · TJ-SE · 2023', tipo:'multipla',
+   enunciado:`A multipropriedade foi positivada pela Lei 13.777/2018 (art. 1.358-C do CC): regime de condomínio em que cada proprietário é titular de uma fração de tempo, com uso e gozo exclusivos da totalidade do imóvel, de forma alternada. Constitui traço comum entre esse instituto e o condomínio em geral:`,
+   alternativas:[
+     {letra:'A',texto:'a sujeição à ação de extinção de condomínio.'},
+     {letra:'B',texto:'a existência de matrícula própria.'},
+     {letra:'C',texto:'a extinção quando todas as frações se concentram na mão de uma mesma pessoa natural ou jurídica.'},
+     {letra:'D',texto:'a possibilidade de adjudicação, pelo condomínio edilício a que pertençam, da fração atribuída ao condômino/coproprietário inadimplente.'},
+     {letra:'E',texto:'o direito de preferência entre condôminos/coproprietários de adquirirem as frações dos demais.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê:</b> a banca apontou como traço comum a possibilidade de o condomínio edilício adjudicar a fração do inadimplente, mecanismo aplicável tanto ao condomínio quanto à multipropriedade nele instituída.<br><br><b>📌 Fundamento:</b> arts. 1.358-C a 1.358-U do CC, em especial o regramento da inadimplência (art. 1.358-S).<br><br><b>⚠️ Pegadinha:</b> A, C e E descrevem <b>diferenças</b>: a multipropriedade não se sujeita à ação de divisão/extinção (art. 1.358-D), não se extingue pela concentração de frações e não assegura direito de preferência na alienação (art. 1.358-L, §1º).<br><br><b>🔁 Revisar:</b> multipropriedade não extingue por concentração nem dá preferência; o ponto comum cobrado foi a adjudicação do inadimplente.<br><br><b>☑ Verificação:</b> Norma [arts. 1.358-C/D/L/S CC ✔] · QConcursos [a confirmar] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q13', materia:'Condomínio edilício — obras urgentes (art. 1.341)', banca:'CONSULPLAN · TJ-MA · 2023', tipo:'multipla',
+   enunciado:`Fortes chuvas danificaram totalmente o telhado de um edifício; as águas represadas na laje começaram a infiltrar pelo teto dos apartamentos do último andar. Procurado, o síndico, mesmo reconhecendo a gravidade, permaneceu inerte. Diante da necessidade de obras de reparação urgente, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:'qualquer condômino poderá realizá-las, apenas com autorização do síndico e desde que não importem em despesas excessivas.'},
+     {letra:'B',texto:'qualquer condômino poderá realizá-las, independentemente de autorização do síndico, desde que não importem em despesas excessivas.'},
+     {letra:'C',texto:'as obras, ainda que urgentes, somente poderão ser realizadas após expressa deliberação da assembleia especialmente convocada para esta finalidade.'},
+     {letra:'D',texto:'qualquer condômino poderá realizá-las somente após autorização do síndico, que deverá convocar imediatamente assembleia para deliberar sobre a questão.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> sendo as obras ou reparações <b>necessárias e urgentes</b>, e não importando despesas excessivas, qualquer condômino pode realizá-las <b>independentemente de autorização</b> (do síndico ou da assembleia), com direito a reembolso.<br><br><b>📌 Fundamento:</b> art. 1.341, §§1º a 3º, do CC.<br><br><b>⚠️ Pegadinha:</b> se as obras urgentes implicarem despesas excessivas, o condômino deve dar ciência à assembleia; se não forem urgentes, dependem de autorização. Aqui são urgentes e sem despesa excessiva.<br><br><b>🔁 Revisar:</b> obra urgente + despesa não excessiva = qualquer condômino faz, sem autorização.<br><br><b>☑ Verificação:</b> Norma [art. 1.341 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q14', materia:'Condomínio edilício — disposições gerais', banca:'CONSULPLAN · TJ-AC · 2023', tipo:'multipla',
+   enunciado:`No que tange aos condomínios edilícios, considerando o Código Civil, assinale a afirmativa correta.`,
+   alternativas:[
+     {letra:'A',texto:'Para realizar obras de embelezamento da área de lazer e das piscinas, o condomínio deverá obter voto favorável de metade dos proprietários de unidades.'},
+     {letra:'B',texto:'Em grande área livre do condomínio, destinada a jardim e lazer, não pode ser construído novo edifício destinado à moradia de terceiros, em nenhuma hipótese.'},
+     {letra:'C',texto:'O terraço de cobertura de prédio de oito andares, pertencente a uma das unidades autônomas, é de responsabilidade comum do condomínio, que arca com as despesas de sua conservação.'},
+     {letra:'D',texto:'Desejando parte dos moradores construir uma pequena academia em parte da área de jardim (mais do que suficiente ao lazer de todos), deverá haver aprovação em assembleia por 2/3 dos condôminos.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê:</b> a construção de outra área comum, em acréscimo às já existentes, depende da aprovação de <b>2/3 dos votos</b> dos condôminos.<br><br><b>📌 Fundamento:</b> art. 1.342 do CC; obras voluptuárias (embelezamento) exigem 2/3 — art. 1.341, I; terraço de cobertura é da respectiva unidade, salvo disposição em contrário (art. 1.344).<br><br><b>⚠️ Pegadinha:</b> A exige só metade (errado: 2/3); B usa "em nenhuma hipótese" (cabe com unanimidade); C atribui o terraço ao condomínio (é da unidade — art. 1.344).<br><br><b>🔁 Revisar:</b> nova área comum / embelezamento = 2/3; terraço de cobertura = da unidade.<br><br><b>☑ Verificação:</b> Norma [arts. 1.341/1.342/1.344 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q15', materia:'Condomínio edilício — disposições gerais', banca:'VUNESP · TJ-SP · 2022', tipo:'multipla',
+   enunciado:`Pode-se afirmar, acerca do condomínio edilício, que:`,
+   alternativas:[
+     {letra:'A',texto:'qualquer condômino, sozinho, pode convocar assembleia extraordinária.'},
+     {letra:'B',texto:'a constituição de conselho fiscal é obrigatória em condomínios edilícios com mais de dez unidades autônomas.'},
+     {letra:'C',texto:'as obras ou reparações necessárias somente podem ser realizadas pelo síndico mediante autorização prévia da assembleia dos condôminos.'},
+     {letra:'D',texto:'o regime de multipropriedade pode ser adotado em condomínio edilício por meio da deliberação da maioria absoluta dos condôminos, mesmo sem previsão na instituição.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê:</b> o condomínio edilício pode adotar a multipropriedade em parte ou na totalidade das unidades por <b>previsão no instrumento de instituição</b> ou por <b>deliberação da maioria absoluta dos condôminos</b> — logo, possível mesmo sem previsão original.<br><br><b>📌 Fundamento:</b> art. 1.358-O do CC.<br><br><b>⚠️ Pegadinha:</b> A erra (convocação exige 1/4 dos condôminos — art. 1.355); B erra (conselho fiscal é facultativo — art. 1.356); C erra (obras necessárias podem ser feitas pelo síndico ou, urgentes, por qualquer condômino — art. 1.341).<br><br><b>🔁 Revisar:</b> multipropriedade no edilício = instituição OU maioria absoluta; conselho fiscal facultativo; 1/4 convoca assembleia.<br><br><b>☑ Verificação:</b> Norma [arts. 1.355/1.356/1.358-O CC ✔] · Dizer o Direito [N/A — letra de norma].`}
+ ];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function syncResultado(){try{var total=QUESTOES.length,acertos=0,erradas=[];QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta){acertos++;}else{erradas.push({id:q.id,enunciado:q.enunciado,gabarito:q.correta,resposta:r,alternativas:q.alternativas,comentario:q.comentario});}}});var m=(SLUG.match(/meta(\d+)/)||[])[1];fetch('https://danielbesis-site.vercel.app/api/resultado',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:(function(){try{var u=new URLSearchParams(location.search).get("uid");if(u){localStorage.setItem("db_uid",u);return u;}return localStorage.getItem("db_uid")||null;}catch(e){return null;}})(),slug:SLUG,metaNumero:m?parseInt(m,10):null,respostas:state.respostas,total:total,acertos:acertos,erradas:erradas})}).catch(function(){});}catch(e){}}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();syncResultado();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_'+SLUG+'_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — '+document.title+'\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_'+SLUG+'_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx=document.title+' · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+
+window.addEventListener("load",function(){try{syncResultado();}catch(e){}});/*sync-on-load*/
+</script>
+</body>
+</html>

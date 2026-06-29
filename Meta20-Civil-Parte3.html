@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TEMPLATE PADRÃO — Simulado de questões objetivas (modelo Meta 16 Empresarial)
+  ----------------------------------------------------------------------------
+  COMO GERAR UM NOVO SIMULADO:
+   1) Edite o CONFIG mínimo:
+        - <title> e <h1>:  "Meta XX · Disciplina — Parte X"
+        - <footer>:        "Meta XX · Disciplina · <tema do bloco> · Parte X"
+        - STORE_KEY:       "concurso_metaXX_disciplina_parteX_v1"
+                           (chave do localStorage onde este simulado guarda o progresso)
+   2) Preencha o array QUESTOES (15 questões por parte). Um objeto por questão:
+        id:'q1'..'q15' -> POSIÇÃO no simulado (NUNCA o nº da banca)
+        materia,banca  -> proveniência (banca/tribunal/ano PODE aparecer)
+        enunciado      -> HTML, aceita <br> e assertivas I, II, III
+        alternativas   -> [{letra,texto}]
+        correta:'A'    -> LETRA do GABARITO OFICIAL do material (não palpite)
+        comentario     -> HTML com os rótulos padrão
+   3) Salve como:  MetaXX-Disciplina-ParteX.html   (SEM Qxxx no nome)
+
+  A tela mostra "Questão X de N" (posição), nunca o nº da banca.
+  Recursos prontos: timer, stats, revisão espaçada, caderno de erros, modo por
+  tema/aleatório, anotações por questão, exportar/importar progresso (JSON).
+  ============================================================================
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta 20 · Direito Civil — Parte 3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:none;outline:none;font-family:inherit}
+.banner-save{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner-iframe{background:#1a1200;border-bottom:1px solid #4a3200;padding:8px 14px;font-size:12px;color:#d4a84b;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.banner-iframe button{background:none;color:#d4a84b;font-size:16px;line-height:1;padding:0 4px;border:none;cursor:pointer}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:12px}
+.timer-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:#7aa3cc;margin-bottom:12px}
+.timer-bar span.time-val{color:#38bdf8;font-variant-numeric:tabular-nums;font-weight:600}
+.timer-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:3px 10px;border-radius:6px;font-size:12px}
+.timer-btn:hover{border-color:#38bdf8;color:#38bdf8}
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.stat-chip{background:#0b1828;border:1px solid #16365a;border-radius:8px;padding:5px 11px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat-chip .sv{font-size:18px;font-weight:700;line-height:1.1}
+.stat-chip .sl{font-size:10px;color:#55738e;text-transform:uppercase;letter-spacing:.5px}
+.sv.green{color:#27c06a}.sv.red{color:#f25555}.sv.amber{color:#f5a623}.sv.cyan{color:#38bdf8}
+.progress-wrap{margin-bottom:14px}
+.progress-bar{height:5px;background:#0b1828;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#27c06a,#38bdf8);border-radius:3px;transition:width .4s}
+.progress-label{font-size:11px;color:#55738e;margin-top:3px}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.mode-btn{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:20px;font-size:12px;transition:all .2s}
+.mode-btn.active{background:#16365a;border-color:#38bdf8;color:#38bdf8;font-weight:600}
+.mode-btn:hover:not(.active){border-color:#38bdf8;color:#c9d6e8}
+.materia-select{background:#0b1828;border:1px solid #16365a;color:#c9d6e8;padding:5px 10px;border-radius:20px;font-size:12px;outline:none}
+.materia-select:focus{border-color:#38bdf8}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.btn-sm{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:5px 12px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-sm:hover{border-color:#38bdf8;color:#c9d6e8}
+.btn-danger{border-color:#f25555;color:#f25555}
+.btn-danger:hover{background:#2a0808}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-materia{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-banca{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.review-badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.review-today{background:#2a1e00;color:#f5a623}
+.review-future{background:#0b1828;color:#55738e;border:1px solid #16365a}
+.enunciado{font-size:15px;line-height:1.6;color:#d8e8f8;margin-bottom:16px}
+.nav-counter{text-align:right;font-size:12px;color:#55738e;margin-bottom:8px}
+.alts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.alt-btn{background:#050b18;border:1.5px solid #16365a;color:#b8cce0;padding:11px 14px;border-radius:10px;text-align:left;font-size:14px;line-height:1.4;transition:all .15s;display:flex;gap:10px;align-items:flex-start;width:100%}
+.alt-btn .alt-letra{font-weight:700;min-width:18px;color:#38bdf8;flex-shrink:0}
+.alt-btn:hover:not(:disabled){border-color:#38bdf8;background:#0b1828}
+.alt-btn.selected{border-color:#b06bf2;background:#1a0d28}
+.alt-btn.correct{border-color:#27c06a!important;background:#0a2018!important;color:#7fffa8!important}
+.alt-btn.wrong{border-color:#f25555!important;background:#200a0a!important;color:#ffaaaa!important}
+.alt-btn.reveal-correct{border-color:#27c06a;background:#0a2018;color:#7fffa8}
+.alt-btn:disabled{cursor:default;opacity:.85}
+.alt-letra.correct{color:#27c06a!important}
+.alt-letra.wrong{color:#f25555!important}
+.alt-letra.reveal-correct{color:#27c06a}
+.btn-confirm{width:100%;padding:12px;border-radius:10px;font-size:15px;font-weight:700;background:#16365a;color:#e8f0fb;border:1.5px solid #2a5a8a;transition:all .2s;margin-bottom:10px}
+.btn-confirm:hover:not(:disabled){background:#1e4a7a;border-color:#38bdf8}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.result-banner{padding:12px 16px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:12px}
+.result-banner.correct{background:#0a2018;border:1.5px solid #27c06a;color:#7fffa8}
+.result-banner.wrong{background:#200a0a;border:1.5px solid #f25555;color:#ffaaaa}
+.comment-wrap{margin-bottom:12px}
+.comment-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.comment-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+.comment-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0;display:none}
+.comment-body.open{display:block}
+.sched-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.sched-label{font-size:11px;color:#55738e;margin-right:2px}
+.sched-btn{padding:5px 11px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #4a3200;color:#f5a623;background:#1a1200;transition:all .2s}
+.sched-btn:hover{background:#2a1e00;border-color:#f5a623}
+.sched-btn.remove{border-color:#16365a;color:#55738e;background:#050b18}
+.sched-btn.remove:hover{border-color:#f25555;color:#f25555}
+.star-btn{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #16365a;color:#55738e;background:#050b18;transition:all .2s}
+.star-btn.active{border-color:#b06bf2;color:#b06bf2;background:#160d24}
+.star-btn:hover{border-color:#b06bf2;color:#b06bf2}
+.nav-row{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.nav-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;background:#0b1828;border:1.5px solid #16365a;color:#7aa3cc;transition:all .2s;max-width:48%}
+.nav-btn:hover:not(:disabled){border-color:#38bdf8;color:#c9d6e8}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.empty-state{text-align:center;padding:48px 20px;color:#55738e;font-size:14px}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
+.io-row{display:flex;gap:6px;flex-wrap:wrap}
+.btn-io{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:6px 13px;border-radius:8px;font-size:12px;transition:all .2s}
+.btn-io:hover{border-color:#38bdf8;color:#c9d6e8}
+#fileInput{display:none}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+@media(max-width:480px){.stats-bar{gap:6px}.stat-chip{padding:4px 8px}.stat-chip .sv{font-size:16px}}
+.notas-wrap{margin-top:14px;border-top:1px dashed #1b3550;padding-top:12px}
+.notas-label{font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:7px}
+.notas-area{width:100%;min-height:70px;resize:vertical;background:#0b1828;border:1px solid #16365a;border-radius:10px;color:#dbe7f5;font-size:13.5px;font-family:inherit;line-height:1.5;padding:10px 12px;outline:none;transition:border .2s}
+.notas-area:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+.notas-area::placeholder{color:#3a5474}
+.claude-qbtn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#38bdf8;border-radius:6px;padding:3px 9px;font-size:13px;opacity:.45;transition:.15s;-webkit-tap-highlight-color:transparent;}
+.claude-qbtn:hover,.claude-qbtn:active{opacity:1;background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+<div class="banner-save">💾 Seu progresso é salvo automaticamente neste aparelho. Cada pessoa tem o seu.</div>
+<div class="banner-iframe" id="bannerIframe">
+  <span>⚠️ Abra sempre por link direto, não embutido em iframe (Notion/etc.), ou o progresso pode não ser salvo.</span>
+  <button onclick="dismissIframeBanner()" title="Fechar">✕</button>
+</div>
+<div class="header">
+  <h1>Meta 20 · Direito Civil — Parte 3</h1>
+  <div class="timer-bar">
+    <span>⏱ <span class="time-val" id="timerQ">00:00</span></span><span>|</span>
+    <span>Sessão: <span class="time-val" id="timerS">00:00</span></span>
+    <button class="timer-btn" id="btnPause" onclick="togglePause()">Pausar</button>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="mode-bar">
+    <button class="mode-btn" data-modo="todas" onclick="setModo('todas')">Todas</button>
+    <button class="mode-btn" data-modo="hoje" onclick="setModo('hoje')">Revisar hoje</button>
+    <button class="mode-btn" data-modo="caderno" onclick="setModo('caderno')">Caderno de erros</button>
+    <button class="mode-btn" data-modo="materia" onclick="setModo('materia')">Por tema</button>
+    <button class="mode-btn" data-modo="aleatorio" onclick="setModo('aleatorio')">Aleatório</button>
+    <select class="materia-select" id="materiaSelect" style="display:none" onchange="setMateriaFiltro(this.value)">
+      <option value="">— Escolha —</option>
+    </select>
+  </div>
+  <div class="action-row">
+    <div class="io-row">
+      <button class="btn-io" onclick="exportarProgresso()">⬇ Exportar</button>
+      <button class="btn-io" onclick="document.getElementById('fileInput').click()">⬆ Importar</button>
+      <input type="file" id="fileInput" accept=".json" onchange="importarProgresso(event)">
+      <button class="btn-io" onclick="exportarNotas()">📝 Baixar anotações (.txt)</button>
+    </div>
+    <button class="btn-sm btn-danger" onclick="recomecar()">🔄 Recomeçar</button>
+  </div>
+</div>
+<div style="padding:0 14px" id="mainContent"></div>
+<footer>Meta 20 · Direito Civil · Direito das Coisas (Propriedade resolúvel/fiduciária, Superfície, Servidões, Usufruto, Uso e Habitação) · Parte 3</footer>
+<script>
+const STORE_KEY = 'concurso_meta20_civil_parte3_v1';   // chave do localStorage deste simulado
+const SLUG = STORE_KEY.replace(/^concurso_/,'');   // usado nos nomes dos arquivos de exportação
+const QUESTOES = [
+  {id:'q1', materia:'Condomínio edilício — convenção (art. 1.333)', banca:'FGV · TJ-SC · 2021', tipo:'multipla',
+   enunciado:`Marcelo é usufrutuário de uma das unidades em condomínio edilício. Ele é obrigado a obedecer à convenção condominial desde que ela tenha sido subscrita:`,
+   alternativas:[
+     {letra:'A',texto:'pela maioria das frações ideais.'},
+     {letra:'B',texto:'por dois terços das frações ideais.'},
+     {letra:'C',texto:'pela totalidade das frações ideais.'},
+     {letra:'D',texto:'pela maioria das frações ideais e registrada no Cartório de Registro de Imóveis.'},
+     {letra:'E',texto:'por dois terços das frações ideais e registrada no Cartório de Registro de Imóveis.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> a convenção de condomínio deve ser subscrita pelos titulares de, no mínimo, <b>2/3 das frações ideais</b> e torna-se, desde logo, obrigatória para os titulares de direito sobre as unidades e para os <b>ocupantes</b> (como o usufrutuário) — independentemente de registro.<br><br><b>📌 Fundamento:</b> art. 1.333, caput e parágrafo único, do CC.<br><br><b>⚠️ Pegadinha:</b> o registro (par. único) é exigido para eficácia <b>contra terceiros</b>, não para obrigar condôminos e ocupantes — por isso D e E erram ao condicionar a obrigatoriedade ao registro.<br><br><b>🔁 Revisar:</b> convenção = 2/3 das frações; obriga ocupantes desde a subscrição; registro só para terceiros.<br><br><b>☑ Verificação:</b> Norma [art. 1.333 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q2', materia:'Propriedade resolúvel — arts. 1.359/1.360', banca:'IESES · TJ-PA · 2026', tipo:'multipla',
+   enunciado:`Os artigos 1.359 e 1.360 do Código Civil regulamentam a propriedade resolúvel. De acordo com esses dispositivos, assinale a alternativa correta:`,
+   alternativas:[
+     {letra:'A',texto:'A resolução da propriedade em razão do implemento da condição ou advento do tempo opera efeitos "ex tunc" e "erga omnes"; a resolução por outra causa superveniente opera efeitos "ex nunc" e "inter partes".'},
+     {letra:'B',texto:'A resolução em razão da condição opera efeitos "ex tunc" e "erga omnes"; a resolução em razão do advento do tempo ou por outra causa superveniente opera efeitos "ex nunc" e "inter partes".'},
+     {letra:'C',texto:'A resolução em razão da condição opera efeitos "ex tunc" e "erga omnes"; a resolução em razão do advento do tempo ou por outra causa superveniente opera efeitos "ex tunc" e "inter partes".'},
+     {letra:'D',texto:'A resolução em razão do implemento da condição, advento do tempo ou outra causa superveniente opera efeitos "ex nunc" e "erga omnes".'},
+     {letra:'E',texto:'A resolução em razão do implemento da condição, advento do tempo ou outra causa superveniente opera efeitos "ex tunc" e "erga omnes".'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> a resolução por <b>implemento de condição ou advento do termo</b> (art. 1.359) opera efeitos retroativos (ex tunc) e contra todos (erga omnes), resolvendo os direitos reais concedidos na pendência. Já a resolução por <b>causa superveniente</b> (art. 1.360) opera ex nunc e inter partes — só contra aquele em favor de quem se opera.<br><br><b>📌 Fundamento:</b> arts. 1.359 e 1.360 do CC.<br><br><b>⚠️ Pegadinha:</b> a diferença é exatamente o par "ex tunc/erga omnes" (causa originária) × "ex nunc/inter partes" (causa superveniente).<br><br><b>🔁 Revisar:</b> condição/termo = ex tunc + erga omnes; causa superveniente = ex nunc + inter partes.<br><br><b>☑ Verificação:</b> Norma [arts. 1.359/1.360 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q3', materia:'Propriedade fiduciária — constituição (art. 1.361)', banca:'FGV · TJ-ES · 2025', tipo:'multipla',
+   enunciado:`Sobre a alienação fiduciária de imóvel, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:'a contratação da alienação fiduciária é privativa das entidades que operam no Sistema de Financiamento Imobiliário (SFI), não podendo ter como objeto a propriedade superficiária.'},
+     {letra:'B',texto:'a alienação fiduciária da propriedade superveniente, adquirida pelo fiduciante, é suscetível de registro desde a data da consolidação da propriedade, tornando-se eficaz a partir do cancelamento da propriedade fiduciária anteriormente constituída.'},
+     {letra:'C',texto:'nas operações garantidas por alienação fiduciária de dois ou mais imóveis, havendo vinculação de cada imóvel a uma parcela da dívida, o credor poderá promover a excussão em ato simultâneo, por meio da consolidação e leilão de todos os imóveis em conjunto.'},
+     {letra:'D',texto:'o inadimplemento de quaisquer das obrigações garantidas pela propriedade fiduciária faculta ao credor declarar vencidas as demais obrigações garantidas pelo mesmo imóvel, exceto quando a titularidade decorrer da sub-rogação do fiador que pagar a dívida.'},
+     {letra:'E',texto:'constitui-se a propriedade fiduciária mediante registro, no competente registro de imóveis, do contrato que lhe serve de título e, em consequência, dá-se o desdobramento da posse, tornando-se o fiduciante possuidor direto e o fiduciário possuidor indireto do imóvel.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b>.<br><br><b>⚖️ Por quê:</b> a propriedade fiduciária constitui-se com o <b>registro</b> do contrato (título) no registro de imóveis; com a constituição, ocorre o <b>desdobramento da posse</b> — o devedor/fiduciante fica como possuidor direto e o credor/fiduciário como possuidor indireto.<br><br><b>📌 Fundamento:</b> art. 1.361, §§1º e 2º, do CC.<br><br><b>⚠️ Pegadinha:</b> a alienação fiduciária no CC não é privativa do SFI (afasta A); o desdobramento da posse é o efeito central que a alternativa correta descreve.<br><br><b>🔁 Revisar:</b> propriedade fiduciária = registro do contrato + desdobramento da posse (fiduciante direto, fiduciário indireto).<br><br><b>☑ Verificação:</b> Norma [art. 1.361 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q4', materia:'Servidões — aquisição / usucapião (art. 1.379)', banca:'FGV · ENAC · 2025', tipo:'multipla',
+   enunciado:`Considere os seguintes fatos e atos jurídicos: i) oferecimento em hipoteca; ii) constituição de servidão; iii) usucapião. As servidões aparentes, contínuas ou descontínuas:`,
+   alternativas:[
+     {letra:'A',texto:'podem ser objeto apenas do item ii.'},
+     {letra:'B',texto:'podem ser objeto apenas do item iii.'},
+     {letra:'C',texto:'podem ser objeto apenas dos itens i e ii.'},
+     {letra:'D',texto:'podem ser objeto apenas dos itens i e iii.'},
+     {letra:'E',texto:'não podem ser objeto desses fatos e atos jurídicos.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> apenas as servidões <b>aparentes</b> podem ser adquiridas por <b>usucapião</b> (item iii). Servidão não é objeto de hipoteca (i) nem de "constituição de servidão" sobre si mesma (ii).<br><br><b>📌 Fundamento:</b> art. 1.379 do CC (usucapião de servidão aparente); art. 1.213 (servidões não aparentes não se adquirem por usucapião); Súmula 415 do STF.<br><br><b>⚠️ Pegadinha:</b> só a servidão APARENTE rende usucapião e proteção possessória; a não aparente, não.<br><br><b>🔁 Revisar:</b> servidão aparente = usucapível e protegida pela posse.<br><br><b>☑ Verificação:</b> Norma [arts. 1.213/1.379 CC; Súm. 415 STF ✔] · QConcursos [a confirmar] · Dizer o Direito [a confirmar].`},
+
+  {id:'q5', materia:'Direitos de vizinhança — passagem forçada (STJ)', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`Consoante o entendimento do STJ, o direito de passagem forçada é atribuído:`,
+   alternativas:[
+     {letra:'A',texto:'unicamente ao possuidor, independentemente do pagamento de indenização.'},
+     {letra:'B',texto:'ao proprietário e ao possuidor, independentemente do pagamento de indenização.'},
+     {letra:'C',texto:'unicamente ao proprietário, mediante pagamento de indenização.'},
+     {letra:'D',texto:'ao proprietário e ao possuidor, mediante pagamento de indenização.'},
+     {letra:'E',texto:'unicamente ao proprietário, independentemente do pagamento de indenização.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b>.<br><br><b>⚖️ Por quê:</b> para o STJ, a passagem forçada (imóvel encravado) pode ser pleiteada tanto pelo <b>proprietário</b> quanto pelo <b>possuidor</b> do prédio sem saída, sempre <b>mediante pagamento de indenização</b> ao vizinho onerado.<br><br><b>📌 Fundamento:</b> art. 1.285 do CC.<br><br><b>⚠️ Pegadinha:</b> não confundir passagem forçada (encravamento absoluto, com indenização) com passagem de cabos/tubulações (art. 1.286). A indenização é da essência do instituto.<br><br><b>⚖️ Jurisprudência:</b> STJ — legitimidade do proprietário e do possuidor; indenização devida.<br><br><b>🔁 Revisar:</b> passagem forçada = proprietário ou possuidor + indenização.<br><br><b>☑ Verificação:</b> Norma [art. 1.285 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [tese — a confirmar].`},
+
+  {id:'q6', materia:'Direito de superfície (arts. 1.369-1.377)', banca:'IESES · TJ-AM · 2023', tipo:'multipla',
+   enunciado:`A respeito do direito de superfície, assinale a alternativa correta de acordo com a regra geral do Código Civil.`,
+   alternativas:[
+     {letra:'A',texto:'O superficiário não responderá pelos encargos e tributos que incidirem sobre o imóvel.'},
+     {letra:'B',texto:'A concessão da superfície somente pode se dar de maneira onerosa, cabendo às partes convencionar se o pagamento será de uma só vez ou parceladamente.'},
+     {letra:'C',texto:'O direito de superfície pode transferir-se a terceiros e, por morte do superficiário, aos seus herdeiros.'},
+     {letra:'D',texto:'O direito de superfície autoriza obra no subsolo, salvo se for inerente ao objeto da concessão.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b>.<br><br><b>⚖️ Por quê:</b> o direito de superfície é transmissível a terceiros e, por morte do superficiário, aos seus herdeiros.<br><br><b>📌 Fundamento:</b> art. 1.372, parágrafo único, do CC.<br><br><b>⚠️ Pegadinha:</b> A erra (o superficiário responde pelos encargos e tributos — art. 1.371); B erra (a concessão pode ser gratuita ou onerosa — art. 1.370); D inverte o art. 1.369, par. único (o direito de superfície <b>não</b> autoriza obra no subsolo, salvo se inerente ao objeto).<br><br><b>🔁 Revisar:</b> superfície = transferível e hereditária; pode ser gratuita; não alcança o subsolo (salvo inerência).<br><br><b>☑ Verificação:</b> Norma [arts. 1.369–1.372 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q7', materia:'Servidões — servidão de vista/panorama', banca:'CONSULPLAN · TJ-MA · 2023', tipo:'multipla',
+   enunciado:`"A", proprietário de um imóvel há trinta anos, desfrutava de bela vista da capital maranhense, quando o prédio vizinho iniciou construção mais elevada, privando-o desse panorama. À luz do instituto das servidões prediais, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:'o proprietário "A" poderá manejar ação de usucapião, por se tratar de posse de mais de trinta anos, aparente e contínua, apta a gerar declaração judicial de prescrição aquisitiva.'},
+     {letra:'B',texto:'o proprietário "A" não obterá prestação jurisdicional de procedência, por não ser a hipótese de servidão de vista, tratando-se de mera faculdade da qual não decorre direito de posse a ser tutelado.'},
+     {letra:'C',texto:'o proprietário "A" pode manejar ação confessória, de caráter petitório, para obter provimento declaratório positivo quanto à existência de servidão contínua e aparente.'},
+     {letra:'D',texto:'o proprietário "A" obterá procedência ao manejar ação negatória, obtendo declaração negativa do direito de servidão, autorizando o vizinho a erguer a construção.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> não existe, em regra, "servidão de vista/panorama" adquirida pelo simples desfrute prolongado da paisagem. Trata-se de mera faculdade, sem posse de servidão a ser tutelada; logo, "A" não obtém procedência.<br><br><b>📌 Fundamento:</b> arts. 1.378 e 1.379 do CC (servidões se constituem por declaração + registro ou usucapião de servidão aparente).<br><br><b>⚠️ Pegadinha:</b> a vista agradável não gera servidão por usucapião (afasta A e C); a ação negatória serve ao titular do prédio para negar servidão alheia, não ao caso (afasta D).<br><br><b>🔁 Revisar:</b> não há servidão de panorama pelo só uso; falta posse de servidão tutelável.<br><br><b>☑ Verificação:</b> Norma [arts. 1.378/1.379 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [a confirmar].`},
+
+  {id:'q8', materia:'Servidões — disposições gerais', banca:'CONSULPLAN · TJ-MS · 2021', tipo:'multipla',
+   enunciado:`A servidão é a restrição imposta a um prédio para uso e utilidade do outro. Assinale a alternativa que DIVERGE das previsões legais do Código Civil sobre as servidões.`,
+   alternativas:[
+     {letra:'A',texto:'Na servidão de trânsito, a de maior inclui a de menor ônus.'},
+     {letra:'B',texto:'É vedado ao dono do prédio serviente embaraçar o exercício legítimo da servidão.'},
+     {letra:'C',texto:'Quando a servidão alcançar mais de um prédio, seus donos devem ratear as despesas das obras necessárias, assim como as manutenções.'},
+     {letra:'D',texto:'A finalidade da servidão constituída para fins específicos pode ser ampliada mediante manifestação de vontade do dono do prédio dominante.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> (a que DIVERGE da lei).<br><br><b>⚖️ Por quê:</b> constituída para certo fim, a servidão <b>não pode ampliar-se</b> a outro pela só vontade do dono do prédio dominante.<br><br><b>📌 Fundamento:</b> art. 1.385, §1º (não ampliação); §2º (a de maior inclui a de menor); art. 1.383 (serviente não pode embaraçar); art. 1.384 (rateio quando alcança mais de um prédio).<br><br><b>⚠️ Pegadinha:</b> A, B e C reproduzem a lei; D é a única em desacordo (ampliação unilateral é vedada).<br><br><b>🔁 Revisar:</b> servidão não se amplia por vontade unilateral do dominante.<br><br><b>☑ Verificação:</b> Norma [arts. 1.383–1.385 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q9', materia:'Uso e habitação (arts. 1.412-1.416)', banca:'IESES · TJ-PA · 2026', tipo:'multipla',
+   enunciado:`Nos termos do art. 1.414 e seguintes do Código Civil, marque a opção INCORRETA.`,
+   alternativas:[
+     {letra:'A',texto:'São aplicáveis à habitação, no que não for contrário à sua natureza, as disposições relativas ao usufruto.'},
+     {letra:'B',texto:'Mediante promessa de compra e venda sem cláusula de arrependimento, celebrada por instrumento público ou particular e registrada no Cartório de Registro de Imóveis, adquire o promitente comprador direito real à aquisição do imóvel.'},
+     {letra:'C',texto:'O promitente comprador, titular de direito real, pode exigir do promitente vendedor (ou de terceiros a quem os direitos forem cedidos) a outorga da escritura definitiva e, havendo recusa, requerer ao juiz a adjudicação do imóvel.'},
+     {letra:'D',texto:'Quando o uso consistir no direito de habitar onerosamente casa alheia, o titular deste direito não a pode alugar pelo período de seis meses.'},
+     {letra:'E',texto:'Se o direito real de habitação for conferido a mais de uma pessoa, qualquer delas que sozinha habite a casa não terá de pagar aluguel à outra, mas não as pode impedir de exercerem, querendo, o direito de habitá-la.'}
+   ],
+   correta:'D',
+   comentario:`<b>✅ Gabarito: LETRA D</b> (a INCORRETA).<br><br><b>⚖️ Por quê:</b> o titular do direito de habitação <b>não pode alugar nem emprestar</b> o bem — em hipótese alguma. A alternativa inventa um regime "oneroso" e um prazo de seis meses inexistentes.<br><br><b>📌 Fundamento:</b> arts. 1.414 e 1.416 (habitação); 1.415 (mais de um habitante); 1.417/1.418 (direito real do promitente comprador).<br><br><b>⚠️ Pegadinha:</b> A, B, C e E reproduzem a lei; D é a única falsa (habitação é gratuita e personalíssima — não se aluga).<br><br><b>🔁 Revisar:</b> habitação não se aluga nem se empresta.<br><br><b>☑ Verificação:</b> Norma [arts. 1.414–1.418 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q10', materia:'Direito de habitação (art. 1.414/1.415)', banca:'IESES · TJ-PA · 2026', tipo:'multipla',
+   enunciado:`Sobre o direito de habitação (arts. 1.414 e 1.416 do CC), analise as assertivas:<br><br><b>I.</b> O direito de habitação em imóvel alheio é gratuito, não podendo o titular alugar o bem, mas podendo emprestar gratuitamente o uso a terceiros.<br><b>II.</b> O direito de habitação, se conferido a mais de uma pessoa e exercido apenas por um dos titulares, gera aos demais o direito de cobrar aluguel pelo uso exclusivo.<br><b>III.</b> Caso o direito real de habitação seja atribuído a mais de um indivíduo, nenhum deles poderá impedir que os outros exerçam, querendo, o mesmo direito de habitação que igualmente lhes assiste.<br><br>De acordo com o texto legal, assinale a alternativa correta:`,
+   alternativas:[
+     {letra:'A',texto:'Está correta apenas a assertiva III.'},
+     {letra:'B',texto:'Estão corretas apenas as assertivas I e II.'},
+     {letra:'C',texto:'Todas as assertivas estão corretas.'},
+     {letra:'D',texto:'Está correta apenas a assertiva II.'},
+     {letra:'E',texto:'Nenhuma das assertivas está correta.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b> (apenas III).<br><br><b>⚖️ Por quê:</b> a III reproduz o art. 1.415. A I está errada — o titular não pode alugar <b>nem</b> emprestar (art. 1.414). A II está errada — quem habita sozinho não deve aluguel aos demais (art. 1.415).<br><br><b>📌 Fundamento:</b> arts. 1.414 e 1.415 do CC.<br><br><b>⚠️ Pegadinha:</b> o erro da I é o "podendo emprestar gratuitamente"; o erro da II é "direito de cobrar aluguel".<br><br><b>🔁 Revisar:</b> habitação a vários: quem habita sozinho não paga aluguel; ninguém impede o outro de habitar; não se aluga nem empresta.<br><br><b>☑ Verificação:</b> Norma [arts. 1.414/1.415 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q11', materia:'Usufruto — natureza / registro (STJ)', banca:'CEBRASPE · TJ-RO · 2025', tipo:'multipla',
+   enunciado:`De acordo com a jurisprudência do STJ, o usufruto de imóvel instituído em testamento, que envolve apenas a usufrutuária e a nua-proprietária, configura espécie de direito:`,
+   alternativas:[
+     {letra:'A',texto:'pessoal, podendo a parte beneficiária buscar a proteção do seu direito em relação à outra, independentemente do registro no cartório de registro de imóveis.'},
+     {letra:'B',texto:'real, não havendo impedimento para que a parte beneficiária busque a proteção do seu direito em relação à outra, independentemente do registro no cartório de registro de imóveis.'},
+     {letra:'C',texto:'real, exigindo-se, para que a parte beneficiária busque a proteção do seu direito em relação à outra, o registro no cartório de registro de imóveis.'},
+     {letra:'D',texto:'real, exigindo-se, para a proteção do direito em relação à outra parte, o registro de títulos e documentos.'},
+     {letra:'E',texto:'pessoal, não havendo impedimento para que a parte beneficiária busque a proteção do seu direito em relação à outra, independentemente do registro no cartório de registro de imóveis.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> o usufruto é direito <b>real</b>. Entre as próprias partes (usufrutuária × nua-proprietária), a proteção do direito pode ser exercida <b>independentemente do registro</b> — o registro serve à eficácia <b>erga omnes</b> (contra terceiros).<br><br><b>📌 Fundamento:</b> arts. 1.225, IV, e 1.391 do CC; jurisprudência do STJ.<br><br><b>⚠️ Pegadinha:</b> A e E erram ao chamar de direito pessoal; C e D exigem registro mesmo entre as partes.<br><br><b>⚖️ Jurisprudência:</b> STJ — usufruto é direito real; entre as partes, dispensa-se o registro para a tutela do direito.<br><br><b>🔁 Revisar:</b> usufruto = direito real; registro vale para terceiros, não entre as partes.<br><br><b>☑ Verificação:</b> Norma [arts. 1.225/1.391 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [tese — a confirmar].`},
+
+  {id:'q12', materia:'Direito real de habitação — cônjuge supérstite (STJ)', banca:'CEBRASPE · TJ-PE · 2024', tipo:'multipla',
+   enunciado:`Conforme entendimento do STJ, o direito real de habitação do cônjuge supérstite:`,
+   alternativas:[
+     {letra:'A',texto:'não vigora se o regime de casamento do casal tiver sido o da separação obrigatória de bens.'},
+     {letra:'B',texto:'extingue-se se ele vier a contrair novo matrimônio ou falecer.'},
+     {letra:'C',texto:'extingue-se se ele vier a constituir nova família sob a forma de união estável.'},
+     {letra:'D',texto:'é assegurado em relação ao imóvel em que o casal residia ao tempo da abertura da sucessão, ainda que o de cujus tenha deixado outro imóvel dessa natureza.'},
+     {letra:'E',texto:'tem natureza de direito real, vitalício e personalíssimo.'}
+   ],
+   correta:'E',
+   comentario:`<b>✅ Gabarito: LETRA E</b>.<br><br><b>⚖️ Por quê:</b> o direito real de habitação do cônjuge/companheiro supérstite tem natureza de <b>direito real, vitalício e personalíssimo</b>, qualquer que seja o regime de bens.<br><br><b>📌 Fundamento:</b> art. 1.831 do CC; jurisprudência do STJ.<br><br><b>⚠️ Pegadinha:</b> A erra (vigora inclusive na separação obrigatória); B e C erram (não se extingue por novo casamento/união estável, segundo o STJ); D erra (só é assegurado se for o <b>único</b> imóvel daquela natureza a inventariar).<br><br><b>⚖️ Jurisprudência:</b> STJ — direito real de habitação é vitalício, personalíssimo e independe do regime de bens; não se condiciona à monogamia futura.<br><br><b>🔁 Revisar:</b> habitação do supérstite = vitalícia, personalíssima, qualquer regime, sobre o único imóvel residencial.<br><br><b>☑ Verificação:</b> Norma [art. 1.831 CC ✔] · QConcursos [a confirmar] · Dizer o Direito [tese — a confirmar].`},
+
+  {id:'q13', materia:'Usufruto — direito de acrescer (art. 1.411)', banca:'CONSULPLAN · TJ-MA · 2023', tipo:'multipla',
+   enunciado:`João, viúvo, proprietário de um apartamento em Ipanema/RJ, instituiu em 2018, por escritura pública (averbada na matrícula), usufruto vitalício do imóvel em favor de suas duas filhas, Isaura e Isadora, que passaram a residir no bem. Isaura faleceu em maio de 2023. Sem disposição em contrário, quanto à extinção do usufruto pela morte de Isaura, é correto afirmar que:`,
+   alternativas:[
+     {letra:'A',texto:'caberá exclusivamente a Isadora o exercício integral do usufruto do imóvel.'},
+     {letra:'B',texto:'consolida-se ao nu-proprietário (João) a plena propriedade da parte ideal que pertencia a Isaura.'},
+     {letra:'C',texto:'transmite-se automaticamente aos herdeiros de Isaura o exercício de sua parte no usufruto do imóvel.'},
+     {letra:'D',texto:'existindo disposição expressa no testamento de Isaura, é possível a transmissão de sua parte no usufruto até mesmo a terceiros.'}
+   ],
+   correta:'B',
+   comentario:`<b>✅ Gabarito: LETRA B</b>.<br><br><b>⚖️ Por quê:</b> no usufruto simultâneo (a duas ou mais pessoas), extingue-se a parte de cada usufrutuário que falece, <b>salvo</b> se houver estipulação do <b>direito de acrescer</b>. Como não houve, a parte de Isaura se consolida na nua-propriedade de João.<br><br><b>📌 Fundamento:</b> arts. 1.411 e 1.410, I, do CC.<br><br><b>⚠️ Pegadinha:</b> sem cláusula de acrescer, Isadora NÃO fica com a parte de Isaura (afasta A); o usufruto é personalíssimo e não se transmite a herdeiros nem a terceiros (afasta C e D).<br><br><b>🔁 Revisar:</b> usufruto simultâneo sem direito de acrescer → a parte do falecido consolida com o nu-proprietário.<br><br><b>☑ Verificação:</b> Norma [arts. 1.410/1.411 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q14', materia:'Usufruto — caráter personalíssimo (art. 1.410)', banca:'FGV · TJ-SC · 2021', tipo:'multipla',
+   enunciado:`Rose pretende doar seu apartamento à irmã, reservando para si o usufruto do imóvel. No cartório, informaram disposições que pretendiam registrar: cessão onerosa do exercício do usufruto a terceiros; transmissão do usufruto aos herdeiros quando do falecimento; prazo de dez anos de duração; possibilidade de a usufrutuária alterar a finalidade residencial para atividade comercial; e dispensa de caução. É INVÁLIDA a disposição que:`,
+   alternativas:[
+     {letra:'A',texto:'prevê a transmissão do usufruto aos herdeiros em caso de morte da usufrutuária.'},
+     {letra:'B',texto:'permite a cessão onerosa do exercício do usufruto.'},
+     {letra:'C',texto:'prevê o prazo de dez anos de duração do usufruto.'},
+     {letra:'D',texto:'permite a alteração da finalidade do imóvel.'},
+     {letra:'E',texto:'dispensa a caução.'}
+   ],
+   correta:'A',
+   comentario:`<b>✅ Gabarito: LETRA A</b>.<br><br><b>⚖️ Por quê:</b> o usufruto é <b>personalíssimo</b> e extingue-se com a morte do usufrutuário; <b>não se transmite aos herdeiros</b>. Logo, é inválida a cláusula que prevê tal transmissão.<br><br><b>📌 Fundamento:</b> art. 1.410, I (extinção pela morte); art. 1.393 (o usufruto não se transfere, mas seu exercício pode ser cedido); art. 1.400, par. único (caução pode ser dispensada).<br><br><b>⚠️ Pegadinha:</b> a cessão do <b>exercício</b> é válida (B); prazo determinado é válido (C); dispensa de caução é válida (E) — só a transmissão do usufruto aos herdeiros é vedada.<br><br><b>🔁 Revisar:</b> usufruto não passa para herdeiros (personalíssimo); o exercício, sim, pode ser cedido.<br><br><b>☑ Verificação:</b> Norma [arts. 1.393/1.400/1.410 CC ✔] · Dizer o Direito [N/A — letra de norma].`},
+
+  {id:'q15', materia:'Usufruto — direitos e deveres (arts. 1.394-1.409)', banca:'CONSULPLAN · TJ-MS · 2021', tipo:'multipla',
+   enunciado:`Em relação aos direitos e deveres dos usufrutuários, com base na legislação vigente, assinale a alternativa INCORRETA.`,
+   alternativas:[
+     {letra:'A',texto:'O usufrutuário não é obrigado a pagar as deteriorações resultantes do exercício regular do usufruto.'},
+     {letra:'B',texto:'Se o usufruto recair num patrimônio, ou parte dele, será o usufrutuário obrigado aos juros da dívida que onerar o patrimônio ou a parte dele.'},
+     {letra:'C',texto:'Quando o usufruto recai em títulos de crédito, o usufrutuário tem direito a perceber os frutos, sendo-lhe vedada a cobrança das respectivas dívidas.'},
+     {letra:'D',texto:'Salvo direito adquirido por outrem, o usufrutuário faz seus os frutos naturais pendentes ao começar o usufruto, sem encargo de pagar as despesas de produção.'}
+   ],
+   correta:'C',
+   comentario:`<b>✅ Gabarito: LETRA C</b> (a INCORRETA).<br><br><b>⚖️ Por quê:</b> quando o usufruto recai sobre títulos de crédito, o usufrutuário tem direito a perceber os frutos <b>e a cobrar</b> as respectivas dívidas — a alternativa inverte ao vedar a cobrança.<br><br><b>📌 Fundamento:</b> art. 1.395 (títulos de crédito); art. 1.402 (deteriorações do uso regular); art. 1.405 (juros da dívida); art. 1.396 (frutos naturais pendentes).<br><br><b>⚠️ Pegadinha:</b> A, B e D reproduzem a lei; C é a única em desacordo (na verdade pode cobrar as dívidas).<br><br><b>🔁 Revisar:</b> usufruto sobre títulos de crédito = perceber frutos + cobrar as dívidas.<br><br><b>☑ Verificação:</b> Norma [arts. 1.395/1.396/1.402/1.405 CC ✔] · Dizer o Direito [N/A — letra de norma].`}
+ ];
+function defaultState(){return{respostas:{},revisao:{},caderno:{},revisarDepois:{},posicao:0,modo:'todas',materiaFiltro:'',notas:{}};}
+let state=defaultState(),lista=[],paused=false,qSecs=0,sSecs=0,timerInterval=null,commentOpen={};
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){}}
+function loadState(){try{var raw=localStorage.getItem(STORE_KEY);if(raw){state=Object.assign(defaultState(),JSON.parse(raw));}}catch(e){state=defaultState();}}
+function today(){return new Date().toISOString().split('T')[0];}
+function addDays(d,n){var dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];}
+function fmtDate(iso){if(!iso)return'';var p=iso.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function buildLista(){var t=today(),ids;if(state.modo==='todas'){ids=QUESTOES.map(function(q){return q.id;});}else if(state.modo==='hoje'){ids=QUESTOES.filter(function(q){var r=state.revisao[q.id];return r&&r.nextDate&&r.nextDate<=t;}).map(function(q){return q.id;});}else if(state.modo==='caderno'){ids=QUESTOES.filter(function(q){return state.caderno[q.id]||state.revisarDepois[q.id];}).map(function(q){return q.id;});}else if(state.modo==='materia'){var m=state.materiaFiltro;ids=QUESTOES.filter(function(q){return !m||q.materia===m;}).map(function(q){return q.id;});}else if(state.modo==='aleatorio'){ids=shuffle(QUESTOES.map(function(q){return q.id;}));}else{ids=QUESTOES.map(function(q){return q.id;});}return ids;}
+function computeStats(){var total=QUESTOES.length,acertos=0,erros=0,t=today(),revisadasHoje=0;QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta)acertos++;else erros++;}var rev=state.revisao[q.id];if(rev&&rev.lastAnswered===t)revisadasHoje++;});var respondidas=acertos+erros,pendentes=total-respondidas,pct=total>0?Math.round(respondidas/total*100):0;return{total:total,acertos:acertos,erros:erros,pendentes:pendentes,revisadasHoje:revisadasHoje,respondidas:respondidas,pct:pct};}
+function renderStats(){var s=computeStats();document.getElementById('statsBar').innerHTML='<div class="stat-chip"><span class="sv green">'+s.acertos+'</span><span class="sl">Acertos</span></div><div class="stat-chip"><span class="sv red">'+s.erros+'</span><span class="sl">Erros</span></div><div class="stat-chip"><span class="sv amber">'+s.pendentes+'</span><span class="sl">Pendentes</span></div><div class="stat-chip"><span class="sv cyan">'+s.revisadasHoje+'</span><span class="sl">Revisadas hoje</span></div>';var fill=document.getElementById('progressFill'),lbl=document.getElementById('progressLabel');if(fill)fill.style.width=s.pct+'%';if(lbl)lbl.textContent=s.respondidas+'/'+s.total+' respondidas ('+s.pct+'%)';}
+function fmtTime(secs){return String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');}
+function startTimers(){if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(function(){if(!paused){qSecs++;sSecs++;}var q=document.getElementById('timerQ'),s=document.getElementById('timerS');if(q)q.textContent=fmtTime(qSecs);if(s)s.textContent=fmtTime(sSecs);},1000);}
+function resetQTimer(){qSecs=0;var q=document.getElementById('timerQ');if(q)q.textContent='00:00';}
+function togglePause(){paused=!paused;var b=document.getElementById('btnPause');if(b)b.textContent=paused?'Retomar':'Pausar';}
+function scheduleNext(id,acertou){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:1,acertos:0,lastAnswered:null};rv.lastAnswered=t;if(acertou){rv.acertos=(rv.acertos||0)+1;rv.interval=rv.acertos===1?1:rv.acertos===2?7:30;}else{rv.acertos=0;rv.interval=1;}rv.nextDate=addDays(t,rv.interval);state.revisao[id]=rv;}
+function scheduleManual(id,days){var t=today(),rv=state.revisao[id]||{nextDate:null,interval:days,acertos:0,lastAnswered:t};rv.nextDate=days===0?null:addDays(t,days);rv.interval=days;state.revisao[id]=rv;saveState();renderCard();}
+function reviewBadgeHTML(id){var rv=state.revisao[id];if(!rv||!rv.nextDate)return'';if(rv.nextDate<=today())return'<span class="review-badge review-today">revisar hoje ⏰</span>';return'<span class="review-badge review-future">📅 '+fmtDate(rv.nextDate)+'</span>';}
+function schedRowHTML(id){return'<div class="sched-row"><span class="sched-label">Agendar:</span><button class="sched-btn" onclick="scheduleManual(\''+id+'\',1)">1 dia</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',7)">7 dias</button><button class="sched-btn" onclick="scheduleManual(\''+id+'\',30)">30 dias</button><button class="sched-btn remove" onclick="scheduleManual(\''+id+'\',0)">remover</button></div>';}
+function starBtnHTML(id){var active=state.revisarDepois[id]?' active':'',label=state.revisarDepois[id]?'⭐ No caderno':'☆ Revisar depois';return'<button class="star-btn'+active+'" onclick="toggleStar(\''+id+'\')">'+label+'</button>';}
+function toggleStar(id){if(state.revisarDepois[id])delete state.revisarDepois[id];else state.revisarDepois[id]=true;saveState();renderCard();renderStats();}
+function selecionarAlternativa(id,letra){if(state.respostas[id])return;document.querySelectorAll('.alt-btn[data-id="'+id+'"]').forEach(function(b){b.classList.remove('selected');});var btn=document.querySelector('.alt-btn[data-id="'+id+'"][data-letra="'+letra+'"]');if(btn)btn.classList.add('selected');var c=document.getElementById('confirm-'+id);if(c)c.disabled=false;}
+function syncResultado(){try{var total=QUESTOES.length,acertos=0,erradas=[];QUESTOES.forEach(function(q){var r=state.respostas[q.id];if(r){if(r===q.correta){acertos++;}else{erradas.push({id:q.id,enunciado:q.enunciado,gabarito:q.correta,resposta:r,alternativas:q.alternativas,comentario:q.comentario});}}});var m=(SLUG.match(/meta(\d+)/)||[])[1];fetch('https://danielbesis-site.vercel.app/api/resultado',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:(function(){try{var u=new URLSearchParams(location.search).get("uid");if(u){localStorage.setItem("db_uid",u);return u;}return localStorage.getItem("db_uid")||null;}catch(e){return null;}})(),slug:SLUG,metaNumero:m?parseInt(m,10):null,respostas:state.respostas,total:total,acertos:acertos,erradas:erradas})}).catch(function(){});}catch(e){}}
+function confirmar(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var sel=document.querySelector('.alt-btn[data-id="'+id+'"].selected');if(!sel)return;var letra=sel.dataset.letra;state.respostas[id]=letra;var acertou=letra===q.correta;scheduleNext(id,acertou);if(!acertou)state.caderno[id]=true;saveState();syncResultado();renderCard();renderStats();}
+function toggleComment(id){commentOpen[id]=!commentOpen[id];var body=document.getElementById('comment-body-'+id),tog=document.getElementById('comment-toggle-'+id);if(body)body.classList.toggle('open',!!commentOpen[id]);if(tog)tog.textContent=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';}
+function salvarNota(id,txt){if(!state.notas)state.notas={};state.notas[id]=txt;saveState();}
+function renderCard(){var cont=document.getElementById('mainContent');if(!lista.length){cont.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>Nenhuma questão neste filtro.</div></div>';return;}var pos=Math.min(Math.max(state.posicao,0),lista.length-1);state.posicao=pos;var id=lista[pos],q=QUESTOES.find(function(x){return x.id===id;});if(!q){cont.innerHTML='';return;}var resposta=state.respostas[id],respondida=!!resposta,acertou=respondida&&resposta===q.correta;var resultHTML='';if(respondida){resultHTML=acertou?'<div class="result-banner correct">✅ Correto! Resposta: '+resposta+'</div>':'<div class="result-banner wrong">❌ Incorreto. Sua resposta: '+resposta+' | Gabarito: '+q.correta+'</div>';}var altsHTML='<div class="alts">';q.alternativas.forEach(function(alt){var btnCls='alt-btn',letraCls='alt-letra',disabled=respondida?'disabled':'';if(respondida){if(alt.letra===q.correta&&alt.letra===resposta){btnCls='alt-btn correct';letraCls='alt-letra correct';}else if(alt.letra===q.correta){btnCls='alt-btn reveal-correct';letraCls='alt-letra reveal-correct';}else if(alt.letra===resposta){btnCls='alt-btn wrong';letraCls='alt-letra wrong';}}altsHTML+='<button class="'+btnCls+'" data-id="'+id+'" data-letra="'+alt.letra+'" '+disabled+' onclick="selecionarAlternativa(\''+id+'\',\''+alt.letra+'\')"><span class="'+letraCls+'">'+alt.letra+'</span><span>'+alt.texto+'</span></button>';});altsHTML+='</div>';var confirmHTML=respondida?'':'<button class="btn-confirm" id="confirm-'+id+'" onclick="confirmar(\''+id+'\')" disabled>Confirmar</button>';var cOpen=commentOpen[id]?' open':'',cLabel=commentOpen[id]?'▲ Ocultar comentário':'▼ Ver comentário / gabarito (ICOL)';var commentHTML=respondida?'<div class="comment-wrap"><button class="comment-toggle" id="comment-toggle-'+id+'" onclick="toggleComment(\''+id+'\')">'+cLabel+'</button><div class="comment-body'+cOpen+'" id="comment-body-'+id+'">'+q.comentario+'</div></div>':'';var schedHTML=respondida?schedRowHTML(id):'';var notaVal=(state.notas&&state.notas[id])?state.notas[id]:'';var notasHTML='<div class="notas-wrap"><div class="notas-label">📝 Minhas anotações</div><textarea class="notas-area" placeholder="Escreva aqui suas anotações sobre esta questão…" oninput="salvarNota(\''+id+'\', this.value)">'+notaVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';cont.innerHTML='<div class="nav-counter">Questão '+(pos+1)+' de '+lista.length+'</div><div class="card"><div class="card-meta"><span class="badge badge-banca">'+q.banca+'</span><span class="badge badge-materia">'+q.materia+'</span>'+reviewBadgeHTML(id)+starBtnHTML(id)+claudeBtnHTML(id)+'</div><div class="enunciado">'+q.enunciado+'</div>'+altsHTML+confirmHTML+resultHTML+commentHTML+schedHTML+notasHTML+'</div><div class="nav-row"><button class="nav-btn" onclick="navPrev()" '+(pos===0?'disabled':'')+'>← Anterior</button><button class="nav-btn" onclick="navNext()" '+(pos>=lista.length-1?'disabled':'')+'>Próxima →</button></div>';}
+function navPrev(){if(state.posicao>0){state.posicao--;saveState();resetQTimer();renderCard();}}
+function navNext(){if(state.posicao<lista.length-1){state.posicao++;saveState();resetQTimer();renderCard();}}
+function setModo(modo){state.modo=modo;state.posicao=0;var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=modo==='materia'?'':'none';document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===modo);});lista=buildLista();saveState();resetQTimer();renderCard();renderStats();}
+function setMateriaFiltro(val){state.materiaFiltro=val;state.posicao=0;lista=buildLista();saveState();resetQTimer();renderCard();}
+function populateMateriaSelect(){var materias=[];QUESTOES.forEach(function(q){if(materias.indexOf(q.materia)===-1)materias.push(q.materia);});materias.sort();var sel=document.getElementById('materiaSelect');if(!sel)return;sel.innerHTML='<option value="">— Escolha —</option>';materias.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;if(m===state.materiaFiltro)o.selected=true;sel.appendChild(o);});}
+function recomecar(){if(confirm('Tem certeza? Todo o progresso será apagado permanentemente.')){localStorage.removeItem(STORE_KEY);location.reload();}}
+function exportarProgresso(){var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='progresso_'+SLUG+'_'+today()+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function exportarNotas(){var txt='ANOTAÇÕES — '+document.title+'\n'+today()+'\n\n',n=0;QUESTOES.forEach(function(q){var nota=state.notas&&state.notas[q.id];if(nota&&nota.trim()){n++;txt+='【'+q.banca+' · '+q.materia+'】\n'+nota.trim()+'\n\n';}});if(!n){alert('Você ainda não tem anotações registradas.');return;}var blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='anotacoes_'+SLUG+'_'+today()+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function importarProgresso(evt){var file=evt.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{state=Object.assign(defaultState(),JSON.parse(e.target.result));saveState();lista=buildLista();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel)sel.style.display=state.modo==='materia'?'':'none';renderStats();renderCard();alert('Progresso importado com sucesso!');}catch(err){alert('Arquivo inválido ou corrompido.');}};reader.readAsText(file);evt.target.value='';}
+function dismissIframeBanner(){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';try{sessionStorage.setItem('iframe_banner_dismissed','1');}catch(e){}}
+function checkIframeBanner(){try{if(sessionStorage.getItem('iframe_banner_dismissed')==='1'){var b=document.getElementById('bannerIframe');if(b)b.style.display='none';}}catch(e){}}
+function init(){loadState();checkIframeBanner();populateMateriaSelect();document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('active',b.dataset.modo===state.modo);});var sel=document.getElementById('materiaSelect');if(sel&&state.modo==='materia')sel.style.display='';lista=buildLista();renderStats();renderCard();startTimers();}
+function claudeBtnHTML(id){return '<button class="claude-qbtn" onclick="askClaude(\''+id+'\')">🤖</button>';}
+function askClaude(id){var q=QUESTOES.find(function(x){return x.id===id;});if(!q)return;var ctx=document.title+' · Questão '+id+'\nTema: '+q.materia+'\nBanca: '+(q.banca||'')+'\nConcurso: Cartório TJMT\n\nEnunciado:\n'+q.enunciado.replace(/<[^>]+>/g,'')+'\n\nTenho uma dúvida sobre esta questão:\n';navigator.clipboard.writeText(ctx).catch(function(){});window.open('https://claude.ai','_blank');}
+init();
+
+window.addEventListener("load",function(){try{syncResultado();}catch(e){}});/*sync-on-load*/
+</script>
+</body>
+</html>
