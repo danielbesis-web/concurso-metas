@@ -249,7 +249,7 @@ function syncResultado(){
     var slug=(typeof SLUG!=="undefined"?SLUG:STORE_KEY.replace(/^concurso_/,""));
     fetch("https://danielbesis-site.vercel.app/api/resultado",{
       method:"POST", headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({slug:slug, metaNumero:10, respostas:state.respostas, total:total, acertos:acertos, erradas:erradas, dominio:computeDominio().b})
+      body:JSON.stringify({user_id:(function(){try{var u=new URLSearchParams(location.search).get("uid");if(u){localStorage.setItem("db_uid",u);return u;}return localStorage.getItem("db_uid")||null;}catch(e){return null;}})(), slug:slug, metaNumero:10, respostas:state.respostas, total:total, acertos:acertos, erradas:erradas, dominio:computeDominio().b})
     }).catch(function(){});
   }catch(e){}
 }
