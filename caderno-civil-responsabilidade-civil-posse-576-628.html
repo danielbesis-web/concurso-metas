@@ -9,7 +9,18 @@
 body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
 a{color:#38bdf8}
 .wrap{max-width:780px;margin:0 auto}
-.banner{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.banner{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center}
+.progress-wrap{position:sticky;top:0;z-index:100;background:#050b18;padding:9px 14px 7px;border-bottom:1px solid #16365a}
+.progress-top{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#7aa3cc;margin-bottom:5px}
+.progress-top b{color:#27c06a}
+.progress-bar{height:7px;background:#0b1828;border:1px solid #16365a;border-radius:6px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#1f6b4d,#27c06a);width:0;transition:width .35s ease}
+.btn-reset{background:none;border:none;color:#55738e;font-size:10.5px;cursor:pointer;text-decoration:underline;padding:0}
+.btn-reset:hover{color:#7aa3cc}
+.rev-btn{margin-left:auto;background:#0b1828;border:1px solid #2a4a3a;color:#6f9a85;padding:3px 11px;border-radius:20px;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.rev-btn:hover{border-color:#27c06a;color:#9fe6bd}
+.card.revisado{border-color:#1f6b4d;box-shadow:inset 3px 0 0 #27c06a}
+.card.revisado .rev-btn{background:#08160f;border-color:#27c06a;color:#27c06a}
 .header{padding:16px 14px 0}
 .header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
 .header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
@@ -99,7 +110,11 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
 </head>
 <body>
 <div class="wrap">
-<div class="banner">📘 Caderno de Revisão · Civil — clique nos blocos 📜 e 🎯 para revelar lei e respostas · clique nos cartões 🔁 para virar · marque o checklist ✅</div>
+<div class="banner">📘 Caderno de Revisão · Civil — clique nos blocos 📜 e 🎯 para revelar lei e respostas · clique nos cartões 🔁 para virar · use "marcar revisado" para acompanhar o progresso</div>
+<div class="progress-wrap">
+  <div class="progress-top"><span id="progLabel"><b>0</b> de 16 tópicos revisados · 0%</span><button id="progReset" class="btn-reset">zerar progresso</button></div>
+  <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+</div>
 <div class="header">
   <h1>📒 Caderno de Revisão · Direito Civil — Responsabilidade Civil &amp; Posse</h1>
   <div class="sub"><b>Responsabilidade Civil</b> (conceito · funções · dano · perda de uma chance · dano moral · nexo · culpa · objetiva) + <b>Posse</b> (teorias · detenção · classificações · interditos · aquisição/transmissão · perda) · e-Book de Civil, <b>págs. 576–628</b></div>
@@ -597,8 +612,35 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
 <footer>Caderno de Revisão · Direito Civil — Responsabilidade Civil &amp; Posse · e-Book de Civil, págs. 576–628 · uso pessoal de estudo</footer>
 </div>
 <script>
-document.querySelectorAll('.flip').forEach(function(f){f.addEventListener('click',function(){f.classList.toggle('flipped');});});
-document.querySelectorAll('.check-item').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('done');});});
+(function(){
+  var KEY='caderno_civil_576628_revisado_v1';
+  var cards=[].slice.call(document.querySelectorAll('.card[id]')).filter(function(c){return /^[ab][0-9]+$/.test(c.id);});
+  var state={};try{state=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){state={};}
+  var fill=document.getElementById('progFill'),lbl=document.getElementById('progLabel');
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function render(){
+    var done=0;
+    cards.forEach(function(c){
+      var on=!!state[c.id];c.classList.toggle('revisado',on);
+      var b=c.querySelector('.rev-btn');if(b)b.textContent=on?'✓ Revisado':'○ Marcar revisado';
+      if(on)done++;
+    });
+    var pct=cards.length?Math.round(done/cards.length*100):0;
+    if(fill)fill.style.width=pct+'%';
+    if(lbl)lbl.innerHTML='<b>'+done+'</b> de '+cards.length+' tópicos revisados · '+pct+'%';
+  }
+  cards.forEach(function(c){
+    var meta=c.querySelector('.card-meta');if(!meta)return;
+    var b=document.createElement('button');b.className='rev-btn';b.type='button';
+    b.addEventListener('click',function(e){e.stopPropagation();if(state[c.id])delete state[c.id];else state[c.id]=1;save();render();});
+    meta.appendChild(b);
+  });
+  var reset=document.getElementById('progReset');
+  if(reset)reset.addEventListener('click',function(){state={};save();render();});
+  render();
+  document.querySelectorAll('.flip').forEach(function(f){f.addEventListener('click',function(){f.classList.toggle('flipped');});});
+  document.querySelectorAll('.check-item').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('done');});});
+})();
 </script>
 </body>
 </html>
