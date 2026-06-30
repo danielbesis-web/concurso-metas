@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Civil — Responsabilidade Civil + Posse (pp. 576–628)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:780px;margin:0 auto}
+.banner{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center;position:sticky;top:0;z-index:100}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.bloco-h{font-size:13px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fbbf24;padding:18px 14px 4px;border-top:1px solid #16365a;margin-top:10px}
+.bloco-h.b{color:#27c06a}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:6px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.sec-label.jur{color:#f472b6}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.recall-a b{color:#d6ffe9}
+.jur-box{background:#1a0a1c;border:1px solid #4a1f4a;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:13px;line-height:1.55;color:#f5cce8}
+.jur-box .info{display:inline-block;background:#3a1a3a;color:#f9b8e6;border:1px solid #6b2a6b;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:4px;margin-bottom:3px}
+.jur-box b{color:#fce4f5}
+.jur-box+.jur-box{margin-top:8px}
+.map-table,.cmp-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0;counter-increment:p}
+.list-pega li:before{content:counter(p);position:absolute;left:0;top:0;background:#1a1200;border:1px solid #4a3200;color:#fbbf24;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#f3dca8}
+.flash-hint{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.flip-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flip{perspective:1200px;height:185px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow-y:auto}
+.flip-front{background:#0d2040;border:1.5px solid #1d4a78}
+.flip-front .fq{font-size:13.5px;font-weight:600;color:#dceaff;line-height:1.45}
+.flip-front .ftag{position:absolute;top:8px;left:10px;font-size:10px;font-weight:700;color:#5b86b3;letter-spacing:.5px}
+.flip-front .fhint{position:absolute;bottom:8px;font-size:10px;color:#4f7199}
+.flip-back{background:#08160f;border:1.5px solid #1f6b4d;transform:rotateY(180deg)}
+.flip-back .fa{font-size:12.5px;color:#9fe6bd;line-height:1.5}
+.flip-back .fa b{color:#d6ffe9}
+.check-item{background:#050b18;border:1.5px solid #16365a;border-radius:9px;padding:10px 13px;margin-bottom:7px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:13.5px;line-height:1.5;color:#cdddf0;transition:all .15s}
+.check-item:hover{border-color:#27c06a}
+.check-item .box{width:18px;height:18px;border:2px solid #2a4a3a;border-radius:5px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#08160f;transition:all .15s}
+.check-item.done .box{background:#27c06a;border-color:#27c06a}
+.check-item.done{color:#6f8a7e;text-decoration:line-through;text-decoration-color:#2a4a3a}
+@media(max-width:560px){.flip-grid{grid-template-columns:1fr}.flip{height:170px}}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner">📘 Caderno de Revisão · Civil — clique nos blocos 📜 e 🎯 para revelar lei e respostas · clique nos cartões 🔁 para virar · marque o checklist ✅</div>
+<div class="header">
+  <h1>📒 Caderno de Revisão · Direito Civil — Responsabilidade Civil &amp; Posse</h1>
+  <div class="sub"><b>Responsabilidade Civil</b> (conceito · funções · dano · perda de uma chance · dano moral · nexo · culpa · objetiva) + <b>Posse</b> (teorias · detenção · classificações · interditos · aquisição/transmissão · perda) · e-Book de Civil, <b>págs. 576–628</b></div>
+  <div class="toc">
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#a1">A1 Conceito</a>
+    <a href="#a2">A2 Sistema 186/187/927</a>
+    <a href="#a3">A3 Funções</a>
+    <a href="#a4">A4 Conduta</a>
+    <a href="#a5">A5 Dano · perda de chance</a>
+    <a href="#a6">A6 Dano moral</a>
+    <a href="#a7">A7 Nexo causal</a>
+    <a href="#a8">A8 Culpa · subjetiva</a>
+    <a href="#a9">A9 Objetiva · risco</a>
+    <a href="#b1">B1 Direitos reais</a>
+    <a href="#b2">B2 Posse · teorias</a>
+    <a href="#b3">B3 Detenção</a>
+    <a href="#b4">B4 Justa × injusta</a>
+    <a href="#b5">B5 Classificações · interditos</a>
+    <a href="#b6">B6 Aquisição/transmissão</a>
+    <a href="#b7">B7 Perda da posse</a>
+    <a href="#sum">⚖️ Súmulas/Jur.</a>
+    <a href="#peg">⚠️ Pegadinhas</a>
+    <a href="#flash">🔁 Flashcards</a>
+    <a href="#check">✅ Checklist</a>
+  </div>
+</div>
+<div class="content">
+
+<div class="card mapa" id="mapa">
+  <div class="card-meta"><span class="badge badge-tema">Mapa</span><span class="badge badge-pag">págs. 576–628</span></div>
+  <div class="card-title">🗺️ Faixa de páginas × Assunto</div>
+  <table class="map-table">
+    <tr><th>Págs.</th><th>Assunto</th></tr>
+    <tr><td class="pg">576–581</td><td><b>Resp. Civil — base:</b> conceito; contratual × extracontratual (aquiliana); sistema legal (arts. 186/187/927); abuso de direito; funções (reparatória/punitiva/precaução)</td></tr>
+    <tr><td class="pg">582–584</td><td><b>Pressupostos e conduta:</b> inadimplemento involuntário × voluntário; elementos; ato lícito que indeniza; estado de necessidade (Teoria do Sacrifício)</td></tr>
+    <tr><td class="pg">584–591</td><td><b>Dano:</b> emergente × lucro cessante; <b>perda de uma chance</b>; perdas e danos em dinheiro (art. 404); <b>dano moral</b> (PJ, coletivo, abandono afetivo, score de crédito)</td></tr>
+    <tr><td class="pg">592–595</td><td><b>Nexo de causalidade:</b> equivalência dos antecedentes · causalidade adequada · dano direto e imediato (art. 403)</td></tr>
+    <tr><td class="pg">596–600</td><td><b>Culpa</b> e <b>resp. objetiva</b> (risco criado/proveito/integral) e <b>subjetiva</b> (culpa presumida; obrigação de meio × resultado)</td></tr>
+    <tr><td class="pg">603–606</td><td><b>Direito das Coisas:</b> direitos reais × pessoais; rol do art. 1.225; taxatividade; princípios</td></tr>
+    <tr><td class="pg">607–612</td><td><b>Posse:</b> conceito (art. 1.196); natureza; teorias (Savigny/Ihering/sociológica); detenção (art. 1.198); mera tolerância; bem público</td></tr>
+    <tr><td class="pg">613–621</td><td><b>Classificação da posse:</b> justa × injusta; boa-fé × má-fé; direta × indireta; nova × velha; <b>ad interdicta</b> (interditos)</td></tr>
+    <tr><td class="pg">622–628</td><td><b>Aquisição e transmissão</b> (tradição; acessão; partilha de direitos possessórios) e <b>perda da posse</b> (arts. 1.223/1.224)</td></tr>
+  </table>
+</div>
+
+<div class="bloco-h">Bloco A · Responsabilidade Civil</div>
+
+<!-- A1 -->
+<div class="card" id="a1">
+  <div class="card-meta"><span class="badge badge-tema">Conceito</span><span class="badge badge-pag">págs. 576–577, 580–582</span></div>
+  <div class="card-title">A1 · Conceito e espécies — contratual × extracontratual</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>A responsabilidade civil é a <b>consequência jurídica</b> que surge da transgressão de uma norma preexistente, impondo ao causador do dano o <b>dever de reparar</b>. Decorre do <b>descumprimento obrigacional</b>.</p>
+    <ul>
+      <li><b>Contratual / negocial</b> — viola <b>dever jurídico específico</b>; <b>preexiste</b> relação jurídica de direito material entre as partes (arts. 389 e ss.).</li>
+      <li><b>Extracontratual / aquiliana</b> — viola <b>dever jurídico genérico</b> (a lei / <i>neminem laedere</i>); <b>inexiste</b> relação prévia (arts. 186, 187 e 927). Nome vem da <i>Lex Aquilia de Damno</i>.</li>
+    </ul>
+    <p>Adotada a <b>teoria dualista/clássica</b> (separa as duas). A <b>teoria unitária</b> é a do <b>CDC</b> (art. 17): não distingue contratual/extracontratual na responsabilidade do fornecedor, cujo fundamento é a <b>violação do dever de segurança</b>.</p>
+    <p>Os "rótulos" (contratual/extracontratual, objetiva/subjetiva) referem-se à <b>fonte/causa</b> da responsabilidade, não à responsabilidade em si (que é mero resultado da aferição do nexo entre conduta e dano).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">DEVER ESPECÍFICO + relação prévia = CONTRATUAL · DEVER GENÉRICO (lei) + sem relação prévia = EXTRACONTRATUAL (aquiliana)</span><br>
+    Prescrição da pretensão de reparação civil: <b>3 anos</b> (art. 206, §3º, V — Enunciado 419 CJF).
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O que distingue a responsabilidade contratual da extracontratual?</span><span class="chev">▸</span></summary><div class="recall-a">A <b>fonte</b>: dever jurídico <b>específico</b> com relação prévia entre as partes → <b>contratual</b>; dever <b>genérico</b> (lei), sem relação prévia → <b>extracontratual/aquiliana</b>.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual teoria o CDC adota e qual o fundamento?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Teoria unitária</b> (art. 17 CDC) — não distingue contratual/extracontratual; fundamento é a <b>violação do dever de segurança</b>.</div></details>
+</div>
+
+<!-- A2 -->
+<div class="card" id="a2">
+  <div class="card-meta"><span class="badge badge-tema">Sistema legal · Abuso de direito</span><span class="badge badge-pag">págs. 577–578</span></div>
+  <div class="card-title">A2 · Arts. 186, 187 e 927 + abuso de direito</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>O sistema repousa em três dispositivos:</p>
+    <ul>
+      <li><b>Art. 186</b> — define o <b>ato ilícito</b> (ação/omissão, negligência ou imprudência, viola direito e causa dano, <b>ainda que exclusivamente moral</b>). Critério <b>subjetivo</b> (culpa).</li>
+      <li><b>Art. 187</b> — <b>abuso de direito</b> (atos emulativos): comete ato ilícito quem, ao exercer um direito, excede manifestamente os limites do fim econômico/social, da boa-fé ou dos bons costumes. Critério <b>objetivo-finalístico</b> → <b>não exige dolo nem culpa</b>; basta o <b>desvio da finalidade</b>.</li>
+      <li><b>Art. 927</b> — quem comete ato ilícito (186/187) fica obrigado a <b>reparar</b>. <b>Parágrafo único</b> = cláusula geral da <b>responsabilidade objetiva</b> (independe de culpa): nos casos <b>previstos em lei</b> ou quando a <b>atividade</b> normalmente desenvolvida implicar <b>risco</b>.</li>
+    </ul>
+    <p>Conflito art. 1.228, §2º (exige intenção de prejudicar) × art. 187 (dispensa culpa): resolve-se pelo <b>Enunciado 49 JDC</b> (interpreta-se restritivamente o 1.228, §2º, em harmonia com a função social e com o art. 187).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">186 = CULPA (subjetivo) · 187 = FINALIDADE (objetivo, sem culpa) · 927 = REPARAR (caput) / RISCO (parág. único)</span><br>
+    Abuso de direito por área: Consumidor (publicidade abusiva) · Trabalho (greve abusiva) · Processual (litigância de má-fé) · Civil (abuso do direito de propriedade).
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência / Enunciados</div>
+  <div class="jur-box"><span class="info">Enunciado 37 JDC</span> A responsabilidade civil por <b>abuso de direito independe de culpa</b> e fundamenta-se somente no critério <b>objetivo-finalístico</b>.</div>
+  <div class="jur-box"><span class="info">Enunciado 539 JDC</span> O abuso de direito é <b>categoria jurídica autônoma</b> em relação à responsabilidade civil; o exercício abusivo desafia controle <b>independentemente de dano</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Para configurar abuso de direito (art. 187) é preciso provar dolo ou culpa?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não.</b> O art. 187 adota critério <b>objetivo-finalístico</b>: basta o <b>desvio da finalidade</b> do direito (Enunciado 37). Dolo/culpa são irrelevantes.</div></details>
+</div>
+
+<!-- A3 -->
+<div class="card" id="a3">
+  <div class="card-meta"><span class="badge badge-tema">Funções</span><span class="badge badge-pag">págs. 579–580</span></div>
+  <div class="card-title">A3 · Funções da responsabilidade civil</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Tripartição funcional, <b>sem hierarquia</b> entre elas:</p>
+    <ul>
+      <li><b>Reparatória</b> — transfere o dano do lesante para o lesado (reequilíbrio patrimonial). Indenização + prevenção de danos.</li>
+      <li><b>Punitiva</b> — pena civil que desestimula condutas reprováveis. Pena + prevenção de ilícitos.</li>
+      <li><b>Precaução</b> — inibe atividades potencialmente danosas (anterioridade). Sanção + prevenção de riscos.</li>
+    </ul>
+    <p>A <b>prevenção (lato sensu)</b> é princípio regente comum às três funções — não é uma "quarta função" autônoma.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">REPARAR · PUNIR · PRECAVER</span> — e a <b>PREVENÇÃO</b> permeia todas (não é função autônoma).</div>
+</div>
+
+<!-- A4 -->
+<div class="card" id="a4">
+  <div class="card-meta"><span class="badge badge-tema">Pressupostos · Conduta</span><span class="badge badge-pag">págs. 582–584</span></div>
+  <div class="card-title">A4 · Elementos, conduta e ato lícito que indeniza</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Elementos:</b> (1) conduta antijurídica (omissiva/comissiva); (2) nexo de causalidade; (3) dano; (4) culpa (na resp. subjetiva). A <b>conduta</b> exige <b>voluntariedade</b> do agente.</p>
+    <p><b>Inadimplemento involuntário</b> (sem culpa — caso fortuito/força maior): em regra, <b>não</b> há responsabilidade. <b>Exceções</b> (responde mesmo assim): previsão contratual de assunção do fortuito (vedada em adesão); <b>devedor em mora</b>; comodato; obrigação de dar coisa incerta antes da escolha.</p>
+    <p><b>Inadimplemento voluntário</b> (com culpa — art. 389): sanções na ação indenizatória → <b>perdas e danos, juros, correção monetária e honorários</b>.</p>
+    <p><b>Ato lícito pode gerar dever de indenizar</b> (a ilicitude não é requisito de toda responsabilidade): desapropriação; passagem forçada (art. 1.285); <b>estado de necessidade agressivo</b> (prejudica terceiro inocente).</p>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Inf. 513 STJ</span> O ato em <b>estado de necessidade</b> é lícito (art. 188, II), mas <b>não afasta</b> o dever de indenizar a vítima inocente (arts. 929 e 930); depois cabe regresso contra quem criou o perigo. A indenização deve ser <b>proporcional</b> (<b>Teoria do Sacrifício</b>): entre dois comportamentos lícitos, protege-se o mais inocente, sacrificando o outro.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quem age em estado de necessidade e atinge terceiro inocente indeniza?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Sim</b> (arts. 929/930), embora o ato seja lícito; indenização <b>proporcional</b> (Teoria do Sacrifício), com regresso contra o causador do perigo.</div></details>
+</div>
+
+<!-- A5 -->
+<div class="card" id="a5">
+  <div class="card-meta"><span class="badge badge-tema">Dano · Perda de uma chance</span><span class="badge badge-pag">págs. 584–587</span></div>
+  <div class="card-title">A5 · Dano patrimonial e teoria da perda de uma chance</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Sem dano não há responsabilidade civil.</b> O dano patrimonial divide-se em:</p>
+    <ul>
+      <li><b>Dano emergente (positivo)</b> — diminuição <b>efetiva e imediata</b> do patrimônio (o que se perdeu).</li>
+      <li><b>Lucro cessante</b> — efeitos <b>mediatos/futuros</b>; frustração do <b>ganho esperável</b> (o que razoavelmente deixou de ganhar). Não confundir com lucro <b>imaginário</b>/hipotético.</li>
+    </ul>
+    <p><b>Perda de uma chance</b> — modernamente, <b>subespécie de dano emergente</b>. Indeniza-se a <b>chance perdida</b>, não o resultado. A probabilidade serve só para aferir se a chance era <b>séria e real</b>. Difere do lucro cessante (neste há probabilidade objetiva do resultado; na perda de chance a expectativa é aleatória — ex.: aprovação em concurso).</p>
+    <p><b>Perdas e danos em dinheiro</b> (art. 404): correção monetária + juros + custas + honorários (+ pena convencional). <b>Parágrafo único</b>: se os juros não cobrirem o prejuízo e não houver pena convencional, cabe <b>indenização suplementar</b>.</p>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência / Enunciados</div>
+  <div class="jur-box"><span class="info">Enunciado 444 JDC</span> A perda de uma chance <b>não se limita</b> a dano extrapatrimonial — pode ter <b>natureza patrimonial</b>; a chance deve ser <b>séria e real</b> (sem percentuais apriorísticos).</div>
+  <div class="jur-box"><span class="info">STJ · REsp 2174003/SP (2023)</span> O <b>advogado responde por obrigação de MEIO</b>, como regra (não de resultado); só responde pela perda da causa se houver <b>negligência</b> no seu mister. Reexame de prova esbarra na <b>Súmula 7 STJ</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Na perda de uma chance, indeniza-se o resultado ou a chance?</span><span class="chev">▸</span></summary><div class="recall-a">A <b>chance perdida</b> (a oportunidade dissipada), nunca o resultado. A probabilidade só mede se a chance era <b>séria e real</b>.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Dano emergente × lucro cessante?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Emergente</b> = o que efetivamente se perdeu (imediato). <b>Lucro cessante</b> = o que razoavelmente se deixou de lucrar (mediato/futuro).</div></details>
+</div>
+
+<!-- A6 -->
+<div class="card" id="a6">
+  <div class="card-meta"><span class="badge badge-tema">Dano moral</span><span class="badge badge-pag">págs. 588–591</span></div>
+  <div class="card-title">A6 · Dano moral — PJ, coletivo, abandono afetivo, score</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Dano moral = lesão a <b>bem jurídico extrapatrimonial</b>, ligado à <b>dignidade da pessoa humana</b> (art. 1º, III, CF) e aos direitos da personalidade (nome, honra, imagem, vida privada, integridade física).</p>
+    <ul>
+      <li><b>Por inadimplemento contratual</b> — em regra <b>não</b> gera dano moral (mero aborrecimento); <b>excepcionalmente</b>, quando o inadimplemento atinge a dignidade (REsp 1.025.665/RJ).</li>
+      <li><b>Pessoa jurídica</b> — <b>é possível</b> (Súmula 227 STJ; atributos compatíveis da personalidade se estendem à PJ).</li>
+      <li><b>Dano moral coletivo</b> — possível em <b>direitos difusos/coletivos</b> (meio ambiente, consumidor, ordem econômica). Difuso = pessoas indeterminadas por fato/circunstância; coletivo = pessoas determináveis ligadas por relação jurídica (Lei 7.347/85).</li>
+      <li><b>Abandono socioafetivo</b> — REsp 1.159.242/SP (pai condenado a R$ 200 mil); tema com votos divergentes, <b>não pacificado</b>.</li>
+    </ul>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Súmula 227 STJ</span> A <b>pessoa jurídica</b> pode sofrer <b>dano moral</b>.</div>
+  <div class="jur-box"><span class="info">Tema Repetitivo 710 STJ</span> O <b>credit scoring</b> é prática comercial <b>lícita</b> (art. 5º, IV, e art. 7º, I, da Lei 12.414/2011), respeitados privacidade e transparência. <b>Gera dano moral</b> o uso de informações <b>excessivas/sensíveis</b> ou a recusa indevida de crédito por dados <b>incorretos/desatualizados</b> (resp. objetiva e solidária).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Mero inadimplemento contratual gera dano moral?</span><span class="chev">▸</span></summary><div class="recall-a">Em regra <b>não</b> (mero aborrecimento). Só <b>excepcionalmente</b>, quando o inadimplemento atinge a <b>dignidade</b> da pessoa.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O credit scoring é lícito? Quando gera dano moral?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Lícito</b> (Tema 710). Gera dano moral se usar <b>informações excessivas/sensíveis</b> ou recusar crédito por <b>dados incorretos/desatualizados</b>.</div></details>
+</div>
+
+<!-- A7 -->
+<div class="card" id="a7">
+  <div class="card-meta"><span class="badge badge-tema">Nexo de causalidade</span><span class="badge badge-pag">págs. 592–595</span></div>
+  <div class="card-title">A7 · Nexo causal — as três teorias</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Nexo = <b>liame</b> entre a fonte e o resultado danoso; elemento <b>estruturante</b> (vale para resp. objetiva e subjetiva). Três teorias:</p>
+    <ul>
+      <li><b>Equivalência dos antecedentes</b> (<i>conditio sine qua non</i>) — <b>não distingue</b> causa e condição; toda contribuição é causa. Problema: <b>regressão infinita</b>.</li>
+      <li><b>Causalidade adequada</b> — <b>seleciona</b> as condições; só a <b>condição qualificada</b> (causa juridicamente relevante/determinante) gera responsabilidade; a condição simples, não.</li>
+      <li><b>Dano direto e imediato</b> (interrupção do nexo — art. 403; Agostinho Alvim) — indeniza-se o dano que se filia <b>necessariamente</b> à causa (critério da <b>necessariedade</b>). Acolhida pelo STF (RE 130.764).</li>
+    </ul>
+    <p><b>O que o CC/STJ adotam:</b> para Tartuce e a jurisprudência superior, o CC consagra a <b>causalidade adequada</b> (arts. 944 e 945) <b>+ dano direto e imediato</b> (art. 403).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Equivalência = TUDO é causa (regressão infinita) · Adequada = SELEÇÃO (causa relevante) · Direto e imediato = NECESSARIEDADE (art. 403)</span><br>CC/STJ → <b>causalidade adequada (944/945) + dano direto e imediato (403)</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual(is) teoria(s) do nexo causal o CC/STJ adotam?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Causalidade adequada</b> (arts. 944/945) somada à teoria do <b>dano direto e imediato</b> (art. 403).</div></details>
+</div>
+
+<!-- A8 -->
+<div class="card" id="a8">
+  <div class="card-meta"><span class="badge badge-tema">Culpa · Resp. subjetiva</span><span class="badge badge-pag">págs. 596, 599–600</span></div>
+  <div class="card-title">A8 · Culpa e responsabilidade subjetiva</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Na <b>resp. subjetiva</b> a <b>culpa</b> é o elemento central. <b>Culpa stricto sensu</b> = <b>negligência, imprudência ou imperícia</b> (sem intenção de violar). O <b>grau de culpa</b> influencia a indenização (art. 944, parágrafo único — redução equitativa por desproporção).</p>
+    <p><b>Culpa presumida</b> — técnica de <b>inversão do ônus da prova</b> (presunção <b>relativa</b>): cabe ao agente provar causa estranha (força maior, fato exclusivo da vítima/terceiro). Permanece na esfera subjetiva.</p>
+    <p><b>Obrigação de meio × resultado</b> (médico): regra é <b>obrigação de meio</b> (cuidados diligentes, não a cura) — a vítima prova a culpa. <b>Cirurgia plástica estética</b> = <b>obrigação de resultado</b> — basta provar que o resultado prometido não foi alcançado (culpa presumida, inversão do ônus).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Culpa s.s. = NIN (Negligência · Imprudência · imperÍcia... → "NEG-IMP-IMP")</span><br>Médico = <b>MEIO</b> (regra) · Cirurgia estética = <b>RESULTADO</b> (culpa presumida).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A obrigação do médico é de meio ou de resultado? E na cirurgia estética?</span><span class="chev">▸</span></summary><div class="recall-a">Regra: <b>obrigação de meio</b> (a vítima prova culpa). <b>Cirurgia plástica estética</b>: <b>obrigação de resultado</b> (culpa presumida, inversão do ônus).</div></details>
+</div>
+
+<!-- A9 -->
+<div class="card" id="a9">
+  <div class="card-meta"><span class="badge badge-tema">Resp. objetiva · Risco</span><span class="badge badge-pag">págs. 596–598</span></div>
+  <div class="card-title">A9 · Responsabilidade objetiva e teorias do risco</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Cláusula geral</b> (art. 927, parágrafo único): obrigação de reparar <b>independentemente de culpa</b>, nos casos <b>previstos em lei</b> (ex.: garantes do art. 932) ou quando a <b>atividade</b> implicar <b>risco</b>. Funda-se na <b>violação do dever de segurança</b> (Cavalieri).</p>
+    <ul>
+      <li><b>Risco criado</b> — <b>adotada pelo art. 927, p.u.</b> Basta a <b>natureza da atividade</b> ter criado risco; <b>dispensa proveito/vantagem</b> e dispensa culpa.</li>
+      <li><b>Risco proveito</b> — exige que o agente retire <b>vantagem econômica</b> da atividade de risco. Difícil delimitar o "proveito".</li>
+      <li><b>Risco integral</b> — dever de indenizar <b>mesmo sem nexo causal</b>; <b>não</b> admite excludentes (culpa exclusiva da vítima, fato de terceiro, caso fortuito/força maior). Aplicação restrita: <b>dano ambiental</b> (ex.: Brumadinho).</li>
+    </ul>
+  </div>
+  <div class="sec-label jur">⚖️ Enunciado</div>
+  <div class="jur-box"><span class="info">Enunciado 553 CJF</span> Nas ações de resp. civil por <b>cadastramento indevido</b> nos registros de devedores inadimplentes feito por <b>instituições financeiras</b>, a responsabilidade é <b>objetiva</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual teoria do risco o art. 927, p.u., adota? Precisa de proveito?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Risco criado.</b> <b>Não</b> precisa de proveito/vantagem — basta a natureza da atividade ter criado risco para terceiros.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual teoria não admite excludentes (nem culpa exclusiva da vítima)?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Risco integral</b> (indeniza mesmo sem nexo) — aplicação restrita ao <b>dano ambiental</b>.</div></details>
+</div>
+
+<div class="bloco-h b">Bloco B · Posse / Direito das Coisas</div>
+
+<!-- B1 -->
+<div class="card" id="b1">
+  <div class="card-meta"><span class="badge badge-tema">Direito das coisas · Direitos reais</span><span class="badge badge-pag">págs. 603–606</span></div>
+  <div class="card-title">B1 · Direitos reais × pessoais; rol do art. 1.225; taxatividade</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Direito das coisas</b> = relação de domínio da pessoa sobre a coisa, de dois tipos: <b>domínio fático (posse)</b> e <b>domínio jurídico (propriedade)</b>. No CC, posse <b>não é direito real</b>, mas é direito das coisas (Livro III, Título I).</p>
+    <p><b>Rol do art. 1.225</b> — propriedade, superfície, servidões, usufruto, uso, habitação, direito do promitente comprador, penhor, hipoteca, anticrese, concessão de uso especial p/ moradia, concessão de direito real de uso, <b>laje</b> (Lei 14.620/2023) e <b>direitos da imissão provisória na posse</b> (Lei 14.620/2023).</p>
+    <ul>
+      <li><b>Visão clássica (1ª fase — majoritária):</b> rol <b>TAXATIVO</b> (<i>numerus clausus</i>) — princípio da tipicidade.</li>
+      <li><b>Visão contemporânea (2ª fase/oral):</b> exemplificativo. 1ª corrente (Tartuce): não taxatividade, mas <b>tipicidade</b> — outras leis podem criar direitos reais (ex.: alienação fiduciária, DL 911/69 e Lei 9.514/97). 2ª corrente (Chaves/Rosenvald): a <b>autonomia privada</b> poderia criar novos direitos reais (criticada pela oponibilidade <i>erga omnes</i>).</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><b>Direitos reais:</b> oponibilidade <span class="mnemo">erga omnes</span> · sujeito passivo = toda a coletividade · publicidade (registro/tradição) · rol taxativo · direito de sequela · caráter permanente. <b>Pessoais:</b> inter partes · autonomia privada · transitório.<br><b>Híbridos:</b> posse · obrigações <i>propter rem</i> · abuso de direito.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O rol do art. 1.225 é taxativo? (regra para 1ª fase)</span><span class="chev">▸</span></summary><div class="recall-a">Para a <b>visão clássica majoritária (1ª fase)</b>: <b>TAXATIVO</b> (<i>numerus clausus</i>, princípio da tipicidade). A leitura exemplificativa fica para 2ª fase/oral.</div></details>
+</div>
+
+<!-- B2 -->
+<div class="card" id="b2">
+  <div class="card-meta"><span class="badge badge-tema">Posse · Teorias</span><span class="badge badge-pag">págs. 607–609</span></div>
+  <div class="card-title">B2 · Posse: conceito, natureza e teorias</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Art. 1.196</b>: possuidor é quem tem de fato o exercício, pleno ou não, de <b>algum dos poderes inerentes à propriedade</b> (Gozar/fruir, Reaver, Usar, Dispor — "GRUD"). Quem tem <b>todos</b> = propriedade plena; <b>alguns</b> = limitada; <b>ao menos um</b> = posse.</p>
+    <p><b>Natureza jurídica</b>: prevalece que a posse é <b>direito</b> (de natureza especial — Tartuce/Reale); há quem a veja como direito real (Maria Helena Diniz).</p>
+    <ul>
+      <li><b>Teoria subjetiva (Savigny)</b> — posse = <b>corpus</b> (poder físico) + <b>animus domini</b> (intenção de ser dono). Locatário/comodatário seriam <b>meros detentores</b>. <b>Não adotada</b> — só releva no Brasil na <b>usucapião</b> (onde a intenção de ser dono importa).</li>
+      <li><b>Teoria objetiva (Ihering)</b> — basta o <b>corpus</b> (dispor fisicamente da coisa com fim econômico); dispensa o <i>animus</i>. <b>Adotada pelo CC</b> (art. 1.196). Locatário/comodatário <b>são possuidores</b>. <b>Detenção</b> = posse <b>desqualificada</b> pela lei.</li>
+      <li><b>Teoria sociológica (função social)</b> — corpus + <b>função social</b>; adotada implicitamente na <b>posse-trabalho</b> (art. 1.238, p.u.).</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">SAVIGNY = Subjetiva (corpus + ANIMUS) → só na usucapião · IHERING = objetiva (só corpus) → ADOTADA pelo CC</span></div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual teoria da posse o CC adota e qual a consequência para o locatário?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Teoria objetiva de Ihering</b> (só corpus). Por isso o <b>locatário/comodatário É possuidor</b> (direto), não mero detentor.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quando a teoria de Savigny (animus domini) ganha relevância no Brasil?</span><span class="chev">▸</span></summary><div class="recall-a">Na <b>usucapião</b>, em que a intenção de ser proprietário (ânimo de dono) é relevante.</div></details>
+</div>
+
+<!-- B3 -->
+<div class="card" id="b3">
+  <div class="card-meta"><span class="badge badge-tema">Posse × Detenção</span><span class="badge badge-pag">págs. 610–613</span></div>
+  <div class="card-title">B3 · Detenção, mera tolerância e bem público</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Detentor / fâmulo / servidor / gestor da posse</b> (art. 1.198): conserva a posse <b>em nome de outrem</b>, por relação de <b>dependência/subordinação</b> (caseiro, motorista, empregado). <b>Presume-se</b> detentor até prova em contrário. <b>Não usa interditos</b> possessórios, mas <b>pode</b> exercer <b>autodefesa</b> em favor do possuidor (Enunciado 493).</p>
+    <p><b>Atos de mera tolerância/permissão</b> (art. 1.208): <b>não induzem posse</b>. A <b>conversão da detenção em posse</b> (<i>interversio</i>) ocorre quando rompida a subordinação, exercendo-se os atos em nome próprio (Enunciado 301).</p>
+    <p><b>Ocupação irregular de bem público</b> = <b>detenção</b> (não posse), insuscetível de indenização por acessões/benfeitorias (<b>Súmula 619 STJ</b>). Particular × Poder Público: <b>não</b> cabe interdito (exerce mera detenção). Particular × particular sobre bem público dominical: cabe interdito (disputa relativa à posse).</p>
+    <p><b>Tença</b> = "mini-detenção": apreensão física totalmente precária, sem qualquer consequência jurídica protetiva (ex.: pegar um peixe, tirar foto e devolver ao mar).</p>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Súmula 619 STJ</span> A ocupação indevida de <b>bem público</b> configura <b>mera detenção</b>, de natureza precária, insuscetível de retenção ou indenização por acessões e benfeitorias.</div>
+  <div class="jur-box"><span class="info">STJ · REsp 1296964/DF (Info 594)</span> Cabe interdito possessório entre <b>particulares</b> em disputa sobre bem público <b>dominical</b> (entre eles a disputa é relativa à posse); contra o <b>Poder Público</b> o particular invasor <b>não</b> tem proteção possessória.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O detentor pode usar interditos possessórios?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não</b> usa interditos, mas <b>pode</b> exercer <b>autodefesa</b> (desforço imediato/legítima defesa) no interesse do possuidor (Enunciado 493).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Ocupação de bem público gera posse ou detenção?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Detenção</b> (Súmula 619), sem direito a indenização por acessões/benfeitorias.</div></details>
+</div>
+
+<!-- B4 -->
+<div class="card" id="b4">
+  <div class="card-meta"><span class="badge badge-tema">Classificação I · Vícios objetivos</span><span class="badge badge-pag">págs. 613–616</span></div>
+  <div class="card-title">B4 · Posse justa × injusta (violenta, clandestina, precária)</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Justa/limpa</b> (art. 1.200): sem vícios objetivos. <b>Injusta</b>: com <b>ao menos um</b> vício (não precisa cumular). A posse pode ser <b>justa para um e injusta para outro</b> — o possuidor injusto ainda tem ação possessória <b>contra terceiros</b>.</p>
+    <ul>
+      <li><b>Violenta</b> — força física ou grave ameaça (≈ <b>roubo</b>; contra a pessoa, não a coisa; <i>vis</i> compulsiva ou absoluta).</li>
+      <li><b>Clandestina</b> — às ocultas, "à surdina" (≈ <b>furto</b>); basta que o esbulhado não saiba.</li>
+      <li><b>Precária</b> — abuso de confiança/direito (≈ <b>apropriação indébita/estelionato</b>; esbulho pacífico). Configura-se quando o precarista se recusa a devolver (fim do comodato, locação, depósito).</li>
+    </ul>
+    <p><b>Convalidação</b> (art. 1.208, 2ª parte): posse <b>violenta e clandestina</b> podem ser <b>convalidadas</b> (cessada a violência/clandestinidade — <i>interversio possessionis</i>). A <b>precária NÃO</b> se convalida (majoritário). Exceção à continuidade do caráter da posse (art. 1.203).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">VIOLENTA = roubo · CLANDESTINA = furto · PRECÁRIA = apropriação indébita</span><br>Convalidam: <b>Violenta + Clandestina</b> (cessado o vício). <b>Precária NÃO convalida</b> (majoritário).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais posses injustas podem convalidar e qual não pode?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Violenta e clandestina convalidam</b> (cessada a violência/clandestinidade). A <b>precária NÃO</b> convalida (posição majoritária).</div></details>
+</div>
+
+<!-- B5 -->
+<div class="card" id="b5">
+  <div class="card-meta"><span class="badge badge-tema">Classificações · Interditos</span><span class="badge badge-pag">págs. 615–621</span></div>
+  <div class="card-title">B5 · Demais classificações e proteção possessória</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Quanto à boa-fé:</b> <b>boa-fé</b> (art. 1.201 — ignora o vício; <b>justo título</b> gera presunção relativa de boa-fé — Enunciado 303) × <b>má-fé</b> (art. 1.202 — sabe que possui indevidamente). Justa↔boa-fé em regra coincidem, mas não necessariamente (ex.: compra de celular roubado = injusta, mas de boa-fé).</p>
+    <p><b>Quanto ao desdobramento</b> (art. 1.197): <b>direta/imediata</b> (locatário, comodatário, usufrutuário) × <b>indireta/mediata</b> (locador, nu-proprietário). <b>Uma não anula a outra</b>; ambos podem usar interditos, inclusive um contra o outro (Enunciado 76).</p>
+    <p><b>Quanto ao título:</b> com título (<i>ius possidendi</i>) × sem título (<i>ius possessionis</i>). <b>Quanto ao tempo:</b> nova (&lt; 1 ano e 1 dia) × velha (≥ 1 ano e 1 dia) — não confundir com força nova/velha (conta-se da turbação/esbulho — CPC art. 558).</p>
+    <p><b>Ad interdicta</b> (defendida por possessórias): <b>ameaça</b> → interdito proibitório; <b>turbação</b> → ação de manutenção; <b>esbulho</b> → ação de reintegração. <b>Autotutela</b>: legítima defesa (ameaça/turbação) e desforço imediato (esbulho), proporcionais e imediatos (<i>in continenti</i>).</p>
+    <p><b>Exceção de domínio vedada</b> (art. 1.210, §2º; CPC 557): não se discute propriedade em juízo possessório (autonomia entre posse e propriedade).</p>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Súmula 637 STJ</span> O <b>ente público</b> tem legitimidade e interesse para intervir, <b>incidentalmente</b>, na ação possessória entre <b>particulares</b>, podendo deduzir matéria defensiva, inclusive o domínio.</div>
+  <div class="jur-box"><span class="info">STJ · Info 701 (REsp 1909196/SP)</span> Havendo <b>ação possessória em curso</b>, é <b>vedado</b> ajuizar <b>ação de imissão na posse</b> (que é petitória, baseada na propriedade) sobre o mesmo bem.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Ameaça, turbação e esbulho — qual ação possessória cabe em cada?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Ameaça</b> → interdito proibitório · <b>Turbação</b> → manutenção de posse · <b>Esbulho</b> → reintegração de posse.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Pode-se discutir o domínio em ação possessória?</span><span class="chev">▸</span></summary><div class="recall-a">Em regra <b>não</b> (exceção de domínio vedada — art. 1.210, §2º). Mas o <b>ente público</b> pode deduzir o domínio incidentalmente em possessória entre particulares (Súmula 637).</div></details>
+</div>
+
+<!-- B6 -->
+<div class="card" id="b6">
+  <div class="card-meta"><span class="badge badge-tema">Aquisição · Transmissão</span><span class="badge badge-pag">págs. 622–627</span></div>
+  <div class="card-title">B6 · Aquisição e transmissão da posse</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Aquisição</b> (art. 1.204 — modelo <b>aberto</b>, não taxativo):</p>
+    <ul>
+      <li><b>Originária</b> — sem vínculo com possuidor anterior (<i>res derelicta</i>/<i>res nullius</i>); posse <b>despida de vícios</b>.</li>
+      <li><b>Derivada</b> — com vínculo; posse <b>vem gravada</b> dos vícios anteriores (art. 1.206: transmite-se aos herdeiros/legatários com os mesmos caracteres).</li>
+    </ul>
+    <p><b>Tradição</b> (modo derivado): <b>efetiva/real</b> (entrega material); <b>simbólica</b> (gesto representativo — entrega das chaves, <i>traditio longa manu</i>); <b>ficta</b> (presunção): <i>traditio brevi manu</i> (possuía em nome alheio e passa a possuir em nome próprio — ex.: locatário que compra) e <b>constituto possessório</b>/cláusula <i>constituti</i> (possuía em nome próprio e passa a possuir em nome alheio — ex.: vende e fica como locatário; é modo de aquisição <b>e</b> de perda).</p>
+    <p><b>Transmissão</b> (princípio da continuidade — arts. 1.203 e 1.206): <b>universal</b> → <b>continuidade obrigatória</b> (mesmo caráter); <b>singular</b> (legatário, compra e venda) → <b>união de posses (acessão) facultativa</b> (art. 1.207). O sucessor singular que opta por nova contagem <b>não</b> se livra do vício objetivo anterior (Enunciado 494).</p>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">STJ · REsp 1.984.847-MG (Nancy Andrighi, 21/06/2022)</span> É possível incluir <b>direitos possessórios sobre imóveis não escriturados na partilha</b> de bens (sucessão), desde que não exista má-fé dos possuidores. Há <b>autonomia entre o direito de propriedade e o direito possessório</b>; a regularização da propriedade pode ser adiada.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span><i>Traditio brevi manu</i> × constituto possessório?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Brevi manu</b>: possuía em nome <b>alheio</b> → passa a possuir em nome <b>próprio</b> (locatário compra). <b>Constituto possessório</b>: possuía em nome <b>próprio</b> → passa a possuir em nome <b>alheio</b> (vende e fica como locatário).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Na sucessão, a continuidade da posse é obrigatória ou facultativa?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Universal</b> = continuidade <b>obrigatória</b> (mesmo caráter). <b>Singular</b> = união/acessão <b>facultativa</b> (art. 1.207).</div></details>
+</div>
+
+<!-- B7 -->
+<div class="card" id="b7">
+  <div class="card-meta"><span class="badge badge-tema">Perda da posse</span><span class="badge badge-pag">págs. 628</span></div>
+  <div class="card-title">B7 · Perda da posse</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Art. 1.223</b>: perde-se a posse quando cessa, <b>ainda que contra a vontade</b> do possuidor, o poder sobre o bem (art. 1.196). Modelo <b>aberto</b> (os casos do CC/16 servem só de exemplo).</p>
+    <p><b>Quanto ao ausente</b> (art. 1.224): só se considera perdida a posse de quem <b>não presenciou</b> o esbulho quando, <b>tendo notícia</b> dele, se abstém de retomar a coisa, ou, tentando recuperá-la, é <b>violentamente repelido</b>. Liga-se à boa-fé objetiva (<b>supressio</b>): quem não age ao saber do esbulho não pode depois insurgir-se (presunção relativa).</p>
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quando o ausente perde a posse?</span><span class="chev">▸</span></summary><div class="recall-a">Quando, <b>tendo notícia</b> do esbulho, se abstém de retomar a coisa ou, tentando, é <b>violentamente repelido</b> (art. 1.224 — ligado à <i>supressio</i>).</div></details>
+</div>
+
+<!-- SÚMULAS -->
+<div class="card" id="sum">
+  <div class="card-meta"><span class="badge badge-tema">⚖️ Consolidado</span><span class="badge badge-pag">súmulas · temas · enunciados</span></div>
+  <div class="card-title">⚖️ Súmulas, Temas e Enunciados — quadro de revisão</div>
+  <table class="cmp-table">
+    <tr><th>Fonte</th><th>Conteúdo</th></tr>
+    <tr><td>Súmula 227 STJ</td><td>Pessoa jurídica pode sofrer dano moral.</td></tr>
+    <tr><td>Súmula 619 STJ</td><td>Ocupação indevida de bem público = mera detenção (sem indenização por acessões/benfeitorias).</td></tr>
+    <tr><td>Súmula 637 STJ</td><td>Ente público pode intervir incidentalmente em possessória entre particulares, inclusive deduzindo o domínio.</td></tr>
+    <tr><td>Súmula 7 STJ</td><td>Não cabe reexame de prova em recurso especial (citada no caso do advogado/perda de chance).</td></tr>
+    <tr><td>Tema 710 STJ</td><td>Credit scoring é lícito; dano moral por dados excessivos/sensíveis ou recusa por dado incorreto.</td></tr>
+    <tr><td>Inf. 513 STJ</td><td>Estado de necessidade: indeniza vítima inocente (arts. 929/930) — Teoria do Sacrifício.</td></tr>
+    <tr><td>Inf. 594 STJ</td><td>Cabe interdito entre particulares sobre bem público dominical.</td></tr>
+    <tr><td>Inf. 701 STJ</td><td>Possessória em curso veda imissão na posse (petitória) sobre o mesmo bem.</td></tr>
+    <tr><td>REsp 1.984.847-MG</td><td>Partilha de direitos possessórios sobre imóveis não escriturados (autonomia posse × propriedade).</td></tr>
+    <tr><td>Enunciados 37 / 539 JDC</td><td>Abuso de direito independe de culpa (critério objetivo-finalístico); é categoria autônoma.</td></tr>
+    <tr><td>Enunciado 444 JDC</td><td>Perda de uma chance pode ser dano patrimonial; chance séria e real.</td></tr>
+    <tr><td>Enunciado 553 CJF</td><td>Cadastramento indevido por instituição financeira = responsabilidade objetiva.</td></tr>
+    <tr><td>Enunciados 301 / 303 / 76 / 492 / 493 / 494 JDC</td><td>Posse: conversão detenção→posse; justo título; defesa entre possuidores; autonomia da posse; autodefesa do detentor; vício do sucessor singular.</td></tr>
+  </table>
+</div>
+
+<!-- PEGADINHAS -->
+<div class="card" id="peg">
+  <div class="card-meta"><span class="badge badge-tema">⚠️ Pegadinhas</span><span class="badge badge-pag">o que derruba na prova</span></div>
+  <div class="card-title">⚠️ Pegadinhas clássicas</div>
+  <ul class="list-pega">
+    <li><b>Abuso de direito (art. 187)</b> NÃO exige dolo/culpa — critério objetivo-finalístico (Enunciado 37). Quem marca "depende de culpa" erra.</li>
+    <li><b>Perda de uma chance</b> indeniza a <b>chance</b>, não o resultado; é subespécie de <b>dano emergente</b> (não de lucro cessante).</li>
+    <li><b>Advogado</b> = obrigação de <b>meio</b> (regra); só responde por perda da causa se houver <b>negligência</b>.</li>
+    <li><b>Médico</b> = obrigação de meio; <b>cirurgia plástica estética</b> = obrigação de <b>resultado</b> (culpa presumida).</li>
+    <li><b>Risco criado</b> (art. 927 p.u.) <b>dispensa proveito</b>; quem exige vantagem é o <b>risco proveito</b>.</li>
+    <li><b>Risco integral</b> NÃO admite excludentes (nem culpa exclusiva da vítima) — restrito ao dano ambiental.</li>
+    <li>CC/STJ adotam <b>causalidade adequada + dano direto e imediato</b> (não a equivalência dos antecedentes).</li>
+    <li><b>Locatário É possuidor</b> (teoria de Ihering, adotada), não mero detentor.</li>
+    <li><b>Posse precária NÃO convalida</b> (majoritário); só violenta e clandestina.</li>
+    <li><b>Ocupação de bem público</b> = detenção (Súmula 619); <b>sem</b> indenização por benfeitorias.</li>
+    <li><b>Posse injusta ainda é posse</b> — gera ação possessória contra terceiros (justa/injusta é relativa).</li>
+    <li><b>Exceção de domínio vedada</b> em possessória (art. 1.210, §2º) — salvo intervenção do ente público (Súmula 637).</li>
+    <li><b>Constituto possessório</b> é modo de aquisição <b>E</b> de perda da posse (desdobramento).</li>
+    <li>Sucessão <b>universal</b> = continuidade <b>obrigatória</b>; <b>singular</b> = união (acessão) <b>facultativa</b> (mas o vício pode acompanhar — Enunciado 494).</li>
+  </ul>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="card" id="flash">
+  <div class="card-meta"><span class="badge badge-tema">🔁 Flashcards</span><span class="badge badge-pag">clique para virar</span></div>
+  <div class="card-title">🔁 Flashcards — revisão rápida</div>
+  <div class="flash-hint">Pense na resposta, depois clique no cartão para conferir.</div>
+  <div class="flip-grid">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">RESP. CIVIL</span><span class="fq">Quais os 3 artigos-base do sistema de responsabilidade civil?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>186</b> (ato ilícito/culpa) · <b>187</b> (abuso de direito/objetivo) · <b>927</b> (reparar + p.u. risco/objetiva).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">DANO</span><span class="fq">Perda de uma chance é subespécie de quê? Indeniza o quê?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">De <b>dano emergente</b>. Indeniza a <b>chance perdida</b> (séria e real), não o resultado.</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">NEXO</span><span class="fq">Teorias do nexo causal adotadas pelo CC/STJ?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Causalidade adequada</b> (944/945) + <b>dano direto e imediato</b> (403).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">RISCO</span><span class="fq">Qual risco dispensa proveito e qual não admite excludentes?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">Dispensa proveito = <b>risco criado</b> (927 p.u.). Sem excludentes = <b>risco integral</b> (dano ambiental).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">POSSE</span><span class="fq">Teoria adotada pelo CC e situação do locatário?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Ihering</b> (objetiva, só corpus). Locatário <b>É possuidor direto</b>.</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">VÍCIOS</span><span class="fq">Violenta = ? · Clandestina = ? · Precária = ? (analogia penal)</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">Roubo · Furto · Apropriação indébita. <b>Precária não convalida.</b></span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">INTERDITOS</span><span class="fq">Ameaça / Turbação / Esbulho → qual ação?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">Interdito proibitório / Manutenção / Reintegração.</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">BEM PÚBLICO</span><span class="fq">Ocupação de bem público gera o quê? Súmula?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Detenção</b> (Súmula 619 STJ); sem indenização por acessões/benfeitorias.</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">TRADIÇÃO</span><span class="fq"><i>Brevi manu</i> × constituto possessório?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Brevi manu</b>: alheio→próprio. <b>Constituto</b>: próprio→alheio (e é modo de perda também).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">SÚMULA</span><span class="fq">Dano moral à pessoa jurídica — possível?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Sim</b> — Súmula 227 STJ.</span></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="card" id="check">
+  <div class="card-meta"><span class="badge badge-tema">✅ Checklist</span><span class="badge badge-pag">domínio do bloco</span></div>
+  <div class="card-title">✅ Checklist final — marque o que já domina</div>
+  <div class="check-item"><span class="box">✓</span><span>Diferencio responsabilidade contratual × extracontratual pela <b>fonte</b> (dever específico × genérico).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei o papel dos arts. <b>186, 187 e 927</b> e que o abuso de direito independe de culpa.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Distingo dano <b>emergente × lucro cessante × perda de uma chance</b>.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Domino o <b>dano moral</b>: PJ (Súmula 227), coletivo, abandono afetivo, score (Tema 710).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei que o CC/STJ adotam <b>causalidade adequada + dano direto e imediato</b>.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Distingo <b>risco criado × proveito × integral</b> e obrigação de <b>meio × resultado</b>.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei que o CC adota a <b>teoria objetiva de Ihering</b> (locatário é possuidor).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Classifico a posse: justa/injusta (e convalidação), boa-fé/má-fé, direta/indireta, nova/velha.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei os <b>interditos</b> (proibitório/manutenção/reintegração) e a vedação à exceção de domínio.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Domino aquisição/transmissão (tradição, acessão) e perda da posse (arts. 1.223/1.224).</span></div>
+</div>
+
+</div>
+<footer>Caderno de Revisão · Direito Civil — Responsabilidade Civil &amp; Posse · e-Book de Civil, págs. 576–628 · uso pessoal de estudo</footer>
+</div>
+<script>
+document.querySelectorAll('.flip').forEach(function(f){f.addEventListener('click',function(){f.classList.toggle('flipped');});});
+document.querySelectorAll('.check-item').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('done');});});
+</script>
+</body>
+</html>
