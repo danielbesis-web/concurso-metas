@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caderno de Revisão · Civil — Propriedade &amp; Condomínio (pp. 629–668)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050b18;color:#c9d6e8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;min-height:100vh}
+a{color:#38bdf8}
+.wrap{max-width:780px;margin:0 auto}
+.banner{background:#0d2040;border-bottom:1px solid #16365a;padding:8px 14px;font-size:12px;color:#7aa3cc;text-align:center}
+.progress-wrap{position:sticky;top:0;z-index:100;background:#050b18;padding:9px 14px 7px;border-bottom:1px solid #16365a}
+.progress-top{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#7aa3cc;margin-bottom:5px}
+.progress-top b{color:#27c06a}
+.progress-bar{height:7px;background:#0b1828;border:1px solid #16365a;border-radius:6px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#1f6b4d,#27c06a);width:0;transition:width .35s ease}
+.btn-reset{background:none;border:none;color:#55738e;font-size:10.5px;cursor:pointer;text-decoration:underline;padding:0}
+.btn-reset:hover{color:#7aa3cc}
+.rev-btn{margin-left:auto;background:#0b1828;border:1px solid #2a4a3a;color:#6f9a85;padding:3px 11px;border-radius:20px;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.rev-btn:hover{border-color:#27c06a;color:#9fe6bd}
+.card.revisado{border-color:#1f6b4d;box-shadow:inset 3px 0 0 #27c06a}
+.card.revisado .rev-btn{background:#08160f;border-color:#27c06a;color:#27c06a}
+.header{padding:16px 14px 0}
+.header h1{font-size:18px;font-weight:700;color:#e8f0fb;margin-bottom:4px;line-height:1.3}
+.header .sub{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.header .sub b{color:#38bdf8}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.toc a{background:#0b1828;border:1px solid #16365a;color:#7aa3cc;padding:4px 10px;border-radius:20px;font-size:11.5px;text-decoration:none}
+.toc a:hover{border-color:#38bdf8;color:#38bdf8}
+.bloco-h{font-size:13px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fbbf24;padding:18px 14px 4px;border-top:1px solid #16365a;margin-top:10px}
+.bloco-h.b{color:#27c06a}
+.bloco-h.c{color:#c59bf2}
+.content{padding:0 14px}
+.card{background:#0b1828;border:1px solid #16365a;border-radius:14px;padding:20px;margin:0 0 12px}
+.card.mapa{border-color:#16463a;background:#08160f}
+.card.intro{border-color:#34204e;background:#0d0a1c}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-tema{background:#0d2040;color:#7aa3cc;border:1px solid #16365a}
+.badge-pag{background:#1a0d28;color:#c59bf2;border:1px solid #34204e}
+.card-title{font-size:17px;font-weight:700;color:#e8f0fb;margin-bottom:6px;line-height:1.35}
+.sec-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 7px;display:flex;align-items:center;gap:6px}
+.sec-label.sintese{color:#38bdf8}
+.sec-label.mem{color:#fbbf24}
+.sec-label.recall{color:#27c06a}
+.sec-label.jur{color:#f472b6}
+.prose{font-size:14px;line-height:1.65;color:#cdddf0}
+.prose p{margin-bottom:9px}
+.prose b{color:#e8f0fb}
+.prose .art{color:#9fb6d0;font-style:italic}
+.prose ul{margin:6px 0 9px 2px;list-style:none}
+.prose li{position:relative;padding-left:16px;margin-bottom:5px}
+.prose li:before{content:"▸";position:absolute;left:0;color:#38bdf8}
+details{margin-top:6px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.lei-toggle{background:#0d1e32;border:1px solid #16365a;color:#7aa3cc;padding:8px 14px;border-radius:8px;font-size:13px;width:100%;text-align:left;transition:all .2s}
+.lei-toggle:hover{border-color:#38bdf8;color:#c9d6e8}
+details[open] .lei-toggle{border-radius:8px 8px 0 0}
+.lei-body{background:#040c1c;border:1px solid #16365a;border-top:none;border-radius:0 0 8px 8px;padding:14px;font-size:13px;line-height:1.7;color:#b8cce0}
+.lei-body p{margin-bottom:7px}
+.lei-body .art-num{color:#f5a623;font-weight:700}
+.mem-box{background:#1a1200;border:1px solid #4a3200;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;color:#f3dca8;margin-top:6px}
+.mem-box b{color:#fbbf24}
+.mem-box .mnemo{display:inline-block;background:#2a1e00;border:1px solid #f5a623;color:#ffce6b;border-radius:6px;padding:1px 8px;font-weight:700;letter-spacing:.5px;margin:2px 0}
+.recall-item{background:#050b18;border:1.5px solid #16365a;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.recall-q{padding:11px 14px;font-size:14px;font-weight:600;color:#cdddf0;display:flex;gap:9px;align-items:flex-start;transition:all .15s}
+.recall-q:hover{background:#0b1828}
+.recall-q .qmark{color:#27c06a;font-weight:700;flex-shrink:0}
+.recall-q .chev{margin-left:auto;color:#55738e;flex-shrink:0;transition:transform .2s}
+details[open] .recall-q .chev{transform:rotate(90deg)}
+.recall-a{padding:11px 14px 13px 33px;font-size:13.5px;line-height:1.6;color:#9fe6bd;border-top:1px dashed #16463a}
+.recall-a b{color:#d6ffe9}
+.jur-box{background:#1a0a1c;border:1px solid #4a1f4a;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:13px;line-height:1.55;color:#f5cce8}
+.jur-box .info{display:inline-block;background:#3a1a3a;color:#f9b8e6;border:1px solid #6b2a6b;border-radius:5px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:4px;margin-bottom:3px}
+.jur-box b{color:#fce4f5}
+.jur-box+.jur-box{margin-top:8px}
+.map-table,.cmp-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.map-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;border-bottom:1px solid #16463a}
+.map-table td{padding:7px 8px;border-bottom:1px solid #0f2a1e;color:#cdddf0;vertical-align:top}
+.map-table td.pg{color:#c59bf2;font-weight:600;white-space:nowrap}
+.cmp-table th{text-align:left;color:#38bdf8;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #16365a}
+.cmp-table td{padding:6px 8px;border-bottom:1px solid #0f2030;color:#cdddf0;vertical-align:top}
+.cmp-table td:first-child{color:#9fb6d0;font-weight:600}
+.list-pega{list-style:none;counter-reset:p}
+.list-pega li{position:relative;padding-left:30px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#cdddf0;counter-increment:p}
+.list-pega li:before{content:counter(p);position:absolute;left:0;top:0;background:#1a1200;border:1px solid #4a3200;color:#fbbf24;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.list-pega b{color:#f3dca8}
+.flash-hint{font-size:12.5px;color:#7aa3cc;margin-bottom:12px}
+.flip-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flip{perspective:1200px;height:185px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow-y:auto}
+.flip-front{background:#0d2040;border:1.5px solid #1d4a78}
+.flip-front .fq{font-size:13.5px;font-weight:600;color:#dceaff;line-height:1.45}
+.flip-front .ftag{position:absolute;top:8px;left:10px;font-size:10px;font-weight:700;color:#5b86b3;letter-spacing:.5px}
+.flip-front .fhint{position:absolute;bottom:8px;font-size:10px;color:#4f7199}
+.flip-back{background:#08160f;border:1.5px solid #1f6b4d;transform:rotateY(180deg)}
+.flip-back .fa{font-size:12.5px;color:#9fe6bd;line-height:1.5}
+.flip-back .fa b{color:#d6ffe9}
+.check-item{background:#050b18;border:1.5px solid #16365a;border-radius:9px;padding:10px 13px;margin-bottom:7px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:13.5px;line-height:1.5;color:#cdddf0;transition:all .15s}
+.check-item:hover{border-color:#27c06a}
+.check-item .box{width:18px;height:18px;border:2px solid #2a4a3a;border-radius:5px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#08160f;transition:all .15s}
+.check-item.done .box{background:#27c06a;border-color:#27c06a}
+.check-item.done{color:#6f8a7e;text-decoration:line-through;text-decoration-color:#2a4a3a}
+@media(max-width:560px){.flip-grid{grid-template-columns:1fr}.flip{height:170px}}
+footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="banner">📘 Caderno de Revisão · Civil — clique nos blocos 📜 e 🎯 para revelar lei e respostas · clique nos cartões 🔁 para virar · use "marcar revisado" para acompanhar o progresso</div>
+<div class="progress-wrap">
+  <div class="progress-top"><span id="progLabel"><b>0</b> de 16 tópicos revisados · 0%</span><button id="progReset" class="btn-reset">zerar progresso</button></div>
+  <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+</div>
+<div class="header">
+  <h1>📒 Caderno de Revisão · Direito Civil — Propriedade &amp; Condomínio</h1>
+  <div class="sub"><b>Propriedade</b> (conceito · atributos · características · aquisição · perda · função social · extensão vertical · resolúvel · fiduciária) + <b>Condomínio</b> (ordinário · edilício · de lotes) + <b>Multipropriedade</b> · <b>Fundo de investimento</b> · <b>Cohousing</b> · e-Book de Civil, <b>págs. 629–668</b></div>
+  <div class="toc">
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#a1">A1 Conceito · atributos</a>
+    <a href="#a2">A2 Características</a>
+    <a href="#a3">A3 Espécies</a>
+    <a href="#a4">A4 Aquisição</a>
+    <a href="#a5">A5 Perda · ext. vertical</a>
+    <a href="#a6">A6 Função social</a>
+    <a href="#a7">A7 Resolúvel · fiduciária</a>
+    <a href="#b1">B1 Cond. ordinário</a>
+    <a href="#b2">B2 Cond. edilício</a>
+    <a href="#b3">B3 Instituição · convenção</a>
+    <a href="#b4">B4 Administração · lotes</a>
+    <a href="#c1">C1 Multiprop. · natureza</a>
+    <a href="#c2">C2 Multiprop. · direitos</a>
+    <a href="#c3">C3 Multiprop. · registro</a>
+    <a href="#c4">C4 Fundo investimento</a>
+    <a href="#c5">C5 Cohousing</a>
+    <a href="#sum">⚖️ Súmulas/Jur.</a>
+    <a href="#peg">⚠️ Pegadinhas</a>
+    <a href="#flash">🔁 Flashcards</a>
+    <a href="#check">✅ Checklist</a>
+    <a href="#verif">☑ Verificado</a>
+  </div>
+</div>
+<div class="content">
+
+<div class="card mapa" id="mapa">
+  <div class="card-meta"><span class="badge badge-tema">Mapa</span><span class="badge badge-pag">págs. 629–668</span></div>
+  <div class="card-title">🗺️ Faixa de páginas × Assunto</div>
+  <table class="map-table">
+    <tr><th>Págs.</th><th>Assunto</th></tr>
+    <tr><td class="pg">629–633</td><td><b>Propriedade — base:</b> histórico; conceito (<i>jus in re propria</i>); domínio × propriedade; natureza; elementos; atributos (GRUD — art. 1.228)</td></tr>
+    <tr><td class="pg">634–635</td><td><b>Espécies</b> (plena · limitada: nua propriedade + domínio útil · resolúvel) e <b>características</b> (absoluto · exclusivo · perpétuo · elástico · complexo · fundamental)</td></tr>
+    <tr><td class="pg">635–637</td><td><b>Modos de aquisição:</b> originária (acessão natural/artificial; usucapião) × derivada (registro; sucessão/saisine; tradição; especificação, comistão, confusão, adjunção)</td></tr>
+    <tr><td class="pg">637–641</td><td><b>Perda</b> (art. 1.275); <b>restrições:</b> função social e socioambiental; atos emulativos (§2); desapropriação (§3) e <b>judicial indireta/posse-trabalho</b> (§§4–5); <b>extensão vertical</b> (art. 1.229)</td></tr>
+    <tr><td class="pg">641–643</td><td><b>Propriedade resolúvel</b> (arts. 1.359–1.360; Enunciado 509) e <b>propriedade fiduciária</b> (art. 1.361; Lei 9.514/97)</td></tr>
+    <tr><td class="pg">643–646</td><td><b>Condomínio geral/ordinário:</b> sistema romano × germânico; classificações (origem/objeto/forma); Info 724 (violência doméstica)</td></tr>
+    <tr><td class="pg">646–653</td><td><b>Condomínio edilício:</b> natureza despersonalizada (Info 665); composição; instituição; convenção (2/3); administração e assembleia (Leis 14.309 e 14.405/2022); extinção; <b>condomínio de lotes</b></td></tr>
+    <tr><td class="pg">653–665</td><td><b>Multipropriedade / time-sharing</b> (Lei 13.777/2018): conceito; natureza (direito real); fração de tempo; direitos/deveres; transferência; administração; repercussão no Registro de Imóveis</td></tr>
+    <tr><td class="pg">665–668</td><td><b>Fundo de investimento</b> (Lei 13.874/2019 — condomínio especial) e <b>cohousing</b> (× coliving)</td></tr>
+  </table>
+</div>
+
+<div class="bloco-h">Bloco A · Da Propriedade</div>
+
+<!-- A1 -->
+<div class="card" id="a1">
+  <div class="card-meta"><span class="badge badge-tema">Conceito · Atributos</span><span class="badge badge-pag">págs. 629–633</span></div>
+  <div class="card-title">A1 · Conceito, natureza, elementos e atributos</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Propriedade (<i>jus in re propria</i>) é o <b>poder jurídico</b> conferido pela lei a alguém para <b>usar, gozar, dispor</b> de um bem e <b>reavê-lo</b> de quem injustamente o possua ou detenha (art. 1.228). É o direito real <b>por excelência</b> (matriz), o mais completo, o <b>único sobre coisa própria</b> e o único <b>originário</b>.</p>
+    <p><b>Domínio × propriedade</b> (Aronne): <b>domínio</b> = poder do titular sobre a coisa (faculdades de uso, fruição e disposição), restrito a coisas <b>corpóreas</b>; <b>propriedade</b> = relação do titular com a coletividade (abstenção universal, <i>erga omnes</i>), alcança coisas corpóreas <b>ou incorpóreas</b>. O CC/02 suprimiu o termo "domínio", subentendendo-o como equivalente à propriedade (há divergência — Chaves/Rosenvald).</p>
+    <p><b>Natureza jurídica</b>: direito real, subjetivo, cuja natureza é <b>predominantemente social</b> (função social — CF/88).</p>
+    <p><b>Elementos</b> (art. 1.228): (a) <b>internos/econômicos</b> — usar, gozar, dispor; (b) <b>externo/jurídico</b> — reivindicar; (c) <b>funcional</b> — função social.</p>
+    <p><b>Atributos/faculdades:</b></p>
+    <ul>
+      <li><b>Gozar/fruir</b> (<i>jus fruendi</i>) — explorar economicamente, extrair <b>frutos</b> (renováveis) e <b>produtos</b> (esgotáveis). Frutos: <b>naturais</b>, <b>industriais</b> e <b>civis</b> (aluguéis, juros, dividendos).</li>
+      <li><b>Usar</b> (<i>jus utendi</i>) — dar à coisa a destinação (com limites: função social, vizinhança, Estatuto da Cidade).</li>
+      <li><b>Dispor/alienar</b> (<i>jus disponendi</i>) — transmitir gratuita/onerosamente, <i>inter vivos</i> ou <i>mortis causa</i> (vender, doar, hipotecar, testar).</li>
+      <li><b>Reaver/reivindicar</b> (<i>jus vindicandi</i> — sequela) — elemento externo; exerce-se por <b>ação petitória</b> (a mais comum é a <b>reivindicatória</b>, em que o autor prova o domínio). Prevalece a <b>imprescritibilidade</b> dessa ação.</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box">
+    <span class="mnemo">G-R-U-D — Gozar · Reaver · Usar · Dispor (art. 1.228)</span><br>
+    Elementos: <b>internos</b> (usar/gozar/dispor) · <b>externo</b> (reivindicar) · <b>funcional</b> (função social). Ação reivindicatória = <b>imprescritível</b> (STJ, REsp 216.117/RN).
+  </div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Quais os quatro atributos da propriedade e a base legal?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Usar, gozar, dispor</b> (internos/econômicos) + <b>reaver/reivindicar</b> (externo/jurídico) — art. <b>1.228</b> do CC. Some-se o elemento <b>funcional</b> (função social).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Como se distinguem domínio e propriedade (Aronne)?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Domínio</b> = poder sobre a coisa (só corpóreas). <b>Propriedade</b> = relação com a coletividade (<i>erga omnes</i>), alcança corpóreas e <b>incorpóreas</b>.</div></details>
+  <div class="sec-label" style="color:#7aa3cc">📜 Letra da lei</div>
+  <details><summary class="lei-toggle">▸ Art. 1.228 — caput</summary><div class="lei-body"><p><span class="art-num">Art. 1.228.</span> O proprietário tem a faculdade de <b>usar, gozar e dispor</b> da coisa, e o direito de <b>reavê-la</b> do poder de quem quer que injustamente a possua ou detenha.</p></div></details>
+</div>
+
+<!-- A2 -->
+<div class="card" id="a2">
+  <div class="card-meta"><span class="badge badge-tema">Características</span><span class="badge badge-pag">págs. 634–635</span></div>
+  <div class="card-title">A2 · Características da propriedade</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <ul>
+      <li><b>Absoluto</b> — oponível <i>erga omnes</i>; o titular desfruta como bem entender. <b>Relativizado</b> pela função social e socioambiental (art. 1.228, §1º) — não é mais direito ilimitado.</li>
+      <li><b>Exclusivo</b> — a mesma coisa não pode pertencer, com exclusividade e simultaneidade, a duas pessoas (art. 1.231 presume a propriedade <b>plena e exclusiva</b> até prova em contrário). No <b>condomínio</b> não há contradição: cada um é dono de sua <b>fração ideal</b> (da parte e do todo ao mesmo tempo).</li>
+      <li><b>Perpétuo</b> — duração ilimitada; só se perde por <b>vontade</b> do titular, <b>disposição legal</b> (ex.: usucapião) ou <b>ordem judicial</b>. Exceção: propriedade resolúvel/revogável (subordinada a termo/condição).</li>
+      <li><b>Elástico</b> — comporta desmembramento em frações no <b>espaço</b> (condomínio) e no <b>tempo</b> (<i>time sharing</i>); distende-se e contrai-se conforme se agregam/retiram atributos destacáveis.</li>
+      <li><b>Complexo</b> — reúne os quatro atributos do art. 1.228.</li>
+      <li><b>Fundamental</b> — direito fundamental (art. 5º, XXII e XXIII, CF) e cláusula pétrea.</li>
+    </ul>
+    <p>Chaves: <b>exclusividade</b> e <b>elasticidade</b> são formas de qualificação do <b>domínio</b>; a <b>perpetuidade</b> refere-se ao direito de <b>propriedade</b>.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">A-E-P-E-C-F — Absoluto · Exclusivo · Perpétuo · Elástico · Complexo · Fundamental</span><br>Absoluto ≠ ilimitado (função social relativiza) · Exclusivo compatível com condomínio (fração ideal).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A exclusividade impede o condomínio?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não.</b> No condomínio cada consorte é dono de uma <b>fração ideal</b> (da parte e do todo ao mesmo tempo) — não há contradição com a exclusividade.</div></details>
+</div>
+
+<!-- A3 -->
+<div class="card" id="a3">
+  <div class="card-meta"><span class="badge badge-tema">Espécies</span><span class="badge badge-pag">pág. 634</span></div>
+  <div class="card-title">A3 · Espécies de propriedade</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <ul>
+      <li><b>Plena</b> — o titular reúne os quatro atributos e os exerce de forma <b>absoluta, exclusiva e perpétua</b>.</li>
+      <li><b>Limitada/restrita</b> — o titular transfere o <b>uso e/ou o gozo</b> a outrem, impondo a si um ônus real (ex.: usufruto). Divide-se em: <b>nua propriedade</b> (titularidade do domínio, despida de uso e fruição) e <b>domínio útil</b> (uso, gozo e disposição).</li>
+      <li><b>Resolúvel</b> — subordinada a <b>termo ou condição resolutiva</b> que causará a extinção (ex.: propriedade fiduciária de imóvel). — detalhada no card A7.</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><b>Limitada</b> = <span class="mnemo">NUA PROPRIEDADE (domínio "seco") + DOMÍNIO ÚTIL (usar/gozar/dispor)</span></div>
+</div>
+
+<!-- A4 -->
+<div class="card" id="a4">
+  <div class="card-meta"><span class="badge badge-tema">Aquisição</span><span class="badge badge-pag">págs. 635–637</span></div>
+  <div class="card-title">A4 · Modos de aquisição — originária × derivada</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Duas formas. A distinção importa: na <b>originária</b> a propriedade é adquirida <b>sem vínculo</b> com o titular anterior (limpa dos vícios/gravames); na <b>derivada</b> há <b>continuidade</b> da propriedade anterior (vem com seus caracteres).</p>
+    <p><b>ORIGINÁRIA</b> (inexiste transmissão):</p>
+    <ul>
+      <li><b>Acessão natural</b> — <b>aluvião própria</b> (acréscimo paulatino nos terrenos ribeirinhos); <b>aluvião imprópria</b> (parte do álveo que se descobre pelo afastamento das águas); <b>ilhas</b>; <b>avulsão</b> (desprendimento violento de porção de terra que se junta a outro terreno); <b>álveo abandonado</b> (leito abandonado passa aos ribeirinhos das duas margens).</li>
+      <li><b>Acessão artificial</b> — <b>plantações e construções</b> (quem semeia/edifica em terreno próprio com material alheio adquire a propriedade destes, pagando o valor + perdas e danos se má-fé).</li>
+      <li><b>Usucapião</b> — aquisição pela posse prolongada + requisitos legais. <b>Móvel</b>: ordinária <b>3 anos</b> (posse mansa/pacífica, <i>animus domini</i>, justo título e boa-fé) · extraordinária <b>5 anos</b> (posse ininterrupta e pacífica com <i>animus domini</i>).</li>
+    </ul>
+    <p><b>DERIVADA</b> (há transmissão <i>inter vivos</i> ou <i>mortis causa</i>):</p>
+    <ul>
+      <li><b>Imóvel</b> — <b>registro do título</b> (sem registro não se adquire; art. 1.245) e <b>sucessão</b> (princípio da <i>saisine</i> — art. 1.784).</li>
+      <li><b>Móvel</b> — <b>tradição</b> (real, simbólica ou consensual — <i>constituto possessório</i> e <i>traditio brevi manu</i>); <b>sucessão</b>; <b>especificação</b> (matéria-prima em espécie nova pelo trabalho); <b>comistão</b> (mistura de sólidos de donos diversos, sem coisa nova); <b>confusão</b> (mistura de líquidos); <b>adjunção</b> (justaposição de sólidos inseparáveis sem deterioração).</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Usucapião de MÓVEL: ORDINÁRIA 3 anos (justo título + boa-fé) · EXTRAORDINÁRIA 5 anos</span><br>Móveis (mistura): <b>coMistão</b> = sólidos secos · <b>coNfusão</b> = líquidos (as duas com "N/M" de… mistura) · <b>adjunção</b> = justaposição inseparável.<br>Imóvel derivado: sem <b>REGISTRO</b> não há propriedade.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Por que a distinção originária × derivada importa?</span><span class="chev">▸</span></summary><div class="recall-a">Na <b>originária</b> não há vínculo com o antecessor (propriedade <b>limpa</b> de vícios/gravames); na <b>derivada</b> há continuidade e a propriedade <b>vem com seus caracteres</b> anteriores.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Prazos da usucapião de bem móvel (ordinária × extraordinária)?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Ordinária: 3 anos</b> (justo título + boa-fé). <b>Extraordinária: 5 anos</b>.</div></details>
+</div>
+
+<!-- A5 -->
+<div class="card" id="a5">
+  <div class="card-meta"><span class="badge badge-tema">Perda · Extensão vertical</span><span class="badge badge-pag">págs. 637–638, 641</span></div>
+  <div class="card-title">A5 · Perda da propriedade e extensão vertical</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Modos de perda</b> (art. 1.275 — rol <b>não exaustivo</b>):</p>
+    <ul>
+      <li><b>Alienação</b> — transferência voluntária (onerosa/gratuita).</li>
+      <li><b>Renúncia</b> — ato unilateral e formal de abrir mão. A <b>renúncia translativa</b> (em favor de alguém) <b>não</b> é admitida (seria doação); toda renúncia é <b>abdicativa</b>.</li>
+      <li><b>Abandono</b> (<i>derrelição</i>) — desfazer-se do bem. Após <b>3 anos</b>, o imóvel <b>urbano</b> é arrecadado pelo Município/DF; o <b>rural</b>, pela União (art. 1.276).</li>
+      <li><b>Perecimento</b> — perda das qualidades essenciais/valor (perece o objeto, perece o direito).</li>
+      <li><b>Desapropriação</b> — modo originário de aquisição e perda, por interesse social/utilidade pública.</li>
+    </ul>
+    <p><b>Fora do rol do CC:</b> arrematação, adjudicação, usucapião e casamento pela comunhão universal de bens.</p>
+    <p><b>Extensão vertical</b> (art. 1.229): a propriedade do solo abrange o <b>espaço aéreo</b> e o <b>subsolo</b> correspondentes, em altura e profundidade <b>úteis</b> ao seu exercício (<b>critério da utilidade</b>). O proprietário não pode opor-se a atividades de terceiros (ex.: postes, cabeamento) a altura/profundidade em que não tenha interesse legítimo em impedir.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Perda (1.275): A-R-A-P-D — Alienação · Renúncia · Abandono · Perecimento · Desapropriação</span><br>Abandono → 3 anos → <b>Urbano = Município/DF · Rural = União</b>. Extensão vertical = <b>critério da utilidade</b> (art. 1.229).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>É admitida a renúncia translativa da propriedade?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não.</b> Toda renúncia é <b>abdicativa</b>; a translativa (em favor de alguém) equivaleria a doação e não é admitida.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual o parâmetro da propriedade do subsolo/espaço aéreo?</span><span class="chev">▸</span></summary><div class="recall-a">O <b>critério da utilidade</b> — altura e profundidade <b>úteis</b> ao exercício (art. 1.229).</div></details>
+  <div class="sec-label" style="color:#7aa3cc">📜 Letra da lei</div>
+  <details><summary class="lei-toggle">▸ Art. 1.229 — extensão vertical</summary><div class="lei-body"><p><span class="art-num">Art. 1.229.</span> A propriedade do solo abrange a do espaço aéreo e subsolo correspondentes, em altura e profundidade <b>úteis</b> ao seu exercício, não podendo o proprietário opor-se a atividades que sejam realizadas, por terceiros, a uma altura ou profundidade tais, que não tenha ele interesse legítimo em impedi-las.</p></div></details>
+</div>
+
+<!-- A6 -->
+<div class="card" id="a6">
+  <div class="card-meta"><span class="badge badge-tema">Função social · Limitações</span><span class="badge badge-pag">págs. 638–641</span></div>
+  <div class="card-title">A6 · Função social, socioambiental e limitações</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Função social</b> — finalidade coletiva (relação de mão dupla). Dupla função: <b>limitadora</b> (impõe um <i>não fazer</i> — ex.: vedação aos atos emulativos, art. 1.228, §2º) e <b>impulsionadora</b> (impõe condutas positivas). Elevada a <b>preceito de ordem pública</b> (art. 2.035, parágrafo único).</p>
+    <ul>
+      <li><b>Rural</b> — art. <b>186</b> da CF: (I) aproveitamento racional e adequado; (II) uso adequado dos recursos naturais e preservação do meio ambiente; (III) observância das relações de trabalho; (IV) bem-estar de proprietários e trabalhadores. Requisitos <b>cumulativos</b>.</li>
+      <li><b>Urbana</b> — art. 182, §2º, CF: cumpre função social quando atende às exigências de ordenação da cidade no <b>plano diretor</b> municipal.</li>
+    </ul>
+    <p><b>Função socioambiental</b> (art. 1.228, §1º) — obriga à recuperação ambiental; responsabilidade civil <b>objetiva</b>, teoria do <b>risco integral</b>, obrigação <b>propter rem</b> (o novo proprietário responde ainda que não tenha causado o dano).</p>
+    <p><b>Limitações:</b></p>
+    <ul>
+      <li><b>Ordem privada</b> (§2º) — abuso do direito / atos emulativos (defesos os atos sem utilidade ao dono e animados por intenção de prejudicar; Tartuce: configura-se também quando há vantagem ao dono, mas com prejuízo alheio).</li>
+      <li><b>Ordem administrativa</b> (§3º) — desapropriação (necessidade/utilidade pública, interesse social) e requisição (perigo público iminente).</li>
+      <li><b>Desapropriação judicial indireta / posse-trabalho</b> (§§4º e 5º) — extensa área, posse ininterrupta e de boa-fé por <b>+5 anos</b>, de <b>considerável número de pessoas</b>, com obras/serviços de interesse social e econômico relevante; o juiz fixa a <b>justa indenização</b> e a sentença serve de <b>título para registro</b>. Para Tartuce é <b>desapropriação</b> (há indenização), não usucapião.</li>
+    </ul>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">§1º função (econômica/social + ambiental) · §2º atos emulativos · §3º desapropriação/requisição · §§4º-5º posse-trabalho (indenizada)</span><br>Rural = art. <b>186 CF</b> (4 requisitos cumulativos) · Urbana = <b>plano diretor</b> (art. 182 §2). Propriedade <b>produtiva ≠</b> necessariamente cumpre função social (ex.: trabalho escravo).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Propriedade produtiva cumpre, por si só, a função social?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não.</b> É preciso observar <b>todos</b> os requisitos do art. 186 CF. Ex.: usina produtiva com trabalho escravo é produtiva, mas <b>não</b> cumpre a função social.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A desapropriação judicial indireta (§§4º/5º) é usucapião?</span><span class="chev">▸</span></summary><div class="recall-a">Para Tartuce, <b>não</b>: é modalidade de <b>desapropriação</b> (o §5º prevê <b>justa indenização</b>; o sistema não admite usucapião onerosa).</div></details>
+</div>
+
+<!-- A7 -->
+<div class="card" id="a7">
+  <div class="card-meta"><span class="badge badge-tema">Resolúvel · Fiduciária</span><span class="badge badge-pag">págs. 641–643</span></div>
+  <div class="card-title">A7 · Propriedade resolúvel e fiduciária</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Propriedade resolúvel</b> — pode extinguir-se pelo advento de <b>condição</b> (evento futuro e incerto), <b>termo</b> (futuro e certo) ou <b>causa superveniente</b>. Exemplos: compra e venda com <b>retrovenda</b> (resolúvel até 3 anos), venda com <b>reserva de domínio</b>, <b>doação com cláusula de reversão</b>.</p>
+    <ul>
+      <li><b>Resolução por condição/termo previstos no título</b> (art. 1.359) — efeito <b>ex tunc</b> (retroativo) e <b>erga omnes</b>: resolvem-se todos os direitos reais concedidos na pendência; é questão de <b>eficácia</b>, não de validade.</li>
+      <li><b>Resolução por causa superveniente</b> (art. 1.360) — efeito <b>ex nunc</b> (não retroage) e <b>inter partes</b>: quem adquiriu antes da causa é <b>proprietário perfeito</b>; ao prejudicado cabe apenas ação contra aquele cuja propriedade se resolveu.</li>
+    </ul>
+    <p><b>Propriedade fiduciária</b> — há propriedade <b>resolúvel</b>. Art. 1.361: coisa <b>móvel infungível</b> que o devedor, com escopo de <b>garantia</b>, transfere ao credor. Bens <b>imóveis</b>: alienação fiduciária da <b>Lei 9.514/1997</b> (o fiduciante transfere ao fiduciário a propriedade resolúvel do imóvel em garantia).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">CONDIÇÃO/TERMO (título) → ex TUNC + erga omnes (1.359) · CAUSA SUPERVENIENTE → ex NUNC + inter partes (1.360)</span><br>Fiduciária: móvel infungível = art. 1.361 CC · imóvel = <b>Lei 9.514/97</b>.</div>
+  <div class="sec-label jur">⚖️ Jurisprudência / Enunciado</div>
+  <div class="jur-box"><span class="info">Enunciado 509 CJF</span> A resolução da propriedade, quando determinada por <b>causa originária</b>, prevista no título, opera <b>ex tunc e erga omnes</b>; se decorrente de <b>causa superveniente</b>, atua <b>ex nunc e inter partes</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Resolução por condição prevista no título × por causa superveniente — efeitos?</span><span class="chev">▸</span></summary><div class="recall-a">Condição/termo no título → <b>ex tunc + erga omnes</b> (art. 1.359; Enunciado 509). Causa superveniente → <b>ex nunc + inter partes</b> (art. 1.360; o adquirente anterior é proprietário perfeito).</div></details>
+</div>
+
+<div class="bloco-h b">Bloco B · Do Condomínio</div>
+
+<!-- B1 -->
+<div class="card" id="b1">
+  <div class="card-meta"><span class="badge badge-tema">Condomínio ordinário</span><span class="badge badge-pag">págs. 643–646</span></div>
+  <div class="card-title">B1 · Condomínio geral / ordinário</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>No condomínio, o exercício da propriedade cabe a <b>mais de uma pessoa</b> ao mesmo tempo. Natureza <b>real</b> (não contratual). <b>Condomínio ordinário</b>: a mesma coisa pertence a mais de um titular, cabendo a cada um igual direito, idealmente, sobre o todo e cada parte.</p>
+    <ul>
+      <li><b>Sistema romano</b> (adotado — art. 1.314) — a coisa indivisa é dividida em <b>frações/quotas ideais</b>; a quota é a medida da propriedade (reparte benefícios e ônus). Cada condômino exerce a propriedade em plenitude, respeitado o direito dos demais.</li>
+      <li><b>Sistema germânico / "mão comum"</b> — <b>não há quotas</b>; a coisa toda é objeto de uso e gozo comum. Adotado nos regimes da <b>comunhão universal e parcial</b> de bens e na <b>sucessão</b> (herança indivisa até a partilha).</li>
+    </ul>
+    <p><b>Classificações:</b> quanto à <b>origem</b> — voluntário/convencional, incidente/eventual, necessário/forçado (paredes, muros); quanto ao <b>objeto</b> — universal (todo o bem + acessórios/frutos) × particular; quanto à <b>forma</b> — <b>pro diviso</b> (só de direito; cada um já ocupa parte certa) × <b>pro indiviso</b> (de fato e de direito; fração ideal).</p>
+    <p><b>Uso exclusivo por um condômino</b> — em regra, o coproprietário que usa com exclusividade o bem indiviso deve <b>aluguel</b> aos demais (art. 1.319). <b>Exceção</b> (Info 724).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">ROMANO (adotado) = QUOTAS/frações ideais · GERMÂNICO ("mão comum") = SEM quotas (comunhão de bens e herança)</span><br>Origem: <b>V·I·N</b> (Voluntário · Incidente · Necessário) · Forma: <b>pro DIviso</b> (parte certa) × <b>pro INdiviso</b> (fração ideal).</div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Info 724 STJ</span> <span class="info">REsp 1966556-SP</span> <b>Não cabe arbitramento de aluguel</b> em desfavor da <b>coproprietária vítima de violência doméstica</b> que, por <b>medida protetiva de urgência</b>, detém o uso e gozo exclusivo do imóvel de cotitularidade do agressor. A medida protetiva é motivo legítimo que limita o domínio do agressor (afasta o art. 1.319 e o enriquecimento sem causa). <i>(3ª Turma, 08/02/2022.)</i></div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual sistema de condomínio o CC adotou e qual a nota característica?</span><span class="chev">▸</span></summary><div class="recall-a">O <b>sistema romano</b> (art. 1.314): a coisa indivisa se divide em <b>frações ideais/quotas</b>. O germânico ("mão comum") — sem quotas — só aparece na comunhão de bens e na herança.</div></details>
+</div>
+
+<!-- B2 -->
+<div class="card" id="b2">
+  <div class="card-meta"><span class="badge badge-tema">Condomínio edilício</span><span class="badge badge-pag">págs. 646–648</span></div>
+  <div class="card-title">B2 · Condomínio edilício — natureza e composição</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>Condomínio <b>especial</b> em edifícios (residenciais/comerciais) ou casas (horizontal). Disciplina: <b>arts. 1.331 a 1.358</b> do CC + Lei 4.591/64 (no que compatível).</p>
+    <p><b>Natureza</b> — corrente <b>minoritária</b> (Enunciado 246 CJF) reconhece <b>personalidade jurídica</b>; prevalece que o condomínio é <b>ente despersonalizado</b> (massa patrimonial), representado pelo síndico.</p>
+    <p><b>Composição</b> (art. 1.331) — dois tipos de propriedade:</p>
+    <ul>
+      <li><b>Propriedade autônoma</b> — uso exclusivo (apto, sala, loja); pode ser alienada/gravada livremente, <b>sem direito de preferência</b> dos demais. <b>Vaga de garagem</b>: proibida a alienação/aluguel a estranhos ao condomínio, salvo autorização expressa na convenção (§1º). <b>Terraço de cobertura</b> = parte comum, salvo disposição contrária (§5º).</li>
+      <li><b>Propriedade comum</b> — uso conjunto (hall, escadas, elevadores, piscina; solo, estrutura, telhado, redes). <b>Não</b> pode ser alienada separadamente da autônoma nem dividida (§2º). Nenhuma unidade pode ser privada de acesso ao logradouro.</li>
+    </ul>
+  </div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Info 665 STJ</span> <span class="info">REsp 1736593-SP</span> O condomínio, por ser <b>massa patrimonial</b> (ente despersonalizado, sem <i>affectio societatis</i>), <b>não possui honra objetiva e não pode sofrer dano moral</b>. Ofensa à reputação atinge, na verdade, <b>cada condômino</b> individualmente. <i>(3ª Turma, 11/02/2020.)</i></div>
+  <div class="jur-box"><span class="info">Info 588 / Info 651 STJ</span> <span class="info">REsp 1564030-MG · REsp 1699022-SP</span> O condomínio <b>não pode proibir</b>, por inadimplência, que o condômino e seus familiares <b>usem as áreas comuns</b> (ainda que de lazer). É ilícita a disposição condominial que impõe essa restrição como meio coercitivo de cobrança.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O condomínio edilício tem personalidade jurídica? Sofre dano moral?</span><span class="chev">▸</span></summary><div class="recall-a">Prevalece que é <b>ente despersonalizado</b> (personalidade é tese minoritária — Enunciado 246). Como massa patrimonial, <b>não sofre dano moral</b> (Info 665).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Pode-se proibir o condômino inadimplente de usar as áreas comuns?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não</b> (Infos 588 e 651) — é ilícita a restrição como meio coercitivo de cobrança, mesmo em áreas de lazer.</div></details>
+</div>
+
+<!-- B3 -->
+<div class="card" id="b3">
+  <div class="card-meta"><span class="badge badge-tema">Instituição · Convenção</span><span class="badge badge-pag">págs. 648–650</span></div>
+  <div class="card-title">B3 · Instituição e convenção do condomínio edilício</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Instituição</b> — ato inicial de constituição, por <b>ato inter vivos ou testamento</b>, <b>registrado no Registro de Imóveis</b>, constando a individualização e discriminação das unidades autônomas, a fração ideal de cada uma e das partes comuns, e a destinação.</p>
+    <p><b>Convenção</b> — <b>norma interna</b> ("lei do condomínio"), de natureza <b>estatutária</b> (não contratual): <b>vincula locatários e futuros compradores</b>. Pode ser por <b>instrumento público ou particular</b>. Deve ser subscrita por titulares de, no mínimo, <b>2/3 das frações ideais</b> (art. 1.333). Para ser <b>oponível a terceiros</b> (eficácia <i>erga omnes</i>), deve ser <b>registrada no RI</b>.</p>
+    <p><b>Cobrança de cotas condominiais</b> — prescreve em <b>5 anos</b> (art. 206, §5º, I — dívida líquida constante de instrumento particular), contados do vencimento de cada parcela.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Convenção: 2/3 das frações ideais + registro no RI (oponibilidade erga omnes)</span><br>Natureza <b>estatutária</b> → vincula locatário e futuro comprador. Cotas condominiais prescrevem em <b>5 anos</b>.</div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">Info 664 STJ</span> <span class="info">REsp 1816039-MG</span> É <b>nula</b> a cláusula de convenção outorgada pela <b>própria construtora</b> que prevê a <b>redução da taxa condominial</b> das suas unidades ainda <b>não comercializadas</b> (ex.: construtora pagaria 30% e os demais 100%). A convenção não pode criar benefício subjetivo em favor do incorporador, sob pena de onerar os demais (viola a proporcionalidade — art. 1.334, I). <i>(3ª Turma, 04/02/2020.)</i></div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual quórum para a convenção e por que registrá-la no RI?</span><span class="chev">▸</span></summary><div class="recall-a"><b>2/3 das frações ideais</b> (art. 1.333). O registro no RI dá <b>oponibilidade erga omnes</b> (contra terceiros).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Em quanto tempo prescreve a cobrança de cotas condominiais?</span><span class="chev">▸</span></summary><div class="recall-a"><b>5 anos</b> (art. 206, §5º, I), a partir do vencimento de cada parcela.</div></details>
+</div>
+
+<!-- B4 -->
+<div class="card" id="b4">
+  <div class="card-meta"><span class="badge badge-tema">Administração · Lotes</span><span class="badge badge-pag">págs. 650–653</span></div>
+  <div class="card-title">B4 · Administração, assembleia, extinção e condomínio de lotes</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Síndico</b> — eleito pela assembleia (pode <b>não ser condômino</b>), prazo <b>não superior a 2 anos</b> (renovável). Destituição por <b>maioria absoluta</b> em assembleia convocada para esse fim (irregularidades, não prestar contas, má administração). Assembleia ordinária <b>anual</b> (art. 1.350); se o síndico não convocar, <b>1/4 dos condôminos</b> pode fazê-lo.</p>
+    <ul>
+      <li><b>Alteração da convenção</b>: <b>2/3 dos votos</b> dos condôminos (art. 1.351). A <b>Lei 14.405/2022</b> passou a permitir a <b>mudança da destinação</b> do edifício/unidade também por <b>2/3</b> (antes exigia <b>unanimidade</b>).</li>
+      <li><b>Deliberações</b>: em 1ª convocação, maioria dos presentes que representem ao menos <b>metade das frações</b> (art. 1.352); em 2ª convocação, maioria dos presentes (art. 1.353), salvo quórum especial. A <b>Lei 14.309/2022</b> criou a <b>sessão permanente</b> (§§ do art. 1.353) e a <b>assembleia eletrônica/híbrida</b> (art. 1.354-A).</li>
+      <li><b>Conselho fiscal</b>: 3 membros, prazo ≤ 2 anos (parecer sobre as contas do síndico).</li>
+    </ul>
+    <p><b>Extinção</b> (art. 1.357) — se a edificação for total/consideravelmente destruída ou ameaçar ruína, a assembleia delibera reconstrução ou venda por votos que representem <b>metade + 1 das frações ideais</b>. Na desapropriação, a indenização se reparte proporcionalmente ao valor das unidades.</p>
+    <p><b>Condomínio de lotes</b> (art. 1.358-A — Lei 13.465/2017; §2º com redação da Lei 14.382/2022) — em terrenos, partes designadas de lotes que são <b>propriedade exclusiva</b> + partes de <b>propriedade comum</b>. Aplica-se, no que couber, o regime do <b>condomínio edilício</b> e o das <b>incorporações imobiliárias</b> (Lei 4.591/64), equiparando-se o empreendedor ao incorporador.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">2/3 → altera convenção E muda destinação (Lei 14.405/2022; antes: unanimidade) · 1/4 → convoca assembleia · metade+1 frações → extinção</span><br>Síndico ≤ 2 anos (pode não ser condômino) · destituição = maioria absoluta · Leis 14.309/2022 (assembleia eletrônica + sessão permanente) e 14.405/2022 (destinação por 2/3).</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual quórum, hoje, para mudar a destinação do edifício?</span><span class="chev">▸</span></summary><div class="recall-a"><b>2/3 dos condôminos</b> (art. 1.351, redação da <b>Lei 14.405/2022</b>). Antes exigia-se <b>unanimidade</b>.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O condomínio de lotes segue qual regime?</span><span class="chev">▸</span></summary><div class="recall-a">O do <b>condomínio edilício</b> (no que couber) e o das <b>incorporações imobiliárias</b> (Lei 4.591/64), com o empreendedor equiparado ao incorporador — art. 1.358-A.</div></details>
+</div>
+
+<div class="bloco-h c">Bloco C · Multipropriedade, Fundo de Investimento e Cohousing</div>
+
+<!-- C1 -->
+<div class="card" id="c1">
+  <div class="card-meta"><span class="badge badge-tema">Multipropriedade · Natureza</span><span class="badge badge-pag">págs. 653–656</span></div>
+  <div class="card-title">C1 · Multipropriedade / time-sharing — conceito, natureza e fração de tempo</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Lei 13.777/2018</b> inseriu no CC a <b>multipropriedade</b> (time-sharing / aproveitamento por turno / direito real de habitação periódica).</p>
+    <p><b>Conceito</b> (art. 1.358-C) — regime de <b>condomínio</b> em que cada proprietário é titular de uma <b>fração de tempo</b>, à qual corresponde a faculdade de <b>uso e gozo com exclusividade da totalidade do imóvel</b>, de forma <b>alternada</b> (rodízio). Alcança <b>apenas bens imóveis</b> (não veículos). <b>Parágrafo único</b>: <b>não</b> se extingue automaticamente ainda que todas as frações sejam do mesmo multiproprietário.</p>
+    <p><b>Natureza jurídica</b> — divergência: (1ª) <b>direito pessoal</b> (taxatividade do art. 1.225); (2ª) <b>direito real</b> — corrente <b>majoritária</b>, seguida pelo <b>STJ</b> (forte liame com a propriedade).</p>
+    <p><b>Características</b> (art. 1.358-D) — o imóvel é <b>indivisível</b> (não se sujeita a ação de divisão ou de extinção de condomínio; as frações também não se desdobram); inclui instalações, equipamentos e mobiliário (princípio da <b>gravitação jurídica</b>).</p>
+    <p><b>Fração de tempo</b> (art. 1.358-E) — indivisível, período <b>mínimo de 7 dias</b> (seguidos ou intercalados), que pode ser: <b>fixo</b> (mesmo período de cada ano), <b>flutuante</b> (determinação periódica, com isonomia — ex.: sorteio) ou <b>misto</b>. Há <b>limite máximo</b> de frações por titular (art. 1.358-H) e <b>fração para reparos</b> (art. 1.358-N).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Multipropriedade = SÓ IMÓVEL · fração de tempo ≥ 7 DIAS · FIXO / FLUTUANTE / MISTO · indivisível</span><br>Natureza = <b>direito REAL</b> (majoritária/STJ). Não se extingue mesmo se todas as frações forem do mesmo dono.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Qual a natureza jurídica da multipropriedade e o período mínimo da fração de tempo?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Direito real</b> (corrente majoritária, seguida pelo STJ). Fração de tempo <b>mínima de 7 dias</b> (fixo, flutuante ou misto).</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>A multipropriedade alcança bens móveis?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não</b> — apenas <b>bens imóveis</b> (art. 1.358-C).</div></details>
+</div>
+
+<!-- C2 -->
+<div class="card" id="c2">
+  <div class="card-meta"><span class="badge badge-tema">Multiprop. · Direitos/Deveres</span><span class="badge badge-pag">págs. 657–663</span></div>
+  <div class="card-title">C2 · Instituição, direitos, deveres, transferência e administração</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Instituição</b> — por ato entre vivos ou testamento, <b>registrada no RI</b>, com a duração dos períodos de cada fração. A <b>convenção</b> (art. 1.358-G) traz rol <b>exemplificativo</b> (poderes/deveres, nº máximo de ocupantes, fundo de reserva, multas etc.).</p>
+    <p><b>Direitos</b> (art. 1.358-I) — usar e gozar no seu período; <b>ceder</b> a fração em locação/comodato; <b>alienar</b> (onerosa/gratuita, <i>inter vivos</i> ou causa mortis); <b>participar e votar</b>. <b>Deveres</b> (art. 1.358-J) — pagar a contribuição condominial; responder por danos; manter conservação/limpeza; usar conforme o destino; <b>desocupar no prazo</b>, sob multa; permitir obras/reparos urgentes.</p>
+    <p><b>Sanções</b> — multa (descumprimento de dever) e, na reiteração, <b>multa progressiva + perda temporária do direito de uso</b>.</p>
+    <p><b>Transferência</b> (art. 1.358-L) — <b>não</b> exige anuência/ciência dos demais; em regra <b>não há direito de preferência</b> (exceção: se previsto no instrumento/convenção). O <b>adquirente é solidariamente responsável</b> com o alienante pelas obrigações, se não obtiver a declaração de inexistência de débitos (§2º — Tartuce: solidariedade passiva legal quanto aos débitos condominiais, obrigação <b>propter rem</b>).</p>
+    <p><b>Administração</b> (art. 1.358-M) — pessoa indicada no instrumento/convenção; na falta, escolhida em assembleia. <b>Em unidades de condomínio edilício</b> (art. 1.358-O): institui-se por previsão no instrumento ou por deliberação da <b>maioria absoluta</b> (Tartuce sugere aplicar o quórum de <b>2/3</b>, art. 113). A <b>renúncia translativa</b> só é admitida em favor do condomínio edilício e se o multiproprietário estiver em dia.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Transferência: SEM anuência · SEM preferência (salvo previsão) · adquirente SOLIDÁRIO por débitos</span><br>Sanção reiterada = multa progressiva + <b>perda temporária</b> do uso. Em edilício: instituição por maioria absoluta (Tartuce: 2/3).</div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">STJ · REsp 1546165-SP (2016)</span> É <b>inválida a penhora sobre a integralidade</b> do imóvel submetido ao regime de <b>multipropriedade (time-sharing)</b> quando a parte executada é titular apenas de <b>fração ideal</b> (por cessão de direitos). A constrição deve recair só sobre a fração do devedor.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Na alienação da fração de tempo há direito de preferência dos demais?</span><span class="chev">▸</span></summary><div class="recall-a">Em regra <b>não</b>. Só há preferência se <b>previsto</b> no instrumento de instituição ou na convenção.</div></details>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Pode a penhora recair sobre todo o imóvel em time-sharing?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não</b> se o devedor é titular apenas de uma <b>fração ideal</b> — a penhora limita-se à sua fração (REsp 1546165/SP).</div></details>
+</div>
+
+<!-- C3 -->
+<div class="card" id="c3">
+  <div class="card-meta"><span class="badge badge-tema">Multiprop. · Registro</span><span class="badge badge-pag">págs. 663–665</span></div>
+  <div class="card-title">C3 · Repercussão no Registro de Imóveis</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p>A Lei 13.777/2018 alterou a <b>Lei de Registros Públicos</b> (Lei 6.015/73). Os imóveis em multipropriedade inscrevem-se no <b>Livro nº 2</b> do RI competente.</p>
+    <ul>
+      <li><b>Art. 176, §10</b> — além da matrícula do imóvel, haverá <b>uma matrícula para cada fração de tempo</b>, onde se registram/averbam os atos daquela fração. Abrem-se tantas matrículas quantas forem as frações de tempo.</li>
+      <li><b>Art. 176, §11</b> — cada fração de tempo pode, conforme a legislação tributária municipal, ser objeto de <b>inscrição imobiliária individualizada</b>.</li>
+      <li><b>Art. 176, §12</b> — a fração de tempo destinada a <b>reparos</b>, quando atribuída aos multiproprietários, <b>não</b> tem matrícula específica (consta da matrícula da fração principal) → <b>exceção ao princípio da unicidade da matrícula</b>.</li>
+      <li><b>Art. 178</b> — as convenções (condomínio edilício, condomínio geral voluntário e multipropriedade) registram-se no <b>Livro nº 3 — Registro Auxiliar</b>.</li>
+    </ul>
+    <p>Ao criar matrícula para cada fração de tempo, o legislador atribuiu a elas natureza de <b>unidade autônoma imobiliária</b> (todo imóvel tem matrícula; toda matrícula se refere a um imóvel).</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Livro 2 = imóvel + 1 matrícula por FRAÇÃO DE TEMPO · Livro 3 (Auxiliar) = convenções</span><br>Fração de <b>reparos</b> = <b>sem matrícula própria</b> (exceção à <b>unicidade da matrícula</b>). Fração de tempo = <b>unidade autônoma imobiliária</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Como se matriculam as frações de tempo? E a fração para reparos?</span><span class="chev">▸</span></summary><div class="recall-a">Cada fração de tempo tem <b>matrícula própria</b> (Livro 2), além da matrícula do imóvel. A fração de <b>reparos</b> <b>não</b> tem matrícula específica (exceção à unicidade) — consta da matrícula da fração principal.</div></details>
+</div>
+
+<!-- C4 -->
+<div class="card" id="c4">
+  <div class="card-meta"><span class="badge badge-tema">Fundo de investimento</span><span class="badge badge-pag">págs. 665–667</span></div>
+  <div class="card-title">C4 · Fundo de investimento (Lei 13.874/2019)</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Art. 1.368-C</b> (Cap. X, incluído pela Lei 13.874/2019) — o fundo de investimento é uma <b>comunhão de recursos</b>, constituída sob a forma de <b>condomínio de natureza especial</b>, destinada à aplicação em ativos financeiros, bens e direitos. Compete à <b>CVM</b> disciplinar; o registro dos regulamentos na CVM garante a <b>publicidade e a oponibilidade</b> a terceiros. Não se lhe aplicam os arts. 1.314 a 1.358-A.</p>
+    <p><b>Relevância da "natureza especial"</b> — em regra <b>inexiste responsabilidade limitada decorrente da lei</b>: o cotista não qualificado pode ser chamado a cobrir o passivo a descoberto. A limitação só existe com <b>previsão contratual expressa registrada na CVM</b> (art. 1.368-D). <i>Obs.:</i> isso <b>não</b> se estende aos Fundos de Investimento Imobiliário (FII), cuja limitação vem de lei especial (art. 13, II, da Lei 8.668/93).</p>
+    <p>A comunhão de recursos é <b>patrimônio separado</b> do dos cotistas/administrador. Os cotistas titularizam o <b>valor patrimonial das cotas</b> (resgatáveis, alienáveis, penhoráveis), não os bens do acervo. A penhora atinge as <b>cotas</b>, não os bens do fundo.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">Fundo = COMUNHÃO DE RECURSOS · condomínio de NATUREZA ESPECIAL · CVM disciplina</span><br>Regra: <b>sem responsabilidade limitada</b> (salvo previsão registrada na CVM). Penhora = <b>cotas</b>, não os bens do acervo.</div>
+  <div class="sec-label jur">⚖️ Jurisprudência</div>
+  <div class="jur-box"><span class="info">STJ · REsp 1965982-SP (2021)</span> Embora <b>despersonalizado</b>, ao fundo de investimento são imputados direitos e deveres, podendo ser titular em nome próprio. O patrimônio do fundo (FIP) pertence em condomínio a todos os cotistas — o que <b>impede</b>, em regra, a responsabilização do fundo por dívida de <b>um único cotista</b> (ressalvada a penhora da cota-parte). Mas, comprovada a <b>constituição fraudulenta</b> (desvio de finalidade/confusão patrimonial), é possível a <b>desconsideração</b> para atingir cotas/patrimônio.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O fundo de investimento tem, por lei, responsabilidade limitada dos cotistas?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Não</b>, em regra (natureza de condomínio especial). A limitação só existe com <b>previsão contratual expressa registrada na CVM</b> (art. 1.368-D). Não confundir com os FII, cuja limitação decorre de lei especial.</div></details>
+</div>
+
+<!-- C5 -->
+<div class="card" id="c5">
+  <div class="card-meta"><span class="badge badge-tema">Cohousing</span><span class="badge badge-pag">pág. 668</span></div>
+  <div class="card-title">C5 · Cohousing (× coliving)</div>
+  <div class="sec-label sintese">📑 Síntese</div>
+  <div class="prose">
+    <p><b>Cohousing</b> — figura ainda no <b>campo obrigacional</b>. Um grupo cria uma <b>comunidade</b> (vertical ou horizontal), conciliando <b>áreas comuns e privativas</b> com intensos níveis de integração e divisão de tarefas — mais severos que os de um condomínio regular/edilício, pois as partes visam criar uma <b>identidade</b>. Não se vende um imóvel, mas um <b>estilo de vida</b> incorporado a frações ideais de um imóvel urbano. Origem: <b>Dinamarca, ~1960</b>.</p>
+    <p><b>Cohousing × coliving</b> — no <b>coliving</b> os interessados <b>dividem a mesma unidade habitacional</b> (como repúblicas estudantis). No <b>cohousing</b> as partes <b>não dividem residência</b>: o espaço privativo é essencial (pequenas unidades — quarto, banheiro, pequena sala), impulsionando a convivência nas áreas comuns (cozinha, convivência, escritório, espaço para hóspedes).</p>
+    <p>Atende paradigmas constitucionais (solidariedade social, meio ambiente, função social da propriedade); é ferramenta contra o individualismo e a solidão.</p>
+  </div>
+  <div class="sec-label mem">🧠 Memorização</div>
+  <div class="mem-box"><span class="mnemo">COLIVING = divide a MESMA residência (repúblicas) · COHOUSING = residências SEPARADAS + intensa vida comum</span><br>Cohousing: campo <b>obrigacional</b>; origem <b>Dinamarca (~1960)</b>.</div>
+  <div class="sec-label recall">🎯 Active Recall</div>
+  <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferença entre cohousing e coliving?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Coliving</b>: dividem a <b>mesma unidade</b> habitacional. <b>Cohousing</b>: unidades <b>privativas separadas</b> + fortes áreas e tarefas comuns (criam identidade).</div></details>
+</div>
+
+<!-- SÚMULAS -->
+<div class="card" id="sum">
+  <div class="card-meta"><span class="badge badge-tema">⚖️ Consolidado</span><span class="badge badge-pag">infos · teses · enunciados</span></div>
+  <div class="card-title">⚖️ Jurisprudência e enunciados — quadro de revisão</div>
+  <table class="cmp-table">
+    <tr><th>Fonte</th><th>Conteúdo</th></tr>
+    <tr><td>Info 724 STJ (REsp 1966556-SP)</td><td>Não cabe aluguel contra coproprietária vítima de violência doméstica com uso exclusivo por medida protetiva (exceção ao art. 1.319).</td></tr>
+    <tr><td>Info 665 STJ (REsp 1736593-SP)</td><td>Condomínio é massa patrimonial (ente despersonalizado): não tem honra objetiva, não sofre dano moral.</td></tr>
+    <tr><td>Info 588 / 651 STJ</td><td>Condomínio não pode proibir inadimplente de usar áreas comuns (mesmo de lazer).</td></tr>
+    <tr><td>Info 664 STJ (REsp 1816039-MG)</td><td>Nula cláusula da convenção (construtora) que reduz taxa das unidades não comercializadas.</td></tr>
+    <tr><td>REsp 1546165-SP</td><td>Inválida penhora sobre a integralidade do imóvel em time-sharing quando o devedor tem só fração ideal.</td></tr>
+    <tr><td>REsp 216.117-RN</td><td>Imprescritibilidade da ação reivindicatória.</td></tr>
+    <tr><td>REsp 1965982-SP</td><td>Fundo de investimento: possível desconsideração se constituição fraudulenta (desvio/confusão).</td></tr>
+    <tr><td>Enunciado 509 CJF</td><td>Resolução por causa originária (título) = ex tunc + erga omnes; superveniente = ex nunc + inter partes.</td></tr>
+    <tr><td>Enunciado 246 CJF</td><td>(Minoritária) reconhece personalidade jurídica ao condomínio edilício.</td></tr>
+    <tr><td>Prescrição — art. 206, §5º, I</td><td>Cobrança de cotas condominiais prescreve em 5 anos.</td></tr>
+  </table>
+</div>
+
+<!-- PEGADINHAS -->
+<div class="card" id="peg">
+  <div class="card-meta"><span class="badge badge-tema">⚠️ Pegadinhas</span><span class="badge badge-pag">o que derruba na prova</span></div>
+  <div class="card-title">⚠️ Pegadinhas clássicas</div>
+  <ul class="list-pega">
+    <li><b>Ação reivindicatória é imprescritível</b> — quem marca "prescreve" erra (REsp 216.117/RN).</li>
+    <li><b>Renúncia translativa NÃO é admitida</b> — toda renúncia é abdicativa (seria doação).</li>
+    <li><b>Abandono</b>: após 3 anos, urbano → Município/DF · rural → União (não confundir).</li>
+    <li>Extensão vertical = <b>critério da utilidade</b> (altura/profundidade úteis), não "até o infinito".</li>
+    <li><b>Propriedade produtiva ≠</b> cumprimento automático da função social (art. 186 CF, requisitos cumulativos).</li>
+    <li>Resolução por <b>condição no título</b> = ex tunc + erga omnes; por <b>causa superveniente</b> = ex nunc + inter partes (Enunciado 509). Não inverter.</li>
+    <li>Condomínio adotou o <b>sistema romano</b> (com quotas); o germânico ("mão comum") só na comunhão de bens/herança.</li>
+    <li>Condomínio edilício é <b>ente despersonalizado</b> (personalidade é minoritária) e <b>não sofre dano moral</b> (Info 665).</li>
+    <li>Convenção: <b>2/3 das frações</b> (não "maioria simples"); registro no RI só para <b>oponibilidade a terceiros</b>.</li>
+    <li>Mudança de <b>destinação</b> do edifício hoje = <b>2/3</b> (Lei 14.405/2022); <b>antes era unanimidade</b>.</li>
+    <li>Multipropriedade alcança <b>só imóvel</b>; natureza = <b>direito real</b> (majoritária/STJ); fração ≥ <b>7 dias</b>.</li>
+    <li>Na multipropriedade, em regra <b>não há preferência</b> e a transferência <b>independe de anuência</b> dos demais.</li>
+    <li>Fração de tempo para <b>reparos</b> = <b>sem matrícula própria</b> (exceção à unicidade da matrícula).</li>
+    <li>Fundo de investimento = condomínio especial <b>sem responsabilidade limitada</b> por lei (salvo previsão na CVM); ≠ FII.</li>
+    <li><b>Coliving</b> divide a mesma unidade; <b>cohousing</b> tem unidades separadas + vida comum (não confundir).</li>
+  </ul>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="card" id="flash">
+  <div class="card-meta"><span class="badge badge-tema">🔁 Flashcards</span><span class="badge badge-pag">clique para virar</span></div>
+  <div class="card-title">🔁 Flashcards — revisão rápida</div>
+  <div class="flash-hint">Pense na resposta, depois clique no cartão para conferir.</div>
+  <div class="flip-grid">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">ATRIBUTOS</span><span class="fq">Quais os 4 atributos da propriedade (art. 1.228)?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Gozar · Reaver · Usar · Dispor</b> (GRUD). + elemento funcional (função social).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">AÇÃO</span><span class="fq">A ação reivindicatória prescreve?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Não</b> — é imprescritível (REsp 216.117/RN).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">USUCAPIÃO MÓVEL</span><span class="fq">Prazos ordinária × extraordinária?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>3 anos</b> (justo título + boa-fé) · <b>5 anos</b> (extraordinária).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">RESOLÚVEL</span><span class="fq">Condição no título × causa superveniente — efeitos?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">Título → <b>ex tunc + erga omnes</b> (1.359). Superveniente → <b>ex nunc + inter partes</b> (1.360). Enunciado 509.</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">CONDOMÍNIO</span><span class="fq">Sistema adotado pelo CC e sua nota?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Romano</b> (art. 1.314): frações/quotas ideais. Germânico ("mão comum") só na comunhão/herança.</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">EDILÍCIO</span><span class="fq">Tem personalidade? Sofre dano moral?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Despersonalizado</b> (personalidade = minoritária, Enunciado 246). <b>Não</b> sofre dano moral (Info 665).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">CONVENÇÃO</span><span class="fq">Quórum da convenção e da mudança de destinação?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">Convenção = <b>2/3 das frações</b> (art. 1.333). Destinação = <b>2/3</b> (Lei 14.405/2022; antes: unanimidade).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">MULTIPROP.</span><span class="fq">Objeto, natureza e fração mínima?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Só imóvel</b> · <b>direito real</b> (majoritária/STJ) · fração ≥ <b>7 dias</b> (fixo/flutuante/misto).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">TIME-SHARING</span><span class="fq">Penhora pode recair sobre todo o imóvel?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Não</b> se o devedor tem só fração ideal — limita-se à sua fração (REsp 1546165/SP).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">REGISTRO</span><span class="fq">Como se matriculam as frações de tempo?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa">1 matrícula por fração (Livro 2) + matrícula do imóvel. Fração de <b>reparos</b> = sem matrícula própria (exceção à unicidade).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">FUNDO</span><span class="fq">Natureza do fundo de investimento e responsabilidade?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Condomínio de natureza especial</b> (art. 1.368-C). Sem responsabilidade limitada por lei (salvo previsão na CVM).</span></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><span class="ftag">COHOUSING</span><span class="fq">Cohousing × coliving?</span><span class="fhint">clique</span></div>
+      <div class="flip-face flip-back"><span class="fa"><b>Coliving</b>: divide a mesma unidade. <b>Cohousing</b>: unidades separadas + intensa vida/tarefas comuns.</span></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="card" id="check">
+  <div class="card-meta"><span class="badge badge-tema">✅ Checklist</span><span class="badge badge-pag">domínio do bloco</span></div>
+  <div class="card-title">✅ Checklist final — marque o que já domina</div>
+  <div class="check-item"><span class="box">✓</span><span>Sei os <b>4 atributos</b> (GRUD, art. 1.228), a distinção domínio × propriedade e a imprescritibilidade da reivindicatória.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Domino as <b>características</b> (absoluto/exclusivo/perpétuo/elástico/complexo/fundamental) e as <b>espécies</b> (plena/limitada/resolúvel).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Distingo aquisição <b>originária × derivada</b> (acessão, usucapião, registro, tradição, especificação/comistão/confusão/adjunção).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei a <b>perda</b> (art. 1.275), abandono (3 anos) e a <b>extensão vertical</b> (critério da utilidade).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Domino a <b>função social/socioambiental</b> e as limitações (§§2º a 5º do art. 1.228).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei a <b>propriedade resolúvel</b> (1.359 × 1.360; Enunciado 509) e a <b>fiduciária</b> (1.361; Lei 9.514/97).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Distingo condomínio <b>romano × germânico</b> e as classificações; conheço o Info 724.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Domino o <b>edilício</b>: natureza despersonalizada (Info 665), composição, Infos 588/651.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei instituição/convenção (2/3; registro RI; Info 664; cotas prescrevem em 5 anos).</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Domino administração/assembleia (Leis 14.309 e 14.405/2022) e o <b>condomínio de lotes</b>.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Sei a <b>multipropriedade</b>: natureza real, fração ≥ 7 dias, direitos/deveres, transferência, REsp 1546165.</span></div>
+  <div class="check-item"><span class="box">✓</span><span>Conheço a <b>repercussão no RI</b> (matrícula por fração; exceção à unicidade), o <b>fundo de investimento</b> e o <b>cohousing</b>.</span></div>
+</div>
+
+<div class="card" id="verif">
+  <div class="card-meta"><span class="badge badge-tema">☑ Verificação em camadas</span><span class="badge badge-pag">jul/2026</span></div>
+  <div class="card-title">☑ Conteúdo verificado nas camadas</div>
+  <div class="prose">
+    <ul>
+      <li><b>Dizer o Direito</b> ✔ — as teses do caderno constam com fonte no próprio material (buscador DoD): <b>Info 724</b> (aluguel × violência doméstica), <b>Info 665</b> (condomínio não sofre dano moral), <b>Infos 588/651</b> (inadimplente usa áreas comuns) e <b>Info 664</b> (nula cláusula da construtora). Confirmadas redações e números.</li>
+      <li><b>Bancos do Notion (todos os 47 data sources)</b> ✔ — <b>Mapas — Verbetes</b>: linkados ao caderno os verbetes de Civil que ele cobre (<b>Propriedade — conceito e extensão</b> → A1; <b>Acessão / Usucapião / Aquisição e perda da propriedade imóvel</b> → A4; <b>Propriedade resolúvel / Propriedade fiduciária</b> → A7; <b>Condomínio edilício</b> → B2; <b>Multipropriedade</b> → C1). <b>Banco Jurisprudência</b> e demais bancos varridos para corroborar (multipropriedade/penhora, condomínio); <b>1ª Fase — Cadernos</b> (Caderno 77) para publicação. Lacuna sinalizada: não há verbete Civil autônomo de "função social" (coberta no A6; existe apenas verbete Registral/Constitucional correlato).</li>
+      <li><b>QConcursos</b> ✔ — <b>função social</b>, <b>condomínio edilício</b> (convenção/quóruns) e <b>multipropriedade</b> (Lei 13.777/2018) são temas de <b>alta recorrência</b> em Civil/Registral de cartório.</li>
+      <li><b>Kollemata</b> ➖ — N/A no núcleo Civil; a repercussão registral (matrícula por fração, Livro 3) foi tratada no card C3.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<footer>Caderno de Revisão · Direito Civil — Propriedade &amp; Condomínio · e-Book de Civil, págs. 629–668 · uso pessoal de estudo</footer>
+</div>
+<script>
+(function(){
+  var KEY='caderno_civil_629668_revisado_v1';
+  var cards=[].slice.call(document.querySelectorAll('.card[id]')).filter(function(c){return /^[abc][0-9]+$/.test(c.id);});
+  var state={};try{state=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){state={};}
+  var fill=document.getElementById('progFill'),lbl=document.getElementById('progLabel');
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function render(){
+    var done=0;
+    cards.forEach(function(c){
+      var on=!!state[c.id];c.classList.toggle('revisado',on);
+      var b=c.querySelector('.rev-btn');if(b)b.textContent=on?'✓ Revisado':'○ Marcar revisado';
+      if(on)done++;
+    });
+    var pct=cards.length?Math.round(done/cards.length*100):0;
+    if(fill)fill.style.width=pct+'%';
+    if(lbl)lbl.innerHTML='<b>'+done+'</b> de '+cards.length+' tópicos revisados · '+pct+'%';
+  }
+  cards.forEach(function(c){
+    var meta=c.querySelector('.card-meta');if(!meta)return;
+    var b=document.createElement('button');b.className='rev-btn';b.type='button';
+    b.addEventListener('click',function(e){e.stopPropagation();if(state[c.id])delete state[c.id];else state[c.id]=1;save();render();});
+    meta.appendChild(b);
+  });
+  var reset=document.getElementById('progReset');
+  if(reset)reset.addEventListener('click',function(){state={};save();render();});
+  render();
+  document.querySelectorAll('.flip').forEach(function(f){f.addEventListener('click',function(){f.classList.toggle('flipped');});});
+  document.querySelectorAll('.check-item').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('done');});});
+})();
+</script>
+</body>
+</html>
