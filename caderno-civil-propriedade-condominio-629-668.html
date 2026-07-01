@@ -107,14 +107,36 @@ details[open] .recall-q .chev{transform:rotate(90deg)}
 .check-item.done{color:#6f8a7e;text-decoration:line-through;text-decoration-color:#2a4a3a}
 @media(max-width:560px){.flip-grid{grid-template-columns:1fr}.flip{height:170px}}
 footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
+.progress-row{margin-bottom:7px}
+.progress-row:last-child{margin-bottom:0}
+.progress-fill.leitura{background:linear-gradient(90deg,#1d4a78,#38bdf8)}
+.bloco-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;cursor:pointer;user-select:none}
+.bloco-h:hover{filter:brightness(1.15)}
+.bloco-caret{font-size:11px;color:currentColor;opacity:.7;transition:transform .2s}
+.bloco-h.open .bloco-caret{transform:rotate(90deg)}
+.bloco-prog{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:0;text-transform:none;color:#7aa3cc}
+.bloco-bar{width:74px;height:6px;background:#0b1828;border:1px solid #16365a;border-radius:5px;overflow:hidden}
+.bloco-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f6b4d,#27c06a);transition:width .3s}
+.bloco-tag{font-size:9.5px;font-weight:700;letter-spacing:.4px;padding:1px 7px;border-radius:20px;border:1px solid #16365a;color:#55738e;text-transform:uppercase}
+.bloco-h.lido .bloco-tag{border-color:#1d4a78;color:#38bdf8}
+.bloco-h.done .bloco-tag{border-color:#1f6b4d;color:#27c06a}
+.bloco-body{display:none}
+.bloco-body.open{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="banner">📘 Caderno de Revisão · Civil — clique nos blocos 📜 e 🎯 para revelar lei e respostas · clique nos cartões 🔁 para virar · use "marcar revisado" para acompanhar o progresso</div>
+<div class="banner">📘 Caderno de Revisão · Civil — clique no <b>título do bloco</b> para abrir/fechar (abrir já conta como leitura) · 📜/🎯 revelam lei e respostas · 🔁 vira o cartão · "marcar revisado" acompanha por tópico</div>
 <div class="progress-wrap">
-  <div class="progress-top"><span id="progLabel"><b>0</b> de 16 tópicos revisados · 0%</span><button id="progReset" class="btn-reset">zerar progresso</button></div>
-  <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+  <div class="progress-row">
+    <div class="progress-top"><span id="leituraLabel">📖 <b>0</b> de 3 blocos lidos · 0%</span></div>
+    <div class="progress-bar"><div class="progress-fill leitura" id="leituraFill"></div></div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-top"><span id="progLabel">✅ <b>0</b> de 16 tópicos revisados · 0%</span><button id="progReset" class="btn-reset">zerar progresso</button></div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+  </div>
 </div>
 <div class="header">
   <h1>📒 Caderno de Revisão · Direito Civil — Propriedade &amp; Condomínio</h1>
@@ -163,7 +185,8 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
   </table>
 </div>
 
-<div class="bloco-h">Bloco A · Da Propriedade</div>
+<div class="bloco-h" data-block="a" role="button" tabindex="0"><span class="bloco-caret">▸</span><span class="bloco-name">Bloco A · Da Propriedade</span><span class="bloco-prog"><span class="bloco-tag">a ler</span><span class="bloco-bar"><i></i></span><span class="bloco-count">0/7</span></span></div>
+<div class="bloco-body" id="body-a">
 
 <!-- A1 -->
 <div class="card" id="a1">
@@ -332,7 +355,9 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
   <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Resolução por condição prevista no título × por causa superveniente — efeitos?</span><span class="chev">▸</span></summary><div class="recall-a">Condição/termo no título → <b>ex tunc + erga omnes</b> (art. 1.359; Enunciado 509). Causa superveniente → <b>ex nunc + inter partes</b> (art. 1.360; o adquirente anterior é proprietário perfeito).</div></details>
 </div>
 
-<div class="bloco-h b">Bloco B · Do Condomínio</div>
+</div>
+<div class="bloco-h b" data-block="b" role="button" tabindex="0"><span class="bloco-caret">▸</span><span class="bloco-name">Bloco B · Do Condomínio</span><span class="bloco-prog"><span class="bloco-tag">a ler</span><span class="bloco-bar"><i></i></span><span class="bloco-count">0/4</span></span></div>
+<div class="bloco-body" id="body-b">
 
 <!-- B1 -->
 <div class="card" id="b1">
@@ -421,7 +446,9 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
   <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>O condomínio de lotes segue qual regime?</span><span class="chev">▸</span></summary><div class="recall-a">O do <b>condomínio edilício</b> (no que couber) e o das <b>incorporações imobiliárias</b> (Lei 4.591/64), com o empreendedor equiparado ao incorporador — art. 1.358-A.</div></details>
 </div>
 
-<div class="bloco-h c">Bloco C · Multipropriedade, Fundo de Investimento e Cohousing</div>
+</div>
+<div class="bloco-h c" data-block="c" role="button" tabindex="0"><span class="bloco-caret">▸</span><span class="bloco-name">Bloco C · Multipropriedade, Fundo &amp; Cohousing</span><span class="bloco-prog"><span class="bloco-tag">a ler</span><span class="bloco-bar"><i></i></span><span class="bloco-count">0/5</span></span></div>
+<div class="bloco-body" id="body-c">
 
 <!-- C1 -->
 <div class="card" id="c1">
@@ -520,6 +547,7 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
   <details class="recall-item"><summary class="recall-q"><span class="qmark">?</span><span>Diferença entre cohousing e coliving?</span><span class="chev">▸</span></summary><div class="recall-a"><b>Coliving</b>: dividem a <b>mesma unidade</b> habitacional. <b>Cohousing</b>: unidades <b>privativas separadas</b> + fortes áreas e tarefas comuns (criam identidade).</div></details>
 </div>
 
+</div>
 <!-- SÚMULAS -->
 <div class="card" id="sum">
   <div class="card-meta"><span class="badge badge-tema">⚖️ Consolidado</span><span class="badge badge-pag">infos · teses · enunciados</span></div>
@@ -658,33 +686,79 @@ footer{padding:16px 14px 28px;text-align:center;font-size:11px;color:#2a4060}
 </div>
 <script>
 (function(){
-  var KEY='caderno_civil_629668_revisado_v1';
+  var RKEY='caderno_civil_629668_revisado_v1';   // tópicos revisados
+  var LKEY='caderno_civil_629668_leitura_v1';     // blocos lidos (abertos ao menos 1x)
+  var BLOCOS=['a','b','c'];
+  function load(k){try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};}}
+  function saveK(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  var rev=load(RKEY), lidos=load(LKEY);
   var cards=[].slice.call(document.querySelectorAll('.card[id]')).filter(function(c){return /^[abc][0-9]+$/.test(c.id);});
-  var state={};try{state=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){state={};}
-  var fill=document.getElementById('progFill'),lbl=document.getElementById('progLabel');
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
-  function render(){
-    var done=0;
-    cards.forEach(function(c){
-      var on=!!state[c.id];c.classList.toggle('revisado',on);
-      var b=c.querySelector('.rev-btn');if(b)b.textContent=on?'✓ Revisado':'○ Marcar revisado';
-      if(on)done++;
-    });
-    var pct=cards.length?Math.round(done/cards.length*100):0;
-    if(fill)fill.style.width=pct+'%';
-    if(lbl)lbl.innerHTML='<b>'+done+'</b> de '+cards.length+' tópicos revisados · '+pct+'%';
-  }
+  function cardsDoBloco(b){return cards.filter(function(c){return c.id.charAt(0)===b;});}
+
+  // botão "marcar revisado" por tópico
   cards.forEach(function(c){
     var meta=c.querySelector('.card-meta');if(!meta)return;
     var b=document.createElement('button');b.className='rev-btn';b.type='button';
-    b.addEventListener('click',function(e){e.stopPropagation();if(state[c.id])delete state[c.id];else state[c.id]=1;save();render();});
+    b.addEventListener('click',function(e){e.stopPropagation();if(rev[c.id])delete rev[c.id];else rev[c.id]=1;saveK(RKEY,rev);render();});
     meta.appendChild(b);
   });
+
+  // acordeão: abrir/fechar o bloco; abrir marca como lido
+  function setBloco(b,open){
+    var h=document.querySelector('.bloco-h[data-block="'+b+'"]');
+    var body=document.getElementById('body-'+b);
+    if(!h||!body)return;
+    h.classList.toggle('open',open);
+    body.classList.toggle('open',open);
+    if(open&&!lidos[b]){lidos[b]=1;saveK(LKEY,lidos);}
+    render();
+  }
+  document.querySelectorAll('.bloco-h[data-block]').forEach(function(h){
+    var b=h.getAttribute('data-block');
+    h.addEventListener('click',function(){setBloco(b,!h.classList.contains('open'));});
+    h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setBloco(b,!h.classList.contains('open'));}});
+  });
+
+  function bar(id,p){var e=document.getElementById(id);if(e)e.style.width=p+'%';}
+  function lab(id,html){var e=document.getElementById(id);if(e)e.innerHTML=html;}
+  function render(){
+    // meter revisão (tópicos)
+    var dR=cards.filter(function(c){return rev[c.id];}).length;
+    var pR=cards.length?Math.round(dR/cards.length*100):0;
+    bar('progFill',pR);lab('progLabel','✅ <b>'+dR+'</b> de '+cards.length+' tópicos revisados · '+pR+'%');
+    cards.forEach(function(c){var on=!!rev[c.id];c.classList.toggle('revisado',on);var b=c.querySelector('.rev-btn');if(b)b.textContent=on?'✓ Revisado':'○ Marcar revisado';});
+    // meter leitura (blocos)
+    var dL=BLOCOS.filter(function(b){return lidos[b];}).length;
+    var pL=Math.round(dL/BLOCOS.length*100);
+    bar('leituraFill',pL);lab('leituraLabel','📖 <b>'+dL+'</b> de '+BLOCOS.length+' blocos lidos · '+pL+'%');
+    // barra + selo por bloco
+    BLOCOS.forEach(function(b){
+      var h=document.querySelector('.bloco-h[data-block="'+b+'"]');if(!h)return;
+      var cds=cardsDoBloco(b),d=cds.filter(function(c){return rev[c.id];}).length;
+      var p=cds.length?Math.round(d/cds.length*100):0;
+      var i=h.querySelector('.bloco-bar i');if(i)i.style.width=p+'%';
+      var cnt=h.querySelector('.bloco-count');if(cnt)cnt.textContent=d+'/'+cds.length;
+      var done=cds.length&&d===cds.length;
+      h.classList.toggle('lido',!!lidos[b]);h.classList.toggle('done',done);
+      var tag=h.querySelector('.bloco-tag');if(tag)tag.textContent=done?'concluído':(lidos[b]?'em leitura':'a ler');
+    });
+  }
+
+  // zerar tudo (revisão + leitura) e fechar blocos
   var reset=document.getElementById('progReset');
-  if(reset)reset.addEventListener('click',function(){state={};save();render();});
-  render();
+  if(reset)reset.addEventListener('click',function(e){e.stopPropagation();rev={};lidos={};saveK(RKEY,rev);saveK(LKEY,lidos);BLOCOS.forEach(function(b){setBloco(b,false);});render();});
+
+  // TOC: clicar num tópico abre o bloco dele e rola até lá
+  document.querySelectorAll('.toc a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href').slice(1);
+      if(/^[abc][0-9]+$/.test(id)){e.preventDefault();setBloco(id.charAt(0),true);var t=document.getElementById(id);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+
   document.querySelectorAll('.flip').forEach(function(f){f.addEventListener('click',function(){f.classList.toggle('flipped');});});
   document.querySelectorAll('.check-item').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('done');});});
+  render(); // blocos começam recolhidos; o progresso de leitura persiste mesmo fechados
 })();
 </script>
 </body>
