@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Mapa Interativo · CNN — Da Outorga de Delegação — Do Concurso Público</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b0a08;color:#e8e0d2;font-family:'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1a140c;border-bottom:1px solid #3a2c18;flex-wrap:wrap}
+.topbar .t{min-width:0;flex:1}
+.topbar h1{font-size:14px;font-weight:700;color:#f0e6d4;line-height:1.25}
+.topbar .sub{font-size:11px;color:#b08a4a}
+.btn{background:#0b0a08;border:1px solid #4a3a1e;color:#c9b487;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none}
+.btn:hover{border-color:#c9962e;color:#f0e6d4}
+.btn.on{background:#132b16;border-color:#27c06a;color:#7fe0a0}
+.zoombar{display:flex;gap:4px}
+.zoombar .btn{width:34px;padding:6px 0;text-align:center;font-size:15px}
+.partsbar{display:flex;align-items:center;gap:6px;padding:7px 14px;background:#150f08;border-bottom:1px solid #3a2c18;overflow-x:auto}
+.partsbar .plabel{font-size:11px;color:#8a7550;white-space:nowrap;margin-right:2px}
+.chip{background:#0b0a08;border:1px solid #3a2c18;color:#b08a4a;border-radius:20px;padding:4px 11px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:5px}
+.chip:hover{border-color:#c9962e;color:#f0e6d4}
+.chip.active{background:#3a2c18;border-color:#c9962e;color:#f5ead2}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:#3a2c18;flex-shrink:0}
+.chip.done .dot{background:#27c06a}
+.partname{font-size:11.5px;color:#c9b487;padding:5px 14px 0;min-height:20px}
+.stage{flex:1;position:relative;overflow:hidden;background:#0b0a08;background-image:radial-gradient(#181207 1px,transparent 1px);background-size:22px 22px;cursor:grab;touch-action:none}
+.stage.grabbing{cursor:grabbing}
+.stage img{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;user-select:none;-webkit-user-drag:none;box-shadow:0 8px 40px rgba(0,0,0,.6);border-radius:8px;background:#fff}
+.navbtn{position:absolute;top:50%;transform:translateY(-50%);background:#1a140cdd;border:1px solid #4a3a1e;color:#e8e0d2;width:38px;height:52px;border-radius:10px;font-size:20px;cursor:pointer;z-index:5;backdrop-filter:blur(4px)}
+.navbtn:hover{border-color:#c9962e}
+.navbtn.prev{left:10px}.navbtn.next{right:10px}
+.navbtn[disabled]{opacity:.25;cursor:default}
+.hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:#1a140ccc;border:1px solid #3a2c18;color:#b08a4a;font-size:11.5px;padding:6px 12px;border-radius:20px;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(4px)}
+.hint.hide{opacity:0}
+.foot{padding:7px 14px;background:#1a140c;border-top:1px solid #3a2c18;font-size:11px;color:#8a7550;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.foot b{color:#b08a4a}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="t"><h1>Da Outorga de Delegação — Do Concurso Público</h1><div class="sub">CNN · Provimento 176/2024-CNJ · arts. 74–76</div></div>
+  <div class="zoombar">
+    <button class="btn" id="zout" title="Diminuir">−</button>
+    <button class="btn" id="zin" title="Aumentar">+</button>
+    <button class="btn" id="zreset" title="Ajustar à tela">⊡</button>
+    <button class="btn" id="zfull" title="Tela cheia">⛶</button>
+  </div>
+  <button class="btn" id="estudado" title="Marcar esta parte como estudada">○ Estudado</button>
+</div>
+<div class="partsbar" id="partsbar"><span class="plabel">Partes:</span></div>
+<div class="partname" id="partname"></div>
+<div class="stage" id="stage">
+  <button class="navbtn prev" id="prev" title="Parte anterior">‹</button>
+  <img id="mapa" alt="Mapa CNN" draggable="false">
+  <button class="navbtn next" id="next" title="Próxima parte">›</button>
+  <div class="hint" id="hint">arraste para mover · role/pinça ou +/− para zoom · duplo-clique aproxima</div>
+</div>
+<div class="foot">
+  <span id="progtxt">🧠 a imagem é o núcleo — explore com zoom · marque cada parte estudada</span>
+  <span>Fundamentação: <b>arts. 74 a 76 do Provimento 176/2024</b></span>
+</div>
+<script>
+var PARTS=[{"src": "img/cnn-concurso-p1.png", "label": "Disposições gerais · realização do concurso"}, {"src": "img/cnn-concurso-p2.png", "label": "Envio obrigatório dos dados · informações (74/76)"}], SLUG="mapa-cnn-concurso-publico";
+(function(){
+  var stage=document.getElementById('stage'),img=document.getElementById('mapa'),hint=document.getElementById('hint');
+  var scale=1,minScale=1,tx=0,ty=0,iw=0,ih=0,cur=0;
+  function apply(){img.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';}
+  function fit(){var sw=stage.clientWidth,sh=stage.clientHeight;if(!iw)return;minScale=Math.min(sw/iw,sh/ih)*0.96;scale=minScale;tx=(sw-iw*scale)/2;ty=(sh-ih*scale)/2;apply();}
+  function clamp(){var sw=stage.clientWidth,sh=stage.clientHeight,w=iw*scale,h=ih*scale,m=80;if(w<=sw)tx=(sw-w)/2;else tx=Math.min(m,Math.max(sw-w-m,tx));if(h<=sh)ty=(sh-h)/2;else ty=Math.min(m,Math.max(sh-h-m,ty));}
+  function zoomAt(cx,cy,f){var ns=Math.min(minScale*8,Math.max(minScale,scale*f));var r=ns/scale;tx=cx-(cx-tx)*r;ty=cy-(cy-ty)*r;scale=ns;clamp();apply();}
+  img.onload=function(){iw=img.naturalWidth;ih=img.naturalHeight;fit();};
+  // progresso por parte
+  function key(i){return SLUG+'_p'+i+'_estudado';}
+  function isDone(i){try{return localStorage.getItem(key(i))==='1';}catch(e){return false;}}
+  function renderProg(){var d=0;for(var i=0;i<PARTS.length;i++)if(isDone(i))d++;
+    document.querySelectorAll('.chip').forEach(function(c,i){c.classList.toggle('done',isDone(i));});
+    var b=document.getElementById('estudado');var on=isDone(cur);b.classList.toggle('on',on);b.textContent=on?'✓ Estudado':'○ Estudado';
+    document.getElementById('progtxt').innerHTML=(PARTS.length>1?('📊 <b style="color:#7fe0a0">'+d+'</b>/'+PARTS.length+' partes estudadas · '):'')+'🧠 a imagem é o núcleo — zoom e navegação';
+  }
+  // navegação de partes
+  var bar=document.getElementById('partsbar'), pname=document.getElementById('partname');
+  PARTS.forEach(function(p,i){var c=document.createElement('div');c.className='chip';c.innerHTML='<span class="dot"></span>'+(PARTS.length>1?('Parte '+(i+1)):'Mapa');c.onclick=function(){go(i);};bar.appendChild(c);});
+  if(PARTS.length<2){bar.style.display='none';document.getElementById('prev').style.display='none';document.getElementById('next').style.display='none';}
+  function go(i){cur=Math.max(0,Math.min(PARTS.length-1,i));img.src=PARTS[cur].src;iw=0;pname.textContent=(PARTS.length>1?('Parte '+(cur+1)+' — '):'')+PARTS[cur].label;
+    document.querySelectorAll('.chip').forEach(function(c,j){c.classList.toggle('active',j===cur);});
+    document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===PARTS.length-1;renderProg();}
+  document.getElementById('prev').onclick=function(){go(cur-1);};
+  document.getElementById('next').onclick=function(){go(cur+1);};
+  document.getElementById('estudado').onclick=function(){try{localStorage.setItem(key(cur),isDone(cur)?'0':'1');}catch(e){}renderProg();};
+  // interações de imagem
+  var drag=false,px=0,py=0;
+  stage.addEventListener('pointerdown',function(e){drag=true;px=e.clientX;py=e.clientY;stage.classList.add('grabbing');stage.setPointerCapture(e.pointerId);pts[e.pointerId]=e;});
+  stage.addEventListener('pointermove',function(e){if(e.pointerId in pts)pts[e.pointerId]=e;var ids=Object.keys(pts);if(ids.length===2){var a=pts[ids[0]],b=pts[ids[1]];var d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);var r=stage.getBoundingClientRect();if(pd)zoomAt((a.clientX+b.clientX)/2-r.left,(a.clientY+b.clientY)/2-r.top,d/pd);pd=d;drag=false;hideHint();return;}if(!drag)return;var dx=e.clientX-px,dy=e.clientY-py;tx+=dx;ty+=dy;px=e.clientX;py=e.clientY;clamp();apply();hideHint();});
+  function up(e){drag=false;stage.classList.remove('grabbing');delete pts[e.pointerId];if(Object.keys(pts).length<2)pd=0;}
+  stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+  var pts={},pd=0;
+  stage.addEventListener('wheel',function(e){e.preventDefault();var r=stage.getBoundingClientRect();zoomAt(e.clientX-r.left,e.clientY-r.top,e.deltaY<0?1.15:0.87);hideHint();},{passive:false});
+  stage.addEventListener('dblclick',function(e){var r=stage.getBoundingClientRect();if(scale>minScale*1.3)fit();else zoomAt(e.clientX-r.left,e.clientY-r.top,2.2);hideHint();});
+  document.getElementById('zin').onclick=function(){zoomAt(stage.clientWidth/2,stage.clientHeight/2,1.35);};
+  document.getElementById('zout').onclick=function(){zoomAt(stage.clientWidth/2,stage.clientHeight/2,0.74);};
+  document.getElementById('zreset').onclick=fit;
+  document.getElementById('zfull').onclick=function(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}else{document.exitFullscreen&&document.exitFullscreen();}};
+  window.addEventListener('resize',fit);
+  var hh;function hideHint(){hint.classList.add('hide');}setTimeout(hideHint,4500);
+  go(0);
+})();
+</script>
+</body>
+</html>
